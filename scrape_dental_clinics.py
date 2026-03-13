@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Scrape dental clinics in Christchurch, New Zealand using the Google Places API.
+Scrape dental clinics in Christchurch, New Zealand using the Google Places API (New).
 Outputs results to dental_clinics_christchurch.csv
 
 Requires:
@@ -21,109 +21,72 @@ if not API_KEY:
     print("ERROR: GOOGLE_PLACES_API_KEY environment variable is not set.")
     sys.exit(1)
 
-TEXT_SEARCH_URL = "https://maps.googleapis.com/maps/api/place/textsearch/json"
-PLACE_DETAILS_URL = "https://maps.googleapis.com/maps/api/place/details/json"
+PLACES_SEARCH_URL = "https://places.googleapis.com/v1/places:searchText"
 OUTPUT_FILE = "dental_clinics_christchurch.csv"
 QUERY = "dental clinic Christchurch New Zealand"
 
-DETAIL_FIELDS = [
-    "name",
-    "formatted_address",
-    "formatted_phone_number",
-    "website",
-    "rating",
-    "user_ratings_total",
-    "opening_hours",
-    "business_status",
-    "url",
-]
+FIELD_MASK = ",".join([
+    "places.displayName",
+    "places.formattedAddress",
+    "places.nationalPhoneNumber",
+    "places.internationalPhoneNumber",
+    "places.websiteUri",
+    "places.rating",
+    "places.userRatingCount",
+    "places.businessStatus",
+    "places.googleMapsUri",
+    "places.regularOpeningHours",
+    "nextPageToken",
+])
 
 
-def search_places(query: str) -> list[dict]:
+def search_all_places(query: str) -> list[dict]:
     """Fetch all pages of text search results for the given query."""
     results = []
-    params = {"query": query, "key": API_KEY}
+    payload = {"textQuery": query, "pageSize": 20}
+    headers = {
+        "Content-Type": "application/json",
+        "X-Goog-Api-Key": API_KEY,
+        "X-Goog-FieldMask": FIELD_MASK,
+    }
 
     while True:
-        resp = requests.get(TEXT_SEARCH_URL, params=params, timeout=10)
+        resp = requests.post(PLACES_SEARCH_URL, headers=headers, json=payload, timeout=10)
         resp.raise_for_status()
         data = resp.json()
 
-        status = data.get("status")
-        if status not in ("OK", "ZERO_RESULTS"):
-            print(f"Places API error: {status} — {data.get('error_message', '')}")
-            break
+        batch = data.get("places", [])
+        results.extend(batch)
+        print(f"  Fetched {len(batch)} results (total so far: {len(results)})")
 
-        results.extend(data.get("results", []))
-        print(f"  Fetched {len(data.get('results', []))} results (total so far: {len(results)})")
-
-        next_page_token = data.get("next_page_token")
+        next_page_token = data.get("nextPageToken")
         if not next_page_token:
             break
 
-        # Google requires a short delay before the next_page_token is valid
-        time.sleep(2)
-        params = {"pagetoken": next_page_token, "key": API_KEY}
+        # Use the page token for the next request
+        payload = {"textQuery": query, "pageSize": 20, "pageToken": next_page_token}
+        time.sleep(1)
 
     return results
 
 
-def get_place_details(place_id: str) -> dict:
-    """Fetch detailed information for a single place."""
-    params = {
-        "place_id": place_id,
-        "fields": ",".join(DETAIL_FIELDS),
-        "key": API_KEY,
-    }
-    resp = requests.get(PLACE_DETAILS_URL, params=params, timeout=10)
-    resp.raise_for_status()
-    data = resp.json()
-
-    if data.get("status") != "OK":
-        return {}
-    return data.get("result", {})
-
-
-def extract_hours(details: dict) -> str:
+def extract_hours(place: dict) -> str:
     """Return a semicolon-separated string of opening hours."""
-    opening_hours = details.get("opening_hours", {})
-    weekday_text = opening_hours.get("weekday_text", [])
+    hours = place.get("regularOpeningHours", {})
+    weekday_text = hours.get("weekdayDescriptions", [])
     return "; ".join(weekday_text)
 
 
 def main():
     print(f"Searching for: {QUERY!r}")
-    places = search_places(QUERY)
-    print(f"\nFound {len(places)} places. Fetching details...\n")
-
-    rows = []
-    for i, place in enumerate(places, 1):
-        place_id = place.get("place_id")
-        name = place.get("name", "")
-        print(f"[{i}/{len(places)}] {name}")
-
-        details = get_place_details(place_id) if place_id else {}
-
-        row = {
-            "name": details.get("name") or name,
-            "address": details.get("formatted_address") or place.get("formatted_address", ""),
-            "phone": details.get("formatted_phone_number", ""),
-            "website": details.get("website", ""),
-            "rating": details.get("rating", ""),
-            "total_ratings": details.get("user_ratings_total", ""),
-            "business_status": details.get("business_status") or place.get("business_status", ""),
-            "google_maps_url": details.get("url", ""),
-            "opening_hours": extract_hours(details),
-        }
-        rows.append(row)
-
-        # Be polite to the API
-        time.sleep(0.1)
+    places = search_all_places(QUERY)
+    print(f"\nFound {len(places)} dental clinics. Writing to {OUTPUT_FILE}...\n")
 
     fieldnames = [
         "name",
         "address",
-        "phone",
+        "phone_national",
+        "phone_international",
         "website",
         "rating",
         "total_ratings",
@@ -131,6 +94,23 @@ def main():
         "google_maps_url",
         "opening_hours",
     ]
+
+    rows = []
+    for place in places:
+        row = {
+            "name": place.get("displayName", {}).get("text", ""),
+            "address": place.get("formattedAddress", ""),
+            "phone_national": place.get("nationalPhoneNumber", ""),
+            "phone_international": place.get("internationalPhoneNumber", ""),
+            "website": place.get("websiteUri", ""),
+            "rating": place.get("rating", ""),
+            "total_ratings": place.get("userRatingCount", ""),
+            "business_status": place.get("businessStatus", ""),
+            "google_maps_url": place.get("googleMapsUri", ""),
+            "opening_hours": extract_hours(place),
+        }
+        rows.append(row)
+        print(f"  {row['name']} — {row['address']}")
 
     with open(OUTPUT_FILE, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
