@@ -18,6 +18,7 @@ SCRAPERS=(
     scrape_manawatu_whanganui.py
     scrape_northland.py
     scrape_taranaki.py
+    scrape_wellington.py
 )
 
 for script in "${SCRAPERS[@]}"; do
