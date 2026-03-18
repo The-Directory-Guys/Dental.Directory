@@ -14,7 +14,8 @@ create table clinics (
   category    text,
   region      text,
   town        text,
-  price       text
+  price       text,
+  date_scraped date
 );
 
 create index on clinics (region);
