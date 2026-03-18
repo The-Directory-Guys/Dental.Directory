@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Scrape dental clinics in Canterbury (excluding Christchurch) using the Google Places API (New).
+Scrape dental clinics in the Canterbury region using the Google Places API (New).
+Covers Christchurch city suburbs and the wider Canterbury/South Canterbury region.
 Outputs results to dental_clinics_canterbury.csv
 
 Requires:
@@ -23,28 +24,102 @@ if not API_KEY:
 
 PLACES_SEARCH_URL = "https://places.googleapis.com/v1/places:searchText"
 OUTPUT_FILE = "dental_clinics_canterbury.csv"
+REGION = "Canterbury"
 
-CANTERBURY_TOWNS = [
-    "Ashburton",
-    "Timaru",
-    "Rangiora",
+TOWNS = [
+    # Christchurch City
+    "Christchurch CBD",
+    "Addington Christchurch",
+    "Avonhead Christchurch",
+    "Beckenham Christchurch",
+    "Belfast Christchurch",
+    "Bishopdale Christchurch",
+    "Bryndwr Christchurch",
+    "Burnside Christchurch",
+    "Cashmere Christchurch",
+    "Fendalton Christchurch",
+    "Halswell Christchurch",
+    "Harewood Christchurch",
+    "Hornby Christchurch",
+    "Ilam Christchurch",
+    "Linwood Christchurch",
+    "Lyttelton Christchurch",
+    "Merivale Christchurch",
+    "New Brighton Christchurch",
+    "Northcote Christchurch",
+    "Opawa Christchurch",
+    "Papanui Christchurch",
+    "Parklands Christchurch",
+    "Rangiora Christchurch",
+    "Redwood Christchurch",
+    "Riccarton Christchurch",
+    "Richmond Christchurch",
+    "Shirley Christchurch",
+    "Sockburn Christchurch",
+    "Spreydon Christchurch",
+    "St Albans Christchurch",
+    "Sumner Christchurch",
+    "Sydenham Christchurch",
+    "Upper Riccarton Christchurch",
+    "Wainoni Christchurch",
+    "Waltham Christchurch",
+    "Wigram Christchurch",
+    "Woolston Christchurch",
+    # Wider Canterbury / Selwyn / Waimakariri
     "Kaiapoi",
-    "Rolleston",
-    "Lincoln",
-    "Darfield",
-    "Hanmer Springs",
-    "Kaikoura",
-    "Geraldine",
-    "Methven",
-    "Twizel",
-    "Lake Tekapo",
+    "Rangiora",
     "Amberley",
     "Oxford",
     "Cheviot",
-    "Leeston",
+    "Kaikōura",
+    "Rolleston",
+    "Lincoln",
     "Prebbleton",
-    "Westport",
-    "Greymouth",
+    "Darfield",
+    "Leeston",
+    "Broadfield",
+    # South Canterbury
+    "Ashburton",
+    "Methven",
+    "Geraldine",
+    "Timaru",
+    "Temuka",
+    "Pleasant Point",
+    # Mackenzie District
+    "Twizel",
+    "Lake Tekapo",
+    # Hanmer / Lewis Pass
+    "Hanmer Springs",
+]
+
+# Address fragments used to keep only Canterbury-region results
+CANTERBURY_REGION_MARKERS = [
+    "Christchurch",
+    "Canterbury",
+    "Kaiapoi",
+    "Rangiora",
+    "Amberley",
+    "Oxford",
+    "Cheviot",
+    "Kaikōura",
+    "Kaikoura",
+    "Rolleston",
+    "Lincoln",
+    "Prebbleton",
+    "Darfield",
+    "Leeston",
+    "Broadfield",
+    "Ashburton",
+    "Methven",
+    "Geraldine",
+    "Timaru",
+    "Temuka",
+    "Twizel",
+    "Tekapo",
+    "Hanmer Springs",
+    "Selwyn",
+    "Waimakariri",
+    "Lyttelton",
 ]
 
 FIELD_MASK = ",".join([
@@ -94,11 +169,25 @@ def extract_hours(place: dict) -> str:
     return "; ".join(hours.get("weekdayDescriptions", []))
 
 
+def in_region(address: str) -> bool:
+    return any(marker in address for marker in CANTERBURY_REGION_MARKERS)
+
+
+def clean_town(town_query: str) -> str:
+    """Strip location qualifier suffixes to get a clean town name for the CSV."""
+    return (
+        town_query
+        .replace(" Christchurch", "")
+        .replace(" New Zealand", "")
+        .strip()
+    )
+
+
 def main():
     all_rows = []
     seen = set()  # deduplicate by google_maps_url
 
-    for town in CANTERBURY_TOWNS:
+    for town in TOWNS:
         query = f"dental clinic {town} New Zealand"
         print(f"Searching: {query!r}")
         try:
@@ -116,8 +205,7 @@ def main():
             seen.add(maps_url)
 
             address = place.get("formattedAddress", "")
-            # Skip Christchurch entries
-            if "Christchurch" in address:
+            if not in_region(address):
                 continue
 
             row = {
@@ -132,6 +220,9 @@ def main():
                 "google_maps_url": maps_url,
                 "opening_hours": extract_hours(place),
                 "category": "dental_clinic",
+                "region": REGION,
+                "town": clean_town(town),
+                "price": "no_prices",
             }
             all_rows.append(row)
             new_count += 1
@@ -142,7 +233,7 @@ def main():
     fieldnames = [
         "name", "address", "phone_national", "phone_international",
         "website", "rating", "total_ratings", "business_status",
-        "google_maps_url", "opening_hours", "category",
+        "google_maps_url", "opening_hours", "category", "region", "town", "price",
     ]
 
     with open(OUTPUT_FILE, "w", newline="", encoding="utf-8") as f:
@@ -151,8 +242,6 @@ def main():
         writer.writerows(all_rows)
 
     print(f"\nDone! {len(all_rows)} clinics saved to {OUTPUT_FILE}")
-    for row in all_rows:
-        print(f"  {row['name']} — {row['address']}")
 
 
 if __name__ == "__main__":
