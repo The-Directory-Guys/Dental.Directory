@@ -2,9 +2,9 @@
  * Import dental_clinics_all.csv into Supabase.
  *
  * Usage:
- *   SUPABASE_URL=... SUPABASE_SERVICE_KEY=... npx ts-node supabase/import.ts
+ *   SUPABASE_URL=... SUPABASE_SERVICE_KEY=... npx ts-node --esm supabase/import.ts
  *
- * Requires: npm install -g ts-node @supabase/supabase-js csv-parse
+ * Requires: npm install (see package.json devDependencies)
  */
 
 import { createClient } from "@supabase/supabase-js";
@@ -23,12 +23,12 @@ if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 
 async function main() {
-  const csvPath = path.join(__dirname, "../dental_clinics_all.csv");
+  const csvPath = path.join(new URL("..", import.meta.url).pathname, "dental_clinics_all.csv");
   const raw = fs.readFileSync(csvPath, "utf-8");
 
   const records = parse(raw, { columns: true, skip_empty_lines: true });
 
-  const rows = records.map((r: Record<string, string>) => ({
+  const rows = (records as Record<string, string>[]).map((r) => ({
     name: r.name,
     address: r.address,
     phone: r.phone_national,
