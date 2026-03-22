@@ -23,7 +23,7 @@ if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 
 async function main() {
-  const csvPath = path.join(new URL("..", import.meta.url).pathname, "dental_clinics_all.csv");
+  const csvPath = path.join(new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"), "dental_clinics_all.csv");
   const raw = fs.readFileSync(csvPath, "utf-8");
 
   const records = parse(raw, { columns: true, skip_empty_lines: true });
