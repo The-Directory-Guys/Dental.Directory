@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "import-supabase": "ts-node --esm supabase/import.ts"
+  },
   "devDependencies": {
     "@supabase/supabase-js": "^2.99.3",
     "@types/node": "^25.5.0",

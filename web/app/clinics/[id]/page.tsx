@@ -8,7 +8,8 @@ import ReviewForm from "@/components/ReviewForm";
 import PriceForm from "@/components/PriceForm";
 
 export default function ClinicPage() {
-  const { id } = useParams<{ id: string }>();
+  const { id: idParam } = useParams<{ id: string }>();
+  const clinicId = idParam ? parseInt(idParam, 10) : NaN;
 
   const [clinic, setClinic] = useState<Clinic | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -18,10 +19,22 @@ export default function ClinicPage() {
 
   useEffect(() => {
     async function load() {
+      if (!Number.isFinite(clinicId)) {
+        setLoading(false);
+        return;
+      }
       const [{ data: c }, { data: r }, { data: p }] = await Promise.all([
-        supabase.from("clinics").select("*").eq("id", id).single(),
-        supabase.from("reviews").select("*").eq("clinic_id", id).order("created_at", { ascending: false }),
-        supabase.from("price_reports").select("*").eq("clinic_id", id).order("created_at", { ascending: false }),
+        supabase.from("dental_clinics").select("*").eq("id", clinicId).single(),
+        supabase
+          .from("reviews")
+          .select("*")
+          .eq("clinic_id", clinicId)
+          .order("created_at", { ascending: false }),
+        supabase
+          .from("price_reports")
+          .select("*")
+          .eq("clinic_id", clinicId)
+          .order("created_at", { ascending: false }),
       ]);
       setClinic(c);
       setReviews(r ?? []);
@@ -29,7 +42,7 @@ export default function ClinicPage() {
       setLoading(false);
     }
     load();
-  }, [id]);
+  }, [clinicId]);
 
   if (loading) return <div className="p-8 text-gray-400">Loading...</div>;
   if (!clinic) return <div className="p-8 text-red-500">Clinic not found.</div>;
@@ -61,11 +74,16 @@ export default function ClinicPage() {
           <div>
             <p className="text-xs text-gray-400 uppercase tracking-wide">Region</p>
             <p className="font-medium">{clinic.region}</p>
-            <p className="text-sm text-gray-500">{clinic.town}</p>
+            <p className="text-xs text-gray-400 uppercase tracking-wide mt-2">
+              Suburb / town
+            </p>
+            <p className="text-sm text-gray-500">
+              {clinic.suburb_town ?? clinic.town ?? "—"}
+            </p>
           </div>
           <div>
             <p className="text-xs text-gray-400 uppercase tracking-wide">Phone</p>
-            <p className="font-medium">{clinic.phone ?? "—"}</p>
+            <p className="font-medium">{clinic.phone_national ?? clinic.phone_international ?? "—"}</p>
           </div>
           <div>
             <p className="text-xs text-gray-400 uppercase tracking-wide">Website</p>
@@ -121,7 +139,7 @@ export default function ClinicPage() {
         {activeTab === "reviews" && (
           <div className="space-y-4">
             <ReviewForm
-              clinicId={parseInt(id)}
+              clinicId={clinicId}
               onSubmitted={(r) => setReviews([r, ...reviews])}
             />
             {reviews.length === 0 ? (
@@ -144,7 +162,7 @@ export default function ClinicPage() {
         {activeTab === "prices" && (
           <div className="space-y-4">
             <PriceForm
-              clinicId={parseInt(id)}
+              clinicId={clinicId}
               onSubmitted={(p) => setPrices([p, ...prices])}
             />
             {prices.length === 0 ? (

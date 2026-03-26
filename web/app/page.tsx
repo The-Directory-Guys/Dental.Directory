@@ -39,7 +39,7 @@ export default function HomePage() {
     setLoading(true);
 
     let query = supabase
-      .from("clinics")
+      .from("dental_clinics")
       .select("*", { count: "exact" })
       .eq("business_status", "OPERATIONAL");
 
@@ -148,7 +148,9 @@ export default function HomePage() {
               className="bg-white rounded-xl border shadow-sm p-4 hover:shadow-md transition-shadow"
             >
               <h2 className="font-semibold text-gray-900 truncate">{clinic.name}</h2>
-              <p className="text-sm text-gray-500 mt-1 truncate">{clinic.town ?? clinic.region}</p>
+              <p className="text-sm text-gray-500 mt-1 truncate">
+                {clinic.suburb_town ?? clinic.town ?? clinic.region}
+              </p>
               <p className="text-xs text-gray-400 mt-0.5 truncate">{clinic.address}</p>
 
               <div className="flex items-center justify-between mt-3">

@@ -4,7 +4,8 @@ export type Clinic = {
   id: number;
   name: string;
   address: string;
-  phone: string | null;
+  phone_national: string | null;
+  phone_international: string | null;
   website: string | null;
   rating: number | null;
   total_ratings: number | null;
@@ -13,7 +14,10 @@ export type Clinic = {
   opening_hours: string | null;
   category: string | null;
   region: string;
-  town: string | null;
+  /** Present when DB column is `suburb_town` */
+  suburb_town?: string | null;
+  /** Present when DB column is still `town` (legacy) */
+  town?: string | null;
   price: string | null;
 };
 
