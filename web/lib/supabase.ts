@@ -18,6 +18,8 @@ export type Clinic = {
   suburb_town?: string | null;
   /** Present when DB column is still `town` (legacy) */
   town?: string | null;
+  /** Main city label, e.g. Auckland, or NA (optional until DB migrated) */
+  city?: string | null;
   price: string | null;
 };
 

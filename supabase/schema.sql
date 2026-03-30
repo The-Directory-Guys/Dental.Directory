@@ -17,6 +17,7 @@ create table dental_clinics (
   category    text,
   region      text,
   suburb_town text,
+  city        text,
   price       text,
   date_scraped date
 );

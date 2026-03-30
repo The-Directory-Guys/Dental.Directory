@@ -74,6 +74,10 @@ export default function ClinicPage() {
           <div>
             <p className="text-xs text-gray-400 uppercase tracking-wide">Region</p>
             <p className="font-medium">{clinic.region}</p>
+            <p className="text-xs text-gray-400 uppercase tracking-wide mt-2">City</p>
+            <p className="text-sm text-gray-500">
+              {clinic.city && clinic.city !== "NA" ? clinic.city : "NA"}
+            </p>
             <p className="text-xs text-gray-400 uppercase tracking-wide mt-2">
               Suburb / town
             </p>

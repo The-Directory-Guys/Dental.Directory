@@ -125,6 +125,7 @@ type ClinicRow = {
   category: string;
   region: string;
   suburb_town: string;
+  city: string;
   price: string | null;
 };
 
@@ -144,6 +145,7 @@ function clinicRowToDb(row: ClinicRow): Record<string, unknown> {
     category: row.category,
     region: row.region,
     [SUBURB_DB_COL]: row.suburb_town,
+    city: row.city || "NA",
     price: row.price,
   };
 }
@@ -352,6 +354,7 @@ async function main() {
       (r as Record<string, string>)["suburb_town"] ??
       (r as Record<string, string>)["town"] ??
       "",
+    city: ((r as Record<string, string>)["city"] || "NA").trim() || "NA",
     price: r.price !== "no_prices" ? r.price : null,
   }));
 

@@ -149,7 +149,14 @@ export default function HomePage() {
             >
               <h2 className="font-semibold text-gray-900 truncate">{clinic.name}</h2>
               <p className="text-sm text-gray-500 mt-1 truncate">
-                {clinic.suburb_town ?? clinic.town ?? clinic.region}
+                {(() => {
+                  const sub = clinic.suburb_town ?? clinic.town;
+                  const c = clinic.city;
+                  if (c && c !== "NA") {
+                    return sub ? `${c} · ${sub}` : c;
+                  }
+                  return sub ?? clinic.region;
+                })()}
               </p>
               <p className="text-xs text-gray-400 mt-0.5 truncate">{clinic.address}</p>
 
