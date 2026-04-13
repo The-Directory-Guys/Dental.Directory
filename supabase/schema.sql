@@ -49,11 +49,29 @@ create table price_reports (
 
 create index on price_reports (clinic_id);
 
+-- Website-scraped offers/fees (automated); clinic_id null = chain-wide
+create table scraped_prices (
+  id bigserial primary key,
+  clinic_id bigint references dental_clinics (id) on delete cascade,
+  source text not null,
+  treatment text not null,
+  price_nzd integer,
+  price_label text not null,
+  source_url text not null,
+  scraped_at timestamptz not null default now(),
+  notes text
+);
+
+create index on scraped_prices (clinic_id);
+create index on scraped_prices (source);
+
 alter table reviews enable row level security;
 alter table price_reports enable row level security;
+alter table scraped_prices enable row level security;
 
 create policy "Reviews are public" on reviews for select using (true);
 create policy "Prices are public" on price_reports for select using (true);
+create policy "Scraped prices are public" on scraped_prices for select using (true);
 
 create policy "Users insert own reviews" on reviews for insert
   with check (auth.uid() = user_id);

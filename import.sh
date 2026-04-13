@@ -7,6 +7,10 @@
 
 set -euo pipefail
 
+if [ -f ".env" ]; then
+    set -a; source .env; set +a
+fi
+
 if [ -z "${SUPABASE_URL:-}" ]; then
     echo "ERROR: SUPABASE_URL environment variable is not set."
     exit 1

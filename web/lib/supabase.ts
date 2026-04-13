@@ -42,6 +42,19 @@ export type PriceReport = {
   created_at: string;
 };
 
+/** Automated website scrape (see scraped_prices table); clinic_id null = chain-wide */
+export type ScrapedPrice = {
+  id: number;
+  clinic_id: number | null;
+  source: string;
+  treatment: string;
+  price_nzd: number | null;
+  price_label: string;
+  source_url: string;
+  scraped_at: string;
+  notes: string | null;
+};
+
 export const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
