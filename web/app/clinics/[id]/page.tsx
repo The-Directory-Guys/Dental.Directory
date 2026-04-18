@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { supabase, type Clinic, type Review, type PriceReport } from "@/lib/supabase";
+import { supabase, type Clinic, type Review, type PriceReport, type ScrapedPrice } from "@/lib/supabase";
 import ReviewForm from "@/components/ReviewForm";
 import PriceForm from "@/components/PriceForm";
 
@@ -14,6 +14,7 @@ export default function ClinicPage() {
   const [clinic, setClinic] = useState<Clinic | null>(null);
   const [reviews, setReviews] = useState<Review[]>([]);
   const [prices, setPrices] = useState<PriceReport[]>([]);
+  const [scrapedPrices, setScrapedPrices] = useState<ScrapedPrice[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<"info" | "reviews" | "prices">("info");
 
@@ -23,7 +24,7 @@ export default function ClinicPage() {
         setLoading(false);
         return;
       }
-      const [{ data: c }, { data: r }, { data: p }] = await Promise.all([
+      const [{ data: c }, { data: r }, { data: p }, { data: sp }] = await Promise.all([
         supabase.from("dental_clinics").select("*").eq("id", clinicId).single(),
         supabase
           .from("reviews")
@@ -35,10 +36,16 @@ export default function ClinicPage() {
           .select("*")
           .eq("clinic_id", clinicId)
           .order("created_at", { ascending: false }),
+        supabase
+          .from("scraped_prices")
+          .select("*")
+          .eq("clinic_id", clinicId)
+          .order("treatment", { ascending: true }),
       ]);
       setClinic(c);
       setReviews(r ?? []);
       setPrices(p ?? []);
+      setScrapedPrices(sp ?? []);
       setLoading(false);
     }
     load();
@@ -164,39 +171,79 @@ export default function ClinicPage() {
 
         {/* Prices tab */}
         {activeTab === "prices" && (
-          <div className="space-y-4">
-            <PriceForm
-              clinicId={clinicId}
-              onSubmitted={(p) => setPrices([p, ...prices])}
-            />
-            {prices.length === 0 ? (
-              <p className="text-sm text-gray-400">No prices submitted yet.</p>
-            ) : (
-              <div className="bg-white rounded-xl border shadow-sm overflow-hidden">
-                <table className="w-full text-sm">
-                  <thead className="bg-gray-50 border-b">
-                    <tr>
-                      <th className="text-left px-4 py-2 font-medium text-gray-600">Treatment</th>
-                      <th className="text-right px-4 py-2 font-medium text-gray-600">Price (NZD)</th>
-                      <th className="text-left px-4 py-2 font-medium text-gray-600">Notes</th>
-                      <th className="text-right px-4 py-2 font-medium text-gray-600">Date</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y">
-                    {prices.map((p) => (
-                      <tr key={p.id}>
-                        <td className="px-4 py-2 text-gray-900">{p.treatment}</td>
-                        <td className="px-4 py-2 text-right font-medium">${p.price_nzd}</td>
-                        <td className="px-4 py-2 text-gray-500">{p.notes ?? "—"}</td>
-                        <td className="px-4 py-2 text-right text-gray-400">
-                          {new Date(p.created_at).toLocaleDateString("en-NZ")}
-                        </td>
+          <div className="space-y-6">
+            {/* Scraped prices */}
+            {scrapedPrices.length > 0 && (
+              <div>
+                <div className="flex items-baseline justify-between mb-2">
+                  <h2 className="font-semibold text-gray-800">Pricing &amp; Payment Information</h2>
+                  {clinic.prices_last_updated && (
+                    <span className="text-xs text-gray-400">
+                      Last updated {new Date(clinic.prices_last_updated).toLocaleDateString("en-NZ", { day: "numeric", month: "long", year: "numeric" })}
+                    </span>
+                  )}
+                </div>
+                <div className="bg-white rounded-xl border shadow-sm overflow-hidden">
+                  <table className="w-full text-sm">
+                    <thead className="bg-gray-50 border-b">
+                      <tr>
+                        <th className="text-left px-4 py-2 font-medium text-gray-600">Treatment / Scheme</th>
+                        <th className="text-right px-4 py-2 font-medium text-gray-600">Price (NZD)</th>
+                        <th className="text-left px-4 py-2 font-medium text-gray-600">Notes</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody className="divide-y">
+                      {scrapedPrices.map((sp) => (
+                        <tr key={sp.id}>
+                          <td className="px-4 py-2 text-gray-900">{sp.treatment}</td>
+                          <td className="px-4 py-2 text-right font-medium">
+                            {sp.price_label ? sp.price_label : sp.price_nzd ? `$${sp.price_nzd}` : "—"}
+                          </td>
+                          <td className="px-4 py-2 text-gray-500">{sp.notes ?? "—"}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             )}
+
+            {/* User-submitted prices */}
+            <div>
+              <h2 className="font-semibold text-gray-800 mb-2">Community Price Reports</h2>
+              <PriceForm
+                clinicId={clinicId}
+                onSubmitted={(p) => setPrices([p, ...prices])}
+              />
+              {prices.length === 0 ? (
+                <p className="text-sm text-gray-400 mt-3">No prices submitted yet. Be the first!</p>
+              ) : (
+                <div className="bg-white rounded-xl border shadow-sm overflow-hidden mt-3">
+                  <table className="w-full text-sm">
+                    <thead className="bg-gray-50 border-b">
+                      <tr>
+                        <th className="text-left px-4 py-2 font-medium text-gray-600">Treatment</th>
+                        <th className="text-right px-4 py-2 font-medium text-gray-600">Price (NZD)</th>
+                        <th className="text-left px-4 py-2 font-medium text-gray-600">Notes</th>
+                        <th className="text-right px-4 py-2 font-medium text-gray-600">Date</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y">
+                      {prices.map((p) => (
+                        <tr key={p.id}>
+                          <td className="px-4 py-2 text-gray-900">{p.treatment}</td>
+                          <td className="px-4 py-2 text-right font-medium">${p.price_nzd}</td>
+                          <td className="px-4 py-2 text-gray-500">{p.notes ?? "—"}</td>
+                          <td className="px-4 py-2 text-right text-gray-400">
+                            {new Date(p.created_at).toLocaleDateString("en-NZ")}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
           </div>
         )}
       </main>

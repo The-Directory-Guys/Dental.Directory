@@ -21,6 +21,7 @@ export type Clinic = {
   /** Main city label, e.g. Auckland, or NA (optional until DB migrated) */
   city?: string | null;
   price: string | null;
+  prices_last_updated: string | null;
 };
 
 export type Review = {
