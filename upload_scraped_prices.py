@@ -75,10 +75,13 @@ def insert_rows(rows: list[dict]):
     resp.raise_for_status()
 
 
-def update_clinic_date(clinic_id: int):
+def update_clinic(clinic_id: int, open_to_new_patients):
+    payload = {"prices_last_updated": TODAY}
+    if open_to_new_patients is not None:
+        payload["open_to_new_patients"] = open_to_new_patients
     resp = requests.patch(
         f"{SUPABASE_URL}/rest/v1/dental_clinics?id=eq.{clinic_id}",
-        headers=HEADERS, json={"prices_last_updated": TODAY}, timeout=15,
+        headers=HEADERS, json=payload, timeout=15,
     )
     resp.raise_for_status()
 
@@ -169,9 +172,11 @@ def main():
             continue
 
         try:
+            otnp_raw = row.get("open_to_new_patients", "")
+            open_to_new_patients = True if otnp_raw == "True" else (False if otnp_raw == "False" else None)
             delete_existing_scraper_rows(clinic_id)
             insert_rows(price_rows)
-            update_clinic_date(clinic_id)
+            update_clinic(clinic_id, open_to_new_patients)
             inserted += 1
             name = row['name'].encode('ascii', 'replace').decode()
             print(f"  + {name} ({len(price_rows)} rows)")

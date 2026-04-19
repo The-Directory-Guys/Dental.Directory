@@ -74,6 +74,7 @@ PRICING_FIELDS = [
     "new_patient",
     "other",
     "has_pricing",
+    "open_to_new_patients",
     "pages_crawled",
 ]
 
@@ -355,6 +356,11 @@ Extract any pricing information you can find across all pages. Look for:
 - New patient consultation fees
 - Any other specific prices mentioned
 
+Also look for whether the clinic is currently accepting new patients. Look for phrases like:
+- "accepting new patients", "welcoming new patients", "new patients welcome"
+- "not accepting new patients", "our books are closed", "not taking new patients"
+- If no mention is found, return null.
+
 Return ONLY a JSON object with these exact fields (use null if not found):
 {{
     "checkup": "price or range as string e.g. '$95' or '$85-$110'",
@@ -364,7 +370,8 @@ Return ONLY a JSON object with these exact fields (use null if not found):
     "whitening": "price or range as string",
     "new_patient": "price or range as string",
     "other": "any other pricing info found, as a brief string",
-    "has_pricing": true or false
+    "has_pricing": true or false,
+    "open_to_new_patients": true, false, or null
 }}
 
 Return ONLY valid JSON. No explanation, no markdown, no backticks."""
