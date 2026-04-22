@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Southland Dentists — NZ Dental</title>
+    <meta name="description"
+        content="Browse and compare the best dentists in Southland. Filter by suburb, service, and rating. Read real patient reviews.">
+    <meta property="og:title" content="Southland Dentists — NZ Dental">
+    <meta property="og:description"
+        content="Find the perfect dentist in Southland. Compare ratings, services, and patient reviews.">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header__inner">
+            <a href="index.html" class="logo">
+                <div class="logo__icon">🦷</div>
+                NZ Dental
+            </a>
+            <nav class="nav" id="main-nav">
+                <a href="index.html" class="nav__link">Home</a>
+                <a href="index.html#locations" class="nav__link">All Regions</a>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section
+        style="background: linear-gradient(135deg, var(--clr-navy) 0%, var(--clr-navy-light) 100%); color: #fff; padding: 3rem 0; text-align: center;">
+        <div class="container">
+            <h1 style="color:#fff; margin-bottom:.75rem;">Dentists in <span class="hero__highlight">Southland</span>
+            </h1>
+            <p style="color: var(--clr-gray-300); max-width: 500px; margin: 0 auto;">Compare ratings, read reviews, and
+                find the right dental practice for you.</p>
+        </div>
+    </section>
+
+    <!-- Mobile Filter Button -->
+    <div class="container" style="padding-top: 1.5rem;">
+        <button class="btn btn--outline mobile-filter-btn" id="mobile-filter-btn">☰ Filters</button>
+    </div>
+
+    <!-- Mobile Filter Overlay -->
+    <div class="filter-overlay" id="filter-overlay"></div>
+    <div class="filter-drawer" id="filter-drawer">
+        <div class="filter-drawer__header">
+            <h3>Filters</h3>
+            <button class="filter-drawer__close" id="filter-drawer-close">✕</button>
+        </div>
+        <div class="filter-group">
+            <div class="filter-group__label">Max Checkup Price</div>
+            <div class="price-slider">
+                <input type="range" class="price-range" id="mobile-price-range" min="100" max="200" value="200" step="5">
+                <div class="price-slider__labels">
+                    <span>$100</span>
+                    <span class="price-slider__value" id="mobile-price-value">Up to $200</span>
+                    <span>$200</span>
+                </div>
+            </div>
+        </div>
+        <div class="filter-group">
+            <div class="filter-group__label">Suburb</div>
+            <div class="filter-group__items">
+            </div>
+        </div>
+        <div class="filter-group">
+            <div class="filter-group__label">Service</div>
+            <div class="filter-group__items">
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="General Dentistry">
+                    General</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Cosmetic">
+                    Cosmetic</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Teeth Whitening">
+                    Whitening</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Orthodontics">
+                    Orthodontics</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Implants">
+                    Implants</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Emergency">
+                    Emergency</label>
+            </div>
+        </div>
+        <div class="filter-group">
+            <div class="filter-group__label">Rating</div>
+            <div class="filter-group__items">
+                <label class="filter-check"><input type="checkbox" class="filter-rating" value="4.5"> ★ 4.5+</label>
+                <label class="filter-check"><input type="checkbox" class="filter-rating" value="4.0"> ★ 4.0+</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <section class="section" style="padding-top: 2rem;">
+        <div class="container">
+            <div class="listings-layout">
+
+                <!-- Desktop Sidebar -->
+                <aside class="sidebar">
+                    <div class="sidebar__title">☰ Filters</div>
+
+                    <div class="filter-group">
+                        <div class="filter-group__label">Search</div>
+                        <div class="listings-search">
+                            <input type="text" id="listings-search" placeholder="Search by name...">
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <div class="filter-group__label">Max Checkup Price</div>
+                        <div class="price-slider">
+                            <input type="range" class="price-range" id="desktop-price-range" min="100" max="200" value="200" step="5">
+                            <div class="price-slider__labels">
+                                <span>$100</span>
+                                <span class="price-slider__value" id="desktop-price-value">Up to $200</span>
+                                <span>$200</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <div class="filter-group__label">Suburb</div>
+                        <div class="filter-group__items">
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <div class="filter-group__label">Service</div>
+                        <div class="filter-group__items">
+                            <label class="filter-check"><input type="checkbox" class="filter-service"
+                                    value="General Dentistry"> General Dentistry</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Cosmetic">
+                                Cosmetic</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service"
+                                    value="Teeth Whitening"> Teeth Whitening</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service"
+                                    value="Orthodontics"> Orthodontics</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Implants">
+                                Implants</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Emergency">
+                                Emergency</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <div class="filter-group__label">Rating</div>
+                        <div class="filter-group__items">
+                            <label class="filter-check"><input type="checkbox" class="filter-rating" value="4.5"> ★ 4.5
+                                and above</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-rating" value="4.0"> ★ 4.0
+                                and above</label>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Listings -->
+                <main>
+                    <div class="listings-header">
+                        <span class="listings-header__count" id="results-count">Loading dentists...</span>
+                        <select class="sort-select" id="sort-select">
+                            <option value="rating">Sort by: Rating</option>
+                            <option value="reviews">Sort by: Most Reviews</option>
+                            <option value="price">Sort by: Lowest Price</option>
+                            <option value="name">Sort by: Name A–Z</option>
+                        </select>
+                    </div>
+                    <div class="dentist-grid" id="dentist-grid" data-region="Southland">
+                    </div>
+                </main>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__brand">🦷 NZ Dental</div>
+                <div class="footer__links">
+                    <a href="index.html">Home</a>
+                    <a href="index.html#locations">All Regions</a>
+                    <a href="mailto:hello@nzdental.co.nz">Contact</a>
+                </div>
+            </div>
+            <div class="footer__copy">© 2026 NZ Dental. All rights reserved. Built in New Zealand 🇳🇿</div>
+        </div>
+    </footer>
+
+    <script src="assets/js/dentists.js"></script>
+    <script src="assets/js/supabase.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
