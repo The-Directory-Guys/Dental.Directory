@@ -26,7 +26,10 @@
 
   function getCheckupPrice(d) {
     if (!d.pricing || d.pricing.length === 0) return null;
-    const checkup = d.pricing.find(p => p.service.toLowerCase().includes('checkup'));
+    const checkup = d.pricing.find(p => {
+      const s = p.service.toLowerCase();
+      return s.includes('checkup') || s.includes('check-up') || s.includes('exam') || s.includes('consult');
+    });
     if (!checkup) return null;
     const match = checkup.price.replace(/,/g, '').match(/\$(\d+)/);
     return match ? parseInt(match[1], 10) : null;
@@ -468,10 +471,13 @@
       `;
     }).join('');
 
-    // Pricing table
+    // Pricing table — always show, with empty state if no data
     let pricingHTML = '';
     if (dentist.pricing && dentist.pricing.length > 0) {
-      const rows = dentist.pricing.map(p => `<tr><td>${p.service}</td><td>${p.price}</td></tr>`).join('');
+      const rows = dentist.pricing.map(p => {
+        const notesHtml = p.notes ? `<div class="pricing-note">${p.notes}</div>` : '';
+        return `<tr><td>${p.service}${notesHtml}</td><td>${p.price}</td></tr>`;
+      }).join('');
       pricingHTML = `
         <div class="profile-section">
           <h2 class="profile-section__title">Pricing</h2>
@@ -480,6 +486,20 @@
             <thead><tr><th>Service</th><th>Price (NZD)</th></tr></thead>
             <tbody>${rows}</tbody>
           </table>
+        </div>
+      `;
+    } else {
+      // Empty pricing state — placeholder for when we don't have data yet
+      pricingHTML = `
+        <div class="profile-section">
+          <h2 class="profile-section__title">Pricing</h2>
+          <div class="pricing-empty">
+            <div class="pricing-empty__icon">💰</div>
+            <h4 class="pricing-empty__title">Pricing Coming Soon</h4>
+            <p class="pricing-empty__text">We're working on getting pricing information for this practice. In the meantime, contact them directly for a quote.</p>
+            ${dentist.phone ? `<a href="tel:${dentist.phone.replace(/\s/g, '')}" class="btn btn--outline btn--sm pricing-empty__btn">📞 Call for Pricing</a>` : ''}
+            ${dentist.website ? `<a href="${dentist.website}" target="_blank" class="btn btn--outline btn--sm pricing-empty__btn">🌐 Check Website</a>` : ''}
+          </div>
         </div>
       `;
     }

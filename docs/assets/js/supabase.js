@@ -49,13 +49,127 @@ function transformClinic(clinic) {
     rating: clinic.rating || 0,
     reviewCount: clinic.total_ratings || 0,
     services: ['General Dentistry'],  // Default — DB doesn't have services yet
-    pricing: (clinic.price && !isNaN(parseFloat(clinic.price))) ? [{ service: 'General Checkup', price: `$${clinic.price}` }] : [],
+    pricing: [],  // Will be populated from scraped_prices table
+    hasPricingFlag: clinic.price || null,  // 'full_prices', 'some_prices', or null
     description: '',
     hours: parseOpeningHours(clinic.opening_hours),
     reviews: [],
     googleMapsUrl: clinic.google_maps_url || '',
     businessStatus: clinic.business_status || 'OPERATIONAL'
   };
+}
+
+// Fetch pricing data for a list of clinic IDs from the scraped_prices table
+// Handles batching (to avoid URL length limits) and pagination (Supabase 1000-row cap)
+async function fetchClinicPricing(clinicIds) {
+  if (!clinicIds || clinicIds.length === 0) return {};
+
+  const pricingMap = {};
+  const BATCH_SIZE = 50; // IDs per request to keep URLs manageable
+
+  try {
+    // Process clinic IDs in batches
+    for (let i = 0; i < clinicIds.length; i += BATCH_SIZE) {
+      const batch = clinicIds.slice(i, i + BATCH_SIZE);
+      const idsParam = batch.map(id => `clinic_id.eq.${id}`).join(',');
+
+      // Paginate within each batch (handle > 1000 pricing rows per batch)
+      let offset = 0;
+      let hasMore = true;
+
+      while (hasMore) {
+        const url = `${SUPABASE_URL}/rest/v1/scraped_prices?or=(${idsParam})&select=clinic_id,treatment,price_label,notes&order=clinic_id,id&limit=1000&offset=${offset}`;
+
+        const response = await fetch(url, {
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          }
+        });
+
+        if (!response.ok) {
+          console.warn('Failed to fetch pricing batch:', response.status);
+          break;
+        }
+
+        const data = await response.json();
+        if (!Array.isArray(data) || data.length === 0) {
+          hasMore = false;
+          break;
+        }
+
+        // Group pricing by clinic_id
+        data.forEach(row => {
+          if (row.treatment === 'Scrape error' || row.price_label === 'Website could not be fetched') return;
+          
+          if (!pricingMap[row.clinic_id]) {
+            pricingMap[row.clinic_id] = [];
+          }
+          pricingMap[row.clinic_id].push({
+            service: row.treatment || 'Other',
+            price: row.price_label || '—',
+            notes: row.notes || ''
+          });
+        });
+
+        // If we got fewer than 1000 rows, we've reached the end for this batch
+        if (data.length < 1000) {
+          hasMore = false;
+        } else {
+          offset += 1000;
+        }
+      }
+    }
+
+    console.log(`Fetched pricing for ${Object.keys(pricingMap).length} clinics`);
+    return pricingMap;
+  } catch (error) {
+    console.error('Failed to fetch pricing:', error);
+    return pricingMap; // Return whatever we collected so far
+  }
+}
+
+// Fetch pricing for a single clinic (with pagination)
+async function fetchSingleClinicPricing(clinicId) {
+  try {
+    const allPricing = [];
+    let offset = 0;
+    let hasMore = true;
+
+    while (hasMore) {
+      const url = `${SUPABASE_URL}/rest/v1/scraped_prices?clinic_id=eq.${clinicId}&select=treatment,price_label,notes&order=id&limit=1000&offset=${offset}`;
+      
+      const response = await fetch(url, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      });
+
+      if (!response.ok) return allPricing;
+
+      const data = await response.json();
+      if (!Array.isArray(data) || data.length === 0) break;
+
+      data.forEach(row => {
+        if (row.treatment === 'Scrape error' || row.price_label === 'Website could not be fetched') return;
+        
+        allPricing.push({
+          service: row.treatment || 'Other',
+          price: row.price_label || '—',
+          notes: row.notes || ''
+        });
+      });
+
+      hasMore = data.length === 1000;
+      offset += 1000;
+    }
+
+    return allPricing;
+  } catch (error) {
+    console.error('Failed to fetch single clinic pricing:', error);
+    return [];
+  }
 }
 
 // Fetch clinics from Supabase for a given region
@@ -84,7 +198,21 @@ async function fetchClinics(region) {
     }
 
     console.log(`Fetched ${data.length} clinics for ${region}`);
-    return data.map(transformClinic);
+    const clinics = data.map(transformClinic);
+
+    // Fetch pricing for ALL clinics in this region (not just flagged ones)
+    const allClinicIds = data.map(c => c.id);
+    if (allClinicIds.length > 0) {
+      const pricingMap = await fetchClinicPricing(allClinicIds);
+      clinics.forEach(clinic => {
+        if (pricingMap[clinic.id]) {
+          clinic.pricing = pricingMap[clinic.id];
+        }
+      });
+      console.log(`Attached pricing to ${Object.keys(pricingMap).length} of ${clinics.length} clinics in ${region}`);
+    }
+
+    return clinics;
   } catch (error) {
     console.error('Failed to fetch clinics from Supabase:', error);
     // Fall back to static data if available
@@ -96,7 +224,7 @@ async function fetchClinics(region) {
   }
 }
 
-// Fetch a single clinic by ID
+// Fetch a single clinic by ID (including its pricing)
 async function fetchClinicById(id) {
   try {
     const url = `${SUPABASE_URL}/rest/v1/dental_clinics?id=eq.${id}`;
@@ -114,7 +242,13 @@ async function fetchClinicById(id) {
 
     const clinics = await response.json();
     if (clinics.length === 0) return null;
-    return transformClinic(clinics[0]);
+    const clinic = transformClinic(clinics[0]);
+
+    // Fetch pricing for this specific clinic
+    const pricing = await fetchSingleClinicPricing(id);
+    clinic.pricing = pricing;
+
+    return clinic;
   } catch (error) {
     console.error('Failed to fetch clinic:', error);
     return null;

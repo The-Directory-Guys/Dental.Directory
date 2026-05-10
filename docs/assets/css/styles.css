@@ -1373,6 +1373,50 @@ h4 {
     white-space: nowrap;
 }
 
+/* Pricing notes (under treatment name in table) */
+.pricing-note {
+    font-size: var(--fs-xs);
+    color: var(--clr-gray-400);
+    font-weight: 400;
+    margin-top: 2px;
+    font-style: italic;
+}
+
+/* Empty pricing state */
+.pricing-empty {
+    text-align: center;
+    padding: var(--sp-10) var(--sp-6);
+    background: var(--clr-gray-50);
+    border: 2px dashed var(--clr-gray-200);
+    border-radius: var(--radius-xl);
+}
+
+.pricing-empty__icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--sp-4);
+    opacity: .7;
+}
+
+.pricing-empty__title {
+    font-size: var(--fs-lg);
+    font-weight: 700;
+    color: var(--clr-navy);
+    margin-bottom: var(--sp-2);
+}
+
+.pricing-empty__text {
+    font-size: var(--fs-sm);
+    color: var(--clr-gray-500);
+    max-width: 400px;
+    margin: 0 auto var(--sp-6);
+    line-height: 1.6;
+}
+
+.pricing-empty__btn {
+    margin: 0 var(--sp-2);
+    font-size: var(--fs-sm) !important;
+}
+
 /* ===================================================
    NO RESULTS
    =================================================== */
