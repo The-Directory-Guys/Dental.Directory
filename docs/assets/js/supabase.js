@@ -217,7 +217,7 @@ async function fetchClinics(region) {
     console.error('Failed to fetch clinics from Supabase:', error);
     // Fall back to static data if available
     if (typeof dentists !== 'undefined') {
-      console.warn('⚠️ Falling back to static dentist data (Christchurch only)');
+      console.warn('⚠️ Falling back to static dentist data (Canterbury only)');
       return dentists;
     }
     return [];

@@ -402,7 +402,7 @@
         <div class="no-results">
           <div class="no-results__icon">😕</div>
           <h3>Dentist not found</h3>
-          <p>The profile you're looking for doesn't exist. <a href="christchurch.html" style="color: var(--clr-teal);">Go back to listings</a>.</p>
+          <p>The profile you're looking for doesn't exist. <a href="canterbury.html" style="color: var(--clr-teal);">Go back to listings</a>.</p>
         </div>
       `;
       return;
@@ -482,10 +482,12 @@
         <div class="profile-section">
           <h2 class="profile-section__title">Pricing</h2>
           <p style="font-size:.875rem;color:var(--clr-gray-500);margin-bottom:1rem;">Prices are indicative and may vary. Contact the practice for an exact quote.</p>
-          <table class="pricing-table">
-            <thead><tr><th>Service</th><th>Price (NZD)</th></tr></thead>
-            <tbody>${rows}</tbody>
-          </table>
+          <div style="overflow-x: auto;">
+            <table class="pricing-table">
+              <thead><tr><th>Service</th><th>Price (NZD)</th></tr></thead>
+              <tbody>${rows}</tbody>
+            </table>
+          </div>
         </div>
       `;
     } else {
@@ -597,7 +599,7 @@
   const heroRegionSelect = document.getElementById('hero-region-select');
 
   function getSelectedRegionUrl() {
-    const region = heroRegionSelect ? heroRegionSelect.value : 'christchurch';
+    const region = heroRegionSelect ? heroRegionSelect.value : 'canterbury';
     return `${region}.html`;
   }
 
