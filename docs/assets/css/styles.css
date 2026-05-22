@@ -661,7 +661,7 @@ h4 {
 .dentist-grid {
     display: grid;
     gap: var(--sp-6);
-    min-height: 800px;
+    min-height: 400px;
 }
 
 .load-more-container {
@@ -1285,7 +1285,7 @@ h4 {
 .pricing-preview__row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     padding: var(--sp-2) 0;
     font-size: var(--fs-sm);
     color: var(--clr-gray-600);
@@ -1299,8 +1299,9 @@ h4 {
 .pricing-preview__price {
     font-weight: 700;
     color: var(--clr-navy);
-    white-space: nowrap;
     margin-left: var(--sp-4);
+    text-align: right;
+    word-break: break-word;
 }
 
 .pricing-preview__more {
