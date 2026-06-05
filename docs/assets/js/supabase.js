@@ -248,10 +248,47 @@ async function fetchClinicById(id) {
     const pricing = await fetchSingleClinicPricing(id);
     clinic.pricing = pricing;
 
+    // Fetch reviews for this specific clinic
+    const reviews = await fetchSingleClinicReviews(id);
+    clinic.reviews = reviews;
+
     return clinic;
   } catch (error) {
     console.error('Failed to fetch clinic:', error);
     return null;
+  }
+}
+
+// Fetch reviews for a single clinic from Supabase reviews table
+async function fetchSingleClinicReviews(clinicId) {
+  try {
+    const url = `${SUPABASE_URL}/rest/v1/reviews?clinic_id=eq.${clinicId}&order=created_at.desc`;
+    const response = await fetch(url, {
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      }
+    });
+
+    if (!response.ok) {
+      console.warn('Failed to fetch reviews:', response.status);
+      return [];
+    }
+
+    const data = await response.json();
+    if (!Array.isArray(data)) return [];
+
+    return data.map(r => ({
+      name: 'Verified Patient',
+      date: r.created_at 
+        ? new Date(r.created_at).toLocaleDateString('en-NZ', { day: 'numeric', month: 'long', year: 'numeric' })
+        : 'Recently',
+      rating: r.rating || 5,
+      text: r.body || ''
+    }));
+  } catch (error) {
+    console.error('Failed to fetch single clinic reviews:', error);
+    return [];
   }
 }
 

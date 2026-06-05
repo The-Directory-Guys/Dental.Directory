@@ -423,6 +423,31 @@
       `;
     }
 
+    // Update Back button to point to dentist's actual region page dynamically
+    const backBtn = document.querySelector('.profile-hero__back');
+    if (backBtn && dentist.region) {
+      const regionFiles = {
+        'Auckland': 'auckland.html',
+        'Bay of Plenty': 'bay-of-plenty.html',
+        'Canterbury': 'canterbury.html',
+        'Gisborne': 'gisborne.html',
+        'Hawke\'s Bay': 'hawkes-bay.html',
+        'Manawatū-Whanganui': 'manawatu-whanganui.html',
+        'Marlborough': 'marlborough.html',
+        'Nelson': 'nelson-tasman.html',
+        'Northland': 'northland.html',
+        'Otago': 'otago.html',
+        'Southland': 'southland.html',
+        'Taranaki': 'taranaki.html',
+        'Waikato': 'waikato.html',
+        'Wellington': 'wellington.html',
+        'West Coast': 'west-coast.html'
+      };
+      const fileName = regionFiles[dentist.region] || 'index.html';
+      backBtn.href = fileName;
+      backBtn.textContent = `← Back to ${dentist.region === 'Nelson' ? 'Nelson/Tasman' : dentist.region} listings`;
+    }
+
     document.title = `${dentist.name} | NZ Dental`;
 
     const serviceIcons = {
