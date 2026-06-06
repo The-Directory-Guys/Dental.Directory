@@ -1,74 +1,69 @@
-1. After Hours Dental [no data]
-   Status:  [ ]
-   Website: 
-
-2. Avonhead Dental [scraped]
-   Status:  [ ]
+1. Avonhead Dental [scraped]
+   Status:  [Checked: Accurate]
    Website: https://avonheaddental.co.nz/
+   - Exam / checkup: $175 (includes 2 x-rays and clean; 30-45 minutes); $120 without clean [verified by phone 18/05/26]
+   - Hygienist: Starting mid-June 2026
+   - Filling: From $210
+   - Root canal: From $900
    - Credit card: American Express, Apple Pay, Google Pay, Mastercard, Shop Pay, Union Pay, Visa
 
-3. Barrington Dental Centre [scraped]
-   Status:  [ ]
+
+2. Barrington Dental Centre [scraped]
+   Status:  [Checked: Accurate]
    Website: http://www.barringtondental.co.nz/
-   - ACC: ACC Treatment available
+   - Exam / checkup: $160 (includes clean and polish, 2 x-rays; 15-30 minutes) [verified by phone 18/05/26]
+   - Hygienist: $165 (1 hour) [verified by phone 18/05/26]
+   - ACC: Available
    - Free teen dental care: Free until age 18
 
-4. Beale & Cullen - Dentist [scraped]
-   Status:  [ ]
-   Website: https://www.bealeandcullen.co.nz/
-   - Q Card: Available
-   - Credit card: Available
 
-5. Bealey Dental [scraped]
-   Status:  [ ]
+3. Beale & Cullen - Dentist [scraped]
+   Status:  [Checked: Accurate]
+   Website: https://www.bealeandcullen.co.nz/
+   - Exam / checkup: $95-$130 (30-40 minutes) [verified by phone 18/05/26]
+   - Hygienist: $185 (45 minutes) [verified by phone 18/05/26]
+   - Q Card: Available
+   - Credit card: Debit and credit card accepted
+   - Cash: Accepted
+   - Online booking: Available
+
+
+4. Bealey Dental [scraped]
+   Status:  [Checked: Accurate]
    Website: http://www.bealeydental.co.nz/
+   - Exam / checkup: $158 (30 minutes) [verified by phone 18/05/26]
+   - Hygienist: $181 (45-minute scale and polish) [verified by phone 18/05/26]
    - ACC: Available
    - Free teen dental care: Free treatment for ages 13-18
 
-6. Better Denture [scraped]
-   Status:  [ ]
-   Website: http://www.betterdenture.co.nz/
-   - Consultation: Free of charge, no-obligation
-   - WINZ: Quotes available
 
-7. Better Smiles Ltd [MANUAL]
-   Status:  [ ]
+5. Better Smiles Ltd [MANUAL]
+   Status:  [Checked: Accurate]
    Website: http://www.bettersmiles.co.nz/
-   - Scale and polish: $195
+   Note: Dental hygienist only — no general dentistry or checkups
+   - Hygienist: $195 (1 hour; includes plaque/tartar removal, gum check, oral care advice) [checked 18/05/26]
+   - Cancellation fee: $50 (less than 24 hours notice or no-show)
 
-8. Blossom Dental [no data]
-   Status:  [ ]
-   Website: 
 
-9. Boutique Dental Implants Christchurch [MANUAL]
+6. Blossom Dental [no data]
    Status:  [ ]
-   Website: https://dentalimplantschristchurch.co.nz/
-   - Consultation: $95
-   - Consultation: $142
-   - X-ray – OPG: $115
-   - X-ray – intraoral: $48
-   - Implant: from $5,800
-   - Bone graft: from $1,950
-   - Root canal – molar: from $1,800
-   - Extraction – surgical: from $400
-   - Extraction – wisdom tooth: from $400
-   - ACC
-   - Afterpay: 4 fortnightly payments
-   - Farmers Card
-   - Q Card: 12 months interest-free
-   - WINZ: $95 consultation fee
+   Website: https://www.healthpoint.co.nz/dentistry/general-dentist/blossom-dental/ [blossomdental.co.nz broken — switched to Healthpoint]
+   Address: 14 Lincoln Road, Hillmorton, Christchurch 8149
+   Phone: 03 421 7211
+   Note: Previously known as Hoon Hay Dental
 
-10. Bradley Wood Dentists [scraped]
-   Status:  [ ]
-   Website: http://www.bradleywooddentists.co.nz/
 
-11. Bright Smiles Children's Dentistry [scraped]
-   Status:  [ ]
+7. Bright Smiles Children's Dentistry [scraped]
+   Status:  [Checked: Accurate]
    Website: http://www.brightsmiles.co.nz/
+   Note: Focused on children, teenagers and young adults
    - ACC: Registered provider. Most costs covered by ACC. No co-payment charged.
    - Free teen dental care: For teens from Year 9 at school until their 18th birthday: check-ups and most dental treatment is free. Once a year full check-up including x-rays, fluoride, fissure sealants, cleaning and preventive advice.
+   Additional information:
+   - X-rays are fully digital (lower radiation than traditional film); range of sizes available for pre-schoolers to school leavers; OPG machine available for full-mouth wide view x-rays
 
-12. Bush Dental [MANUAL]
+
+8. Bush Dental [MANUAL]
    Status:  [ ]
    Website: https://christchurchdentists.nz/
    - New patient offer: $69 (full examination + 2 x-rays)
@@ -82,19 +77,16 @@
    - ACC: Available
    - WINZ: Available
 
-13. Carlton Dental Care [scraped]
-   Status:  [ ]
+
+9. Carlton Dental Care [scraped]
+   Status:  [Checked: Accurate]
    Website: https://www.carltondental.co.nz/
+   - Exam / checkup: $110 (includes x-rays; ~30 minutes); $235 with clean [verified by phone 18/05/26]
+   - Credit card: Visa, Mastercard
+   - Afterpay: Available
 
-14. Cashmere Dentists [no data]
-   Status:  [ ]
-   Website: http://www.cashmeredentists.co.nz/
 
-15. Cathedral Dental Centre [no data]
-   Status:  [ ]
-   Website: http://www.cathedraldental.co.nz/
-
-16. Christchurch Boutique Dental [MANUAL]
+10. Christchurch Boutique Dental [MANUAL]
    Status:  [ ]
    Website: https://boutiquedental.co.nz/
    - Consultation: $95; extended consultation $142
@@ -171,67 +163,41 @@
    - Clinical Denture Technician Consults: $65
    - Upper and Lower denture: from $3000
 
-17. Christchurch Endodontic Practice [scraped]
-   Status:  [ ]
-   Website: https://www.endodontic.co.nz/
-   - Consultation: Payment required at time of appointment
-   - ACC: Part of cost could potentially be covered for dental trauma
-   - Root canal retreatment: Cost discussed during consultation appointment
-   - Periapical surgery: Cost discussed during consultation appointment
-   - Dental implant: Cost discussed during consultation appointment
 
-18. Christchurch Periohygiene [scraped]
+11. Chung Dental Clinic [no data]
    Status:  [ ]
-   Website: http://www.periohygiene.com/?utm_source=google&utm_medium=organic&utm_campaign=gbp-listing
-   - Consultation: will cost abo...
-   - Periodontal treatment: cost ranges depending on the severity of the disease
+   Website: https://www.healthpoint.co.nz/dentistry/general-dentist/chung-dental-clinic/
 
-19. Chung Dental Clinic [no data]
-   Status:  [ ]
-   Website: 
 
-20. Church Corner Dental Surgery [no data]
-   Status:  [ ]
-   Website: https://churchcornerdental.co.nz/
-
-21. Colombo Street Dental [MANUAL]
-   Status:  [ ]
+12. Colombo Street Dental [MANUAL]
+   Status:  [Checked: Accurate]
    Website: https://colombostreetdental.co.nz/
-   - Crown - ceramic: $1,200 (LISI/NICE same-day); $1,499 (EMAX/Zirconia/PFM/Pressed EMAX)
-   - Afterpay: 4 equal fortnightly instalments, no interest
-   - Q Card: 12 months interest-free ($500–$1,250); 18–24 months interest-free (over $1,250)
+   - Exam / checkup: $137 (includes x-rays); $223 with clean; clean only (existing patients) $197 [manually checked 18/05/26]
+   - Filling: $275-$495 per filling
+   - Extraction - simple: $297 (includes x-ray); surgical up to $550
+   - Wisdom tooth - simple: $297; surgical $695; all 4 ~$1,800-$2,500 (+ $500 for IV sedation)
+   - Root canal: $1,100-$1,600
+   - Crown: $1,200 (LISI/NICE same-day); $1,499 (Monolithic EMAX/Zirconia/PFM)
+   - Partial denture: $1,500 (plastic); $2,500 (metal)
+   - Full denture: $850/arch temporary; $2,000/arch in-house milled; $2,500/arch premium
+   - ACC: Approved provider; ACC consult $75
+   - Free teen dental care: Free from Year 9 until 18th birthday
+   - WINZ: $137 dental assessment for quote
    - Southern Cross: Easy-Claim available
-   - WINZ: $137 dental assessment
-   - Consultation: $137
-   - New patient offer: Initial New Patient Comprehensive Exam (Includes Intraoral imaging such as a set of Bitewing X-Rays) $137; Initial New Patient Examination, Bitewing X-rays and Cleaning appointment $223
-   - Extraction - simple: $297
-   - Extraction - surgical: up to $550
-   - Root canal: $1100-$1600
-   - Crown - ceramic: LISI or NICE same-day crowns: $1200; Monolithic EMAX, Zirconia, PFM and Pressed Emax: $1499
-   - Afterpay: 4 equal installments over 2 weeks, no additional interest charged and no additional fees
-   - Q Card: Up to 24 Months Interest Free: 12-months Interest-Free for treatments between $500-$1250; 18-24 months Interest-Free for treatments over $1,250
-   - Payment plan: Online banking, cash, credit card, Afterpay, Q Card Long-Term Financing
-   - Credit card: Available
-   - ACC: ACC & Under 18's service available
-   - WINZ: $137 dental assessment for a quote of treatment required
-   - Southern Cross: Southern Cross Easy-Claim available, dental treatments approved by insurance policy paid directly by Southern Cross
-   - Student discount: 10% discounts for students on fillings and extractions
-   - Community Services Card: 10% discounts for Community Services Card holders on fillings and extractions
-   - X-Rays, Exam & Clean: Included in new patient offers
+   - Afterpay: 4 fortnightly instalments, no interest
+   - Q Card: 12 months interest-free ($500-$1,250); 18-24 months interest-free (over $1,250)
+   - Community Services Card: 10% discount on fillings and extractions
+   - Student discount: 10% on fillings and extractions
 
-22. Cosmetic Denture Clinic - Denture Expert in Complete, Partial and Immediate Dentures [scraped]
-   Status:  [ ]
-   Website: http://www.cosmeticdentureclinic.co.nz/
 
-23. Dana Dental Ltd [no data]
-   Status:  [ ]
+13. Dana Dental Ltd [no data]
+   Status:  [Checked: Accurate]
    Website: http://www.danadental.co.nz/
+   - Exam / checkup: $195 (includes 2 x-rays and scale & polish; 30-minute appointment) [verified by phone 18/05/26]
+   Note: No separate hygienist — checkup and clean combined into one appointment
 
-24. Dana Dental Ltd [no data]
-   Status:  [ ]
-   Website: https://danadental.co.nz/
 
-25. Dental Care on Barrington [MANUAL]
+14. Dental Care on Barrington [MANUAL]
    Status:  [ ]
    Website: https://www.dentalhealth.co.nz/
    - WINZ: Free
@@ -244,17 +210,16 @@
    - Southern Cross: Members accepted
    - New Patient Exam and Two X-rays: $120
 
-26. Dental Clinics [no data]
-   Status:  [ ]
-   Website: 
 
-27. Dental on Kilmore [MANUAL]
-   Status:  [ ]
+15. Dental on Kilmore [MANUAL]
+   Status:  [Checked: Accurate]
    Website: https://www.dentalonkilmore.co.nz/?utm_source=Google&utm_medium=Organic&utm_campaign=GBP&utm_term=Website
+   - Exam / checkup: $164 new patient exam (includes x-rays and scan; 60-minute appointment; subsequent visits priced based on treatment required) [prices vary, verified by phone 18/05/26]
+   - Hygienist: $210 [prices vary, verified by phone 18/05/26]
    - Afterpay: 4 interest-free instalments
    - Q Card: Long-term finance
    - Free teen dental care: Free
-   - WINZ: 5 consultation fee
+   - WINZ: $5 consultation fee
    - Consultation: $85
    - Root canal: varies in complexity
    - Afterpay: 4 interest-free instalments over 6 weeks
@@ -268,98 +233,44 @@
    - Cash payment: Accepted
    - EFTPOS payment: Accepted
 
-28. Dentist On Merrin [no data]
-   Status:  [ ]
-   Website: 
 
-29. Dentistry on Merivale [no data]
+16. Dentist On Merrin [no data]
    Status:  [ ]
-   Website: 
+   Website: https://www.healthpoint.co.nz/dentistry/general-dentist/dentist-on-merrin/at/45-merrin-street-avonhead-christchurch/ [dentistonmerrin.co.nz broken — switched to Healthpoint]
+   Address: 4/45 Merrin Street, Avonhead, Christchurch 8042
+   Phone: 03 358 9662
 
-30. Dentistry With A Smile [scraped]
-   Status:  [ ]
+
+17. Dentistry With A Smile [scraped]
+   Status:  [Checked: Accurate]
    Website: http://www.dentistrywithasmile.co.nz/
+   - Exam / checkup: 2 x-rays $98 (15-30 minutes) [verified by phone 18/05/26]
+   - Hygienist: $190 (45 minutes) [verified by phone 18/05/26]
+   - Free teen dental care: Free basic services for secondary school students up to 18 (excludes orthodontics)
+   - WINZ: Accredited; quotes available; $50 deposit required at initial appointment (refunded once WINZ pays)
+   - ACC: Accredited; complex treatments may incur surcharge; does not cover wear and tear or decay
+   - Payment plan: Available after credit history established; new patients must pay in full on first visit
+   - Community Services Card: Not accepted
 
-31. Denture House [no data]
-   Status:  [ ]
-   Website: https://www.denturehouse.co.nz/?utm_source=google&utm_medium=wix_google_business_profile&utm_campaign=8342447051141617133
 
-32. Denture South Barrington [scraped]
-   Status:  [ ]
-   Website: http://www.denturesouth.nz/
-   - Payment plan: Flexible finance options available
-
-33. Denture World [no data]
-   Status:  [ ]
-   Website: https://www.dentureworld.co.nz/
-
-34. Dentures & More [scraped]
-   Status:  [ ]
-   Website: https://denturesandmore.co.nz/?utm_source=google&utm_medium=gbp
-   - Consultation: Free initial consult - no obligation
-   - Denture repair: Same-day service available
-   - Payment plan: Flexible payment options – including 0% finance plans
-
-35. Dentures Plus [scraped]
-   Status:  [ ]
-   Website: http://www.denturesplus.co.nz/
-   - Consultation: Free no obligation consultation
-
-36. Designer Denture Clinic [no data]
-   Status:  [ ]
-   Website: 
-
-37. Dr Rob Cumming Dentist [MANUAL]
-   Status:  [ ]
-   Website: http://prebbletondental.net.nz/
-   - Southern Cross
-   - Afterpay: 4 fortnightly payments
-   - ACC
-   - Q Card: Up to 24 months interest-free
-
-38. Dr. Keira Malone - Oral Surgeon [no data]
-   Status:  [ ]
-   Website: https://www.drkeiramalone.com/
-
-39. Duchenne Denture Specialists [scraped]
-   Status:  [ ]
-   Website: http://duchenne.co.nz/
-   - New patient offer: Book during May and save $150!
-
-40. Duchenne Dentures Hoon Hay [scraped]
-   Status:  [ ]
-   Website: http://duchenne.co.nz/
-   - New patient offer: Book during May and save $150!
-
-41. Duchenne Dentures Linwood [scraped]
-   Status:  [ ]
-   Website: https://www.duchenne.co.nz/
-   - Consultation: Free assessment
-   - New patient offer: Book during May and save $150
-
-42. Duxton Dental [no data]
-   Status:  [ ]
+18. Duxton Dental [no data]
+   Status:  [Checked: Accurate]
    Website: https://www.duxtondental.co.nz/?utm_source=google&utm_medium=organic&utm_campaign=Google%20My%20Business%20Page
+   - Exam / checkup: $225 new patient exam (75 minutes) [verified by phone 18/05/26]
+   - Hygienist: $250 first visit; subsequent visits combined checkup and hygienist $210 (50 minutes; varies depending on x-rays, time required etc.) [verified by phone 18/05/26]
 
-43. Elmwood Dental Centre [scraped]
-   Status:  [ ]
+
+19. Elmwood Dental Centre [scraped]
+   Status:  [Checked: Accurate]
    Website: http://www.elmwooddental.co.nz/
-   - ACC: Accredited ACC provider
-   - Student discount: Student discounts available
-   - Free teen dental care: Free dental care for all high school aged children
+   - Exam / checkup: $178 (includes x-rays and simple clean; 30 minutes) [verified by phone 18/05/26; confirmed by patient 27/05/26 — fluoride treatment included at no extra cost]
+   - ACC: Accredited provider
+   - WINZ: Accredited; quotes available
+   - Student discount: Available
+   - Free teen dental care: Free for all high school aged children
 
-44. Endo With Jay [no data]
-   Status:  [ ]
-   Website: http://www.endowithjay.co.nz/
 
-45. Essential Dental [MANUAL]
-   Status:  [ ]
-   Website: https://www.essentialdental.nz/
-   - Scale and polish: $149
-   - Tooth gem: $50 (x1, within hygiene visit); $75 (x2, within hygiene visit); $70 (x1, standalone); $110 (x2, standalone)
-   - Free teen dental care: Free (birth to 18 years)
-
-46. Fendalton Dental [MANUAL]
+20. Fendalton Dental [MANUAL]
    Status:  [ ]
    Website: https://www.fendaltondental.co.nz/
    - New patient offer: $49 (full check-up + 2 x-rays)
@@ -401,52 +312,18 @@
    - Root Sensitivity Treatment Using Laser: $95
    - Wire Splint: $120
 
-47. Ferry Road Dental Centre [scraped]
-   Status:  [ ]
+
+21. Ferry Road Dental Centre [scraped]
+   Status:  [Checked: Accurate]
    Website: http://www.ferryrddental.co.nz/
+   - Exam / checkup: $89 new patient (includes digital x-rays); $129 standard [manually checked 18/05/26]
+   - ACC: Majority of costs usually covered; some treatments require patient co-payment
+   - WINZ: Quotes available for emergency and urgent dental work
+   - Free teen dental care: Free for ages 13-18
+   - Afterpay: Available
 
-48. Ferrymead Dental Clinic | Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/ferrymead-dental-centre-christchurch/?utm_source=google_business_profile&utm_medium=organic
-   - New patient offer: $99
-   - Afterpay: 4 equal fortnightly payments, interest-free
-   - Q Card: 18 months interest-free
-   - Credit card: Visa, MasterCard accepted; American Express and Diners Club available upon confirmation
-   - ACC: Available for dental injury caused by accident, sporting injury, or dental treatment
-   - WINZ: Registered provider
-   - Southern Cross: Members offer available; Easy-Claim insurance
-   - Free teen dental care: Free for teenagers until 18th birthday who meet eligibility criteria
-   - SuperGold Card: Accepted
 
-49. Ferrymead Dental Services [scraped]
-   Status:  [ ]
-   Website: https://www.ferrymead-dental.co.nz/index.php/contact-us
-   - New patient offer: $99 New Patient Check Up
-   - Afterpay: 4 fortnightly payments, interest-free
-   - Q Card: 18 months interest-free
-   - Credit card: Visa, MasterCard accepted; American Express and Diners Club accepted at most practices
-   - ACC: Registered provider for dental injuries from accidents, sporting injuries, or dental treatment
-   - WINZ: Registered dentist
-   - Southern Cross: Members offer available; Easy-Claim Insurance accepted
-   - Free teen dental care: Free for eligible teenagers until 18th birthday
-   - SuperGold Card: Available
-
-50. G&E Dental [MANUAL]
-   Status:  [ ]
-   Website: http://www.gedental.nz/
-   - Q Card: 12 months interest-free on treatments over $200
-   - Q Card: Q Mastercard — 3 months no payments, no interest
-   - Farmers Card: Available
-   - Afterpay: 4 interest-free instalments over 6 weeks
-   - Credit card: No surcharge (Mastercard and Visa)
-   - Afterpay: 4 interest-free installments over 6 weeks
-   - Q Card: No payments and no interest for 3 months on every purchase
-   - Farmers Card: Farmers Finance Card accepted
-   - Payment plan: 12 months interest-free finance on dental treatments over $200
-   - Credit card: No surcharge for credit cards - accepts Mastercard and Visa
-   - Free teen dental care: All New Zealand teenagers aged 13-17 are entitled to free dental treatment
-
-51. Garden City Dental [MANUAL]
+22. Garden City Dental [MANUAL]
    Status:  [ ]
    Website: http://www.gardencitydental.co.nz/
    - Exam / checkup: $40 (exam and x-ray)
@@ -455,369 +332,117 @@
    - Southern Cross: Easy-Claim available
    - NIB: First choice provider
 
-52. Gold smile Dentures & Repairs [scraped]
-   Status:  [ ]
-   Website: https://janiceling6888.wixsite.com/goldsmiledenturesrep
-   - Consultation: Free
-   - Denture - full: $995 or $1995 sets
-   - Denture - partial: Starts from $705
-   - WINZ: Free WINZ quotes available
-   - Immediate single full denture: $1480 or $2480 sets
 
-53. Golden Grin Teeth Whitening Christchurch Chch [MANUAL]
-   Status:  [ ]
-   Website: http://goldengrinteeth.co.nz/?utm_source=google&utm_medium=banner&utm_campaign=GoldenGrin_gmb_1
-   - Consultation: $60 ($30 credited back towards full treatment)
-
-54. Halswell Dental [scraped]
-   Status:  [ ]
-   Website: http://www.halswelldental.co.nz/
-   - Payment plan: Available - clinic will work with patients to adjust treatment timing or create a plan that suits their budget
-   - ACC: Accredited Provider
-   - WINZ: Eligible patients can apply for dental grant through Ministry of Social Development; clinic provides written quote to support application
-   - Southern Cross: Easy Claim provider - processes claims on the spot
-   - Community Services Card: Discounted emergency dental treatment - up to two subsidised emergency visits per year for relieving pain and stabilising issues
-
-55. Happy Smiles Paediatric Dentistry- Children's Specialist Dentist [scraped]
-   Status:  [ ]
-   Website: http://www.happysmiles.nz/
-   - Consultation: $195
-   - Credit card: Visa and Mastercard accepted
-   - ACC: Registered provider - co-payment applies
-   - Southern Cross: Southern Cross affiliated provider - direct claim processing
-   - New Patient Specialist Consultation with Dr Arun (up to 45 minutes): $195
-
-56. Harris Dental Christchurch | Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/harris-dental-christchurch/?utm_source=google_business_profile&utm_medium=organic
-   - Exam / checkup: $99
-   - New patient offer: $99
-   - Afterpay: 4 fortnightly payments, interest-free
-   - Q Card: 18 Months Interest Free for full priced treatments $300 and over
-   - Credit card: All major credit cards accepted including Visa and MasterCard
-   - ACC: Registered provider
-   - WINZ: Registered dentist
-   - Southern Cross: Available
-   - Free teen dental care: Available
-   - SuperGold Card: Available
-
-57. Henderson Periodontics & Implants [MANUAL]
-   Status:  [ ]
-   Website: https://www.hendersonperiodontics.co.nz/
-   - Exam / checkup: $309
-   - Exam / checkup: $190
-   - Consultation: $120
-   - Scale and polish: $255 per hour
-   - Whitening: $539
-   - X-ray – intraoral: $25
-   - X-ray – OPG: $150
-   - X-ray – OPG: $160
-   - X-ray – OPG: from $290
-   - ACC: $60
-   - Extraction: from $395
-   - Extraction – surgical: from $550
-   - Crown lengthening: $2,032
-   - Crown lengthening: $952 per hour
-   - Laser treatment: $450
-   - Flap surgery: $220
-   - Flap surgery: $1,050 per hour
-   - Bone graft: $1,105 per hour
-   - Gum graft: from $1,850
-   - Bone graft: from $2,500
-   - Periodontal treatment: $890
-   - Periodontal treatment: $1,350
-   - Periodontal treatment: $1,780
-   - Implant: from $5,500
-   - Implant: from $5,900
-   - Implant: from $6,790
-   - Implant: $220–$600
-   - Implant: $950
-   - Implant: $6,790
-   - Implant – All-on-4: $13,380
-   - Denture: from $1,078
-   - Q Card: 12 months interest-free
-   - Q Card: 18 months interest-free
-   - Q Card: 24 months interest-free
-   - Q Card: 36 months interest-free
-   - SuperGold Card
-   - ACC
-   - WINZ: Free
-
-58. Highsted Dental [scraped]
-   Status:  [ ]
-   Website: https://highsteddental.co.nz/
-   - ACC: Registered provider
-
-59. Hoon Hay Dental [no data]
-   Status:  [ ]
-   Website: 
-
-60. Hornby Dental Centre [no data]
-   Status:  [ ]
-   Website: https://www.hornbydental.co.nz/
-
-61. Ilam Dental Centre [MANUAL]
+23. Ilam Dental Centre [MANUAL]
    Status:  [ ]
    Website: http://www.ilamdental.co.nz/
    - Exam / checkup: $150 (incl. checkup, clean & x-rays)
    - Student discount: Subsidised dental treatment for University of Canterbury students (via UCSA vouchers; 1 per student per year)
 
-62. Just Teeth [no data]
-   Status:  [ ]
-   Website: http://www.just-teeth.co.nz/
 
-63. Langdons Dental [scraped]
-   Status:  [ ]
+24. Langdons Dental [scraped]
+   Status:  [Checked: Accurate]
    Website: https://langdonsdental.nz/
+   - Exam / checkup: $127.50 (includes 2 x-rays and standard clean; opening special valid until 31/05/26, usually $150) [manually checked 18/05/26]
    - ACC: Registered provider (patient surcharge may apply)
-   - WINZ: Quote available
+   - WINZ: Quotes available; Studylink quotes available
+   - Southern Cross: Easy-Claim available
+   - Afterpay: Available
+   - Free teen dental care: Free routine and emergency dental care for ages 13-17
    - Southern Cross: Accepted
    - Free teen dental care: Free routine dental care for age 13 to under 18; Free emergency dental care for age under 18
 
-64. Linwood Ave Dental [no data]
-   Status:  [ ]
-   Website: 
 
-65. Linwood Dental Centre [scraped]
-   Status:  [ ]
-   Website: https://linwooddentalcentre.co.nz/
-   - WINZ: Registered provider - provides quotes for WINZ eligible patients on benefits, pension or student allowance for urgent dental treatment
-   - Free teen dental care: Free basic dental care for ages 13-18 years old including annual examination, X-rays, scaling and polishing, fillings (not all white fillings), fluoride treatments, extractions (non-orthodontic), fissure sealants, root canal treatments, and emergency consultations
-
-66. Longhurst Dental [scraped]
-   Status:  [ ]
-   Website: http://www.longhurstdental.co.nz/
-   - Q Card: Available
-   - Payment plan: Available
-   - ACC: Available
-   - Free teen dental care: High school students up to 18th birthday treated free (examination, x-rays, fillings, root canal therapy and extractions due to dental decay)
-
-67. Lumino On Cambridge Christchurch | Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/lumino-on-cambridge-christchurch/?utm_source=google_business_profile&utm_medium=organic
-   - Exam / checkup: $99
-   - New patient offer: $99 New Patient Check Up
-   - Children's dentistry: Free Teen Dentistry
-   - Afterpay: Available
-   - Q Card: 18 Months Interest Free
-   - Payment plan: 36 Months Interest Free with Q Offer
-   - ACC: ACC Dentists
-   - WINZ: WINZ Registered Dentist
-   - Southern Cross: Southern Cross Members Offer, Southern Cross Easy-Claim Insurance
-   - Free teen dental care: Free Teen Dentistry
-   - SuperGold Card: SuperGold Card
-
-68. Lumino St Albans | Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/lumino-st-albans/?utm_source=google_business_profile&utm_medium=organic
-   - Exam / checkup: $99
-   - New patient offer: $99 New Patient Check Up
-   - Afterpay: Available
-   - Q Card: 18 Months Interest Free
-   - Payment plan: 36 Months Interest Free with Q Offer
-   - ACC: Registered provider
-   - WINZ: Registered provider
-   - Southern Cross: Members Offer and Easy-Claim Insurance
-   - Free teen dental care: Available
-   - SuperGold Card: Accepted
-
-69. Lumino The Dentist - Christchurch City CBD [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/christchurch-city-cbd/?utm_source=google_business_profile&utm_medium=organic
-   - Exam / checkup: $99
-   - New patient offer: $99
-   - Afterpay: 4 equal fortnightly payments, interest-free
-   - Q Card: 18 months interest-free for treatments $300 and over; 3 months no payments and no interest on EFTPOS
-   - Credit card: All major credit cards accepted including Visa and MasterCard; American Express and Diners Club accepted at most practices
-   - ACC: Registered ACC dentist; ACC may help with dental injury costs from accidents, sporting injuries, or dental treatment
-   - WINZ: Registered dentist; Work and Income can help with dental costs and financial assistance for urgent dental help and treatment
-   - Southern Cross: Members Offer available; Easy-Claim Insurance available
-   - Free teen dental care: Free dental care for teenagers until 18th birthday (subject to eligibility criteria)
-   - SuperGold Card: Discount available on most dental treatments
-   - Corporate Offers: 5% discount for employees of large/nationwide corporates
-
-70. Maidstone Dental [MANUAL]
-   Status:  [ ]
+25. Maidstone Dental [MANUAL]
+   Status:  [Checked: Accurate]
    Website: https://maidstonedental.co.nz/
-   - New patient offer: $49 (full dental exam + 2 x-rays)
+   - Exam / checkup: $49 new patient (full dental exam + 2 x-rays) [manually checked 18/05/26]
    - Student discount: 10% off (Ara or Otago University student ID)
    - SuperGold Card: 10% off
    - Afterpay: Available
    - Zip: Available
+   - Credit card: EFTPOS and credit card accepted
 
-71. Merivale Dental Group Christchurch [MANUAL]
-   Status:  [ ]
+
+26. Merivale Dental Group Christchurch [MANUAL]
+   Status:  [Checked: Accurate]
    Website: https://merivaledental.co.nz/
+   Note: Formerly Riverside Dental Christchurch City [manually checked 18/05/26]
    - Consultation: $89
-   - Exam / checkup: $126 (examination + 2 x-rays)
+   - Exam / checkup: $126 (includes 2 x-rays)
    - X-ray - intraoral: $39 (PA)
    - X-ray - OPG: $99
-   - Scale and polish: $199 (50–60 min; standard for new patients)
-   - Scale and polish: $185 (40–45 min)
-   - Scale and polish: $149 (30 min)
+   - Hygienist: $219 (50-60 min; standard for new patients); $194 (40-45 min); $165 (30 min)
    - Fissure sealant: $75
-   - Filling - composite: $274–$449
-   - Filling - glass ionomer: $225–$245
-   - Veneer - composite: $375–$475
-   - Veneer - porcelain: $1,595
-   - Veneer: $1,595+ depending on gold cost (gold veneer)
-   - Crown - ceramic: $1,695
-   - Crown - gold: $1,895+ depending on gold cost
-   - Crown: $3,895 (ceramic bridge, 3-unit)
-   - IV sedation: $545 per appointment
-   - Extraction - simple: $295 (first tooth)
-   - Extraction - simple: $159 (each additional tooth)
+   - Filling - composite: $274-$488
+   - Filling - glass ionomer: $225-$245
+   - Veneer - composite: $395-$525
+   - Veneer - ceramic: $1,695
+   - Crown - ceramic: $1,785
+   - Crown - gold: $1,895+
+   - Bridge - ceramic (3-unit): $3,895
+   - IV sedation: $575 per appointment
+   - Extraction - simple: $295 (first tooth); $162 each additional
    - Extraction - surgical: $395
-   - Extraction - wisdom tooth: up to $188 (consult incl. x-rays)
-   - Extraction - surgical: $475 (single wisdom tooth)
-   - Extraction - surgical: $1,154 (four wisdom teeth)
-   - Extraction - surgical: $1,654 (four wisdom teeth + IV sedation)
-   - Root canal - front tooth: $800 + composite filling (incisor/canine)
+   - Extraction - wisdom tooth consult: Up to $188 (incl. x-rays)
+   - Extraction - wisdom tooth surgical: $495 (single); $1,214 (four); $1,789 (four + IV sedation)
+   - Root canal - incisor/canine: $850 + composite filling
    - Root canal - premolar: $950 + composite filling
-   - Root canal - molar: $1,200 + crown/composite filling
+   - Root canal - molar: $1,300 + crown/composite filling
+   - ACC: Available; initial treatment usually fully or mostly covered; co-payment may apply
    - Southern Cross: Easy-Claim available
-   - ACC: Available
-   - Student discount: 10% off
+   - Credit card: Cash, EFTPOS, Visa, Mastercard
 
-72. Merivale Denture Clinic [scraped]
-   Status:  [ ]
-   Website: https://www.merivaledentureclinic.co.nz/
-   - Consultation: Free
-   - Q Card: 12 months no payments and no interest on treatments $200 and over. A $55 Establishment Fee for new Q Cardholders and a $35 Advance Fee for existing Q Cardholders will apply. Q Card Standard Interest Rate applies to any outstanding balance at end of Payment Holiday.
 
-73. Moriarty Dental [scraped]
+27. Moriarty Dental [scraped]
    Status:  [ ]
    Website: https://www.moriartydental.co.nz/contact
    - WINZ: Available through MSD/studylink community services card scheme
    - Student discount: UCSA dental scheme: $40 checkup with 30-minute appointment, quick clean and x-rays; 75% cover on further treatment up to a capped amount
    - Community Services Card: Available for funding through MSD/studylink community services card scheme
 
-74. Morton Dentistry Christchurch | Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/morton-dentistry-christchurch/?utm_source=google_business_profile&utm_medium=organic
-   - Exam / checkup: $99
-   - New patient offer: $99 New Patient Check Up
-   - Afterpay: 4 equal fortnightly payments, no added interest and no additional fees
-   - Q Card: 3 months no payments and no interest; 18 months interest-free for full priced treatments $300 and over
-   - Credit card: All major credit cards accepted including Visa and MasterCard; American Express and Diners Club at most practices
-   - ACC: Registered ACC dentists; ACC may help towards treatment costs for dental injury caused by accident, sporting injury, or dental treatment
-   - WINZ: Registered WINZ dentist; Work and Income can help with dental costs and financial assistance for urgent dental help and treatment
-   - Southern Cross: Southern Cross Members Offer; Southern Cross Easy-Claim Insurance
-   - Free teen dental care: Free for all teenagers who meet eligibility criteria until their 18th birthday
-   - SuperGold Card: Available
 
-75. Mr Liam Moore Oral and Maxillofacial Surgeon [scraped]
-   Status:  [ ]
-   Website: https://specialistoms.co.nz/
-   - Botox / aesthetics: Free consultation
-
-76. Ms J M Sheehan [no data]
-   Status:  [ ]
-   Website: 
-
-77. New Brighton Denture Clinic [no data]
-   Status:  [ ]
-   Website: 
-
-78. North Avon Dental Christchurch | Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/north-avon-dental-christchurch/?utm_source=google_business_profile&utm_medium=organic
-   - Exam / checkup: $99
-   - New patient offer: $99
-   - Whitening - take-home: $499
-   - Afterpay: 4 equal fortnightly payments, interest-free
-   - Q Card: 18 months interest-free for treatments $300 and over
-   - Credit card: Visa, MasterCard, American Express, Diners Club accepted
-   - ACC: Registered provider
-   - WINZ: Registered dentist
-   - Southern Cross: Members offer available
-   - Free teen dental care: Available
-   - SuperGold Card: Discount on most dental treatments
-
-79. Northwest Dental [scraped]
-   Status:  [ ]
-   Website: https://nwdental.co.nz/
-   - Q Card: 18 months interest-free on full priced dental treatments
-   - Payment plan: Individual dental payment plans available
-   - Credit card: Available
-   - Southern Cross: Affiliated Provider
-   - Free teen dental care: FREE for High School students (13-18 years)
-
-80. Nova Denture Clinic [no data]
-   Status:  [ ]
-   Website: https://novadentureclinic.wixsite.com/denture-clinic
-
-81. Oral Design NZ [scraped]
-   Status:  [ ]
-   Website: http://www.oraldesign.co.nz/
-   - Consultation: A consultation fee applies
-
-82. Oral Medicine Ōtautahi [scraped]
-   Status:  [ ]
-   Website: https://www.soms.co.nz/
-   - Consultation: $140-$350
-   - ACC: Relevant - details to be discussed
-
-83. Oral Smiles Health [no data]
-   Status:  [ ]
-   Website: 
-
-84. OrthodontiX Cashmere [scraped]
-   Status:  [ ]
-   Website: https://www.orthodontix.co.nz/orthodontix-cashmere/?utm_source=google%20my%20business&utm_medium=organic
-
-85. Palms Dental centre [scraped]
-   Status:  [ ]
+28. Palms Dental centre [scraped]
+   Status:  [Checked: Accurate]
    Website: http://www.palmsdentist.co.nz/
+   - Exam / checkup: $140 (includes bitewing x-ray) [verified by phone 14/05/26]
+   - Hygienist: $218-$238 depending on appointment length (full hour $238; follow-up appointments typically cheaper as shorter) [verified by phone 14/05/26]
+   - Zip: 25% upfront then 3 fortnightly interest-free payments
+   - Q Card: Minimum 3 months no payments, no interest
+   - Southern Cross: Easy-Claim available
+   - NIB: Accepted
+   - Credit card: Maestro, Q Mastercard, Union Pay, EFTPOS, cash
 
-86. Papanui Dental Centre- Open Wide [scraped]
-   Status:  [ ]
-   Website: http://papanuidental.co.nz/
-   - ACC: Accepted - ACC Dental Benefits
-   - WINZ: Accepted - WINZ Dental Benefits
-   - Free teen dental care: High School Age Students
 
-87. Pathway Dental [MANUAL]
-   Status:  [ ]
-   Website: https://www.pathwaydentists.co.nz/
-   - ACC: Registered provider; ACC surcharge usually applies (except initial consult and under-18s)
-   - Q Card: 12 months interest-free + payment holiday options (Q Card / Q Mastercard)
-   - Farmers Card: Available
-   - Afterpay: 4 equal fortnightly payments, no interest, no fees
-   - Zip: 4 interest-free payments over 6 weeks (25% upfront)
-   - Credit card: Visa and Mastercard, no surcharge
-   - After-hours fee: No surcharge for after-hours or weekend appointments
-   - Children's dentistry: Free Child and Adolescent care
-   - Afterpay: 4 equal fortnightly payments, no added interest, no additional fees
-   - Q Card: 12 month interest free finance and payment holiday finance options available
-   - Zip: 4 interest free payments over 6 weeks, 25% upfront
-   - Farmers Card: Accepted
-   - Credit card: Visa and MasterCard accepted
-   - ACC: ACC registered provider
-   - Free teen dental care: Free Child and Adolescent care
-
-88. Periodontal Services [no data]
-   Status:  [ ]
-   Website: http://www.perioservices.co.nz/about-us/
-
-89. Peter Durham [scraped]
-   Status:  [ ]
-   Website: https://peterdurham.co.nz/
-   - ACC: Insurance quotes available
-
-90. Prebbleton Dental [MANUAL]
-   Status:  [ ]
+29. Prebbleton Dental [MANUAL]
+   Status:  [Checked: Accurate]
    Website: http://prebbletondental.net.nz/
-   - Southern Cross
-   - Afterpay: 4 fortnightly payments
-   - Q Card: Up to 24 months interest-free
-   - ACC
+   - Exam / checkup: $119 new patient (includes 2 bite-wing x-rays) [manually checked 18/05/26]
+   - Hygienist: From $185 (regular patients); $195 new patients/longer appointments
+   - Filling: From $195 (white fillings)
+   - Extraction: From $350 (discounts for multiple extractions)
+   - Root canal: From $695
+   - Crown: $1,495 (back teeth); $1,650 (front teeth)
+   - Bridge: From $1,800 (Maryland); $1,950 (cantilever); $3,500 (fixed)
+   - Implant crown: From $2,950 (oral surgery fees extra)
+   - Veneer: From $1,400 per tooth
+   - Whitening - take-home: Custom kit from $550; refills from $95
+   - Denture consult: Free (with onsite dental technician)
+   - ACC: Registered provider; initial assessment often fully covered; part-charges apply for complex treatments; pre-approval required for crowns, implants and dentures
+   - Southern Cross: Easy-Claim member
+   - Afterpay: 4 fortnightly payments, no interest
+   - Q Card: Up to 24 months interest-free on treatments over $200; 6-month payment holiday available
 
-91. Precision Dental 1985 Ltd [scraped]
-   Status:  [ ]
+
+30. Precision Dental 1985 Ltd [scraped]
+   Status:  [Checked: Accurate]
    Website: https://www.precisiondentalchch.co.nz/
-   - Consultation: Free, no-obligation consultations
-   - Denture: Cost varies depending on type and work required; free consultation recommended for accurate quote
+   Note: Dentures only — not a general dentist [manually checked 18/05/26]
+   - Consultation: Free, no-obligation
+   - Denture: Cost varies; free consultation for accurate quote
+   - WINZ: Quotes available
+   - SuperGold Card: Discount available
+   - Credit card: EFTPOS and card payments accepted
    - Denture repair: Typically completed within 2-3 hours; cost deductible from new denture purchase
    - Credit card: EFTPOS and card payments accepted
    - WINZ: WINZ quotes available; payment required on completion of work
@@ -826,31 +451,11 @@
    - Denture tooth addition - metal partial dentures: May take 2-3 days depending on tooth location
    - Insurance quotes: Available
 
-92. QE2 Dental [no data]
-   Status:  [ ]
-   Website: https://qe2dental.co.nz/
 
-93. Redcliffs Dental [scraped]
-   Status:  [ ]
-   Website: https://www.redcliffsdental.co.nz/
-   - Southern Cross: Easy-Claim provider for Southern Cross Health Society members
-
-94. Redwood Family Dentists [scraped]
-   Status:  [ ]
-   Website: http://www.familydentist.co.nz/
-   - Free teen dental care: Free care for high school students up to 18 years of age
-
-95. Riccarton Dental Studio (Previously Stafford Dental Centre - Sockburn) [scraped]
-   Status:  [ ]
-   Website: https://riccartondentalstudio.co.nz/
-
-96. Riccarton Dentists [no data]
-   Status:  [ ]
-   Website: https://www.riccartondentists.co.nz/
-
-97. Richmond Village Dental [MANUAL]
+31. Richmond Village Dental [MANUAL]
    Status:  [ ]
    Website: https://richmondvillage.dental/
+   Note: Registered company name: RICHMOND DENTAL (2020) LIMITED
    - Exam / checkup: $120 (comprehensive oral examination, incl. bitewing x-rays)
    - Scale and polish: $165 (hygienist visit)
    - Filling: $205–$400
@@ -872,44 +477,14 @@
    - Hygienist visit: $165
    - 3D printed oral appliance: $2150
 
-98. Riverside Dental Christchurch City [no data]
-   Status:  [ ]
+
+32. Riverside Dental Christchurch City [no data]
+   Status:  [Checked: Accurate]
    Website: http://riversidedental.co.nz/
+   Note: Relocated and rebranded as Merivale Dental Group (see entry 68)
 
-99. RJ Begg and Associates Oral and Maxillofacial Surgery [scraped]
-   Status:  [ ]
-   Website: https://www.rjbegg.co.nz/?utm_source=google_business_profile&utm_medium=organic
-   - Consultation: Costs discussed at consultation
-   - X-ray: A part charge payable by patient (ACC); costs discussed at consultation (general patients)
-   - IV sedation: Payment required immediately prior to surgery
-   - Payment plan: Prior arrangement available; must contact office
-   - Credit card: Mastercard and Visa accepted
-   - ACC: Partial or total coverage possible with prior approval; patient pays part charge for consultations and x-rays
-   - Payment methods: Mastercard, Visa, EFTPOS, cheque, cash and internet banking accepted
-   - Cancellation fee: Charged if appointments cancelled within 48 hours of scheduled time
-   - Insurance payment: Prior approval number required before surgery; any non-payment, part payment or late payment by insurance company is full responsibility of patient
-   - Private hospital surgery payment: Payment required at rooms no later than 48 hours prior to admission
 
-100. Shirley Dental Christchurch | Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/shirley-dental-practice/?utm_source=google_business_profile&utm_medium=organic
-   - New patient offer: $99
-   - Afterpay: 4 equal fortnightly payments, interest-free
-   - Q Card: 18 months interest-free for full priced treatments $300 and over
-   - Credit card: Visa, MasterCard, American Express and Diners Club accepted
-   - ACC: Registered provider - may help towards treatment costs for dental injuries from accidents, sporting injuries, or dental treatment
-   - WINZ: Registered dentist - quotes available
-   - Southern Cross: Southern Cross Members Offer available
-   - Free teen dental care: Free for teenagers until 18th birthday (eligibility criteria apply)
-   - SuperGold Card: Discount on most dental treatments
-   - Endodontics consultation: approximately 30 minutes
-   - Endodontics treatment: approximately 90 minutes each
-
-101. Smile Bright [no data]
-   Status:  [ ]
-   Website: https://www.instagram.com/smilebright_christchurch/
-
-102. Smile Concepts [MANUAL]
+33. Smile Concepts [MANUAL]
    Status:  [ ]
    Website: http://www.smileconcepts.co.nz/
    - Exam / checkup: $120 (full check-up with x-rays and treatment plan)
@@ -925,52 +500,15 @@
    - Afterpay: 4 instalments
    - WINZ: Quotes accepted
 
-103. Smile Design - Dental implants Christchurch [no data]
-   Status:  [ ]
-   Website: https://www.smiledesign.co.nz/
 
-104. Smile Glow Christchurch [MANUAL]
-   Status:  [ ]
-   Website: http://www.smileglownz.com/
-   - Whitening: 89
-   - Whitening: 14.50 each
-   - Whitening: 75 each
-   - Whitening: 29
-   - Whitening: 85 per person
-   - Whitening: 75 per person
-   - Afterpay
-
-105. Smiles Oral Health [no data]
-   Status:  [ ]
-   Website: https://appointments.praktika.net.au/online-booking/step1?Apikey=8a83eec1-bd6c-4825-9f24-b7c0d0d04bd1&fbclid=IwY2xjawJ-o5dleHRuA2FlbQIxMQABHn-I0kbmNIJtXtUhflppqojBEWHboEV2tngpvaACCI65JGY_-mmKhO0PMLtL_aem_G4loymfENxx0Dy9q09a1AQ
-
-106. Smilesville Dental [scraped]
-   Status:  [ ]
-   Website: https://www.smilesville.co.nz/
-   - Consultation: Free of charge (Invisalign initial consultation)
-   - Children's dentistry: Free treatment for under 18s
-   - Payment plan: Interest-free finance options available (conditions apply)
-   - ACC: Registered ACC treatment provider
-   - WINZ: WINZ quotes available
-   - Free teen dental care: Free treatment for under 18s
-
-107. Southern OMS [scraped]
-   Status:  [ ]
-   Website: http://soms.co.nz/
-   - Consultation: $140-$350
-
-108. Studio Dental [no data]
-   Status:  [ ]
+34. Studio Dental [no data]
+   Status:  [Checked: Accurate]
    Website: https://www.studiodental.nz/
+   - Exam / checkup: $144 (includes 2 x-rays)
+   - Hygienist: $243 (approximately 1 hour; may cost more if signs of gum disease)
 
-109. Sweet Tooth Dental [scraped]
-   Status:  [ ]
-   Website: http://www.sweettoothdental.nz/
-   - ACC: Registered provider
-   - WINZ: Work with Work and Income New Zealand to support patients with funding where eligible
-   - SuperGold Card: 10% discount on selected treatments
 
-110. Sydenham Dental Centre [MANUAL]
+35. Sydenham Dental Centre [MANUAL]
    Status:  [ ]
    Website: https://www.sydenhamdentalcentre.co.nz/
    - New patient offer: $49 (full check-up + 2 x-rays)
@@ -994,87 +532,18 @@
    - Student discount: $35 checkup with 2 x-rays for Ara and Otago University Medical students
    - Community Services Card: 10% discount for payment on the day (applicable on treatments over $150; excluding Hygienist)
 
-111. Team Dental Bealey [scraped]
+
+36. Time Dental [no data]
    Status:  [ ]
-   Website: https://www.team-dental.co.nz/christchurch/bealey-avenue?utm_campaign=bealey&utm_medium=gbp&utm_source=google
-   - Zip: Credit limit up to $1000, interest-free payments available
-   - Credit card: EFTPOS and credit card facilities available
-   - ACC: Partial assistance available in case of accident or trauma
-   - WINZ: Quotes issued
-   - Free teen dental care: Emergency temporary treatment of children and adolescents up to age 18 under Government Special Dental Benefits scheme
+   Website: https://www.healthpoint.co.nz/dentistry/general-dentist/time-dental/
 
-112. Team Dental Papanui [scraped]
+
+37. Warrington Dental [no data]
    Status:  [ ]
-   Website: https://www.team-dental.co.nz/christchurch/papanui/?utm_campaign=papanui&utm_medium=gbp&utm_source=google
-   - Whitening: Available - tray takes up to a week, ready-to-go treatments available
-   - Orthodontics - aligners: Available at 16th Ave practice in Tauranga
-   - IV sedation: Available for anxious patients or difficult surgery
-   - Children's dentistry: Under Government Special Dental Benefits scheme - emergency temporary treatment of children and adolescents up to age 18
-   - Zip: Credit limit up to $1000, interest-free payments
-   - Credit card: EFTPOS and credit card facilities available
-   - ACC: Partial assistance sometimes available for accident or trauma
-   - WINZ: Quotes issued
+   Website: https://www.warringtondental.com/
 
-113. Team Dental Riccarton [scraped]
-   Status:  [ ]
-   Website: https://www.team-dental.co.nz/christchurch/riccarton/?utm_campaign=riccarton&utm_medium=gbp&utm_source=google
-   - Whitening: Available
-   - Whitening - in-chair: Ready-to-go whitening treatments available
-   - Whitening - take-home: Whitening tray and solution provided, takes up to a week
-   - Orthodontics - aligners: Invisalign available at Tauranga 16th Ave practice only
-   - IV sedation: Available for anxious patients or difficult surgery; consultation required
-   - Children's dentistry: Emergency temporary treatment under Government Special Dental Benefits scheme up to age 18; ongoing treatment for accident/trauma through ACC
-   - Zip: Up to $1000 credit limit, interest-free payments
-   - Credit card: Available
-   - ACC: Partial assistance sometimes available for accident or trauma
-   - WINZ: Quotes issued
 
-114. The Big Grin Orthodontists and Dental Clinic [scraped]
-   Status:  [ ]
-   Website: http://www.thebiggrin.co.nz/
-   - Consultation: FREE orthodontist consultation
-
-115. The White Smile Company [MANUAL]
-   Status:  [ ]
-   Website: http://thewhitesmilecompany.co.nz/
-   - Whitening – in-chair: 30
-   - Whitening – take-home: 50
-   - Whitening: 5
-   - Whitening: 0
-
-116. Time Dental [no data]
-   Status:  [ ]
-   Website: 
-
-117. Tony Jackson Dental [scraped]
-   Status:  [ ]
-   Website: https://www.tonyjacksondental.co.nz/
-   - Free teen dental care: Free dental care for secondary & high school students up to the age of 18 (excludes Orthodontic work)
-
-118. Waltham Dental Centre [scraped]
-   Status:  [ ]
-   Website: http://www.walthamdental.co.nz/
-
-119. Warrington Dental [no data]
-   Status:  [ ]
-   Website: 
-
-120. Windsor Dental Centre [scraped]
-   Status:  [Checked: Accurate]
-   Website: http://www.windsordentalcentre.co.nz/
-   - ACC: Free consultations for all ages
-   - Free teen dental care: Free for 13-18-year-olds
-   - WINZ: Quotes available
-   - Whitening - take-home: Take-home kits available
-   - WINZ: WINZ Quotes
-   - Free teen dental care: 13-18-year-olds free*
-
-121. Wisdom Dental [no data]
-   Status:  [Checked: Accurate]
-   Website: https://www.wisdomdental.co.nz/
-   - No prices listed: Hourly rate described as "amongst the most affordable in Christchurch and Canterbury"; requires consultation for assessment
-
-122. Yaldhurst Dental [scraped]
+38. Yaldhurst Dental [scraped]
    Status:  [Checked: Accurate]
    Website: http://www.yaldhurstdental.co.nz/
    - New patient offer: Exam + 2 x-rays + simple clean $135 (current special)
@@ -1090,3 +559,26 @@
    - Southern Cross: Easy-Claim
    - Afterpay: Available
    - Free teen dental care: Free under 18 (Adolescent Oral Health Scheme)
+
+
+39. Linwood Avenue Dental [scraped]
+   Address: 201A Linwood Avenue, Linwood, Christchurch 8011
+   Status:  [ ]
+   Website: https://www.healthpoint.co.nz/dentistry/general-dentist/linwood-avenue-dental-practice/ [no individual website]
+   Phone: 03 389 6023
+
+
+40. New Brighton Dental [scraped]
+   Address: 160 Seaview Road, New Brighton, Christchurch 8083
+   Status:  [ ]
+   Website: https://www.healthpoint.co.nz/dentistry/general-dentist/new-brighton-dental/ [newbrightondental.co.nz SSL error — switched to Healthpoint]
+   Phone: 03 388 9079
+
+
+41. van Kuijk Peter [scraped]
+   Address: 129 Williams Street, Kaiapoi 7630
+   Status:  [ ]
+   Website: https://www.healthpoint.co.nz/dentistry/general-dentist/peter-van-kuijk-dentist/ [no individual website]
+   Note: Kaiapoi (Canterbury, ~20 km north of Christchurch)
+
+

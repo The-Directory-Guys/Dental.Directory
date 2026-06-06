@@ -1,0 +1,42 @@
+Invercargill clinics needing phone verification for checkup prices
+Generated 05/06/26 — 8 excluded (denture: Cosmetic Denture Clinic, Dentures Direct NZ, Duchenne Dentures, Egan Dentures, Smiles Denture Clinic, Village Denture Studio; orthodontist: Embrace Orthodontics, Kieran O'Neill Orthodontics; specialist: Oral Surgery South; Lumino: Lumino Invercargill)
+Note: Rachel Ward Dental = Windsor Street Dental (same practice, renamed) — listed once as Windsor Street Dental
+
+1. Dougherty Dental
+   http://www.doughertydental.co.nz/
+   74 Kelvin Street, Invercargill 9810
+   Phone: 03 218 9687
+
+2. Invercargill City Dentists
+   https://www.invercargillcitydentists.co.nz/
+   89 Don Street, Invercargill 9810
+
+3. John Harris Dental Surgery
+   http://johnharrisdental.co.nz/
+   79 Don Street, Invercargill 9810
+   Phone: 03 218 8356
+
+4. Remarkable Smile Dentistry
+   https://www.remarkablesmile.co.nz/
+   83 Don Street, Invercargill 9810
+
+5. The Dentist on Kelvin [no individual website — switched to Healthpoint fallback]
+   https://www.healthpoint.co.nz/dentistry/general-dentist/the-dentist-on-kelvin/
+   27 Kelvin Street, Invercargill 9810
+   Phone: 03 218 6280
+
+6. Tooth Works
+   https://toothworks.co.nz/
+   Opus House, 65 Arena Avenue, Avenal, Invercargill 9810
+
+7. Waihopai Dental Clinic [note: community/public oral health clinic — verify if general dental checkups available to public]
+   https://www.healthpoint.co.nz/dentistry/general-dentist/waihopai-community-oral-health-clinic/
+   90 Alice Street, Gladstone, Invercargill 9810
+   Phone: 03 218 7744
+
+8. Windsor Street Dental [formerly Rachel Ward Dental]
+   https://www.windsorstreetdental.nz/
+   38 Windsor Street, Windsor, Invercargill 9810
+   Phone: 03 217 7134
+
+Total: 8 clinics

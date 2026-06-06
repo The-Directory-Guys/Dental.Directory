@@ -1,789 +1,111 @@
-1. Art of Dentistry [MANUAL]
+1. Capital Dental Brandon Street [MANUAL]
+   Address: Harbour City tower level 6/29 Brandon Street, Wellington Central, Wellington 6011
+   Region: Greater Wellington
    Status:  [Checked: Accurate]
-   Website: http://www.artofdentistry.co.nz/
-   - Cancellation fee: $100 (less than 24 hours notice or no-show)
-   - ACC: Available; additional private fee applies; $80 consult/quote fee if ACC declines or estimate not submitted
-   - WINZ: Estimates provided; $80 consult/quote fee if WINZ declines or estimate not submitted
-
-2. Burton & Brown Wellington | Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/burton-brown-wellington-cbd/?utm_source=google%20my%20business&utm_medium=organic
-   - Exam / checkup: $99
-   - New patient offer: $99
-   - Afterpay: 4 fortnightly payments, no interest, no additional fees
-   - Q Card: 3 months no payments and no interest on all treatments; 18 months interest-free for full priced treatments $300 and over
-   - Credit card: All major credit cards accepted (Visa, MasterCard); American Express and Diners Club accepted at most practices
-   - ACC: Registered ACC dentists; ACC may help towards treatment costs for dental injury from accident, sporting injury, or dental treatment
-   - WINZ: Registered dentist; Work and Income can help with dental costs and financial assistance for urgent dental help and treatment
-   - Southern Cross: Southern Cross Members Offer available; Southern Cross Easy-Claim Insurance accepted
-   - Free teen dental care: Free Teen Dentistry
-   - SuperGold Card: Discount on most dental treatments available
-
-3. Capital Dental Brandon Street [MANUAL]
-   Status:  [ ]
-   Website: http://brandonstreetdentists.co.nz/
+   Website: http://brandonstreetdentists.co.nz/ (Brandon Street Dentists — now part of Capital Dental)
    - New patient offer: $60
    - Free teen dental care: Subsidised
    - WINZ: WINZ quotes available
    - ACC: ACC dental treatment
 
-4. Capital Dental Newtown [scraped]
-   Status:  [ ]
-   Website: https://www.dentistwellington.co.nz/
-   - Laybuy: Available
 
-5. Capital Dental Ngaio [MANUAL]
+2. Capital Dental Lower Hutt [scraped]
+   Address: level 1/577 High Street, Boulcott, Lower Hutt 5010
+   Region: Greater Wellington
    Status:  [ ]
-   Website: https://ngaio.systeme.io/b90b6595
-   - New patient offer: $109 (valued at $320)
+   Website: https://www.dentistwellington.co.nz/lower-hutt
 
-6. Capital Dental Tawa [scraped]
-   Status:  [ ]
-   Website: https://www.dentistwellington.co.nz/
-   - Laybuy: Available
 
-7. Capital Dental The Terrace [scraped]
-   Status:  [ ]
-   Website: http://www.capitaldental.co.nz/
-   - Laybuy: Available
-
-8. Capital Dental Thorndon [scraped]
-   Status:  [ ]
-   Website: http://www.capitaldental.co.nz/
-   - Laybuy: Available
-
-9. Capital Dental Upper Hutt [scraped]
-   Status:  [ ]
-   Website: http://www.dentistwellington.co.nz/
-   - Laybuy: Available
-10. Care Dental [scraped]
-   Status:  [ ]
-   Website: https://www.caredental.co.nz/
-   - ACC: Registered provider
-   - WINZ: We happily work with WINZ to support you in the best treatment
-
-11. Central Hutt Dental [MANUAL]
-   Status:  [ ]
-   Website: https://centralhuttdental.co.nz/
-   - Afterpay: Afterpay available
-   - Zip: Zip available
-   - Laybuy: Laybuy available
-   - Gem Visa: 0% interest for 6 months
-   - Q Card: Q Card available
-   - Farmers Card: Farmers Finance Card accepted
-   - Southern Cross: Southern Cross affiliated provider
-   - NIB: NIB health insurance accepted
-   - WINZ: WINZ payment card accepted
-
-12. Centre of Dental Excellence [MANUAL]
-   Status:  [ ]
-   Website: http://www.dental.net.nz/
-   - Q Card: 12 months no payment, no interest
-   - Zip: Up to $1,000, 6 weeks interest-free
-
-13. Champion Dental Centre [MANUAL]
-   Status:  [ ]
-   Website: http://www.championdental.co.nz/
-   - Q Card: 6 or 12 months interest-free
-   - Afterpay: 4 interest-free instalments over 6 weeks
-   - Southern Cross: Southern Cross Easy Claim provider
-   - ACC: Registered ACC provider
-   - WINZ: WINZ quotes available
-
-14. City Dentists [MANUAL]
-   Status:  [ ]
-   Website: https://www.citydentists.co.nz/
-   - Student discount: 10% off treatment
-   - Student discount: Up to $1,000/year free
-   - ACC: ACC-accredited provider
-
-15. Coastlands Dental Health Centre | Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/coastlands-dental-health-centre-paraparaumu/?utm_source=google_business_profile&utm_medium=organic
-   - New patient offer: $99
-   - Afterpay: 4 equal fortnightly payments, interest-free
-   - Q Card: 18 months interest-free for full priced treatments $300 and over
-   - Credit card: All major credit cards accepted (Visa, MasterCard, American Express, Diners Club)
-   - ACC: Registered ACC dentists available
-   - WINZ: Registered WINZ dentist
-   - Southern Cross: Southern Cross Easy-Claim Insurance accepted
-   - Free teen dental care: Available for eligible teenagers until 18th birthday
-   - SuperGold Card: Discount on most dental treatments
-
-16. Courtenay Orthodontics [MANUAL]
-   Status:  [ ]
-   Website: http://www.courtenayorthodontics.co.nz/
-   - Free teen dental care: $80
-   - Consultation: $105
-   - X-ray: $95
-   - Orthodontics: $420
-   - Orthodontics – braces: Variable — quote provided after consultation
-
-17. Courtenay Place Dental | Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/courtenay-place-dental-wellington-cbd/?utm_source=google_business_profile&utm_medium=organic
-   - Exam / checkup: $99
-   - New patient offer: $99
-   - Afterpay: 4 fortnightly payments, no interest, no additional fees
-   - Q Card: 18 months interest-free for treatments $300 and over; 3 months no payments and no interest on EFTPOS
-   - Credit card: Visa, MasterCard, American Express, Diners Club accepted
-   - ACC: Registered provider for dental injury from accident, sporting injury, or dental treatment
-   - WINZ: Registered dentist, available for dental assistance
-   - Southern Cross: Members offer available
-   - Free teen dental care: Available
-   - SuperGold Card: Discount on most dental treatments
-
-18. Darling Dental [MANUAL]
-   Status:  [ ]
-   Website: http://darlingdental.co.nz/
-   - Free teen dental care: FREE
-   - ACC: Registered ACC provider
-   - WINZ: WINZ quotes available
-   - Student discount: Up to $1,000/year
-   - SuperGold Card: 10% off exams & treatment
-   - Capital & Coast DHB discount: 10% off exams & treatment
-   - Institute discount: 10% off exams & treatment
-   - Afterpay: Afterpay available
-   - Zip: Zip available
-   - Laybuy: Laybuy available
-   - Southern Cross: Southern Cross direct claims
-
-19. Dental care centre Lower Hutt [MANUAL]
+3. Capital Dental Ngaio [MANUAL]
+   Address: 42 Ottawa Road, Ngaio, Wellington 6035
+   Region: Greater Wellington
    Status:  [Checked: Accurate]
-   Website: https://www.dentalcarecentrelowerhutt.co.nz/
-   - New patient offer: $45 (comprehensive exam + 2 x-rays)
-   - Payment plan: Up to 12 months interest-free on treatments over $500
-   - Afterpay: Available
-   - Q Card: Available
-   - Gem Visa: 6 months interest-free (under $1,250); 12 months interest-free (over $1,250); 18 months interest-free (over $5,000)
-   - Farmers Card: Available
+   Website: https://www.dentistwellington.co.nz/ngaio
+   - New patient offer: $109 (valued at $320; includes check-up, 2 x-rays, clean & polish, consultation; new patients only; Tue & Wed only; redeem within 90 days; 48-hr cancellation policy)
 
-20. Dental Reflections [MANUAL]
-   Status:  [Checked: Accurate]
-   Website: https://dentalreflections.co.nz/
-   - Consultation: Free denture consultations
-   - SuperGold Card: 15% off all treatment
 
-21. Denture Care Services [MANUAL]
-   Status:  [Checked: Accurate]
-   Website: http://www.denturecareservices.co.nz/
-   - Consultation: Free consultation
-   - WINZ: Quotes accepted
-
-22. Denture Care Services - Porirua [MANUAL]
-   Status:  [Checked: Accurate]
-   Website: http://www.denturecareservices.co.nz/
-   - Consultation: Free consultation
-   - WINZ: Quotes accepted
-
-23. Denture Services Upper Hutt [MANUAL]
-   Status:  [Checked: Accurate]
-   Website: http://www.dentureservicesupperhutt.com/
-   - Consultation: Free consultations
-   - Denture repair: Emergency denture repairs available
-   - Mouthguard: Sports Guards & Splints available
-   - WINZ: Free WINZ quotes
-   - SuperGold Card: Super Gold Card discounts
-
-24. Eastbourne Dental Centre [MANUAL]
-   Status:  [Checked: Accurate]
-   Website: http://www.eastbournedental.co.nz/
-   - ACC: May be able to help cover some costs for accidents involving the mouth
-   - Free teen dental care: Adolescent Oral Health Scheme (AOHS) - government scheme funds dental care for teenagers (except orthodontics) from year 9 until 18th birthday
-
-25. Gentle Dental [MANUAL]
+4. Capital Dental Petone [scraped]
+   Address: 272 Jackson Street, Petone, Lower Hutt 5012
+   Region: Greater Wellington
    Status:  [ ]
-   Website: https://www.gentledental.co.nz/contact-us#ghuzneestreet
-   - New patient offer: $55
-   - X-ray – OPG: $138
-   - Consultation: $88
-   - Q Card: Min. 3 months interest-free
-   - Afterpay: 4 interest-free fortnightly payments
-   - Southern Cross: Registered Southern Cross provider
-
-26. Gentle Dental Centre [MANUAL]
-   Status:  [ ]
-   Website: https://gentledental.co.nz/
-   - New patient offer: $55
-   - X-ray – OPG: $138
-   - Consultation: $88
-   - Q Card: Min. 3 months interest-free
-   - Afterpay: 4 interest-free fortnightly payments
-   - Southern Cross: Registered Southern Cross provider
-
-27. Gentle Dental Centre [MANUAL]
-   Status:  [ ]
-   Website: https://www.gentledental.co.nz/
-   - New patient offer: $55
-   - X-ray – OPG: $138
-   - Consultation: $88
-   - Q Card: Min. 3 months interest-free
-   - Afterpay: 4 interest-free fortnightly payments
-   - Southern Cross: Registered Southern Cross provider
-
-28. Grace Dental [MANUAL]
-   Status:  [ ]
-   Website: http://gracedental.co.nz/
-   - ACC: ACC claims accepted
-   - WINZ: $30 (fully refundable)
-   - Free teen dental care: FREE
-   - Afterpay: Afterpay available
-   - Q Card: Q Card accepted
-   - Southern Cross: Southern Cross Easy Claim accepted
-
-29. GREAT TEETH DENTAL [scraped]
-   Status:  [Checked: Accurate]
-   Website: http://greatteeth.co.nz/
-   - New patient offer: $70 (exam, routine x-rays and cleaning; online booking only)
-   - Consultation: Free (cosmetic makeover consultation; online booking only)
-   - Student discount: $40 check-up incl. x-rays + 10% off further treatment; most students qualify for $1,000/year free dental care
-   - Free teen dental care: Free (publicly funded, until 18th birthday)
-
-30. Greytown Dental [scraped]
-   Status:  [ ]
-   Website: http://www.greytowndental.co.nz/
-   - Q Card: Available
-   - Farmers Card: Available
-   - Credit card: Mastercard, Visa
-   - ACC: Available
-   - WINZ: Available
-
-31. Haus of Amor Teeth Whitening and Gems [MANUAL]
-   Status:  [ ]
-   Website: http://hausofamor.gettimely.com/
-   - Whitening: $310
-   - Whitening: $230
-   - Whitening: $150
-   - Tooth gem: $70
-   - Tooth gem: $100
-   - Tooth gem: $100
-   - Tooth gem: $120
-   - Orthodontics – aligners: $140
-   - Custom design: Price varies
-   - Mobile service: Price varies
-
-32. Hutt City Dental Centre | Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/hutt-city-dental-centre-lower-hutt/?utm_source=google_business_profile&utm_medium=organic
-   - New patient offer: $99
-   - Afterpay: Available
-   - Q Card: 18 Months Interest Free
-   - Payment plan: 36 Months Interest Free with Q Offer
-   - Credit card: All major credit cards accepted (Visa, MasterCard, American Express, Diners Club)
-   - ACC: Registered ACC dentist
-   - WINZ: Registered WINZ dentist
-   - Southern Cross: Southern Cross Easy-Claim Insurance, Southern Cross Members Offer
-   - Free teen dental care: Free Teen Dentistry
-   - SuperGold Card: SuperGold Card
-
-33. Hutt Dental Hub [MANUAL]
-   Status:  [ ]
-   Website: http://www.huttdentalhub.co.nz/?utm_source=gmb
-   - Q Card: Q Card available
-   - Gem Visa: 0% interest for 6 months
-   - Farmers Card: Farmers Finance Card accepted
-   - Zip: Zip available
-   - Afterpay: 4 interest-free instalments
-   - Southern Cross: Southern Cross affiliated provider
-   - WINZ: WINZ payment card accepted
-   - SuperGold Card: 10% off selected appointments
-
-34. Hutt Dental Specialists - Morris Wong [scraped]
-   Status:  [ ]
-   Website: https://www.perio.co.nz/
-   - ACC: In most cases ACC will cover the majority of appointment cost, however patient responsible for a charge. Once case approved by ACC, detailed quote provided. In some cases following appointments covered in full by ACC.
-
-35. Hutt Endodontics [scraped]
-   Status:  [ ]
-   Website: https://huttendodontics.co.nz/
-   - New patient offer: $100 OFF on All Dental Service*
-
-36. icare dental [MANUAL]
-   Status:  [ ]
-   Website: http://www.icaredental.co.nz/
-   - Q Card: 12 months interest-free
-   - ACC: ACC-approved provider
-   - Payment plan: Payment plans available
-
-37. Johnsonville Dental Centre [MANUAL]
-   Status:  [ ]
-   Website: https://jdc-wellington.com/
-   - Exam / checkup: $100
-   - Exam / checkup: $180
-   - Scale and polish: $180
-   - Filling – composite: $400
-   - Extraction: $400
-   - Extraction – wisdom tooth: $800
-   - Filling: $1,600
-   - Crown: $800
-   - Crown – ceramic: $1,600
-   - Crown – gold: Gold market price
-   - Crown: $400
-   - Implant: $3,000
-   - Implant: $3,000
-   - Consultation: $100
-   - Orthodontics – braces: $10,000
-   - Orthodontics: $500
-   - Night guard: $1,000
-   - Night guard: $2,000
-   - ACC: Subsidised ACC treatment
-   - WINZ: WINZ quotes available
-   - Free teen dental care: FREE
-
-38. Johnsonville Dental Practice Wellington | Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/johnsonville-dental-practice-wellington/?utm_source=google_business_profile&utm_medium=organic
-   - Exam / checkup: $99
-   - New patient offer: $99
-   - Afterpay: 4 equal fortnightly payments, interest-free
-   - Q Card: 18 months interest-free for treatments $300 and over; 3 months no payments and no interest for all treatments
-   - Credit card: All major credit cards accepted (Visa, MasterCard, American Express, Diners Club)
-   - ACC: Registered ACC dentist; ACC may help towards treatment costs for dental injury from accident, sporting injury, or dental treatment
-   - WINZ: Registered dentist
-   - Southern Cross: Members offer available; Southern Cross Easy-Claim Insurance accepted
-   - Free teen dental care: Free for teenagers meeting eligibility criteria until 18th birthday
-   - SuperGold Card: Discount on most dental treatments
-
-39. Johnsonville Family Dentist [scraped]
-   Status:  [ ]
-   Website: https://johnsonvillefamilydentist.co.nz/
-   - ACC: Registered provider
-   - WINZ: Available
-   - Free teen dental care: Available
-
-40. Kapiti Dental Centre [scraped]
-   Status:  [ ]
-   Website: http://www.kapitidental.co.nz/
-   - Payment plan: Affordable payment options available
-
-41. Karori Dental Centre Wellington | Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/karori-dental-centre-wellington/?utm_source=google_business_profile&utm_medium=organic
-   - Exam / checkup: $99
-   - New patient offer: $99
-   - Afterpay: 4 fortnightly payments, interest-free
-   - Q Card: 18 months interest-free for treatments $300 and over; 3 months no payments and no interest with Q MasterCard
-   - Credit card: All major credit cards accepted
-   - ACC: Registered dentist; covers dental injury from accident, sporting injury, or dental treatment
-   - WINZ: Registered dentist
-   - Southern Cross: Members offer available
-   - Free teen dental care: Available for teenagers until 18th birthday who meet eligibility criteria
-   - SuperGold Card: Discount on most dental treatments
-   - Corporate discount: 5% discount
-
-42. Khandallah Dental Centre [scraped]
-   Status:  [ ]
-   Website: http://www.khandallahdental.co.nz/
-   - ACC: ACC accredited
-   - WINZ: WINZ quotes available
-   - Free teen dental care: Government Funded Treatment for Children and Teens
-
-43. Knights Road Dental Centre [scraped]
-   Status:  [ ]
-   Website: https://www.knightsroaddental.co.nz/
-   - Free teen dental care: Teenagers and children, 18 and under, receive free dental care
-
-44. Lovelysmiles Professional Teeth Whitening [MANUAL]
-   Status:  [ ]
-   Website: http://www.lovelysmiles.co/
-   - Whitening: $649/year
-   - Whitening: $439
-   - Whitening: $329
-
-45. Lumino Porirua | Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/plaza-dental-centre-porirua/?utm_source=google_business_profile&utm_medium=organic
-   - Exam / checkup: $99
-   - New patient offer: $99
-   - Afterpay: 4 equal fortnightly payments, interest-free
-   - Q Card: 18 months interest-free for full priced treatments $300 and over
-   - Credit card: All major credit cards accepted
-   - ACC: ACC Dentists
-   - WINZ: Registered provider
-   - Southern Cross: Southern Cross Members Offer; Southern Cross Easy-Claim Insurance
-   - Free teen dental care: Free Teen Dentistry
-   - SuperGold Card: Discount on most dental treatments
-
-46. Lumino Queens Drive | Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/lumino-queens-drive-lower-hutt/?utm_source=google_business_profile&utm_medium=organic
-   - Exam / checkup: $99
-   - New patient offer: $99
-   - Afterpay: 4 fortnightly payments, no interest, no additional fees
-   - Q Card: 18 Months Interest-Free for full priced treatments $300 and over
-   - Credit card: All major credit cards accepted (Visa, MasterCard, American Express, Diners Club)
-   - ACC: Registered provider
-   - WINZ: Registered provider
-   - Southern Cross: Members Offer available, Easy-Claim Insurance
-   - Free teen dental care: Available
-   - SuperGold Card: Available
-
-47. Lumino Symes De Silva [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/lumino-symes-de-silva/?utm_source=google_business_profile&utm_medium=organic
-   - New patient offer: $99
-   - Afterpay: Available
-   - Q Card: 18 Months Interest Free
-   - Payment plan: 36 Months Interest Free with Q Offer
-   - ACC: Registered provider
-   - WINZ: Registered provider
-   - Southern Cross: Members Offer and Easy-Claim Insurance
-   - Free teen dental care: Available
-   - SuperGold Card: Available
-
-48. Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/find-a-practice/north-island/wellington/
-   - New patient offer: $99 New Patient Check Up
-   - Afterpay: Available
-   - Q Card: 18 Months Interest Free
-   - Payment plan: 36 Months Interest Free with Q Offer
-   - ACC: ACC Dentists
-   - WINZ: WINZ Registered Dentist
-   - Southern Cross: Southern Cross Members Offer, Southern Cross Easy-Claim Insurance
-   - Free teen dental care: Free Teen Dentistry
-   - SuperGold Card: SuperGold Card
-
-49. Lumino The Terrace Dental Practice | Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/the-terrace-dental-practice-wellington-cbd/?utm_source=google_business_profile&utm_medium=organic
-   - Exam / checkup: $99
-   - New patient offer: $99
-   - Afterpay: 4 fortnightly payments, no interest, no additional fees
-   - Q Card: 3 months no payments and no interest on EFTPOS; 18 months interest-free for treatments $300 and over
-   - Credit card: Available
-   - ACC: Registered provider
-   - WINZ: Registered provider
-   - Southern Cross: Available
-   - Free teen dental care: Available
-   - SuperGold Card: Discount on most dental treatments
-
-50. Lumino Woodward Dental [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/lumino-woodward-dental/?utm_source=google_business_profile&utm_medium=organic
-   - Exam / checkup: $99
-   - New patient offer: $99
-   - Afterpay: 4 fortnightly payments, no interest, no additional fees
-   - Q Card: 3 months no payments and no interest; 18 months interest-free for full priced treatments $300 and over
-   - Credit card: All major credit cards accepted including Visa and MasterCard; American Express and Diners Club accepted at most practices
-   - ACC: ACC Dentists
-   - WINZ: WINZ Registered Dentist
-   - Southern Cross: Southern Cross Members Offer; Southern Cross Easy-Claim Insurance
-   - Free teen dental care: Free Teen Dentistry
-   - SuperGold Card: SuperGold Card
-
-51. Martinborough Dental [scraped]
-   Status:  [ ]
-   Website: http://www.martinboroughdental.co.nz/
-   - Q Card: Available
-   - Farmers Card: Available
-   - Credit card: Mastercard, Visa
-   - ACC: Available
-   - WINZ: Available
-
-52. Masterton Dental [MANUAL]
-   Status:  [ ]
-   Website: http://www.mastertondental.co.nz/
-   - Q Card: Q Card available
-   - Zip: Zip available
-   - Loan Haus: Loan Haus available
-   - Southern Cross: Southern Cross accepted
-   - WINZ: WINZ estimates available
-   - ACC: ACC claims accepted
-   - Cancellation fee: $100
-
-53. Masterton Dental Practice | Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/masterton-dental-practice/?utm_source=google_business_profile&utm_medium=organic
-   - Exam / checkup: $99
-   - New patient offer: $99
-   - Afterpay: 4 fortnightly payments, no interest, no fees
-   - Q Card: 3 months no payments and no interest; 18 months interest-free for full priced treatments $300 and over
-   - Credit card: All major credit cards accepted (Visa, MasterCard); American Express and Diners Club accepted at most practices
-   - ACC: ACC Dentists
-   - WINZ: WINZ Registered Dentist
-   - Southern Cross: Southern Cross Members Offer; Southern Cross Easy-Claim Insurance
-   - Free teen dental care: Free Teen Dentistry
-   - SuperGold Card: SuperGold Card
-
-54. MatPDental [scraped]
-   Status:  [ ]
-   Website: http://www.matpdental.co.nz/
-   - ACC: Available
-   - WINZ: Available
-
-55. Miramar Dental Wellington | Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/miramar-dental-wellington/?utm_source=google_business_profile&utm_medium=organic
-   - Exam / checkup: $99
-   - New patient offer: $99
-   - Afterpay: Available
-   - Q Card: 3 months no payments and no interest automatically; 18 months interest-free for full priced treatments $300 and over
-   - Credit card: All major credit cards accepted (Visa, MasterCard); American Express and Diners Club at most practices
-   - ACC: Registered provider
-   - WINZ: Registered dentist
-   - Southern Cross: 5% discount on dental treatment; does not include half price exam and x-rays
-   - Free teen dental care: Available for teenagers meeting eligibility criteria until 18th birthday
-   - SuperGold Card: Discount on most dental treatments
-
-56. Newtown Dental [MANUAL]
-   Status:  [ ]
-   Website: https://newtowndental.co.nz/?utm_source=gmb&utm_medium=organic&utm_campaign=Google+My+Business
-   - Q Card: Q Card available
-   - Gem Visa: 0% interest for 6 months
-   - Afterpay: 4 interest-free instalments over 6 weeks
-   - Farmers Card: Farmers Finance Card accepted
-   - Southern Cross: Southern Cross affiliated provider
-   - WINZ: WINZ payment card accepted
-   - Southern Cross: Discount available
-
-57. Petone Dental Centre [scraped]
-   Status:  [ ]
-   Website: https://www.dentistwellington.co.nz/petone-dental-centre
+   Website: https://www.dentistwellington.co.nz/petone
    - ACC: Registered provider
    - Free teen dental care: Available for teenagers and kids under Ministry of Health
 
-58. Phillip Chin Dental Practice [scraped]
-   Status:  [ ]
-   Website: http://www.phillipchindental.co.nz/
-   - ACC: Registered provider
-   - WINZ: Registered provider
 
-59. Raine Street Dental [scraped]
+5. Capital Dental Tawa [scraped]
+   Address: Tawa, Wellington 5028
+   Region: Greater Wellington
+   Status:  [ ]
+   Website: https://www.dentistwellington.co.nz/tawa
+   - Laybuy: Available
+
+
+6. Capital Dental Thorndon [scraped]
+   Address: 1 Murphy Street, Thorndon, Wellington 6011
+   Region: Greater Wellington
+   Status:  [ ]
+   Website: https://www.dentistwellington.co.nz/clinic/capital-dental-thorndon
+   - Laybuy: Available
+
+
+7. Capital Dental Upper Hutt [scraped]
+   Address: 21 Main Street, Upper Hutt Central, Upper Hutt 5018
+   Region: Greater Wellington
+   Status:  [ ]
+   Website: https://www.dentistwellington.co.nz/clinic/capital-dental-upper-hutt
+   - Laybuy: Available
+
+
+8. Central Dental Surgery [scraped]
+   Address: Harbour City Tower tower level 6/29 Brandon Street, Te Aro, Wellington 6011
+   Region: Greater Wellington
+   Status:  [ ]
+   Website: https://www.healthpoint.co.nz/dentistry/general-dentist/central-dental-surgery/
+
+
+9. Paremata Dental Surgery [manually verified 27/05/26]
+   Address: 98 Mana Esplanade, Paremata, Porirua 5026
+   Region: Greater Wellington
+   Status:  [Checked: no checkup price]
+   Website: https://parematadentalsurgery.co.nz/ (parematadental.co.nz redirects here)
+   Note: Darling Dental (distinct clinic) formerly operated from this address; has since moved to Unit 14, 99 Mana Esplanade
+   - WINZ: Accepts WINZ quotes for dental treatment
+
+
+10. Edward Leung Dental Surgery [scraped]
+   Address: Level 3/128 Featherston Street, Wellington Central, Wellington 6011
+   Region: Greater Wellington
+   Status:  [ ]
+   Website: https://www.healthpoint.co.nz/dentistry/general-dentist/edward-leung-dentistry/ [website broken — edwardleung.co.nz; switched to Healthpoint fallback]
+
+
+11. Gee Dental Centre [website broken — dentist.co.nz listing; switched to Healthpoint fallback]
+   Address: 22 Cornwall Street, Hutt Central, Lower Hutt 5010
+   Region: Greater Wellington
+   Status:  [ ]
+   Website: https://www.healthpoint.co.nz/dentistry/general-dentist/gee-dental-centre/
+
+
+12. Lange M H BDS [scraped]
+   Address: 368 Tinakori Road, Thorndon, Wellington 6011
+   Region: Greater Wellington
+   Status:  [ ]
+   Website: https://www.healthpoint.co.nz/dentistry/general-dentist/michael-lange-dental/
+
+
+13. Michael Walton Dental [scraped]
+   Address: 22 Royal Street, Upper Hutt Central, Upper Hutt 5018
+   Region: Greater Wellington
+   Status:  [ ]
+   Website: https://www.healthpoint.co.nz/dentistry/general-dentist/waltdental/
+
+
+14. Raine Street Dental [scraped]
+   Address: 4 Raine Street, Karori, Wellington 6012
+   Region: Greater Wellington
    Status:  [ ]
    Website: https://www.healthpoint.co.nz/dentistry/general-dentist/raine-street-dental/
    - Free teen dental care: Free dental care for adolescents from the beginning of year 9 (first year of high school) until their 18th birthday
 
-60. Real Dentistry [scraped]
-   Status:  [ ]
-   Website: http://www.realdentistry.co.nz/
-   - Afterpay: Available
-   - Q Card: Available
-   - Gem Visa: Available
-   - ACC: Registered provider
-   - WINZ: Quotes available
 
-61. Silverstream Dental Upper Hutt | Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/silverstream-dental-upper-hutt/?utm_source=google_business_profile&utm_medium=organic
-   - Exam / checkup: $99
-   - New patient offer: $99
-   - Afterpay: 4 fortnightly payments, no interest, no additional fees
-   - Q Card: 18 Months Interest Free for full priced treatments $300 and over; 3 months no payments and no interest on EFTPOS
-   - Credit card: All major credit cards accepted including Visa, MasterCard, American Express and Diners Club
-   - ACC: ACC Dentists
-   - WINZ: WINZ Registered Dentist
-   - Southern Cross: Southern Cross Members Offer; Southern Cross Easy-Claim Insurance
-   - Free teen dental care: Free Teen Dentistry
-   - SuperGold Card: SuperGold Card
-
-62. Simply Dental [scraped]
-   Status:  [ ]
-   Website: http://www.simplydental.co.nz/
-   - Whitening: Professional in-house and take-home options
-   - Orthodontics - aligners: Invisalign available
-   - Mouthguard: Custom Fitted Mouth Guard available
-   - Children's dentistry: Free dental care for ages 0-12 years (with School Dental Service referral or WINZ)
-   - Q Card: 18 months interest free (Conditions apply)
-   - Payment plan: Annual Care Plan available
-   - ACC: ACC Dental Injuries covered
-   - WINZ: WINZ Quotes available
-   - Free teen dental care: Secondary School Aged 13-17 years: Free Dental Care
-
-63. Singleton Dental [MANUAL]
-   Status:  [ ]
-   Website: https://singletondental.co.nz/
-   - Exam / checkup: $130
-   - Consultation: $85
-   - X-ray – OPG: $95
-   - Crown: $1,500
-   - Filling – composite: $210–$360
-   - Root canal – molar: $1,450
-   - Implant: $2,400
-   - Extraction – simple: $295
-   - Extraction – wisdom tooth: From $495
-   - Implant: $2,400
-   - ACC: ACC accepted
-
-64. Smile Creations Waikanae | Lumino The Dentists [scraped]
-   Status:  [ ]
-   Website: https://lumino.co.nz/dentists/smile-creations-waikanae/?utm_source=google_business_profile&utm_medium=organic
-   - New patient offer: $99
-   - Afterpay: 4 equal fortnightly payments, interest-free
-   - Q Card: 3 months no payments and no interest; 18 months interest-free for treatments $300 and over
-   - Credit card: All major credit cards accepted (Visa, MasterCard); American Express and Diners Club accepted at most practices
-   - ACC: Registered provider; may help towards treatment costs for dental injury from accident, sporting injury, or dental treatment
-   - WINZ: Registered dentist
-   - Southern Cross: Members offer available; Easy-Claim Insurance
-   - Free teen dental care: Free dentistry for teenagers until 18th birthday (if eligible)
-   - SuperGold Card: Subsidised offers available
-
-65. Sunshine Dental Porirua [MANUAL]
-   Status:  [ ]
-   Website: https://www.sunshinedental.co.nz/
-   - Checkup / exam: $100 (exam + bitewing x-rays); $149 (exam + gross scale & polish + bitewing x-rays); additional x-rays $20 each
-   - Scale and polish: Hygienist deep-scale treatment $190 per session (often takes 2 sessions — upper and lower jaw separately)
-   - Whitening - take-home: $580 (take-home kit incl. trays)
-   - Whitening - in-chair: $880 (Beyond in-house whitening; 1-hour session)
-   - Extraction - simple: From $380 (single extraction)
-   - Extraction - surgical: From $480 (surgical); from $620 (wisdom tooth)
-   - Filling: From $380 (composite/white fillings)
-   - Veneer - porcelain: From $1,680 per tooth
-   - Root canal - molar: $1,799 (molar/premolar, 3 roots; incl. all appointments, x-rays, root canals; excl. final restoration)
-   - Crown - ceramic: $1,780 (porcelain fused to metal); $1,780 (full porcelain)
-   - Crown - gold: $2,250 (gold metal)
-   - Implant: Single implant crown from $3,600
-   - Denture - partial: Plastic from $1,600; metal from $2,600 (price varies by number of teeth)
-   - Orthodontics - aligners: From $6,999 (Invisalign clear aligners); free initial consultation
-   - Payment plan: Flexible and affordable payment plans available
-   - Free teen dental care: Free for eligible children under 18; incl. decay check, x-rays, fissure sealants, cleaning, fillings, extractions
-
-66. Sunshine Dental, Johnsonville [MANUAL]
-   Status:  [ ]
-   Website: http://www.sunshinedental.co.nz/
-   - Checkup / exam: $100 (exam + bitewing x-rays); $149 (exam + gross scale & polish + bitewing x-rays); additional x-rays $20 each
-   - Scale and polish: Hygienist deep-scale treatment $190 per session (often takes 2 sessions — upper and lower jaw separately)
-   - Whitening - take-home: $580 (take-home kit incl. trays)
-   - Whitening - in-chair: $880 (Beyond in-house whitening; 1-hour session)
-   - Extraction - simple: From $380 (single extraction)
-   - Extraction - surgical: From $480 (surgical); from $620 (wisdom tooth)
-   - Filling: From $380 (composite/white fillings)
-   - Veneer - porcelain: From $1,680 per tooth
-   - Root canal - molar: $1,799 (molar/premolar, 3 roots; incl. all appointments, x-rays, root canals; excl. final restoration)
-   - Crown - ceramic: $1,780 (porcelain fused to metal); $1,780 (full porcelain)
-   - Crown - gold: $2,250 (gold metal)
-   - Implant: Single implant crown from $3,600
-   - Denture - partial: Plastic from $1,600; metal from $2,600 (price varies by number of teeth)
-   - Orthodontics - aligners: From $6,999 (Invisalign clear aligners); free initial consultation
-   - Payment plan: Flexible and affordable payment plans available
-   - Free teen dental care: Free for eligible children under 18; incl. decay check, x-rays, fissure sealants, cleaning, fillings, extractions
-
-67. Supreme Dental Concepts [MANUAL]
-   Status:  [ ]
-   Website: https://www.supremedentalconcepts.co.nz/?utm_source=gmb&utm_medium=organic&utm_campaign=Google+My+Business
-   - WINZ: FREE (valued at $150)
-   - Payment plan: Finance packages available
-   - Payment plan: Convenient payment plans available
-   - Payment plan: In-office plans available
-   - Free teen dental care: FREE for insured families
-   - WINZ: WINZ quotes available
-
-68. Supreme Dental Concepts [MANUAL]
-   Status:  [ ]
-   Website: https://www.supremedentalconcepts.co.nz/?utm_source=gmb&utm_medium=organic&utm_campaign=Google+My+Business
-   - WINZ: FREE (valued at $150)
-   - Payment plan: Finance packages available
-   - Payment plan: Convenient payment plans available
-   - Payment plan: In-office plans available
-   - Free teen dental care: FREE for insured families
-   - WINZ: WINZ quotes available
-
-69. Switch Dental Lower Hutt [MANUAL]
-   Status:  [ ]
-   Website: https://www.switchdental.co.nz/
-   - Afterpay: 4 interest-free fortnightly payments
-   - Q Card: 12 months interest-free
-
-70. The Wellington Dental Practice [scraped]
-   Status:  [Checked: Accurate]
-   Website: http://www.wellingtondental.co.nz/
-   - Q Card: Available
-   - Southern Cross: Easy claim payment cover for members
-
-71. Thorndon Dental Surgery [MANUAL]
-   Status:  [ ]
-   Website: https://www.thorndondental.co.nz/
-   - ACC: Registered ACC provider
-
-72. Thorndon Orthodontics [scraped]
-   Status:  [ ]
-   Website: https://thorndonortho.co.nz/
-   - New patient offer: $140 (under 18), $170 (adults)
-   - Records and treatment planning: $370. Treatment costs vary by case. Interest-free payment plans available. Family member discounts offered.
-
-73. True Dentistry [scraped]
-   Status:  [ ]
-   Website: https://truedentistry.co.nz/
-   - ACC: ACC providers
-   - Free teen dental care: Free adolescent care
-
-74. Victoria Street Dental [MANUAL]
-   Status:  [ ]
-   Website: http://victoriastreetdental.co.nz/
-   - Exam / checkup: $56
-   - Consultation: $88
-   - Filling: $289–$556
-   - Crown: $1,700–$2,000
-   - Filling: $1,600–$1,950
-   - Scale and polish: $190–$360
-   - X-ray – OPG: $186
-   - X-ray – OPG: $358
-   - Extraction – surgical: $350–$700
-   - IV sedation: $665
-   - Q Card: Up to 12 months interest-free
-   - Southern Cross: Southern Cross Easy Claim provider
-
-75. Wainui Dental [MANUAL]
-   Status:  [ ]
-   Website: https://wainuidental.co.nz/?utm_source=gmb
-   - Q Card: Q Card available
-   - Gem Visa: 0% interest for 6 months
-   - Afterpay: 4 equal instalments over 6 weeks
-   - Farmers Card: Farmers Finance Card accepted
-   - Southern Cross: Southern Cross affiliated provider
-   - WINZ: WINZ payment card accepted
-   - SuperGold Card: 10% off selected appointments
-
-76. Wellington Dentists Ltd [MANUAL]
-   Status:  [ ]
-   Website: http://www.wellingtondentist.co.nz/
-   - Student discount: $40
-   - Student discount: 10% off most treatments
-   - Filling – composite: $293–$621
-   - Fissure sealant: $122 each
-   - Scale and polish: $257
-   - Veneer – composite: $880 per tooth
-   - Crown: $2,153–$2,290 per missing tooth
-   - Implant: $5,000–$6,500 per tooth
-   - Implant: $2,207–$4,017 per tooth
-   - Crown: $1,600 per unit
-   - Crown: $2,200–$2,800 per missing tooth
-   - Extraction: From $380
-   - IV sedation: $598
-   - Filling: $1,827–$2,252
-   - Botox / aesthetics: $150–$300 per treatment area
-   - Whitening – take-home: $770
-   - Crown: $352
-   - Crown: $1,024
-   - Crown – ceramic: $1,950–$2,284 per tooth
-   - Crown – gold: $1,950–$2,584 per tooth
-   - Q Card: 12 months interest-free / 18-month payment holiday
-
-77. Wellington Dentures - Dentures and Dental Implant Dentures [scraped]
-   Status:  [Checked: Accurate]
-   Website: http://www.wellingtondentures.co.nz/
-   - Q Card: 3 months interest-free
-   - Payment plan: Flexible payment schedules available
-   - WINZ: Detailed quotes provided; lower cost options explored for low income earners
-   - Credit card: Visa and Mastercard accepted
-
-78. Wellington Oral Surgery [MANUAL]
-   Status:  [ ]
-   Website: https://www.wellingtonoralsurgery.co.nz/?utm_source=google_business_profile&utm_medium=organic
-   - Q Card: 3 months or 18 months interest-free
-
-79. Whitby Dental Centre [MANUAL]
-   Status:  [Checked: Accurate]
-   Website: http://www.whitbydental.co.nz/
-   - Whitening - in-chair: $900 (Philips Zoom!; promotional price, was $1,200)
-   - ACC: Registered provider
-   - Credit card: Visa and Mastercard accepted; no surcharge mentioned
-
-80. Wong Kevin B [scraped]
-   Status:  [Checked: Accurate]
-   Website: https://www.kevinwongdentalpractice.com/
-   - Payment plan: Available (cash, credit card, eftpos, extended payment plans)
-   - SuperGold Card: Discount available
-   - WINZ: Free quotes provided
-   - Free teen dental care: Free (under 18)
-   - Community Services Card: Discount available

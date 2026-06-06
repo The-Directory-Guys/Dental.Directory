@@ -12,7 +12,7 @@ const REGIONS = [
   "Hawke's Bay",
   "Manawatū-Whanganui",
   "Marlborough",
-  "Nelson/Tasman",
+  "Nelson",
   "Northland",
   "Otago",
   "Southland",
@@ -20,6 +20,7 @@ const REGIONS = [
   "Waikato",
   "Wellington",
   "West Coast",
+  "Wider Wellington Region",
 ];
 
 const PAGE_SIZE = 20;
@@ -31,9 +32,28 @@ export default function HomePage() {
 
   const [search, setSearch] = useState("");
   const [region, setRegion] = useState("");
+  const [city, setCity] = useState("");
+  const [cities, setCities] = useState<string[]>([]);
   const [minRating, setMinRating] = useState("");
   const [sortBy, setSortBy] = useState("rating");
   const [page, setPage] = useState(0);
+
+  // Fetch available cities whenever region changes
+  useEffect(() => {
+    setCity("");
+    setCities([]);
+    if (!region) return;
+    supabase
+      .from("dental_clinics")
+      .select("city")
+      .eq("region", region)
+      .eq("business_status", "OPERATIONAL")
+      .then(({ data }) => {
+        if (!data) return;
+        const unique = [...new Set(data.map((r) => r.city).filter(Boolean))].sort() as string[];
+        setCities(unique);
+      });
+  }, [region]);
 
   const fetchClinics = useCallback(async () => {
     setLoading(true);
@@ -48,6 +68,9 @@ export default function HomePage() {
     }
     if (region) {
       query = query.eq("region", region);
+    }
+    if (city) {
+      query = query.eq("city", city);
     }
     if (minRating) {
       query = query.gte("rating", parseFloat(minRating));
@@ -69,11 +92,11 @@ export default function HomePage() {
       setTotal(count ?? 0);
     }
     setLoading(false);
-  }, [search, region, minRating, sortBy, page]);
+  }, [search, region, city, minRating, sortBy, page]);
 
   useEffect(() => {
     setPage(0);
-  }, [search, region, minRating, sortBy]);
+  }, [search, region, city, minRating, sortBy]);
 
   useEffect(() => {
     fetchClinics();
@@ -111,6 +134,19 @@ export default function HomePage() {
               <option key={r} value={r}>{r}</option>
             ))}
           </select>
+
+          {cities.length > 1 && (
+            <select
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              className="border rounded-lg px-3 py-2 text-sm"
+            >
+              <option value="">All cities</option>
+              {cities.map((c) => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
+          )}
 
           <select
             value={minRating}

@@ -1,0 +1,79 @@
+1. Martinborough Dental [scraped]
+   Address: 18 Kitchener Street, Martinborough 5711
+   Region: Wider Wellington Region
+   Status:  [ ]
+   Website: http://www.martinboroughdental.co.nz/
+   Note: Branch of Greytown Dental
+   - Q Card: Available
+   - Farmers Card: Available
+   - Credit card: Mastercard, Visa
+   - ACC: Available
+   - WINZ: Available
+
+
+2. Masterton Dental [MANUAL]
+   Address: 50 Perry Street, Masterton 5810
+   Region: Wider Wellington Region
+   Status:  [ ]
+   Website: http://www.mastertondental.co.nz/
+   - Q Card: Q Card available
+   - Zip: Zip available
+   - Loan Haus: Loan Haus available
+   - Southern Cross: Southern Cross accepted
+   - WINZ: WINZ estimates available
+   - ACC: ACC claims accepted
+   - Cancellation fee: $100
+
+
+3. Park Road Dental Surgery [scraped]
+   Address: 30 Park Road, Carterton 5713
+   Region: Wider Wellington Region
+   Status:  [ ]
+   Website: https://www.parkroaddental.co.nz/
+
+
+4. True Dentistry [scraped]
+   Address: 1A Seddon Street, Carterton 5713
+   Region: Wider Wellington Region
+   Status:  [ ]
+   Website: https://truedentistry.co.nz/
+   - ACC: ACC providers
+   - Free teen dental care: Free adolescent care
+
+
+5. Kevin Wong Dental Surgery [scraped]
+   Address: 17 Renall Street, Masterton 5810
+   Region: Wider Wellington Region
+   Note: Also has a branch in Pahiatua (44 Mangahao Road, Pahiatua 4910 — no separate website)
+   Status:  [Checked: Accurate]
+   Website: https://www.kevinwongdentalpractice.com/
+   - Payment plan: Available (cash, credit card, eftpos, extended payment plans)
+   - SuperGold Card: Discount available
+   - WINZ: Free quotes provided
+   - Free teen dental care: Free (under 18)
+   - Community Services Card: Discount available
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
