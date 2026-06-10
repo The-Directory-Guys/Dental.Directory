@@ -124,7 +124,7 @@
             </h3>
             <div class="dentist-card__meta">
               <span class="dentist-card__meta-item">${ratingDisplay}</span>
-              <span class="dentist-card__meta-item">📍 ${d.suburb}</span>
+              <span class="dentist-card__meta-item">📍 ${[d.suburb, d.city].filter(Boolean).join(', ') || 'Unknown'}</span>
               ${reviewText ? `<span class="dentist-card__meta-item">${reviewText}</span>` : ''}
             </div>
             ${descText ? `<p class="dentist-card__desc">${descText}</p>` : ''}
@@ -422,7 +422,6 @@
         : '<span style="color:var(--clr-gray-300)">No rating yet</span>';
       heroMeta.innerHTML = `
         <span class="profile-hero__meta-item">${ratingHtml}</span>
-        <span class="profile-hero__meta-item">📍 ${dentist.suburb}</span>
         <span class="profile-hero__meta-item">📍 ${dentist.address}</span>
       `;
     }
