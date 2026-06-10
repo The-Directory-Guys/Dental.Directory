@@ -41,7 +41,7 @@ function transformClinic(clinic) {
     id: clinic.id,
     name: clinic.name || 'Unknown Clinic',
     slug: generateSlug(clinic.name || 'unknown'),
-    suburb: clinic.town || 'Unknown',
+    suburb: clinic.suburb_town || clinic.town || 'Unknown',
     address: clinic.address || '',
     phone: clinic.phone_national || clinic.phone_international || clinic.phone || '',
     email: clinic.email || '',
