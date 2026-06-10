@@ -197,15 +197,9 @@ h4 {
     color: var(--clr-navy);
 }
 
-.logo__icon {
-    width: 36px;
-    height: 36px;
-    background: linear-gradient(135deg, var(--clr-teal), var(--clr-mint));
-    border-radius: var(--radius-lg);
-    display: grid;
-    place-items: center;
-    color: var(--clr-white);
-    font-size: var(--fs-lg);
+.logo__img {
+    height: 40px;
+    width: auto;
 }
 
 .nav {
