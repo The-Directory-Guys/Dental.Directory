@@ -1,0 +1,109 @@
+Dunedin clinics needing phone verification for checkup prices
+Regenerated 09/06/26 — 11 excluded (non-dentist: Dunedin Orthodontics, Farella Orthodontics, Gentle Hygiene and Therapy, Hauman Endodontics, Knight Dental Specialists, London Street Specialists, Origin Oral Surgeons, Otago Oral Surgery & Implant Centre, Otago Orthodontics, Paterson Orthodontics, Teeth Whitening Associates)
+
+1. A1 smile clinic
+   https://www.a1smile.co.nz/
+   123 Balmacewen Road, Wakari, Dunedin 9010
+   Phone: 0800 176 453
+
+2. Bell Hill Dental
+   https://www.bellhilldental.co.nz/
+   109 Princes Street, Central Dunedin, Dunedin 9016
+   Phone: 03 477 8387
+
+3. CAP Dental [verified 23/05/26 — no checkup price]
+   https://www.capdental.co.nz/
+   Burns House Level 3/10 George Street, Central Dunedin, Dunedin 9016
+   Phone: 03 477 0900
+
+4. Dental Care Dunedin
+   https://dunedindentalcare.nz/
+   504 George Street, Dunedin North, Dunedin 9016
+   Phone: 03 477 8751
+
+5. Dentistry On Musselburgh
+   https://www.dentistdunedin.co.nz/make-an-appointment/
+   84 Musselburgh Rise Left, Musselburgh, Dunedin 9013
+   Phone: 03 455 0621
+
+6. Dentistry on Highgate (Smith Dental Ltd t/a Dentistry on Highgate)
+   https://www.dunedindentists.nz/
+   289B Highgate, Roslyn, Dunedin 9010
+   Phone: 03 474 0029
+
+7. Dunbar Wilson Dental [verified 23/05/26 — no checkup price]
+   http://dunbarwilson.co.nz/
+   55 Crawford Street, Dunedin 9016
+   Phone: 03 477 9765
+
+8. Fiona Firth Orthodontics (Unison Dental Specialists)
+   https://www.firthortho.co.nz/
+   Level 9/8 Water Street, Central Dunedin, Dunedin 9016
+   Phone: 021 223 3414
+
+9. Gardens Dental Dunedin
+   https://gardensdental.nz/
+   26 Bank Street, North East Valley, Dunedin 9010
+   Phone: 03 470 1391
+
+10. Gentle Dental
+   http://www.gentdent.co.nz/
+   10 George Street, Central Dunedin, Dunedin 9016
+   Phone: 03 477 6071
+
+11. Green Island Dental Centre
+   http://greenislanddentist.co.nz/
+   187 Main South Road, Green Island, Dunedin 9018
+   Phone: 03 488 3129
+
+12. Kaikorai Dental Surgery [no individual website]
+   https://www.healthpoint.co.nz/dentistry/general-dentist/kaikorai-dental-surgery/
+   19 Nairn Street, Kaikorai, Dunedin 9010
+   Phone: 03 466 7043
+
+13. McClea & Green Dental
+   https://www.mccleagreendental.nz/
+   Burns House 7/10 George Street, Central Dunedin, Dunedin 9016
+   Phone: 03 477 1783
+
+14. Mornington Dental
+   http://www.morningtondentist.co.nz/
+   27 Mailer Street, Mornington, Dunedin 9011
+   Phone: 03 453 4000
+
+15. Octagon Dental Suite [website broken — octagondental.co.nz; switched to Healthpoint fallback]
+   https://www.healthpoint.co.nz/dentistry/general-dentist/octagon-dental-suite/
+   10 George Street, Central Dunedin, Dunedin 9016
+   Phone: 03 477 9360
+
+16. Otago Dental Services
+   http://www.otagodentalservice.co.nz/
+   83 Crawford Street, Central Dunedin, Dunedin 9016
+   Phone: 03 477 0106
+
+17. Project Dental
+   http://www.projectdental.co.nz/
+   152 Hillside Road, South Dunedin, Dunedin 9012
+   Phone: 03 455 3770
+
+18. Smile Co Dental
+   https://www.smilecodental.nz/
+   373 Princes Street, Dunedin 9016
+   Phone: 03 477 7993
+
+19. The Dental Walrus [no individual website]
+   https://www.healthpoint.co.nz/dentistry/general-dentist/the-dental-walrus/
+   27I Albany Street, Dunedin North, Dunedin 9016
+   Phone: 03 470 1156
+
+20. Tony Ryder Dental Rooms [no individual website]
+   https://www.healthpoint.co.nz/dentistry/general-dentist/ryder-dental-rooms/
+   4th Floor, Westpac Trust Building, 106 George Street, Dunedin Central, Dunedin 9016
+   Phone: (03) 477 8751
+
+21. York Place Dental
+   https://dunedindentalcare.nz/yorkdental/
+   504 George Street, Dunedin North, Dunedin 9016
+   Phone: 03 474 0557
+
+Total: 21 clinics

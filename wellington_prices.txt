@@ -1,22 +1,5 @@
-1. Capital Dental Brandon Street [MANUAL]
-   Address: Harbour City tower level 6/29 Brandon Street, Wellington Central, Wellington 6011
-   Region: Greater Wellington
-   Status:  [Checked: Accurate]
-   Website: http://brandonstreetdentists.co.nz/ (Brandon Street Dentists — now part of Capital Dental)
-   - New patient offer: $60
-   - Free teen dental care: Subsidised
-   - WINZ: WINZ quotes available
-   - ACC: ACC dental treatment
 
-
-2. Capital Dental Lower Hutt [scraped]
-   Address: level 1/577 High Street, Boulcott, Lower Hutt 5010
-   Region: Greater Wellington
-   Status:  [ ]
-   Website: https://www.dentistwellington.co.nz/lower-hutt
-
-
-3. Capital Dental Ngaio [MANUAL]
+1. Capital Dental Ngaio [MANUAL]
    Address: 42 Ottawa Road, Ngaio, Wellington 6035
    Region: Greater Wellington
    Status:  [Checked: Accurate]
@@ -24,7 +7,7 @@
    - New patient offer: $109 (valued at $320; includes check-up, 2 x-rays, clean & polish, consultation; new patients only; Tue & Wed only; redeem within 90 days; 48-hr cancellation policy)
 
 
-4. Capital Dental Petone [scraped]
+2. Capital Dental Petone [scraped]
    Address: 272 Jackson Street, Petone, Lower Hutt 5012
    Region: Greater Wellington
    Status:  [ ]
@@ -33,7 +16,7 @@
    - Free teen dental care: Available for teenagers and kids under Ministry of Health
 
 
-5. Capital Dental Tawa [scraped]
+3. Capital Dental Tawa [scraped]
    Address: Tawa, Wellington 5028
    Region: Greater Wellington
    Status:  [ ]
@@ -41,7 +24,7 @@
    - Laybuy: Available
 
 
-6. Capital Dental Thorndon [scraped]
+4. Capital Dental Thorndon [scraped]
    Address: 1 Murphy Street, Thorndon, Wellington 6011
    Region: Greater Wellington
    Status:  [ ]
@@ -49,7 +32,7 @@
    - Laybuy: Available
 
 
-7. Capital Dental Upper Hutt [scraped]
+5. Capital Dental Upper Hutt [scraped]
    Address: 21 Main Street, Upper Hutt Central, Upper Hutt 5018
    Region: Greater Wellington
    Status:  [ ]
@@ -57,51 +40,42 @@
    - Laybuy: Available
 
 
-8. Central Dental Surgery [scraped]
+6. Central Dental Surgery [scraped]
    Address: Harbour City Tower tower level 6/29 Brandon Street, Te Aro, Wellington 6011
    Region: Greater Wellington
    Status:  [ ]
    Website: https://www.healthpoint.co.nz/dentistry/general-dentist/central-dental-surgery/
 
 
-9. Paremata Dental Surgery [manually verified 27/05/26]
-   Address: 98 Mana Esplanade, Paremata, Porirua 5026
-   Region: Greater Wellington
-   Status:  [Checked: no checkup price]
-   Website: https://parematadentalsurgery.co.nz/ (parematadental.co.nz redirects here)
-   Note: Darling Dental (distinct clinic) formerly operated from this address; has since moved to Unit 14, 99 Mana Esplanade
-   - WINZ: Accepts WINZ quotes for dental treatment
-
-
-10. Edward Leung Dental Surgery [scraped]
+7. Edward Leung Dental Surgery [scraped]
    Address: Level 3/128 Featherston Street, Wellington Central, Wellington 6011
    Region: Greater Wellington
    Status:  [ ]
    Website: https://www.healthpoint.co.nz/dentistry/general-dentist/edward-leung-dentistry/ [website broken — edwardleung.co.nz; switched to Healthpoint fallback]
 
 
-11. Gee Dental Centre [website broken — dentist.co.nz listing; switched to Healthpoint fallback]
+8. Gee Dental Centre [website broken — dentist.co.nz listing; switched to Healthpoint fallback]
    Address: 22 Cornwall Street, Hutt Central, Lower Hutt 5010
    Region: Greater Wellington
    Status:  [ ]
    Website: https://www.healthpoint.co.nz/dentistry/general-dentist/gee-dental-centre/
 
 
-12. Lange M H BDS [scraped]
+9. Lange M H BDS [scraped]
    Address: 368 Tinakori Road, Thorndon, Wellington 6011
    Region: Greater Wellington
    Status:  [ ]
    Website: https://www.healthpoint.co.nz/dentistry/general-dentist/michael-lange-dental/
 
 
-13. Michael Walton Dental [scraped]
+10. Michael Walton Dental [scraped]
    Address: 22 Royal Street, Upper Hutt Central, Upper Hutt 5018
    Region: Greater Wellington
    Status:  [ ]
    Website: https://www.healthpoint.co.nz/dentistry/general-dentist/waltdental/
 
 
-14. Raine Street Dental [scraped]
+11. Raine Street Dental [scraped]
    Address: 4 Raine Street, Karori, Wellington 6012
    Region: Greater Wellington
    Status:  [ ]

@@ -1,0 +1,89 @@
+Palmerston North clinics needing phone verification for checkup prices
+Regenerated 09/06/26 — 11 excluded (non-dentist: BDL Denture Clinic, Broadway Dental Hygiene, Broadway Specialists Centre, Central Endodontics, Courtney Orthodontics On Elmira, Denture Services, Glenn Kirk Oral Surgeon Ltd, Lovelysmiles Professional Teeth Whitening, Stranges Denture Group, Super Smilez Teeth Whitening, The Orthodontic Centre)
+
+1. Carpenters Dental Palmerston North
+   http://www.carpentersdental.co.nz/
+   332 Broadway Avenue, Palmerston North Central, Palmerston North 4414
+   Phone: 06 355 8218
+
+2. Dr Ross J Murray [no individual website — Healthpoint address page used]
+   
+   250 Grey Street, Palmerston North Central, Papaioea 4414
+   Phone: 06 357 4575
+
+3. Grey Street Dental Surgery [website SSL error — greystdental.co.nz; switched to Healthpoint fallback]
+   https://www.healthpoint.co.nz/dentistry/general-dentist/grey-street-dental-surgery/
+   188 Grey Street, Palmerston North Central, Palmerston North 4414
+   Phone: 06 357 1285
+
+4. Highbury Dental
+   http://highburydental.co.nz/
+   12 Brentwood Avenue, Highbury, Palmerston North 4412
+   Phone: 06 222 3585
+
+5. Hui Wang Dental [no individual website — switched to Healthpoint fallback]
+   
+   250 Grey Street, Palmerston North Central, Palmerston North 4414
+   Phone: 06 357 9680
+
+6. ICONA New Zealand
+   http://www.icona.co.nz/
+   141 Harrisons Line, Kelvin Grove, Palmerston North 4470
+   Phone: 06 352 0099
+
+7. Kwok Joe Dental
+   http://www.kwokjoedental.co.nz/
+   11 Grey Street, Palmerston North Central, Palmerston North 4410
+   Phone: 06 355 3388
+
+8. Lumino Broadway Dental | Lumino The Dentists
+   https://lumino.co.nz/dentists/lumino-broadway-dental/
+   187 Broadway Avenue, Palmerston North Central, Palmerston North 4410
+   Phone: 06 358 5386
+
+9. Lumino Main Street | Lumino The Dentists
+   https://lumino.co.nz/dentists/lumino-main-street/
+   506 Main Street, Palmerston North Central, Palmerston North 4440
+   Phone: 06 358 4102
+
+10. Lumino Manawatu Dental | Lumino The Dentists
+   https://lumino.co.nz/dentists/lumino-manawatu-dental/
+   254 Church Street, Palmerston North Central, Palmerston North 4410
+   Phone: 06 358 3988
+
+11. Lumino Palmerston North | Lumino The Dentists
+   https://lumino.co.nz/dentists/palmerston-north-dental-practice/
+   The Palm Medical Centre, Suite 1/445 Ferguson Street, Palmerston North Central, Palmerston North 4410
+   Phone: 06 356 9020
+
+12. M Dental
+   http://www.mdental.co.nz/
+   18 Victoria Avenue, Palmerston North Central, Palmerston North 4410
+   Phone: 06 355 5273
+
+13. Primecare Dental Palmerston North
+   https://primecaredental.co.nz/contact-us/palmerston-north/
+   6 Vivian Street, Palmerston North Central, Palmerston North 4414
+   Phone: 06 358 5882
+
+14. Rapid Response Dental [website: new patient $95 exam + free x-rays]
+   https://www.rapidresponsedental.co.nz/
+   277 Broadway Avenue, Palmerston North Central, Palmerston North 4414
+   Phone: 06 358 8277
+
+15. Ross dental clinic
+   
+   25 Freyberg Street, Roslyn, Palmerston North 4414
+   Phone: 06 358 4572
+
+16. Smile Dental - Palmerston North
+   https://www.smiledental.co.nz/
+   22 Victoria Avenue, Palmerston North Central, Palmerston North 4410
+   Phone: 0800 476 453
+
+17. Susannah Wilson Dental
+   https://swdental.co.nz/
+   250 Grey Street, Palmerston North Central, Palmerston North 4414
+   Phone: 06 357 4575
+
+Total: 17 clinics

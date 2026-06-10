@@ -1,0 +1,83 @@
+Napier clinics needing phone verification for checkup prices
+Regenerated 09/06/26 — 6 excluded (non-dentist: Artisan Denture Studio - Dentures in Napier, Dentures Direct Karen Pedersen, Hawkes Bay Denture Care Ltd, Hawkes Bay Periodontics & Dental Implants, Ocean Orthodontics, The Oral Surgery Centre)
+
+1. City Dental Napier
+   https://citydentalnapier.co.nz/
+   24 Shakespeare Road, Bluff Hill, Napier 4110
+   Phone: 06 833 6938
+
+2. Clive Square Dental Associates
+   http://www.clivesquaredental.co.nz
+   27 Clive Square West, Napier South, Napier 4110
+   Phone: 06 835 8169
+
+3. Deco Dental
+   https://www.decodental.nz/
+   274 Kennedy Road, Onekawa, Napier 4110
+   Phone: 06 843 9064
+
+4. Dental Clinics
+   
+   243 Kennedy Road, Onekawa, Napier 4110
+
+5. Dental on Raffles
+   https://www.dentalonraffles.co.nz/
+   106 Raffles Street, Hawkes Bay, Napier 4110
+   Phone: 06 835 6253
+
+6. Dentiq
+   https://www.dentiq.nz/
+   20 Gloucester Street, Greenmeadows, Napier 4112
+   Phone: 06 880 6161
+
+7. Devine Smile Design Ltd
+   http://devinesmiledesign.nz/
+   4/62 Munroe Street, Napier South, Napier 4110
+   Phone: 06 844 8024
+
+8. Kennedy Road Dental [no individual website — switched to Healthpoint fallback]
+   
+   100 Kennedy Road, Napier South, Napier 4110
+   Phone: 06 835 5100
+
+9. Mark Clifford Dental Creations [note: name suggests cosmetic focus — verify general dentistry offered]
+   https://www.dentalcreations.co.nz/
+   250 Gloucester Street, Taradale, Napier 4112
+   Phone: 06 835 7535
+
+10. Napier Dental Practice | Lumino The Dentists
+   https://lumino.co.nz/dentists/napier-dental-practice/
+   157 Tennyson Street, Napier South, Napier 4110
+   Phone: 06 835 8849
+
+11. Napier Dentist - Golden Apple Dental
+   https://www.gadental.co.nz/
+   17 Tennyson Street, Napier South, Napier 4110
+   Phone: 06 833 6522
+
+12. Parkside Dental
+   https://parksidedental.co.nz/
+   514 Kennedy Road, Greenmeadows, Napier 4112
+   Phone: 06 845 3544
+
+13. Pearl of Ahuriri - Dental Care
+   http://pearlofahuriri.co.nz/
+   6 Ossian Street, Ahuriri, Napier 4110
+   Phone: 06 651 7645
+
+14. Taradale Dentist, Napier - Lumino The Dentists
+   https://lumino.co.nz/dentists/taradale-dentist/
+   20A Puketapu Road, Taradale, Napier 4112
+   Phone: 06 844 2448
+
+15. Taradale Family Dental
+   http://www.taradalefamilydental.co.nz/
+   28 Lee Road, Taradale, Napier 4112
+   Phone: 06 845 4595
+
+16. The Dentists - Taradale
+   https://www.dentiststaradale.co.nz/
+   18 Meeanee Road, Taradale, Napier 4112
+   Phone: 06 844 2718
+
+Total: 16 clinics

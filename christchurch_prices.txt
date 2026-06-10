@@ -395,6 +395,7 @@
 
 
 27. Moriarty Dental [scraped]
+   Address: 153 Innes Road, St Albans, Christchurch 8052 (formerly 52 Worcester Boulevard, Westend)
    Status:  [ ]
    Website: https://www.moriartydental.co.nz/contact
    - WINZ: Available through MSD/studylink community services card scheme
@@ -434,25 +435,7 @@
    - Q Card: Up to 24 months interest-free on treatments over $200; 6-month payment holiday available
 
 
-30. Precision Dental 1985 Ltd [scraped]
-   Status:  [Checked: Accurate]
-   Website: https://www.precisiondentalchch.co.nz/
-   Note: Dentures only — not a general dentist [manually checked 18/05/26]
-   - Consultation: Free, no-obligation
-   - Denture: Cost varies; free consultation for accurate quote
-   - WINZ: Quotes available
-   - SuperGold Card: Discount available
-   - Credit card: EFTPOS and card payments accepted
-   - Denture repair: Typically completed within 2-3 hours; cost deductible from new denture purchase
-   - Credit card: EFTPOS and card payments accepted
-   - WINZ: WINZ quotes available; payment required on completion of work
-   - SuperGold Card: Discounts offered for SuperGold card holders
-   - Denture tooth addition - acrylic partial dentures: Often completed same day
-   - Denture tooth addition - metal partial dentures: May take 2-3 days depending on tooth location
-   - Insurance quotes: Available
-
-
-31. Richmond Village Dental [MANUAL]
+30. Richmond Village Dental [MANUAL]
    Status:  [ ]
    Website: https://richmondvillage.dental/
    Note: Registered company name: RICHMOND DENTAL (2020) LIMITED
@@ -478,13 +461,13 @@
    - 3D printed oral appliance: $2150
 
 
-32. Riverside Dental Christchurch City [no data]
+31. Riverside Dental Christchurch City [no data]
    Status:  [Checked: Accurate]
    Website: http://riversidedental.co.nz/
    Note: Relocated and rebranded as Merivale Dental Group (see entry 68)
 
 
-33. Smile Concepts [MANUAL]
+32. Smile Concepts [MANUAL]
    Status:  [ ]
    Website: http://www.smileconcepts.co.nz/
    - Exam / checkup: $120 (full check-up with x-rays and treatment plan)
@@ -501,14 +484,14 @@
    - WINZ: Quotes accepted
 
 
-34. Studio Dental [no data]
+33. Studio Dental [no data]
    Status:  [Checked: Accurate]
    Website: https://www.studiodental.nz/
    - Exam / checkup: $144 (includes 2 x-rays)
    - Hygienist: $243 (approximately 1 hour; may cost more if signs of gum disease)
 
 
-35. Sydenham Dental Centre [MANUAL]
+34. Sydenham Dental Centre [MANUAL]
    Status:  [ ]
    Website: https://www.sydenhamdentalcentre.co.nz/
    - New patient offer: $49 (full check-up + 2 x-rays)
@@ -533,17 +516,17 @@
    - Community Services Card: 10% discount for payment on the day (applicable on treatments over $150; excluding Hygienist)
 
 
-36. Time Dental [no data]
+35. Time Dental [no data]
    Status:  [ ]
    Website: https://www.healthpoint.co.nz/dentistry/general-dentist/time-dental/
 
 
-37. Warrington Dental [no data]
+36. Warrington Dental [no data]
    Status:  [ ]
-   Website: https://www.warringtondental.com/
+   Website: https://www.healthpoint.co.nz/dentistry/general-dentist/warrington-dental/ [no individual website — switched to Healthpoint fallback; warringtondental.com is a US practice]
 
 
-38. Yaldhurst Dental [scraped]
+37. Yaldhurst Dental [scraped]
    Status:  [Checked: Accurate]
    Website: http://www.yaldhurstdental.co.nz/
    - New patient offer: Exam + 2 x-rays + simple clean $135 (current special)
@@ -561,21 +544,21 @@
    - Free teen dental care: Free under 18 (Adolescent Oral Health Scheme)
 
 
-39. Linwood Avenue Dental [scraped]
+38. Linwood Avenue Dental [scraped]
    Address: 201A Linwood Avenue, Linwood, Christchurch 8011
    Status:  [ ]
    Website: https://www.healthpoint.co.nz/dentistry/general-dentist/linwood-avenue-dental-practice/ [no individual website]
    Phone: 03 389 6023
 
 
-40. New Brighton Dental [scraped]
+39. New Brighton Dental [scraped]
    Address: 160 Seaview Road, New Brighton, Christchurch 8083
    Status:  [ ]
    Website: https://www.healthpoint.co.nz/dentistry/general-dentist/new-brighton-dental/ [newbrightondental.co.nz SSL error — switched to Healthpoint]
    Phone: 03 388 9079
 
 
-41. van Kuijk Peter [scraped]
+40. van Kuijk Peter [scraped]
    Address: 129 Williams Street, Kaiapoi 7630
    Status:  [ ]
    Website: https://www.healthpoint.co.nz/dentistry/general-dentist/peter-van-kuijk-dentist/ [no individual website]

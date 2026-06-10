@@ -1,0 +1,199 @@
+Hamilton clinics needing phone verification for checkup prices
+Regenerated 09/06/26 — 7 excluded (non-dentist: Affordable Denture Hamilton, Anglesea OMS, Choice Dentures, Hamilton Orthodontics, Oral Hygiene Clinic, The Denture Studio, Victoria Denture)
+
+1. Alpha Dental Ltd [manually verified 26/05/26 — no checkup price; website down (Cloudflare error 521 on www.alphadental.co.nz); switched to Healthpoint fallback]
+   https://www.healthpoint.co.nz/dentistry/general-dentist/alpha-dental-ltd/
+   Level 1/5 Somerset Street, Frankton, Hamilton 3204
+   Phone: 09 360 0680
+
+2. Avalon Dental
+   http://www.avalondental.co.nz/
+   6 Avalon Drive, Nawton, Hamilton 3200
+   Phone: 07 847 5767
+
+3. Bella Dental [manually verified 26/05/26 — no checkup price; Q Card / Q Mastercard (12 months interest-free); Visa; Mastercard; EFTPOS; bank deposit; Apple Pay]
+   http://www.belladental.nz/
+   310 Cambridge Road, Hillcrest, Hamilton 3216
+   Phone: 07 858 4131
+
+4. Brite White Dental Centre [manually verified 26/05/26 — no checkup price]
+   https://www.britewhitedental.nz/
+   Corner Rostrevor and Tristram Streets, 130 Rostrevor Street, Hamilton Central, Hamilton 3204
+   Phone: 07 958 1435
+
+5. C & R Dental Care
+   https://www.crdentalcare.co.nz/
+   697C Wairere Drive, Chartwell, Hamilton 3210
+   Phone: 07 856 4116
+
+6. City Smile Dental - Anglesea St Dentist Hamilton
+   https://citysmiledental.co.nz/
+   487D Anglesea Street, Hamilton Central, Hamilton 3204
+   Phone: 0800 248 976
+
+7. City Smile Dental - Victoria St Dentist Hamilton
+   http://www.citysmiledental.co.nz/
+   King St Building Level One/462 Victoria Street, Hamilton Central, Hamilton 3204
+   Phone: 0800 248 976
+
+8. Clarence Dental
+   http://www.clarencedental.co.nz/
+   Level 1/2 Fifth Avenue, Hamilton 3214
+   Phone: 07 839 5559
+
+9. Dental Excellence [manually verified 26/05/26 — no checkup price; free off-street basement parking; disabled access]
+   http://www.dentalexcellence.co.nz/
+   1100 Victoria Street, Whitiora, Hamilton 3200
+   Phone: 07 839 5831
+
+10. Dental Holistix
+   https://dentalholistix.co.nz/
+   Cnr Anglesea &, Thackeray Street, Hamilton Central, Hamilton 3204
+   Phone: 07 858 0750
+
+11. Dinsdale Dental Hamilton | Lumino The Dentists
+   https://lumino.co.nz/dentists/dinsdale-dental-hamilton/
+   44 Whatawhata Road, Dinsdale, Hamilton 3204
+   Phone: 07 847 3221
+
+12. Focus 32 Dental
+   http://www.focus32.co.nz/
+   41 Hukanui Road, Fairfield, Hamilton 3214
+   Phone: 07 853 0620
+
+13. Garden Place Dental Hamilton | Lumino The Dentists
+   https://lumino.co.nz/dentists/garden-place-dental-hamilton/
+   Level 3/24 Garden Place, Hamilton Central, Hamilton 3204
+   Phone: 07 839 5862
+
+14. Gentle Dental Hamilton
+   http://gentledentalhamilton.com/contact-us.php
+   24 Harwood Street, Hamilton Central, Hamilton 3204
+   Phone: 07 839 0353
+
+15. Hamilton Dental Centre
+   https://www.thehamiltondentist.co.nz/
+   3/111 Thomas Road, Rototuna, Hamilton 3210
+   Phone: 07 854 8905
+
+16. Hamilton Dental Clinic
+   https://hamiltondental.nz/
+   41 Karewa Place, Pukete, Hamilton 3200
+   Phone: 0800 765 777
+
+17. Hamilton Dental Emergency Centre
+   http://www.hamiltonemergencydentist.co.nz/
+   481 Anglesea Street, Hamilton Central, Hamilton 3204
+   Phone: 07 834 9293
+
+18. Hamilton East Dental Centre
+   https://hamiltoneastdentalcentre.co.nz/
+   395 Grey Street, Hamilton East, Hamilton 3216
+   Phone: 07 856 6438
+
+19. Hamilton Family Dental
+   http://www.hamiltonfamilydental.co.nz/
+   1359 Victoria Street, Beerescourt, Hamilton 3200
+   Phone: 07 214 5987
+
+20. Hillcrest Dental Centre
+   http://www.hillcrestdental.co.nz/
+   153 Cambridge Road, Hillcrest, Hamilton 3216
+   Phone: 07 856 7462
+
+21. Ian Ross [no individual website]
+   https://www.healthpoint.co.nz/27-oneill-street-claudelands-hamilton/
+   27 Oneill Street, Claudelands, Hamilton 3214
+   Phone: 07 853 2929
+
+22. Jogia Dental Surgery [no individual website]
+   https://www.healthpoint.co.nz/dentistry/general-dentist/jogia-dental-surgery/
+   195 Peachgrove Road, Claudelands, Hamilton 3214
+   Phone: 07 855 0701
+
+23. Lumino Chartwell | Lumino The Dentists
+   https://lumino.co.nz/dentists/lumino-chartwell/
+   Suite 5, Professional Suites, Chartwell, Hamilton 3210
+   Phone: 07 855 4904
+
+24. Lumino Rototuna | Lumino The Dentists
+   https://lumino.co.nz/dentists/lumino-rototuna/
+   17B Rototuna Shopping Centre, Thomas Road, Rototuna North, Hamilton 3210
+   Phone: 07 853 0050
+
+25. Mackie Dental Specialists
+   http://www.mackiedental.co.nz/
+   157 Anglesea Street, Hamilton Central, Hamilton 3204
+   Phone: 07 839 2824
+
+26. Medford House Dental Hamilton | Lumino The Dentists
+   https://lumino.co.nz/dentists/medford-house-dental-hamilton/
+   174 Collingwood Street, Hamilton Lake, Hamilton 3214
+   Phone: 07 839 4030
+
+27. Nawton Dental and Denture Centre
+   https://www.nawtondentalcentre.co.nz/
+   61 Hyde Avenue, Nawton, Hamilton 3200
+   Phone: 07 846 5678
+
+28. New Smile
+   http://www.newsmiledental.co.nz/
+   15 Galloway Street, Hamilton East, Hamilton 3216
+   Phone: 07 834 1128
+
+29. NorthCare Dental Centre
+   http://www.ncdc.co.nz/
+   110A Vickery Street, Te Rapa, Hamilton 3200
+   Phone: 07 850 5100
+
+30. Relax Dental
+   http://relaxdental.co.nz/
+   32 Te Aroha Street, Hamilton East, Hamilton 3216
+   Phone: 07 855 8199
+
+31. River Road Dental Centre
+   http://www.riverroaddental.co.nz/
+   608 River Road, Fairfield, Hamilton 3214
+   Phone: 07 853 3166
+
+32. South City Dental
+   http://www.southcitydental.co.nz/
+   91 Kahikatea Drive, Melville, Hamilton 3206
+   Phone: 07 839 4041
+
+33. Te Kohao Dental [website broken — tekohaodentalhamilton.co.nz; switched to Healthpoint fallback]
+   https://www.healthpoint.co.nz/dentistry/general-dentist/te-kohao-dental/
+   951 Wairere Drive, Hamilton East, Hamilton 3216
+   Phone: 07 856 5479
+
+34. The Tooth Group
+   http://www.thetoothgroup.co.nz/
+   127 Peachgrove Road, Hamilton East, Hamilton 3216
+   Phone: 07 855 7764
+
+35. Tui Dental Borman
+   http://www.tuidental.co.nz/
+   1/60 Hare Puke Drive, Flagstaff, Waikato 3210
+   Phone: 07 849 6954
+
+36. Tui Dental Bryant Road
+   http://www.tuidental.co.nz/
+   26 Bryant Road, Te Rapa, Hamilton 3200
+   Phone: 07 849 6954
+
+37. Tulip Dental
+   http://www.tulipdental.co.nz/
+   152 Horsham Downs Road, Rototuna North, Hamilton 3210
+   Phone: 07 949 6947
+
+38. Victoria Dentists
+   http://victoriadentists.co.nz/
+   270 Victoria Street, Hamilton Central, Hamilton 3204
+   Phone: 07 839 1660
+
+39. Waikato Dental
+   https://www.waikatodental.com/
+   1000 Victoria Street, Whitiora, Hamilton 3200
+   Phone: 07 839 5298
+
+Total: 39 clinics

@@ -1,0 +1,59 @@
+Hastings clinics needing phone verification for checkup prices
+Regenerated 09/06/26 — 2 excluded (non-dentist: Hastings Denture Studio Ltd, Neil Carlisle Denture Studio)
+
+1. Aesthetic Dental Limited
+   https://www.aestheticdental.co.nz/
+   305 Lyndon Road West, Hastings 4122
+   Phone: 06 878 8171
+
+2. Bay Dental Care
+   http://www.baydentalcare.nz/
+   507 Saint Aubyn Street West, Hastings 4122
+   Phone: 06 878 8791
+
+3. David Marriott Dental
+   http://www.davidmarriottdental.co.nz/
+   300 Southampton Street West, St Leonards, Hastings 4122
+   Phone: 06 876 5797
+
+4. Dental@105
+   http://dentalat105.co.nz/
+   105 Southampton Street West, St Leonards, Hastings 4122
+   Phone: 06 876 5868
+
+5. Frimley Dental
+   http://www.frimleydental.co.nz/
+   317 Frimley Avenue, Frimley, Hastings 4120
+   Phone: 06 870 6202
+
+6. Hastings Dentist - Golden Apple Dental [note: located within Hastings Health Centre building]
+   http://www.gadental.co.nz/
+   Hastings Health Centre, 303 Saint Aubyn Street West, Hastings 4122
+   Phone: 06 873 8565
+
+7. Helen Cho & Ken Joe Dental [no individual website — switched to Healthpoint fallback]
+   
+   307 Nelson Street South, Hastings 4122
+   Phone: 06 878 9321
+
+8. Lumino Hastings | Lumino The Dentists
+   https://lumino.co.nz/dentists/smile-centre-hastings/
+   309 Southampton Street West, St Leonards, Hastings 4122
+   Phone: 06 876 9983
+
+9. The Dental Institute
+   http://www.tdi.nz/
+   Tribune First Floor/113 Karamu Road North, Hastings 4122
+   Phone: 06 870 6362
+
+10. The Hastings Health Centre
+   https://hastingshealth.co.nz/
+   303 Saint Aubyn Street West, Hastings 4122
+   Phone: 06 873 8999
+
+11. iSmile Dental - Dentures Hastings [note: offers both general dentistry and dentures — verify general dental checkup available]
+   https://ismiledental.co.nz/
+   705 Omahu Road, Frimley, Hastings 4120
+   Phone: 021 423 328
+
+Total: 11 clinics
