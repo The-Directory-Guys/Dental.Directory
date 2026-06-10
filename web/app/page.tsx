@@ -6,22 +6,27 @@ import { supabase, type Clinic } from "@/lib/supabase";
 
 const REGIONS = [
   "Auckland",
-  "Bay of Plenty",
   "Canterbury",
-  "Gisborne",
-  "Hawke's Bay",
-  "Manawatū-Whanganui",
-  "Marlborough",
-  "Nelson",
-  "Northland",
-  "Otago",
-  "Southland",
-  "Taranaki",
-  "Waikato",
   "Wellington",
+  "Waikato",
+  "Bay of Plenty",
+  "Manawatū-Whanganui",
+  "Otago",
+  "Northland",
+  "Hawke's Bay",
+  "Taranaki",
+  "Nelson & Tasman",
+  "Southland",
+  "Gisborne",
+  "Marlborough",
   "West Coast",
-  "Wider Wellington Region",
 ];
+
+const WELLINGTON_REGIONS = ["Wellington", "Wider Wellington Region"];
+const REGION_MAP: Record<string, string[]> = {
+  Wellington: WELLINGTON_REGIONS,
+  "Nelson & Tasman": ["Nelson"],
+};
 
 const PAGE_SIZE = 20;
 
@@ -43,10 +48,11 @@ export default function HomePage() {
     setCity("");
     setCities([]);
     if (!region) return;
+    const regionFilter = REGION_MAP[region] ?? [region];
     supabase
       .from("dental_clinics")
       .select("city")
-      .eq("region", region)
+      .in("region", regionFilter)
       .eq("business_status", "OPERATIONAL")
       .then(({ data }) => {
         if (!data) return;
@@ -67,7 +73,8 @@ export default function HomePage() {
       query = query.ilike("name", `%${search.trim()}%`);
     }
     if (region) {
-      query = query.eq("region", region);
+      const regionFilter = REGION_MAP[region] ?? [region];
+      query = query.in("region", regionFilter);
     }
     if (city) {
       query = query.eq("city", city);

@@ -321,7 +321,7 @@ h4 {
 .hero-search {
     position: relative;
     z-index: 1;
-    max-width: 640px;
+    max-width: 780px;
     margin: 0 auto;
     display: flex;
     background: var(--clr-white);
