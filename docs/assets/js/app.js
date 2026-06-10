@@ -1,4 +1,4 @@
-// NZ Dental — App Logic
+// Dental Compare — App Logic
 (function () {
   'use strict';
 
@@ -109,7 +109,8 @@
       const ratingDisplay = d.rating ? `<span class="stars">${starsHTML(d.rating)}</span> <strong>${d.rating}</strong>` : '<span style="color:var(--clr-gray-400)">No rating yet</span>';
       const reviewText = d.reviewCount ? `💬 ${d.reviewCount} reviews` : '';
       const descText = d.description || '';
-      const phoneText = d.phone ? `📞 ${d.phone}` : '';
+      const phoneText = d.phone ? `<a href="tel:${d.phone.replace(/\\s/g, '')}" style="text-decoration:none; color:inherit;">📞 ${d.phone}</a>` : '';
+      const emailText = d.email ? `<a href="mailto:${d.email}" style="text-decoration:none; color:inherit; margin-left:1rem;">✉️ Email</a>` : '';
 
       // Use id for Supabase records, slug for static
       const profileLink = d.id ? `dentist.html?id=${d.id}` : `dentist.html?slug=${d.slug}`;
@@ -130,7 +131,10 @@
             ${servicePills ? `<div class="dentist-card__services">${servicePills}</div>` : ''}
             ${pricingPreview}
             <div class="dentist-card__footer">
-              ${phoneText ? `<span class="dentist-card__phone">${phoneText}</span>` : '<span></span>'}
+              <div>
+                ${phoneText ? `<span class="dentist-card__phone">${phoneText}</span>` : ''}
+                ${emailText ? `<span class="dentist-card__email">${emailText}</span>` : ''}
+              </div>
               <a href="${profileLink}" class="btn btn--primary">View Profile</a>
             </div>
           </div>
@@ -448,7 +452,7 @@
       backBtn.textContent = `← Back to ${dentist.region === 'Nelson' ? 'Nelson/Tasman' : dentist.region} listings`;
     }
 
-    document.title = `${dentist.name} | NZ Dental`;
+    document.title = `${dentist.name} | Dental Compare`;
 
     const serviceIcons = {
       'General Dentistry': '🦷', 'Cosmetic': '✨', 'Teeth Whitening': '💎',
@@ -592,7 +596,7 @@
           <div class="contact-item">
             <div class="contact-item__icon">📞</div>
             <div>
-              <div style="font-weight:600;color:var(--clr-navy)">${dentist.phone}</div>
+              <a href="tel:${dentist.phone.replace(/\\s/g, '')}" style="font-weight:600;color:var(--clr-navy);text-decoration:none;">${dentist.phone}</a>
               <div style="font-size:.75rem;color:var(--clr-gray-400)">Phone</div>
             </div>
           </div>` : ''}
@@ -600,7 +604,7 @@
           <div class="contact-item">
             <div class="contact-item__icon">✉️</div>
             <div>
-              <div style="font-weight:600;color:var(--clr-navy)">${dentist.email}</div>
+              <a href="mailto:${dentist.email}" style="font-weight:600;color:var(--clr-navy);text-decoration:none;">${dentist.email}</a>
               <div style="font-size:.75rem;color:var(--clr-gray-400)">Email</div>
             </div>
           </div>` : ''}

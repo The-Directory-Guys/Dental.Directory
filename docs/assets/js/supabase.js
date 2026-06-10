@@ -43,8 +43,8 @@ function transformClinic(clinic) {
     slug: generateSlug(clinic.name || 'unknown'),
     suburb: clinic.town || 'Unknown',
     address: clinic.address || '',
-    phone: clinic.phone || '',
-    email: '',
+    phone: clinic.phone_national || clinic.phone_international || clinic.phone || '',
+    email: clinic.email || '',
     website: clinic.website || '',
     rating: clinic.rating || 0,
     reviewCount: clinic.total_ratings || 0,
@@ -259,10 +259,10 @@ async function fetchClinicById(id) {
   }
 }
 
-// Fetch reviews for a single clinic from Supabase reviews table
+// Fetch reviews for a single clinic from Supabase google_reviews table
 async function fetchSingleClinicReviews(clinicId) {
   try {
-    const url = `${SUPABASE_URL}/rest/v1/reviews?clinic_id=eq.${clinicId}&order=created_at.desc`;
+    const url = `${SUPABASE_URL}/rest/v1/google_reviews?clinic_id=eq.${clinicId}&order=fetched_at.desc`;
     const response = await fetch(url, {
       headers: {
         'apikey': SUPABASE_ANON_KEY,
@@ -279,12 +279,10 @@ async function fetchSingleClinicReviews(clinicId) {
     if (!Array.isArray(data)) return [];
 
     return data.map(r => ({
-      name: 'Verified Patient',
-      date: r.created_at 
-        ? new Date(r.created_at).toLocaleDateString('en-NZ', { day: 'numeric', month: 'long', year: 'numeric' })
-        : 'Recently',
+      name: r.author || 'Verified Patient',
+      date: r.date_text || 'Recently',
       rating: r.rating || 5,
-      text: r.body || ''
+      text: r.snippet || ''
     }));
   } catch (error) {
     console.error('Failed to fetch single clinic reviews:', error);
