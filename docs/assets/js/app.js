@@ -647,4 +647,32 @@
     });
   }
 
+  // ===== Homepage: Dynamic Region Counts =====
+  const locationCards = document.querySelectorAll('.location-card[data-region]');
+  if (locationCards.length > 0) {
+    const REGION_DB_MAP = {
+      'Wellington': ['Wellington', 'Wider Wellington Region'],
+      'Nelson & Tasman': ['Nelson']
+    };
+
+    fetchAllClinics().then(clinics => {
+      if (!Array.isArray(clinics) || clinics.length === 0) return;
+
+      const counts = {};
+      clinics.forEach(c => {
+        if (c.region) counts[c.region] = (counts[c.region] || 0) + 1;
+      });
+
+      locationCards.forEach(card => {
+        const displayRegion = card.getAttribute('data-region');
+        const dbRegions = REGION_DB_MAP[displayRegion] || [displayRegion];
+        const total = dbRegions.reduce((sum, r) => sum + (counts[r] || 0), 0);
+        if (total > 0) {
+          const countEl = card.querySelector('.location-card__count');
+          if (countEl) countEl.textContent = `${total} dentists`;
+        }
+      });
+    });
+  }
+
 })();
