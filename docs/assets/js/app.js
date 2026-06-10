@@ -124,7 +124,7 @@
             </h3>
             <div class="dentist-card__meta">
               <span class="dentist-card__meta-item">${ratingDisplay}</span>
-              <span class="dentist-card__meta-item">📍 ${[d.suburb, d.city].filter(Boolean).join(', ') || 'Unknown'}</span>
+              <span class="dentist-card__meta-item">📍 ${d.suburb && d.suburb !== d.city ? `${d.suburb}, ${d.city}` : (d.city || d.suburb || 'Unknown')}</span>
               ${reviewText ? `<span class="dentist-card__meta-item">${reviewText}</span>` : ''}
             </div>
             ${descText ? `<p class="dentist-card__desc">${descText}</p>` : ''}
