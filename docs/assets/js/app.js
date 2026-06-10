@@ -651,8 +651,7 @@
   const locationCards = document.querySelectorAll('.location-card[data-region]');
   if (locationCards.length > 0) {
     const REGION_DB_MAP = {
-      'Wellington': ['Wellington', 'Wider Wellington Region'],
-      'Nelson & Tasman': ['Nelson']
+      'Wellington': ['Wellington', 'Wider Wellington Region']
     };
 
     fetchAllClinics().then(clinics => {

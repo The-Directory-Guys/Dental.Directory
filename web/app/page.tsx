@@ -25,7 +25,6 @@ const REGIONS = [
 const WELLINGTON_REGIONS = ["Wellington", "Wider Wellington Region"];
 const REGION_MAP: Record<string, string[]> = {
   Wellington: WELLINGTON_REGIONS,
-  "Nelson & Tasman": ["Nelson"],
 };
 
 const PAGE_SIZE = 20;
