@@ -198,9 +198,8 @@ h4 {
 }
 
 .logo__img {
-    height: 40px;
-    width: 40px;
-    object-fit: contain;
+    height: 56px;
+    width: auto;
     display: block;
 }
 
