@@ -293,21 +293,23 @@ async function fetchSingleClinicReviews(clinicId) {
 
 // Fetch all clinics (for homepage stats, etc.)
 async function fetchAllClinics() {
+  const PAGE = 1000;
+  const all = [];
   try {
-    const url = `${SUPABASE_URL}/rest/v1/dental_clinics?select=id,region&business_status=eq.OPERATIONAL&limit=2000`;
-    
-    const response = await fetch(url, {
-      headers: {
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-      }
-    });
-
-    if (!response.ok) {
-      throw new Error(`Supabase error: ${response.status}`);
+    for (let offset = 0; ; offset += PAGE) {
+      const url = `${SUPABASE_URL}/rest/v1/dental_clinics?select=id,region&business_status=eq.OPERATIONAL&limit=${PAGE}&offset=${offset}`;
+      const response = await fetch(url, {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      });
+      if (!response.ok) throw new Error(`Supabase error: ${response.status}`);
+      const page = await response.json();
+      all.push(...page);
+      if (page.length < PAGE) break;
     }
-
-    return await response.json();
+    return all;
   } catch (error) {
     console.error('Failed to fetch all clinics:', error);
     return [];
