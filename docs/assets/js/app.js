@@ -319,9 +319,8 @@
       }
     });
 
-    // Sort by count (descending), then alphabetically
     const sortedSuburbs = Object.entries(suburbCounts)
-      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+      .sort((a, b) => a[0].localeCompare(b[0]));
 
     // Helper to build checkbox HTML
     function buildCheckboxes(suburbs) {
