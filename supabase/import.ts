@@ -310,7 +310,8 @@ async function deleteClinicsNotInCsv(csvUrls: Set<string>) {
       const url = row.google_maps_url as string | null | undefined;
       const pkVal = row[CLINICS_PK] as Pk | undefined;
       if (pkVal === undefined || pkVal === null) continue;
-      if (!url || !csvUrls.has(url)) {
+      // Only treat rows WITH a URL as potential orphans — no-URL rows can't be matched
+      if (url && !csvUrls.has(url)) {
         orphanPks.push(pkVal);
       }
     }
