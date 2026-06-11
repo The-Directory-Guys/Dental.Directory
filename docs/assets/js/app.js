@@ -151,7 +151,12 @@
         if (activeSuburbs.length && !activeSuburbs.includes(d.suburb)) return false;
         if (activeServices.length && !activeServices.some(s => d.services.includes(s))) return false;
         if (d.rating < minRating) return false;
-        if (searchQuery && !d.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          const matchesName = d.name.toLowerCase().includes(q);
+          const matchesService = d.services.some(s => s.toLowerCase().includes(q));
+          if (!matchesName && !matchesService) return false;
+        }
         const price = getCheckupPrice(d);
         if (price !== null && maxPrice !== Infinity && price > maxPrice) return false;
         return true;
@@ -209,7 +214,12 @@
           if (activeSuburbs.length && !activeSuburbs.includes(d.suburb)) return false;
           if (activeServices.length && !activeServices.some(s => d.services.includes(s))) return false;
           if (d.rating < minRating) return false;
-          if (searchQuery && !d.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+          if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          const matchesName = d.name.toLowerCase().includes(q);
+          const matchesService = d.services.some(s => s.toLowerCase().includes(q));
+          if (!matchesName && !matchesService) return false;
+        }
           const price = getCheckupPrice(d);
           if (price !== null && maxPrice !== Infinity && price > maxPrice) return false;
           return true;
@@ -271,6 +281,12 @@
         searchQuery = e.target.value;
         renderWithReset();
       });
+      // Pre-fill from ?q= URL param (passed by home page search)
+      const urlQ = new URLSearchParams(window.location.search).get('q');
+      if (urlQ) {
+        searchInput.value = urlQ;
+        searchQuery = urlQ;
+      }
     }
 
     // Sort
@@ -628,9 +644,12 @@
   const heroSearchBtn = document.querySelector('.hero-search__btn');
   const heroRegionSelect = document.getElementById('hero-region-select');
 
+  const heroSearchInput = document.querySelector('.hero-search__input');
+
   function getSelectedRegionUrl() {
     const region = heroRegionSelect ? heroRegionSelect.value : 'canterbury';
-    return `${region}.html`;
+    const query = heroSearchInput ? heroSearchInput.value.trim() : '';
+    return query ? `${region}.html?q=${encodeURIComponent(query)}` : `${region}.html`;
   }
 
   if (heroSearchBtn) {
@@ -639,7 +658,6 @@
     });
   }
 
-  const heroSearchInput = document.querySelector('.hero-search__input');
   if (heroSearchInput) {
     heroSearchInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
