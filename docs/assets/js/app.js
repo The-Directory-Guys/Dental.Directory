@@ -113,7 +113,7 @@
       const emailText = d.email ? `<a href="mailto:${d.email}" style="text-decoration:none; color:inherit; margin-left:1rem;">✉️ Email</a>` : '';
 
       // Use id for Supabase records, slug for static
-      const profileLink = d.id ? `dentist.html?id=${d.id}` : `dentist.html?slug=${d.slug}`;
+      const profileLink = d.id ? `dentist.html?id=${d.id}&region=${encodeURIComponent(d.region || '')}` : `dentist.html?slug=${d.slug}&region=${encodeURIComponent(d.region || '')}`;
 
       return `
         <article class="dentist-card" data-suburb="${d.suburb}" data-rating="${d.rating || 0}" data-name="${d.name}">
@@ -377,11 +377,43 @@
     initProfile();
   }
 
+  const REGION_FILES = {
+    'Auckland': 'auckland.html',
+    'Bay of Plenty': 'bay-of-plenty.html',
+    'Canterbury': 'canterbury.html',
+    'Gisborne': 'gisborne.html',
+    'Hawke\'s Bay': 'hawkes-bay.html',
+    'Manawatū-Whanganui': 'manawatu-whanganui.html',
+    'Marlborough': 'marlborough.html',
+    'Nelson': 'nelson-tasman.html',
+    'Nelson & Tasman': 'nelson-tasman.html',
+    'Northland': 'northland.html',
+    'Otago': 'otago.html',
+    'Southland': 'southland.html',
+    'Taranaki': 'taranaki.html',
+    'Waikato': 'waikato.html',
+    'Wellington': 'wellington.html',
+    'West Coast': 'west-coast.html'
+  };
+
+  function setBackButton(region) {
+    const backBtn = document.querySelector('.profile-hero__back');
+    if (!backBtn || !region) return;
+    const fileName = REGION_FILES[region] || 'index.html';
+    backBtn.href = fileName;
+    const displayName = region === 'Nelson' ? 'Nelson/Tasman' : region;
+    backBtn.textContent = `← Back to ${displayName} listings`;
+  }
+
   async function initProfile() {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
     const slug = params.get('slug');
+    const regionParam = params.get('region');
     let dentist = null;
+
+    // Set back button immediately from URL param so it works before async fetch completes
+    if (regionParam) setBackButton(regionParam);
 
     // Try Supabase first (by id)
     if (id && typeof fetchClinicById === 'function') {
@@ -418,30 +450,8 @@
       `;
     }
 
-    // Update Back button to point to dentist's actual region page dynamically
-    const backBtn = document.querySelector('.profile-hero__back');
-    if (backBtn && dentist.region) {
-      const regionFiles = {
-        'Auckland': 'auckland.html',
-        'Bay of Plenty': 'bay-of-plenty.html',
-        'Canterbury': 'canterbury.html',
-        'Gisborne': 'gisborne.html',
-        'Hawke\'s Bay': 'hawkes-bay.html',
-        'Manawatū-Whanganui': 'manawatu-whanganui.html',
-        'Marlborough': 'marlborough.html',
-        'Nelson': 'nelson-tasman.html',
-        'Northland': 'northland.html',
-        'Otago': 'otago.html',
-        'Southland': 'southland.html',
-        'Taranaki': 'taranaki.html',
-        'Waikato': 'waikato.html',
-        'Wellington': 'wellington.html',
-        'West Coast': 'west-coast.html'
-      };
-      const fileName = regionFiles[dentist.region] || 'index.html';
-      backBtn.href = fileName;
-      backBtn.textContent = `← Back to ${dentist.region === 'Nelson' ? 'Nelson/Tasman' : dentist.region} listings`;
-    }
+    // Update Back button with confirmed region from loaded data
+    if (dentist.region) setBackButton(dentist.region);
 
     document.title = `${dentist.name} | Dental Compare`;
 
