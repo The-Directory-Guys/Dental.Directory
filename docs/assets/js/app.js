@@ -89,7 +89,7 @@
     let minRating = 0;
     let searchQuery = '';
     let sortBy = 'rating';
-    let maxPrice = 200;
+    let maxPrice = Infinity;
 
     function cardHTML(d) {
       const initials = d.name.split(' ').filter(w => w.length > 0).map(w => w[0]).join('').slice(0, 2).toUpperCase();
@@ -153,7 +153,7 @@
         if (d.rating < minRating) return false;
         if (searchQuery && !d.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
         const price = getCheckupPrice(d);
-        if (price !== null && price > maxPrice) return false;
+        if (price !== null && maxPrice !== Infinity && price > maxPrice) return false;
         return true;
       });
 
@@ -211,7 +211,7 @@
           if (d.rating < minRating) return false;
           if (searchQuery && !d.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
           const price = getCheckupPrice(d);
-          if (price !== null && price > maxPrice) return false;
+          if (price !== null && maxPrice !== Infinity && price > maxPrice) return false;
           return true;
         }).length;
         const showingCount = Math.min(visibleCount, totalFiltered);
@@ -289,8 +289,8 @@
     const mobileLabel = document.getElementById('mobile-price-value');
 
     function updatePriceSlider(value) {
-      maxPrice = parseInt(value, 10);
-      const label = maxPrice >= 200 ? 'Any price' : `Up to $${maxPrice}`;
+      maxPrice = parseInt(value, 10) >= 300 ? Infinity : parseInt(value, 10);
+      const label = maxPrice === Infinity ? 'Any price' : `Up to $${maxPrice}`;
       if (desktopSlider) desktopSlider.value = maxPrice;
       if (mobileSlider) mobileSlider.value = maxPrice;
       if (desktopLabel) desktopLabel.textContent = label;

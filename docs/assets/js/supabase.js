@@ -294,7 +294,7 @@ async function fetchSingleClinicReviews(clinicId) {
 // Fetch all clinics (for homepage stats, etc.)
 async function fetchAllClinics() {
   try {
-    const url = `${SUPABASE_URL}/rest/v1/dental_clinics?select=id,region,town&business_status=eq.OPERATIONAL&limit=2000`;
+    const url = `${SUPABASE_URL}/rest/v1/dental_clinics?select=id,region&business_status=eq.OPERATIONAL&limit=2000`;
     
     const response = await fetch(url, {
       headers: {
