@@ -49,7 +49,7 @@ function transformClinic(clinic) {
     website: clinic.website || '',
     rating: clinic.rating || 0,
     reviewCount: clinic.total_ratings || 0,
-    services: ['General Dentistry'],  // Default — DB doesn't have services yet
+    services: clinic.services ? clinic.services.split(',').map(s => s.trim()) : ['General Dentistry'],
     pricing: [],  // Will be populated from scraped_prices table
     hasPricingFlag: clinic.price || null,  // 'full_prices', 'some_prices', or null
     description: clinic.description || '',

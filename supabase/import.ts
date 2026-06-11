@@ -128,6 +128,7 @@ type ClinicRow = {
   city: string;
   price: string | null;
   description: string | null;
+  services: string | null;
 };
 
 /** Map CSV row to PostgREST payload (suburb_town → town or suburb_town column). */
@@ -149,6 +150,7 @@ function clinicRowToDb(row: ClinicRow): Record<string, unknown> {
     city: row.city || "NA",
     price: row.price,
     description: row.description || null,
+    services: row.services || null,
   };
 }
 
@@ -359,6 +361,7 @@ async function main() {
     city: ((r as Record<string, string>)["city"] || "NA").trim() || "NA",
     price: r.price !== "no_prices" ? r.price : null,
     description: (r as Record<string, string>)["description"] || null,
+    services: (r as Record<string, string>)["services"] || null,
   }));
 
   const { rows, duplicateUrls } = dedupeRowsByGoogleMapsUrl(parsed);
