@@ -273,12 +273,41 @@ async function upsertBatchByGoogleMapsUrl(batch: ClinicRow[]) {
     }
   }
 
+  // For no-URL rows, look up existing rows by name to avoid re-inserting duplicates
+  const noUrlRows = batch.filter((r) => !r.google_maps_url?.trim());
+  const idByName = new Map<string, Pk>();
+  if (noUrlRows.length > 0) {
+    const names = [...new Set(noUrlRows.map((r) => r.name))];
+    const NAME_CHUNK = 40;
+    for (let j = 0; j < names.length; j += NAME_CHUNK) {
+      const slice = names.slice(j, j + NAME_CHUNK);
+      const { data } = await withPostgrestRetry(
+        `select by name (${j + 1}-${j + slice.length})`,
+        () => supabase.from(CLINICS_TABLE).select(`${CLINICS_PK}, name`).in("name", slice)
+      );
+      for (const e of data ?? []) {
+        const rec = e as Record<string, unknown>;
+        const name = rec.name as string | undefined;
+        const pkVal = rec[CLINICS_PK] as Pk | undefined;
+        // Keep highest id if multiple rows exist (shouldn't after cleanup)
+        if (name && pkVal !== undefined && pkVal !== null) {
+          const existing = idByName.get(name);
+          if (existing === undefined || (pkVal as number) > (existing as number)) {
+            idByName.set(name, pkVal);
+          }
+        }
+      }
+    }
+  }
+
   const toInsert: ClinicRow[] = [];
   const toUpdate: { pk: Pk; row: ClinicRow }[] = [];
   for (const row of batch) {
     const u = row.google_maps_url;
     if (!u || !String(u).trim()) {
-      toInsert.push(row);
+      const pkVal = idByName.get(row.name);
+      if (pkVal !== undefined) toUpdate.push({ pk: pkVal, row });
+      else toInsert.push(row);
       continue;
     }
     const pkVal = idByUrl.get(u);
