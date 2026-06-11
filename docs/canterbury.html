@@ -124,9 +124,13 @@
         </div>
         <div class="filter-group">
             <div class="filter-group__label">Rating</div>
-            <div class="filter-group__items">
-                <label class="filter-check"><input type="checkbox" class="filter-rating" value="4.5"> ★ 4.5+</label>
-                <label class="filter-check"><input type="checkbox" class="filter-rating" value="4.0"> ★ 4.0+</label>
+            <div class="price-slider">
+                <input type="range" class="rating-range" id="mobile-rating-range" min="0" max="5" value="0" step="0.5">
+                <div class="price-slider__labels">
+                    <span>Any</span>
+                    <span class="price-slider__value" id="mobile-rating-value">Any</span>
+                    <span>★ 5.0</span>
+                </div>
             </div>
         </div>
     </div>
@@ -213,12 +217,14 @@
 
                     <div class="filter-group">
                         <div class="filter-group__label">Rating</div>
-                        <div class="filter-group__items">
-                            <label class="filter-check"><input type="checkbox" class="filter-rating" value="4.5"> ★ 4.5
-                                and above</label>
-                            <label class="filter-check"><input type="checkbox" class="filter-rating" value="4.0"> ★ 4.0
-                                and above</label>
-                        </div>
+                        <div class="price-slider">
+                <input type="range" class="rating-range" id="desktop-rating-range" min="0" max="5" value="0" step="0.5">
+                <div class="price-slider__labels">
+                    <span>Any</span>
+                    <span class="price-slider__value" id="desktop-rating-value">Any</span>
+                    <span>★ 5.0</span>
+                </div>
+            </div>
                     </div>
                 </aside>
 

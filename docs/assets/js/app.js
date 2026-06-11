@@ -245,14 +245,24 @@
       });
     });
 
-    // Rating filter
-    document.querySelectorAll('.filter-rating').forEach(cb => {
-      cb.addEventListener('change', () => {
-        const checked = Array.from(document.querySelectorAll('.filter-rating:checked')).map(el => parseFloat(el.value));
-        minRating = checked.length ? Math.min(...checked) : 0;
-        renderWithReset();
-      });
-    });
+    // Rating slider (sync desktop & mobile)
+    const desktopRatingSlider = document.getElementById('desktop-rating-range');
+    const mobileRatingSlider = document.getElementById('mobile-rating-range');
+    const desktopRatingLabel = document.getElementById('desktop-rating-value');
+    const mobileRatingLabel = document.getElementById('mobile-rating-value');
+
+    function updateRatingSlider(value) {
+      minRating = parseFloat(value);
+      const label = minRating === 0 ? 'Any' : `★ ${minRating.toFixed(1)}+`;
+      if (desktopRatingSlider) desktopRatingSlider.value = minRating;
+      if (mobileRatingSlider) mobileRatingSlider.value = minRating;
+      if (desktopRatingLabel) desktopRatingLabel.textContent = label;
+      if (mobileRatingLabel) mobileRatingLabel.textContent = label;
+      renderWithReset();
+    }
+
+    if (desktopRatingSlider) desktopRatingSlider.addEventListener('input', (e) => updateRatingSlider(e.target.value));
+    if (mobileRatingSlider) mobileRatingSlider.addEventListener('input', (e) => updateRatingSlider(e.target.value));
 
     // Search
     const searchInput = document.getElementById('listings-search');
