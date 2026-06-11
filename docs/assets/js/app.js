@@ -323,11 +323,6 @@
     const sortedSuburbs = Object.entries(suburbCounts)
       .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
 
-    // Find the desktop sidebar suburb container
-    const desktopSuburbItems = document.querySelector('.sidebar .filter-group__items');
-    // Find mobile suburb container (first filter-group__items in the drawer)
-    const mobileDrawer = document.querySelector('.filter-drawer');
-
     // Helper to build checkbox HTML
     function buildCheckboxes(suburbs) {
       return suburbs.map(([suburb, count]) => `
@@ -338,27 +333,15 @@
       `).join('');
     }
 
-    // Update desktop sidebar — find the Suburb filter group
-    if (desktopSuburbItems) {
-      const suburbGroup = document.querySelector('.sidebar [data-filter="suburb"] .filter-group__items') || desktopSuburbItems;
-      // Only update if we find suburb checkboxes
-      const existingSuburbCheck = suburbGroup.querySelector('.filter-suburb');
-      if (existingSuburbCheck) {
-        suburbGroup.innerHTML = buildCheckboxes(sortedSuburbs);
-      }
-    }
+    const checkboxHtml = buildCheckboxes(sortedSuburbs);
+
+    // Update desktop sidebar — find by data-filter attribute, independent of DOM order
+    const desktopSuburbItems = document.querySelector('.sidebar [data-filter="suburb"] .filter-group__items');
+    if (desktopSuburbItems) desktopSuburbItems.innerHTML = checkboxHtml;
 
     // Update mobile drawer
-    if (mobileDrawer) {
-      const mobileSuburbGroups = mobileDrawer.querySelectorAll('.filter-group__items');
-      // The suburb items are in the second filter-group (first is price slider now)
-      for (const group of mobileSuburbGroups) {
-        if (group.querySelector('.filter-suburb')) {
-          group.innerHTML = buildCheckboxes(sortedSuburbs);
-          break;
-        }
-      }
-    }
+    const mobileSuburbItems = document.querySelector('.filter-drawer [data-filter="suburb"] .filter-group__items');
+    if (mobileSuburbItems) mobileSuburbItems.innerHTML = checkboxHtml;
   }
 
   // ===== Mobile Filter Drawer =====
