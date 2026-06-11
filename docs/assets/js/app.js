@@ -430,7 +430,7 @@
         <div class="no-results">
           <div class="no-results__icon">😕</div>
           <h3>Dentist not found</h3>
-          <p>The profile you're looking for doesn't exist. <a href="index.html" style="color: var(--clr-teal);">Go back to listings</a>.</p>
+          <p>The profile you're looking for doesn't exist. <a href="/" style="color: var(--clr-teal);">Go back to listings</a>.</p>
         </div>
       `;
       return;
