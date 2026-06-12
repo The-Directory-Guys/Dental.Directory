@@ -48,17 +48,22 @@
         <div class="container">
             <h1 style="color:#fff; margin-bottom:.75rem;">Dentists Near Me</h1>
             <p id="nearby-subtitle" style="color:var(--clr-gray-300); max-width:500px; margin:0 auto;">Getting your location...</p>
-            <div id="nearby-controls" style="display:none; justify-content:center; align-items:center; gap:1.5rem; margin-top:1rem; flex-wrap:wrap;">
-                <label style="display:flex; align-items:center; gap:.5rem; color:#fff; font-size:.9rem; font-weight:500;">
-                    Radius:
-                    <select id="radius-select" style="padding:.3rem .75rem; border-radius:6px; border:1px solid rgba(255,255,255,.4); background:rgba(255,255,255,.15); color:#fff; font-size:.9rem; cursor:pointer;">
-                        <option value="5" selected style="background:#1e293b; color:#fff;">5 km</option>
-                        <option value="10" style="background:#1e293b; color:#fff;">10 km</option>
-                        <option value="20" style="background:#1e293b; color:#fff;">20 km</option>
-                        <option value="50" style="background:#1e293b; color:#fff;">50 km</option>
-                    </select>
-                </label>
-                <span id="nearby-count" style="color:rgba(255,255,255,.85); font-size:.9rem;"></span>
+            <div id="nearby-controls" style="display:none; flex-direction:column; align-items:center; gap:1rem; margin-top:1.25rem;">
+                <input id="nearby-search" type="text" placeholder="Search by name or service..."
+                    style="width:100%; max-width:480px; padding:.6rem 1rem; border-radius:8px; border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.12); color:#fff; font-size:.95rem; outline:none;"
+                    oninput="window._nearbyRender && window._nearbyRender()">
+                <div style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; justify-content:center;">
+                    <label style="display:flex; align-items:center; gap:.5rem; color:#fff; font-size:.9rem; font-weight:500;">
+                        Radius:
+                        <select id="radius-select" style="padding:.3rem .75rem; border-radius:6px; border:1px solid rgba(255,255,255,.4); background:rgba(255,255,255,.15); color:#fff; font-size:.9rem; cursor:pointer;">
+                            <option value="5" selected style="background:#1e293b; color:#fff;">5 km</option>
+                            <option value="10" style="background:#1e293b; color:#fff;">10 km</option>
+                            <option value="20" style="background:#1e293b; color:#fff;">20 km</option>
+                            <option value="50" style="background:#1e293b; color:#fff;">50 km</option>
+                        </select>
+                    </label>
+                    <span id="nearby-count" style="color:rgba(255,255,255,.85); font-size:.9rem;"></span>
+                </div>
             </div>
         </div>
     </section>
@@ -81,15 +86,16 @@
     <script src="assets/js/app.js"></script>
     <script>
       (function () {
-        const grid      = document.getElementById('nearby-grid');
-        const mapEl     = document.getElementById('nearby-map');
-        const subtitle  = document.getElementById('nearby-subtitle');
-        const controls  = document.getElementById('nearby-controls');
-        const countEl   = document.getElementById('nearby-count');
-        const emptyEl   = document.getElementById('nearby-empty');
-        const errorEl   = document.getElementById('nearby-error');
-        const errorMsg  = document.getElementById('nearby-error-msg');
-        const radiusSel = document.getElementById('radius-select');
+        const grid        = document.getElementById('nearby-grid');
+        const mapEl       = document.getElementById('nearby-map');
+        const subtitle    = document.getElementById('nearby-subtitle');
+        const controls    = document.getElementById('nearby-controls');
+        const countEl     = document.getElementById('nearby-count');
+        const emptyEl     = document.getElementById('nearby-empty');
+        const errorEl     = document.getElementById('nearby-error');
+        const errorMsg    = document.getElementById('nearby-error-msg');
+        const radiusSel   = document.getElementById('radius-select');
+        const searchInput = document.getElementById('nearby-search');
 
         let userLat, userLng, allClinics = [];
         let map, clinicMarkers = [], radiusCircle;
@@ -186,9 +192,14 @@
 
         function render() {
           const radius = parseInt(radiusSel.value, 10);
+          const q = (searchInput ? searchInput.value : '').toLowerCase().trim();
           const nearby = allClinics
             .map(c => ({ ...c, distKm: haversineKm(userLat, userLng, c.lat, c.lng) }))
             .filter(c => c.distKm <= radius)
+            .filter(c => {
+              if (!q) return true;
+              return c.name.toLowerCase().includes(q) || c.services.some(s => s.toLowerCase().includes(q));
+            })
             .sort((a, b) => a.distKm - b.distKm);
 
           updateMap(nearby, radius);
@@ -241,6 +252,10 @@
           }
           subtitle.textContent = '';
           controls.style.display = 'flex';
+          window._nearbyRender = render;
+          // Pre-fill search from ?q= param
+          const qParam = params.get('q');
+          if (qParam && searchInput) searchInput.value = qParam;
           initMap();
           radiusSel.addEventListener('change', render);
           render();

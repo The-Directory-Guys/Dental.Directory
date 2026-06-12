@@ -680,7 +680,9 @@
       navigator.geolocation.getCurrentPosition(
         pos => {
           const { latitude: lat, longitude: lng } = pos.coords;
-          window.location.href = `nearby.html?lat=${lat}&lng=${lng}`;
+          const q = heroSearchInput ? heroSearchInput.value.trim() : '';
+          const qParam = q ? `&q=${encodeURIComponent(q)}` : '';
+          window.location.href = `nearby.html?lat=${lat}&lng=${lng}${qParam}`;
         },
         () => {
           nearMeBtn.disabled = false;
