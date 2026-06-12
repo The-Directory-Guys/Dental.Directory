@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dentists Near Me — Dental Compare</title>
+    <meta name="description" content="Find dental practices near your location in New Zealand.">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4J758VJQVX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4J758VJQVX');
+    </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container header__inner">
+            <a href="/" class="logo">
+                <img src="assets/images/logo.png" alt="Dental Compare" class="logo__img">
+            </a>
+            <nav class="nav" id="main-nav">
+                <a href="/" class="nav__link">Home</a>
+                <a href="/#locations" class="nav__link">All Regions</a>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <section class="region-hero" style="padding: var(--sp-10) 0 var(--sp-8);">
+        <div class="container">
+            <h1 class="region-hero__title">Dentists Near Me</h1>
+            <p class="region-hero__subtitle" id="nearby-subtitle">Finding your location...</p>
+            <div class="nearby-controls" id="nearby-controls" style="display:none;">
+                <label class="nearby-radius-label">
+                    Search radius:
+                    <select class="nearby-radius-select" id="radius-select">
+                        <option value="5">5 km</option>
+                        <option value="10" selected>10 km</option>
+                        <option value="20">20 km</option>
+                        <option value="50">50 km</option>
+                    </select>
+                </label>
+                <span class="nearby-count" id="nearby-count"></span>
+            </div>
+        </div>
+    </section>
+
+    <main class="container" style="padding-bottom: var(--sp-16);">
+        <div id="nearby-grid" class="dentist-grid"></div>
+        <div id="nearby-empty" style="display:none; text-align:center; padding: var(--sp-16) 0; color: var(--clr-gray-500);">
+            <p style="font-size:1.5rem; margin-bottom:var(--sp-4);">No clinics found within this radius.</p>
+            <p>Try increasing the search radius.</p>
+        </div>
+        <div id="nearby-error" style="display:none; text-align:center; padding: var(--sp-16) 0;">
+            <p style="font-size:1.2rem; color:var(--clr-gray-500); margin-bottom:var(--sp-6);" id="nearby-error-msg">Could not get your location.</p>
+            <a href="/" class="btn btn--primary">Browse by Region</a>
+        </div>
+    </main>
+
+    <script src="assets/js/supabase.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script>
+      (function () {
+        const grid      = document.getElementById('nearby-grid');
+        const subtitle  = document.getElementById('nearby-subtitle');
+        const controls  = document.getElementById('nearby-controls');
+        const countEl   = document.getElementById('nearby-count');
+        const emptyEl   = document.getElementById('nearby-empty');
+        const errorEl   = document.getElementById('nearby-error');
+        const errorMsg  = document.getElementById('nearby-error-msg');
+        const radiusSel = document.getElementById('radius-select');
+
+        let userLat, userLng, allClinics = [];
+
+        function haversineKm(lat1, lng1, lat2, lng2) {
+          const R = 6371;
+          const dLat = (lat2 - lat1) * Math.PI / 180;
+          const dLng = (lng2 - lng1) * Math.PI / 180;
+          const a = Math.sin(dLat/2)**2 +
+                    Math.cos(lat1 * Math.PI/180) * Math.cos(lat2 * Math.PI/180) * Math.sin(dLng/2)**2;
+          return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        }
+
+        function starsHTML(rating) {
+          const full  = Math.floor(rating);
+          const half  = rating % 1 >= 0.5 ? 1 : 0;
+          const empty = 5 - full - half;
+          return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(empty);
+        }
+
+        function cardHTML(d) {
+          const initials = d.name.split(' ').filter(w => w.length > 0).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+          const servicePills = (d.services || []).slice(0, 4).map(s => `<span class="pill pill--sm">${s}</span>`).join('');
+          const ratingDisplay = d.rating ? `<span class="stars">${starsHTML(d.rating)}</span> <strong>${d.rating}</strong>` : '<span style="color:var(--clr-gray-400)">No rating yet</span>';
+          const reviewText = d.reviewCount ? `💬 ${d.reviewCount} reviews` : '';
+          const profileLink = `dentist.html?id=${d.id}&region=${encodeURIComponent(d.region || '')}`;
+          const distBadge = `<span class="distance-badge">${d.distKm.toFixed(1)} km away</span>`;
+          const location = d.suburb ? `${d.suburb}${d.region ? ', ' + d.region : ''}` : (d.region || '');
+
+          return `
+            <article class="dentist-card">
+              <div class="dentist-card__avatar">${initials}</div>
+              <div class="dentist-card__body">
+                <h3 class="dentist-card__name">
+                  <a href="${profileLink}">${d.name}</a>
+                  ${distBadge}
+                </h3>
+                <div class="dentist-card__meta">
+                  <span class="dentist-card__meta-item">${ratingDisplay}</span>
+                  <span class="dentist-card__meta-item">📍 ${location}</span>
+                  ${reviewText ? `<span class="dentist-card__meta-item">${reviewText}</span>` : ''}
+                </div>
+                ${servicePills ? `<div class="dentist-card__services">${servicePills}</div>` : ''}
+                <div class="dentist-card__footer">
+                  <div></div>
+                  <a href="${profileLink}" class="btn btn--primary">View Profile</a>
+                </div>
+              </div>
+            </article>
+          `;
+        }
+
+        function render() {
+          const radius = parseInt(radiusSel.value, 10);
+          const nearby = allClinics
+            .map(c => ({ ...c, distKm: haversineKm(userLat, userLng, c.lat, c.lng) }))
+            .filter(c => c.distKm <= radius)
+            .sort((a, b) => a.distKm - b.distKm);
+
+          if (nearby.length === 0) {
+            grid.innerHTML = '';
+            emptyEl.style.display = 'block';
+            countEl.textContent = '';
+          } else {
+            emptyEl.style.display = 'none';
+            countEl.textContent = `${nearby.length} clinic${nearby.length !== 1 ? 's' : ''} found`;
+            grid.innerHTML = nearby.map(cardHTML).join('');
+          }
+        }
+
+        async function loadClinics() {
+          const PAGE = 1000;
+          const all = [];
+          for (let offset = 0; ; offset += PAGE) {
+            const url = `${SUPABASE_URL}/rest/v1/dental_clinics?select=id,name,suburb_town,region,lat,lng,rating,total_ratings,services,description&business_status=eq.OPERATIONAL&lat=not.is.null&limit=${PAGE}&offset=${offset}`;
+            const resp = await fetch(url, { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } });
+            const page = await resp.json();
+            all.push(...page);
+            if (page.length < PAGE) break;
+          }
+          return all.map(c => ({
+            id: c.id,
+            name: c.name || 'Unknown Clinic',
+            suburb: c.suburb_town || '',
+            region: c.region || '',
+            lat: c.lat,
+            lng: c.lng,
+            rating: c.rating || 0,
+            reviewCount: c.total_ratings || 0,
+            services: c.services ? c.services.split(',').map(s => s.trim()) : [],
+            description: c.description || '',
+          }));
+        }
+
+        function showError(msg) {
+          subtitle.textContent = '';
+          errorMsg.textContent = msg;
+          errorEl.style.display = 'block';
+        }
+
+        async function init(lat, lng) {
+          userLat = lat;
+          userLng = lng;
+          subtitle.textContent = 'Loading clinics...';
+
+          try {
+            allClinics = await loadClinics();
+          } catch (e) {
+            showError('Failed to load clinic data. Please try again.');
+            return;
+          }
+
+          subtitle.textContent = '';
+          controls.style.display = 'flex';
+          radiusSel.addEventListener('change', render);
+          render();
+        }
+
+        // Read lat/lng from URL params (passed from homepage)
+        const params = new URLSearchParams(window.location.search);
+        const lat = parseFloat(params.get('lat'));
+        const lng = parseFloat(params.get('lng'));
+
+        if (!isNaN(lat) && !isNaN(lng)) {
+          init(lat, lng);
+        } else {
+          // Ask for location
+          if (!navigator.geolocation) {
+            showError('Geolocation is not supported by your browser.');
+          } else {
+            navigator.geolocation.getCurrentPosition(
+              pos => init(pos.coords.latitude, pos.coords.longitude),
+              err => showError('Location access was denied. Please allow location access and try again.')
+            );
+          }
+        }
+      })();
+    </script>
+</body>
+</html>

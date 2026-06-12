@@ -666,6 +666,30 @@
     });
   }
 
+  // ===== Homepage: Near Me Button =====
+  const nearMeBtn = document.getElementById('near-me-btn');
+  const nearMeStatus = document.getElementById('near-me-status');
+  if (nearMeBtn) {
+    nearMeBtn.addEventListener('click', () => {
+      if (!navigator.geolocation) {
+        nearMeStatus.textContent = 'Geolocation not supported by your browser.';
+        return;
+      }
+      nearMeBtn.disabled = true;
+      nearMeStatus.textContent = 'Getting your location...';
+      navigator.geolocation.getCurrentPosition(
+        pos => {
+          const { latitude: lat, longitude: lng } = pos.coords;
+          window.location.href = `nearby.html?lat=${lat}&lng=${lng}`;
+        },
+        () => {
+          nearMeBtn.disabled = false;
+          nearMeStatus.textContent = 'Location access denied. Please allow location access.';
+        }
+      );
+    });
+  }
+
   // ===== Homepage: Dynamic Region Counts =====
   const locationCards = document.querySelectorAll('.location-card[data-region]');
   if (locationCards.length > 0) {

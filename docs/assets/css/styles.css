@@ -372,6 +372,91 @@ h4 {
     opacity: .9;
 }
 
+/* Near Me */
+.hero-nearby {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+    margin-top: var(--sp-4);
+    justify-content: center;
+}
+
+.hero-nearby__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: var(--sp-3) var(--sp-6);
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: var(--radius-full);
+    background: rgba(255,255,255,0.12);
+    color: var(--clr-white);
+    font-weight: 600;
+    font-size: var(--fs-sm);
+    cursor: pointer;
+    transition: background var(--transition), border-color var(--transition);
+}
+
+.hero-nearby__btn:hover:not(:disabled) {
+    background: rgba(255,255,255,0.22);
+    border-color: rgba(255,255,255,0.8);
+}
+
+.hero-nearby__btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.hero-nearby__hint {
+    font-size: var(--fs-sm);
+    color: rgba(255,255,255,0.75);
+}
+
+/* Distance badge on nearby cards */
+.distance-badge {
+    display: inline-block;
+    margin-left: var(--sp-2);
+    padding: 2px var(--sp-2);
+    background: var(--clr-teal);
+    color: #fff;
+    border-radius: var(--radius-full);
+    font-size: 0.7rem;
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+/* Nearby page controls */
+.nearby-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-6);
+    margin-top: var(--sp-4);
+    flex-wrap: wrap;
+}
+
+.nearby-radius-label {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    color: var(--clr-white);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+}
+
+.nearby-radius-select {
+    padding: var(--sp-2) var(--sp-4);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.15);
+    color: var(--clr-white);
+    font-size: var(--fs-sm);
+    cursor: pointer;
+}
+
+.nearby-count {
+    color: rgba(255,255,255,0.85);
+    font-size: var(--fs-sm);
+}
+
 /* Stats strip */
 .hero-stats {
     display: flex;
