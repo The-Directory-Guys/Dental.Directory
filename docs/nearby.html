@@ -445,9 +445,18 @@
           layout.style.display = '';
           mobileBtn.style.display = '';
 
-          // Pre-fill search from ?q=
+          // Pre-fill search from ?q=; if it matches a service, tick that instead
           const q = params.get('q');
-          if (q && searchInput) searchInput.value = q;
+          if (q && searchInput) {
+            const matchingService = Array.from(document.querySelectorAll('.filter-service'))
+              .find(cb => cb.value.toLowerCase() === q.toLowerCase());
+            if (matchingService) {
+              document.querySelectorAll(`.filter-service[value="${matchingService.value}"]`).forEach(cb => cb.checked = true);
+              activeServices = [matchingService.value];
+            } else {
+              searchInput.value = q;
+            }
+          }
 
           initMap();
 

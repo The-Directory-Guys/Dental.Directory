@@ -286,6 +286,17 @@
       if (urlQ) {
         searchInput.value = urlQ;
         searchQuery = urlQ;
+        // If the query matches a service checkbox exactly, tick it and clear the text search
+        const matchingService = Array.from(document.querySelectorAll('.filter-service'))
+          .find(cb => cb.value.toLowerCase() === urlQ.toLowerCase());
+        if (matchingService) {
+          matchingService.checked = true;
+          // Sync the paired mobile/desktop checkbox too
+          document.querySelectorAll(`.filter-service[value="${matchingService.value}"]`).forEach(cb => cb.checked = true);
+          activeServices = [matchingService.value];
+          searchInput.value = '';
+          searchQuery = '';
+        }
       }
     }
 
