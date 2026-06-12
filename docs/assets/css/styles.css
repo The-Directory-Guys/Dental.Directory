@@ -341,13 +341,18 @@ h4 {
 }
 
 .hero-search__select {
-    padding: var(--sp-4) var(--sp-5);
+    padding: var(--sp-4) 2.5rem var(--sp-4) var(--sp-5);
     border: none;
     border-left: 1px solid var(--clr-gray-200);
     font-family: var(--ff-body);
     font-size: var(--fs-sm);
     color: var(--clr-gray-600);
-    background: var(--clr-gray-50);
+    background-color: var(--clr-gray-50);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath stroke='%236b7280' stroke-width='1.5' fill='none' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    appearance: none;
+    -webkit-appearance: none;
     cursor: pointer;
     outline: none;
     min-width: 150px;
