@@ -372,7 +372,7 @@
           // Second pass: apply all filters
           let filtered = inRadius.filter(c => {
             if (q && !c.name.toLowerCase().includes(q) && !c.services.some(s => s.toLowerCase().includes(q))) return false;
-            if (activeServices.length && !activeServices.some(s => c.services.includes(s))) return false;
+            if (activeServices.length && !activeServices.every(s => c.services.includes(s))) return false;
             if (activeSuburbs.length && !activeSuburbs.includes(c.suburb)) return false;
             if (c.rating < minRating) return false;
             if (maxPrice !== Infinity) {
@@ -467,7 +467,11 @@
 
           document.querySelectorAll('.filter-service').forEach(cb =>
             cb.addEventListener('change', () => {
-              activeServices = Array.from(document.querySelectorAll('.filter-service:checked')).map(e => e.value);
+              // Sync paired mobile/desktop checkbox to the same state
+              document.querySelectorAll(`.filter-service[value="${cb.value}"]`).forEach(paired => {
+                paired.checked = cb.checked;
+              });
+              activeServices = [...new Set(Array.from(document.querySelectorAll('.filter-service:checked')).map(e => e.value))];
               render(false);
             })
           );

@@ -149,7 +149,7 @@
     function render() {
       let filtered = allDentists.filter(d => {
         if (activeSuburbs.length && !activeSuburbs.includes(d.suburb)) return false;
-        if (activeServices.length && !activeServices.some(s => d.services.includes(s))) return false;
+        if (activeServices.length && !activeServices.every(s => d.services.includes(s))) return false;
         if (d.rating < minRating) return false;
         if (searchQuery) {
           const q = searchQuery.toLowerCase();
@@ -212,7 +212,7 @@
       if (resultsCount) {
         const totalFiltered = allDentists.filter(d => {
           if (activeSuburbs.length && !activeSuburbs.includes(d.suburb)) return false;
-          if (activeServices.length && !activeServices.some(s => d.services.includes(s))) return false;
+          if (activeServices.length && !activeServices.every(s => d.services.includes(s))) return false;
           if (d.rating < minRating) return false;
           if (searchQuery) {
           const q = searchQuery.toLowerCase();
@@ -250,7 +250,11 @@
     // Service filters
     document.querySelectorAll('.filter-service').forEach(cb => {
       cb.addEventListener('change', () => {
-        activeServices = Array.from(document.querySelectorAll('.filter-service:checked')).map(el => el.value);
+        // Sync paired mobile/desktop checkbox to the same state
+        document.querySelectorAll(`.filter-service[value="${cb.value}"]`).forEach(paired => {
+          paired.checked = cb.checked;
+        });
+        activeServices = [...new Set(Array.from(document.querySelectorAll('.filter-service:checked')).map(el => el.value))];
         renderWithReset();
       });
     });
