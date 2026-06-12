@@ -7,7 +7,7 @@
     <title>Dentists Near Me — Dental Compare</title>
     <meta name="description" content="Find dental practices near your location in New Zealand.">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4J758VJQVX"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -23,9 +23,7 @@
         margin-bottom: var(--sp-8);
         z-index: 0;
       }
-      @media (max-width: 640px) {
-        #nearby-map { height: 280px; }
-      }
+      @media (max-width: 640px) { #nearby-map { height: 280px; } }
     </style>
 </head>
 
@@ -46,29 +44,29 @@
         </div>
     </header>
 
-    <section class="region-hero" style="padding: var(--sp-10) 0 var(--sp-8);">
+    <section style="background: linear-gradient(135deg, var(--clr-navy) 0%, var(--clr-navy-light) 100%); color:#fff; padding: 3rem 0 2rem; text-align:center;">
         <div class="container">
-            <h1 class="region-hero__title">Dentists Near Me</h1>
-            <p class="region-hero__subtitle" id="nearby-subtitle">Finding your location...</p>
-            <div class="nearby-controls" id="nearby-controls" style="display:none;">
-                <label class="nearby-radius-label">
-                    Search radius:
-                    <select class="nearby-radius-select" id="radius-select">
+            <h1 style="color:#fff; margin-bottom:.75rem;">Dentists Near Me</h1>
+            <p id="nearby-subtitle" style="color:var(--clr-gray-300); max-width:500px; margin:0 auto;">Getting your location...</p>
+            <div id="nearby-controls" style="display:none; justify-content:center; align-items:center; gap:1.5rem; margin-top:1rem; flex-wrap:wrap;">
+                <label style="display:flex; align-items:center; gap:.5rem; color:#fff; font-size:.9rem; font-weight:500;">
+                    Radius:
+                    <select id="radius-select" style="padding:.3rem .75rem; border-radius:6px; border:1px solid rgba(255,255,255,.4); background:rgba(255,255,255,.15); color:#fff; font-size:.9rem; cursor:pointer;">
                         <option value="5">5 km</option>
                         <option value="10" selected>10 km</option>
                         <option value="20">20 km</option>
                         <option value="50">50 km</option>
                     </select>
                 </label>
-                <span class="nearby-count" id="nearby-count"></span>
+                <span id="nearby-count" style="color:rgba(255,255,255,.85); font-size:.9rem;"></span>
             </div>
         </div>
     </section>
 
-    <main class="container" style="padding-bottom: var(--sp-16);">
+    <main class="container" style="padding-top: var(--sp-8); padding-bottom: var(--sp-16);">
         <div id="nearby-map" style="display:none;"></div>
         <div id="nearby-grid" class="dentist-grid"></div>
-        <div id="nearby-empty" style="display:none; text-align:center; padding: var(--sp-16) 0; color: var(--clr-gray-500);">
+        <div id="nearby-empty" style="display:none; text-align:center; padding: var(--sp-16) 0; color:var(--clr-gray-500);">
             <p style="font-size:1.5rem; margin-bottom:var(--sp-4);">No clinics found within this radius.</p>
             <p>Try increasing the search radius.</p>
         </div>
@@ -78,7 +76,7 @@
         </div>
     </main>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLcE=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="assets/js/supabase.js"></script>
     <script src="assets/js/app.js"></script>
     <script>
@@ -94,7 +92,7 @@
         const radiusSel = document.getElementById('radius-select');
 
         let userLat, userLng, allClinics = [];
-        let map, userMarker, clinicMarkers = [], radiusCircle;
+        let map, clinicMarkers = [], radiusCircle;
 
         function haversineKm(lat1, lng1, lat2, lng2) {
           const R = 6371;
@@ -106,42 +104,37 @@
         }
 
         function starsHTML(rating) {
-          const full  = Math.floor(rating);
-          const half  = rating % 1 >= 0.5 ? 1 : 0;
-          const empty = 5 - full - half;
-          return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(empty);
+          const full = Math.floor(rating), half = rating % 1 >= 0.5 ? 1 : 0;
+          return '★'.repeat(full) + (half ? '★' : '') + '☆'.repeat(5 - full - half);
         }
 
         function cardHTML(d) {
-          const initials = d.name.split(' ').filter(w => w.length > 0).map(w => w[0]).join('').slice(0, 2).toUpperCase();
-          const servicePills = (d.services || []).slice(0, 4).map(s => `<span class="pill pill--sm">${s}</span>`).join('');
-          const ratingDisplay = d.rating ? `<span class="stars">${starsHTML(d.rating)}</span> <strong>${d.rating}</strong>` : '<span style="color:var(--clr-gray-400)">No rating yet</span>';
-          const reviewText = d.reviewCount ? `💬 ${d.reviewCount} reviews` : '';
-          const profileLink = `dentist.html?id=${d.id}&region=${encodeURIComponent(d.region || '')}`;
-          const distBadge = `<span class="distance-badge">${d.distKm.toFixed(1)} km away</span>`;
-          const location = d.suburb ? `${d.suburb}${d.region ? ', ' + d.region : ''}` : (d.region || '');
-
+          const initials = d.name.split(' ').filter(w => w).map(w => w[0]).join('').slice(0,2).toUpperCase();
+          const pills = (d.services||[]).slice(0,4).map(s=>`<span class="pill pill--sm">${s}</span>`).join('');
+          const rating = d.rating ? `<span class="stars">${starsHTML(d.rating)}</span> <strong>${d.rating}</strong>` : '<span style="color:var(--clr-gray-400)">No rating yet</span>';
+          const reviews = d.reviewCount ? `💬 ${d.reviewCount} reviews` : '';
+          const loc = d.suburb ? `${d.suburb}, ${d.region}` : d.region;
+          const link = `dentist.html?id=${d.id}&region=${encodeURIComponent(d.region||'')}`;
           return `
             <article class="dentist-card">
               <div class="dentist-card__avatar">${initials}</div>
               <div class="dentist-card__body">
                 <h3 class="dentist-card__name">
-                  <a href="${profileLink}">${d.name}</a>
-                  ${distBadge}
+                  <a href="${link}">${d.name}</a>
+                  <span class="distance-badge">${d.distKm.toFixed(1)} km</span>
                 </h3>
                 <div class="dentist-card__meta">
-                  <span class="dentist-card__meta-item">${ratingDisplay}</span>
-                  <span class="dentist-card__meta-item">📍 ${location}</span>
-                  ${reviewText ? `<span class="dentist-card__meta-item">${reviewText}</span>` : ''}
+                  <span class="dentist-card__meta-item">${rating}</span>
+                  <span class="dentist-card__meta-item">📍 ${loc}</span>
+                  ${reviews ? `<span class="dentist-card__meta-item">${reviews}</span>` : ''}
                 </div>
-                ${servicePills ? `<div class="dentist-card__services">${servicePills}</div>` : ''}
+                ${pills ? `<div class="dentist-card__services">${pills}</div>` : ''}
                 <div class="dentist-card__footer">
                   <div></div>
-                  <a href="${profileLink}" class="btn btn--primary">View Profile</a>
+                  <a href="${link}" class="btn btn--primary">View Profile</a>
                 </div>
               </div>
-            </article>
-          `;
+            </article>`;
         }
 
         function initMap() {
@@ -151,60 +144,40 @@
             attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             maxZoom: 19
           }).addTo(map);
-
-          // User location marker
-          userMarker = L.circleMarker([userLat, userLng], {
-            radius: 10,
-            fillColor: '#2563eb',
-            color: '#fff',
-            weight: 3,
-            fillOpacity: 1
+          L.circleMarker([userLat, userLng], {
+            radius: 10, fillColor: '#2563eb', color: '#fff', weight: 3, fillOpacity: 1
           }).addTo(map).bindPopup('<strong>Your location</strong>');
         }
 
         function updateMap(nearby, radiusKm) {
-          // Remove old clinic markers and radius circle
           clinicMarkers.forEach(m => map.removeLayer(m));
           clinicMarkers = [];
           if (radiusCircle) map.removeLayer(radiusCircle);
 
-          // Radius circle
           radiusCircle = L.circle([userLat, userLng], {
             radius: radiusKm * 1000,
-            color: '#0d9488',
-            fillColor: '#0d9488',
-            fillOpacity: 0.06,
-            weight: 1.5,
-            dashArray: '6 4'
+            color: '#0d9488', fillColor: '#0d9488', fillOpacity: 0.06,
+            weight: 1.5, dashArray: '6 4'
           }).addTo(map);
 
-          // Clinic markers
-          const clinicIcon = L.divIcon({
+          const icon = L.divIcon({
             className: '',
-            html: '<div style="width:28px;height:28px;background:#0d9488;border:3px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>',
-            iconSize: [28, 28],
-            iconAnchor: [14, 14],
-            popupAnchor: [0, -16]
+            html: '<div style="width:26px;height:26px;background:#0d9488;border:3px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;"><svg width="11" height="11" viewBox="0 0 24 24" fill="white"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>',
+            iconSize: [26, 26], iconAnchor: [13, 13], popupAnchor: [0, -16]
           });
 
           nearby.forEach(c => {
-            const profileLink = `dentist.html?id=${c.id}&region=${encodeURIComponent(c.region || '')}`;
-            const ratingLine = c.rating ? `<span style="color:#f59e0b">★</span> ${c.rating}` : 'No rating';
-            const popup = `
-              <div style="min-width:160px;">
-                <strong style="font-size:0.9rem;">${c.name}</strong><br>
-                <span style="font-size:0.78rem;color:#6b7280;">📍 ${c.suburb || c.region}</span><br>
-                <span style="font-size:0.78rem;">${ratingLine}</span><br>
-                <span style="font-size:0.78rem;color:#0d9488;font-weight:600;">${c.distKm.toFixed(1)} km away</span><br>
-                <a href="${profileLink}" style="font-size:0.78rem;color:#2563eb;">View Profile →</a>
-              </div>`;
-            const marker = L.marker([c.lat, c.lng], { icon: clinicIcon })
-              .addTo(map)
-              .bindPopup(popup);
-            clinicMarkers.push(marker);
+            const link = `dentist.html?id=${c.id}&region=${encodeURIComponent(c.region||'')}`;
+            const popup = `<div style="min-width:150px;line-height:1.6;">
+              <strong style="font-size:.88rem;">${c.name}</strong><br>
+              <span style="font-size:.76rem;color:#6b7280;">📍 ${c.suburb||c.region}</span><br>
+              ${c.rating ? `<span style="font-size:.76rem;color:#f59e0b;">★</span><span style="font-size:.76rem;"> ${c.rating}</span><br>` : ''}
+              <span style="font-size:.76rem;color:#0d9488;font-weight:600;">${c.distKm.toFixed(1)} km away</span><br>
+              <a href="${link}" style="font-size:.76rem;color:#2563eb;">View Profile →</a>
+            </div>`;
+            clinicMarkers.push(L.marker([c.lat, c.lng], { icon }).addTo(map).bindPopup(popup));
           });
 
-          // Fit map to show all markers + user
           if (nearby.length > 0) {
             const bounds = L.latLngBounds([[userLat, userLng], ...nearby.map(c => [c.lat, c.lng])]);
             map.fitBounds(bounds, { padding: [40, 40] });
@@ -235,21 +208,18 @@
           const PAGE = 1000;
           const all = [];
           for (let offset = 0; ; offset += PAGE) {
-            const url = `${SUPABASE_URL}/rest/v1/dental_clinics?select=id,name,suburb_town,region,lat,lng,rating,total_ratings,services,description&business_status=eq.OPERATIONAL&lat=not.is.null&limit=${PAGE}&offset=${offset}`;
-            const resp = await fetch(url, { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } });
+            const url = `${SUPABASE_URL}/rest/v1/dental_clinics?select=id,name,suburb_town,region,lat,lng,rating,total_ratings,services&business_status=eq.OPERATIONAL&lat=not.is.null&limit=${PAGE}&offset=${offset}`;
+            const resp = await fetch(url, { headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` } });
+            if (!resp.ok) throw new Error(`Supabase ${resp.status}`);
             const page = await resp.json();
             all.push(...page);
             if (page.length < PAGE) break;
           }
           return all.map(c => ({
-            id: c.id,
-            name: c.name || 'Unknown Clinic',
-            suburb: c.suburb_town || '',
-            region: c.region || '',
-            lat: c.lat,
-            lng: c.lng,
-            rating: c.rating || 0,
-            reviewCount: c.total_ratings || 0,
+            id: c.id, name: c.name || 'Unknown Clinic',
+            suburb: c.suburb_town || '', region: c.region || '',
+            lat: c.lat, lng: c.lng,
+            rating: c.rating || 0, reviewCount: c.total_ratings || 0,
             services: c.services ? c.services.split(',').map(s => s.trim()) : [],
           }));
         }
@@ -261,17 +231,14 @@
         }
 
         async function init(lat, lng) {
-          userLat = lat;
-          userLng = lng;
+          userLat = lat; userLng = lng;
           subtitle.textContent = 'Loading clinics...';
-
           try {
             allClinics = await loadClinics();
           } catch (e) {
-            showError('Failed to load clinic data. Please try again.');
+            showError('Failed to load clinic data. Please try again later.');
             return;
           }
-
           subtitle.textContent = '';
           controls.style.display = 'flex';
           initMap();
@@ -285,15 +252,13 @@
 
         if (!isNaN(lat) && !isNaN(lng)) {
           init(lat, lng);
+        } else if (!navigator.geolocation) {
+          showError('Geolocation is not supported by your browser.');
         } else {
-          if (!navigator.geolocation) {
-            showError('Geolocation is not supported by your browser.');
-          } else {
-            navigator.geolocation.getCurrentPosition(
-              pos => init(pos.coords.latitude, pos.coords.longitude),
-              () => showError('Location access was denied. Please allow location access and try again.')
-            );
-          }
+          navigator.geolocation.getCurrentPosition(
+            pos => init(pos.coords.latitude, pos.coords.longitude),
+            () => showError('Location access was denied. Please allow location access and try again.')
+          );
         }
       })();
     </script>
