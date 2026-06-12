@@ -7,6 +7,7 @@
     <title>Dentists Near Me — Dental Compare</title>
     <meta name="description" content="Find dental practices near your location in New Zealand.">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4J758VJQVX"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -14,6 +15,18 @@
       gtag('js', new Date());
       gtag('config', 'G-4J758VJQVX');
     </script>
+    <style>
+      #nearby-map {
+        width: 100%;
+        height: 420px;
+        border-radius: var(--radius-lg);
+        margin-bottom: var(--sp-8);
+        z-index: 0;
+      }
+      @media (max-width: 640px) {
+        #nearby-map { height: 280px; }
+      }
+    </style>
 </head>
 
 <body>
@@ -53,6 +66,7 @@
     </section>
 
     <main class="container" style="padding-bottom: var(--sp-16);">
+        <div id="nearby-map" style="display:none;"></div>
         <div id="nearby-grid" class="dentist-grid"></div>
         <div id="nearby-empty" style="display:none; text-align:center; padding: var(--sp-16) 0; color: var(--clr-gray-500);">
             <p style="font-size:1.5rem; margin-bottom:var(--sp-4);">No clinics found within this radius.</p>
@@ -64,11 +78,13 @@
         </div>
     </main>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLcE=" crossorigin=""></script>
     <script src="assets/js/supabase.js"></script>
     <script src="assets/js/app.js"></script>
     <script>
       (function () {
         const grid      = document.getElementById('nearby-grid');
+        const mapEl     = document.getElementById('nearby-map');
         const subtitle  = document.getElementById('nearby-subtitle');
         const controls  = document.getElementById('nearby-controls');
         const countEl   = document.getElementById('nearby-count');
@@ -78,6 +94,7 @@
         const radiusSel = document.getElementById('radius-select');
 
         let userLat, userLng, allClinics = [];
+        let map, userMarker, clinicMarkers = [], radiusCircle;
 
         function haversineKm(lat1, lng1, lat2, lng2) {
           const R = 6371;
@@ -127,12 +144,81 @@
           `;
         }
 
+        function initMap() {
+          mapEl.style.display = 'block';
+          map = L.map('nearby-map').setView([userLat, userLng], 13);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            maxZoom: 19
+          }).addTo(map);
+
+          // User location marker
+          userMarker = L.circleMarker([userLat, userLng], {
+            radius: 10,
+            fillColor: '#2563eb',
+            color: '#fff',
+            weight: 3,
+            fillOpacity: 1
+          }).addTo(map).bindPopup('<strong>Your location</strong>');
+        }
+
+        function updateMap(nearby, radiusKm) {
+          // Remove old clinic markers and radius circle
+          clinicMarkers.forEach(m => map.removeLayer(m));
+          clinicMarkers = [];
+          if (radiusCircle) map.removeLayer(radiusCircle);
+
+          // Radius circle
+          radiusCircle = L.circle([userLat, userLng], {
+            radius: radiusKm * 1000,
+            color: '#0d9488',
+            fillColor: '#0d9488',
+            fillOpacity: 0.06,
+            weight: 1.5,
+            dashArray: '6 4'
+          }).addTo(map);
+
+          // Clinic markers
+          const clinicIcon = L.divIcon({
+            className: '',
+            html: '<div style="width:28px;height:28px;background:#0d9488;border:3px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>',
+            iconSize: [28, 28],
+            iconAnchor: [14, 14],
+            popupAnchor: [0, -16]
+          });
+
+          nearby.forEach(c => {
+            const profileLink = `dentist.html?id=${c.id}&region=${encodeURIComponent(c.region || '')}`;
+            const ratingLine = c.rating ? `<span style="color:#f59e0b">★</span> ${c.rating}` : 'No rating';
+            const popup = `
+              <div style="min-width:160px;">
+                <strong style="font-size:0.9rem;">${c.name}</strong><br>
+                <span style="font-size:0.78rem;color:#6b7280;">📍 ${c.suburb || c.region}</span><br>
+                <span style="font-size:0.78rem;">${ratingLine}</span><br>
+                <span style="font-size:0.78rem;color:#0d9488;font-weight:600;">${c.distKm.toFixed(1)} km away</span><br>
+                <a href="${profileLink}" style="font-size:0.78rem;color:#2563eb;">View Profile →</a>
+              </div>`;
+            const marker = L.marker([c.lat, c.lng], { icon: clinicIcon })
+              .addTo(map)
+              .bindPopup(popup);
+            clinicMarkers.push(marker);
+          });
+
+          // Fit map to show all markers + user
+          if (nearby.length > 0) {
+            const bounds = L.latLngBounds([[userLat, userLng], ...nearby.map(c => [c.lat, c.lng])]);
+            map.fitBounds(bounds, { padding: [40, 40] });
+          }
+        }
+
         function render() {
           const radius = parseInt(radiusSel.value, 10);
           const nearby = allClinics
             .map(c => ({ ...c, distKm: haversineKm(userLat, userLng, c.lat, c.lng) }))
             .filter(c => c.distKm <= radius)
             .sort((a, b) => a.distKm - b.distKm);
+
+          updateMap(nearby, radius);
 
           if (nearby.length === 0) {
             grid.innerHTML = '';
@@ -165,7 +251,6 @@
             rating: c.rating || 0,
             reviewCount: c.total_ratings || 0,
             services: c.services ? c.services.split(',').map(s => s.trim()) : [],
-            description: c.description || '',
           }));
         }
 
@@ -189,11 +274,11 @@
 
           subtitle.textContent = '';
           controls.style.display = 'flex';
+          initMap();
           radiusSel.addEventListener('change', render);
           render();
         }
 
-        // Read lat/lng from URL params (passed from homepage)
         const params = new URLSearchParams(window.location.search);
         const lat = parseFloat(params.get('lat'));
         const lng = parseFloat(params.get('lng'));
@@ -201,13 +286,12 @@
         if (!isNaN(lat) && !isNaN(lng)) {
           init(lat, lng);
         } else {
-          // Ask for location
           if (!navigator.geolocation) {
             showError('Geolocation is not supported by your browser.');
           } else {
             navigator.geolocation.getCurrentPosition(
               pos => init(pos.coords.latitude, pos.coords.longitude),
-              err => showError('Location access was denied. Please allow location access and try again.')
+              () => showError('Location access was denied. Please allow location access and try again.')
             );
           }
         }
