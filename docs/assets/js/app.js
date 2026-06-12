@@ -343,7 +343,7 @@
       return suburbs.map(([suburb, count]) => `
         <label class="filter-check">
           <input type="checkbox" class="filter-suburb" value="${suburb}">
-          ${suburb} <span class="filter-check__count">${count}</span>
+          <span>${suburb} <span class="filter-check__count">${count}</span></span>
         </label>
       `).join('');
     }

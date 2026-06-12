@@ -298,7 +298,7 @@
           clinicsInRadius.forEach(c => { if (c.suburb) counts[c.suburb] = (counts[c.suburb] || 0) + 1; });
           const sorted = Object.entries(counts).sort((a, b) => a[0].localeCompare(b[0]));
           const html = sorted.map(([s, n]) =>
-            `<label class="filter-check"><input type="checkbox" class="filter-suburb" value="${s}"> ${s} <span style="color:var(--clr-gray-400);font-size:.8em">(${n})</span></label>`
+            `<label class="filter-check"><input type="checkbox" class="filter-suburb" value="${s}"><span>${s} <span class="filter-check__count">(${n})</span></span></label>`
           ).join('');
           document.querySelectorAll('[data-filter="suburb"] .filter-group__items').forEach(el => {
             el.innerHTML = html;
