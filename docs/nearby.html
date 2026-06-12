@@ -18,12 +18,12 @@
     <style>
       #nearby-map {
         width: 100%;
-        height: 420px;
+        height: 380px;
         border-radius: var(--radius-lg);
-        margin-bottom: var(--sp-8);
+        margin-bottom: var(--sp-6);
         z-index: 0;
       }
-      @media (max-width: 640px) { #nearby-map { height: 280px; } }
+      @media (max-width: 640px) { #nearby-map { height: 260px; } }
     </style>
 </head>
 
@@ -44,42 +44,175 @@
         </div>
     </header>
 
+    <!-- Hero -->
     <section style="background: linear-gradient(135deg, var(--clr-navy) 0%, var(--clr-navy-light) 100%); color:#fff; padding: 3rem 0 2rem; text-align:center;">
         <div class="container">
             <h1 style="color:#fff; margin-bottom:.75rem;">Dentists Near Me</h1>
-            <p id="nearby-subtitle" style="color:var(--clr-gray-300); max-width:500px; margin:0 auto;">Getting your location...</p>
-            <div id="nearby-controls" style="display:none; flex-direction:column; align-items:center; gap:1rem; margin-top:1.25rem;">
-                <input id="nearby-search" type="text" placeholder="Search by name or service..."
-                    style="width:100%; max-width:480px; padding:.6rem 1rem; border-radius:8px; border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.12); color:#fff; font-size:.95rem; outline:none;"
-                    oninput="window._nearbyRender && window._nearbyRender()">
-                <div style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; justify-content:center;">
-                    <label style="display:flex; align-items:center; gap:.5rem; color:#fff; font-size:.9rem; font-weight:500;">
-                        Radius:
-                        <select id="radius-select" style="padding:.3rem .75rem; border-radius:6px; border:1px solid rgba(255,255,255,.4); background:rgba(255,255,255,.15); color:#fff; font-size:.9rem; cursor:pointer;">
-                            <option value="5" selected style="background:#1e293b; color:#fff;">5 km</option>
-                            <option value="10" style="background:#1e293b; color:#fff;">10 km</option>
-                            <option value="20" style="background:#1e293b; color:#fff;">20 km</option>
-                            <option value="50" style="background:#1e293b; color:#fff;">50 km</option>
-                        </select>
-                    </label>
-                    <span id="nearby-count" style="color:rgba(255,255,255,.85); font-size:.9rem;"></span>
-                </div>
+            <p id="nearby-subtitle" style="color:var(--clr-gray-300); max-width:500px; margin:0 auto 1rem;">Getting your location...</p>
+            <div id="radius-row" style="display:none; justify-content:center; align-items:center; gap:1rem;">
+                <label style="display:flex; align-items:center; gap:.5rem; color:#fff; font-size:.9rem; font-weight:500;">
+                    Radius:
+                    <select id="radius-select" style="padding:.3rem .75rem; border-radius:6px; border:1px solid rgba(255,255,255,.4); background:rgba(255,255,255,.15); color:#fff; font-size:.9rem; cursor:pointer;">
+                        <option value="5" selected style="background:#1e293b; color:#fff;">5 km</option>
+                        <option value="10" style="background:#1e293b; color:#fff;">10 km</option>
+                        <option value="20" style="background:#1e293b; color:#fff;">20 km</option>
+                        <option value="50" style="background:#1e293b; color:#fff;">50 km</option>
+                    </select>
+                </label>
             </div>
         </div>
     </section>
 
-    <main class="container" style="padding-top: var(--sp-8); padding-bottom: var(--sp-16);">
-        <div id="nearby-map" style="display:none;"></div>
-        <div id="nearby-grid" class="dentist-grid"></div>
-        <div id="nearby-empty" style="display:none; text-align:center; padding: var(--sp-16) 0; color:var(--clr-gray-500);">
-            <p style="font-size:1.5rem; margin-bottom:var(--sp-4);">No clinics found within this radius.</p>
-            <p>Try increasing the search radius.</p>
+    <!-- Mobile Filter Button -->
+    <div class="container" style="padding-top: 1.5rem;">
+        <button class="btn btn--outline mobile-filter-btn" id="mobile-filter-btn" style="display:none;">☰ Filters</button>
+    </div>
+
+    <!-- Mobile Filter Overlay + Drawer -->
+    <div class="filter-overlay" id="filter-overlay"></div>
+    <div class="filter-drawer" id="filter-drawer">
+        <div class="filter-drawer__header">
+            <h3>Filters</h3>
+            <button class="filter-drawer__close" id="filter-drawer-close">✕</button>
         </div>
-        <div id="nearby-error" style="display:none; text-align:center; padding: var(--sp-16) 0;">
-            <p style="font-size:1.2rem; color:var(--clr-gray-500); margin-bottom:var(--sp-6);" id="nearby-error-msg">Could not get your location.</p>
-            <a href="/" class="btn btn--primary">Browse by Region</a>
+        <div class="filter-group">
+            <div class="filter-group__label">Maximum Price</div>
+            <div class="price-slider">
+                <input type="range" class="price-range" id="mobile-price-range" min="100" max="300" value="300" step="5">
+                <div class="price-slider__labels">
+                    <span>$100</span>
+                    <span class="price-slider__value" id="mobile-price-value">Any</span>
+                    <span>$300+</span>
+                </div>
+            </div>
         </div>
-    </main>
+        <div class="filter-group">
+            <div class="filter-group__label">Service</div>
+            <div class="filter-group__items">
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Cosmetic"> Cosmetic</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Dental Implants"> Dental Implants</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Dentures"> Dentures</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Emergency"> Emergency</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Endodontics"> Endodontics</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="General Dentistry"> General</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Oral and Maxillofacial Surgery"> Oral and Maxillofacial Surgery</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Oral Surgery"> Oral Surgery</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Orthodontics"> Orthodontics</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Periodontal Care"> Periodontal Care</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Teeth Whitening"> Whitening</label>
+            </div>
+        </div>
+        <div class="filter-group" data-filter="suburb">
+            <div class="filter-group__label">Suburb/Town</div>
+            <div class="filter-group__items"></div>
+        </div>
+        <div class="filter-group">
+            <div class="filter-group__label">Rating</div>
+            <div class="price-slider">
+                <input type="range" class="rating-range" id="mobile-rating-range" min="0" max="5" value="0" step="0.5">
+                <div class="price-slider__labels">
+                    <span>Any</span>
+                    <span class="price-slider__value" id="mobile-rating-value">Any</span>
+                    <span>★ 5.0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <section class="section" style="padding-top: 1.5rem;">
+        <div class="container">
+
+            <!-- Error state (shown before layout loads) -->
+            <div id="nearby-error" style="display:none; text-align:center; padding: var(--sp-16) 0;">
+                <p style="font-size:1.2rem; color:var(--clr-gray-500); margin-bottom:var(--sp-6);" id="nearby-error-msg">Could not get your location.</p>
+                <a href="/" class="btn btn--primary">Browse by Region</a>
+            </div>
+
+            <div class="listings-layout" id="listings-layout" style="display:none;">
+
+                <!-- Desktop Sidebar -->
+                <aside class="sidebar">
+                    <div class="sidebar__title">☰ Filters</div>
+
+                    <div class="filter-group">
+                        <div class="filter-group__label">Search</div>
+                        <div class="listings-search">
+                            <input type="text" id="listings-search" placeholder="Search by name or service...">
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <div class="filter-group__label">Maximum Price</div>
+                        <div class="price-slider">
+                            <input type="range" class="price-range" id="desktop-price-range" min="100" max="300" value="300" step="5">
+                            <div class="price-slider__labels">
+                                <span>$100</span>
+                                <span class="price-slider__value" id="desktop-price-value">Any</span>
+                                <span>$300+</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <div class="filter-group__label">Service</div>
+                        <div class="filter-group__items">
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Cosmetic"> Cosmetic</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Dental Implants"> Dental Implants</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Dentures"> Dentures</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Emergency"> Emergency</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Endodontics"> Endodontics</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="General Dentistry"> General Dentistry</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Oral and Maxillofacial Surgery"> Oral and Maxillofacial Surgery</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Oral Surgery"> Oral Surgery</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Orthodontics"> Orthodontics</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Periodontal Care"> Periodontal Care</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Teeth Whitening"> Teeth Whitening</label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group" data-filter="suburb">
+                        <div class="filter-group__label">Suburb/Town</div>
+                        <div class="filter-group__items">
+                            <!-- Built dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <div class="filter-group__label">Rating</div>
+                        <div class="price-slider">
+                            <input type="range" class="rating-range" id="desktop-rating-range" min="0" max="5" value="0" step="0.5">
+                            <div class="price-slider__labels">
+                                <span>Any</span>
+                                <span class="price-slider__value" id="desktop-rating-value">Any</span>
+                                <span>★ 5.0</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Listings -->
+                <main>
+                    <div id="nearby-map"></div>
+                    <div class="listings-header">
+                        <span class="listings-header__count" id="results-count">Loading...</span>
+                        <select class="sort-select" id="sort-select">
+                            <option value="distance">Sort by: Distance</option>
+                            <option value="rating">Sort by: Rating</option>
+                            <option value="reviews">Sort by: Most Reviews</option>
+                            <option value="name">Sort by: Name A–Z</option>
+                        </select>
+                    </div>
+                    <div class="dentist-grid" id="nearby-grid"></div>
+                    <div id="nearby-empty" style="display:none; text-align:center; padding: var(--sp-16) 0; color:var(--clr-gray-500);">
+                        <p style="font-size:1.3rem; margin-bottom:var(--sp-3);">No clinics match your filters.</p>
+                        <p>Try adjusting the radius or clearing some filters.</p>
+                    </div>
+                </main>
+
+            </div>
+        </div>
+    </section>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="assets/js/supabase.js"></script>
@@ -89,16 +222,22 @@
         const grid        = document.getElementById('nearby-grid');
         const mapEl       = document.getElementById('nearby-map');
         const subtitle    = document.getElementById('nearby-subtitle');
-        const controls    = document.getElementById('nearby-controls');
-        const countEl     = document.getElementById('nearby-count');
+        const radiusRow   = document.getElementById('radius-row');
+        const radiusSel   = document.getElementById('radius-select');
+        const layout      = document.getElementById('listings-layout');
+        const countEl     = document.getElementById('results-count');
         const emptyEl     = document.getElementById('nearby-empty');
         const errorEl     = document.getElementById('nearby-error');
         const errorMsg    = document.getElementById('nearby-error-msg');
-        const radiusSel   = document.getElementById('radius-select');
-        const searchInput = document.getElementById('nearby-search');
+        const searchInput = document.getElementById('listings-search');
+        const sortSelect  = document.getElementById('sort-select');
+        const mobileBtn   = document.getElementById('mobile-filter-btn');
 
         let userLat, userLng, allClinics = [];
         let map, clinicMarkers = [], radiusCircle;
+        let activeServices = [], activeSuburbs = [], minRating = 0, maxPrice = Infinity;
+
+        const params = new URLSearchParams(window.location.search);
 
         function haversineKm(lat1, lng1, lat2, lng2) {
           const R = 6371;
@@ -114,6 +253,17 @@
           return '★'.repeat(full) + (half ? '★' : '') + '☆'.repeat(5 - full - half);
         }
 
+        function getCheckupPrice(d) {
+          if (!d.pricing || !d.pricing.length) return null;
+          const p = d.pricing.find(p => {
+            const s = p.service.toLowerCase();
+            return s.includes('checkup') || s.includes('check-up') || s.includes('exam') || s.includes('consult');
+          });
+          if (!p) return null;
+          const m = p.price.replace(/,/g, '').match(/\$(\d+)/);
+          return m ? parseInt(m[1], 10) : null;
+        }
+
         function cardHTML(d) {
           const initials = d.name.split(' ').filter(w => w).map(w => w[0]).join('').slice(0,2).toUpperCase();
           const pills = (d.services||[]).slice(0,4).map(s=>`<span class="pill pill--sm">${s}</span>`).join('');
@@ -122,7 +272,7 @@
           const loc = d.suburb ? `${d.suburb}, ${d.region}` : d.region;
           const link = `dentist.html?id=${d.id}&region=${encodeURIComponent(d.region||'')}`;
           return `
-            <article class="dentist-card">
+            <article class="dentist-card" data-suburb="${d.suburb}" data-rating="${d.rating||0}" data-name="${d.name}">
               <div class="dentist-card__avatar">${initials}</div>
               <div class="dentist-card__body">
                 <h3 class="dentist-card__name">
@@ -143,8 +293,26 @@
             </article>`;
         }
 
+        function buildSuburbFilters(clinicsInRadius) {
+          const counts = {};
+          clinicsInRadius.forEach(c => { if (c.suburb) counts[c.suburb] = (counts[c.suburb] || 0) + 1; });
+          const sorted = Object.entries(counts).sort((a, b) => a[0].localeCompare(b[0]));
+          const html = sorted.map(([s, n]) =>
+            `<label class="filter-check"><input type="checkbox" class="filter-suburb" value="${s}"> ${s} <span style="color:var(--clr-gray-400);font-size:.8em">(${n})</span></label>`
+          ).join('');
+          document.querySelectorAll('[data-filter="suburb"] .filter-group__items').forEach(el => {
+            el.innerHTML = html;
+            el.querySelectorAll('.filter-suburb').forEach(cb => {
+              if (activeSuburbs.includes(cb.value)) cb.checked = true;
+              cb.addEventListener('change', () => {
+                activeSuburbs = Array.from(document.querySelectorAll('.filter-suburb:checked')).map(e => e.value);
+                render(false);
+              });
+            });
+          });
+        }
+
         function initMap() {
-          mapEl.style.display = 'block';
           map = L.map('nearby-map').setView([userLat, userLng], 13);
           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -177,7 +345,7 @@
             const popup = `<div style="min-width:150px;line-height:1.6;">
               <strong style="font-size:.88rem;">${c.name}</strong><br>
               <span style="font-size:.76rem;color:#6b7280;">📍 ${c.suburb||c.region}</span><br>
-              ${c.rating ? `<span style="font-size:.76rem;color:#f59e0b;">★</span><span style="font-size:.76rem;"> ${c.rating}</span><br>` : ''}
+              ${c.rating ? `<span style="font-size:.76rem;color:#f59e0b;">★ ${c.rating}</span><br>` : ''}
               <span style="font-size:.76rem;color:#0d9488;font-weight:600;">${c.distKm.toFixed(1)} km away</span><br>
               <a href="${link}" style="font-size:.76rem;color:#2563eb;">View Profile →</a>
             </div>`;
@@ -185,33 +353,53 @@
           });
 
           if (nearby.length > 0) {
-            const bounds = L.latLngBounds([[userLat, userLng], ...nearby.map(c => [c.lat, c.lng])]);
-            map.fitBounds(bounds, { padding: [40, 40] });
+            map.fitBounds(L.latLngBounds([[userLat, userLng], ...nearby.map(c => [c.lat, c.lng])]), { padding: [40, 40] });
           }
         }
 
-        function render() {
+        function render(rebuildSuburbs) {
           const radius = parseInt(radiusSel.value, 10);
-          const q = (searchInput ? searchInput.value : '').toLowerCase().trim();
-          const nearby = allClinics
+          const q = searchInput ? searchInput.value.toLowerCase().trim() : '';
+          const sort = sortSelect ? sortSelect.value : 'distance';
+
+          // First pass: all clinics within radius (for suburb filter population)
+          const inRadius = allClinics
             .map(c => ({ ...c, distKm: haversineKm(userLat, userLng, c.lat, c.lng) }))
-            .filter(c => c.distKm <= radius)
-            .filter(c => {
-              if (!q) return true;
-              return c.name.toLowerCase().includes(q) || c.services.some(s => s.toLowerCase().includes(q));
-            })
-            .sort((a, b) => a.distKm - b.distKm);
+            .filter(c => c.distKm <= radius);
 
-          updateMap(nearby, radius);
+          if (rebuildSuburbs !== false) buildSuburbFilters(inRadius);
 
-          if (nearby.length === 0) {
+          // Second pass: apply all filters
+          let filtered = inRadius.filter(c => {
+            if (q && !c.name.toLowerCase().includes(q) && !c.services.some(s => s.toLowerCase().includes(q))) return false;
+            if (activeServices.length && !activeServices.some(s => c.services.includes(s))) return false;
+            if (activeSuburbs.length && !activeSuburbs.includes(c.suburb)) return false;
+            if (c.rating < minRating) return false;
+            if (maxPrice !== Infinity) {
+              const price = getCheckupPrice(c);
+              if (price !== null && price > maxPrice) return false;
+            }
+            return true;
+          });
+
+          // Sort
+          if (sort === 'distance') filtered.sort((a, b) => a.distKm - b.distKm);
+          else if (sort === 'rating') filtered.sort((a, b) => (b.rating||0) - (a.rating||0));
+          else if (sort === 'reviews') filtered.sort((a, b) => (b.reviewCount||0) - (a.reviewCount||0));
+          else if (sort === 'name') filtered.sort((a, b) => a.name.localeCompare(b.name));
+
+          updateMap(filtered, radius);
+
+          countEl.textContent = filtered.length
+            ? `${filtered.length} clinic${filtered.length !== 1 ? 's' : ''} within ${radius} km`
+            : '';
+
+          if (filtered.length === 0) {
             grid.innerHTML = '';
             emptyEl.style.display = 'block';
-            countEl.textContent = '';
           } else {
             emptyEl.style.display = 'none';
-            countEl.textContent = `${nearby.length} clinic${nearby.length !== 1 ? 's' : ''} found`;
-            grid.innerHTML = nearby.map(cardHTML).join('');
+            grid.innerHTML = filtered.map(cardHTML).join('');
           }
         }
 
@@ -232,6 +420,7 @@
             lat: c.lat, lng: c.lng,
             rating: c.rating || 0, reviewCount: c.total_ratings || 0,
             services: c.services ? c.services.split(',').map(s => s.trim()) : [],
+            pricing: [],
           }));
         }
 
@@ -250,18 +439,56 @@
             showError('Failed to load clinic data. Please try again later.');
             return;
           }
+
           subtitle.textContent = '';
-          controls.style.display = 'flex';
-          window._nearbyRender = render;
-          // Pre-fill search from ?q= param
-          const qParam = params.get('q');
-          if (qParam && searchInput) searchInput.value = qParam;
+          radiusRow.style.display = 'flex';
+          layout.style.display = '';
+          mobileBtn.style.display = '';
+
+          // Pre-fill search from ?q=
+          const q = params.get('q');
+          if (q && searchInput) searchInput.value = q;
+
           initMap();
-          radiusSel.addEventListener('change', render);
+
+          // Wire up all filter controls
+          radiusSel.addEventListener('change', () => render());
+          sortSelect.addEventListener('change', () => render(false));
+          if (searchInput) searchInput.addEventListener('input', () => render(false));
+
+          document.querySelectorAll('.filter-service').forEach(cb =>
+            cb.addEventListener('change', () => {
+              activeServices = Array.from(document.querySelectorAll('.filter-service:checked')).map(e => e.value);
+              render(false);
+            })
+          );
+
+          document.querySelectorAll('.price-range').forEach(el => {
+            el.addEventListener('input', e => {
+              const v = parseInt(e.target.value, 10);
+              maxPrice = v >= 300 ? Infinity : v;
+              const label = maxPrice === Infinity ? 'Any' : `Up to $${v}`;
+              document.querySelectorAll('.price-slider__value').forEach(el2 => {
+                if (el2.id.includes('price')) el2.textContent = label;
+              });
+              render(false);
+            });
+          });
+
+          document.querySelectorAll('.rating-range').forEach(el => {
+            el.addEventListener('input', e => {
+              minRating = parseFloat(e.target.value);
+              const label = minRating === 0 ? 'Any' : `★ ${minRating.toFixed(1)}+`;
+              document.querySelectorAll('.price-slider__value').forEach(el2 => {
+                if (el2.id.includes('rating')) el2.textContent = label;
+              });
+              render(false);
+            });
+          });
+
           render();
         }
 
-        const params = new URLSearchParams(window.location.search);
         const lat = parseFloat(params.get('lat'));
         const lng = parseFloat(params.get('lng'));
 
