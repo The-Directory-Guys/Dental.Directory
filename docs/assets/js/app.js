@@ -676,6 +676,12 @@
     fetchAllClinics().then(clinics => {
       if (!Array.isArray(clinics) || clinics.length === 0) return;
 
+      // Update hero stat with live clinic count
+      const heroStatEl = document.querySelector('.hero-stat__number');
+      if (heroStatEl && heroStatEl.textContent.includes('1,100')) {
+        heroStatEl.textContent = clinics.length.toLocaleString();
+      }
+
       const counts = {};
       clinics.forEach(c => {
         if (c.region) counts[c.region] = (counts[c.region] || 0) + 1;
