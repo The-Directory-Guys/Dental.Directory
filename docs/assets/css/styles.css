@@ -414,11 +414,9 @@ h4 {
     border-color: rgba(255,255,255,0.8);
 }
 
-.hero-nearby__btn--active {
-    background: #fff !important;
-    color: var(--clr-navy) !important;
-    border-color: #fff !important;
-    font-weight: 600;
+.hero-nearby__btn--active::before {
+    content: '✓ ';
+    font-weight: 700;
 }
 
 .hero-nearby__btn--nudge {
