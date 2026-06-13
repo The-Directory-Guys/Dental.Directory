@@ -60,11 +60,12 @@
       'Woolston','Avonhead','Hillmorton','Seaview','Cashmere','Sockburn','Halswell',
       'Bryndwr','Richmond','Redwood','Riccarton (Upper)','Somerfield','Hoon Hay',
       'Phillipstown','Ferrymead','Casebrook','Northcote','Ilam','Waltham','Addington',
-      'North New Brighton','Redcliffs','Fendalton','Yaldhurst'
+      'North New Brighton','Redcliffs','Fendalton','Yaldhurst',
+      'Kaiapoi','Prebbleton','Rangiora','Rolleston','Lincoln'
     ]),
     'wider-canterbury': new Set([
-      'Rangiora','Kaiapoi','Prebbleton','Ashburton','Timaru Central','Rolleston',
-      'Darfield','Geraldine','Allenton','Kaikōura','Lincoln','Oxford','Temuka','Parkside'
+      'Ashburton','Timaru Central','Darfield','Geraldine','Allenton',
+      'Kaikōura','Oxford','Temuka','Parkside'
     ]),
     'hamilton-city': new Set([
       'Hamilton Central','Hamilton East','Claudelands','Chartwell','Hillcrest','Pukete',
