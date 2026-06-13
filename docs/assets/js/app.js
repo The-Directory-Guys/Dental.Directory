@@ -81,8 +81,7 @@
       'Pyes Pa','Otūmoetai','Papamoa','Mount Maunganui','Tauriko','Hairini'
     ]),
     'wider-bop': new Set([
-      'Rotorua','Whakatāne','Kawerau','Utuhina','Ōpōtiki','Katikati','Omokoroa',
-      'Ngongotahā','Lynmore','Victoria, Rotorua','Ngapuna','Te Puke','Ohinemutu'
+      'Rotorua','Whakatāne','Kawerau','Ōpōtiki','Katikati','Omokoroa','Te Puke'
     ]),
     'dunedin-city': new Set([
       'Dunedin Central','Dunedin North','Mosgiel','Green Island','Roslyn','Wakari',
