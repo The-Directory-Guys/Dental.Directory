@@ -744,19 +744,34 @@
     );
   }
 
-  function doSearch() {
-    if (savedLat === null) {
-      if (nearMeBtn) nearMeBtn.classList.add('hero-nearby__btn--nudge');
-      nearMeStatus.textContent = 'Enable your location to search.';
-      setTimeout(() => {
-        if (nearMeBtn) nearMeBtn.classList.remove('hero-nearby__btn--nudge');
-        nearMeStatus.textContent = '';
-      }, 2000);
+  async function doSearch() {
+    const q = heroSearchInput ? heroSearchInput.value.trim() : '';
+
+    if (savedLat !== null) {
+      const qParam = q ? `&q=${encodeURIComponent(q)}` : '';
+      window.location.href = `nearby.html?lat=${savedLat}&lng=${savedLng}${qParam}`;
       return;
     }
-    const q = heroSearchInput ? heroSearchInput.value.trim() : '';
-    const qParam = q ? `&q=${encodeURIComponent(q)}` : '';
-    window.location.href = `nearby.html?lat=${savedLat}&lng=${savedLng}${qParam}`;
+
+    if (q) {
+      if (heroSearchBtn) { heroSearchBtn.textContent = 'Searching…'; heroSearchBtn.disabled = true; }
+      try {
+        const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q + ', New Zealand')}&format=json&limit=1&countrycodes=nz`);
+        const data = await res.json();
+        if (data.length > 0) {
+          window.location.href = `nearby.html?lat=${data[0].lat}&lng=${data[0].lon}&q=${encodeURIComponent(q)}`;
+          return;
+        }
+      } catch (e) {}
+      if (heroSearchBtn) { heroSearchBtn.textContent = 'Search'; heroSearchBtn.disabled = false; }
+    }
+
+    if (nearMeBtn) nearMeBtn.classList.add('hero-nearby__btn--nudge');
+    nearMeStatus.textContent = q ? 'Location not found. Try enabling your location.' : 'Enable your location to search.';
+    setTimeout(() => {
+      if (nearMeBtn) nearMeBtn.classList.remove('hero-nearby__btn--nudge');
+      nearMeStatus.textContent = '';
+    }, 2000);
   }
 
   // "Use my location" → show modal (if location not yet granted) or clear it (if already on)
