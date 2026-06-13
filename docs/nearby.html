@@ -77,13 +77,24 @@
             <button class="filter-drawer__close" id="filter-drawer-close">✕</button>
         </div>
         <div class="filter-group">
-            <div class="filter-group__label">Maximum Price</div>
+            <div class="filter-group__label">Max Checkup Price</div>
             <div class="price-slider">
                 <input type="range" class="price-range" id="mobile-price-range" min="100" max="300" value="300" step="5">
                 <div class="price-slider__labels">
                     <span>$100</span>
                     <span class="price-slider__value" id="mobile-price-value">Any</span>
                     <span>$300+</span>
+                </div>
+            </div>
+        </div>
+        <div class="filter-group">
+            <div class="filter-group__label">Max Hygienist Price</div>
+            <div class="price-slider">
+                <input type="range" class="price-range" id="mobile-hygienist-range" min="80" max="200" value="200" step="5">
+                <div class="price-slider__labels">
+                    <span>$80</span>
+                    <span class="price-slider__value" id="mobile-hygienist-value">Any</span>
+                    <span>$200+</span>
                 </div>
             </div>
         </div>
@@ -144,13 +155,24 @@
                     </div>
 
                     <div class="filter-group">
-                        <div class="filter-group__label">Maximum Price</div>
+                        <div class="filter-group__label">Max Checkup Price</div>
                         <div class="price-slider">
                             <input type="range" class="price-range" id="desktop-price-range" min="100" max="300" value="300" step="5">
                             <div class="price-slider__labels">
                                 <span>$100</span>
                                 <span class="price-slider__value" id="desktop-price-value">Any</span>
                                 <span>$300+</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <div class="filter-group__label">Max Hygienist Price</div>
+                        <div class="price-slider">
+                            <input type="range" class="price-range" id="desktop-hygienist-range" min="80" max="200" value="200" step="5">
+                            <div class="price-slider__labels">
+                                <span>$80</span>
+                                <span class="price-slider__value" id="desktop-hygienist-value">Any</span>
+                                <span>$200+</span>
                             </div>
                         </div>
                     </div>
@@ -201,6 +223,7 @@
                             <option value="distance">Sort by: Distance</option>
                             <option value="rating">Sort by: Rating</option>
                             <option value="reviews">Sort by: Most Reviews</option>
+                            <option value="price">Sort by: Lowest Price</option>
                             <option value="name">Sort by: Name A–Z</option>
                         </select>
                     </div>
@@ -236,7 +259,7 @@
 
         let userLat, userLng, allClinics = [];
         let map, clinicMarkers = [], radiusCircle, userMarker;
-        let activeServices = [], activeSuburbs = [], minRating = 0, maxPrice = Infinity;
+        let activeServices = [], activeSuburbs = [], minRating = 0, maxPrice = Infinity, maxHygienistPrice = Infinity;
 
         const params = new URLSearchParams(window.location.search);
 
@@ -265,6 +288,18 @@
           return m ? parseInt(m[1], 10) : null;
         }
 
+        function getHygienistPrice(d) {
+          if (!d.pricing || !d.pricing.length) return null;
+          const p = d.pricing.find(p => {
+            const s = p.service.toLowerCase();
+            return s.includes('hygienist') || s.includes('hygiene') ||
+                   (s.includes('scale') && (s.includes('polish') || s.includes('clean')));
+          });
+          if (!p) return null;
+          const m = p.price.replace(/,/g, '').match(/\$(\d+)/);
+          return m ? parseInt(m[1], 10) : null;
+        }
+
         function cardHTML(d) {
           const initials = d.name.split(' ').filter(w => w).map(w => w[0]).join('').slice(0,2).toUpperCase();
           const pills = (d.services||[]).slice(0,4).map(s=>`<span class="pill pill--sm">${s}</span>`).join('');
@@ -272,6 +307,15 @@
           const reviews = d.reviewCount ? `💬 ${d.reviewCount} reviews` : '';
           const loc = d.suburb ? `${d.suburb}, ${d.region}` : d.region;
           const link = `dentist.html?id=${d.id}&region=${encodeURIComponent(d.region||'')}`;
+          const checkupP = getCheckupPrice(d);
+          const hygP = getHygienistPrice(d);
+          let pricePills = '';
+          if (checkupP || hygP) {
+            const parts = [];
+            if (checkupP) parts.push(`<span class="pill pill--sm" style="background:#f0fdfa;color:#0d9488;">Checkup $${checkupP}</span>`);
+            if (hygP) parts.push(`<span class="pill pill--sm" style="background:#f0fdfa;color:#0d9488;">Hygienist $${hygP}</span>`);
+            pricePills = `<div class="dentist-card__services" style="margin-top:.25rem;">${parts.join('')}</div>`;
+          }
           return `
             <article class="dentist-card" data-suburb="${d.suburb}" data-rating="${d.rating||0}" data-name="${d.name}">
               <div class="dentist-card__avatar">${initials}</div>
@@ -286,6 +330,7 @@
                   ${reviews ? `<span class="dentist-card__meta-item">${reviews}</span>` : ''}
                 </div>
                 ${pills ? `<div class="dentist-card__services">${pills}</div>` : ''}
+                ${pricePills}
                 <div class="dentist-card__footer">
                   <div></div>
                   <a href="${link}" class="btn btn--primary">View Profile</a>
@@ -404,6 +449,10 @@
               const price = getCheckupPrice(c);
               if (price !== null && price > maxPrice) return false;
             }
+            if (maxHygienistPrice !== Infinity) {
+              const hygPrice = getHygienistPrice(c);
+              if (hygPrice !== null && hygPrice > maxHygienistPrice) return false;
+            }
             return true;
           });
 
@@ -411,6 +460,7 @@
           if (sort === 'distance') filtered.sort((a, b) => a.distKm - b.distKm);
           else if (sort === 'rating') filtered.sort((a, b) => (b.rating||0) - (a.rating||0));
           else if (sort === 'reviews') filtered.sort((a, b) => (b.reviewCount||0) - (a.reviewCount||0));
+          else if (sort === 'price') filtered.sort((a, b) => (getCheckupPrice(a) || 999) - (getCheckupPrice(b) || 999));
           else if (sort === 'name') filtered.sort((a, b) => a.name.localeCompare(b.name));
 
           updateMap(filtered, radius, fitMap);
@@ -499,6 +549,17 @@
 
           initMap();
 
+          // Fetch pricing for clinics within 50 km in background, then re-render
+          const nearbyIds = allClinics
+            .filter(c => haversineKm(userLat, userLng, c.lat, c.lng) <= 50)
+            .map(c => c.id);
+          if (nearbyIds.length > 0 && typeof fetchClinicPricing === 'function') {
+            fetchClinicPricing(nearbyIds).then(pricingMap => {
+              allClinics.forEach(c => { if (pricingMap[c.id]) c.pricing = pricingMap[c.id]; });
+              render(false);
+            }).catch(() => {});
+          }
+
           // Wire up all filter controls
           radiusSel.addEventListener('change', () => render());
           sortSelect.addEventListener('change', () => render(false));
@@ -515,16 +576,32 @@
             })
           );
 
-          document.querySelectorAll('.price-range').forEach(el => {
-            el.addEventListener('input', e => {
-              const v = parseInt(e.target.value, 10);
-              maxPrice = v >= 300 ? Infinity : v;
-              const label = maxPrice === Infinity ? 'Any' : `Up to $${v}`;
-              document.querySelectorAll('.price-slider__value').forEach(el2 => {
-                if (el2.id.includes('price')) el2.textContent = label;
-              });
-              render(false);
-            });
+          // Checkup price sliders
+          function updateCheckupSlider(v) {
+            maxPrice = v >= 300 ? Infinity : v;
+            const label = maxPrice === Infinity ? 'Any' : `Up to $${v}`;
+            const val = maxPrice === Infinity ? 300 : v;
+            ['desktop-price-range','mobile-price-range'].forEach(id => { const el = document.getElementById(id); if (el) el.value = val; });
+            ['desktop-price-value','mobile-price-value'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = label; });
+            render(false);
+          }
+          ['desktop-price-range','mobile-price-range'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('input', e => updateCheckupSlider(parseInt(e.target.value, 10)));
+          });
+
+          // Hygienist price sliders
+          function updateHygienistSlider(v) {
+            maxHygienistPrice = v >= 200 ? Infinity : v;
+            const label = maxHygienistPrice === Infinity ? 'Any' : `Up to $${v}`;
+            const val = maxHygienistPrice === Infinity ? 200 : v;
+            ['desktop-hygienist-range','mobile-hygienist-range'].forEach(id => { const el = document.getElementById(id); if (el) el.value = val; });
+            ['desktop-hygienist-value','mobile-hygienist-value'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = label; });
+            render(false);
+          }
+          ['desktop-hygienist-range','mobile-hygienist-range'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('input', e => updateHygienistSlider(parseInt(e.target.value, 10)));
           });
 
           document.querySelectorAll('.rating-range').forEach(el => {
