@@ -57,7 +57,7 @@
     'christchurch-city': new Set([
       'Christchurch Central','Papanui','Riccarton','Strowan','Merivale','St Albans',
       'Sydenham','Bishopdale','Linwood','Shirley','Spreydon','Hornby','Burnside',
-      'Woolston','Avonhead','Hillmorton','Seaview','Cashmere','Sockburn','Halswell',
+      'Woolston','Avonhead','Hillmorton','Cashmere','Sockburn','Halswell',
       'Bryndwr','Richmond','Redwood','Riccarton (Upper)','Somerfield','Hoon Hay',
       'Phillipstown','Ferrymead','Casebrook','Northcote','Ilam','Waltham','Addington',
       'North New Brighton','Redcliffs','Fendalton','Yaldhurst',
