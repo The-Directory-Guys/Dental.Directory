@@ -235,7 +235,7 @@
         const mobileBtn   = document.getElementById('mobile-filter-btn');
 
         let userLat, userLng, allClinics = [];
-        let map, clinicMarkers = [], radiusCircle;
+        let map, clinicMarkers = [], radiusCircle, userMarker;
         let activeServices = [], activeSuburbs = [], minRating = 0, maxPrice = Infinity;
 
         const params = new URLSearchParams(window.location.search);
@@ -313,15 +313,38 @@
           });
         }
 
+        function setUserMarker(lat, lng) {
+          if (userMarker) map.removeLayer(userMarker);
+          userMarker = L.circleMarker([lat, lng], {
+            radius: 10, fillColor: '#2563eb', color: '#fff', weight: 3, fillOpacity: 1
+          }).addTo(map).bindPopup('<strong>Search location</strong><br><span style="font-size:.75rem;color:#6b7280;">Click map to move</span>');
+        }
+
         function initMap() {
           map = L.map('nearby-map').setView([userLat, userLng], 13);
           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             maxZoom: 19
           }).addTo(map);
-          L.circleMarker([userLat, userLng], {
-            radius: 10, fillColor: '#2563eb', color: '#fff', weight: 3, fillOpacity: 1
-          }).addTo(map).bindPopup('<strong>Your location</strong>');
+          setUserMarker(userLat, userLng);
+
+          // Click map to reposition search centre
+          map.on('click', function(e) {
+            userLat = e.latlng.lat;
+            userLng = e.latlng.lng;
+            setUserMarker(userLat, userLng);
+            render(true);
+          });
+
+          // Map hint
+          const hint = L.control({ position: 'bottomleft' });
+          hint.onAdd = () => {
+            const d = L.DomUtil.create('div');
+            d.style.cssText = 'background:rgba(255,255,255,.85);padding:4px 8px;border-radius:6px;font-size:.72rem;color:#6b7280;pointer-events:none;';
+            d.textContent = 'Click map to move search location';
+            return d;
+          };
+          hint.addTo(map);
         }
 
         function updateMap(nearby, radiusKm) {
@@ -329,6 +352,7 @@
           clinicMarkers = [];
           if (radiusCircle) map.removeLayer(radiusCircle);
 
+          setUserMarker(userLat, userLng);
           radiusCircle = L.circle([userLat, userLng], {
             radius: radiusKm * 1000,
             color: '#0d9488', fillColor: '#0d9488', fillOpacity: 0.06,
