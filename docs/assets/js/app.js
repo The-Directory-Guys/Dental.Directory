@@ -35,6 +35,18 @@
     return match ? parseInt(match[1], 10) : null;
   }
 
+  function getHygienistPrice(d) {
+    if (!d.pricing || d.pricing.length === 0) return null;
+    const match = d.pricing.find(p => {
+      const s = p.service.toLowerCase();
+      return s.includes('hygienist') || s.includes('hygiene') ||
+             (s.includes('scale') && (s.includes('polish') || s.includes('clean')));
+    });
+    if (!match) return null;
+    const m = match.price.replace(/,/g, '').match(/\$(\d+)/);
+    return m ? parseInt(m[1], 10) : null;
+  }
+
   // ===== Listings Page Logic =====
   const dentistGrid = document.getElementById('dentist-grid');
   const resultsCount = document.getElementById('results-count');
@@ -135,8 +147,9 @@
     let activeServices = [];
     let minRating = 0;
     let searchQuery = '';
-    let sortBy = 'rating';
+    let sortBy = 'name';
     let maxPrice = Infinity;
+    let maxHygienistPrice = Infinity;
 
     function cardHTML(d) {
       const initials = d.name.split(' ').filter(w => w.length > 0).map(w => w[0]).join('').slice(0, 2).toUpperCase();
@@ -206,6 +219,8 @@
         }
         const price = getCheckupPrice(d);
         if (price !== null && maxPrice !== Infinity && price > maxPrice) return false;
+        const hygPrice = getHygienistPrice(d);
+        if (hygPrice !== null && maxHygienistPrice !== Infinity && hygPrice > maxHygienistPrice) return false;
         return true;
       });
 
@@ -269,6 +284,8 @@
         }
           const price = getCheckupPrice(d);
           if (price !== null && maxPrice !== Infinity && price > maxPrice) return false;
+          const hygPrice = getHygienistPrice(d);
+          if (hygPrice !== null && maxHygienistPrice !== Infinity && hygPrice > maxHygienistPrice) return false;
           return true;
         }).length;
         const showingCount = Math.min(visibleCount, totalFiltered);
@@ -382,6 +399,30 @@
     }
     if (mobileSlider) {
       mobileSlider.addEventListener('input', (e) => updatePriceSlider(e.target.value));
+    }
+
+    // Hygienist price slider (sync desktop & mobile)
+    const desktopHygienistSlider = document.getElementById('desktop-hygienist-range');
+    const mobileHygienistSlider = document.getElementById('mobile-hygienist-range');
+    const desktopHygienistLabel = document.getElementById('desktop-hygienist-value');
+    const mobileHygienistLabel = document.getElementById('mobile-hygienist-value');
+
+    function updateHygienistSlider(value) {
+      maxHygienistPrice = parseInt(value, 10) >= 200 ? Infinity : parseInt(value, 10);
+      const label = maxHygienistPrice === Infinity ? 'Any' : `Up to $${maxHygienistPrice}`;
+      const sliderVal = maxHygienistPrice === Infinity ? 200 : maxHygienistPrice;
+      if (desktopHygienistSlider) desktopHygienistSlider.value = sliderVal;
+      if (mobileHygienistSlider) mobileHygienistSlider.value = sliderVal;
+      if (desktopHygienistLabel) desktopHygienistLabel.textContent = label;
+      if (mobileHygienistLabel) mobileHygienistLabel.textContent = label;
+      renderWithReset();
+    }
+
+    if (desktopHygienistSlider) {
+      desktopHygienistSlider.addEventListener('input', (e) => updateHygienistSlider(e.target.value));
+    }
+    if (mobileHygienistSlider) {
+      mobileHygienistSlider.addEventListener('input', (e) => updateHygienistSlider(e.target.value));
     }
 
     // Initial render

@@ -65,13 +65,24 @@
             <button class="filter-drawer__close" id="filter-drawer-close">✕</button>
         </div>
         <div class="filter-group">
-            <div class="filter-group__label">Maximum Price</div>
+            <div class="filter-group__label">Max Checkup Price</div>
             <div class="price-slider">
                 <input type="range" class="price-range" id="mobile-price-range" min="100" max="300" value="300" step="5">
                 <div class="price-slider__labels">
                     <span>$100</span>
-                    <span class="price-slider__value" id="mobile-price-value">Up to $200</span>
+                    <span class="price-slider__value" id="mobile-price-value">Any</span>
                     <span>$300</span>
+                </div>
+            </div>
+        </div>
+        <div class="filter-group">
+            <div class="filter-group__label">Max Hygienist Price</div>
+            <div class="price-slider">
+                <input type="range" class="price-range" id="mobile-hygienist-range" min="80" max="200" value="200" step="5">
+                <div class="price-slider__labels">
+                    <span>$80</span>
+                    <span class="price-slider__value" id="mobile-hygienist-value">Any</span>
+                    <span>$200+</span>
                 </div>
             </div>
         </div>
@@ -137,13 +148,24 @@
                     </div>
 
                     <div class="filter-group">
-                        <div class="filter-group__label">Maximum Price</div>
+                        <div class="filter-group__label">Max Checkup Price</div>
                         <div class="price-slider">
                             <input type="range" class="price-range" id="desktop-price-range" min="100" max="300" value="300" step="5">
                             <div class="price-slider__labels">
                                 <span>$100</span>
-                                <span class="price-slider__value" id="desktop-price-value">Up to $200</span>
+                                <span class="price-slider__value" id="desktop-price-value">Any</span>
                                 <span>$300</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <div class="filter-group__label">Max Hygienist Price</div>
+                        <div class="price-slider">
+                            <input type="range" class="price-range" id="desktop-hygienist-range" min="80" max="200" value="200" step="5">
+                            <div class="price-slider__labels">
+                                <span>$80</span>
+                                <span class="price-slider__value" id="desktop-hygienist-value">Any</span>
+                                <span>$200+</span>
                             </div>
                         </div>
                     </div>
@@ -203,7 +225,7 @@
                             <option value="rating">Sort by: Rating</option>
                             <option value="reviews">Sort by: Most Reviews</option>
                             <option value="price">Sort by: Lowest Price</option>
-                            <option value="name">Sort by: Name A–Z</option>
+                            <option value="name" selected>Sort by: Name A–Z</option>
                         </select>
                     </div>
                     <div class="dentist-grid" id="dentist-grid" data-region="Gisborne">
