@@ -64,7 +64,7 @@
       'Kaiapoi','Prebbleton','Rangiora','Rolleston','Lincoln'
     ]),
     'wider-canterbury': new Set([
-      'Ashburton','Timaru Central','Darfield','Geraldine','Kaikōura','Oxford','Temuka'
+      'Ashburton','Timaru','Darfield','Geraldine','Kaikōura','Oxford','Temuka'
     ]),
     'hamilton-city': new Set([
       'Hamilton Central','Hamilton East','Claudelands','Chartwell','Hillcrest','Pukete',
