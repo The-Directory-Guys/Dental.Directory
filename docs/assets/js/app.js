@@ -684,27 +684,47 @@
   // ===== Homepage: Near Me Button =====
   const nearMeBtn = document.getElementById('near-me-btn');
   const nearMeStatus = document.getElementById('near-me-status');
-  if (nearMeBtn) {
-    nearMeBtn.addEventListener('click', () => {
-      if (!navigator.geolocation) {
-        nearMeStatus.textContent = 'Geolocation not supported by your browser.';
-        return;
+  const locationModalOverlay = document.getElementById('location-modal-overlay');
+  const locationModalAllow = document.getElementById('location-modal-allow');
+  const locationModalDeny = document.getElementById('location-modal-deny');
+
+  function requestLocation() {
+    if (!navigator.geolocation) {
+      nearMeStatus.textContent = 'Geolocation not supported by your browser.';
+      return;
+    }
+    nearMeBtn.disabled = true;
+    nearMeStatus.textContent = 'Getting your location...';
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        const { latitude: lat, longitude: lng } = pos.coords;
+        const q = heroSearchInput ? heroSearchInput.value.trim() : '';
+        const qParam = q ? `&q=${encodeURIComponent(q)}` : '';
+        window.location.href = `nearby.html?lat=${lat}&lng=${lng}${qParam}`;
+      },
+      () => {
+        nearMeBtn.disabled = false;
+        nearMeStatus.textContent = 'Location access denied. Please allow location access.';
       }
-      nearMeBtn.disabled = true;
-      nearMeStatus.textContent = 'Getting your location...';
-      navigator.geolocation.getCurrentPosition(
-        pos => {
-          const { latitude: lat, longitude: lng } = pos.coords;
-          const q = heroSearchInput ? heroSearchInput.value.trim() : '';
-          const qParam = q ? `&q=${encodeURIComponent(q)}` : '';
-          window.location.href = `nearby.html?lat=${lat}&lng=${lng}${qParam}`;
-        },
-        () => {
-          nearMeBtn.disabled = false;
-          nearMeStatus.textContent = 'Location access denied. Please allow location access.';
-        }
-      );
+    );
+  }
+
+  if (nearMeBtn && locationModalOverlay) {
+    nearMeBtn.addEventListener('click', () => {
+      locationModalOverlay.style.display = 'flex';
     });
+    locationModalAllow.addEventListener('click', () => {
+      locationModalOverlay.style.display = 'none';
+      requestLocation();
+    });
+    locationModalDeny.addEventListener('click', () => {
+      locationModalOverlay.style.display = 'none';
+    });
+    locationModalOverlay.addEventListener('click', (e) => {
+      if (e.target === locationModalOverlay) locationModalOverlay.style.display = 'none';
+    });
+  } else if (nearMeBtn) {
+    nearMeBtn.addEventListener('click', requestLocation);
   }
 
   // ===== Homepage: Dynamic Region Counts =====
