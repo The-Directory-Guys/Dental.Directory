@@ -333,7 +333,7 @@
             userLat = e.latlng.lat;
             userLng = e.latlng.lng;
             setUserMarker(userLat, userLng);
-            render(true);
+            render(true, false);
           });
 
           // Map hint
@@ -347,7 +347,7 @@
           hint.addTo(map);
         }
 
-        function updateMap(nearby, radiusKm) {
+        function updateMap(nearby, radiusKm, fitMap = true) {
           clinicMarkers.forEach(m => map.removeLayer(m));
           clinicMarkers = [];
           if (radiusCircle) map.removeLayer(radiusCircle);
@@ -377,12 +377,12 @@
             clinicMarkers.push(L.marker([c.lat, c.lng], { icon }).addTo(map).bindPopup(popup));
           });
 
-          if (nearby.length > 0) {
+          if (fitMap && nearby.length > 0) {
             map.fitBounds(L.latLngBounds([[userLat, userLng], ...nearby.map(c => [c.lat, c.lng])]), { padding: [40, 40] });
           }
         }
 
-        function render(rebuildSuburbs) {
+        function render(rebuildSuburbs, fitMap = true) {
           const radius = parseInt(radiusSel.value, 10);
           const q = searchInput ? searchInput.value.toLowerCase().trim() : '';
           const sort = sortSelect ? sortSelect.value : 'distance';
@@ -413,7 +413,7 @@
           else if (sort === 'reviews') filtered.sort((a, b) => (b.reviewCount||0) - (a.reviewCount||0));
           else if (sort === 'name') filtered.sort((a, b) => a.name.localeCompare(b.name));
 
-          updateMap(filtered, radius);
+          updateMap(filtered, radius, fitMap);
 
           countEl.textContent = filtered.length
             ? `${filtered.length} clinic${filtered.length !== 1 ? 's' : ''} within ${radius} km`
