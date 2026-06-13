@@ -1233,7 +1233,10 @@ h4 {
 .footer {
     background: var(--clr-navy);
     color: var(--clr-gray-400);
-    padding: var(--sp-12) 0 var(--sp-8);
+    padding: var(--sp-8) 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .footer__inner {
@@ -1264,9 +1267,6 @@ h4 {
     width: 100%;
     text-align: center;
     font-size: var(--fs-sm);
-    padding-top: var(--sp-8);
-    margin-top: var(--sp-8);
-    border-top: 1px solid rgba(255, 255, 255, .08);
 }
 
 /* ===================================================
