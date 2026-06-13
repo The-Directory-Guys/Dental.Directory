@@ -53,9 +53,24 @@
     initListings();
   }
 
+  const SUBURB_FILTERS = {
+    'christchurch-city': new Set([
+      'Christchurch Central','Papanui','Riccarton','Strowan','Merivale','St Albans',
+      'Sydenham','Bishopdale','Linwood','Shirley','Spreydon','Hornby','Burnside',
+      'Woolston','Avonhead','Hillmorton','Seaview','Cashmere','Sockburn','Halswell',
+      'Bryndwr','Richmond','Redwood','Riccarton (Upper)','Somerfield','Hoon Hay',
+      'Phillipstown','Ferrymead','Casebrook','Northcote','Ilam','Waltham','Addington',
+      'North New Brighton','Redcliffs','Fendalton','Yaldhurst'
+    ]),
+    'wider-canterbury': new Set([
+      'Rangiora','Kaiapoi','Prebbleton','Ashburton','Timaru Central','Rolleston',
+      'Darfield','Geraldine','Allenton','Kaikōura','Lincoln','Oxford','Temuka','Parkside'
+    ])
+  };
+
   async function initListings() {
     let allDentists = [];
-    
+
     // Read region from data attribute (defaults to Canterbury)
     const region = dentistGrid.dataset.region || 'Canterbury';
 
@@ -63,10 +78,17 @@
     if (typeof fetchClinics === 'function') {
       allDentists = await fetchClinics(region);
     }
-    
+
     // Fall back to static data if Supabase returned nothing
     if (allDentists.length === 0 && typeof dentists !== 'undefined') {
       allDentists = dentists;
+    }
+
+    // Apply suburb filter if page specifies one
+    const suburbFilterKey = dentistGrid.dataset.suburbFilter;
+    if (suburbFilterKey && SUBURB_FILTERS[suburbFilterKey]) {
+      const allowed = SUBURB_FILTERS[suburbFilterKey];
+      allDentists = allDentists.filter(d => allowed.has(d.suburb));
     }
 
     if (allDentists.length === 0) {
@@ -411,7 +433,7 @@
   const REGION_FILES = {
     'Auckland': 'auckland.html',
     'Bay of Plenty': 'bay-of-plenty.html',
-    'Canterbury': 'canterbury.html',
+    'Canterbury': 'christchurch.html',
     'Gisborne': 'gisborne.html',
     'Hawke\'s Bay': 'hawkes-bay.html',
     'Manawatū-Whanganui': 'manawatu-whanganui.html',
@@ -424,6 +446,7 @@
     'Taranaki': 'taranaki.html',
     'Waikato': 'waikato.html',
     'Wellington': 'wellington.html',
+    'Wider Wellington Region': 'wairarapa.html',
     'West Coast': 'west-coast.html'
   };
 
@@ -749,10 +772,6 @@
   // ===== Homepage: Dynamic Region Counts =====
   const locationCards = document.querySelectorAll('.location-card[data-region]');
   if (locationCards.length > 0) {
-    const REGION_DB_MAP = {
-      'Wellington': ['Wellington', 'Wider Wellington Region']
-    };
-
     fetchAllClinics().then(clinics => {
       if (!Array.isArray(clinics) || clinics.length === 0) return;
 
@@ -768,9 +787,15 @@
       });
 
       locationCards.forEach(card => {
-        const displayRegion = card.getAttribute('data-region');
-        const dbRegions = REGION_DB_MAP[displayRegion] || [displayRegion];
-        const total = dbRegions.reduce((sum, r) => sum + (counts[r] || 0), 0);
+        const dbRegion = card.getAttribute('data-region');
+        const suburbFilterKey = card.getAttribute('data-suburb-filter');
+        let total;
+        if (suburbFilterKey && SUBURB_FILTERS[suburbFilterKey]) {
+          const allowed = SUBURB_FILTERS[suburbFilterKey];
+          total = clinics.filter(c => c.region === dbRegion && allowed.has(c.suburb_town)).length;
+        } else {
+          total = counts[dbRegion] || 0;
+        }
         if (total > 0) {
           const countEl = card.querySelector('.location-card__count');
           if (countEl) countEl.textContent = `${total} dentists`;

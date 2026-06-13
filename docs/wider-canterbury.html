@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wider Canterbury Dentists — Dental Compare</title>
+    <meta name="description"
+        content="Browse and compare dentists across Wider Canterbury including Rangiora, Ashburton, Timaru, Rolleston and more.">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4J758VJQVX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4J758VJQVX');
+    </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container header__inner">
+            <a href="/" class="logo">
+                <img src="assets/images/logo.png" alt="Dental Compare" class="logo__img">
+            </a>
+            <nav class="nav" id="main-nav">
+                <a href="/" class="nav__link">Home</a>
+                <a href="clinic-owners.html" class="nav__link nav__link--owners">For Clinic Owners</a>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <section style="background: linear-gradient(135deg, var(--clr-navy) 0%, var(--clr-navy-light) 100%); color: #fff; padding: 3rem 0; text-align: center;">
+        <div class="container">
+            <a href="/" class="profile-hero__back" style="display:inline-block; color:rgba(255,255,255,.7); font-size:.875rem; margin-bottom:1rem; text-decoration:none;">← Back</a>
+            <h1 style="color:#fff; margin-bottom:.75rem;">Dentists in <span class="hero__highlight">Wider Canterbury</span></h1>
+            <p style="color: var(--clr-gray-300); max-width: 500px; margin: 0 auto;">Rangiora, Ashburton, Timaru, Rolleston, Kaiapoi and surrounding areas.</p>
+        </div>
+    </section>
+
+    <div class="container" style="padding-top: 1.5rem;">
+        <button class="btn btn--outline mobile-filter-btn" id="mobile-filter-btn">☰ Filters</button>
+    </div>
+
+    <div class="filter-overlay" id="filter-overlay"></div>
+    <div class="filter-drawer" id="filter-drawer">
+        <div class="filter-drawer__header">
+            <h3>Filters</h3>
+            <button class="filter-drawer__close" id="filter-drawer-close">✕</button>
+        </div>
+        <div class="filter-group">
+            <div class="filter-group__label">Maximum Price</div>
+            <div class="price-slider">
+                <input type="range" class="price-range" id="mobile-price-range" min="100" max="300" value="300" step="5">
+                <div class="price-slider__labels">
+                    <span>$100</span>
+                    <span class="price-slider__value" id="mobile-price-value">Any</span>
+                    <span>$300+</span>
+                </div>
+            </div>
+        </div>
+        <div class="filter-group">
+            <div class="filter-group__label">Service</div>
+            <div class="filter-group__items">
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="General Dentistry"> General</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Cosmetic"> Cosmetic</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Teeth Whitening"> Whitening</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Orthodontics"> Orthodontics</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Dental Implants"> Dental Implants</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Emergency"> Emergency</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Dentures"> Dentures</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Endodontics"> Endodontics</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Oral Surgery"> Oral Surgery</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Periodontal Care"> Periodontal Care</label>
+            </div>
+        </div>
+        <div class="filter-group" data-filter="suburb">
+            <div class="filter-group__label">Suburb/Town</div>
+            <div class="filter-group__items"></div>
+        </div>
+        <div class="filter-group">
+            <div class="filter-group__label">Rating</div>
+            <div class="price-slider">
+                <input type="range" class="rating-range" id="mobile-rating-range" min="0" max="5" value="0" step="0.5">
+                <div class="price-slider__labels">
+                    <span>Any</span>
+                    <span class="price-slider__value" id="mobile-rating-value">Any</span>
+                    <span>★ 5.0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="section" style="padding-top: 2rem;">
+        <div class="container">
+            <div class="listings-layout">
+
+                <aside class="sidebar">
+                    <div class="sidebar__title">☰ Filters</div>
+                    <div class="filter-group">
+                        <div class="filter-group__label">Search</div>
+                        <div class="listings-search">
+                            <input type="text" id="listings-search" placeholder="Search by name or service...">
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <div class="filter-group__label">Maximum Price</div>
+                        <div class="price-slider">
+                            <input type="range" class="price-range" id="desktop-price-range" min="100" max="300" value="300" step="5">
+                            <div class="price-slider__labels">
+                                <span>$100</span>
+                                <span class="price-slider__value" id="desktop-price-value">Any</span>
+                                <span>$300+</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <div class="filter-group__label">Service</div>
+                        <div class="filter-group__items">
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="General Dentistry"> General Dentistry</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Cosmetic"> Cosmetic</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Teeth Whitening"> Teeth Whitening</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Orthodontics"> Orthodontics</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Dental Implants"> Dental Implants</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Emergency"> Emergency</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Dentures"> Dentures</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Endodontics"> Endodontics</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Oral Surgery"> Oral Surgery</label>
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Periodontal Care"> Periodontal Care</label>
+                        </div>
+                    </div>
+                    <div class="filter-group" data-filter="suburb">
+                        <div class="filter-group__label">Suburb/Town</div>
+                        <div class="filter-group__items"></div>
+                    </div>
+                    <div class="filter-group">
+                        <div class="filter-group__label">Rating</div>
+                        <div class="price-slider">
+                            <input type="range" class="rating-range" id="desktop-rating-range" min="0" max="5" value="0" step="0.5">
+                            <div class="price-slider__labels">
+                                <span>Any</span>
+                                <span class="price-slider__value" id="desktop-rating-value">Any</span>
+                                <span>★ 5.0</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <main>
+                    <div class="listings-header">
+                        <span class="listings-header__count" id="results-count"></span>
+                        <select class="sort-select" id="sort-select">
+                            <option value="rating">Sort by: Rating</option>
+                            <option value="reviews">Sort by: Most Reviews</option>
+                            <option value="price">Sort by: Lowest Price</option>
+                            <option value="name">Sort by: Name A–Z</option>
+                        </select>
+                    </div>
+                    <div class="dentist-grid" id="dentist-grid" data-region="Canterbury" data-suburb-filter="wider-canterbury">
+                        <!-- Cards injected by JS -->
+                    </div>
+                </main>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__copy">Built in New Zealand</div>
+        </div>
+    </footer>
+
+    <script src="assets/js/dentists.js"></script>
+    <script src="assets/js/supabase.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>

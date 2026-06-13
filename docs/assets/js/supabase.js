@@ -297,7 +297,7 @@ async function fetchAllClinics() {
   const all = [];
   try {
     for (let offset = 0; ; offset += PAGE) {
-      const url = `${SUPABASE_URL}/rest/v1/dental_clinics?select=id,region&business_status=eq.OPERATIONAL&limit=${PAGE}&offset=${offset}`;
+      const url = `${SUPABASE_URL}/rest/v1/dental_clinics?select=id,region,suburb_town&business_status=eq.OPERATIONAL&limit=${PAGE}&offset=${offset}`;
       const response = await fetch(url, {
         headers: {
           'apikey': SUPABASE_ANON_KEY,
