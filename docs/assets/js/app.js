@@ -744,44 +744,96 @@
     );
   }
 
+  // Animated placeholder typewriter
+  if (heroSearchInput) {
+    const examples = [
+      "Try 'Dentures in Wellington'…",
+      "Try 'Orthodontics near Riccarton'…",
+      "Try 'Christchurch'…",
+      "Or use 'Use my location' below…",
+    ];
+    let exIdx = 0, charIdx = 0, erasing = false;
+    function typePlaceholder() {
+      if (document.activeElement === heroSearchInput || heroSearchInput.value) return;
+      const target = examples[exIdx];
+      if (!erasing) {
+        heroSearchInput.placeholder = target.slice(0, ++charIdx);
+        if (charIdx === target.length) { erasing = true; setTimeout(typePlaceholder, 2000); return; }
+        setTimeout(typePlaceholder, 55);
+      } else {
+        heroSearchInput.placeholder = target.slice(0, --charIdx);
+        if (charIdx === 0) { erasing = false; exIdx = (exIdx + 1) % examples.length; setTimeout(typePlaceholder, 400); return; }
+        setTimeout(typePlaceholder, 30);
+      }
+    }
+    setTimeout(typePlaceholder, 800);
+  }
+
+  function resolveLocation(locationStr) {
+    const coords = typeof SUBURB_COORDS !== 'undefined' ? SUBURB_COORDS : {};
+    const lower = locationStr.toLowerCase().trim();
+    const entry = Object.entries(coords).find(([k]) =>
+      k.toLowerCase() === lower || k.toLowerCase() === lower.split(',')[0].trim()
+    );
+    return entry ? { lat: entry[1][0], lng: entry[1][1], fromCache: true } : null;
+  }
+
+  async function geocodeFallback(locationStr) {
+    const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(locationStr + ', New Zealand')}&format=json&limit=1&countrycodes=nz`);
+    const data = await res.json();
+    if (data.length > 0) return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon), fromCache: false };
+    return null;
+  }
+
   async function doSearch() {
     const q = heroSearchInput ? heroSearchInput.value.trim() : '';
 
+    // Parse "service in/near location" pattern
+    const locationMatch = q.match(/^(.+?)\s+(?:in|near)\s+(.+)$/i);
+    const service = locationMatch ? locationMatch[1].trim() : null;
+    const locationStr = locationMatch ? locationMatch[2].trim() : null;
+
+    // If explicit "X in/near Y" — geocode Y and use X as service filter
+    if (locationMatch) {
+      let coord = resolveLocation(locationStr);
+      if (!coord) {
+        if (heroSearchBtn) { heroSearchBtn.textContent = 'Searching…'; heroSearchBtn.disabled = true; }
+        try { coord = await geocodeFallback(locationStr); } catch (e) {}
+        if (heroSearchBtn) { heroSearchBtn.textContent = 'Search'; heroSearchBtn.disabled = false; }
+      }
+      if (coord) {
+        window.location.href = `nearby.html?lat=${coord.lat}&lng=${coord.lng}&q=${encodeURIComponent(service)}`;
+        return;
+      }
+    }
+
+    // GPS active — use it
     if (savedLat !== null) {
       const qParam = q ? `&q=${encodeURIComponent(q)}` : '';
       window.location.href = `nearby.html?lat=${savedLat}&lng=${savedLng}${qParam}`;
       return;
     }
 
+    // No GPS — try treating full query as a location
     if (q) {
-      // Check static lookup first (instant, no API call)
-      const qLower = q.toLowerCase();
-      const coordsEntry = Object.entries(typeof SUBURB_COORDS !== 'undefined' ? SUBURB_COORDS : {})
-        .find(([k]) => k.toLowerCase() === qLower || k.toLowerCase() === qLower.split(',')[0].trim());
-      if (coordsEntry) {
-        const [lat, lng] = coordsEntry[1];
-        window.location.href = `nearby.html?lat=${lat}&lng=${lng}&q=${encodeURIComponent(q)}`;
+      let coord = resolveLocation(q);
+      if (!coord) {
+        if (heroSearchBtn) { heroSearchBtn.textContent = 'Searching…'; heroSearchBtn.disabled = true; }
+        try { coord = await geocodeFallback(q); } catch (e) {}
+        if (heroSearchBtn) { heroSearchBtn.textContent = 'Search'; heroSearchBtn.disabled = false; }
+      }
+      if (coord) {
+        window.location.href = `nearby.html?lat=${coord.lat}&lng=${coord.lng}&q=${encodeURIComponent(q)}`;
         return;
       }
-      // Fall back to Nominatim for unrecognised inputs
-      if (heroSearchBtn) { heroSearchBtn.textContent = 'Searching…'; heroSearchBtn.disabled = true; }
-      try {
-        const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q + ', New Zealand')}&format=json&limit=1&countrycodes=nz`);
-        const data = await res.json();
-        if (data.length > 0) {
-          window.location.href = `nearby.html?lat=${data[0].lat}&lng=${data[0].lon}&q=${encodeURIComponent(q)}`;
-          return;
-        }
-      } catch (e) {}
-      if (heroSearchBtn) { heroSearchBtn.textContent = 'Search'; heroSearchBtn.disabled = false; }
     }
 
     if (nearMeBtn) nearMeBtn.classList.add('hero-nearby__btn--nudge');
-    nearMeStatus.textContent = q ? 'Location not found. Try enabling your location.' : 'Enable your location to search.';
+    nearMeStatus.textContent = q ? 'Location not found. Try "Dentures in Wellington".' : 'Enter a suburb, or use your location.';
     setTimeout(() => {
       if (nearMeBtn) nearMeBtn.classList.remove('hero-nearby__btn--nudge');
       nearMeStatus.textContent = '';
-    }, 2000);
+    }, 3000);
   }
 
   // "Use my location" → show modal (if location not yet granted) or clear it (if already on)
