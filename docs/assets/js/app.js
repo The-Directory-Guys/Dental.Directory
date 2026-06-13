@@ -75,6 +75,14 @@
       'Cambridge','Taupo','Thames','Te Awamutu','Morrinsville','Tokoroa','Waihi',
       'Pirongia','Leamington','Paeroa','Huntly','Coromandel Town','Matamata',
       'Raglan','Te Aroha','Turangi','Whitianga'
+    ]),
+    'dunedin-city': new Set([
+      'Dunedin Central','Dunedin North','Mosgiel','Green Island','Roslyn','Wakari',
+      'Musselburgh','North East Valley','Kaikorai','Mornington','South Dunedin'
+    ]),
+    'wider-otago': new Set([
+      'Queenstown','Frankton','Wānaka','Alexandra','Oamaru','Cromwell',
+      'Balclutha','Ranfurly','Milton','Palmerston'
     ])
   };
 
@@ -451,7 +459,7 @@
     'Nelson': 'nelson-tasman.html',
     'Nelson & Tasman': 'nelson-tasman.html',
     'Northland': 'northland.html',
-    'Otago': 'otago.html',
+    'Otago': 'dunedin.html',
     'Southland': 'southland.html',
     'Taranaki': 'taranaki.html',
     'Waikato': 'hamilton.html',
