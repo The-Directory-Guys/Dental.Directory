@@ -666,11 +666,18 @@
   const locationModalAllow = document.getElementById('location-modal-allow');
   const locationModalDeny = document.getElementById('location-modal-deny');
 
-  let locationToggled = false;
+  let savedLat = null, savedLng = null;
 
-  function setLocationToggle(active) {
-    locationToggled = active;
-    if (nearMeBtn) nearMeBtn.classList.toggle('hero-nearby__btn--active', active);
+  function setLocationActive(lat, lng) {
+    savedLat = lat; savedLng = lng;
+    if (nearMeBtn) nearMeBtn.classList.add('hero-nearby__btn--active');
+    if (nearMeStatus) nearMeStatus.textContent = '';
+  }
+
+  function clearLocation() {
+    savedLat = null; savedLng = null;
+    if (nearMeBtn) nearMeBtn.classList.remove('hero-nearby__btn--active');
+    if (nearMeStatus) nearMeStatus.textContent = '';
   }
 
   function requestLocation() {
@@ -681,40 +688,41 @@
     nearMeStatus.textContent = 'Getting your location...';
     navigator.geolocation.getCurrentPosition(
       pos => {
-        const { latitude: lat, longitude: lng } = pos.coords;
-        const q = heroSearchInput ? heroSearchInput.value.trim() : '';
-        const qParam = q ? `&q=${encodeURIComponent(q)}` : '';
-        window.location.href = `nearby.html?lat=${lat}&lng=${lng}${qParam}`;
+        setLocationActive(pos.coords.latitude, pos.coords.longitude);
       },
       () => {
-        nearMeStatus.textContent = 'Location access denied. Please allow location access in your browser.';
-        setLocationToggle(false);
+        nearMeStatus.textContent = 'Location access denied. Please allow location in your browser.';
       }
     );
   }
 
   function doSearch() {
-    if (!locationToggled) {
-      // Nudge the user to toggle location
-      nearMeBtn.classList.add('hero-nearby__btn--nudge');
+    if (savedLat === null) {
+      if (nearMeBtn) nearMeBtn.classList.add('hero-nearby__btn--nudge');
       nearMeStatus.textContent = 'Enable your location to search.';
       setTimeout(() => {
-        nearMeBtn.classList.remove('hero-nearby__btn--nudge');
+        if (nearMeBtn) nearMeBtn.classList.remove('hero-nearby__btn--nudge');
         nearMeStatus.textContent = '';
       }, 2000);
       return;
     }
-    if (locationModalOverlay) {
-      locationModalOverlay.style.display = 'flex';
-    } else {
-      requestLocation();
-    }
+    const q = heroSearchInput ? heroSearchInput.value.trim() : '';
+    const qParam = q ? `&q=${encodeURIComponent(q)}` : '';
+    window.location.href = `nearby.html?lat=${savedLat}&lng=${savedLng}${qParam}`;
   }
 
+  // "Use my location" → show modal (if location not yet granted) or clear it (if already on)
   if (nearMeBtn) {
     nearMeBtn.addEventListener('click', () => {
-      setLocationToggle(!locationToggled);
-      if (!locationToggled) nearMeStatus.textContent = '';
+      if (savedLat !== null) {
+        clearLocation();
+        return;
+      }
+      if (locationModalOverlay) {
+        locationModalOverlay.style.display = 'flex';
+      } else {
+        requestLocation();
+      }
     });
   }
 
