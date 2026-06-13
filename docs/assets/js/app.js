@@ -76,6 +76,14 @@
       'Pirongia','Leamington','Paeroa','Huntly','Coromandel Town','Matamata',
       'Raglan','Te Aroha','Turangi','Whitianga'
     ]),
+    'tauranga-city': new Set([
+      'Tauranga','Papamoa Beach','Tauranga South','Gate Pa','Bethlehem','Greerton',
+      'Pyes Pa','Otūmoetai','Papamoa','Mount Maunganui','Tauriko','Hairini'
+    ]),
+    'wider-bop': new Set([
+      'Rotorua','Whakatāne','Kawerau','Utuhina','Ōpōtiki','Katikati','Omokoroa',
+      'Ngongotahā','Lynmore','Victoria, Rotorua','Ngapuna','Te Puke','Ohinemutu'
+    ]),
     'dunedin-city': new Set([
       'Dunedin Central','Dunedin North','Mosgiel','Green Island','Roslyn','Wakari',
       'Musselburgh','North East Valley','Kaikorai','Mornington','South Dunedin'
@@ -450,7 +458,7 @@
 
   const REGION_FILES = {
     'Auckland': 'auckland.html',
-    'Bay of Plenty': 'bay-of-plenty.html',
+    'Bay of Plenty': 'tauranga.html',
     'Canterbury': 'christchurch.html',
     'Gisborne': 'gisborne.html',
     'Hawke\'s Bay': 'hawkes-bay.html',
