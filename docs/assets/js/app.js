@@ -471,7 +471,7 @@
     'Taranaki': 'taranaki.html',
     'Waikato': 'hamilton.html',
     'Wellington': 'wellington.html',
-    'Wider Wellington Region': 'wairarapa.html',
+    'Wairarapa': 'wairarapa.html',
     'West Coast': 'west-coast.html'
   };
 
