@@ -785,12 +785,28 @@
     return null;
   }
 
+  const SERVICE_ALIASES = {
+    'orthodontist': 'Orthodontics', 'orthodontists': 'Orthodontics', 'orthodontic': 'Orthodontics',
+    'implant': 'Dental Implants', 'implants': 'Dental Implants', 'dental implant': 'Dental Implants',
+    'whitening': 'Teeth Whitening', 'tooth whitening': 'Teeth Whitening',
+    'emergency dentist': 'Emergency', 'urgent': 'Emergency', 'emergency dentistry': 'Emergency',
+    'general': 'General Dentistry', 'general dentist': 'General Dentistry', 'general dentistry': 'General Dentistry',
+    'denture': 'Dentures',
+    'periodontist': 'Periodontal Care', 'periodontics': 'Periodontal Care', 'gum disease': 'Periodontal Care',
+    'endodontist': 'Endodontics', 'root canal': 'Endodontics', 'root canals': 'Endodontics',
+    'oral surgeon': 'Oral Surgery', 'oral surgeons': 'Oral Surgery', 'maxillofacial': 'Oral Surgery',
+    'cosmetic dentist': 'Cosmetic', 'cosmetic dentistry': 'Cosmetic',
+  };
+  function normalizeService(str) {
+    return SERVICE_ALIASES[str.toLowerCase().trim()] || str;
+  }
+
   async function doSearch() {
     const q = heroSearchInput ? heroSearchInput.value.trim() : '';
 
     // Parse "service in/near location" pattern
     const locationMatch = q.match(/^(.+?)\s+(?:in|near)\s+(.+)$/i);
-    const service = locationMatch ? locationMatch[1].trim() : null;
+    const service = locationMatch ? normalizeService(locationMatch[1].trim()) : null;
     const locationStr = locationMatch ? locationMatch[2].trim() : null;
 
     // If explicit "X in/near Y" — geocode Y and use X as service filter

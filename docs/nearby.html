@@ -470,11 +470,25 @@
           layout.style.display = '';
           mobileBtn.style.display = '';
 
-          // Pre-fill search from ?q=; if it matches a service, tick that instead
+          // Pre-fill search from ?q=; if it matches a service (or alias), tick that instead
+          const SERVICE_ALIASES = {
+            'orthodontist': 'Orthodontics', 'orthodontists': 'Orthodontics', 'orthodontic': 'Orthodontics',
+            'implant': 'Dental Implants', 'implants': 'Dental Implants', 'dental implant': 'Dental Implants',
+            'whitening': 'Teeth Whitening', 'tooth whitening': 'Teeth Whitening',
+            'emergency dentist': 'Emergency', 'urgent': 'Emergency', 'emergency dentistry': 'Emergency',
+            'general': 'General Dentistry', 'general dentist': 'General Dentistry', 'general dentistry': 'General Dentistry',
+            'denture': 'Dentures',
+            'periodontist': 'Periodontal Care', 'periodontics': 'Periodontal Care', 'gum disease': 'Periodontal Care',
+            'endodontist': 'Endodontics', 'root canal': 'Endodontics', 'root canals': 'Endodontics',
+            'oral surgeon': 'Oral Surgery', 'oral surgeons': 'Oral Surgery', 'maxillofacial': 'Oral Surgery',
+            'cosmetic dentist': 'Cosmetic', 'cosmetic dentistry': 'Cosmetic',
+          };
           const q = params.get('q');
           if (q && searchInput) {
+            const qLower = q.toLowerCase().trim();
+            const canonical = SERVICE_ALIASES[qLower] || q;
             const matchingService = Array.from(document.querySelectorAll('.filter-service'))
-              .find(cb => cb.value.toLowerCase() === q.toLowerCase());
+              .find(cb => cb.value.toLowerCase() === canonical.toLowerCase());
             if (matchingService) {
               document.querySelectorAll(`.filter-service[value="${matchingService.value}"]`).forEach(cb => cb.checked = true);
               activeServices = [matchingService.value];
