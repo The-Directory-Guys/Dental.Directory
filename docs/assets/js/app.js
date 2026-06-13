@@ -368,9 +368,10 @@
 
     function updatePriceSlider(value) {
       maxPrice = parseInt(value, 10) >= 300 ? Infinity : parseInt(value, 10);
-      const label = maxPrice === Infinity ? 'Any price' : `Up to $${maxPrice}`;
-      if (desktopSlider) desktopSlider.value = maxPrice;
-      if (mobileSlider) mobileSlider.value = maxPrice;
+      const label = maxPrice === Infinity ? 'Any' : `Up to $${maxPrice}`;
+      const sliderVal = maxPrice === Infinity ? 300 : maxPrice;
+      if (desktopSlider) desktopSlider.value = sliderVal;
+      if (mobileSlider) mobileSlider.value = sliderVal;
       if (desktopLabel) desktopLabel.textContent = label;
       if (mobileLabel) mobileLabel.textContent = label;
       renderWithReset();
