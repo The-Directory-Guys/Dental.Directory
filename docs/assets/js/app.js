@@ -754,6 +754,16 @@
     }
 
     if (q) {
+      // Check static lookup first (instant, no API call)
+      const qLower = q.toLowerCase();
+      const coordsEntry = Object.entries(typeof SUBURB_COORDS !== 'undefined' ? SUBURB_COORDS : {})
+        .find(([k]) => k.toLowerCase() === qLower || k.toLowerCase() === qLower.split(',')[0].trim());
+      if (coordsEntry) {
+        const [lat, lng] = coordsEntry[1];
+        window.location.href = `nearby.html?lat=${lat}&lng=${lng}&q=${encodeURIComponent(q)}`;
+        return;
+      }
+      // Fall back to Nominatim for unrecognised inputs
       if (heroSearchBtn) { heroSearchBtn.textContent = 'Searching…'; heroSearchBtn.disabled = true; }
       try {
         const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q + ', New Zealand')}&format=json&limit=1&countrycodes=nz`);
