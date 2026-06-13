@@ -655,45 +655,29 @@
     `;
   }
 
-  // ===== Hero Search Redirect =====
-  const heroSearchBtn = document.querySelector('.hero-search__btn');
-  const heroRegionSelect = document.getElementById('hero-region-select');
-
+  // ===== Hero Search =====
+  const heroSearchBtn = document.getElementById('hero-search-btn');
   const heroSearchInput = document.querySelector('.hero-search__input');
 
-  function getSelectedRegionUrl() {
-    const region = heroRegionSelect ? heroRegionSelect.value : 'canterbury';
-    const query = heroSearchInput ? heroSearchInput.value.trim() : '';
-    return query ? `${region}.html?q=${encodeURIComponent(query)}` : `${region}.html`;
-  }
-
-  if (heroSearchBtn) {
-    heroSearchBtn.addEventListener('click', () => {
-      window.location.href = getSelectedRegionUrl();
-    });
-  }
-
-  if (heroSearchInput) {
-    heroSearchInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        window.location.href = getSelectedRegionUrl();
-      }
-    });
-  }
-
-  // ===== Homepage: Near Me Button =====
+  // ===== Homepage: Near Me Toggle + Search =====
   const nearMeBtn = document.getElementById('near-me-btn');
   const nearMeStatus = document.getElementById('near-me-status');
   const locationModalOverlay = document.getElementById('location-modal-overlay');
   const locationModalAllow = document.getElementById('location-modal-allow');
   const locationModalDeny = document.getElementById('location-modal-deny');
 
+  let locationToggled = false;
+
+  function setLocationToggle(active) {
+    locationToggled = active;
+    if (nearMeBtn) nearMeBtn.classList.toggle('hero-nearby__btn--active', active);
+  }
+
   function requestLocation() {
     if (!navigator.geolocation) {
       nearMeStatus.textContent = 'Geolocation not supported by your browser.';
       return;
     }
-    nearMeBtn.disabled = true;
     nearMeStatus.textContent = 'Getting your location...';
     navigator.geolocation.getCurrentPosition(
       pos => {
@@ -703,16 +687,45 @@
         window.location.href = `nearby.html?lat=${lat}&lng=${lng}${qParam}`;
       },
       () => {
-        nearMeBtn.disabled = false;
-        nearMeStatus.textContent = 'Location access denied. Please allow location access.';
+        nearMeStatus.textContent = 'Location access denied. Please allow location access in your browser.';
+        setLocationToggle(false);
       }
     );
   }
 
-  if (nearMeBtn && locationModalOverlay) {
-    nearMeBtn.addEventListener('click', () => {
+  function doSearch() {
+    if (!locationToggled) {
+      // Nudge the user to toggle location
+      nearMeBtn.classList.add('hero-nearby__btn--nudge');
+      nearMeStatus.textContent = 'Enable your location to search.';
+      setTimeout(() => {
+        nearMeBtn.classList.remove('hero-nearby__btn--nudge');
+        nearMeStatus.textContent = '';
+      }, 2000);
+      return;
+    }
+    if (locationModalOverlay) {
       locationModalOverlay.style.display = 'flex';
+    } else {
+      requestLocation();
+    }
+  }
+
+  if (nearMeBtn) {
+    nearMeBtn.addEventListener('click', () => {
+      setLocationToggle(!locationToggled);
+      if (!locationToggled) nearMeStatus.textContent = '';
     });
+  }
+
+  if (heroSearchBtn) heroSearchBtn.addEventListener('click', doSearch);
+  if (heroSearchInput) {
+    heroSearchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') doSearch();
+    });
+  }
+
+  if (locationModalOverlay) {
     locationModalAllow.addEventListener('click', () => {
       locationModalOverlay.style.display = 'none';
       requestLocation();
@@ -723,8 +736,6 @@
     locationModalOverlay.addEventListener('click', (e) => {
       if (e.target === locationModalOverlay) locationModalOverlay.style.display = 'none';
     });
-  } else if (nearMeBtn) {
-    nearMeBtn.addEventListener('click', requestLocation);
   }
 
   // ===== Homepage: Dynamic Region Counts =====
