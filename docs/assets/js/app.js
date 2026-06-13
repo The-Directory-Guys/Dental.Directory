@@ -65,6 +65,16 @@
     'wider-canterbury': new Set([
       'Rangiora','Kaiapoi','Prebbleton','Ashburton','Timaru Central','Rolleston',
       'Darfield','Geraldine','Allenton','Kaikōura','Lincoln','Oxford','Temuka','Parkside'
+    ]),
+    'hamilton-city': new Set([
+      'Hamilton Central','Hamilton East','Claudelands','Chartwell','Hillcrest','Pukete',
+      'Nawton','Fairfield','Whitiora','Hamilton Lake','Te Rapa','Rototuna North','Rototuna',
+      'Frankton','Dinsdale','Beerescourt','Parkwood','Melville','Flagstaff'
+    ]),
+    'wider-waikato': new Set([
+      'Cambridge','Taupo','Thames','Te Awamutu','Morrinsville','Tokoroa','Waihi',
+      'Pirongia','Leamington','Paeroa','Huntly','Coromandel Town','Matamata',
+      'Raglan','Te Aroha','Turangi','Whitianga'
     ])
   };
 
@@ -444,7 +454,7 @@
     'Otago': 'otago.html',
     'Southland': 'southland.html',
     'Taranaki': 'taranaki.html',
-    'Waikato': 'waikato.html',
+    'Waikato': 'hamilton.html',
     'Wellington': 'wellington.html',
     'Wider Wellington Region': 'wairarapa.html',
     'West Coast': 'west-coast.html'
