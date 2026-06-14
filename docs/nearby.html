@@ -262,6 +262,7 @@
         let userLat, userLng, allClinics = [];
         let map, clinicMarkers = [], radiusCircle, userMarker;
         let activeServices = [], activeSuburbs = [], minRating = 0, maxPrice = Infinity, maxHygienistPrice = Infinity;
+        let activeTreatmentPriceType = null;
 
         const params = new URLSearchParams(window.location.search);
 
@@ -458,8 +459,24 @@
             return true;
           });
 
-          // Sort
-          if (sort === 'distance') filtered.sort((a, b) => a.distKm - b.distKm);
+          // Sort — price-boost takes precedence when a priceable treatment alias is active
+          if (activeTreatmentPriceType === 'checkup') {
+            filtered.sort((a, b) => {
+              const pa = getCheckupPrice(a), pb = getCheckupPrice(b);
+              if (pa !== null && pb !== null) return pa - pb;
+              if (pa !== null) return -1;
+              if (pb !== null) return 1;
+              return (b.rating||0) - (a.rating||0);
+            });
+          } else if (activeTreatmentPriceType === 'hygienist') {
+            filtered.sort((a, b) => {
+              const pa = getHygienistPrice(a), pb = getHygienistPrice(b);
+              if (pa !== null && pb !== null) return pa - pb;
+              if (pa !== null) return -1;
+              if (pb !== null) return 1;
+              return (b.rating||0) - (a.rating||0);
+            });
+          } else if (sort === 'distance') filtered.sort((a, b) => a.distKm - b.distKm);
           else if (sort === 'rating') filtered.sort((a, b) => (b.rating||0) - (a.rating||0));
           else if (sort === 'reviews') filtered.sort((a, b) => (b.reviewCount||0) - (a.reviewCount||0));
           else if (sort === 'price') filtered.sort((a, b) => (getCheckupPrice(a) || 999) - (getCheckupPrice(b) || 999));
@@ -522,30 +539,24 @@
           layout.style.display = '';
           mobileBtn.style.display = '';
 
-          // Pre-fill search from ?q=; if it matches a service (or alias), tick that instead
-          const SERVICE_ALIASES = {
-            'orthodontist': 'Orthodontics', 'orthodontists': 'Orthodontics', 'orthodontic': 'Orthodontics',
-            'implant': 'Dental Implants', 'implants': 'Dental Implants', 'dental implant': 'Dental Implants',
-            'whitening': 'Teeth Whitening', 'tooth whitening': 'Teeth Whitening',
-            'emergency dentist': 'Emergency', 'urgent': 'Emergency', 'emergency dentistry': 'Emergency',
-            'general': 'General Dentistry', 'general dentist': 'General Dentistry', 'general dentistry': 'General Dentistry',
-            'denture': 'Dentures',
-            'periodontist': 'Periodontal Care', 'periodontics': 'Periodontal Care', 'gum disease': 'Periodontal Care',
-            'endodontist': 'Endodontics', 'root canal': 'Endodontics', 'root canals': 'Endodontics',
-            'oral surgeon': 'Oral Surgery', 'oral surgeons': 'Oral Surgery', 'maxillofacial': 'Oral Surgery',
-            'cosmetic dentist': 'Cosmetic', 'cosmetic dentistry': 'Cosmetic',
-          };
+          // Pre-fill search from ?q=; if it matches a treatment alias or service, tick that instead
           const q = params.get('q');
           if (q && searchInput) {
             const qLower = q.toLowerCase().trim();
-            const canonical = SERVICE_ALIASES[qLower] || q;
-            const matchingService = Array.from(document.querySelectorAll('.filter-service'))
-              .find(cb => cb.value.toLowerCase() === canonical.toLowerCase());
-            if (matchingService) {
-              document.querySelectorAll(`.filter-service[value="${matchingService.value}"]`).forEach(cb => cb.checked = true);
-              activeServices = [matchingService.value];
+            const treatment = typeof TREATMENT_MAP !== 'undefined' && TREATMENT_MAP[qLower];
+            if (treatment) {
+              document.querySelectorAll(`.filter-service[value="${treatment.service}"]`).forEach(cb => { cb.checked = true; });
+              activeServices = [treatment.service];
+              activeTreatmentPriceType = treatment.priceType;
             } else {
-              searchInput.value = q;
+              const matchingService = Array.from(document.querySelectorAll('.filter-service'))
+                .find(cb => cb.value.toLowerCase() === qLower);
+              if (matchingService) {
+                document.querySelectorAll(`.filter-service[value="${matchingService.value}"]`).forEach(cb => { cb.checked = true; });
+                activeServices = [matchingService.value];
+              } else {
+                searchInput.value = q;
+              }
             }
           }
 
@@ -565,7 +576,18 @@
           // Wire up all filter controls
           radiusSel.addEventListener('change', () => render());
           sortSelect.addEventListener('change', () => render(false));
-          if (searchInput) searchInput.addEventListener('input', () => render(false));
+          if (searchInput) searchInput.addEventListener('input', () => {
+            const raw = searchInput.value;
+            const treatment = typeof TREATMENT_MAP !== 'undefined' && TREATMENT_MAP[raw.trim().toLowerCase()];
+            if (treatment) {
+              document.querySelectorAll(`.filter-service[value="${treatment.service}"]`).forEach(cb => { cb.checked = true; });
+              activeServices = [...new Set(Array.from(document.querySelectorAll('.filter-service:checked')).map(e => e.value))];
+              activeTreatmentPriceType = treatment.priceType;
+            } else {
+              activeTreatmentPriceType = null;
+            }
+            render(false);
+          });
 
           document.querySelectorAll('.filter-service').forEach(cb =>
             cb.addEventListener('change', () => {

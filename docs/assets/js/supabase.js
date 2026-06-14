@@ -260,10 +260,27 @@ async function fetchClinicById(id) {
   }
 }
 
+// Parse "X days/weeks/months/years ago" into a comparable number (lower = more recent)
+function parseDateTextToDaysAgo(s) {
+  if (!s) return 9999;
+  s = s.toLowerCase().trim();
+  if (s === 'just now' || s === 'today') return 0;
+  if (s === 'a day ago' || s === 'yesterday') return 1;
+  if (s === 'a week ago') return 7;
+  if (s === 'a month ago') return 30;
+  if (s === 'a year ago') return 365;
+  if (s === 'an hour ago' || s === 'a minute ago' || s === 'a second ago') return 0;
+  const m = s.match(/^(\d+)\s+(second|minute|hour|day|week|month|year)s?\s+ago$/);
+  if (!m) return 9999;
+  const n = parseInt(m[1]);
+  const mult = { second: 0, minute: 0, hour: 0, day: 1, week: 7, month: 30, year: 365 };
+  return n * (mult[m[2]] ?? 1);
+}
+
 // Fetch reviews for a single clinic from Supabase google_reviews table
 async function fetchSingleClinicReviews(clinicId) {
   try {
-    const url = `${SUPABASE_URL}/rest/v1/google_reviews?clinic_id=eq.${clinicId}&order=fetched_at.desc`;
+    const url = `${SUPABASE_URL}/rest/v1/google_reviews?clinic_id=eq.${clinicId}&order=id.desc`;
     const response = await fetch(url, {
       headers: {
         'apikey': SUPABASE_ANON_KEY,
@@ -279,12 +296,15 @@ async function fetchSingleClinicReviews(clinicId) {
     const data = await response.json();
     if (!Array.isArray(data)) return [];
 
-    return data.map(r => ({
-      name: r.author || 'Verified Patient',
-      date: r.date_text || 'Recently',
-      rating: r.rating || 5,
-      text: r.snippet || ''
-    }));
+    return data
+      .map(r => ({
+        name: r.author || 'Verified Patient',
+        date: r.date_text || 'Recently',
+        rating: r.rating || 5,
+        text: r.snippet || '',
+        daysAgo: parseDateTextToDaysAgo(r.date_text)
+      }))
+      .sort((a, b) => a.daysAgo - b.daysAgo);
   } catch (error) {
     console.error('Failed to fetch single clinic reviews:', error);
     return [];

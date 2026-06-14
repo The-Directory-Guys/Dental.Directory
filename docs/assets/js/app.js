@@ -1,4 +1,94 @@
 // Dental Compare — App Logic
+
+// Treatment synonym map — keys are user search terms, values are { service, priceType }
+// priceType: 'checkup' | 'hygienist' | null (null = no price-boost sort)
+const TREATMENT_MAP = {
+  // General Dentistry / checkup
+  'checkup':              { service: 'General Dentistry', priceType: 'checkup' },
+  'checkups':             { service: 'General Dentistry', priceType: 'checkup' },
+  'check-up':             { service: 'General Dentistry', priceType: 'checkup' },
+  'check up':             { service: 'General Dentistry', priceType: 'checkup' },
+  'exam':                 { service: 'General Dentistry', priceType: 'checkup' },
+  'examination':          { service: 'General Dentistry', priceType: 'checkup' },
+  'dental exam':          { service: 'General Dentistry', priceType: 'checkup' },
+  'consult':              { service: 'General Dentistry', priceType: 'checkup' },
+  'consultation':         { service: 'General Dentistry', priceType: 'checkup' },
+  'general':              { service: 'General Dentistry', priceType: null },
+  'general dentist':      { service: 'General Dentistry', priceType: null },
+  'general dentistry':    { service: 'General Dentistry', priceType: null },
+  'filling':              { service: 'General Dentistry', priceType: null },
+  'fillings':             { service: 'General Dentistry', priceType: null },
+  'crown':                { service: 'General Dentistry', priceType: null },
+  'crowns':               { service: 'General Dentistry', priceType: null },
+  'extraction':           { service: 'General Dentistry', priceType: null },
+  'extractions':          { service: 'General Dentistry', priceType: null },
+  'tooth extraction':     { service: 'General Dentistry', priceType: null },
+  'wisdom tooth':         { service: 'General Dentistry', priceType: null },
+  'wisdom teeth':         { service: 'General Dentistry', priceType: null },
+  // Hygienist
+  'hygienist':            { service: 'Hygienist', priceType: 'hygienist' },
+  'hygienists':           { service: 'Hygienist', priceType: 'hygienist' },
+  'hygiene':              { service: 'Hygienist', priceType: 'hygienist' },
+  'clean':                { service: 'Hygienist', priceType: 'hygienist' },
+  'cleaning':             { service: 'Hygienist', priceType: 'hygienist' },
+  'dental clean':         { service: 'Hygienist', priceType: 'hygienist' },
+  'dental cleaning':      { service: 'Hygienist', priceType: 'hygienist' },
+  'scale and polish':     { service: 'Hygienist', priceType: 'hygienist' },
+  'scale and clean':      { service: 'Hygienist', priceType: 'hygienist' },
+  'scale & polish':       { service: 'Hygienist', priceType: 'hygienist' },
+  'scale & clean':        { service: 'Hygienist', priceType: 'hygienist' },
+  // Orthodontics
+  'braces':               { service: 'Orthodontics', priceType: null },
+  'brace':                { service: 'Orthodontics', priceType: null },
+  'aligners':             { service: 'Orthodontics', priceType: null },
+  'aligner':              { service: 'Orthodontics', priceType: null },
+  'invisalign':           { service: 'Orthodontics', priceType: null },
+  'orthodontist':         { service: 'Orthodontics', priceType: null },
+  'orthodontists':        { service: 'Orthodontics', priceType: null },
+  'orthodontic':          { service: 'Orthodontics', priceType: null },
+  'orthodontics':         { service: 'Orthodontics', priceType: null },
+  // Dental Implants
+  'implant':              { service: 'Dental Implants', priceType: null },
+  'implants':             { service: 'Dental Implants', priceType: null },
+  'dental implant':       { service: 'Dental Implants', priceType: null },
+  'dental implants':      { service: 'Dental Implants', priceType: null },
+  // Teeth Whitening
+  'whitening':            { service: 'Teeth Whitening', priceType: null },
+  'teeth whitening':      { service: 'Teeth Whitening', priceType: null },
+  'tooth whitening':      { service: 'Teeth Whitening', priceType: null },
+  'bleaching':            { service: 'Teeth Whitening', priceType: null },
+  // Emergency
+  'emergency':            { service: 'Emergency', priceType: null },
+  'emergency dentist':    { service: 'Emergency', priceType: null },
+  'emergency dentistry':  { service: 'Emergency', priceType: null },
+  'urgent':               { service: 'Emergency', priceType: null },
+  // Dentures
+  'denture':              { service: 'Dentures', priceType: null },
+  'dentures':             { service: 'Dentures', priceType: null },
+  // Endodontics
+  'root canal':           { service: 'Endodontics', priceType: null },
+  'root canals':          { service: 'Endodontics', priceType: null },
+  'endodontics':          { service: 'Endodontics', priceType: null },
+  'endodontist':          { service: 'Endodontics', priceType: null },
+  // Oral Surgery
+  'oral surgery':         { service: 'Oral Surgery', priceType: null },
+  'oral surgeon':         { service: 'Oral Surgery', priceType: null },
+  'oral surgeons':        { service: 'Oral Surgery', priceType: null },
+  'maxillofacial':        { service: 'Oral Surgery', priceType: null },
+  // Periodontal Care
+  'gum disease':          { service: 'Periodontal Care', priceType: null },
+  'gum treatment':        { service: 'Periodontal Care', priceType: null },
+  'periodontist':         { service: 'Periodontal Care', priceType: null },
+  'periodontics':         { service: 'Periodontal Care', priceType: null },
+  'periodontal':          { service: 'Periodontal Care', priceType: null },
+  // Cosmetic
+  'cosmetic':             { service: 'Cosmetic', priceType: null },
+  'veneers':              { service: 'Cosmetic', priceType: null },
+  'veneer':               { service: 'Cosmetic', priceType: null },
+  'cosmetic dentist':     { service: 'Cosmetic', priceType: null },
+  'cosmetic dentistry':   { service: 'Cosmetic', priceType: null },
+};
+
 (function () {
   'use strict';
 
@@ -150,6 +240,7 @@
     let sortBy = 'name';
     let maxPrice = Infinity;
     let maxHygienistPrice = Infinity;
+    let activeTreatmentPriceType = null;
 
     function cardHTML(d) {
       const initials = d.name.split(' ').filter(w => w.length > 0).map(w => w[0]).join('').slice(0, 2).toUpperCase();
@@ -224,7 +315,23 @@
         return true;
       });
 
-      if (sortBy === 'rating') {
+      if (activeTreatmentPriceType === 'checkup') {
+        filtered.sort((a, b) => {
+          const pa = getCheckupPrice(a), pb = getCheckupPrice(b);
+          if (pa !== null && pb !== null) return pa - pb;
+          if (pa !== null) return -1;
+          if (pb !== null) return 1;
+          return (b.rating || 0) - (a.rating || 0);
+        });
+      } else if (activeTreatmentPriceType === 'hygienist') {
+        filtered.sort((a, b) => {
+          const pa = getHygienistPrice(a), pb = getHygienistPrice(b);
+          if (pa !== null && pb !== null) return pa - pb;
+          if (pa !== null) return -1;
+          if (pb !== null) return 1;
+          return (b.rating || 0) - (a.rating || 0);
+        });
+      } else if (sortBy === 'rating') {
         filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0));
       } else if (sortBy === 'name') {
         filtered.sort((a, b) => a.name.localeCompare(b.name));
@@ -346,24 +453,39 @@
     const searchInput = document.getElementById('listings-search');
     if (searchInput) {
       searchInput.addEventListener('input', (e) => {
-        searchQuery = e.target.value;
+        const raw = e.target.value;
+        const treatment = TREATMENT_MAP[raw.trim().toLowerCase()];
+        if (treatment) {
+          document.querySelectorAll(`.filter-service[value="${treatment.service}"]`).forEach(cb => { cb.checked = true; });
+          activeServices = [...new Set(Array.from(document.querySelectorAll('.filter-service:checked')).map(el => el.value))];
+          activeTreatmentPriceType = treatment.priceType;
+          searchQuery = '';
+        } else {
+          activeTreatmentPriceType = null;
+          searchQuery = raw;
+        }
         renderWithReset();
       });
       // Pre-fill from ?q= URL param (passed by home page search)
       const urlQ = new URLSearchParams(window.location.search).get('q');
       if (urlQ) {
-        searchInput.value = urlQ;
-        searchQuery = urlQ;
-        // If the query matches a service checkbox exactly, tick it and clear the text search
-        const matchingService = Array.from(document.querySelectorAll('.filter-service'))
-          .find(cb => cb.value.toLowerCase() === urlQ.toLowerCase());
-        if (matchingService) {
-          matchingService.checked = true;
-          // Sync the paired mobile/desktop checkbox too
-          document.querySelectorAll(`.filter-service[value="${matchingService.value}"]`).forEach(cb => cb.checked = true);
-          activeServices = [matchingService.value];
-          searchInput.value = '';
-          searchQuery = '';
+        const qLower = urlQ.trim().toLowerCase();
+        const treatment = TREATMENT_MAP[qLower];
+        if (treatment) {
+          document.querySelectorAll(`.filter-service[value="${treatment.service}"]`).forEach(cb => { cb.checked = true; });
+          activeServices = [treatment.service];
+          activeTreatmentPriceType = treatment.priceType;
+        } else {
+          // Fall back to direct service checkbox match
+          const matchingService = Array.from(document.querySelectorAll('.filter-service'))
+            .find(cb => cb.value.toLowerCase() === qLower);
+          if (matchingService) {
+            document.querySelectorAll(`.filter-service[value="${matchingService.value}"]`).forEach(cb => { cb.checked = true; });
+            activeServices = [matchingService.value];
+          } else {
+            searchInput.value = urlQ;
+            searchQuery = urlQ;
+          }
         }
       }
     }
@@ -678,6 +800,11 @@
       ? `<a href="${dentist.googleMapsUrl}" target="_blank" class="btn btn--outline btn--block" style="margin-top:.5rem;">📍 Get Directions</a>`
       : '';
 
+    // Write a Google Review button
+    const writeReviewBtn = dentist.googleMapsUrl
+      ? `<a href="${dentist.googleMapsUrl}" target="_blank" rel="noopener" class="btn btn--block" style="margin-top:.5rem;background:#fff;border:1.5px solid #dadce0;color:#3c4043;display:flex;align-items:center;justify-content:center;gap:.5rem;font-weight:500;"><svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>Write a Google Review</a>`
+      : '';
+
     // Website button
     const websiteBtn = dentist.website
       ? `<a href="${dentist.website}" target="_blank" class="btn btn--primary btn--block">Visit Website ↗</a>`
@@ -704,11 +831,16 @@
           <table class="hours-table">${hoursHTML}</table>
         </div>` : ''}
 
-        ${reviewsHTML ? `
         <div class="profile-section">
-          <h2 class="profile-section__title">Reviews (${dentist.reviewCount})</h2>
-          <div class="review-list">${reviewsHTML}</div>
-        </div>` : ''}
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;">
+            <h2 class="profile-section__title" style="margin-bottom:0;">Reviews${dentist.reviewCount ? ` (${dentist.reviewCount})` : ''}</h2>
+            ${dentist.googleMapsUrl ? `<a href="${dentist.googleMapsUrl}" target="_blank" rel="noopener" style="font-size:.8rem;color:#4285F4;text-decoration:none;font-weight:500;">★ Write a Google Review →</a>` : ''}
+          </div>
+          ${reviewsHTML
+            ? `<div class="review-list">${reviewsHTML}</div>`
+            : `<p style="color:var(--clr-gray-400);font-size:.9rem;">No reviews yet. Be the first to leave one!</p>`
+          }
+        </div>
       </div>
 
       <aside>
@@ -740,6 +872,7 @@
           ${websiteBtn}
           ${mapEmbed}
           ${mapLink}
+          ${writeReviewBtn}
         </div>
       </aside>
     `;
@@ -827,20 +960,9 @@
     return null;
   }
 
-  const SERVICE_ALIASES = {
-    'orthodontist': 'Orthodontics', 'orthodontists': 'Orthodontics', 'orthodontic': 'Orthodontics',
-    'implant': 'Dental Implants', 'implants': 'Dental Implants', 'dental implant': 'Dental Implants',
-    'whitening': 'Teeth Whitening', 'tooth whitening': 'Teeth Whitening',
-    'emergency dentist': 'Emergency', 'urgent': 'Emergency', 'emergency dentistry': 'Emergency',
-    'general': 'General Dentistry', 'general dentist': 'General Dentistry', 'general dentistry': 'General Dentistry',
-    'denture': 'Dentures',
-    'periodontist': 'Periodontal Care', 'periodontics': 'Periodontal Care', 'gum disease': 'Periodontal Care',
-    'endodontist': 'Endodontics', 'root canal': 'Endodontics', 'root canals': 'Endodontics',
-    'oral surgeon': 'Oral Surgery', 'oral surgeons': 'Oral Surgery', 'maxillofacial': 'Oral Surgery',
-    'cosmetic dentist': 'Cosmetic', 'cosmetic dentistry': 'Cosmetic',
-  };
   function normalizeService(str) {
-    return SERVICE_ALIASES[str.toLowerCase().trim()] || str;
+    const t = TREATMENT_MAP[str.toLowerCase().trim()];
+    return t ? t.service : str;
   }
 
   async function doSearch() {
