@@ -90,6 +90,7 @@ body {
     line-height: 1.6;
     color: var(--clr-gray-700);
     background: var(--clr-white);
+    overflow-x: hidden;
 }
 
 img {
@@ -1058,6 +1059,11 @@ h4 {
     padding: var(--sp-10) 0;
 }
 
+.profile-main,
+.profile-layout > aside {
+    min-width: 0;
+}
+
 .profile-section {
     margin-bottom: var(--sp-10);
 }
@@ -1095,6 +1101,11 @@ h4 {
     place-items: center;
     flex-shrink: 0;
     font-size: var(--fs-lg);
+}
+
+.service-item__content {
+    flex: 1;
+    min-width: 0;
 }
 
 .service-item__name {
@@ -1181,6 +1192,11 @@ h4 {
     color: var(--clr-teal);
 }
 
+.review-card__info {
+    flex: 1;
+    min-width: 0;
+}
+
 .review-card__name {
     font-weight: 600;
     color: var(--clr-navy);
@@ -1243,6 +1259,11 @@ h4 {
     display: grid;
     place-items: center;
     flex-shrink: 0;
+}
+
+.contact-item__content {
+    flex: 1;
+    min-width: 0;
 }
 
 .contact-box .btn {
@@ -1309,8 +1330,9 @@ h4 {
     align-items: center;
     justify-content: center;
     gap: var(--sp-1);
-    white-space: nowrap;
     text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .sticky-actions__btn--call {

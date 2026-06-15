@@ -706,7 +706,7 @@ const TREATMENT_MAP = {
     const servicesHTML = dentist.services.map(s => `
       <div class="service-item">
         <div class="service-item__icon">${serviceIcons[s] || '🦷'}</div>
-        <div>
+        <div class="service-item__content">
           <div class="service-item__name">${s}</div>
           <div class="service-item__desc">Professional ${s.toLowerCase()} services tailored to your needs.</div>
         </div>
@@ -733,7 +733,7 @@ const TREATMENT_MAP = {
         <div class="review-card">
           <div class="review-card__header">
             <div class="review-card__avatar">${initials}</div>
-            <div>
+            <div class="review-card__info">
               <div class="review-card__name">${r.name}</div>
               <div class="review-card__date">${r.date}</div>
             </div>
@@ -849,7 +849,7 @@ const TREATMENT_MAP = {
           ${dentist.phone ? `
           <div class="contact-item">
             <div class="contact-item__icon">📞</div>
-            <div>
+            <div class="contact-item__content">
               <a href="tel:${dentist.phone.replace(/\\s/g, '')}" style="font-weight:600;color:var(--clr-navy);text-decoration:none;">${dentist.phone}</a>
               <div style="font-size:.75rem;color:var(--clr-gray-400)">Phone</div>
             </div>
@@ -857,14 +857,14 @@ const TREATMENT_MAP = {
           ${dentist.email ? `
           <div class="contact-item">
             <div class="contact-item__icon">✉️</div>
-            <div>
+            <div class="contact-item__content">
               <a href="mailto:${dentist.email}" style="font-weight:600;color:var(--clr-navy);text-decoration:none;">${dentist.email}</a>
               <div style="font-size:.75rem;color:var(--clr-gray-400)">Email</div>
             </div>
           </div>` : ''}
           <div class="contact-item">
             <div class="contact-item__icon">📍</div>
-            <div>
+            <div class="contact-item__content">
               <div style="font-weight:600;color:var(--clr-navy)">${dentist.address}</div>
               <div style="font-size:.75rem;color:var(--clr-gray-400)">Address</div>
             </div>
