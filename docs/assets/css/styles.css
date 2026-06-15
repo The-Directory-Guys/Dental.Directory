@@ -81,7 +81,7 @@
 html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 body {
@@ -90,7 +90,6 @@ body {
     line-height: 1.6;
     color: var(--clr-gray-700);
     background: var(--clr-white);
-    overflow-x: hidden;
 }
 
 img {
