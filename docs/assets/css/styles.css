@@ -91,8 +91,6 @@ body {
     color: var(--clr-gray-700);
     background: var(--clr-white);
     overflow-x: hidden;
-    word-break: break-word;
-    overflow-wrap: anywhere;
 }
 
 img {
@@ -1037,6 +1035,8 @@ h4 {
     flex-wrap: wrap;
     font-size: var(--fs-sm);
     color: var(--clr-gray-300);
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 .profile-hero__meta-item {
@@ -1216,6 +1216,8 @@ h4 {
     font-size: var(--fs-sm);
     color: var(--clr-gray-600);
     border-bottom: 1px solid var(--clr-gray-100);
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 .contact-item:last-of-type {
