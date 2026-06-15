@@ -90,7 +90,6 @@ body {
     line-height: 1.6;
     color: var(--clr-gray-700);
     background: var(--clr-white);
-    overflow-x: clip;
 }
 
 img {
@@ -1098,11 +1097,13 @@ h4 {
     font-weight: 600;
     color: var(--clr-navy);
     margin-bottom: var(--sp-1);
+    overflow-wrap: break-word;
 }
 
 .service-item__desc {
     font-size: var(--fs-sm);
     color: var(--clr-gray-500);
+    overflow-wrap: break-word;
 }
 
 /* Hours table */
@@ -1190,6 +1191,11 @@ h4 {
     font-size: var(--fs-sm);
     color: var(--clr-gray-600);
     line-height: 1.7;
+    overflow-wrap: break-word;
+}
+
+.review-card__name {
+    overflow-wrap: break-word;
 }
 
 /* Contact sidebar */
@@ -1257,6 +1263,12 @@ h4 {
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .1);
+    max-width: 100%;
+}
+
+.map-embed iframe {
+    max-width: 100%;
+    display: block;
 }
 
 /* ===================================================
