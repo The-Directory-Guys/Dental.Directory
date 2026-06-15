@@ -81,7 +81,7 @@
 html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
-    overflow-x: clip;
+    overflow-x: hidden;
 }
 
 body {
