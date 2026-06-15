@@ -1627,16 +1627,13 @@ h4 {
         height: 56px;
     }
 
-    /* Compensate for fixed header */
-    .hero,
-    .profile-hero,
-    .listings-section {
+    /* Push all content below the fixed header */
+    body {
         padding-top: 72px;
     }
 
     .hero {
         padding: var(--sp-16) 0 var(--sp-12);
-        padding-top: calc(var(--sp-16) + 72px);
     }
 
     .hero-search {
