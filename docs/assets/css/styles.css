@@ -81,6 +81,7 @@
 html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
 }
 
 body {
@@ -89,6 +90,7 @@ body {
     line-height: 1.6;
     color: var(--clr-gray-700);
     background: var(--clr-white);
+    overflow-x: hidden;
 }
 
 img {
@@ -1600,6 +1602,14 @@ h4 {
         --fs-4xl: 2.25rem;
         --fs-3xl: 1.75rem;
         --fs-2xl: 1.5rem;
+    }
+
+    .header__inner {
+        height: 72px;
+    }
+
+    .logo__img {
+        height: 56px;
     }
 
     .hero {
