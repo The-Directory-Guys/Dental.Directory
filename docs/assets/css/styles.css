@@ -1604,12 +1604,26 @@ h4 {
         --fs-2xl: 1.5rem;
     }
 
+    .header {
+        position: fixed;
+        left: 0;
+        right: 0;
+        width: 100%;
+    }
+
     .header__inner {
         height: 72px;
     }
 
     .logo__img {
         height: 56px;
+    }
+
+    /* Compensate for fixed header */
+    .hero,
+    .profile-hero,
+    .listings-section {
+        padding-top: 72px;
     }
 
     .hero {
