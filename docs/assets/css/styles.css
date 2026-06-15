@@ -204,7 +204,7 @@ h4 {
 }
 
 .logo__img {
-    height: 160px;
+    height: 200px;
     width: auto;
     display: block;
 }
@@ -1706,16 +1706,16 @@ h4 {
     }
 
     .header__inner {
-        height: 72px;
+        height: 88px;
     }
 
     .logo__img {
-        height: 64px;
+        height: 80px;
     }
 
     /* Push all content below the fixed header */
     body {
-        padding-top: 72px;
+        padding-top: 88px;
     }
 
     .hero {
