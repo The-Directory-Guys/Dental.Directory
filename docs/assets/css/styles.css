@@ -90,6 +90,7 @@ body {
     line-height: 1.6;
     color: var(--clr-gray-700);
     background: var(--clr-white);
+    overflow-x: clip;
 }
 
 img {
@@ -1025,6 +1026,7 @@ h4 {
     color: var(--clr-white);
     font-size: var(--fs-3xl);
     margin-bottom: var(--sp-4);
+    overflow-wrap: break-word;
 }
 
 .profile-hero__meta {
