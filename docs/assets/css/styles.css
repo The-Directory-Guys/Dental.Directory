@@ -1265,11 +1265,55 @@ h4 {
     color: var(--clr-gray-400);
     padding: var(--sp-8) 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     position: sticky;
     bottom: 0;
     z-index: 50;
+}
+
+.sticky-actions {
+    display: none;
+    width: 100%;
+    gap: var(--sp-2);
+    padding: var(--sp-3) var(--sp-4) var(--sp-2);
+}
+
+.sticky-actions__btn {
+    flex: 1;
+    padding: var(--sp-3) var(--sp-2);
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    font-size: var(--fs-sm);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-1);
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.sticky-actions__btn--call {
+    background: var(--clr-teal);
+    color: #fff;
+}
+
+.sticky-actions__btn--website {
+    background: var(--clr-white);
+    color: var(--clr-navy);
+}
+
+.sticky-actions__btn--directions {
+    border: 1.5px solid rgba(255,255,255,0.3);
+    color: var(--clr-white);
+}
+
+@media (max-width: 768px) {
+    .sticky-actions {
+        display: flex;
+    }
 }
 
 .footer__inner {

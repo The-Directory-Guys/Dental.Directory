@@ -876,6 +876,16 @@ const TREATMENT_MAP = {
         </div>
       </aside>
     `;
+
+    // Populate sticky mobile action bar in footer
+    const stickyActions = document.getElementById('sticky-actions');
+    if (stickyActions) {
+      stickyActions.innerHTML = [
+        dentist.phone ? `<a href="tel:${dentist.phone.replace(/\s/g, '')}" class="sticky-actions__btn sticky-actions__btn--call">📞 Call</a>` : '',
+        dentist.website ? `<a href="${dentist.website}" target="_blank" class="sticky-actions__btn sticky-actions__btn--website">🌐 Visit Website</a>` : '',
+        dentist.googleMapsUrl ? `<a href="${dentist.googleMapsUrl}" target="_blank" class="sticky-actions__btn sticky-actions__btn--directions">📍 Directions</a>` : '',
+      ].filter(Boolean).join('');
+    }
   }
 
   // ===== Hero Search =====
