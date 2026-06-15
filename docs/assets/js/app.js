@@ -828,7 +828,7 @@ const TREATMENT_MAP = {
         ${hoursHTML ? `
         <div class="profile-section">
           <h2 class="profile-section__title">Opening Hours</h2>
-          <table class="hours-table">${hoursHTML}</table>
+          <div class="hours-table-wrap"><table class="hours-table">${hoursHTML}</table></div>
         </div>` : ''}
 
         <div class="profile-section">
