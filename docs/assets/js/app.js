@@ -234,7 +234,7 @@ const TREATMENT_MAP = {
 
     // Setup filtering & rendering
     let activeSuburbs = [];
-    let activeServices = [];
+    let activeServices = ['General Dentistry'];
     let minRating = 0;
     let searchQuery = '';
     let sortBy = 'name';
@@ -483,6 +483,7 @@ const TREATMENT_MAP = {
             document.querySelectorAll(`.filter-service[value="${matchingService.value}"]`).forEach(cb => { cb.checked = true; });
             activeServices = [matchingService.value];
           } else {
+            activeServices = [];
             searchInput.value = urlQ;
             searchQuery = urlQ;
           }
@@ -546,6 +547,11 @@ const TREATMENT_MAP = {
     if (mobileHygienistSlider) {
       mobileHygienistSlider.addEventListener('input', (e) => updateHygienistSlider(e.target.value));
     }
+
+    // Reflect default activeServices in checkboxes before first render
+    document.querySelectorAll('.filter-service[value="General Dentistry"]').forEach(cb => {
+      cb.checked = activeServices.includes('General Dentistry');
+    });
 
     // Initial render
     render();
