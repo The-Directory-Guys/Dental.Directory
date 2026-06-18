@@ -187,7 +187,7 @@ const TREATMENT_MAP = {
     ]),
     'dunedin-city': new Set([
       'Dunedin Central','Dunedin North','Mosgiel','Green Island','Roslyn','Wakari',
-      'Musselburgh','North East Valley','Kaikorai','Mornington','South Dunedin'
+      'Musselburgh','North East Valley','Kaikorai','Mornington','South Dunedin','Maori Hill'
     ]),
     'wider-otago': new Set([
       'Queenstown','Frankton','Wānaka','Alexandra','Oamaru','Cromwell',
