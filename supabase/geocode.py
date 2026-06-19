@@ -14,6 +14,19 @@ Usage:
 import urllib.request, urllib.parse, json, time, sys, os
 sys.stdout.reconfigure(encoding="utf-8")
 
+def load_env():
+    env_path = os.path.join(os.getcwd(), ".env")
+    if not os.path.exists(env_path):
+        return
+    for line in open(env_path, encoding="utf-8"):
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        k, v = line.split("=", 1)
+        os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+
+load_env()
+
 SUPABASE_URL = os.environ["SUPABASE_URL"]
 SERVICE_KEY = os.environ["SUPABASE_SERVICE_KEY"]
 NOMINATIM_URL = "https://nominatim.openstreetmap.org/search"
