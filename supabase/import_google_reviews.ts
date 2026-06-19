@@ -47,7 +47,8 @@ if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const reviewsPath = path.join(__dirname, "..", "christchurch_reviews.json");
+const reviewsFile = process.argv[2] ?? "christchurch_reviews.json";
+const reviewsPath = path.join(__dirname, "..", reviewsFile);
 const reviewsData = JSON.parse(fs.readFileSync(reviewsPath, "utf-8"));
 
 async function main() {
@@ -69,28 +70,15 @@ async function main() {
 
   const clinicByName = new Map(allClinics.map((c) => [c.name, c.id]));
 
-  // Clear existing google_reviews for Christchurch clinics
-  const christchurchIds = Object.keys(reviewsData)
-    .map((name) => clinicByName.get(name))
-    .filter((id): id is number => id !== undefined);
-
-  if (christchurchIds.length) {
-    const { error: delErr } = await supabase
-      .from("google_reviews")
-      .delete()
-      .in("clinic_id", christchurchIds);
-    if (delErr) throw new Error(`Delete failed: ${delErr.message}`);
-    console.log(`Cleared existing reviews for ${christchurchIds.length} clinics`);
-  }
-
   let totalInserted = 0;
-  let skipped = 0;
+  let totalSkipped = 0;
+  let clinicsSkipped = 0;
 
   for (const [clinicName, data] of Object.entries(reviewsData) as [string, any][]) {
     const clinicId = clinicByName.get(clinicName);
     if (!clinicId) {
       console.warn(`  Skipping — not found in DB: ${clinicName}`);
-      skipped++;
+      clinicsSkipped++;
       continue;
     }
 
@@ -105,19 +93,28 @@ async function main() {
       snippet: rv.snippet ?? null,
     }));
 
+    // Upsert — duplicate reviews (same clinic_id + author + date_text) are ignored
     const CHUNK = 100;
+    let inserted = 0;
     for (let i = 0; i < rows.length; i += CHUNK) {
-      const { error } = await supabase
+      const { error, data: upserted } = await supabase
         .from("google_reviews")
-        .insert(rows.slice(i, i + CHUNK));
-      if (error) throw new Error(`Insert failed for ${clinicName}: ${error.message}`);
+        .upsert(rows.slice(i, i + CHUNK), {
+          onConflict: "clinic_id,author,date_text",
+          ignoreDuplicates: true,
+        })
+        .select("id");
+      if (error) throw new Error(`Upsert failed for ${clinicName}: ${error.message}`);
+      inserted += upserted?.length ?? 0;
     }
 
-    totalInserted += rows.length;
-    console.log(`  ${clinicName}: ${reviews.length} reviews`);
+    const skipped = rows.length - inserted;
+    totalInserted += inserted;
+    totalSkipped += skipped;
+    console.log(`  ${clinicName}: ${inserted} new, ${skipped} already existed`);
   }
 
-  console.log(`\nDone. ${totalInserted} reviews imported, ${skipped} clinics skipped.`);
+  console.log(`\nDone. ${totalInserted} reviews inserted, ${totalSkipped} duplicates skipped, ${clinicsSkipped} clinics not found in DB.`);
 }
 
 main().catch((e) => {

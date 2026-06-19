@@ -1,0 +1,159 @@
+Raw results: 231
+Excluded as non-dental: 78
+Kept as dental clinics: 153
+  Already in DB: 81
+  NEW: 72
+
+=== EXCLUDED (non-dental) ===
+  Chemist Warehouse Lambton Quay
+  Wellington Branch of the NZDA
+  Wellington Regional Hospital
+  Kelvin House
+  New World Metro Willis Street
+  Dental Council New Zealand
+  Bee Healthy Regional Dental Service
+  Bee Healthy Regional Dental Service
+  Bee Healthy Regional Dental Service
+  Miramar Central School Dental Clinic
+  Island Bay Medical Centre
+  Island Bay Veterinary Clinic
+  Churton Park Medical Care
+  Animal Medical Centre
+  New World Churton Park
+  Village Pharmacy Churton Park
+  Newlands Medical Centre
+  Bellevue School Dental Clinic
+  Brooklyn Medical Centre
+  Unichem Brooklyn Pharmacy
+  Central Vet Hospital
+  Yu Dental Laboratory LTD
+  Dentocast Laboratories
+  Sleep Matters
+  Wellington Accident & Urgent Medical Centre
+  Hataitai Medical Practice
+  Hataitai Pharmacy
+  Healthcare Essentials Ltd
+  NZ Society for Sedation in Dentistry
+  Tītahi Bay Dental Hub Clinic - Bee Healthy Regional Dental Service
+  Bee Healthy Regional Dental Service
+  Cannons Creek School Dental Clinic
+  Kenepuru Community Hospital
+  Ora Toa Cannons Creek Medical Centre
+  Rangikura School Dental Clinic
+  Discovery School Dental Clinic
+  Chemist Warehouse Porirua
+  Animates Porirua
+  PAK'nSAVE Porirua
+  New World Porirua City
+  The Warehouse Porirua
+  Porirua Community Vaccination Centre
+  Dental Corporation (Nz) Limited
+  Plimmerton Medical Centre
+  Vet Smart Plimmerton
+  Hutt Hospital Dental Unit
+  Bee Healthy Dental Clinic
+  Pomare School Dental Clinic
+  Institute of Digital Dentistry
+  Hutt Central School Dental Clinic
+  Bee Healthy Regional Dental Service
+  Hutt Valley Health Hub
+  Lower Hutt After Hours Medical Centre
+  Hutt Hospital
+  Bee Healthy Regional Dental Service
+  Precision Dental Laboratory
+  Bee Healthy Regional Dental Service
+  Eastern Hutt School Dental Clinic
+  Hutt Intermediate School Dental Clinic
+  New World Hutt City
+  Verve @ Connolly
+  Petone Dental Laboratory
+  IDD Dental Lab
+  High Street Health Hub
+  Bee Healthy Regional Dental Service
+  Koranui Green School Dental Clinic
+  Stokes Valley Medical Centre
+  Tawhai School Dental Clinic
+  Whai Oranga o Te Iwi Health Centre
+  Bee Healthy Regional Dental Service
+  Dental Surgery
+  Coastlands Dental Health Centre | Lumino The Dentists
+  Raumati Beach Dental Hub Clinic - Bee Healthy Regional Dental Service
+  Featherston Medical Centre
+  Laser Clinics New Zealand - Featherston
+  Pae tu Mokai Featherston Medical Limited
+  FreshChoice Featherston
+  Lang's Pharmacy
+
+=== NEW CLINICS TO ADD ===
+  Lumino The Terrace Dental Practice | Lumino The Dentists | 1st Floor/50 The Terrace, Wellington Central, Wellington 6011, New Zealand | Wellington CBD
+  Gentle Dental Centre | Level 7/276 Lambton Quay, Wellington Central, Wellington 6011, New Zealand | Wellington CBD
+  Discover Dental Wellington | Wakefield, House Level 1/90 The Terrace, Wellington Central, Wellington 6011, New Zealand | Wellington CBD
+  Wellington Dental Hygienists | 126 Willis Street, Te Aro, Wellington 6011, New Zealand | Wellington CBD
+  GREAT TEETH DENTAL | Level 10, Prime Property Tower, 86-90 Lambton Quay, Wellington Central, Wellington 6011, New Zealand | Wellington CBD
+  Lumino The Dentists | level 6/40 Panama Street, Wellington Central, Wellington 6011, New Zealand | Wellington CBD
+  Smile Studio - Wellington | Ground Floor/155 The Terrace, Wellington Central, Wellington 6011, New Zealand | Wellington CBD
+  Wellington Periodontics and Dental Implants | 16/142 Lambton Quay, CBD, Wellington 6011, New Zealand | Wellington CBD
+  Ben Catherwood Dental | Wakefield House Level 1/90 The Terrace, Wellington Central, Wellington 6011, New Zealand | Wellington CBD
+  Dr Dikesh Parmar - Endodontist | GD, 164 The Terrace, Wellington Central, Wellington 6011, New Zealand | Wellington CBD
+  Wellington Oral Surgery | The Dominion Building Level 3/78 Victoria Street, Wellington Central, Wellington 6011, New Zealand | Wellington CBD
+  Gavin Cho Invisalign @ The Wellington Dental Practice | 16 The Terrace, Te Aro, Wellington 6011, New Zealand | Wellington CBD
+  Dr Yeephang Wong | Smile Studio 155 The Terrace, Wellington Central, Wellington 6011, New Zealand | Wellington CBD
+  Middlemiss Dental | 50 The Terrace, Wellington Central, Wellington 6011, New Zealand | Wellington CBD
+  Capital Dentures - Wellington Dental Technician | 29 Brandon Street, Wellington Central, Wellington 6011, New Zealand | Wellington CBD
+  Mr Raymond Joe-Dental Reflection | Radio NZ House Ground Floor/155 The Terrace, Wellington Central, Wellington 6011, New Zealand | Wellington CBD
+  Capital Periodontics and Dental Implants Ltd | 8/94 Dixon Street, Te Aro, Wellington 6011, New Zealand | Wellington CBD
+  Gentle Braces | 81 Ghuznee Street, Te Aro, Wellington 6011, New Zealand | Wellington CBD
+  Wellington Dental Implants | Dominion Building Level 3/78 Victoria Street, Wellington Central, Wellington 6011, New Zealand | Wellington CBD
+  Dr Kamil Tinawi | 119-123 Featherston Street, Wellington Central, Wellington 6011, New Zealand | Wellington CBD
+  Jeff Jones BDS, Dental Surgeon, Wellington Dentists Ltd | 124a Willis Street, Te Aro, Wellington 6011, New Zealand | Wellington CBD
+  Childrens' Dental Clinic | 244-256 Willis Street, Te Aro, Wellington 6011, New Zealand | Wellington CBD
+  Deborah Creagh Endodontics | 8/94 Dixon Street, Te Aro, Wellington 6011, New Zealand | Wellington CBD
+  Teeth Whitening Centres | 32 Lorne Street, Te Aro, Wellington 6011, New Zealand | Wellington CBD
+  Sunshine Dental, Johnsonville | 1/11 Broderick Road, Johnsonville, Wellington 6037, New Zealand | Johnsonville Wellington
+  Mana Dental Surgery Ltd | 33 Broderick Road, Johnsonville, Wellington 6037, New Zealand | Johnsonville Wellington
+  Wellington Dentures - Dentures and Dental Implant Dentures | 128 Johnsonville Road, Johnsonville, Wellington 6037, New Zealand | Johnsonville Wellington
+  The Denturist / Wellington Dentures - Dentures and Dental Implant Dentures | 40 Kilbirnie Crescent, Kilbirnie, Wellington 6022, New Zealand | Kilbirnie Wellington
+  Bing Dental Tawa | 223 Main Road, Tawa, Wellington 5028, New Zealand | Tawa Wellington
+  Dentist Wellington dental surgery tooth fillings Tawa Lower Hutt | Tawa, Wellington 5028, New Zealand | Tawa Wellington
+  Ashley Aesthetics | 10 Trafford Terrace, Churton Park, Wellington 6037, New Zealand | Churton Park Wellington
+  Petone Dental Centre | 374 Jackson Street, Petone, Lower Hutt 5012, New Zealand | Churton Park Wellington
+  Brooklyn Central Health | 183 Ohiro Road, Brooklyn, Wellington 6021, New Zealand | Brooklyn Wellington
+  WellOral Ltd | The Wellington Clinic 62 Vivian Street, Te Aro, Wellington 6011, New Zealand | Brooklyn Wellington
+  The Wellington Clinic | 62 Vivian Street, Te Aro, Wellington 6011, New Zealand | Brooklyn Wellington
+  Thorndon Orthodontics | Level 9/15 Murphy Street, Thorndon, Wellington 6011, New Zealand | Thorndon Wellington
+  James Talbot Dental | 16 The Terrace, Wellington Central, Wellington 6011, New Zealand | Hataitai Wellington
+  Courtenay Orthodontics | Level 1/36 Allen Street, Te Aro, Wellington 6011, New Zealand | Hataitai Wellington
+  Max Facs David Chin-Shong - Allen St Wellington | 1/36 Allen Street, Te Aro, Wellington 6011, New Zealand | Hataitai Wellington
+  Denture Care Services - Porirua | 1 Martin Street, Rānui, Porirua 5024, New Zealand | Porirua
+  The Cosmetic Clinic North City | 2 Titahi Bay Road, Porirua City Centre, Porirua 5022, New Zealand | Porirua
+  Paremata Dental Surgery - Dr Margret Wolbinski | 98 Mana Esplanade, Paremata, Porirua 5026, New Zealand | Porirua
+  The Whitening Lounge | 3/105 Mana Esplanade, Porirua, Paremata, Wellington 5024, New Zealand | Porirua
+  Hutt Dental Hub Lower Hutt | 135 Witako Street, Epuni, Lower Hutt 5011, New Zealand | Lower Hutt
+  Smile Care Centre | 49 Witako Street, Epuni, Lower Hutt 5011, New Zealand | Lower Hutt
+  Hutt Endodontics | 69 Queens Drive, Hutt Central, Lower Hutt 5010, New Zealand | Lower Hutt
+  Hutt Dental Implant Centre Lower Hutt | 65 Queens Drive Inside, Queens Arcade, Hutt Central, Lower Hutt 5010, New Zealand | Lower Hutt
+  Hutt Specialist Oral Surgery | 71 Queens Drive Inside, Queens Arcade, Hutt Central, Lower Hutt 5010, New Zealand | Lower Hutt
+  Hutt Dental Specialists - Morris Wong | 3/52 Queens Drive, Hutt Central, Lower Hutt 5010, New Zealand | Lower Hutt
+  Dental Reflections Lower Hutt | 29 Kings Crescent, Hutt Central, Lower Hutt 5010, New Zealand | Lower Hutt
+  Karen Lee Dental Practice (Fastbraces Senior Master) | 26 Knights Road, Hutt Central, Lower Hutt 5010, New Zealand | Lower Hutt
+  Graeme Yee Dental Care Trust (BDS) | Level 1/52 Queens Drive, Hutt Central, Lower Hutt 5010, New Zealand | Lower Hutt
+  J D Beere Dental | 14 Laings Road, Hutt Central, Lower Hutt 5010, New Zealand | Lower Hutt
+  Denture Care Services | 40 Bloomfield Terrace, Hutt Central, Lower Hutt 5010, New Zealand | Lower Hutt
+  Platinum Teeth Whitening Ltd | 217 Waiwhetu Road, Fairfield, Lower Hutt 5011, New Zealand | Lower Hutt
+  Dental Reflections | 10 The Strand Square, Wainuiomata, Lower Hutt 5014, New Zealand | Lower Hutt
+  My Family Dentists | 44 Queens Drive, Hutt Central, Lower Hutt 5014, New Zealand | Lower Hutt
+  Spotless White | 330 Waiwhetu Road, Waterloo, Lower Hutt 5011, New Zealand | Lower Hutt
+  Hutt Valley Orthodontics | 2 Connolly Street, Hutt Central, Lower Hutt 5010, New Zealand | Lower Hutt
+  The Orthodontist | 1/2 Connolly Street, Hutt Central, Lower Hutt 5010, New Zealand | Lower Hutt
+  W P Szeto - Lower Hutt Dental Centre | level 1/577 High Street, Boulcott, Lower Hutt 5010, New Zealand | Lower Hutt
+  Max Facs David Chin-Shong - Lower Hutt | 52 Queens Drive, Hutt Central, Lower Hutt 5010, New Zealand | Lower Hutt
+  Scott Court Dental Centre | 192 Stokes Valley Road, Stokes Valley, Lower Hutt 5019, New Zealand | Stokes Valley Lower Hutt
+  Gentle Dental Centre | 22 Royal Street, Upper Hutt Central, Wellington 5018, New Zealand | Upper Hutt
+  Denture Services Upper Hutt | Unit 2/5 Gibbons Street, Upper Hutt Central, Upper Hutt 5018, New Zealand | Upper Hutt
+  Dental Reflections | 124 Main Street, Upper Hutt Central, Upper Hutt 5018, New Zealand | Upper Hutt
+  Haus of Amor Teeth Whitening and Gems | 4 Princes Street, Upper Hutt Central, Upper Hutt 5018, New Zealand | Upper Hutt
+  Perfect Dentures | 49-51 Main Street, Upper Hutt Central, Upper Hutt 5018, New Zealand | Upper Hutt
+  Kapiti Oral Health Clinic | 90 Kapiti Road, Paraparaumu 5032, New Zealand | Paraparaumu
+  Paraparaumu Dental Hub Clinic | 11 Ruapehu Street, Paraparaumu 5032, New Zealand | Paraparaumu
+  Waikanae Dental Surgery | 8 Mahara Place, Waikanae 5036, New Zealand | Waikanae
+  Wong Kevin B | 17 Renall Street, Masterton 5810, New Zealand | Masterton

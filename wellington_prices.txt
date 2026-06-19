@@ -27,9 +27,11 @@
 4. Capital Dental Thorndon [scraped]
    Address: 1 Murphy Street, Thorndon, Wellington 6011
    Region: Greater Wellington
-   Status:  [ ]
+   Status:  [Checked: Phone verified 19/06/2026]
    Website: https://www.dentistwellington.co.nz/clinic/capital-dental-thorndon
    - Laybuy: Available
+   - Checkup: $125 (promo on Grab One $59; x-rays included; 30 minutes)
+   - Hygienist: $195 (45-50 minutes)
 
 
 5. Capital Dental Upper Hutt [scraped]

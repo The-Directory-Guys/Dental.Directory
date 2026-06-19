@@ -488,7 +488,7 @@
    Status:  [Checked: Accurate]
    Website: https://www.studiodental.nz/
    - Exam / checkup: $144 (includes 2 x-rays)
-   - Hygienist: $243 (approximately 1 hour; may cost more if signs of gum disease)
+   - Hygienist: approximately $234 (per hour; varies by visit frequency/session length; costs more if gum disease detected; uses contrast gel to show colour/bacteria)
 
 
 34. Sydenham Dental Centre [MANUAL]

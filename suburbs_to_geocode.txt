@@ -1,0 +1,341 @@
+﻿Addington
+Ahuriri
+Albany
+Alexandra
+Algies Bay
+Ashburton
+Auckland Airport
+Auckland CBD
+Avondale
+Avonhead
+Balclutha
+Beachlands
+Beerescourt
+Belmont
+Bethlehem
+Birkenhead
+Bishopdale
+Blenheim Central
+Blockhouse Bay
+Bluff Hill
+Botany Downs
+Boulcott
+Browns Bay
+Bryndwr
+Bucklands Beach
+Bulls
+Burleigh
+Burnside
+Burswood
+Cambridge
+Carterton
+Casebrook
+Cashmere
+Castlecliff
+Chartwell
+Christchurch Central
+Claudelands
+Clover Park
+Cloverlea
+Coromandel Town
+Cromwell
+Dannevirke
+Darfield
+Dargaville
+Devonport
+Dinsdale
+Dunedin Central
+Dunedin North
+East Tāmaki
+Eastbourne
+Eden Terrace
+Ellerslie
+Eltham
+Epsom
+Epuni
+Fairfield
+Feilding
+Fendalton
+Ferrymead
+Flagstaff
+Flat Bush
+Forrest Hill
+Foxton
+Frankton
+Freemans Bay
+Frimley
+Gate Pa
+Geraldine
+Gisborne
+Glen Eden
+Glen Innes
+Glenfield
+Gore
+Grafton
+Green Island
+Greenhithe
+Greenlane
+Greenmeadows
+Greerton
+Grey Lynn
+Greymouth
+Greytown
+Hairini
+Half Moon Bay
+Halswell
+Hamilton Central
+Hamilton East
+Hamilton Lake
+Hastings
+Hauraki
+Havelock North
+Hāwera
+Helensville
+Henderson
+Herne Bay
+Highbury
+Highland Park
+Hillcrest
+Hillmorton
+Hillpark
+Hobsonville
+Hokitika
+Hokowhitu
+Hoon Hay
+Hornby
+Howick
+Huntington Park
+Huntly
+Hutt Central
+Ilam
+Inglewood
+Invercargill
+Johnsonville
+Kaiapoi
+Kaikohe
+Kaikorai
+Kaikōura
+Kaitaia
+Kaiwaka
+Karori
+Katikati
+Kawakawa
+Kawerau
+Kelston
+Kelvin Grove
+Kensington
+Kerikeri
+Khandallah
+Kilbirnie
+Kingsland
+Kumeu
+Levin
+Lincoln
+Linwood
+Long Bay
+Lynfield
+Mairangi Bay
+Mangawhai
+Māngere
+Māngere Bridge
+Māngere East
+Manifold
+Manly
+Manukau City Centre
+Manurewa
+Māpua
+Marewa
+Martinborough
+Marton
+Massey
+Masterton
+Matamata
+Maunu
+Meadowbank
+Melville
+Merivale
+Merrilands
+Milford
+Millwater
+Milton
+Miramar
+Mission Bay
+Morningside
+Mornington
+Morrinsville
+Mosgiel
+Motueka
+Mount Albert
+Mount Eden
+Mount Maunganui
+Mount Roskill
+Mount Wellington
+Musselburgh
+Naenae
+Napier South
+Nawton
+Nelson
+Nelson South
+New Lynn
+New Plymouth Central
+Newmarket
+Newtown
+Ngaio
+North East Valley
+North New Brighton
+Northcote
+Northcross
+Northpark
+Oamaru
+Ohakune
+Omokoroa
+Onehunga
+Onekawa
+Oneroa
+Ōpōtiki
+Ōpunake
+Orewa
+Ostend
+Ōtāhuhu
+Ōtara
+Otūmoetai
+Oxford
+Paeroa
+Pahiatua
+Paihia
+Pakuranga
+Palmerston
+Palmerston North Central
+Panmure
+Papakura
+Papamoa
+Papamoa Beach
+Papanui
+Papatoetoe
+Paraparaumu
+Paremata
+Parkwood
+Parnell
+Penrose
+Petone
+Phillipstown
+Pinehill
+Pirimai
+Pirongia
+Ponsonby
+Porirua City Centre
+Prebbleton
+Pukekohe
+Pukete
+Pyes Pa
+Queenstown
+Raglan
+Ranfurly
+Rangiora
+Ranui
+Rānui
+Redcliffs
+Redwood
+Redwoodtown
+Regent
+Remuera
+Riccarton
+Riccarton (Upper)
+Richmond
+Rolleston
+Rosedale
+Roslyn
+Rothesay Bay
+Rotorua
+Rototuna
+Rototuna North
+Royal Oak
+Ruakākā
+Sandringham
+Schnapper Rock
+Seaview
+Shirley
+Silverdale
+Silverstream
+Smales Farm
+Sockburn
+Somerfield
+South Dunedin
+Spreydon
+Springlands
+St Albans
+St Heliers
+St Johns
+St Leonards
+Stanmore Bay
+Stoke
+Stonefields
+Strandon
+Stratford
+Strowan
+Sydenham
+Tāhunanui
+Taihape
+Tākaka
+Takanini
+Takapuna
+Taradale
+Taumarunui
+Taupo
+Tauranga
+Tauranga South
+Tauriko
+Tawa
+Te Aro
+Te Aroha
+Te Atatū Peninsula
+Te Atatū South
+Te Awamutu
+Te Kamo
+Te Puke
+Te Rapa
+Temuka
+Terrace End
+Thames
+The Wood
+Thorndon
+Three Kings
+Tikipunga
+Timaru
+Titirangi
+Tokoroa
+Turangi
+Unsworth Heights
+Upper Hutt Central
+Victoria, Rotorua
+Vogeltown
+Waihi
+Waikanae
+Wainuiomata
+Waipawa
+Waipukurau
+Wairau Valley
+Waitara
+Waiuku
+Waiwhakaiho
+Wakari
+Waltham
+Wānaka
+Warkworth
+Wellington Central
+West Harbour
+Westgate
+Westown
+Westport
+Whakatāne
+Whanganui
+Whangārei
+Whitby
+Whitianga
+Whitiora
+Windsor Park
+Winton
+Woodhill
+Woodville
+Woolston
+Yaldhurst

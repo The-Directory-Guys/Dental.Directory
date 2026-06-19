@@ -1,0 +1,17 @@
+437	Auckland
+151	Canterbury
+103	Waikato
+92	Bay of Plenty
+85	Wellington
+70	Otago
+47	Manawatū-Whanganui
+42	Hawke's Bay
+40	Northland
+34	Nelson & Tasman
+28	Taranaki
+20	Southland
+8	Wairarapa
+7	Marlborough
+6	West Coast
+5	Gisborne
+1	region
