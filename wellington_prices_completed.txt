@@ -771,3 +771,14 @@
    - Hygienist: no separate hygienist; scaling and polishing $150, 15 minutes
    - Note: checkup and clean can be combined
    - WINZ: Accepts WINZ quotes for dental treatment
+
+
+
+63. Capital Dental Thorndon [phone verified 19/06/2026]
+   Address: 1 Murphy Street, Thorndon, Wellington 6011
+   Region: Greater Wellington
+   Status:  [Checked: Accurate]
+   Website: https://www.dentistwellington.co.nz/clinic/capital-dental-thorndon
+   - Laybuy: Available
+   - Checkup: $125 (promo on Grab One $59; x-rays included; 30 minutes)
+   - Hygienist: $195 (45-50 minutes)

@@ -166,7 +166,7 @@ const TREATMENT_MAP = {
       'Kaiapoi','Prebbleton','Rangiora','Rolleston','Lincoln'
     ]),
     'wider-canterbury': new Set([
-      'Ashburton','Timaru','Darfield','Geraldine','Kaikōura','Oxford','Temuka'
+      'Ashburton','Timaru','Darfield','Geraldine','Kaikōura','Oxford'
     ]),
     'hamilton-city': new Set([
       'Hamilton Central','Hamilton East','Claudelands','Chartwell','Hillcrest','Pukete',
@@ -1075,24 +1075,73 @@ const TREATMENT_MAP = {
 
       // Update hero stat with live clinic count
       const heroStatEl = document.querySelector('.hero-stat__number');
-      if (heroStatEl && heroStatEl.textContent.includes('1,100')) {
+      if (heroStatEl) {
         heroStatEl.textContent = clinics.length.toLocaleString();
       }
 
       const counts = {};
+      const regionCityCounts = {};
       clinics.forEach(c => {
         if (c.region) counts[c.region] = (counts[c.region] || 0) + 1;
+        if (c.region && c.city) {
+          if (!regionCityCounts[c.region]) regionCityCounts[c.region] = {};
+          regionCityCounts[c.region][c.city] = (regionCityCounts[c.region][c.city] || 0) + 1;
+        }
       });
+
+      // Largest city per region (by clinic count) — the headline city shown
+      // in "whole region" tooltips, e.g. Whangārei for Northland.
+      const regionLargestCity = {};
+      Object.entries(regionCityCounts).forEach(([region, cityCounts]) => {
+        regionLargestCity[region] = Object.entries(cityCounts).sort((a, b) => b[1] - a[1])[0][0];
+      });
+
+      // Per-region suburb frequency, excluding the largest city's own
+      // suburbs — used to sample genuinely outer towns. Without excluding
+      // the main city, low-clinic-count inner suburbs of that same city
+      // would wrongly show up as "outer" towns.
+      const regionOuterSuburbCounts = {};
+      clinics.forEach(c => {
+        if (!c.region || !c.suburb_town) return;
+        if (c.city === regionLargestCity[c.region]) return;
+        if (!regionOuterSuburbCounts[c.region]) regionOuterSuburbCounts[c.region] = {};
+        regionOuterSuburbCounts[c.region][c.suburb_town] = (regionOuterSuburbCounts[c.region][c.suburb_town] || 0) + 1;
+      });
+
+      const TOWN_SAMPLE_SIZE = 10;
 
       locationCards.forEach(card => {
         const dbRegion = card.getAttribute('data-region');
         const suburbFilterKey = card.getAttribute('data-suburb-filter');
+        const cardName = card.querySelector('.location-card__name')?.textContent || dbRegion;
         let total;
         if (suburbFilterKey && SUBURB_FILTERS[suburbFilterKey]) {
           const allowed = SUBURB_FILTERS[suburbFilterKey];
           total = clinics.filter(c => c.region === dbRegion && allowed.has(c.suburb_town)).length;
+
+          // Hover tooltip listing the towns this card covers
+          const towns = [...allowed].sort();
+          card.title = `${cardName}: ${towns.join(', ')}`;
         } else {
           total = counts[dbRegion] || 0;
+
+          // Hover tooltip for whole-region cards: lead with the largest
+          // city, then sample the least-common remaining suburbs (a proxy
+          // for outer/satellite towns) so it's clear the card covers the
+          // full region, not just the main city.
+          const largestCity = regionLargestCity[dbRegion];
+          if (largestCity) {
+            const outerCounts = regionOuterSuburbCounts[dbRegion] || {};
+            const allOuterTowns = Object.keys(outerCounts);
+            const sample = Object.entries(outerCounts)
+              .sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0]))
+              .slice(0, TOWN_SAMPLE_SIZE)
+              .map(([town]) => town)
+              .sort();
+            const more = allOuterTowns.length > sample.length ? ' and more' : '';
+            const list = sample.length > 0 ? `${largestCity}, ${sample.join(', ')}` : largestCity;
+            card.title = `${cardName} region: includes ${list}${more}`;
+          }
         }
         if (total > 0) {
           const countEl = card.querySelector('.location-card__count');
