@@ -195,6 +195,17 @@ const TREATMENT_MAP = {
     ])
   };
 
+  // Shorter curated town list for the hover tooltip, used when a card's
+  // full SUBURB_FILTERS set is too long to display nicely. Filtering and
+  // counts still use the full set above — this only affects tooltip text.
+  const TOOLTIP_TOWN_OVERRIDES = {
+    'christchurch-city': ['Christchurch', 'Kaiapoi', 'Lincoln', 'Prebbleton', 'Rangiora', 'Rolleston'],
+    'dunedin-city': ['Dunedin', 'Mosgiel'],
+    'hamilton-city': ['Hamilton'],
+    'Wellington': ['Wellington', 'Lower Hutt', 'Upper Hutt', 'Porirua', 'Paraparaumu', 'Waikanae'],
+    'tauranga-city': ['Tauranga', 'Mount Maunganui', 'Papamoa']
+  };
+
   async function initListings() {
     let allDentists = [];
 
@@ -1120,27 +1131,31 @@ const TREATMENT_MAP = {
           total = clinics.filter(c => c.region === dbRegion && allowed.has(c.suburb_town)).length;
 
           // Hover tooltip listing the towns this card covers
-          const towns = [...allowed].sort();
+          const towns = TOOLTIP_TOWN_OVERRIDES[suburbFilterKey] || [...allowed].sort();
           card.title = `${cardName}: ${towns.join(', ')}`;
         } else {
           total = counts[dbRegion] || 0;
 
-          // Hover tooltip for whole-region cards: lead with the largest
-          // city, then sample the least-common remaining suburbs (a proxy
-          // for outer/satellite towns) so it's clear the card covers the
-          // full region, not just the main city.
-          const largestCity = regionLargestCity[dbRegion];
-          if (largestCity) {
-            const outerCounts = regionOuterSuburbCounts[dbRegion] || {};
-            const allOuterTowns = Object.keys(outerCounts);
-            const sample = Object.entries(outerCounts)
-              .sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0]))
-              .slice(0, TOWN_SAMPLE_SIZE)
-              .map(([town]) => town)
-              .sort();
-            const more = allOuterTowns.length > sample.length ? ' and more' : '';
-            const list = sample.length > 0 ? `${largestCity}, ${sample.join(', ')}` : largestCity;
-            card.title = `${cardName} region: includes ${list}${more}`;
+          if (TOOLTIP_TOWN_OVERRIDES[dbRegion]) {
+            card.title = `${cardName} region: includes ${TOOLTIP_TOWN_OVERRIDES[dbRegion].join(', ')}`;
+          } else {
+            // Hover tooltip for whole-region cards: lead with the largest
+            // city, then sample the least-common remaining suburbs (a proxy
+            // for outer/satellite towns) so it's clear the card covers the
+            // full region, not just the main city.
+            const largestCity = regionLargestCity[dbRegion];
+            if (largestCity) {
+              const outerCounts = regionOuterSuburbCounts[dbRegion] || {};
+              const allOuterTowns = Object.keys(outerCounts);
+              const sample = Object.entries(outerCounts)
+                .sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0]))
+                .slice(0, TOWN_SAMPLE_SIZE)
+                .map(([town]) => town)
+                .sort();
+              const more = allOuterTowns.length > sample.length ? ' and more' : '';
+              const list = sample.length > 0 ? `${largestCity}, ${sample.join(', ')}` : largestCity;
+              card.title = `${cardName} region: includes ${list}${more}`;
+            }
           }
         }
         if (total > 0) {
