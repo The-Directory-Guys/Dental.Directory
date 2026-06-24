@@ -308,6 +308,8 @@ def card_html(clinic: dict, pricing: list, region: str) -> str:
     )
     services_raw = clinic.get("services") or "General Dentistry"
     services     = [s.strip() for s in services_raw.split(",")]
+    if "Teen Dental" in services:
+        services = ["Teen Dental"] + [s for s in services if s != "Teen Dental"]
     cid          = clinic["id"]
 
     initials = "".join(w[0] for w in name.split() if w)[:2].upper()

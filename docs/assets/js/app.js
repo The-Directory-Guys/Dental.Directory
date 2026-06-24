@@ -255,7 +255,10 @@ const TREATMENT_MAP = {
 
     function cardHTML(d) {
       const initials = d.name.split(' ').filter(w => w.length > 0).map(w => w[0]).join('').slice(0, 2).toUpperCase();
-      const servicePills = d.services.slice(0, 4).map(s =>
+      const orderedServices = d.services.includes('Teen Dental')
+        ? ['Teen Dental', ...d.services.filter(s => s !== 'Teen Dental')]
+        : d.services;
+      const servicePills = orderedServices.slice(0, 4).map(s =>
         `<span class="pill pill--sm">${s}</span>`
       ).join('');
 

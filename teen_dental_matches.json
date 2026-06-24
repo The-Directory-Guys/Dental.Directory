@@ -1,0 +1,4358 @@
+[
+  {
+    "clinic_id": 1654,
+    "clinic_name": "Community Oral Health Services",
+    "clinic_suburb": "Nelson South",
+    "clinic_region": "Nelson & Tasman",
+    "hp_name": "Lakes Teeth - Community Oral Health Service",
+    "hp_phone": "0800 525 378",
+    "method": "name_fuzzy(0.82)"
+  },
+  {
+    "clinic_id": 736,
+    "clinic_name": "Li & Lawson Dental",
+    "clinic_suburb": "Auckland CBD",
+    "clinic_region": "Auckland",
+    "hp_name": "Li & Lawson Dental",
+    "hp_phone": "(09) 302 2313",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 2970,
+    "clinic_name": "Confi Dental Hillsborough",
+    "clinic_suburb": "Hillsborough",
+    "clinic_region": "Auckland",
+    "hp_name": "ConfiDENTAL Hillsborough",
+    "hp_phone": "(09) 625 1411",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 1033,
+    "clinic_name": "Ti Rakau Dental Centre",
+    "clinic_suburb": "Burswood",
+    "clinic_region": "Auckland",
+    "hp_name": "Ti Rakau Dental Centre",
+    "hp_phone": "(09) 273 8911",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 916,
+    "clinic_name": "Riverside Dental Warkworth - Dr Seena",
+    "clinic_suburb": "Warkworth",
+    "clinic_region": "Auckland",
+    "hp_name": "Riverside Dental Warkworth - Dr Seena GopiWalk in",
+    "hp_phone": "(09) 422 3214",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 2979,
+    "clinic_name": "Botany Dental Clinic",
+    "clinic_suburb": "Golflands",
+    "clinic_region": "Auckland",
+    "hp_name": "Auckland Regional Dental Service (ARDS)",
+    "hp_phone": "0800 825 583",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 1187,
+    "clinic_name": "Sisam Dental",
+    "clinic_suburb": "Whakat\u0101ne",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Sisam Dental",
+    "hp_phone": "(07) 219 0872",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 1394,
+    "clinic_name": "Pages Dental Surgery",
+    "clinic_suburb": "Timaru",
+    "clinic_region": "Canterbury",
+    "hp_name": "PAG Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.75)"
+  },
+  {
+    "clinic_id": 1914,
+    "clinic_name": "Tooth Works",
+    "clinic_suburb": "Invercargill",
+    "clinic_region": "Southland",
+    "hp_name": "Tooth Works",
+    "hp_phone": "(03) 218 4937",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 719,
+    "clinic_name": "Keith Nelson & Associates",
+    "clinic_suburb": "Freemans Bay",
+    "clinic_region": "Auckland",
+    "hp_name": "Keith Nelson & Associates",
+    "hp_phone": "(09) 378 0877",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 986,
+    "clinic_name": "TMP Stevens Dental Surgery",
+    "clinic_suburb": "Papakura",
+    "clinic_region": "Auckland",
+    "hp_name": "TMP Stevens Dental Surgery",
+    "hp_phone": "(09) 298 5164",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 1976,
+    "clinic_name": "Alpers Dental Cambridge",
+    "clinic_suburb": "Cambridge",
+    "clinic_region": "Waikato",
+    "hp_name": "Alpers Dental - Cambridge",
+    "hp_phone": "(07) 222 3498",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 1032,
+    "clinic_name": "Three Kings Dental Centre",
+    "clinic_suburb": "Three Kings",
+    "clinic_region": "Auckland",
+    "hp_name": "Three Kings Dental Centre",
+    "hp_phone": "(09) 625 7175",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 850,
+    "clinic_name": "Opal Dental",
+    "clinic_suburb": "Te Atat\u016b Peninsula",
+    "clinic_region": "Auckland",
+    "hp_name": "Opal Dental",
+    "hp_phone": "(09) 834 6359",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1030,
+    "clinic_name": "Thompson Dental",
+    "clinic_suburb": "Mount Roskill",
+    "clinic_region": "Auckland",
+    "hp_name": "Thompson Dental",
+    "hp_phone": "(09) 620 8066",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 841,
+    "clinic_name": "Nova Dental Care",
+    "clinic_suburb": "Papakura",
+    "clinic_region": "Auckland",
+    "hp_name": "Nova Dental",
+    "hp_phone": "(09) 298 7501",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 2332,
+    "clinic_name": "Supreme Dental Concepts",
+    "clinic_suburb": "Hutt Central",
+    "clinic_region": "Wellington",
+    "hp_name": "Supreme Dental Concepts",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1821,
+    "clinic_name": "Lakeside Dental Practice",
+    "clinic_suburb": "Queenstown",
+    "clinic_region": "Otago",
+    "hp_name": "Lakeside Dental Practice",
+    "hp_phone": "(03) 441 8248",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 1784,
+    "clinic_name": "Dentistry On Musselburgh",
+    "clinic_suburb": "Musselburgh",
+    "clinic_region": "Otago",
+    "hp_name": "Dentistry on Musselburgh",
+    "hp_phone": "(03) 455 0621",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 760,
+    "clinic_name": "Macleans Dentist",
+    "clinic_suburb": "Bucklands Beach",
+    "clinic_region": "Auckland",
+    "hp_name": "Macleans Dentist",
+    "hp_phone": "(09) 534 0504",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 2129,
+    "clinic_name": "Tulip Dental",
+    "clinic_suburb": "Rototuna North",
+    "clinic_region": "Waikato",
+    "hp_name": "Tulip Dental",
+    "hp_phone": "(07) 949 6947",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 647,
+    "clinic_name": "Flash Dental Mt Eden",
+    "clinic_suburb": "Mount Eden",
+    "clinic_region": "Auckland",
+    "hp_name": "Flash Dental Mt Eden",
+    "hp_phone": "(09) 638 7927",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 1815,
+    "clinic_name": "John Street Dental Centre",
+    "clinic_suburb": "Balclutha",
+    "clinic_region": "Otago",
+    "hp_name": "John Street Dental Centre",
+    "hp_phone": "(03) 418 1374",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 1893,
+    "clinic_name": "Invercargill City Dentists",
+    "clinic_suburb": "Invercargill",
+    "clinic_region": "Southland",
+    "hp_name": "Invercargill City Dentists",
+    "hp_phone": "(03) 218 3456",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 18,
+    "clinic_name": "Albany Dental",
+    "clinic_suburb": "Albany",
+    "clinic_region": "Auckland",
+    "hp_name": "Albany Dental",
+    "hp_phone": "(09) 443 7007",
+    "method": "phone+name"
+  },
+  {
+    "clinic_id": 1875,
+    "clinic_name": "Birch Lane Dental Ltd",
+    "clinic_suburb": "Gore",
+    "clinic_region": "Southland",
+    "hp_name": "Birch Lane Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1969,
+    "clinic_name": "Absolute Dental Limited-Morrinsville",
+    "clinic_suburb": "Morrinsville",
+    "clinic_region": "Waikato",
+    "hp_name": "Absolute Dental Morrinsville",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.98)"
+  },
+  {
+    "clinic_id": 1264,
+    "clinic_name": "Brunswick Dental Chambers",
+    "clinic_suburb": "Timaru",
+    "clinic_region": "Canterbury",
+    "hp_name": "Brunswick Dental Chambers",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 729,
+    "clinic_name": "Lake Road Dentists",
+    "clinic_suburb": "Belmont",
+    "clinic_region": "Auckland",
+    "hp_name": "Lake Road Dentists Limited",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2802,
+    "clinic_name": "Lumino The Dentists",
+    "clinic_suburb": "Wellington Central",
+    "clinic_region": "Wellington",
+    "hp_name": "Lumino The Dentists - Botany",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.84)"
+  },
+  {
+    "clinic_id": 1597,
+    "clinic_name": "M Dental",
+    "clinic_suburb": "Palmerston North Central",
+    "clinic_region": "Manawat\u016b-Whanganui",
+    "hp_name": "M Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 892,
+    "clinic_name": "Ponsonby Dental Boutique",
+    "clinic_suburb": "Ponsonby",
+    "clinic_region": "Auckland",
+    "hp_name": "Floss Dental Boutique",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.73)"
+  },
+  {
+    "clinic_id": 2176,
+    "clinic_name": "Capital Dental Upper Hutt",
+    "clinic_suburb": "Upper Hutt Central",
+    "clinic_region": "Wellington",
+    "hp_name": "Capital Dental Upper Hutt",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 898,
+    "clinic_name": "Pristine Dental",
+    "clinic_suburb": "Papatoetoe",
+    "clinic_region": "Auckland",
+    "hp_name": "Pristine Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2795,
+    "clinic_name": "The Dental Studio - Laura Ng (Johnsonville)",
+    "clinic_suburb": "Johnsonville",
+    "clinic_region": "Wellington",
+    "hp_name": "The Dental Studio Johnsonville",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.84)"
+  },
+  {
+    "clinic_id": 2212,
+    "clinic_name": "Eastbourne Dental Centre",
+    "clinic_suburb": "Eastbourne",
+    "clinic_region": "Wellington",
+    "hp_name": "Eastbourne Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1427,
+    "clinic_name": "Silver Birches Dental Centre",
+    "clinic_suburb": "Timaru",
+    "clinic_region": "Canterbury",
+    "hp_name": "Silver Birches Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1805,
+    "clinic_name": "Gardens Dental Dunedin",
+    "clinic_suburb": "North East Valley",
+    "clinic_region": "Otago",
+    "hp_name": "Gentle Dental - Dunedin",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.77)"
+  },
+  {
+    "clinic_id": 1937,
+    "clinic_name": "Lees Dental Company",
+    "clinic_suburb": "New Plymouth Central",
+    "clinic_region": "Taranaki",
+    "hp_name": "Lees Dental Company Ltd",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1796,
+    "clinic_name": "F & F Dental Care Ltd",
+    "clinic_suburb": "Oamaru",
+    "clinic_region": "Otago",
+    "hp_name": "F & F Dental Care",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 643,
+    "clinic_name": "Epsom Dentists",
+    "clinic_suburb": "Epsom",
+    "clinic_region": "Auckland",
+    "hp_name": "Epsom Dentists",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 754,
+    "clinic_name": "Lumino The Dentists | New Lynn",
+    "clinic_suburb": "New Lynn",
+    "clinic_region": "Auckland",
+    "hp_name": "Lumino the Dentists - Leamington Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.79)"
+  },
+  {
+    "clinic_id": 640,
+    "clinic_name": "Ellerslie Hway Dental Centre",
+    "clinic_suburb": "Mount Wellington",
+    "clinic_region": "Auckland",
+    "hp_name": "Ellerslie Highway Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.90)"
+  },
+  {
+    "clinic_id": 1843,
+    "clinic_name": "Queenstown Dentist",
+    "clinic_suburb": "Queenstown",
+    "clinic_region": "Otago",
+    "hp_name": "Queenstown Dentist",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1236,
+    "clinic_name": "Whakatane Dental Centre",
+    "clinic_suburb": "Whakat\u0101ne",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Whakatane Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2283,
+    "clinic_name": "Mt Wellington Dental Centre",
+    "clinic_suburb": "Mount Wellington",
+    "clinic_region": "Auckland",
+    "hp_name": "Mt Wellington Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1293,
+    "clinic_name": "Lumino The Dentists - Dentistry on Merivale",
+    "clinic_suburb": "Merivale",
+    "clinic_region": "Canterbury",
+    "hp_name": "Lumino The Dentists - Ponsonby Dentist",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.74)"
+  },
+  {
+    "clinic_id": 2224,
+    "clinic_name": "Grace Dental",
+    "clinic_suburb": "Masterton",
+    "clinic_region": "Wairarapa",
+    "hp_name": "Grace Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1106,
+    "clinic_name": "Baywide Smiles Dental",
+    "clinic_suburb": "Gate Pa",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Baywide Smiles",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2350,
+    "clinic_name": "True Dentistry",
+    "clinic_suburb": "Carterton",
+    "clinic_region": "Wairarapa",
+    "hp_name": "True Dentistry",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 694,
+    "clinic_name": "Hibiscus Care Dental",
+    "clinic_suburb": "Stanmore Bay",
+    "clinic_region": "Auckland",
+    "hp_name": "Hibiscus Coast Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.81)"
+  },
+  {
+    "clinic_id": 2038,
+    "clinic_name": "Gentle Dental Hamilton",
+    "clinic_suburb": "Hamilton Central",
+    "clinic_region": "Waikato",
+    "hp_name": "Gentle Dental - Hamilton",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1064,
+    "clinic_name": "Waiheke Dental Centre",
+    "clinic_suburb": "Ostend",
+    "clinic_region": "Auckland",
+    "hp_name": "Waiheke Dental Centre Limited",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1117,
+    "clinic_name": "Complete Dental Care",
+    "clinic_suburb": "Greerton",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Complete Dental Care",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2271,
+    "clinic_name": "Mary McBride Dentist",
+    "clinic_suburb": "Thorndon",
+    "clinic_region": "Wellington",
+    "hp_name": "Mary McBride Dentist",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1533,
+    "clinic_name": "Parkside Dental",
+    "clinic_suburb": "Greenmeadows",
+    "clinic_region": "Hawke's Bay",
+    "hp_name": "Parkside Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 646,
+    "clinic_name": "First Dental",
+    "clinic_suburb": "Henderson",
+    "clinic_region": "Auckland",
+    "hp_name": "First Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 940,
+    "clinic_name": "Silverdale Family Dentists",
+    "clinic_suburb": "Kingsland",
+    "clinic_region": "Auckland",
+    "hp_name": "Silverdale Family Dentists",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1262,
+    "clinic_name": "Bright Smiles Children's Dentistry",
+    "clinic_suburb": "Merivale",
+    "clinic_region": "Canterbury",
+    "hp_name": "Bright Smiles Dental Care",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.79)"
+  },
+  {
+    "clinic_id": 1992,
+    "clinic_name": "Cambridge Dental",
+    "clinic_suburb": "Cambridge",
+    "clinic_region": "Waikato",
+    "hp_name": "Cambridge Dental Practice",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1433,
+    "clinic_name": "Smilesville Dental",
+    "clinic_suburb": "Riccarton",
+    "clinic_region": "Canterbury",
+    "hp_name": "Smile Dental - Somerville",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.79)"
+  },
+  {
+    "clinic_id": 1272,
+    "clinic_name": "Cashmere Dentists",
+    "clinic_suburb": "Cashmere",
+    "clinic_region": "Canterbury",
+    "hp_name": "Cashmere Dentists",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 756,
+    "clinic_name": "Lumino The Dentists: Remuera Dental Centre",
+    "clinic_suburb": "Remuera",
+    "clinic_region": "Auckland",
+    "hp_name": "Lumino The Dentists Masterton",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.82)"
+  },
+  {
+    "clinic_id": 2215,
+    "clinic_name": "Fisher Dental",
+    "clinic_suburb": "Epuni",
+    "clinic_region": "Wellington",
+    "hp_name": "Fisher Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2051,
+    "clinic_name": "Huntly Dental Centre",
+    "clinic_suburb": "Huntly",
+    "clinic_region": "Waikato",
+    "hp_name": "Huntly Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2136,
+    "clinic_name": "Victoria Dentists",
+    "clinic_suburb": "Hamilton Central",
+    "clinic_region": "Waikato",
+    "hp_name": "Victoria Dentists",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1535,
+    "clinic_name": "Pearl of Ahuriri - Dental Care",
+    "clinic_suburb": "Ahuriri",
+    "clinic_region": "Hawke's Bay",
+    "hp_name": "Pearl of Ahuriri",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.84)"
+  },
+  {
+    "clinic_id": 1983,
+    "clinic_name": "Avalon Dental",
+    "clinic_suburb": "Nawton",
+    "clinic_region": "Waikato",
+    "hp_name": "Avalon Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 7,
+    "clinic_name": "Adent dental",
+    "clinic_suburb": "Kumeu",
+    "clinic_region": "Auckland",
+    "hp_name": "Accent Dental Ltd",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.73)"
+  },
+  {
+    "clinic_id": 1235,
+    "clinic_name": "Welcome Bay Dental Care",
+    "clinic_suburb": "Hairini",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Welcome Bay Dental Care",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1718,
+    "clinic_name": "Kensington Dental",
+    "clinic_suburb": "Kensington",
+    "clinic_region": "Northland",
+    "hp_name": "Team Dental - Kensington",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.77)"
+  },
+  {
+    "clinic_id": 2383,
+    "clinic_name": "Hoki Dental",
+    "clinic_suburb": "Hokitika",
+    "clinic_region": "West Coast",
+    "hp_name": "Hokonui Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.73)"
+  },
+  {
+    "clinic_id": 151,
+    "clinic_name": "Dentart",
+    "clinic_suburb": "Howick",
+    "clinic_region": "Auckland",
+    "hp_name": "Dentart Limited",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 805,
+    "clinic_name": "Mount Roskill Family Dentist",
+    "clinic_suburb": "Mount Roskill",
+    "clinic_region": "Auckland",
+    "hp_name": "Mount Roskill Family Dentist",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2373,
+    "clinic_name": "Wishart Dental Centre",
+    "clinic_suburb": "Porirua City Centre",
+    "clinic_region": "Wellington",
+    "hp_name": "Wishart Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1270,
+    "clinic_name": "Carlton Dental Care",
+    "clinic_suburb": "Merivale",
+    "clinic_region": "Canterbury",
+    "hp_name": "Carlton Dental Care",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1357,
+    "clinic_name": "Lumino The Dentist - Christchurch City CBD",
+    "clinic_suburb": "Christchurch Central",
+    "clinic_region": "Canterbury",
+    "hp_name": "Lumino The Dentists - Christchurch City",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.94)"
+  },
+  {
+    "clinic_id": 1609,
+    "clinic_name": "Primecare Dental Palmerston North",
+    "clinic_suburb": "Palmerston North Central",
+    "clinic_region": "Manawat\u016b-Whanganui",
+    "hp_name": "Primecare Dental - Palmerston North",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 63,
+    "clinic_name": "Bays Dental",
+    "clinic_suburb": "Forrest Hill",
+    "clinic_region": "Auckland",
+    "hp_name": "Bays Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 899,
+    "clinic_name": "Project Dentistry",
+    "clinic_suburb": "Takapuna",
+    "clinic_region": "Auckland",
+    "hp_name": "Project Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2222,
+    "clinic_name": "Gentle Dental Centre Upper Hutt",
+    "clinic_suburb": "Upper Hutt Central",
+    "clinic_region": "Wellington",
+    "hp_name": "Gentle Dental Centre Upper Hutt",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2889,
+    "clinic_name": "Harley Dentist",
+    "clinic_suburb": "Dunedin Central",
+    "clinic_region": "Otago",
+    "hp_name": "The Dentist",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.80)"
+  },
+  {
+    "clinic_id": 1138,
+    "clinic_name": "East Bay Dental Opotiki",
+    "clinic_suburb": "\u014cp\u014dtiki",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "East Bay Dental- Opotiki",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1739,
+    "clinic_name": "Team Dental Whangarei",
+    "clinic_suburb": "Whang\u0101rei",
+    "clinic_region": "Northland",
+    "hp_name": "Team Dental - Whangarei",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1026,
+    "clinic_name": "The Tooth Company Smales Farm",
+    "clinic_suburb": "Smales Farm",
+    "clinic_region": "Auckland",
+    "hp_name": "The Tooth Company - Smales Farm",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2152,
+    "clinic_name": "Art of Dentistry",
+    "clinic_suburb": "Upper Hutt Central",
+    "clinic_region": "Wellington",
+    "hp_name": "Art of Dentistry",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 644,
+    "clinic_name": "Family Dentist Pakuranga",
+    "clinic_suburb": "Pakuranga",
+    "clinic_region": "Auckland",
+    "hp_name": "Family Dentist Pakuranga",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 952,
+    "clinic_name": "Smile Dental - Henderson",
+    "clinic_suburb": "Henderson",
+    "clinic_region": "Auckland",
+    "hp_name": "Smile Dental - Henderson Limited",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1787,
+    "clinic_name": "Dunbar Wilson Dental",
+    "clinic_suburb": "Dunedin Central",
+    "clinic_region": "Otago",
+    "hp_name": "Dunbar Wilson Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2104,
+    "clinic_name": "Taupo Dental Centre",
+    "clinic_suburb": "Taup\u014d",
+    "clinic_region": "Waikato",
+    "hp_name": "Taupo Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1259,
+    "clinic_name": "Blossom Dental",
+    "clinic_suburb": "Hillmorton",
+    "clinic_region": "Canterbury",
+    "hp_name": "Blossom Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1581,
+    "clinic_name": "Hazelhurst Dentalcare",
+    "clinic_suburb": "Marton",
+    "clinic_region": "Manawat\u016b-Whanganui",
+    "hp_name": "Hazelhurst Dentalcare",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1307,
+    "clinic_name": "Elmwood Dental Centre",
+    "clinic_suburb": "Strowan",
+    "clinic_region": "Canterbury",
+    "hp_name": "Elmwood Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1567,
+    "clinic_name": "Dannevirke Dental Health Center",
+    "clinic_suburb": "Dannevirke",
+    "clinic_region": "Manawat\u016b-Whanganui",
+    "hp_name": "Dannevirke Dental Health Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.96)"
+  },
+  {
+    "clinic_id": 1109,
+    "clinic_name": "Brush Dental Tauranga",
+    "clinic_suburb": "Tauranga South",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "ER Dental Tauranga",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.81)"
+  },
+  {
+    "clinic_id": 1788,
+    "clinic_name": "Duncan Anderson Dental Surgeons",
+    "clinic_suburb": "Alexandra",
+    "clinic_region": "Otago",
+    "hp_name": "Duncan Anderson Dental Surgeons",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1067,
+    "clinic_name": "Warkworth Dental Practice",
+    "clinic_suburb": "Warkworth",
+    "clinic_region": "Auckland",
+    "hp_name": "Warkworth Dental Practice",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 960,
+    "clinic_name": "Smile Dental - Sylvia Park - Mt Wellington",
+    "clinic_suburb": "Mount Wellington",
+    "clinic_region": "Auckland",
+    "hp_name": "Smile Dental - Sylvia Park Limited",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.72)"
+  },
+  {
+    "clinic_id": 1487,
+    "clinic_name": "Mayfair Dental",
+    "clinic_suburb": "Gisborne",
+    "clinic_region": "Gisborne",
+    "hp_name": "Mayfair Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1779,
+    "clinic_name": "Cooper & Hunt Dental Care",
+    "clinic_suburb": "Oamaru",
+    "clinic_region": "Otago",
+    "hp_name": "Cooper & Hunt Dental Care - Waimate",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.81)"
+  },
+  {
+    "clinic_id": 149,
+    "clinic_name": "Dentalcare Pakuranga",
+    "clinic_suburb": "Pakuranga",
+    "clinic_region": "Auckland",
+    "hp_name": "Dental Care Pakuranga",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.82)"
+  },
+  {
+    "clinic_id": 989,
+    "clinic_name": "Takapuna Dentists",
+    "clinic_suburb": "Takapuna",
+    "clinic_region": "Auckland",
+    "hp_name": "Takapuna Dentist Limited",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.97)"
+  },
+  {
+    "clinic_id": 661,
+    "clinic_name": "Gentle Care Dentist",
+    "clinic_suburb": "Panmure",
+    "clinic_region": "Auckland",
+    "hp_name": "Gentle Care Dentist",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2975,
+    "clinic_name": "Saint Heliers Dental Centre",
+    "clinic_suburb": "St Heliers",
+    "clinic_region": "Auckland",
+    "hp_name": "Lumino St Heliers",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.73)"
+  },
+  {
+    "clinic_id": 2248,
+    "clinic_name": "Johnsonville Dental Centre",
+    "clinic_suburb": "Johnsonville",
+    "clinic_region": "Wellington",
+    "hp_name": "Johnsonville Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 979,
+    "clinic_name": "Sunnynook Dentist",
+    "clinic_suburb": "Forrest Hill",
+    "clinic_region": "Auckland",
+    "hp_name": "Sunnynook Dentist",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1959,
+    "clinic_name": "Taylor Dental Practice",
+    "clinic_suburb": "New Plymouth Central",
+    "clinic_region": "Taranaki",
+    "hp_name": "Taylor Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1287,
+    "clinic_name": "Dental Care Kaiapoi",
+    "clinic_suburb": "Kaiapoi",
+    "clinic_region": "Canterbury",
+    "hp_name": "Dental Care Kaiapoi",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1324,
+    "clinic_name": "G&E Dental Ashburton",
+    "clinic_suburb": "Ashburton",
+    "clinic_region": "Canterbury",
+    "hp_name": "G & E Dental Ashburton",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1507,
+    "clinic_name": "David Marriott Dental",
+    "clinic_suburb": "St Leonards",
+    "clinic_region": "Hawke's Bay",
+    "hp_name": "David Marriott Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1085,
+    "clinic_name": "Young Dental Centre",
+    "clinic_suburb": "Meadowbank",
+    "clinic_region": "Auckland",
+    "hp_name": "You Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.75)"
+  },
+  {
+    "clinic_id": 111,
+    "clinic_name": "Clendon Dental Centre",
+    "clinic_suburb": "Manurewa",
+    "clinic_region": "Auckland",
+    "hp_name": "Clendon Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2374,
+    "clinic_name": "Kevin Wong Dental Surgery",
+    "clinic_suburb": "Masterton",
+    "clinic_region": "Wairarapa",
+    "hp_name": "Kevin Wong Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 3,
+    "clinic_name": "A+ Dentists",
+    "clinic_suburb": "Howick",
+    "clinic_region": "Auckland",
+    "hp_name": "A+ Dentists - Howick",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.74)"
+  },
+  {
+    "clinic_id": 1485,
+    "clinic_name": "Edgar Dental",
+    "clinic_suburb": "Gisborne",
+    "clinic_region": "Gisborne",
+    "hp_name": "Edgar Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 832,
+    "clinic_name": "North Shore Dental",
+    "clinic_suburb": "Browns Bay",
+    "clinic_region": "Auckland",
+    "hp_name": "North Shore Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 843,
+    "clinic_name": "Ocean View Dental",
+    "clinic_suburb": "Northcote",
+    "clinic_region": "Auckland",
+    "hp_name": "Ocean View Dental Limited",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2123,
+    "clinic_name": "Tui Dental",
+    "clinic_suburb": "Huntly",
+    "clinic_region": "Waikato",
+    "hp_name": "Tui Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 130,
+    "clinic_name": "Dental Artistry - Auckland Dentist",
+    "clinic_suburb": "Newmarket",
+    "clinic_region": "Auckland",
+    "hp_name": "West Auckland Dentist",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.83)"
+  },
+  {
+    "clinic_id": 1603,
+    "clinic_name": "Ohakune Dental",
+    "clinic_suburb": "Ohakune",
+    "clinic_region": "Manawat\u016b-Whanganui",
+    "hp_name": "Ohakune Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1443,
+    "clinic_name": "Team Dental Bealey",
+    "clinic_suburb": "Christchurch Central",
+    "clinic_region": "Canterbury",
+    "hp_name": "Team Dental - Bealey Ave",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.86)"
+  },
+  {
+    "clinic_id": 2169,
+    "clinic_name": "Capital Dental Lower Hutt",
+    "clinic_suburb": "Boulcott",
+    "clinic_region": "Wellington",
+    "hp_name": "Capital Dental Lower Hutt",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1770,
+    "clinic_name": "Bespoke Smiles Wanaka",
+    "clinic_suburb": "W\u0101naka",
+    "clinic_region": "Otago",
+    "hp_name": "Bespoke Smiles",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.80)"
+  },
+  {
+    "clinic_id": 1275,
+    "clinic_name": "Christchurch Boutique Dental",
+    "clinic_suburb": "Riccarton",
+    "clinic_region": "Canterbury",
+    "hp_name": "Christchurch Boutique Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2318,
+    "clinic_name": "Rimu Road Dental Surgery",
+    "clinic_suburb": "Paraparaumu",
+    "clinic_region": "Wellington",
+    "hp_name": "Rimu Road Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2026,
+    "clinic_name": "Family Dental Centre Matamata",
+    "clinic_suburb": "Matamata",
+    "clinic_region": "Waikato",
+    "hp_name": "Family Dental Centre - Matamata",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 698,
+    "clinic_name": "Hinemoa Street Dental",
+    "clinic_suburb": "Birkenhead",
+    "clinic_region": "Auckland",
+    "hp_name": "Hinemoa Street Dental Practice",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1444,
+    "clinic_name": "Team Dental Papanui",
+    "clinic_suburb": "Papanui",
+    "clinic_region": "Canterbury",
+    "hp_name": "Team Dental - Papanui",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 934,
+    "clinic_name": "Shine Dental Limited",
+    "clinic_suburb": "Manukau City Centre",
+    "clinic_region": "Auckland",
+    "hp_name": "Sunshine Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.77)"
+  },
+  {
+    "clinic_id": 17,
+    "clinic_name": "Albany Central Dental",
+    "clinic_suburb": "Albany",
+    "clinic_region": "Auckland",
+    "hp_name": "Albany Central Dental Limited",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1509,
+    "clinic_name": "Dental on Raffles",
+    "clinic_suburb": "Napier South",
+    "clinic_region": "Hawke's Bay",
+    "hp_name": "Dental on Raffles",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 930,
+    "clinic_name": "Serenity Dental Group",
+    "clinic_suburb": "Rosedale",
+    "clinic_region": "Auckland",
+    "hp_name": "Serenity Dental Group",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 79,
+    "clinic_name": "Botany South Dental",
+    "clinic_suburb": "Flat Bush",
+    "clinic_region": "Auckland",
+    "hp_name": "Botany South Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1996,
+    "clinic_name": "Cambridge Smile Centre",
+    "clinic_suburb": "Cambridge",
+    "clinic_region": "Waikato",
+    "hp_name": "Cambridge Smile Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1852,
+    "clinic_name": "Smart Dental Care",
+    "clinic_suburb": "Dunedin Central",
+    "clinic_region": "Otago",
+    "hp_name": "Smart Dental Care",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 785,
+    "clinic_name": "Matheson Dental",
+    "clinic_suburb": "Glen Eden",
+    "clinic_region": "Auckland",
+    "hp_name": "Frank Matheson Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.73)"
+  },
+  {
+    "clinic_id": 2116,
+    "clinic_name": "The Dentists - Taup\u014d",
+    "clinic_suburb": "Taup\u014d",
+    "clinic_region": "Waikato",
+    "hp_name": "The Dentists Taupo",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.97)"
+  },
+  {
+    "clinic_id": 1816,
+    "clinic_name": "Kaikorai Dental Surgery",
+    "clinic_suburb": "Kaikorai",
+    "clinic_region": "Otago",
+    "hp_name": "Kaikorai Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 948,
+    "clinic_name": "Smile Dental - Albany",
+    "clinic_suburb": "Albany",
+    "clinic_region": "Auckland",
+    "hp_name": "Smile Dental - Albany Ltd",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 975,
+    "clinic_name": "Stanmore Bay Dental Studio",
+    "clinic_suburb": "Stanmore Bay",
+    "clinic_region": "Auckland",
+    "hp_name": "Stanmore Bay Dental Studio",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1587,
+    "clinic_name": "Kwok Joe Dental",
+    "clinic_suburb": "Palmerston North Central",
+    "clinic_region": "Manawat\u016b-Whanganui",
+    "hp_name": "Kwok Joe Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2387,
+    "clinic_name": "Northmed Dental",
+    "clinic_suburb": "Northcote",
+    "clinic_region": "Auckland",
+    "hp_name": "Northmed Dental Ltd",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 847,
+    "clinic_name": "Onehunga Dental Centre",
+    "clinic_suburb": "Onehunga",
+    "clinic_region": "Auckland",
+    "hp_name": "Onehunga Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1926,
+    "clinic_name": "Dental Care High St",
+    "clinic_suburb": "H\u0101wera",
+    "clinic_region": "Taranaki",
+    "hp_name": "Dental Care High Street",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.86)"
+  },
+  {
+    "clinic_id": 1263,
+    "clinic_name": "Broadfield Dental Centre",
+    "clinic_suburb": "Prebbleton",
+    "clinic_region": "Canterbury",
+    "hp_name": "Broadfield Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 655,
+    "clinic_name": "Fraser Dental",
+    "clinic_suburb": "Hobsonville",
+    "clinic_region": "Auckland",
+    "hp_name": "Fraser Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1292,
+    "clinic_name": "Dentistry With A Smile",
+    "clinic_suburb": "Hillmorton",
+    "clinic_region": "Canterbury",
+    "hp_name": "Dentistry with a Smile",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 950,
+    "clinic_name": "Smile Dental - Beachlands",
+    "clinic_suburb": "Beachlands",
+    "clinic_region": "Auckland",
+    "hp_name": "Smile Dental - Beachlands",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1337,
+    "clinic_name": "Highsted Dental",
+    "clinic_suburb": "Casebrook",
+    "clinic_region": "Canterbury",
+    "hp_name": "Highsted Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2054,
+    "clinic_name": "Jogia Dental Surgery",
+    "clinic_suburb": "Claudelands",
+    "clinic_region": "Waikato",
+    "hp_name": "Jogia Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1716,
+    "clinic_name": "Kamo Dental",
+    "clinic_suburb": "Te Kamo",
+    "clinic_region": "Northland",
+    "hp_name": "Kamo Dental Ltd.",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2041,
+    "clinic_name": "Hamilton Dental Clinic",
+    "clinic_suburb": "Pukete",
+    "clinic_region": "Waikato",
+    "hp_name": "Hamilton Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 700,
+    "clinic_name": "Hobsonville Point Dental",
+    "clinic_suburb": "Hobsonville",
+    "clinic_region": "Auckland",
+    "hp_name": "Hobsonville Point Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2529,
+    "clinic_name": "Tony Ryder Dental Rooms",
+    "clinic_suburb": "Dunedin Central",
+    "clinic_region": "Otago",
+    "hp_name": "Ryder Dental Rooms",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.83)"
+  },
+  {
+    "clinic_id": 81,
+    "clinic_name": "Brent Wallwork Dental",
+    "clinic_suburb": "Papakura",
+    "clinic_region": "Auckland",
+    "hp_name": "Brent Wallwork Dental Limited",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1909,
+    "clinic_name": "Remarkable Smile Dentistry",
+    "clinic_suburb": "Invercargill",
+    "clinic_region": "Southland",
+    "hp_name": "Remarkable Smile",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1413,
+    "clinic_name": "Redcliffs Dental",
+    "clinic_suburb": "Redcliffs",
+    "clinic_region": "Canterbury",
+    "hp_name": "Redcliffs Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2001,
+    "clinic_name": "Chilukuri Dental",
+    "clinic_suburb": "Taup\u014d",
+    "clinic_region": "Waikato",
+    "hp_name": "Chilukuri Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1294,
+    "clinic_name": "Dentistry on Parkside",
+    "clinic_suburb": "Ashburton",
+    "clinic_region": "Canterbury",
+    "hp_name": "Dentistry on Parkside",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 717,
+    "clinic_name": "Joy Family Dental Clinic",
+    "clinic_suburb": "Mount Eden",
+    "clinic_region": "Auckland",
+    "hp_name": "Joy Family Dental Clinic",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1252,
+    "clinic_name": "Beale & Cullen - Dentist",
+    "clinic_suburb": "Strowan",
+    "clinic_region": "Canterbury",
+    "hp_name": "Beale & Cullen Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.75)"
+  },
+  {
+    "clinic_id": 145,
+    "clinic_name": "Dental World Papakura",
+    "clinic_suburb": "Papakura",
+    "clinic_region": "Auckland",
+    "hp_name": "Dental World Papakura",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1095,
+    "clinic_name": "Absolute Dental Limited - Kawerau",
+    "clinic_suburb": "Kawerau",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Absolute Dental Kawerau",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.97)"
+  },
+  {
+    "clinic_id": 1542,
+    "clinic_name": "The Dentists - Taradale",
+    "clinic_suburb": "Taradale",
+    "clinic_region": "Hawke's Bay",
+    "hp_name": "Lumino The Dentists - Taradale",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.86)"
+  },
+  {
+    "clinic_id": 1158,
+    "clinic_name": "Lumino The Dentists Rotorua - InCity Haupapa Street",
+    "clinic_suburb": "Rotorua",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Lumino The Dentist - Rotorua InCity Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.80)"
+  },
+  {
+    "clinic_id": 1075,
+    "clinic_name": "Whangaparaoa Dental Centre",
+    "clinic_suburb": "Manly",
+    "clinic_region": "Auckland",
+    "hp_name": "Whangaparaoa Dental Centre Ltd",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2148,
+    "clinic_name": "32 Gems Dental Care",
+    "clinic_suburb": "Hutt Central",
+    "clinic_region": "Wellington",
+    "hp_name": "32 Gems Dental Care",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1329,
+    "clinic_name": "Good Street Dental",
+    "clinic_suburb": "Rangiora",
+    "clinic_region": "Canterbury",
+    "hp_name": "Good Street Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2992,
+    "clinic_name": "Riverside Dental Warkworth",
+    "clinic_suburb": "Warkworth",
+    "clinic_region": "Auckland",
+    "hp_name": "Riverside Dental Warkworth",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 15,
+    "clinic_name": "Airport Oaks Dental Centre",
+    "clinic_suburb": "M\u0101ngere",
+    "clinic_region": "Auckland",
+    "hp_name": "Airport Oaks Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1210,
+    "clinic_name": "Team Dental Rotorua",
+    "clinic_suburb": "Rotorua",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Team Dental - Rotorua",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1071,
+    "clinic_name": "Westgate Dental Centre",
+    "clinic_suburb": "Massey",
+    "clinic_region": "Auckland",
+    "hp_name": "Westgate Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1781,
+    "clinic_name": "Octagon Dental Suite",
+    "clinic_suburb": "Dunedin Central",
+    "clinic_region": "Otago",
+    "hp_name": "Octagon Dental Suite",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1809,
+    "clinic_name": "Green Island Dental Centre",
+    "clinic_suburb": "Green Island",
+    "clinic_region": "Otago",
+    "hp_name": "Green Island Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2044,
+    "clinic_name": "Hamilton Family Dental",
+    "clinic_suburb": "Beerescourt",
+    "clinic_region": "Waikato",
+    "hp_name": "Milford Family Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.76)"
+  },
+  {
+    "clinic_id": 1766,
+    "clinic_name": "A1 smile clinic",
+    "clinic_suburb": "Wakari",
+    "clinic_region": "Otago",
+    "hp_name": "Taup\u014d Mobile Dental Clinics",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.74)"
+  },
+  {
+    "clinic_id": 1325,
+    "clinic_name": "G&E Dental Rolleston",
+    "clinic_suburb": "Rolleston",
+    "clinic_region": "Canterbury",
+    "hp_name": "G & E Dental Rolleston",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 909,
+    "clinic_name": "Quay Street Dental",
+    "clinic_suburb": "Auckland CBD",
+    "clinic_region": "Auckland",
+    "hp_name": "Quay Street Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 920,
+    "clinic_name": "Royal Road Dental",
+    "clinic_suburb": "Massey",
+    "clinic_region": "Auckland",
+    "hp_name": "Royal Road Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 896,
+    "clinic_name": "Primecare Dental Highland Park",
+    "clinic_suburb": "Highland Park",
+    "clinic_region": "Auckland",
+    "hp_name": "Primecare Dental - Highland Park East",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.91)"
+  },
+  {
+    "clinic_id": 146,
+    "clinic_name": "Dental on Richmond",
+    "clinic_suburb": "Grey Lynn",
+    "clinic_region": "Auckland",
+    "hp_name": "Richmond Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.84)"
+  },
+  {
+    "clinic_id": 2067,
+    "clinic_name": "Mathai Dental Taupo",
+    "clinic_suburb": "Taup\u014d",
+    "clinic_region": "Waikato",
+    "hp_name": "Mathai Dental Taupo",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2106,
+    "clinic_name": "Te Aroha Family Dental Practice",
+    "clinic_suburb": "Te Aroha",
+    "clinic_region": "Waikato",
+    "hp_name": "Te Aroha Family Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1666,
+    "clinic_name": "McIntosh's Dental Surgery",
+    "clinic_suburb": "Nelson",
+    "clinic_region": "Nelson & Tasman",
+    "hp_name": "McIntosh Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.89)"
+  },
+  {
+    "clinic_id": 957,
+    "clinic_name": "Smile Dental - Papakura",
+    "clinic_suburb": "Papakura",
+    "clinic_region": "Auckland",
+    "hp_name": "Smile Dental - Papakura Ltd",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1617,
+    "clinic_name": "Taumarunui Dental Surgery",
+    "clinic_suburb": "Taumarunui",
+    "clinic_region": "Manawat\u016b-Whanganui",
+    "hp_name": "Taumarunui Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 877,
+    "clinic_name": "Papatoetoe Family Dentist",
+    "clinic_suburb": "Papatoetoe",
+    "clinic_region": "Auckland",
+    "hp_name": "Papatoetoe Family Dentist",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2804,
+    "clinic_name": "Ben Catherwood Dental",
+    "clinic_suburb": "Wellington Central",
+    "clinic_region": "Wellington",
+    "hp_name": "Ben Catherwood Dental Ltd",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2043,
+    "clinic_name": "Hamilton East Dental Centre",
+    "clinic_suburb": "Hamilton East",
+    "clinic_region": "Waikato",
+    "hp_name": "Hamilton East Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1406,
+    "clinic_name": "QE2 Dental",
+    "clinic_suburb": "North New Brighton",
+    "clinic_region": "Canterbury",
+    "hp_name": "QE2 Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1931,
+    "clinic_name": "Eltham Dental Centre",
+    "clinic_suburb": "Eltham",
+    "clinic_region": "Taranaki",
+    "hp_name": "Eltham Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1610,
+    "clinic_name": "Rapid Response Dental",
+    "clinic_suburb": "Dannevirke",
+    "clinic_region": "Manawat\u016b-Whanganui",
+    "hp_name": "Rapid Response Dental Ltd",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1161,
+    "clinic_name": "Lumino The Dentists: Willows Dental Centre Tauranga",
+    "clinic_suburb": "Tauranga",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Lumino The Dentists - Whitianga",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.82)"
+  },
+  {
+    "clinic_id": 1063,
+    "clinic_name": "Waiata Shores Dental",
+    "clinic_suburb": "Takanini",
+    "clinic_region": "Auckland",
+    "hp_name": "Waiata Shores Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2077,
+    "clinic_name": "New Smile",
+    "clinic_suburb": "Hamilton East",
+    "clinic_region": "Waikato",
+    "hp_name": "New Smile",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1942,
+    "clinic_name": "Stratford Dental",
+    "clinic_suburb": "Stratford",
+    "clinic_region": "Taranaki",
+    "hp_name": "Stratford Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1722,
+    "clinic_name": "Mangawhai Dental Clinic",
+    "clinic_suburb": "Mangawhai",
+    "clinic_region": "Northland",
+    "hp_name": "Mangawhai Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1827,
+    "clinic_name": "Mosgiel Dental Centre",
+    "clinic_suburb": "Mosgiel",
+    "clinic_region": "Otago",
+    "hp_name": "Mosgiel Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 782,
+    "clinic_name": "Marina Dentists Half Moon Bay",
+    "clinic_suburb": "Half Moon Bay",
+    "clinic_region": "Auckland",
+    "hp_name": "Marina Dentists - Half Moon Bay",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1478,
+    "clinic_name": "Windsor Dental Centre",
+    "clinic_suburb": "Shirley",
+    "clinic_region": "Canterbury",
+    "hp_name": "Windsor Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1539,
+    "clinic_name": "Taradale Family Dental",
+    "clinic_suburb": "Taradale",
+    "clinic_region": "Hawke's Bay",
+    "hp_name": "Taradale Family Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2323,
+    "clinic_name": "Singleton Dental",
+    "clinic_suburb": "Karori",
+    "clinic_region": "Wellington",
+    "hp_name": "Singleton Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1676,
+    "clinic_name": "One Dental Nelson - Stoke",
+    "clinic_suburb": "Stoke",
+    "clinic_region": "Nelson & Tasman",
+    "hp_name": "One Dental - Stoke",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.74)"
+  },
+  {
+    "clinic_id": 2171,
+    "clinic_name": "Capital Dental Ngaio",
+    "clinic_suburb": "Ngaio",
+    "clinic_region": "Wellington",
+    "hp_name": "Capital Dental Ngaio",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2092,
+    "clinic_name": "Relax Dental",
+    "clinic_suburb": "Hamilton East",
+    "clinic_region": "Waikato",
+    "hp_name": "Relax Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 894,
+    "clinic_name": "Ponsonby Teeth",
+    "clinic_suburb": "Ponsonby",
+    "clinic_region": "Auckland",
+    "hp_name": "Ponsonby Teeth",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1320,
+    "clinic_name": "Fox Dental Care",
+    "clinic_suburb": "Rangiora",
+    "clinic_region": "Canterbury",
+    "hp_name": "Fox Dental Care",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1313,
+    "clinic_name": "Ferry Road Dental Centre",
+    "clinic_suburb": "Phillipstown",
+    "clinic_region": "Canterbury",
+    "hp_name": "Ferry Road Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2292,
+    "clinic_name": "Newtown Dental",
+    "clinic_suburb": "Newtown",
+    "clinic_region": "Wellington",
+    "hp_name": "Newtown Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 678,
+    "clinic_name": "Greenlane Dental",
+    "clinic_suburb": "Greenlane",
+    "clinic_region": "Auckland",
+    "hp_name": "Dental On Greenlane",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.86)"
+  },
+  {
+    "clinic_id": 1986,
+    "clinic_name": "Bella Dental",
+    "clinic_suburb": "Hillcrest",
+    "clinic_region": "Waikato",
+    "hp_name": "Bella Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1207,
+    "clinic_name": "Team Dental Greerton",
+    "clinic_suburb": "Greerton",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Team Dental - Greerton",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2312,
+    "clinic_name": "Raine Street Dental",
+    "clinic_suburb": "Karori",
+    "clinic_region": "Wellington",
+    "hp_name": "Clarence Street Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.74)"
+  },
+  {
+    "clinic_id": 1009,
+    "clinic_name": "The Dental Practice",
+    "clinic_suburb": "Botany Downs",
+    "clinic_region": "Auckland",
+    "hp_name": "The Dental Practice Limited",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1497,
+    "clinic_name": "Aesthetic Dental Limited",
+    "clinic_suburb": "Hastings",
+    "clinic_region": "Hawke's Bay",
+    "hp_name": "Aesthetic Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1345,
+    "clinic_name": "Kaikoura Dental Centre",
+    "clinic_suburb": "Kaik\u014dura",
+    "clinic_region": "Canterbury",
+    "hp_name": "Kaik\u014dura Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.88)"
+  },
+  {
+    "clinic_id": 1580,
+    "clinic_name": "Grey Street Dental Surgery",
+    "clinic_suburb": "Palmerston North Central",
+    "clinic_region": "Manawat\u016b-Whanganui",
+    "hp_name": "Grey Street Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1279,
+    "clinic_name": "Chung Dental Clinic",
+    "clinic_suburb": "Redwood",
+    "clinic_region": "Canterbury",
+    "hp_name": "Chung Dental Clinic",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1036,
+    "clinic_name": "Titirangi Dental Centre",
+    "clinic_suburb": "Titirangi",
+    "clinic_region": "Auckland",
+    "hp_name": "Titirangi Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1472,
+    "clinic_name": "Warrington Dental",
+    "clinic_suburb": "St Albans",
+    "clinic_region": "Canterbury",
+    "hp_name": "Warrington Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 695,
+    "clinic_name": "Highland Park Dental Centre",
+    "clinic_suburb": "Highland Park",
+    "clinic_region": "Auckland",
+    "hp_name": "Highland Park Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1836,
+    "clinic_name": "Palmerston Dental Surgery Limited",
+    "clinic_suburb": "Palmerston",
+    "clinic_region": "Otago",
+    "hp_name": "Palmerston Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1735,
+    "clinic_name": "Smile Care Dental Studio",
+    "clinic_suburb": "Regent",
+    "clinic_region": "Northland",
+    "hp_name": "Smile Care Dental Studio",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 648,
+    "clinic_name": "Flat Bush Dental",
+    "clinic_suburb": "Flat Bush",
+    "clinic_region": "Auckland",
+    "hp_name": "Flat Bush Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2322,
+    "clinic_name": "Simply Dental",
+    "clinic_suburb": "Wellington Central",
+    "clinic_region": "Wellington",
+    "hp_name": "Simply Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 953,
+    "clinic_name": "Smile Dental - Kelston",
+    "clinic_suburb": "Glen Eden",
+    "clinic_region": "Auckland",
+    "hp_name": "Smile Dental - Kelston",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1363,
+    "clinic_name": "Maidstone Dental",
+    "clinic_suburb": "Ilam",
+    "clinic_region": "Canterbury",
+    "hp_name": "Maidstone Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1006,
+    "clinic_name": "The Dental Centre Browns Bay",
+    "clinic_suburb": "Browns Bay",
+    "clinic_region": "Auckland",
+    "hp_name": "The Dental Centre Browns Bay",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2226,
+    "clinic_name": "Greytown Dental",
+    "clinic_suburb": "Greytown",
+    "clinic_region": "Wairarapa",
+    "hp_name": "Greytown Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1432,
+    "clinic_name": "Smiles Oral Health",
+    "clinic_suburb": "Spreydon",
+    "clinic_region": "Canterbury",
+    "hp_name": "Smiles Oral Health",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1265,
+    "clinic_name": "Burnett Street Dental",
+    "clinic_suburb": "Ashburton",
+    "clinic_region": "Canterbury",
+    "hp_name": "Burnett Street Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2962,
+    "clinic_name": "Dental on Mount Albert",
+    "clinic_suburb": "Mount Albert",
+    "clinic_region": "Auckland",
+    "hp_name": "Dental on Mt Albert",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.89)"
+  },
+  {
+    "clinic_id": 1677,
+    "clinic_name": "Quin Dental",
+    "clinic_suburb": "Nelson",
+    "clinic_region": "Nelson & Tasman",
+    "hp_name": "Quin Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 167,
+    "clinic_name": "Dominion Dental Centre",
+    "clinic_suburb": "Mount Roskill",
+    "clinic_region": "Auckland",
+    "hp_name": "Dominion Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 897,
+    "clinic_name": "Prisca Dental Centre",
+    "clinic_suburb": "Papatoetoe",
+    "clinic_region": "Auckland",
+    "hp_name": "Prisca Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1934,
+    "clinic_name": "Hawera Dental Surgery",
+    "clinic_suburb": "H\u0101wera",
+    "clinic_region": "Taranaki",
+    "hp_name": "Hawera Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 154,
+    "clinic_name": "Dentist On Shakespeare",
+    "clinic_suburb": "Milford",
+    "clinic_region": "Auckland",
+    "hp_name": "Dentist on Shakespeare",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 97,
+    "clinic_name": "Central Dental Centre",
+    "clinic_suburb": "Mount Roskill",
+    "clinic_region": "Auckland",
+    "hp_name": "Central Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1429,
+    "clinic_name": "Smile Concepts",
+    "clinic_suburb": "Sydenham",
+    "clinic_region": "Canterbury",
+    "hp_name": "Smile Concepts",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1438,
+    "clinic_name": "Studio Dental",
+    "clinic_suburb": "Strowan",
+    "clinic_region": "Canterbury",
+    "hp_name": "Studio Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 84,
+    "clinic_name": "Browns Road Dental Centre",
+    "clinic_suburb": "Manurewa",
+    "clinic_region": "Auckland",
+    "hp_name": "Browns Road Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1669,
+    "clinic_name": "Nelson Dental Centre",
+    "clinic_suburb": "Nelson",
+    "clinic_region": "Nelson & Tasman",
+    "hp_name": "Nelson Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1968,
+    "clinic_name": "Absolute Dental Limited - Tokoroa",
+    "clinic_suburb": "Tokoroa",
+    "clinic_region": "Waikato",
+    "hp_name": "Absolute Dental Tokoroa",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.97)"
+  },
+  {
+    "clinic_id": 14,
+    "clinic_name": "Avondale Dental",
+    "clinic_suburb": "Avondale",
+    "clinic_region": "Auckland",
+    "hp_name": "Avondale Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2354,
+    "clinic_name": "The Dental Studio - Laura Ng",
+    "clinic_suburb": "Hutt Central",
+    "clinic_region": "Wellington",
+    "hp_name": "The Dental Studio - Laura Ng",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1541,
+    "clinic_name": "The Dental Institute",
+    "clinic_suburb": "Hastings",
+    "clinic_region": "Hawke's Bay",
+    "hp_name": "The Dental Suite",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.75)"
+  },
+  {
+    "clinic_id": 1182,
+    "clinic_name": "Rotorua Dentists",
+    "clinic_suburb": "Rotorua",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Tipu Ora Dentists",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.79)"
+  },
+  {
+    "clinic_id": 2408,
+    "clinic_name": "Gentle Dental",
+    "clinic_suburb": "Dunedin Central",
+    "clinic_region": "Otago",
+    "hp_name": "Gentle Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1062,
+    "clinic_name": "W M Dental",
+    "clinic_suburb": "Rosedale",
+    "clinic_region": "Auckland",
+    "hp_name": "WM Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.80)"
+  },
+  {
+    "clinic_id": 1775,
+    "clinic_name": "Chew Dental",
+    "clinic_suburb": "Green Island",
+    "clinic_region": "Otago",
+    "hp_name": "Chew Dental Limited",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1397,
+    "clinic_name": "Pathway Dental",
+    "clinic_suburb": "Riccarton",
+    "clinic_region": "Canterbury",
+    "hp_name": "Pathway Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2170,
+    "clinic_name": "Capital Dental Newtown",
+    "clinic_suburb": "Newtown",
+    "clinic_region": "Wellington",
+    "hp_name": "Capital Dental Newtown",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2996,
+    "clinic_name": "Lumino the Dentists: Proudmouth Takapuna",
+    "clinic_suburb": "Takapuna",
+    "clinic_region": "Auckland",
+    "hp_name": "Lumino The Dentist - Takapuna",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.82)"
+  },
+  {
+    "clinic_id": 1247,
+    "clinic_name": "Ashburton Dental Centre",
+    "clinic_suburb": "Ashburton",
+    "clinic_region": "Canterbury",
+    "hp_name": "Ashburton Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1705,
+    "clinic_name": "Gentle Dental Ruakaka",
+    "clinic_suburb": "Ruak\u0101k\u0101",
+    "clinic_region": "Northland",
+    "hp_name": "Gentle Dental, Ruakaka",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2049,
+    "clinic_name": "Hillcrest Dental Centre",
+    "clinic_suburb": "Hillcrest",
+    "clinic_region": "Waikato",
+    "hp_name": "Hillcrest Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2181,
+    "clinic_name": "Central Hutt Dental",
+    "clinic_suburb": "Hutt Central",
+    "clinic_region": "Wellington",
+    "hp_name": "Central Hutt Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 9,
+    "clinic_name": "Aevitas Dentistry",
+    "clinic_suburb": "Newmarket",
+    "clinic_region": "Auckland",
+    "hp_name": "Aevitas Dentistry",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 46,
+    "clinic_name": "Auckland Family Dental: New Lynn Dental Care",
+    "clinic_suburb": "New Lynn",
+    "clinic_region": "Auckland",
+    "hp_name": "Auckland Family Dental - New Lynn (Formerly New Lynn Dental Care)",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.78)"
+  },
+  {
+    "clinic_id": 1209,
+    "clinic_name": "Team Dental Papamoa",
+    "clinic_suburb": "Papamoa Beach",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Team Dental - P\u0101p\u0101moa",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.85)"
+  },
+  {
+    "clinic_id": 1642,
+    "clinic_name": "Seymour Dental Centre",
+    "clinic_suburb": "Blenheim Central",
+    "clinic_region": "Marlborough",
+    "hp_name": "Seymour Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2094,
+    "clinic_name": "Riverside Dental Care",
+    "clinic_suburb": "Cambridge",
+    "clinic_region": "Waikato",
+    "hp_name": "Riverside Dental Ltd",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.75)"
+  },
+  {
+    "clinic_id": 2269,
+    "clinic_name": "Lumino Woodward Dental",
+    "clinic_suburb": "Wellington Central",
+    "clinic_region": "Wellington",
+    "hp_name": "Lumino Broadway Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.73)"
+  },
+  {
+    "clinic_id": 779,
+    "clinic_name": "Manurewa Dental Centre",
+    "clinic_suburb": "Manurewa",
+    "clinic_region": "Auckland",
+    "hp_name": "Manurewa Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1309,
+    "clinic_name": "Essential Dental",
+    "clinic_suburb": "Riccarton",
+    "clinic_region": "Canterbury",
+    "hp_name": "Essential Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2327,
+    "clinic_name": "Smile Design Dental Group",
+    "clinic_suburb": "Wellington Central",
+    "clinic_region": "Wellington",
+    "hp_name": "Smile Design Dental Group",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 144,
+    "clinic_name": "Dental World Panmure",
+    "clinic_suburb": "Panmure",
+    "clinic_region": "Auckland",
+    "hp_name": "Dental World Panmure",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1829,
+    "clinic_name": "Mosgiel Dentists",
+    "clinic_suburb": "Mosgiel",
+    "clinic_region": "Otago",
+    "hp_name": "Mosgiel Dentists",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 702,
+    "clinic_name": "Howick Village Dental",
+    "clinic_suburb": "Howick",
+    "clinic_region": "Auckland",
+    "hp_name": "Howick Village Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2183,
+    "clinic_name": "Centre of Dental Excellence",
+    "clinic_suburb": "Tawa",
+    "clinic_region": "Wellington",
+    "hp_name": "Centre of Dental Excellence",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2037,
+    "clinic_name": "Gentle Dental Cambridge",
+    "clinic_suburb": "Cambridge",
+    "clinic_region": "Waikato",
+    "hp_name": "Gentle Dental Cambridge",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1217,
+    "clinic_name": "The Dentists - Rotorua",
+    "clinic_suburb": "Rotorua",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "The Dentists Rotorua",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 871,
+    "clinic_name": "Panmure Dentists",
+    "clinic_suburb": "Panmure",
+    "clinic_region": "Auckland",
+    "hp_name": "Manurewa Dentists",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.85)"
+  },
+  {
+    "clinic_id": 765,
+    "clinic_name": "Malimali Dental",
+    "clinic_suburb": "Onehunga",
+    "clinic_region": "Auckland",
+    "hp_name": "Malimali Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2317,
+    "clinic_name": "Real Dentistry",
+    "clinic_suburb": "Kilbirnie",
+    "clinic_region": "Wellington",
+    "hp_name": "Real Dentistry",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1536,
+    "clinic_name": "Smilehaus Dental",
+    "clinic_suburb": "Havelock North",
+    "clinic_region": "Hawke's Bay",
+    "hp_name": "Smilehaus",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2098,
+    "clinic_name": "South Waikato Dental Surgery",
+    "clinic_suburb": "Put\u0101ruru",
+    "clinic_region": "Waikato",
+    "hp_name": "South Waikato Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2179,
+    "clinic_name": "Care Dental",
+    "clinic_suburb": "Paraparaumu",
+    "clinic_region": "Wellington",
+    "hp_name": "Maxcare Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.73)"
+  },
+  {
+    "clinic_id": 1261,
+    "clinic_name": "Bradley Wood Dentists",
+    "clinic_suburb": "Strowan",
+    "clinic_region": "Canterbury",
+    "hp_name": "Bradley Wood Dentists",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 959,
+    "clinic_name": "Smile Dental - Ranui",
+    "clinic_suburb": "Ranui",
+    "clinic_region": "Auckland",
+    "hp_name": "Smile Dental - Ranui",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 804,
+    "clinic_name": "MoonStone Dental Care",
+    "clinic_suburb": "Rosedale",
+    "clinic_region": "Auckland",
+    "hp_name": "MoonStone Dental Care",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 677,
+    "clinic_name": "Greenhithe Dental Boutique",
+    "clinic_suburb": "Greenhithe",
+    "clinic_region": "Auckland",
+    "hp_name": "Greenhithe Dental Boutique",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1097,
+    "clinic_name": "Absolute Dental Limited - Rotorua",
+    "clinic_suburb": "Rotorua",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Absolute Dental Rotorua",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.97)"
+  },
+  {
+    "clinic_id": 1913,
+    "clinic_name": "The Dentist on Kelvin",
+    "clinic_suburb": "Invercargill",
+    "clinic_region": "Southland",
+    "hp_name": "The Dentist on Kelvin",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2174,
+    "clinic_name": "Capital Dental The Terrace",
+    "clinic_suburb": "Wellington Central",
+    "clinic_region": "Wellington",
+    "hp_name": "Capital Dental The Terrace",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 924,
+    "clinic_name": "Sandringham Dental Centre",
+    "clinic_suburb": "Sandringham",
+    "clinic_region": "Auckland",
+    "hp_name": "Sandringham Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 38,
+    "clinic_name": "Auckland City Orthodontics CBD",
+    "clinic_suburb": "Auckland CBD",
+    "clinic_region": "Auckland",
+    "hp_name": "South Auckland Dental & Orthodontics",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.76)"
+  },
+  {
+    "clinic_id": 1317,
+    "clinic_name": "Four Peaks Dental",
+    "clinic_suburb": "Geraldine",
+    "clinic_region": "Canterbury",
+    "hp_name": "Four Peaks Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 120,
+    "clinic_name": "Cosmetic Dental",
+    "clinic_suburb": "Remuera",
+    "clinic_region": "Auckland",
+    "hp_name": "Dental Cosmetic",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2985,
+    "clinic_name": "seddon dental",
+    "clinic_suburb": "Pukekohe",
+    "clinic_region": "Auckland",
+    "hp_name": "Seddon Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1118,
+    "clinic_name": "Corson Dental",
+    "clinic_suburb": "Tauranga",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Corson Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2966,
+    "clinic_name": "Mt Roskill South Dental Care",
+    "clinic_suburb": "Mount Roskill",
+    "clinic_region": "Auckland",
+    "hp_name": "Mt Roskill South Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.84)"
+  },
+  {
+    "clinic_id": 2988,
+    "clinic_name": "Bright Smile Dental",
+    "clinic_suburb": "Henderson",
+    "clinic_region": "Auckland",
+    "hp_name": "City Smile Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.73)"
+  },
+  {
+    "clinic_id": 1096,
+    "clinic_name": "Absolute Dental Limited - Ngongotaha",
+    "clinic_suburb": "Rotorua",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Absolute Dental Ngongotaha",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.98)"
+  },
+  {
+    "clinic_id": 1933,
+    "clinic_name": "Happy Teeth Dental",
+    "clinic_suburb": "Manifold",
+    "clinic_region": "Taranaki",
+    "hp_name": "Happy Teeth Dental Practice",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1682,
+    "clinic_name": "Tasman Dental Centre",
+    "clinic_suburb": "Richmond",
+    "clinic_region": "Nelson & Tasman",
+    "hp_name": "Tasman Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 99,
+    "clinic_name": "Chapel Park Dental",
+    "clinic_suburb": "Flat Bush",
+    "clinic_region": "Auckland",
+    "hp_name": "Chapel Park Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 64,
+    "clinic_name": "Bayside Dental Centre",
+    "clinic_suburb": "Browns Bay",
+    "clinic_region": "Auckland",
+    "hp_name": "Bayside Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2097,
+    "clinic_name": "South City Dental",
+    "clinic_suburb": "Melville",
+    "clinic_region": "Waikato",
+    "hp_name": "South City Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1159,
+    "clinic_name": "Lumino The Dentists Rotorua - Ranolf Street",
+    "clinic_suburb": "Rotorua",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Lumino The Dentist - Seddon Street",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.77)"
+  },
+  {
+    "clinic_id": 1381,
+    "clinic_name": "North Canterbury Dental Care",
+    "clinic_suburb": "Kaiapoi",
+    "clinic_region": "Canterbury",
+    "hp_name": "North Canterbury Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.84)"
+  },
+  {
+    "clinic_id": 767,
+    "clinic_name": "Mangere Dental Centre",
+    "clinic_suburb": "M\u0101ngere",
+    "clinic_region": "Auckland",
+    "hp_name": "Mangere Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1116,
+    "clinic_name": "Complete Dental",
+    "clinic_suburb": "Rotorua",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Complete Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2959,
+    "clinic_name": "Auckland Family Dental: Drury Dental",
+    "clinic_suburb": "Drury",
+    "clinic_region": "Auckland",
+    "hp_name": "Auckland Family Dental - Drury",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2266,
+    "clinic_name": "Lumino Symes De Silva",
+    "clinic_suburb": "Te Aro",
+    "clinic_region": "Wellington",
+    "hp_name": "Lumino Symes de Silva",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1483,
+    "clinic_name": "Amber Dental",
+    "clinic_suburb": "Gisborne",
+    "clinic_region": "Gisborne",
+    "hp_name": "Amber Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 844,
+    "clinic_name": "Omega Dental",
+    "clinic_suburb": "Papakura",
+    "clinic_region": "Auckland",
+    "hp_name": "Omega Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1218,
+    "clinic_name": "The Dentists - Tauranga",
+    "clinic_suburb": "Ot\u016bmoetai",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "The Dentists Tauranga",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 846,
+    "clinic_name": "Onehealth Dental",
+    "clinic_suburb": "Remuera",
+    "clinic_region": "Auckland",
+    "hp_name": "Onehealth Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1500,
+    "clinic_name": "Be Dental Ltd",
+    "clinic_suburb": "Waipukurau",
+    "clinic_region": "Hawke's Bay",
+    "hp_name": "Be Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1155,
+    "clinic_name": "Lakes Care Dental",
+    "clinic_suburb": "Rotorua",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Lakes Care Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2029,
+    "clinic_name": "Focus 32 Dental",
+    "clinic_suburb": "Fairfield",
+    "clinic_region": "Waikato",
+    "hp_name": "Focus 32 Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1756,
+    "clinic_name": "Wellsford Dental Centre",
+    "clinic_suburb": "Wellsford",
+    "clinic_region": "Northland",
+    "hp_name": "Wellsford Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1341,
+    "clinic_name": "Hornby Dental Centre",
+    "clinic_suburb": "Hornby",
+    "clinic_region": "Canterbury",
+    "hp_name": "Hornby Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 733,
+    "clinic_name": "Leabank Dental",
+    "clinic_suburb": "Manurewa",
+    "clinic_region": "Auckland",
+    "hp_name": "Leabank Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 797,
+    "clinic_name": "Mission Bay Dental",
+    "clinic_suburb": "Mission Bay",
+    "clinic_region": "Auckland",
+    "hp_name": "Mission Bay Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 32,
+    "clinic_name": "Apex Dental",
+    "clinic_suburb": "Auckland CBD",
+    "clinic_region": "Auckland",
+    "hp_name": "Apex Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1422,
+    "clinic_name": "Rolleston Dental Centre",
+    "clinic_suburb": "Rolleston",
+    "clinic_region": "Canterbury",
+    "hp_name": "Rolleston Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1445,
+    "clinic_name": "Team Dental Riccarton",
+    "clinic_suburb": "Riccarton",
+    "clinic_region": "Canterbury",
+    "hp_name": "Team Dental - Riccarton",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1280,
+    "clinic_name": "Church Corner Dental Surgery",
+    "clinic_suburb": "Riccarton (Upper)",
+    "clinic_region": "Canterbury",
+    "hp_name": "Church Corner Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 161,
+    "clinic_name": "Devonport Dental",
+    "clinic_suburb": "Devonport",
+    "clinic_region": "Auckland",
+    "hp_name": "Devonport Dental Care",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.75)"
+  },
+  {
+    "clinic_id": 1990,
+    "clinic_name": "Busfield Dental Care",
+    "clinic_suburb": "Tokoroa",
+    "clinic_region": "Waikato",
+    "hp_name": "Busfield Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.73)"
+  },
+  {
+    "clinic_id": 923,
+    "clinic_name": "Sandringham Central Dental Care",
+    "clinic_suburb": "Sandringham",
+    "clinic_region": "Auckland",
+    "hp_name": "Sandringham Central Dental Care",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2388,
+    "clinic_name": "Queen Street Dental Centre",
+    "clinic_suburb": "Auckland CBD",
+    "clinic_region": "Auckland",
+    "hp_name": "Queen Street Dental Centre (Levin)",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.77)"
+  },
+  {
+    "clinic_id": 668,
+    "clinic_name": "Glendowie Dental Centre",
+    "clinic_suburb": "St Heliers",
+    "clinic_region": "Auckland",
+    "hp_name": "Glendowie Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1248,
+    "clinic_name": "Avonhead Dental",
+    "clinic_suburb": "Avonhead",
+    "clinic_region": "Canterbury",
+    "hp_name": "Avonhead Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 155,
+    "clinic_name": "Dentist on Lincoln",
+    "clinic_suburb": "Henderson",
+    "clinic_region": "Auckland",
+    "hp_name": "Dentist on Lincoln",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1179,
+    "clinic_name": "Ranolf Dental Surgery",
+    "clinic_suburb": "Victoria, Rotorua",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Ranolf Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1964,
+    "clinic_name": "Vivian Dental",
+    "clinic_suburb": "New Plymouth Central",
+    "clinic_region": "Taranaki",
+    "hp_name": "Viva Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.80)"
+  },
+  {
+    "clinic_id": 2822,
+    "clinic_name": "Petone Dental Centre",
+    "clinic_suburb": "Petone",
+    "clinic_region": "Wellington",
+    "hp_name": "Petone Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 803,
+    "clinic_name": "Mokoia Road Dental Centre",
+    "clinic_suburb": "Birkenhead",
+    "clinic_region": "Auckland",
+    "hp_name": "Mokoia Road Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1510,
+    "clinic_name": "Dental@105",
+    "clinic_suburb": "St Leonards",
+    "clinic_region": "Hawke's Bay",
+    "hp_name": "Dental @ 105",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1354,
+    "clinic_name": "Longhurst Dental",
+    "clinic_suburb": "Halswell",
+    "clinic_region": "Canterbury",
+    "hp_name": "Longhurst Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1661,
+    "clinic_name": "Fresh Dental",
+    "clinic_suburb": "Stoke",
+    "clinic_region": "Nelson & Tasman",
+    "hp_name": "Fresh Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 24,
+    "clinic_name": "All Smiles Dental",
+    "clinic_suburb": "Mount Eden",
+    "clinic_region": "Auckland",
+    "hp_name": "All Smiles Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2397,
+    "clinic_name": "Sweet Tooth Dental",
+    "clinic_suburb": "St Albans",
+    "clinic_region": "Canterbury",
+    "hp_name": "Sweet Tooth Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2982,
+    "clinic_name": "Ace Dental Centre",
+    "clinic_suburb": "East T\u0101maki",
+    "clinic_region": "Auckland",
+    "hp_name": "Ace Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1780,
+    "clinic_name": "Cromwell Dental Centre",
+    "clinic_suburb": "Cromwell",
+    "clinic_region": "Otago",
+    "hp_name": "Cromwell Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 34,
+    "clinic_name": "Ardmore Dental",
+    "clinic_suburb": "Papakura",
+    "clinic_region": "Auckland",
+    "hp_name": "Ardmore Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1471,
+    "clinic_name": "Waltham Dental Centre",
+    "clinic_suburb": "Sydenham",
+    "clinic_region": "Canterbury",
+    "hp_name": "Waltham Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2257,
+    "clinic_name": "Knights Road Dental Centre",
+    "clinic_suburb": "Hutt Central",
+    "clinic_region": "Wellington",
+    "hp_name": "Knights Road Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1954,
+    "clinic_name": "Pure Dental",
+    "clinic_suburb": "Strandon",
+    "clinic_region": "Taranaki",
+    "hp_name": "Pure Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 949,
+    "clinic_name": "Smile Dental - Avondale",
+    "clinic_suburb": "Avondale",
+    "clinic_region": "Auckland",
+    "hp_name": "Smile Dental - Avondale",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 776,
+    "clinic_name": "Manukau Road Dental",
+    "clinic_suburb": "Epsom",
+    "clinic_region": "Auckland",
+    "hp_name": "Manukau Road Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1651,
+    "clinic_name": "Advanced Dental",
+    "clinic_suburb": "Nelson",
+    "clinic_region": "Nelson & Tasman",
+    "hp_name": "Advanced Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1431,
+    "clinic_name": "Smile Glow Christchurch",
+    "clinic_suburb": "Woolston",
+    "clinic_region": "Canterbury",
+    "hp_name": "G & E Dental Christchurch",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.75)"
+  },
+  {
+    "clinic_id": 728,
+    "clinic_name": "Lake Panorama Dental",
+    "clinic_suburb": "Henderson",
+    "clinic_region": "Auckland",
+    "hp_name": "Lake Panorama Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2346,
+    "clinic_name": "Thorndon Dental Surgery",
+    "clinic_suburb": "Thorndon",
+    "clinic_region": "Wellington",
+    "hp_name": "Thorndon Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 742,
+    "clinic_name": "Luen Dental Centre",
+    "clinic_suburb": "Pukekohe",
+    "clinic_region": "Auckland",
+    "hp_name": "Luen Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 688,
+    "clinic_name": "Hello Dental",
+    "clinic_suburb": "Mission Bay",
+    "clinic_region": "Auckland",
+    "hp_name": "Hello Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1402,
+    "clinic_name": "Prebbleton Dental",
+    "clinic_suburb": "Prebbleton",
+    "clinic_region": "Canterbury",
+    "hp_name": "Prebbleton Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1573,
+    "clinic_name": "Dentist On Glasgow",
+    "clinic_suburb": "Whanganui",
+    "clinic_region": "Manawat\u016b-Whanganui",
+    "hp_name": "Dentist on Glasgow",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2118,
+    "clinic_name": "The Tooth Group",
+    "clinic_suburb": "Hamilton East",
+    "clinic_region": "Waikato",
+    "hp_name": "The Tooth Group",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1342,
+    "clinic_name": "Ilam Dental Centre",
+    "clinic_suburb": "Burnside",
+    "clinic_region": "Canterbury",
+    "hp_name": "Ilam Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2130,
+    "clinic_name": "Turangi Dental",
+    "clinic_suburb": "Turangi",
+    "clinic_region": "Waikato",
+    "hp_name": "T\u016brangi Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.86)"
+  },
+  {
+    "clinic_id": 687,
+    "clinic_name": "Helensville Dental Centre",
+    "clinic_suburb": "Helensville",
+    "clinic_region": "Auckland",
+    "hp_name": "Helensville Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1070,
+    "clinic_name": "West Harbour Dental",
+    "clinic_suburb": "West Harbour",
+    "clinic_region": "Auckland",
+    "hp_name": "West Harbour Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2796,
+    "clinic_name": "Linwood Avenue Dental",
+    "clinic_suburb": "Linwood",
+    "clinic_region": "Canterbury",
+    "hp_name": "Linwood Avenue Dental Practice",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2898,
+    "clinic_name": "Wanaka Dental Clinic",
+    "clinic_suburb": "W\u0101naka",
+    "clinic_region": "Otago",
+    "hp_name": "W\u0101naka Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.83)"
+  },
+  {
+    "clinic_id": 1134,
+    "clinic_name": "ER Dental at Omokoroa",
+    "clinic_suburb": "Omokoroa",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "ER Dental Omokoroa",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.89)"
+  },
+  {
+    "clinic_id": 955,
+    "clinic_name": "Smile Dental - Manukau",
+    "clinic_suburb": "Manukau City Centre",
+    "clinic_region": "Auckland",
+    "hp_name": "Smile Dental - Manukau Ltd",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1385,
+    "clinic_name": "Northwest Dental",
+    "clinic_suburb": "Bryndwr",
+    "clinic_region": "Canterbury",
+    "hp_name": "Northwest Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2064,
+    "clinic_name": "Market St Dentists",
+    "clinic_suburb": "Te Awamutu",
+    "clinic_region": "Waikato",
+    "hp_name": "Market Street Dentists",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.90)"
+  },
+  {
+    "clinic_id": 1460,
+    "clinic_name": "Time Dental",
+    "clinic_suburb": "Bishopdale",
+    "clinic_region": "Canterbury",
+    "hp_name": "Time Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2016,
+    "clinic_name": "Dental Excellence",
+    "clinic_suburb": "Whitiora",
+    "clinic_region": "Waikato",
+    "hp_name": "Dental Excellence",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2079,
+    "clinic_name": "NorthCare Dental Centre",
+    "clinic_suburb": "Te Rapa",
+    "clinic_region": "Waikato",
+    "hp_name": "NorthCare Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 902,
+    "clinic_name": "Pukekohe Dental",
+    "clinic_suburb": "Pukekohe",
+    "clinic_region": "Auckland",
+    "hp_name": "Pukekohe Dental Limited",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 721,
+    "clinic_name": "Kelston Dental Care",
+    "clinic_suburb": "Kelston",
+    "clinic_region": "Auckland",
+    "hp_name": "Kelston Dental Care",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1680,
+    "clinic_name": "Steph Wills Dental Surgery",
+    "clinic_suburb": "Richmond",
+    "clinic_region": "Nelson & Tasman",
+    "hp_name": "Steph Wills Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 944,
+    "clinic_name": "SmartDentist",
+    "clinic_suburb": "Schnapper Rock",
+    "clinic_region": "Auckland",
+    "hp_name": "SmartDentist",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2172,
+    "clinic_name": "Capital Dental Petone",
+    "clinic_suburb": "Petone",
+    "clinic_region": "Wellington",
+    "hp_name": "Capital Dental Petone",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1867,
+    "clinic_name": "Victoria Liu Dental",
+    "clinic_suburb": "Dunedin North",
+    "clinic_region": "Otago",
+    "hp_name": "Victoria Liu Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1273,
+    "clinic_name": "Cathedral Dental Centre",
+    "clinic_suburb": "Christchurch Central",
+    "clinic_region": "Canterbury",
+    "hp_name": "Cathedral Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1508,
+    "clinic_name": "Deco Dental",
+    "clinic_suburb": "Onekawa",
+    "clinic_region": "Hawke's Bay",
+    "hp_name": "Deco Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 696,
+    "clinic_name": "Hill Park Dental",
+    "clinic_suburb": "Hillpark",
+    "clinic_region": "Auckland",
+    "hp_name": "Hill Park Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1663,
+    "clinic_name": "Golden Bay Dental Centre",
+    "clinic_suburb": "T\u0101kaka",
+    "clinic_region": "Nelson & Tasman",
+    "hp_name": "Golden Bay Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1288,
+    "clinic_name": "Dental Care on Barrington",
+    "clinic_suburb": "Spreydon",
+    "clinic_region": "Canterbury",
+    "hp_name": "Dental Care On Barrington",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 810,
+    "clinic_name": "MyDental Mangere Bridge",
+    "clinic_suburb": "M\u0101ngere Bridge",
+    "clinic_region": "Auckland",
+    "hp_name": "Primecare Dental - Mangere Bridge",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.75)"
+  },
+  {
+    "clinic_id": 2789,
+    "clinic_name": "Kilimanjaro Dental Centre",
+    "clinic_suburb": "Northpark",
+    "clinic_region": "Auckland",
+    "hp_name": "Kilimanjaro Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 137,
+    "clinic_name": "Dental Planet Manukau",
+    "clinic_suburb": "Manukau City Centre",
+    "clinic_region": "Auckland",
+    "hp_name": "Dental Planet - Manukau",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1769,
+    "clinic_name": "Bell Hill Dental",
+    "clinic_suburb": "Dunedin Central",
+    "clinic_region": "Otago",
+    "hp_name": "Bell Hill Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1011,
+    "clinic_name": "The Dentist Highbrook",
+    "clinic_suburb": "East T\u0101maki",
+    "clinic_region": "Auckland",
+    "hp_name": "The Dentist Highbrook",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1353,
+    "clinic_name": "Linwood Dental Centre",
+    "clinic_suburb": "Linwood",
+    "clinic_region": "Canterbury",
+    "hp_name": "Linwood Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2139,
+    "clinic_name": "Waihi Family Dental Centre",
+    "clinic_suburb": "Waihi",
+    "clinic_region": "Waikato",
+    "hp_name": "Waihi Family Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1415,
+    "clinic_name": "Redwood Family Dentists",
+    "clinic_suburb": "Papanui",
+    "clinic_region": "Canterbury",
+    "hp_name": "Redwood Family Dentists",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2303,
+    "clinic_name": "Peninsula Dental Centre",
+    "clinic_suburb": "Miramar",
+    "clinic_region": "Wellington",
+    "hp_name": "OC Dental Limited (Peninsula Dental)",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.78)"
+  },
+  {
+    "clinic_id": 1618,
+    "clinic_name": "The Dentists - Whanganui",
+    "clinic_suburb": "Whanganui",
+    "clinic_region": "Manawat\u016b-Whanganui",
+    "hp_name": "The Dentists Whanganui",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2083,
+    "clinic_name": "Otorohanga Dental Surgery",
+    "clinic_suburb": "Otorohanga",
+    "clinic_region": "Waikato",
+    "hp_name": "Otorohanga Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1267,
+    "clinic_name": "Bush Dental",
+    "clinic_suburb": "Bishopdale",
+    "clinic_region": "Canterbury",
+    "hp_name": "Bush Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2256,
+    "clinic_name": "Khandallah Dental Centre",
+    "clinic_suburb": "Khandallah",
+    "clinic_region": "Wellington",
+    "hp_name": "Khandallah Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2141,
+    "clinic_name": "Waikato Dental",
+    "clinic_suburb": "Whitiora",
+    "clinic_region": "Waikato",
+    "hp_name": "Waikato Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1290,
+    "clinic_name": "Dental on Kilmore",
+    "clinic_suburb": "Christchurch Central",
+    "clinic_region": "Canterbury",
+    "hp_name": "Dental on Kilmore",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2302,
+    "clinic_name": "Park Road Dental Surgery",
+    "clinic_suburb": "Carterton",
+    "clinic_region": "Wairarapa",
+    "hp_name": "Park Road Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1459,
+    "clinic_name": "Timaru Dental Care",
+    "clinic_suburb": "Timaru",
+    "clinic_region": "Canterbury",
+    "hp_name": "Timaru Dental Care",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1922,
+    "clinic_name": "Capsite Dental Limited",
+    "clinic_suburb": "Westown",
+    "clinic_region": "Taranaki",
+    "hp_name": "Capsite Dental Ltd",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1160,
+    "clinic_name": "Lumino The Dentists: Landing Road Dental Centre Whakatane",
+    "clinic_suburb": "Whakat\u0101ne",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Lumino The Dentists - Landing Road Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.85)"
+  },
+  {
+    "clinic_id": 1435,
+    "clinic_name": "Southern OMS",
+    "clinic_suburb": "Papanui",
+    "clinic_region": "Canterbury",
+    "hp_name": "Southern Care Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.72)"
+  },
+  {
+    "clinic_id": 1441,
+    "clinic_name": "Sydenham Dental Centre",
+    "clinic_suburb": "Sydenham",
+    "clinic_region": "Canterbury",
+    "hp_name": "Sydenham Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1662,
+    "clinic_name": "Gentle Dental Nelson Ltd",
+    "clinic_suburb": "Nelson",
+    "clinic_region": "Nelson & Tasman",
+    "hp_name": "Gentle Dental Nelson",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2175,
+    "clinic_name": "Capital Dental Thorndon",
+    "clinic_suburb": "Thorndon",
+    "clinic_region": "Wellington",
+    "hp_name": "Capital Dental Thorndon",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 147,
+    "clinic_name": "DentalCare West",
+    "clinic_suburb": "Glen Eden",
+    "clinic_region": "Auckland",
+    "hp_name": "Dentalcare West",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 77,
+    "clinic_name": "Botany Family Dentist",
+    "clinic_suburb": "East T\u0101maki",
+    "clinic_region": "Auckland",
+    "hp_name": "Botany Family Dentist",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 136,
+    "clinic_name": "Dental Planet Mangere",
+    "clinic_suburb": "M\u0101ngere",
+    "clinic_region": "Auckland",
+    "hp_name": "Dental Planet - Mangere",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2994,
+    "clinic_name": "Bunyan and Kennedy Orthodontists",
+    "clinic_suburb": "Takapuna",
+    "clinic_region": "Auckland",
+    "hp_name": "Dan Kennedy Orthodontics",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.79)"
+  },
+  {
+    "clinic_id": 2156,
+    "clinic_name": "Beachside Dental Surgery",
+    "clinic_suburb": "Paraparaumu",
+    "clinic_region": "Wellington",
+    "hp_name": "Beachside Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2331,
+    "clinic_name": "Sunshine Dental Johnsonville",
+    "clinic_suburb": "Johnsonville",
+    "clinic_region": "Wellington",
+    "hp_name": "Lumino Dental - Johnsonville",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.81)"
+  },
+  {
+    "clinic_id": 1564,
+    "clinic_name": "Cliff Dental",
+    "clinic_suburb": "Castlecliff",
+    "clinic_region": "Manawat\u016b-Whanganui",
+    "hp_name": "Cliff Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2934,
+    "clinic_name": "Fiordland Dental Centre",
+    "clinic_suburb": "Te Anau",
+    "clinic_region": "Southland",
+    "hp_name": "Fiordland Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2114,
+    "clinic_name": "The Dental Health Group",
+    "clinic_suburb": "Thames",
+    "clinic_region": "Waikato",
+    "hp_name": "The Dental Health Group",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 982,
+    "clinic_name": "Swanson Dental",
+    "clinic_suburb": "Henderson",
+    "clinic_region": "Auckland",
+    "hp_name": "Swanson Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1057,
+    "clinic_name": "Urban Dental Studio",
+    "clinic_suburb": "Stonefields",
+    "clinic_region": "Auckland",
+    "hp_name": "Riccarton Dental Studio",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.73)"
+  },
+  {
+    "clinic_id": 1846,
+    "clinic_name": "Remarkables Dental",
+    "clinic_suburb": "Queenstown",
+    "clinic_region": "Otago",
+    "hp_name": "Remarkables Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1482,
+    "clinic_name": "Yaldhurst Dental",
+    "clinic_suburb": "Yaldhurst",
+    "clinic_region": "Canterbury",
+    "hp_name": "Yaldhurst Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 849,
+    "clinic_name": "Oneroa Dental Surgery",
+    "clinic_suburb": "Oneroa",
+    "clinic_region": "Auckland",
+    "hp_name": "Oneroa Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1857,
+    "clinic_name": "Tarbert Street Dental Surgery",
+    "clinic_suburb": "Alexandra",
+    "clinic_region": "Otago",
+    "hp_name": "Tarbert Street Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2066,
+    "clinic_name": "Matamata Dental Centre",
+    "clinic_suburb": "Matamata",
+    "clinic_region": "Waikato",
+    "hp_name": "Matamata Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1343,
+    "clinic_name": "Just Teeth",
+    "clinic_suburb": "Burnside",
+    "clinic_region": "Canterbury",
+    "hp_name": "Just Teeth",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1312,
+    "clinic_name": "Fendalton Dental",
+    "clinic_suburb": "Strowan",
+    "clinic_region": "Canterbury",
+    "hp_name": "Fendalton Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1418,
+    "clinic_name": "Riccarton Dentists",
+    "clinic_suburb": "Riccarton",
+    "clinic_region": "Canterbury",
+    "hp_name": "Riccarton Dentists",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 74,
+    "clinic_name": "Blockhouse Bay Dental Centre",
+    "clinic_suburb": "Blockhouse Bay",
+    "clinic_region": "Auckland",
+    "hp_name": "Blockhouse Bay Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1637,
+    "clinic_name": "Durrheim & Associates",
+    "clinic_suburb": "Burleigh",
+    "clinic_region": "Marlborough",
+    "hp_name": "Durrheim & Associates",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1409,
+    "clinic_name": "Rangiora Dental Centre",
+    "clinic_suburb": "Rangiora",
+    "clinic_region": "Canterbury",
+    "hp_name": "Rangiora Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 792,
+    "clinic_name": "Milford Dentists",
+    "clinic_suburb": "Milford",
+    "clinic_region": "Auckland",
+    "hp_name": "Milford Dentists",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 961,
+    "clinic_name": "Smile Dental - Takanini",
+    "clinic_suburb": "Takanini",
+    "clinic_region": "Auckland",
+    "hp_name": "Smile Dental Takanini",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1675,
+    "clinic_name": "One Dental - Mapua",
+    "clinic_suburb": "M\u0101pua",
+    "clinic_region": "Nelson & Tasman",
+    "hp_name": "One Dental - M\u0101pua",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.90)"
+  },
+  {
+    "clinic_id": 1176,
+    "clinic_name": "Phoenix House Dental Centre",
+    "clinic_suburb": "Whakat\u0101ne",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Phoenix House Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 183,
+    "clinic_name": "East Coast Bays Dental",
+    "clinic_suburb": "Albany",
+    "clinic_region": "Auckland",
+    "hp_name": "East Coast Bays Dental (Albany)",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.79)"
+  },
+  {
+    "clinic_id": 1855,
+    "clinic_name": "Synergy Dental",
+    "clinic_suburb": "Dunedin Central",
+    "clinic_region": "Otago",
+    "hp_name": "Synergy Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1999,
+    "clinic_name": "Chapman O'Brien Dental Surgery",
+    "clinic_suburb": "Taup\u014d",
+    "clinic_region": "Waikato",
+    "hp_name": "Chapman O'Brien Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 60,
+    "clinic_name": "Balmoral Dental Centre",
+    "clinic_suburb": "Mount Eden",
+    "clinic_region": "Auckland",
+    "hp_name": "Balmoral Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1121,
+    "clinic_name": "Dental Associates Papamoa",
+    "clinic_suburb": "Papamoa Beach",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Dental Associates Papamoa",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 862,
+    "clinic_name": "Otahuhu Budget Dental Care",
+    "clinic_suburb": "\u014ct\u0101huhu",
+    "clinic_region": "Auckland",
+    "hp_name": "Otahuhu Budget Dental Care Ltd",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1419,
+    "clinic_name": "Richmond Village Dental",
+    "clinic_suburb": "Richmond",
+    "clinic_region": "Canterbury",
+    "hp_name": "Richmond Village Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1521,
+    "clinic_name": "Helen Cho & Ken Joe Dental",
+    "clinic_suburb": "Hastings",
+    "clinic_region": "Hawke's Bay",
+    "hp_name": "Helen Cho & Ken Joe Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 919,
+    "clinic_name": "Royal Oak Dental Centre",
+    "clinic_suburb": "Royal Oak",
+    "clinic_region": "Auckland",
+    "hp_name": "Royal Oak Dental Centre Ltd",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1755,
+    "clinic_name": "Waltdental Ltd",
+    "clinic_suburb": "Maunu",
+    "clinic_region": "Northland",
+    "hp_name": "Waltdental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1253,
+    "clinic_name": "Bealey Dental",
+    "clinic_suburb": "Christchurch Central",
+    "clinic_region": "Canterbury",
+    "hp_name": "Bealey Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1208,
+    "clinic_name": "Team Dental Katikati",
+    "clinic_suburb": "Katikati",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Team Dental - Katikati",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1943,
+    "clinic_name": "New Plymouth Dental Centre",
+    "clinic_suburb": "New Plymouth Central",
+    "clinic_region": "Taranaki",
+    "hp_name": "New Plymouth Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1395,
+    "clinic_name": "Palms Dental centre",
+    "clinic_suburb": "Shirley",
+    "clinic_region": "Canterbury",
+    "hp_name": "Palms Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 701,
+    "clinic_name": "Howick Dental Surgery",
+    "clinic_suburb": "Howick",
+    "clinic_region": "Auckland",
+    "hp_name": "Howick Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 868,
+    "clinic_name": "Pakuranga Dental Surgery",
+    "clinic_suburb": "Pakuranga",
+    "clinic_region": "Auckland",
+    "hp_name": "Pakuranga Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2790,
+    "clinic_name": "Lynfield Dental Centre",
+    "clinic_suburb": "Lynfield",
+    "clinic_region": "Auckland",
+    "hp_name": "Lynfield Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 987,
+    "clinic_name": "Takanini Dental Care",
+    "clinic_suburb": "Takanini",
+    "clinic_region": "Auckland",
+    "hp_name": "Takanini Dental Care",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1697,
+    "clinic_name": "Dental North",
+    "clinic_suburb": "Morningside",
+    "clinic_region": "Northland",
+    "hp_name": "Dental North",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 913,
+    "clinic_name": "Ranfurly Dental Care",
+    "clinic_suburb": "Epsom",
+    "clinic_region": "Auckland",
+    "hp_name": "Ranfurly Dental Care",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1725,
+    "clinic_name": "Maunu Dental",
+    "clinic_suburb": "Maunu",
+    "clinic_region": "Northland",
+    "hp_name": "Maunu Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2154,
+    "clinic_name": "Ashwin Magan Dental Surgery",
+    "clinic_suburb": "Upper Hutt Central",
+    "clinic_region": "Wellington",
+    "hp_name": "Ashwin Magan Dental Surgery Ltd",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1935,
+    "clinic_name": "Inglewood Dental Surgery",
+    "clinic_suburb": "Inglewood",
+    "clinic_region": "Taranaki",
+    "hp_name": "Inglewood Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1534,
+    "clinic_name": "Peak Dental",
+    "clinic_suburb": "Havelock North",
+    "clinic_region": "Hawke's Bay",
+    "hp_name": "Peak Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1626,
+    "clinic_name": "Victoria Dental",
+    "clinic_suburb": "Whanganui",
+    "clinic_region": "Manawat\u016b-Whanganui",
+    "hp_name": "Victoria Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 157,
+    "clinic_name": "Dentists on Birkenhead",
+    "clinic_suburb": "Birkenhead",
+    "clinic_region": "Auckland",
+    "hp_name": "Dentists on Birkenhead",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1251,
+    "clinic_name": "Barrington Dental Centre",
+    "clinic_suburb": "Spreydon",
+    "clinic_region": "Canterbury",
+    "hp_name": "Barrington Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1501,
+    "clinic_name": "Bishop's Dental Surgery",
+    "clinic_suburb": "Waipukurau",
+    "clinic_region": "Hawke's Bay",
+    "hp_name": "Bishops Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.93)"
+  },
+  {
+    "clinic_id": 1613,
+    "clinic_name": "Smile Dental - Palmerston North",
+    "clinic_suburb": "Palmerston North Central",
+    "clinic_region": "Manawat\u016b-Whanganui",
+    "hp_name": "Smile Dental - Palmerston North",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 127,
+    "clinic_name": "Dazzle family dental",
+    "clinic_suburb": "Silverdale",
+    "clinic_region": "Auckland",
+    "hp_name": "Dazzle Family Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2093,
+    "clinic_name": "River Road Dental Centre",
+    "clinic_suburb": "Fairfield",
+    "clinic_region": "Waikato",
+    "hp_name": "River Road Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2793,
+    "clinic_name": "Tooth Factory Dental",
+    "clinic_suburb": "\u014ctara",
+    "clinic_region": "Auckland",
+    "hp_name": "Tooth Fairy Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.83)"
+  },
+  {
+    "clinic_id": 19,
+    "clinic_name": "Albany Dental Surgery",
+    "clinic_suburb": "Albany",
+    "clinic_region": "Auckland",
+    "hp_name": "Albany Dental Surgery",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 676,
+    "clinic_name": "Greenbay Dental",
+    "clinic_suburb": "Titirangi",
+    "clinic_region": "Auckland",
+    "hp_name": "Green Bay Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.94)"
+  },
+  {
+    "clinic_id": 1825,
+    "clinic_name": "Mornington Dental",
+    "clinic_suburb": "Mornington",
+    "clinic_region": "Otago",
+    "hp_name": "Mornington Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 793,
+    "clinic_name": "Millwater Dental",
+    "clinic_suburb": "Millwater",
+    "clinic_region": "Auckland",
+    "hp_name": "Millwater Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 657,
+    "clinic_name": "Freemans Bay Dental Centre",
+    "clinic_suburb": "Freemans Bay",
+    "clinic_region": "Auckland",
+    "hp_name": "Freemans Bay Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2115,
+    "clinic_name": "The Dentist Morrinsville",
+    "clinic_suburb": "Morrinsville",
+    "clinic_region": "Waikato",
+    "hp_name": "The Dentist Morrinsville",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 2370,
+    "clinic_name": "Whitby Dental Centre",
+    "clinic_suburb": "Whitby",
+    "clinic_region": "Wellington",
+    "hp_name": "Whitby Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 170,
+    "clinic_name": "Downtown Dental",
+    "clinic_suburb": "Auckland CBD",
+    "clinic_region": "Auckland",
+    "hp_name": "Downtown Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1790,
+    "clinic_name": "Dunedin Dental",
+    "clinic_suburb": "Dunedin Central",
+    "clinic_region": "Otago",
+    "hp_name": "Dunedin Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 713,
+    "clinic_name": "JJ Dental Care",
+    "clinic_suburb": "Albany",
+    "clinic_region": "Auckland",
+    "hp_name": "JJ Dental Care",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1211,
+    "clinic_name": "Team Dental Tauranga - 16th Ave",
+    "clinic_suburb": "Tauranga South",
+    "clinic_region": "Bay of Plenty",
+    "hp_name": "Team Dental - Tauranga Sixteenth Ave",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.82)"
+  },
+  {
+    "clinic_id": 2316,
+    "clinic_name": "Raumati Dental Centre",
+    "clinic_suburb": "Paraparaumu",
+    "clinic_region": "Wellington",
+    "hp_name": "Raumati Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1869,
+    "clinic_name": "Wakatipu Dental Centre",
+    "clinic_suburb": "Queenstown",
+    "clinic_region": "Otago",
+    "hp_name": "Wakatipu Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1281,
+    "clinic_name": "Colombo Street Dental",
+    "clinic_suburb": "Sydenham",
+    "clinic_region": "Canterbury",
+    "hp_name": "Colombo Street Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1038,
+    "clinic_name": "Titirangi Village Dental Care",
+    "clinic_suburb": "Titirangi",
+    "clinic_region": "Auckland",
+    "hp_name": "Titirangi Village Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.85)"
+  },
+  {
+    "clinic_id": 706,
+    "clinic_name": "Inspire Dental",
+    "clinic_suburb": "Newmarket",
+    "clinic_region": "Auckland",
+    "hp_name": "Inspire Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 70,
+    "clinic_name": "Birkenhead Avenue Dental Centre",
+    "clinic_suburb": "Birkenhead",
+    "clinic_region": "Auckland",
+    "hp_name": "Birkenhead Ave Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.90)"
+  },
+  {
+    "clinic_id": 2278,
+    "clinic_name": "Michael Walton Dental",
+    "clinic_suburb": "Upper Hutt Central",
+    "clinic_region": "Wellington",
+    "hp_name": "Michael Lange Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.74)"
+  },
+  {
+    "clinic_id": 1462,
+    "clinic_name": "Tony Jackson Dental",
+    "clinic_suburb": "Christchurch Central",
+    "clinic_region": "Canterbury",
+    "hp_name": "Tony Jackson Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 882,
+    "clinic_name": "Peninsula Dental Care",
+    "clinic_suburb": "Te Atat\u016b Peninsula",
+    "clinic_region": "Auckland",
+    "hp_name": "Peninsula Dental Centre (Miramar)",
+    "hp_phone": "",
+    "method": "name_fuzzy(0.79)"
+  },
+  {
+    "clinic_id": 689,
+    "clinic_name": "Henderson Dental Centre",
+    "clinic_suburb": "Henderson",
+    "clinic_region": "Auckland",
+    "hp_name": "Henderson Dental Centre",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1738,
+    "clinic_name": "Te Hiku Hauora",
+    "clinic_suburb": "Kaitaia",
+    "clinic_region": "Northland",
+    "hp_name": "Te Hiku Hauora Dental Clinic",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1997,
+    "clinic_name": "Cambridge White Dental",
+    "clinic_suburb": "Cambridge",
+    "clinic_region": "Waikato",
+    "hp_name": "Cambridge White",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1330,
+    "clinic_name": "Halswell Dental",
+    "clinic_suburb": "Halswell",
+    "clinic_region": "Canterbury",
+    "hp_name": "Halswell Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 1523,
+    "clinic_name": "Kennedy Road Dental",
+    "clinic_suburb": "Napier South",
+    "clinic_region": "Hawke's Bay",
+    "hp_name": "Kennedy Road Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  },
+  {
+    "clinic_id": 679,
+    "clinic_name": "Greville Dental",
+    "clinic_suburb": "Pinehill",
+    "clinic_region": "Auckland",
+    "hp_name": "Greville Dental",
+    "hp_phone": "",
+    "method": "name_fuzzy(1.00)"
+  }
+]

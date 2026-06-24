@@ -21,7 +21,7 @@
     </script>
 
     <!-- dc-prefetch-start -->
-    <script id="dc-prefetch">window.__DC_PREFETCH__={"clinics":[{"phone_international":"+64 6 867 9108","total_ratings":168,"price":null,"city":"Gisborne","id":1484,"name":"Dental Care Centre","services":"General Dentistry,Orthodontics","suburb_town":"Gisborne","description":null,"rating":4.8,"phone_national":"06 867 9108"},{"phone_international":"+64 6 929 1614","total_ratings":159,"price":null,"city":"Gisborne","id":1483,"name":"Amber Dental","services":"General Dentistry","suburb_town":"Gisborne","description":null,"rating":4.8,"phone_national":"06 929 1614"},{"phone_international":"+64 6 867 3956","total_ratings":26,"price":null,"city":"Gisborne","id":1487,"name":"Mayfair Dental","services":"General Dentistry","suburb_town":"Gisborne","description":null,"rating":2.9,"phone_national":"06 867 3956"},{"phone_international":"+64 6 867 9329","total_ratings":21,"price":null,"city":"Gisborne","id":1485,"name":"Edgar Dental","services":"General Dentistry","suburb_town":"Gisborne","description":null,"rating":4.5,"phone_national":"06 867 9329"},{"phone_international":"+64 6 868 1995","total_ratings":21,"price":null,"city":"Gisborne","id":1488,"name":"Ocean Dental Centre Gisborne","services":"General Dentistry","suburb_town":"Gisborne","description":null,"rating":3.8,"phone_national":"06 868 1995"},{"phone_international":"+64 6 867 4823","total_ratings":5,"price":null,"city":"Gisborne","id":2936,"name":"Gisborne Denture Clinic","services":"Dentures","suburb_town":"Gisborne","description":null,"rating":5,"phone_national":"06 867 4823"},{"phone_international":"+64 6 867 4878","total_ratings":1,"price":null,"city":"Gisborne","id":2938,"name":"KT Orthodontics","services":"Orthodontics","suburb_town":"Gisborne","description":null,"rating":5,"phone_national":"06 867 4878"},{"phone_international":"+64 6 867 5096","total_ratings":null,"price":null,"city":"Gisborne","id":2937,"name":"Wahaora Dental Clinic","services":"General Dentistry","suburb_town":"Gisborne","description":null,"rating":null,"phone_national":"06 867 5096"}],"pricing":{"1484":[{"service":"Credit card","price":"Cash, EFTPOS or Visa accepted","notes":null},{"service":"ACC","price":"Treatment may be subsidised if accident has affected teeth; dentist will advise on treatment surcharges and apply for approvals on patient's behalf","notes":null},{"service":"WINZ","price":"WINZ quotes provided; Work and Income may be able to help pay towards cost of dental treatment for those on low income or benefit","notes":null},{"service":"Southern Cross","price":"Easy-claim available for members","notes":null},{"service":"Free teen dental care","price":"Free dental care provided to children aged 13-18, including annual check and necessary work (excluding orthodontics)","notes":null}]}};</script>
+    <script id="dc-prefetch">window.__DC_PREFETCH__={"clinics":[{"description":null,"name":"Dental Care Centre","suburb_town":"Gisborne","rating":4.8,"city":"Gisborne","price":null,"total_ratings":168,"phone_international":"+64 6 867 9108","services":"General Dentistry,Orthodontics","phone_national":"06 867 9108","id":1484},{"description":null,"name":"Amber Dental","suburb_town":"Gisborne","rating":4.8,"city":"Gisborne","price":null,"total_ratings":159,"phone_international":"+64 6 929 1614","services":"General Dentistry, Teen Dental","phone_national":"06 929 1614","id":1483},{"description":null,"name":"Mayfair Dental","suburb_town":"Gisborne","rating":2.9,"city":"Gisborne","price":null,"total_ratings":26,"phone_international":"+64 6 867 3956","services":"General Dentistry, Teen Dental","phone_national":"06 867 3956","id":1487},{"description":null,"name":"Edgar Dental","suburb_town":"Gisborne","rating":4.5,"city":"Gisborne","price":null,"total_ratings":21,"phone_international":"+64 6 867 9329","services":"General Dentistry, Teen Dental","phone_national":"06 867 9329","id":1485},{"description":null,"name":"Ocean Dental Centre Gisborne","suburb_town":"Gisborne","rating":3.8,"city":"Gisborne","price":null,"total_ratings":21,"phone_international":"+64 6 868 1995","services":"General Dentistry","phone_national":"06 868 1995","id":1488},{"description":null,"name":"Gisborne Denture Clinic","suburb_town":"Gisborne","rating":5,"city":"Gisborne","price":null,"total_ratings":5,"phone_international":"+64 6 867 4823","services":"Dentures","phone_national":"06 867 4823","id":2936},{"description":null,"name":"KT Orthodontics","suburb_town":"Gisborne","rating":5,"city":"Gisborne","price":null,"total_ratings":1,"phone_international":"+64 6 867 4878","services":"Orthodontics","phone_national":"06 867 4878","id":2938},{"description":null,"name":"Wahaora Dental Clinic","suburb_town":"Gisborne","rating":null,"city":"Gisborne","price":null,"total_ratings":null,"phone_international":"+64 6 867 5096","services":"General Dentistry","phone_national":"06 867 5096","id":2937}],"pricing":{"1484":[{"service":"Credit card","price":"Cash, EFTPOS or Visa accepted","notes":null},{"service":"ACC","price":"Treatment may be subsidised if accident has affected teeth; dentist will advise on treatment surcharges and apply for approvals on patient's behalf","notes":null},{"service":"WINZ","price":"WINZ quotes provided; Work and Income may be able to help pay towards cost of dental treatment for those on low income or benefit","notes":null},{"service":"Southern Cross","price":"Easy-claim available for members","notes":null},{"service":"Free teen dental care","price":"Free dental care provided to children aged 13-18, including annual check and necessary work (excluding orthodontics)","notes":null}]}};</script>
     <!-- dc-prefetch-end -->
     <!-- dc-schema-start -->
     <script type="application/ld+json">
@@ -359,6 +359,8 @@
                     Periodontal Care</label>
                 <label class="filter-check"><input type="checkbox" class="filter-service" value="Teeth Whitening">
                     Whitening</label>
+                <label class="filter-check"><input type="checkbox" class="filter-service" value="Teen Dental">
+                    Teen Dental</label>
             </div>
         </div>
         <div class="filter-group" data-filter="suburb">
@@ -445,7 +447,10 @@
                                 Periodontal Care</label>
                             <label class="filter-check"><input type="checkbox" class="filter-service" value="Teeth Whitening">
                                 Teeth Whitening</label>
-                        </div>
+                        
+                            <label class="filter-check"><input type="checkbox" class="filter-service" value="Teen Dental">
+                                Teen Dental</label>
+</div>
                     </div>
 
                     <div class="filter-group" data-filter="suburb">
@@ -494,7 +499,7 @@
               <span class="dentist-card__meta-item">📍 Gisborne</span>
               <span class="dentist-card__meta-item">💬 159 reviews</span>
             </div>
-            <div class="dentist-card__services"><span class="pill pill--sm">General Dentistry</span></div>
+            <div class="dentist-card__services"><span class="pill pill--sm">Teen Dental</span><span class="pill pill--sm">General Dentistry</span></div>
 
             <div class="dentist-card__footer">
               <div><span class="dentist-card__phone"><a href="tel:069291614" style="text-decoration:none; color:inherit;">📞 06 929 1614</a></span></div>
@@ -511,7 +516,7 @@
               <span class="dentist-card__meta-item">📍 Gisborne</span>
               <span class="dentist-card__meta-item">💬 26 reviews</span>
             </div>
-            <div class="dentist-card__services"><span class="pill pill--sm">General Dentistry</span></div>
+            <div class="dentist-card__services"><span class="pill pill--sm">Teen Dental</span><span class="pill pill--sm">General Dentistry</span></div>
 
             <div class="dentist-card__footer">
               <div><span class="dentist-card__phone"><a href="tel:068673956" style="text-decoration:none; color:inherit;">📞 06 867 3956</a></span></div>
@@ -528,7 +533,7 @@
               <span class="dentist-card__meta-item">📍 Gisborne</span>
               <span class="dentist-card__meta-item">💬 21 reviews</span>
             </div>
-            <div class="dentist-card__services"><span class="pill pill--sm">General Dentistry</span></div>
+            <div class="dentist-card__services"><span class="pill pill--sm">Teen Dental</span><span class="pill pill--sm">General Dentistry</span></div>
 
             <div class="dentist-card__footer">
               <div><span class="dentist-card__phone"><a href="tel:068679329" style="text-decoration:none; color:inherit;">📞 06 867 9329</a></span></div>
