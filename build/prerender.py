@@ -420,19 +420,6 @@ def schema_ld(filename: str, label: str, clinics: list[dict], region: str) -> st
         ],
     }
 
-    faq_schema = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": q,
-                "acceptedAnswer": {"@type": "Answer", "text": a},
-            }
-            for q, a in FAQ_ITEMS
-        ],
-    }
-
     def ld_tag(obj: dict) -> str:
         return (
             '<script type="application/ld+json">\n'
@@ -440,7 +427,7 @@ def schema_ld(filename: str, label: str, clinics: list[dict], region: str) -> st
             + '\n</script>'
         )
 
-    return "\n    ".join([ld_tag(breadcrumb), ld_tag(item_list), ld_tag(faq_schema)])
+    return "\n    ".join([ld_tag(breadcrumb), ld_tag(item_list)])
 
 
 # ---------------------------------------------------------------------------
@@ -561,14 +548,6 @@ def inject_page(
     else:
         print(f"  WARNING: no dentist-grid found in {path}")
 
-    # --- 4. Visible FAQ section ---
-    faq_block = faq_section_html()
-    if "<!-- Footer -->" in src:
-        src = src.replace("<!-- Footer -->", faq_block + "\n\n    <!-- Footer -->", 1)
-    elif '<footer class="footer">' in src:
-        src = src.replace('<footer class="footer">', faq_block + '\n\n    <footer class="footer">', 1)
-    else:
-        print(f"  WARNING: no footer marker found in {path}")
 
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write(src)
@@ -613,7 +592,7 @@ def main():
 
         path = os.path.join(DOCS, filename)
         inject_page(path, filtered, pricing_map, region, filename, label)
-        print(f"  {filename}: {len(filtered)} clinics, schema + FAQ injected")
+        print(f"  {filename}: {len(filtered)} clinics, schema injected")
 
     print("\nDone. Run 'git diff --stat docs/' to review changes before pushing.")
 
