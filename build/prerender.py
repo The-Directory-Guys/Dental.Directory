@@ -161,7 +161,8 @@ FAQ_ITEMS = [
         "Dental Service therapists, usually at a school dental clinic. From Year 9 until their "
         "18th birthday, teenagers receive free dental care at private practices contracted to "
         "Health New Zealand, so the government pays the bill rather than the family. Not all "
-        "clinics offer this, so you need to look for ones that do. At 18, dental treatment is "
+        "clinics offer this, so you need to look for ones that do. You can filter for it on "
+        "Dental Compare. At 18, dental treatment is "
         "no longer publicly funded, so costs are paid out of pocket unless you have health "
         "insurance that covers dental, or your treatment is ACC-eligible.",
     ),
