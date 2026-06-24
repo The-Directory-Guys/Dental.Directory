@@ -157,12 +157,12 @@ FAQ_ITEMS = [
     ),
     (
         "Is dental care free in New Zealand?",
-        "It depends on your age. Primary school children are seen by Community Dental Service "
-        "therapists, usually at a school dental clinic. From Year 9 until their 18th birthday, "
-        "teenagers receive free dental care at private practices contracted to Health New Zealand, "
-        "so the government pays the bill rather than the family. For adults, dental treatment is "
-        "not publicly funded, so costs are paid out of pocket unless you have health insurance "
-        "that covers dental, or your treatment is ACC-eligible.",
+        "It depends on your age. Children up to and including Year 8 are seen by Community "
+        "Dental Service therapists, usually at a school dental clinic. From Year 9 until their "
+        "18th birthday, teenagers receive free dental care at private practices contracted to "
+        "Health New Zealand, so the government pays the bill rather than the family. At 18, "
+        "dental treatment is no longer publicly funded, so costs are paid out of pocket unless "
+        "you have health insurance that covers dental, or your treatment is ACC-eligible.",
     ),
     (
         "So some clinics won't provide free teen dental care?",
