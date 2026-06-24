@@ -138,6 +138,77 @@ FAQ_ITEMS = [
         "for their needs, all in one place. We think transparency is good for patients and "
         "good for the clinics that deserve to stand out.",
     ),
+    (
+        "How are the reviews sourced?",
+        "Reviews are pulled directly from Google, so they come from real patients who visited "
+        "the clinic. We don't accept reviews submitted through this site. The rating and review "
+        "count you see matches what you'd find on Google Maps.",
+    ),
+    (
+        "How often is the information updated?",
+        "We update clinic listings regularly, including contact details, services, and pricing "
+        "where available. If you spot something that looks out of date, let us know.",
+    ),
+    (
+        "Why are some clinics missing phone numbers or websites?",
+        "Some clinics haven't listed this information publicly, or their details weren't "
+        "available when we last updated. Where possible we link directly to the clinic's own "
+        "website so you can find current contact information.",
+    ),
+    (
+        "Is dental care free in New Zealand?",
+        "Dental care is free for children and teenagers up to their 18th birthday through "
+        "the government-funded Community Dental Service. For adults, dental treatment is not "
+        "publicly funded in New Zealand, so costs are paid out of pocket unless you have "
+        "health insurance that covers dental, or your treatment is ACC-eligible.",
+    ),
+    (
+        "Does ACC cover dental treatment?",
+        "ACC covers dental treatment if your injury was caused by an accident, such as a "
+        "chipped or knocked-out tooth from a fall or sports injury. Routine dental work, "
+        "decay, and gum disease are not covered. Your dentist can help you lodge an ACC "
+        "claim if your treatment qualifies.",
+    ),
+    (
+        "Do any clinics offer payment plans?",
+        "Many dental practices in New Zealand offer in-house payment plans or work with "
+        "providers like Afterpay, Q Card, or Zip. You'll often find this on the clinic's "
+        "profile page. If it's not listed, it's worth asking when you call.",
+    ),
+    (
+        "What's the difference between a dentist and a dental hygienist?",
+        "A dentist diagnoses and treats dental conditions, including fillings, extractions, "
+        "root canals, and cosmetic work. A dental hygienist focuses on preventive care, "
+        "mainly teeth cleaning, scaling, and oral hygiene advice. Many practices have both. "
+        "If you're only after a clean, booking with the hygienist is usually faster and cheaper.",
+    ),
+    (
+        "How do I find an emergency dentist?",
+        "Most dental practices set aside time for same-day emergency appointments. Search "
+        "for clinics near you, check their profile for emergency availability, and call as "
+        "early in the day as possible as slots fill quickly. Some practices also list an "
+        "after-hours contact number.",
+    ),
+    (
+        "What should I look for when choosing a dentist?",
+        "Location and hours that work for you, clear pricing, and a good number of recent "
+        "positive reviews are a solid starting point. If you have dental anxiety, look for "
+        "practices that mention this specifically. It's also worth checking what services "
+        "they offer in-house, as some treatments may need a referral elsewhere.",
+    ),
+    (
+        "Can I trust the star ratings?",
+        "The ratings shown are Google reviews from real patients and can't be submitted "
+        "through this site. When comparing clinics, look at the number of reviews as well "
+        "as the score. A clinic with 4.8 stars from 200 reviews is generally more reliable "
+        "than one with 5 stars from 3.",
+    ),
+    (
+        "Why do some clinics have no reviews?",
+        "Newer practices or smaller clinics in less populated areas often have few or no "
+        "reviews. Absence of reviews doesn't mean a clinic is poor. It may simply be new "
+        "or serve a small community where patients don't tend to leave online feedback.",
+    ),
 ]
 
 
