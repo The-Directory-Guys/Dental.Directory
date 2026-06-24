@@ -128,8 +128,7 @@ FAQ_ITEMS = [
         "Dental fees vary depending on the complexity of treatment, the materials used, "
         "and each patient's individual needs, so many practices prefer to give a personalised "
         "quote after an examination. We publish prices wherever clinics have shared them "
-        "publicly. If a clinic you're interested in doesn't show prices, we recommend "
-        "calling ahead or asking for an estimate before your appointment.",
+        "publicly. If a clinic doesn't show prices, we recommend calling before your appointment.",
     ),
     (
         "Why did you make this website?",
