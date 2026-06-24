@@ -269,7 +269,7 @@ const TREATMENT_MAP = {
       }
 
       const ratingDisplay = d.rating ? `<span class="stars">${starsHTML(d.rating)}</span> <strong>${d.rating}</strong>` : '<span style="color:var(--clr-gray-400)">No rating yet</span>';
-      const reviewText = d.reviewCount ? `💬 ${d.reviewCount} reviews` : '';
+      const reviewText = d.reviewCount ? `💬 ${d.reviewCount} review${d.reviewCount === 1 ? '' : 's'}` : '';
       const descText = d.description || '';
       const phoneText = d.phone ? `<a href="tel:${d.phone.replace(/\\s/g, '')}" style="text-decoration:none; color:inherit;">📞 ${d.phone}</a>` : '';
       const emailText = d.email ? `<a href="mailto:${d.email}" style="text-decoration:none; color:inherit; margin-left:1rem;">✉️ Email</a>` : '';
@@ -702,7 +702,7 @@ const TREATMENT_MAP = {
     if (heroName) heroName.textContent = dentist.name;
     if (heroMeta) {
       const ratingHtml = dentist.rating
-        ? `<span class="stars stars--lg">${starsHTML(dentist.rating)}</span> <strong style="color:#fff">${dentist.rating}</strong> <span>(${dentist.reviewCount} reviews)</span>`
+        ? `<span class="stars stars--lg">${starsHTML(dentist.rating)}</span> <strong style="color:#fff">${dentist.rating}</strong> <span>(${dentist.reviewCount} review${dentist.reviewCount === 1 ? '' : 's'})</span>`
         : '<span style="color:var(--clr-gray-300)">No rating yet</span>';
       heroMeta.innerHTML = `
         <span class="profile-hero__meta-item">${ratingHtml}</span>
