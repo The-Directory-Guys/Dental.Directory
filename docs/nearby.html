@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dentists Near Me — Dental Compare</title>
     <meta name="description" content="Find dental practices near your location in New Zealand.">
+    <link rel="canonical" href="https://dentalcompare.co.nz/nearby.html">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4J758VJQVX"></script>
@@ -307,7 +308,7 @@
           const initials = d.name.split(' ').filter(w => w).map(w => w[0]).join('').slice(0,2).toUpperCase();
           const pills = (d.services||[]).slice(0,4).map(s=>`<span class="pill pill--sm">${s}</span>`).join('');
           const rating = d.rating ? `<span class="stars">${starsHTML(d.rating)}</span> <strong>${d.rating}</strong>` : '<span style="color:var(--clr-gray-400)">No rating yet</span>';
-          const reviews = d.reviewCount ? `💬 ${d.reviewCount} reviews` : '';
+          const reviews = d.reviewCount ? `💬 ${d.reviewCount} review${d.reviewCount === 1 ? '' : 's'}` : '';
           const loc = d.suburb ? `${d.suburb}, ${d.region}` : d.region;
           const link = `dentist.html?id=${d.id}&region=${encodeURIComponent(d.region||'')}`;
           const checkupP = getCheckupPrice(d);
