@@ -175,10 +175,26 @@ async function fetchSingleClinicPricing(clinicId) {
 
 // Fetch clinics from Supabase for a given region
 async function fetchClinics(region) {
+  // Use build-time pre-fetched data if available (injected by build/prerender.py).
+  // This skips the Supabase round-trip entirely, making the initial render
+  // instant and ensuring Googlebot sees clinic names without needing JS execution.
+  if (window.__DC_PREFETCH__) {
+    const prefetch = window.__DC_PREFETCH__;
+    const data = prefetch.clinics || [];
+    const pricingById = prefetch.pricing || {};
+    const clinics = data.map(transformClinic);
+    clinics.forEach(clinic => {
+      const rows = pricingById[String(clinic.id)];
+      if (rows) clinic.pricing = rows;
+    });
+    console.log(`[prefetch] ${clinics.length} clinics loaded from pre-rendered data for ${region}`);
+    return clinics;
+  }
+
   try {
     const url = `${SUPABASE_URL}/rest/v1/dental_clinics?region=eq.${encodeURIComponent(region)}&business_status=eq.OPERATIONAL&order=total_ratings.desc.nullslast&limit=1000`;
     console.log('Fetching clinics from:', url, 'for region:', region);
-    
+
     const response = await fetch(url, {
       headers: {
         'apikey': SUPABASE_ANON_KEY,
@@ -191,7 +207,7 @@ async function fetchClinics(region) {
     }
 
     const data = await response.json();
-    
+
     // Check if response is an error object instead of an array
     if (!Array.isArray(data)) {
       console.error('Supabase returned non-array response:', data);
