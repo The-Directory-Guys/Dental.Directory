@@ -11,16 +11,22 @@ What this script does:
        a) <script id="dc-prefetch">window.__DC_PREFETCH__ = {...}</script>
           directly before </head>, so the JS can skip the Supabase fetch
           entirely on page load (faster UX, no loading spinner).
-       b) Pre-rendered clinic card HTML inside <div id="dentist-grid">,
+       b) Three JSON-LD <script type="application/ld+json"> blocks:
+            - BreadcrumbList  (Home > Region — improves search result display)
+            - ItemList        (names all listed clinics for Google)
+            - FAQPage         (can earn expandable FAQ snippets in results)
+       c) Pre-rendered clinic card HTML inside <div id="dentist-grid">,
           so Google Wave 1 sees every practice name without needing JS.
+       d) A visible FAQ section between </section> and <!-- Footer -->,
+          required by Google policy — FAQPage schema must match visible content.
   3. Applies the same suburb-filter logic as SUBURB_FILTERS in app.js,
      so christchurch.html only shows Christchurch suburbs, etc.
 
 Run before every push to GitHub:
     python build/prerender.py
 
-Output: modifies docs/*.html in-place (the script is idempotent -- it
-strips any previously injected prefetch block before re-injecting).
+Output: modifies docs/*.html in-place. The script is fully idempotent —
+it strips all previously-injected blocks before re-injecting.
 """
 
 import html
@@ -36,8 +42,6 @@ sys.stdout.reconfigure(encoding="utf-8")
 load_dotenv()
 
 SUPABASE_URL = os.environ["SUPABASE_URL"]
-# Use service key so we can paginate without rate-limit issues; data is
-# identical to what the anon key returns (dental_clinics has public SELECT).
 SUPABASE_KEY = os.environ["SUPABASE_SERVICE_KEY"]
 HEADERS = {
     "apikey": SUPABASE_KEY,
@@ -45,31 +49,35 @@ HEADERS = {
 }
 
 DOCS = "docs"
+BASE_URL = "https://dentalcompare.co.nz"
 
-# Map of html file -> (region, suburb_filter_key | None)
-# suburb_filter_key matches the keys in SUBURB_FILTERS in app.js.
+# ---------------------------------------------------------------------------
+# Page config: filename -> (region, suburb_filter_key, breadcrumb_label)
+# suburb_filter_key matches keys in SUBURB_FILTERS below (None = whole region).
+# breadcrumb_label is the human-readable region name used in BreadcrumbList.
+# ---------------------------------------------------------------------------
 PAGES = {
-    "index.html":               None,   # home page — no clinic grid
-    "auckland.html":            ("Auckland",              None),
-    "christchurch.html":        ("Canterbury",            "christchurch-city"),
-    "wellington.html":          ("Wellington",            None),
-    "hamilton.html":            ("Waikato",               "hamilton-city"),
-    "tauranga.html":            ("Bay of Plenty",         "tauranga-city"),
-    "dunedin.html":             ("Otago",                 "dunedin-city"),
-    "manawatu-whanganui.html":  ("Manawatū-Whanganui",   None),
-    "northland.html":           ("Northland",             None),
-    "hawkes-bay.html":          ("Hawke's Bay",           None),
-    "wider-bop.html":           ("Bay of Plenty",         "wider-bop"),
-    "taranaki.html":            ("Taranaki",              None),
-    "nelson-tasman.html":       ("Nelson & Tasman",       None),
-    "wider-waikato.html":       ("Waikato",               "wider-waikato"),
-    "southland.html":           ("Southland",             None),
-    "wider-otago.html":         ("Otago",                 "wider-otago"),
-    "wider-canterbury.html":    ("Canterbury",            "wider-canterbury"),
-    "gisborne.html":            ("Gisborne",              None),
-    "marlborough.html":         ("Marlborough",           None),
-    "wairarapa.html":           ("Wairarapa",             None),
-    "west-coast.html":          ("West Coast",            None),
+    "index.html":               None,
+    "auckland.html":            ("Auckland",            None,                  "Auckland"),
+    "christchurch.html":        ("Canterbury",          "christchurch-city",   "Christchurch"),
+    "wellington.html":          ("Wellington",          None,                  "Wellington"),
+    "hamilton.html":            ("Waikato",             "hamilton-city",       "Hamilton"),
+    "tauranga.html":            ("Bay of Plenty",       "tauranga-city",       "Tauranga"),
+    "dunedin.html":             ("Otago",               "dunedin-city",        "Dunedin"),
+    "manawatu-whanganui.html":  ("Manawatū-Whanganui", None,                  "Manawatū-Whanganui"),
+    "northland.html":           ("Northland",           None,                  "Northland"),
+    "hawkes-bay.html":          ("Hawke's Bay",         None,                  "Hawke's Bay"),
+    "wider-bop.html":           ("Bay of Plenty",       "wider-bop",           "Bay of Plenty"),
+    "taranaki.html":            ("Taranaki",            None,                  "Taranaki"),
+    "nelson-tasman.html":       ("Nelson & Tasman",     None,                  "Nelson & Tasman"),
+    "wider-waikato.html":       ("Waikato",             "wider-waikato",       "Wider Waikato"),
+    "southland.html":           ("Southland",           None,                  "Southland"),
+    "wider-otago.html":         ("Otago",               "wider-otago",         "Wider Otago"),
+    "wider-canterbury.html":    ("Canterbury",          "wider-canterbury",    "Wider Canterbury"),
+    "gisborne.html":            ("Gisborne",            None,                  "Gisborne"),
+    "marlborough.html":         ("Marlborough",         None,                  "Marlborough"),
+    "wairarapa.html":           ("Wairarapa",           None,                  "Wairarapa"),
+    "west-coast.html":          ("West Coast",          None,                  "West Coast"),
 }
 
 # Mirrors SUBURB_FILTERS in docs/assets/js/app.js
@@ -109,13 +117,50 @@ SUBURB_FILTERS = {
     },
 }
 
+# ---------------------------------------------------------------------------
+# FAQ content — same on every region page.
+# Answers must be plain text (no HTML); they appear both in visible HTML
+# and in the FAQPage JSON-LD schema block.
+# ---------------------------------------------------------------------------
+FAQ_ITEMS = [
+    (
+        "Why don't all clinics list prices?",
+        "Dental fees in New Zealand vary based on the complexity of treatment, the "
+        "materials used, and each patient's individual needs — so many practices prefer "
+        "to give a personalised quote after an examination. We publish prices wherever "
+        "clinics have shared them publicly. If a clinic you're interested in doesn't show "
+        "prices, we recommend calling ahead or asking for an estimate before your appointment.",
+    ),
+    (
+        "I'm a clinic owner — how do I get my practice listed?",
+        "Every registered dental practice in New Zealand is eligible to appear on Dental "
+        "Compare free of charge. If your clinic isn't showing up, or you'd like to update "
+        "your details — hours, services, website, or phone number — get in touch with us at "
+        "hello@dentalcompare.co.nz. We'll get you added or updated within a few days.",
+    ),
+    (
+        "Why did you make this website?",
+        "Dental care in New Zealand can be expensive, and it's surprisingly hard to compare "
+        "clinics or find one that's upfront about pricing. We built Dental Compare so that "
+        "New Zealanders can see prices, read real patient reviews, and find the right practice "
+        "for their needs — all in one place. We think transparency is good for patients and "
+        "good for the clinics that deserve to stand out.",
+    ),
+    (
+        "How can we work together?",
+        "We're open to partnerships with dental groups, practice management software providers, "
+        "dental suppliers, and health insurers. Whether you're interested in featured placements, "
+        "data licensing, or a custom collaboration, reach out to us at hello@dentalcompare.co.nz "
+        "and we'll find something that works for both parties.",
+    ),
+]
+
 
 # ---------------------------------------------------------------------------
 # Supabase data fetching
 # ---------------------------------------------------------------------------
 
 def fetch_all_clinics():
-    """Fetch every OPERATIONAL clinic from dental_clinics, all regions."""
     clinics = []
     limit = 1000
     offset = 0
@@ -137,12 +182,10 @@ def fetch_all_clinics():
 
 
 def fetch_pricing_for_ids(clinic_ids: list[int]) -> dict:
-    """Fetch scraped_prices rows for the given clinic ids.
-    Returns {clinic_id: [{treatment, price_label, notes}, ...]}."""
     if not clinic_ids:
         return {}
     pricing: dict[int, list] = {}
-    chunk = 200          # PostgREST URL length limit
+    chunk = 200
     for i in range(0, len(clinic_ids), chunk):
         ids_param = ",".join(f"clinic_id.eq.{cid}" for cid in clinic_ids[i:i+chunk])
         offset = 0
@@ -161,9 +204,9 @@ def fetch_pricing_for_ids(clinic_ids: list[int]) -> dict:
             for row in rows:
                 cid = row["clinic_id"]
                 pricing.setdefault(cid, []).append({
-                    "service":  row.get("treatment", ""),
-                    "price":    row.get("price_label", ""),
-                    "notes":    row.get("notes", ""),
+                    "service": row.get("treatment", ""),
+                    "price":   row.get("price_label", ""),
+                    "notes":   row.get("notes", ""),
                 })
             if len(rows) < limit:
                 break
@@ -200,12 +243,10 @@ def card_html(clinic: dict, pricing: list, region: str) -> str:
     cid          = clinic["id"]
 
     initials = "".join(w[0] for w in name.split() if w)[:2].upper()
-
     location = (
         f"{suburb}, {city}" if suburb and city and suburb != city
         else city or suburb or "Unknown"
     )
-
     rating_display = (
         f'<span class="stars">{stars_html(rating)}</span> <strong>{rating}</strong>'
         if rating else '<span style="color:var(--clr-gray-400)">No rating yet</span>'
@@ -214,12 +255,10 @@ def card_html(clinic: dict, pricing: list, region: str) -> str:
         f'💬 {review_count} review{"" if review_count == 1 else "s"}'
         if review_count else ""
     )
-
     service_pills = "".join(
         f'<span class="pill pill--sm">{html.escape(s)}</span>'
         for s in services[:4]
     )
-
     pricing_preview = ""
     if pricing:
         rows_html = "".join(
@@ -273,43 +312,143 @@ def card_html(clinic: dict, pricing: list, region: str) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Structured data (JSON-LD)
+# ---------------------------------------------------------------------------
+
+def schema_ld(filename: str, label: str, clinics: list[dict], region: str) -> str:
+    page_url = f"{BASE_URL}/{filename}"
+
+    breadcrumb = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home",
+             "item": f"{BASE_URL}/"},
+            {"@type": "ListItem", "position": 2, "name": f"Dentists in {label}",
+             "item": page_url},
+        ],
+    }
+
+    item_list = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": f"Dentists in {label}",
+        "url": page_url,
+        "numberOfItems": len(clinics),
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": i + 1,
+                "item": {
+                    "@type": "Dentist",
+                    "name": c.get("name", ""),
+                    "url": f"{BASE_URL}/dentist.html?id={c['id']}&region={requests.utils.quote(region)}",
+                    **({"telephone": c["phone_national"]} if c.get("phone_national") else {}),
+                },
+            }
+            for i, c in enumerate(clinics)
+        ],
+    }
+
+    faq_schema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": q,
+                "acceptedAnswer": {"@type": "Answer", "text": a},
+            }
+            for q, a in FAQ_ITEMS
+        ],
+    }
+
+    def ld_tag(obj: dict) -> str:
+        return (
+            '<script type="application/ld+json">\n'
+            + json.dumps(obj, ensure_ascii=False, indent=2)
+            + '\n</script>'
+        )
+
+    return "\n    ".join([ld_tag(breadcrumb), ld_tag(item_list), ld_tag(faq_schema)])
+
+
+# ---------------------------------------------------------------------------
+# Visible FAQ section HTML
+# ---------------------------------------------------------------------------
+
+def faq_section_html() -> str:
+    items = ""
+    for q, a in FAQ_ITEMS:
+        items += (
+            f'        <details class="faq__item">\n'
+            f'            <summary class="faq__question">{html.escape(q)}</summary>\n'
+            f'            <p class="faq__answer">{html.escape(a)}</p>\n'
+            f'        </details>\n'
+        )
+    return (
+        '\n    <!-- dc-faq-start -->\n'
+        '    <section class="faq section">\n'
+        '        <div class="container">\n'
+        '            <h2 class="faq__heading">Frequently Asked Questions</h2>\n'
+        + items +
+        '        </div>\n'
+        '    </section>\n'
+        '    <!-- dc-faq-end -->'
+    )
+
+
+# ---------------------------------------------------------------------------
 # HTML injection
 # ---------------------------------------------------------------------------
 
-# Matches the previously-injected prefetch block so the script is idempotent.
 PREFETCH_RE = re.compile(
     r'\s*<!-- dc-prefetch-start -->.*?<!-- dc-prefetch-end -->',
     re.DOTALL,
 )
-# Matches the previously-injected cards block (between sentinel comments).
+SCHEMA_RE = re.compile(
+    r'\s*<!-- dc-schema-start -->.*?<!-- dc-schema-end -->',
+    re.DOTALL,
+)
 CARDS_RE = re.compile(
     r'<!-- dc-cards-start -->.*?<!-- dc-cards-end -->',
     re.DOTALL,
 )
-# Matches the dentist-grid opening tag (with any attributes) — used only on
-# first run (before sentinel comments exist).
+FAQ_RE = re.compile(
+    r'\s*<!-- dc-faq-start -->.*?<!-- dc-faq-end -->',
+    re.DOTALL,
+)
 GRID_OPEN_RE = re.compile(r'(<div[^>]+id="dentist-grid"[^>]*>)')
 
 
-def inject_page(path: str, clinics: list[dict], pricing_map: dict, region: str):
+def inject_page(
+    path: str,
+    clinics: list[dict],
+    pricing_map: dict,
+    region: str,
+    filename: str,
+    label: str,
+):
     with open(path, encoding="utf-8") as f:
-        html_src = f.read()
+        src = f.read()
 
-    # Strip any previously-injected prefetch block
-    html_src = PREFETCH_RE.sub("", html_src)
+    # Strip all previously-injected blocks (makes script fully idempotent)
+    src = PREFETCH_RE.sub("", src)
+    src = SCHEMA_RE.sub("", src)
+    src = FAQ_RE.sub("", src)
 
-    # Build the prefetch JSON — only fields shown on listing cards.
-    # opening_hours, address, email, website, google_maps_url are only needed
-    # on the profile page, which fetches from Supabase separately, so we
-    # omit them here to keep page size small (especially for Auckland ~490 clinics).
+    # --- 1. Prefetch JSON block ---
     KEEP = {
         "id","name","suburb_town","town","city",
         "phone_national","phone_international","phone",
         "rating","total_ratings","services","price","description",
     }
     slim_clinics = [{k: c[k] for k in KEEP if k in c} for c in clinics]
-    slim_pricing = {str(cid): rows for cid, rows in pricing_map.items() if cid in {c["id"] for c in clinics}}
-
+    slim_pricing = {
+        str(cid): rows
+        for cid, rows in pricing_map.items()
+        if cid in {c["id"] for c in clinics}
+    }
     prefetch_json = json.dumps(
         {"clinics": slim_clinics, "pricing": slim_pricing},
         ensure_ascii=False, separators=(",", ":"),
@@ -317,38 +456,52 @@ def inject_page(path: str, clinics: list[dict], pricing_map: dict, region: str):
     prefetch_block = (
         '\n    <!-- dc-prefetch-start -->\n'
         '    <script id="dc-prefetch">window.__DC_PREFETCH__='
-        + prefetch_json +
-        ';</script>\n'
+        + prefetch_json + ';</script>\n'
         '    <!-- dc-prefetch-end -->'
     )
 
-    # Inject prefetch block before </head>
-    html_src = html_src.replace("</head>", prefetch_block + "\n</head>", 1)
+    # --- 2. JSON-LD schema block ---
+    schema_block = (
+        '\n    <!-- dc-schema-start -->\n    '
+        + schema_ld(filename, label, clinics, region)
+        + '\n    <!-- dc-schema-end -->'
+    )
 
-    # Build pre-rendered card HTML wrapped in sentinel comments so subsequent
-    # runs can find and replace the block precisely (avoids the nested-div
-    # closing-tag ambiguity of a pure regex approach).
+    # Inject both before </head>
+    src = src.replace(
+        "</head>",
+        prefetch_block + schema_block + "\n</head>",
+        1,
+    )
+
+    # --- 3. Pre-rendered clinic cards ---
     cards_html = "\n".join(
         card_html(c, pricing_map.get(c["id"], []), region)
         for c in clinics
     )
     cards_block = f"<!-- dc-cards-start -->\n{cards_html}\n      <!-- dc-cards-end -->"
 
-    if CARDS_RE.search(html_src):
-        # Subsequent runs: replace between the sentinel comments.
-        new_html = CARDS_RE.sub(cards_block, html_src, count=1)
-    elif GRID_OPEN_RE.search(html_src):
-        # First run: inject immediately after the grid opening tag.
-        new_html = GRID_OPEN_RE.sub(
+    if CARDS_RE.search(src):
+        src = CARDS_RE.sub(cards_block, src, count=1)
+    elif GRID_OPEN_RE.search(src):
+        src = GRID_OPEN_RE.sub(
             lambda m: m.group(1) + "\n" + cards_block,
-            html_src, count=1,
+            src, count=1,
         )
     else:
         print(f"  WARNING: no dentist-grid found in {path}")
-        new_html = html_src
+
+    # --- 4. Visible FAQ section ---
+    faq_block = faq_section_html()
+    if "<!-- Footer -->" in src:
+        src = src.replace("<!-- Footer -->", faq_block + "\n\n    <!-- Footer -->", 1)
+    elif '<footer class="footer">' in src:
+        src = src.replace('<footer class="footer">', faq_block + '\n\n    <footer class="footer">', 1)
+    else:
+        print(f"  WARNING: no footer marker found in {path}")
 
     with open(path, "w", encoding="utf-8", newline="\n") as f:
-        f.write(new_html)
+        f.write(src)
 
 
 # ---------------------------------------------------------------------------
@@ -360,12 +513,10 @@ def main():
     all_clinics = fetch_all_clinics()
     print(f"  {len(all_clinics)} clinics loaded")
 
-    # Group by region
     by_region: dict[str, list] = {}
     for c in all_clinics:
         by_region.setdefault(c.get("region", ""), []).append(c)
 
-    # Fetch pricing for all clinic ids in one pass
     print("Fetching pricing…")
     all_ids = [c["id"] for c in all_clinics]
     pricing_map = fetch_pricing_for_ids(all_ids)
@@ -373,24 +524,26 @@ def main():
 
     for filename, page_cfg in PAGES.items():
         if page_cfg is None:
-            continue  # home page — no clinic grid
-        region, suburb_filter_key = page_cfg
+            continue
+        region, suburb_filter_key, label = page_cfg
 
         region_clinics = by_region.get(region, [])
         if not region_clinics:
-            print(f"  WARNING: no clinics found for region '{region}' ({filename})")
+            print(f"  WARNING: no clinics for region '{region}' ({filename})")
             continue
 
-        # Apply suburb filter if specified
         if suburb_filter_key:
             allowed = SUBURB_FILTERS.get(suburb_filter_key, set())
-            filtered = [c for c in region_clinics if (c.get("suburb_town") or c.get("town") or "") in allowed]
+            filtered = [
+                c for c in region_clinics
+                if (c.get("suburb_town") or c.get("town") or "") in allowed
+            ]
         else:
             filtered = region_clinics
 
         path = os.path.join(DOCS, filename)
-        inject_page(path, filtered, pricing_map, region)
-        print(f"  {filename}: {len(filtered)} clinics pre-rendered")
+        inject_page(path, filtered, pricing_map, region, filename, label)
+        print(f"  {filename}: {len(filtered)} clinics, schema + FAQ injected")
 
     print("\nDone. Run 'git diff --stat docs/' to review changes before pushing.")
 
