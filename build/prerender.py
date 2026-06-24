@@ -125,33 +125,19 @@ SUBURB_FILTERS = {
 FAQ_ITEMS = [
     (
         "Why don't all clinics list prices?",
-        "Dental fees in New Zealand vary based on the complexity of treatment, the "
-        "materials used, and each patient's individual needs — so many practices prefer "
-        "to give a personalised quote after an examination. We publish prices wherever "
-        "clinics have shared them publicly. If a clinic you're interested in doesn't show "
-        "prices, we recommend calling ahead or asking for an estimate before your appointment.",
-    ),
-    (
-        "I'm a clinic owner — how do I get my practice listed?",
-        "Every registered dental practice in New Zealand is eligible to appear on Dental "
-        "Compare free of charge. If your clinic isn't showing up, or you'd like to update "
-        "your details — hours, services, website, or phone number — get in touch with us at "
-        "hello@dentalcompare.co.nz. We'll get you added or updated within a few days.",
+        "Dental fees vary depending on the complexity of treatment, the materials used, "
+        "and each patient's individual needs, so many practices prefer to give a personalised "
+        "quote after an examination. We publish prices wherever clinics have shared them "
+        "publicly. If a clinic you're interested in doesn't show prices, we recommend "
+        "calling ahead or asking for an estimate before your appointment.",
     ),
     (
         "Why did you make this website?",
         "Dental care in New Zealand can be expensive, and it's surprisingly hard to compare "
         "clinics or find one that's upfront about pricing. We built Dental Compare so that "
         "New Zealanders can see prices, read real patient reviews, and find the right practice "
-        "for their needs — all in one place. We think transparency is good for patients and "
+        "for their needs, all in one place. We think transparency is good for patients and "
         "good for the clinics that deserve to stand out.",
-    ),
-    (
-        "How can we work together?",
-        "We're open to partnerships with dental groups, practice management software providers, "
-        "dental suppliers, and health insurers. Whether you're interested in featured placements, "
-        "data licensing, or a custom collaboration, reach out to us at hello@dentalcompare.co.nz "
-        "and we'll find something that works for both parties.",
     ),
 ]
 
