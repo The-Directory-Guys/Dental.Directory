@@ -276,8 +276,15 @@ const TREATMENT_MAP = {
       return;
     }
 
-    // Build dynamic suburb filters from data
+    // Fetch and attach practitioner specialties for the whole region
+    if (!savedMode) {
+      const specMap = await fetchPractitionersForClinics(allDentists.map(d => d.id).filter(Boolean));
+      allDentists.forEach(d => { if (d.id && specMap[d.id]) d.practitionerSpecialties = specMap[d.id]; });
+    }
+
+    // Build dynamic suburb + specialty filters from data
     buildSuburbFilters(allDentists);
+    buildSpecialtyFilters(allDentists);
 
     // Setup filtering & rendering
     let activeSuburbs = [];
@@ -288,6 +295,7 @@ const TREATMENT_MAP = {
     let maxPrice = Infinity;
     let maxHygienistPrice = Infinity;
     let activeTreatmentPriceType = null;
+    let activeSpecialties = [];
     let showFavouritesOnly = false;
     let showOpenOnly = false;
     let _favs = getFavourites();
@@ -376,6 +384,10 @@ const TREATMENT_MAP = {
       let filtered = allDentists.filter(d => {
         if (showFavouritesOnly && !_favs.has(d.id)) return false;
         if (showOpenOnly && isOpenNow(d) !== true) return false;
+        if (activeSpecialties.length) {
+          const specs = d.practitionerSpecialties || [];
+          if (!activeSpecialties.every(kw => specs.some(s => s.includes(kw)))) return false;
+        }
         if (activeSuburbs.length && !activeSuburbs.includes(d.suburb)) return false;
         if (activeServices.length && !activeServices.every(s => d.services.includes(s))) return false;
         if (d.rating < minRating) return false;
@@ -431,6 +443,7 @@ const TREATMENT_MAP = {
           const activeLabels = [];
           if (showFavouritesOnly) activeLabels.push('Saved');
           if (showOpenOnly) activeLabels.push('Open now');
+          activeSpecialties.forEach(s => activeLabels.push(s));
           if (searchQuery) activeLabels.push(`"${searchQuery}"`);
           activeServices.forEach(s => activeLabels.push(s));
           activeSuburbs.forEach(s => activeLabels.push(s));
@@ -533,12 +546,13 @@ const TREATMENT_MAP = {
       maxPrice = Infinity;
       maxHygienistPrice = Infinity;
       activeTreatmentPriceType = null;
+      activeSpecialties = [];
       showFavouritesOnly = false;
       showOpenOnly = false;
       updateFavToggle();
       updateOpenToggle();
 
-      document.querySelectorAll('.filter-suburb, .filter-service').forEach(cb => { cb.checked = false; });
+      document.querySelectorAll('.filter-suburb, .filter-service, .filter-specialty').forEach(cb => { cb.checked = false; });
       if (searchInput) searchInput.value = '';
 
       // Reset sliders + labels without triggering extra renders
@@ -748,6 +762,53 @@ const TREATMENT_MAP = {
 
     // Initial render
     render();
+  }
+
+  // Specialty filter definitions — label shown to user, keyword matched against normalised practitioner specialties
+  const SPECIALTY_FILTERS = [
+    { label: 'Cosmetic Dentistry',        keyword: 'cosmetic' },
+    { label: 'Dental Implants',           keyword: 'implant' },
+    { label: 'Orthodontics / Invisalign', keyword: 'orthodont' },
+    { label: 'Invisalign',               keyword: 'invisalign' },
+    { label: 'Oral Surgery',             keyword: 'oral surgery' },
+    { label: 'Endodontics',              keyword: 'endodontic' },
+    { label: 'IV Sedation',              keyword: 'sedation' },
+    { label: 'Oral Health Therapy',      keyword: 'oral health therap' },
+  ];
+
+  function buildSpecialtyFilters(allDentists) {
+    // Only show specialties that at least one clinic in this region has
+    const available = SPECIALTY_FILTERS.filter(sf =>
+      allDentists.some(d => (d.practitionerSpecialties || []).some(s => s.includes(sf.keyword)))
+    );
+    if (available.length === 0) return;
+
+    const html = available.map(sf => `
+      <label class="filter-check">
+        <input type="checkbox" class="filter-specialty" value="${sf.keyword}">
+        <span>${sf.label}</span>
+      </label>`).join('');
+
+    const groupHTML = `
+      <div class="filter-group" data-filter="specialty">
+        <div class="filter-group__label">Specialist Skills</div>
+        <div class="filter-group__items">${html}</div>
+      </div>`;
+
+    document.querySelectorAll('.sidebar, .filter-drawer').forEach(container => {
+      if (container.querySelector('[data-filter="specialty"]')) return;
+      container.insertAdjacentHTML('beforeend', groupHTML);
+    });
+
+    document.querySelectorAll('.filter-specialty').forEach(cb => {
+      cb.addEventListener('change', () => {
+        activeSpecialties = Array.from(document.querySelectorAll('.filter-specialty:checked')).map(el => el.value);
+        // Sync paired checkboxes
+        document.querySelectorAll(`.filter-specialty[value="${cb.value}"]`).forEach(p => { p.checked = cb.checked; });
+        activeSpecialties = Array.from(document.querySelectorAll('.filter-specialty:checked')).map(el => el.value);
+        renderWithReset();
+      });
+    });
   }
 
   // Build suburb filter checkboxes dynamically from data

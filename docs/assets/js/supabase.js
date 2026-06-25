@@ -241,6 +241,34 @@ async function fetchClinics(region) {
   }
 }
 
+// Fetch practitioners for a batch of clinic IDs, returns map of clinic_id → [specialties string]
+async function fetchPractitionersForClinics(clinicIds) {
+  if (!clinicIds || clinicIds.length === 0) return {};
+  const map = {};
+  const BATCH = 100;
+  try {
+    for (let i = 0; i < clinicIds.length; i += BATCH) {
+      const batch = clinicIds.slice(i, i + BATCH);
+      const idsParam = batch.map(id => `clinic_id.eq.${id}`).join(',');
+      const url = `${SUPABASE_URL}/rest/v1/clinic_practitioners?or=(${idsParam})&select=clinic_id,specialties&limit=1000`;
+      const response = await fetch(url, {
+        headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+      });
+      if (!response.ok) continue;
+      const data = await response.json();
+      data.forEach(row => {
+        if (!row.specialties) return;
+        if (!map[row.clinic_id]) map[row.clinic_id] = [];
+        row.specialties.split(',').forEach(s => {
+          const norm = s.trim().toLowerCase();
+          if (norm && !map[row.clinic_id].includes(norm)) map[row.clinic_id].push(norm);
+        });
+      });
+    }
+  } catch (e) {}
+  return map;
+}
+
 // Fetch practitioners for a single clinic
 async function fetchClinicPractitioners(clinicId) {
   try {
