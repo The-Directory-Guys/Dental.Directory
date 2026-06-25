@@ -270,6 +270,8 @@ def fetch_pricing_for_ids(clinic_ids: list[int]) -> dict:
             r.raise_for_status()
             rows = r.json()
             for row in rows:
+                if row.get("treatment") == "Scrape error" or row.get("price_label") == "Website could not be fetched":
+                    continue
                 cid = row["clinic_id"]
                 pricing.setdefault(cid, []).append({
                     "service": row.get("treatment", ""),
