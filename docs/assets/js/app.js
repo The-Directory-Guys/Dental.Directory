@@ -289,11 +289,6 @@ const TREATMENT_MAP = {
       });
     }
 
-    // Build dynamic suburb + specialty + amenity filters from data
-    buildSuburbFilters(allDentists);
-    buildSpecialtyFilters(allDentists);
-    buildAmenitiesFilter(allDentists);
-
     // Setup filtering & rendering
     let activeSuburbs = [];
     let activeServices = ['General Dentistry'];
@@ -775,6 +770,29 @@ const TREATMENT_MAP = {
       cb.checked = activeServices.includes('General Dentistry');
     });
 
+    // Build dynamic suburb + specialty + amenity filters (after state vars are declared)
+    buildSuburbFilters(allDentists);
+    buildSpecialtyFilters(allDentists);
+    buildAmenitiesFilter(allDentists);
+
+    // Specialty filters (injected dynamically by buildSpecialtyFilters)
+    document.querySelectorAll('.filter-specialty').forEach(cb => {
+      cb.addEventListener('change', () => {
+        document.querySelectorAll(`.filter-specialty[value="${cb.value}"]`).forEach(p => { p.checked = cb.checked; });
+        activeSpecialties = [...new Set(Array.from(document.querySelectorAll('.filter-specialty:checked')).map(el => el.value))];
+        renderWithReset();
+      });
+    });
+
+    // Amenity filters (injected dynamically by buildAmenitiesFilter)
+    document.querySelectorAll('.filter-amenity').forEach(cb => {
+      cb.addEventListener('change', () => {
+        document.querySelectorAll(`.filter-amenity[value="${cb.value}"]`).forEach(p => { p.checked = cb.checked; });
+        activeAmenities = [...new Set(Array.from(document.querySelectorAll('.filter-amenity:checked')).map(el => el.value))];
+        renderWithReset();
+      });
+    });
+
     // Initial render
     render();
   }
@@ -808,14 +826,6 @@ const TREATMENT_MAP = {
     document.querySelectorAll('.sidebar, .filter-drawer').forEach(container => {
       if (container.querySelector('[data-filter="amenity"]')) return;
       container.insertAdjacentHTML('beforeend', groupHTML);
-    });
-
-    document.querySelectorAll('.filter-amenity').forEach(cb => {
-      cb.addEventListener('change', () => {
-        document.querySelectorAll(`.filter-amenity[value="${cb.value}"]`).forEach(p => { p.checked = cb.checked; });
-        activeAmenities = [...new Set(Array.from(document.querySelectorAll('.filter-amenity:checked')).map(el => el.value))];
-        renderWithReset();
-      });
     });
   }
 
@@ -853,16 +863,6 @@ const TREATMENT_MAP = {
     document.querySelectorAll('.sidebar, .filter-drawer').forEach(container => {
       if (container.querySelector('[data-filter="specialty"]')) return;
       container.insertAdjacentHTML('beforeend', groupHTML);
-    });
-
-    document.querySelectorAll('.filter-specialty').forEach(cb => {
-      cb.addEventListener('change', () => {
-        activeSpecialties = Array.from(document.querySelectorAll('.filter-specialty:checked')).map(el => el.value);
-        // Sync paired checkboxes
-        document.querySelectorAll(`.filter-specialty[value="${cb.value}"]`).forEach(p => { p.checked = cb.checked; });
-        activeSpecialties = Array.from(document.querySelectorAll('.filter-specialty:checked')).map(el => el.value);
-        renderWithReset();
-      });
     });
   }
 
