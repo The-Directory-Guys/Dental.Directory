@@ -830,7 +830,6 @@ const TREATMENT_MAP = {
     { label: 'Cosmetic Dentistry',        keyword: 'cosmetic' },
     { label: 'Dental Implants',           keyword: 'implant' },
     { label: 'Orthodontics / Invisalign', keyword: 'orthodont' },
-    { label: 'Invisalign',               keyword: 'invisalign' },
     { label: 'Oral Surgery',             keyword: 'oral surgery' },
     { label: 'Endodontics',              keyword: 'endodontic' },
     { label: 'IV Sedation',              keyword: 'sedation' },
