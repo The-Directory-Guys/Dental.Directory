@@ -766,15 +766,27 @@ h4 {
 }
 
 .sort-select {
-    padding: var(--sp-2) var(--sp-4);
+    padding: var(--sp-2) var(--sp-8) var(--sp-2) var(--sp-4);
     border: 1px solid var(--clr-gray-200);
     border-radius: var(--radius-md);
     font-family: var(--ff-body);
     font-size: var(--fs-sm);
-    color: var(--clr-gray-600);
+    color: var(--clr-gray-700);
     cursor: pointer;
     outline: none;
-    background: var(--clr-white);
+    background: var(--clr-white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right var(--sp-3) center;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: border-color 0.15s;
+}
+
+.sort-select:hover {
+    border-color: var(--clr-gray-400);
+}
+
+.sort-select:focus {
+    border-color: var(--clr-teal);
+    box-shadow: 0 0 0 3px rgba(20,184,166,.15);
 }
 
 .dentist-grid {
