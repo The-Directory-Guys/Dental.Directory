@@ -279,19 +279,14 @@ const TREATMENT_MAP = {
     // Fetch and attach practitioner specialties + amenity flags for the whole region
     if (!savedMode) {
       const ids = allDentists.map(d => d.id).filter(Boolean);
-      console.log('[DC] fetching amenities for', ids.length, 'clinics, first id:', ids[0]);
       const [specMap, amenMap] = await Promise.all([
         fetchPractitionersForClinics(ids),
         fetchAmenitiesForClinics(ids),
       ]);
-      console.log('[DC] amenMap keys:', Object.keys(amenMap).length, 'sample:', JSON.stringify(Object.values(amenMap).slice(0, 2)));
       allDentists.forEach(d => {
         if (d.id && specMap[d.id]) d.practitionerSpecialties = specMap[d.id];
         if (d.id && amenMap[d.id]) d.amenityFlags = amenMap[d.id];
       });
-      const withFlags = allDentists.filter(d => d.amenityFlags).length;
-      const withAnxiety = allDentists.filter(d => d.amenityFlags && d.amenityFlags.dental_anxiety_friendly === true).length;
-      console.log('[DC] clinics with amenityFlags:', withFlags, '| dental_anxiety_friendly=true:', withAnxiety);
     }
 
     // Setup filtering & rendering
@@ -389,7 +384,6 @@ const TREATMENT_MAP = {
     let visibleCount = ITEMS_PER_PAGE;
 
     function render() {
-      console.log('[DC] render() called, activeAmenities=', activeAmenities, 'activeServices=', activeServices);
       _favs = getFavourites();
       let filtered = allDentists.filter(d => {
         if (showFavouritesOnly && !_favs.has(d.id)) return false;
@@ -417,8 +411,6 @@ const TREATMENT_MAP = {
         if (hygPrice !== null && maxHygienistPrice !== Infinity && hygPrice > maxHygienistPrice) return false;
         return true;
       });
-      if (activeAmenities.length) console.log('[DC] render: activeAmenities=', activeAmenities, 'filtered to', filtered.length, 'of', allDentists.length);
-
       if (activeTreatmentPriceType === 'checkup') {
         filtered.sort((a, b) => {
           const pa = getCheckupPrice(a), pb = getCheckupPrice(b);
@@ -509,22 +501,7 @@ const TREATMENT_MAP = {
       }
 
       if (resultsCount) {
-        const totalFiltered = allDentists.filter(d => {
-          if (activeSuburbs.length && !activeSuburbs.includes(d.suburb)) return false;
-          if (activeServices.length && !activeServices.every(s => d.services.includes(s))) return false;
-          if (d.rating < minRating) return false;
-          if (searchQuery) {
-          const q = searchQuery.toLowerCase();
-          const matchesName = d.name.toLowerCase().includes(q);
-          const matchesService = d.services.some(s => s.toLowerCase().includes(q));
-          if (!matchesName && !matchesService) return false;
-        }
-          const price = getCheckupPrice(d);
-          if (price !== null && maxPrice !== Infinity && price > maxPrice) return false;
-          const hygPrice = getHygienistPrice(d);
-          if (hygPrice !== null && maxHygienistPrice !== Infinity && hygPrice > maxHygienistPrice) return false;
-          return true;
-        }).length;
+        const totalFiltered = filtered.length;
         const showingCount = Math.min(visibleCount, totalFiltered);
         if (showingCount < totalFiltered) {
           resultsCount.textContent = `Showing ${showingCount} of ${totalFiltered} ${savedMode ? 'saved clinics' : `dentists in ${region}`}`;
@@ -792,13 +769,10 @@ const TREATMENT_MAP = {
     });
 
     // Amenity filters (injected dynamically by buildAmenitiesFilter)
-    const amenityCheckboxes = document.querySelectorAll('.filter-amenity');
-    console.log('[DC] amenity checkboxes found:', amenityCheckboxes.length);
-    amenityCheckboxes.forEach(cb => {
+    document.querySelectorAll('.filter-amenity').forEach(cb => {
       cb.addEventListener('change', () => {
         document.querySelectorAll(`.filter-amenity[value="${cb.value}"]`).forEach(p => { p.checked = cb.checked; });
         activeAmenities = [...new Set(Array.from(document.querySelectorAll('.filter-amenity:checked')).map(el => el.value))];
-        console.log('[DC] amenity changed, activeAmenities:', activeAmenities);
         renderWithReset();
       });
     });
@@ -819,7 +793,6 @@ const TREATMENT_MAP = {
     const available = AMENITY_FILTERS.filter(af =>
       allDentists.some(d => d.amenityFlags && d.amenityFlags[af.key] === true)
     );
-    console.log('[DC] buildAmenitiesFilter: available=', available.map(a => a.key));
     if (available.length === 0) return;
 
     const html = available.map(af => `
