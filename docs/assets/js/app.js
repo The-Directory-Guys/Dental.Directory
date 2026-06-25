@@ -389,6 +389,7 @@ const TREATMENT_MAP = {
     let visibleCount = ITEMS_PER_PAGE;
 
     function render() {
+      console.log('[DC] render() called, activeAmenities=', activeAmenities, 'activeServices=', activeServices);
       _favs = getFavourites();
       let filtered = allDentists.filter(d => {
         if (showFavouritesOnly && !_favs.has(d.id)) return false;
