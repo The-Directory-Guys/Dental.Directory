@@ -118,12 +118,15 @@ const TREATMENT_MAP = {
     if (!d.pricing || d.pricing.length === 0) return null;
     const checkup = d.pricing.find(p => {
       const s = p.service.toLowerCase();
-      return s.includes('checkup') || s.includes('check-up') || s.includes('exam') || s.includes('consult');
+      return s.includes('checkup') || s.includes('check-up') || s.includes('exam') ||
+             s.includes('consult') || s.includes('assessment') || s.includes('new patient') ||
+             s.includes('initial') || s.includes('comprehensive') || s.includes('oral health');
     });
     if (!checkup) return null;
     const match = checkup.price.replace(/,/g, '').match(/\$(\d+)/);
     return match ? parseInt(match[1], 10) : null;
   }
+
 
   function getHygienistPrice(d) {
     if (!d.pricing || d.pricing.length === 0) return null;

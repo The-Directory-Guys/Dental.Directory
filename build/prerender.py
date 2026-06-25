@@ -353,7 +353,9 @@ def _first_dollar(price_str: str) -> int | None:
 def get_checkup_price(pricing: list) -> int | None:
     for p in pricing:
         s = p["service"].lower()
-        if any(k in s for k in ("checkup", "check-up", "exam", "consult")):
+        if any(k in s for k in ("checkup", "check-up", "exam", "consult",
+                                 "assessment", "new patient", "initial",
+                                 "comprehensive", "oral health")):
             return _first_dollar(p["price"])
     return None
 
