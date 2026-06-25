@@ -140,6 +140,14 @@ const TREATMENT_MAP = {
     return m ? parseInt(m[1], 10) : null;
   }
 
+  function hasSaturdayOrEveningHours(d) {
+    if (d.amenityFlags && d.amenityFlags.saturday_evening_hours === true) return true;
+    if (!d.hrs) return false;
+    if (Array.isArray(d.hrs['6'])) return true; // has Saturday hours
+    if (Object.values(d.hrs).some(v => Array.isArray(v) && v[1] > 1080)) return true; // closes after 6 PM
+    return false;
+  }
+
   function isOpenNow(d) {
     if (!d.hrs) return null;
     const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Pacific/Auckland' }));
@@ -394,7 +402,9 @@ const TREATMENT_MAP = {
         }
         if (activeAmenities.length) {
           const flags = d.amenityFlags || {};
-          if (!activeAmenities.every(key => flags[key] === true)) return false;
+          if (!activeAmenities.every(key =>
+            key === 'saturday_evening_hours' ? hasSaturdayOrEveningHours(d) : flags[key] === true
+          )) return false;
         }
         if (activeSuburbs.length && !activeSuburbs.includes(d.suburb)) return false;
         if (activeServices.length && !activeServices.every(s => d.services.includes(s))) return false;
@@ -790,9 +800,10 @@ const TREATMENT_MAP = {
   ];
 
   function buildAmenitiesFilter(allDentists) {
-    const available = AMENITY_FILTERS.filter(af =>
-      allDentists.some(d => d.amenityFlags && d.amenityFlags[af.key] === true)
-    );
+    const available = AMENITY_FILTERS.filter(af => {
+      if (af.key === 'saturday_evening_hours') return allDentists.some(hasSaturdayOrEveningHours);
+      return allDentists.some(d => d.amenityFlags && d.amenityFlags[af.key] === true);
+    });
     if (available.length === 0) return;
 
     const html = available.map(af => `
