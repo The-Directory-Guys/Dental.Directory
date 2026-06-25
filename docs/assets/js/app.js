@@ -1201,12 +1201,12 @@ const TREATMENT_MAP = {
 
           // Hover tooltip listing the towns this card covers
           const towns = TOOLTIP_TOWN_OVERRIDES[suburbFilterKey] || [...allowed].sort();
-          card.title = `${cardName}: ${towns.join(', ')}`;
+          card.title = `Includes ${towns.join(', ')}`;
         } else {
           total = counts[dbRegion] || 0;
 
           if (TOOLTIP_TOWN_OVERRIDES[dbRegion]) {
-            card.title = `${cardName} region: includes ${TOOLTIP_TOWN_OVERRIDES[dbRegion].join(', ')}`;
+            card.title = `Includes ${TOOLTIP_TOWN_OVERRIDES[dbRegion].join(', ')}`;
           } else {
             // Hover tooltip for whole-region cards: lead with the largest
             // city, then sample the least-common remaining suburbs (a proxy
@@ -1223,7 +1223,7 @@ const TREATMENT_MAP = {
                 .sort();
               const more = allOuterTowns.length > sample.length ? ' and more' : '';
               const list = sample.length > 0 ? `${largestCity}, ${sample.join(', ')}` : largestCity;
-              card.title = `${cardName} region: includes ${list}${more}`;
+              card.title = `Includes ${list}${more}`;
             }
           }
         }
