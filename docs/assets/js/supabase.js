@@ -327,6 +327,26 @@ async function fetchSingleClinicReviews(clinicId) {
   }
 }
 
+// Fetch a specific set of clinics by ID array (used by the saved clinics page)
+async function fetchClinicsByIds(ids) {
+  if (!ids || ids.length === 0) return [];
+  try {
+    const url = `${SUPABASE_URL}/rest/v1/dental_clinics?id=in.(${ids.join(',')})&business_status=eq.OPERATIONAL`;
+    const response = await fetch(url, {
+      headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+    });
+    if (!response.ok) throw new Error(`Supabase error: ${response.status}`);
+    const data = await response.json();
+    const clinics = data.map(transformClinic);
+    const pricingMap = await fetchClinicPricing(data.map(c => c.id));
+    clinics.forEach(clinic => { if (pricingMap[clinic.id]) clinic.pricing = pricingMap[clinic.id]; });
+    return clinics;
+  } catch (error) {
+    console.error('Failed to fetch clinics by IDs:', error);
+    return [];
+  }
+}
+
 // Fetch all clinics (for homepage stats, etc.)
 async function fetchAllClinics() {
   const PAGE = 1000;

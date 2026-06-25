@@ -227,25 +227,39 @@ const TREATMENT_MAP = {
 
   async function initListings() {
     let allDentists = [];
-
-    // Read region from data attribute (defaults to Canterbury)
+    const savedMode = dentistGrid.dataset.mode === 'saved';
     const region = dentistGrid.dataset.region || 'Canterbury';
 
-    // Try Supabase first, fall back to static data
-    if (typeof fetchClinics === 'function') {
-      allDentists = await fetchClinics(region);
-    }
-
-    // Fall back to static data if Supabase returned nothing
-    if (allDentists.length === 0 && typeof dentists !== 'undefined') {
-      allDentists = dentists;
-    }
-
-    // Apply suburb filter if page specifies one
-    const suburbFilterKey = dentistGrid.dataset.suburbFilter;
-    if (suburbFilterKey && SUBURB_FILTERS[suburbFilterKey]) {
-      const allowed = SUBURB_FILTERS[suburbFilterKey];
-      allDentists = allDentists.filter(d => allowed.has(d.suburb));
+    if (savedMode) {
+      const ids = [...getFavourites()];
+      if (ids.length === 0) {
+        dentistGrid.innerHTML = `
+          <div class="no-results">
+            <div class="no-results__icon">♥</div>
+            <p class="no-results__desc">No saved clinics yet. Browse a region and click ♥ on any card to save a clinic.</p>
+            <a href="/" class="btn btn--primary" style="margin-top:1rem;">Browse regions</a>
+          </div>
+        `;
+        if (resultsCount) resultsCount.textContent = '';
+        return;
+      }
+      if (typeof fetchClinicsByIds === 'function') {
+        allDentists = await fetchClinicsByIds(ids);
+      }
+    } else {
+      // Try Supabase first, fall back to static data
+      if (typeof fetchClinics === 'function') {
+        allDentists = await fetchClinics(region);
+      }
+      if (allDentists.length === 0 && typeof dentists !== 'undefined') {
+        allDentists = dentists;
+      }
+      // Apply suburb filter if page specifies one
+      const suburbFilterKey = dentistGrid.dataset.suburbFilter;
+      if (suburbFilterKey && SUBURB_FILTERS[suburbFilterKey]) {
+        const allowed = SUBURB_FILTERS[suburbFilterKey];
+        allDentists = allDentists.filter(d => allowed.has(d.suburb));
+      }
     }
 
     if (allDentists.length === 0) {
@@ -474,9 +488,9 @@ const TREATMENT_MAP = {
         }).length;
         const showingCount = Math.min(visibleCount, totalFiltered);
         if (showingCount < totalFiltered) {
-          resultsCount.textContent = `Showing ${showingCount} of ${totalFiltered} dentists in ${region}`;
+          resultsCount.textContent = `Showing ${showingCount} of ${totalFiltered} ${savedMode ? 'saved clinics' : `dentists in ${region}`}`;
         } else {
-          resultsCount.textContent = `Showing ${totalFiltered} dentist${totalFiltered !== 1 ? 's' : ''} in ${region}`;
+          resultsCount.textContent = `Showing ${totalFiltered} ${savedMode ? `saved clinic${totalFiltered !== 1 ? 's' : ''}` : `dentist${totalFiltered !== 1 ? 's' : ''} in ${region}`}`;
         }
       }
     }
