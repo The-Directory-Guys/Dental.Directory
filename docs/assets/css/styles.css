@@ -1430,6 +1430,24 @@ h4 {
     color: var(--clr-white);
 }
 
+.sticky-actions__btn--save {
+    background: var(--clr-white);
+    color: var(--clr-gray-500);
+    border: 1.5px solid var(--clr-gray-200);
+}
+
+.sticky-actions__btn--save--active {
+    color: #f43f5e;
+    border-color: #f43f5e;
+    background: #fff1f2;
+}
+
+.profile-save-btn--active {
+    color: #f43f5e;
+    border-color: #f43f5e;
+    background: #fff1f2;
+}
+
 @media (max-width: 768px) {
     .sticky-actions {
         display: flex;

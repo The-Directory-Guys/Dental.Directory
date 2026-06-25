@@ -966,6 +966,12 @@ const TREATMENT_MAP = {
       ? `<a href="${dentist.website}" target="_blank" class="btn btn--primary btn--block">Visit Website ↗</a>`
       : '';
 
+    // Save button
+    const profileIsFav = dentist.id && getFavourites().has(dentist.id);
+    const saveBtn = dentist.id
+      ? `<button id="profile-save-btn" class="btn btn--outline btn--block profile-save-btn${profileIsFav ? ' profile-save-btn--active' : ''}" style="margin-top:.5rem;">${profileIsFav ? '♥ Saved' : '♥ Save clinic'}</button>`
+      : '';
+
     profileContainer.innerHTML = `
       <div class="profile-main">
         ${dentist.description ? `
@@ -1026,6 +1032,7 @@ const TREATMENT_MAP = {
             </div>
           </div>
           ${websiteBtn}
+          ${saveBtn}
           ${mapEmbed}
           ${mapLink}
           ${writeReviewBtn}
@@ -1040,7 +1047,29 @@ const TREATMENT_MAP = {
         dentist.phone ? `<a href="tel:${dentist.phone.replace(/\s/g, '')}" class="sticky-actions__btn sticky-actions__btn--call">📞 Call</a>` : '',
         dentist.website ? `<a href="${dentist.website}" target="_blank" class="sticky-actions__btn sticky-actions__btn--website">🌐 Visit Website</a>` : '',
         dentist.googleMapsUrl ? `<a href="${dentist.googleMapsUrl}" target="_blank" class="sticky-actions__btn sticky-actions__btn--directions">📍 Directions</a>` : '',
+        dentist.id ? `<button id="sticky-save-btn" class="sticky-actions__btn sticky-actions__btn--save${profileIsFav ? ' sticky-actions__btn--save--active' : ''}">${profileIsFav ? '♥ Saved' : '♥ Save'}</button>` : '',
       ].filter(Boolean).join('');
+    }
+
+    // Wire up save buttons
+    if (dentist.id) {
+      function syncSaveBtns() {
+        const isFav = getFavourites().has(dentist.id);
+        const b1 = document.getElementById('profile-save-btn');
+        const b2 = document.getElementById('sticky-save-btn');
+        if (b1) { b1.textContent = isFav ? '♥ Saved' : '♥ Save clinic'; b1.classList.toggle('profile-save-btn--active', isFav); }
+        if (b2) { b2.textContent = isFav ? '♥ Saved' : '♥ Save'; b2.classList.toggle('sticky-actions__btn--save--active', isFav); }
+      }
+      function onProfileSaveClick() {
+        const favs = getFavourites();
+        if (favs.has(dentist.id)) favs.delete(dentist.id); else favs.add(dentist.id);
+        saveFavourites(favs);
+        syncSaveBtns();
+      }
+      const b1 = document.getElementById('profile-save-btn');
+      const b2 = document.getElementById('sticky-save-btn');
+      if (b1) b1.addEventListener('click', onProfileSaveClick);
+      if (b2) b2.addEventListener('click', onProfileSaveClick);
     }
   }
 
