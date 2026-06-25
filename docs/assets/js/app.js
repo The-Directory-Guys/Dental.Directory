@@ -802,13 +802,9 @@ const TREATMENT_MAP = {
   ];
 
   function buildAmenitiesFilter(allDentists) {
-    const withHrs = allDentists.filter(d => d.hrs).length;
-    const eveningSample = allDentists.find(d => d.hrs && Object.values(d.hrs).some(v => Array.isArray(v) && v[1] > 1020));
-    console.log('[DC] buildAmenities: withHrs=', withHrs, 'eveningSample=', eveningSample ? eveningSample.name + ' hrs=' + JSON.stringify(eveningSample.hrs) : 'none');
     const available = AMENITY_FILTERS.filter(af =>
       allDentists.some(d => checkAmenity(af.key, d))
     );
-    console.log('[DC] available amenities:', available.map(a => a.key));
     if (available.length === 0) return;
 
     const html = available.map(af => `

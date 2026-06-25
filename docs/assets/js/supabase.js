@@ -188,7 +188,6 @@ async function fetchClinics(region) {
       const rows = pricingById[String(clinic.id)];
       if (rows) clinic.pricing = rows;
     });
-    console.log(`[prefetch] ${clinics.length} clinics loaded from pre-rendered data for ${region}`);
     return clinics;
   }
 
