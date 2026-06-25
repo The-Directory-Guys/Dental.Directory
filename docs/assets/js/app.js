@@ -137,6 +137,16 @@ const TREATMENT_MAP = {
     return m ? parseInt(m[1], 10) : null;
   }
 
+  function isOpenNow(d) {
+    if (!d.hrs) return null;
+    const now = new Date();
+    const range = d.hrs[String(now.getDay())];
+    if (range === undefined) return null;
+    if (range === null) return false;
+    const cur = now.getHours() * 60 + now.getMinutes();
+    return cur >= range[0] && cur < range[1];
+  }
+
   // ===== Listings Page Logic =====
   const dentistGrid = document.getElementById('dentist-grid');
   const resultsCount = document.getElementById('results-count');
@@ -282,6 +292,13 @@ const TREATMENT_MAP = {
       const phoneText = d.phone ? `<a href="tel:${d.phone.replace(/\\s/g, '')}" style="text-decoration:none; color:inherit;">📞 ${d.phone}</a>` : '';
       const emailText = d.email ? `<a href="mailto:${d.email}" style="text-decoration:none; color:inherit; margin-left:1rem;">✉️ Email</a>` : '';
 
+      const openStatus = isOpenNow(d);
+      const openBadge = openStatus === true
+        ? '<span class="badge badge--open">Open now</span>'
+        : openStatus === false
+        ? '<span class="badge badge--closed">Closed</span>'
+        : '';
+
       // Use id for Supabase records, slug for static
       const profileLink = d.id ? `dentist.html?id=${d.id}&region=${encodeURIComponent(d.region || '')}` : `dentist.html?slug=${d.slug}&region=${encodeURIComponent(d.region || '')}`;
 
@@ -292,6 +309,7 @@ const TREATMENT_MAP = {
             <h3 class="dentist-card__name">
               <a href="${profileLink}">${d.name}</a>
             </h3>
+            ${openBadge}
             <div class="dentist-card__meta">
               <span class="dentist-card__meta-item">${ratingDisplay}</span>
               <span class="dentist-card__meta-item">📍 ${d.suburb && d.suburb !== d.city ? `${d.suburb}, ${d.city}` : (d.city || d.suburb || 'Unknown')}</span>

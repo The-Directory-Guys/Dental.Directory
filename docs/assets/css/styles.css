@@ -633,6 +633,16 @@ h4 {
     color: var(--clr-gray-500);
 }
 
+.badge--open {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badge--closed {
+    background: var(--clr-gray-100);
+    color: var(--clr-gray-400);
+}
+
 /* ===================================================
    SERVICE PILLS
    =================================================== */

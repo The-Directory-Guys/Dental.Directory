@@ -283,6 +283,58 @@ def fetch_pricing_for_ids(clinic_ids: list[int]) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# Opening hours helpers — produces compact hrs dict for prefetch JSON
+# ---------------------------------------------------------------------------
+
+_DAY_NUMS = {
+    "monday": 1, "tuesday": 2, "wednesday": 3, "thursday": 4,
+    "friday": 5, "saturday": 6, "sunday": 0,
+}
+_TIME_RANGE_RE = re.compile(
+    r"(\d{1,2}:\d{2}\s*(?:AM|PM))\s*[–—\-]\s*(\d{1,2}:\d{2}\s*(?:AM|PM))",
+    re.IGNORECASE,
+)
+
+
+def _time_to_min(t: str) -> int | None:
+    m = re.match(r"(\d{1,2}):(\d{2})\s*(AM|PM)", t.strip(), re.IGNORECASE)
+    if not m:
+        return None
+    h, mn, ampm = int(m.group(1)), int(m.group(2)), m.group(3).upper()
+    if ampm == "PM" and h != 12:
+        h += 12
+    elif ampm == "AM" and h == 12:
+        h = 0
+    return h * 60 + mn
+
+
+def compact_hours(opening_hours: str | None) -> dict | None:
+    """Parse opening_hours string into {day_num_str: [open_min, close_min] | null}."""
+    if not opening_hours:
+        return None
+    result: dict = {}
+    for segment in opening_hours.split(";"):
+        segment = segment.strip()
+        if not segment or ":" not in segment:
+            continue
+        day_part, _, time_part = segment.partition(":")
+        day_num = _DAY_NUMS.get(day_part.strip().lower())
+        if day_num is None:
+            continue
+        m = _TIME_RANGE_RE.search(time_part)
+        if m:
+            open_min  = _time_to_min(m.group(1))
+            close_min = _time_to_min(m.group(2))
+            if open_min is not None and close_min is not None:
+                result[str(day_num)] = [open_min, close_min]
+            else:
+                result[str(day_num)] = None
+        else:
+            result[str(day_num)] = None
+    return result or None
+
+
+# ---------------------------------------------------------------------------
 # HTML card generation (mirrors cardHTML() in app.js)
 # ---------------------------------------------------------------------------
 
@@ -524,7 +576,13 @@ def inject_page(
         "phone_national","phone_international","phone",
         "rating","total_ratings","services","price","description",
     }
-    slim_clinics = [{k: c[k] for k in KEEP if k in c} for c in clinics]
+    slim_clinics = []
+    for c in clinics:
+        slim = {k: c[k] for k in KEEP if k in c}
+        hrs = compact_hours(c.get("opening_hours"))
+        if hrs:
+            slim["hrs"] = hrs
+        slim_clinics.append(slim)
     slim_pricing = {
         str(cid): rows
         for cid, rows in pricing_map.items()
