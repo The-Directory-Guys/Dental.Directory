@@ -613,6 +613,13 @@ h4 {
     color: var(--clr-gray-500);
 }
 
+.location-card__maori {
+    font-size: var(--fs-xs);
+    color: var(--clr-gray-400);
+    font-style: italic;
+    margin-top: var(--sp-1);
+}
+
 .badge {
     display: inline-block;
     padding: var(--sp-1) var(--sp-3);
