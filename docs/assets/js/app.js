@@ -140,12 +140,15 @@ const TREATMENT_MAP = {
     return m ? parseInt(m[1], 10) : null;
   }
 
-  function hasSaturdayOrEveningHours(d) {
-    if (d.amenityFlags && d.amenityFlags.saturday_evening_hours === true) return true;
-    if (!d.hrs) return false;
-    if (Array.isArray(d.hrs['6'])) return true; // has Saturday hours
-    if (Object.values(d.hrs).some(v => Array.isArray(v) && v[1] > 1080)) return true; // closes after 6 PM
-    return false;
+  const AMENITY_CHECKS = {
+    saturday_hours: d => !!(d.hrs && Array.isArray(d.hrs['6'])),
+    sunday_hours:   d => !!(d.hrs && Array.isArray(d.hrs['0'])),
+    evening_hours:  d => !!(d.hrs && Object.values(d.hrs).some(v => Array.isArray(v) && v[1] > 1020)),
+  };
+
+  function checkAmenity(key, d) {
+    if (AMENITY_CHECKS[key]) return AMENITY_CHECKS[key](d);
+    return !!(d.amenityFlags && d.amenityFlags[key] === true);
   }
 
   function isOpenNow(d) {
@@ -401,10 +404,7 @@ const TREATMENT_MAP = {
           if (!activeSpecialties.every(kw => specs.some(s => s.includes(kw)))) return false;
         }
         if (activeAmenities.length) {
-          const flags = d.amenityFlags || {};
-          if (!activeAmenities.every(key =>
-            key === 'saturday_evening_hours' ? hasSaturdayOrEveningHours(d) : flags[key] === true
-          )) return false;
+          if (!activeAmenities.every(key => checkAmenity(key, d))) return false;
         }
         if (activeSuburbs.length && !activeSuburbs.includes(d.suburb)) return false;
         if (activeServices.length && !activeServices.every(s => d.services.includes(s))) return false;
@@ -795,15 +795,16 @@ const TREATMENT_MAP = {
     { key: 'dental_anxiety_friendly', label: 'Dental anxiety friendly' },
     { key: 'wheelchair_accessible',   label: 'Wheelchair accessible' },
     { key: 'online_booking',          label: 'Online booking' },
-    { key: 'saturday_evening_hours',  label: 'Saturday / evening hours' },
+    { key: 'saturday_hours',          label: 'Open Saturdays' },
+    { key: 'sunday_hours',            label: 'Open Sundays' },
+    { key: 'evening_hours',           label: 'Open evenings (after 5 PM)' },
     { key: 'same_day_emergency',      label: 'Same-day emergencies' },
   ];
 
   function buildAmenitiesFilter(allDentists) {
-    const available = AMENITY_FILTERS.filter(af => {
-      if (af.key === 'saturday_evening_hours') return allDentists.some(hasSaturdayOrEveningHours);
-      return allDentists.some(d => d.amenityFlags && d.amenityFlags[af.key] === true);
-    });
+    const available = AMENITY_FILTERS.filter(af =>
+      allDentists.some(d => checkAmenity(af.key, d))
+    );
     if (available.length === 0) return;
 
     const html = available.map(af => `
