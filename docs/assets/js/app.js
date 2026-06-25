@@ -335,9 +335,9 @@ const TREATMENT_MAP = {
 
       const openStatus = isOpenNow(d);
       const openBadge = openStatus === true
-        ? '<span class="badge badge--open">Open now</span>'
+        ? '<span class="badge badge--open">🟢 Open now</span>'
         : openStatus === false
-        ? '<span class="badge badge--closed">Closed</span>'
+        ? '<span class="badge badge--closed">🔴 Closed</span>'
         : '';
 
       const isFav = !!d.id && _favs.has(d.id);

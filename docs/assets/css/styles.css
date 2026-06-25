@@ -650,8 +650,8 @@ h4 {
 }
 
 .badge--closed {
-    background: var(--clr-gray-100);
-    color: var(--clr-gray-400);
+    background: #fee2e2;
+    color: #991b1b;
 }
 
 /* ===================================================
