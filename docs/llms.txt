@@ -1,0 +1,41 @@
+# Dental Compare
+
+> Dental Compare (dentalcompare.co.nz) is a free New Zealand directory for finding and comparing dentists by price, patient reviews, services and location. Visitors browse practices region by region, open a profile for any clinic to see pricing, services, opening hours and reviews, and save the ones they like.
+
+Dental Compare covers dental practices across every region of New Zealand, from the major cities to wider regional areas. Each region page lists clinics with their rating, suburb, services and contact details, and links to a full profile. Listings can be filtered by suburb, service and minimum rating, and searched by clinic name. The site is informational and free to use; it does not book appointments or take payment.
+
+## Key pages
+- [Home](https://dentalcompare.co.nz/): Search and browse dentists across New Zealand
+- [Dentists near you](https://dentalcompare.co.nz/nearby.html): Find clinics by location
+- [Dental FAQ](https://dentalcompare.co.nz/faq.html): Common questions on dental costs, care and choosing a practice
+
+## Major cities
+- [Auckland](https://dentalcompare.co.nz/auckland.html)
+- [Christchurch](https://dentalcompare.co.nz/christchurch.html)
+- [Wellington](https://dentalcompare.co.nz/wellington.html)
+- [Hamilton](https://dentalcompare.co.nz/hamilton.html)
+- [Tauranga](https://dentalcompare.co.nz/tauranga.html)
+- [Dunedin](https://dentalcompare.co.nz/dunedin.html)
+
+## Regions
+- [Northland](https://dentalcompare.co.nz/northland.html)
+- [Waikato](https://dentalcompare.co.nz/waikato.html)
+- [Wider Waikato](https://dentalcompare.co.nz/wider-waikato.html)
+- [Bay of Plenty](https://dentalcompare.co.nz/bay-of-plenty.html)
+- [Wider Bay of Plenty](https://dentalcompare.co.nz/wider-bop.html)
+- [Gisborne](https://dentalcompare.co.nz/gisborne.html)
+- [Hawke's Bay](https://dentalcompare.co.nz/hawkes-bay.html)
+- [Taranaki](https://dentalcompare.co.nz/taranaki.html)
+- [Manawatū-Whanganui](https://dentalcompare.co.nz/manawatu-whanganui.html)
+- [Wairarapa](https://dentalcompare.co.nz/wairarapa.html)
+- [Nelson-Tasman](https://dentalcompare.co.nz/nelson-tasman.html)
+- [Marlborough](https://dentalcompare.co.nz/marlborough.html)
+- [West Coast](https://dentalcompare.co.nz/west-coast.html)
+- [Canterbury](https://dentalcompare.co.nz/canterbury.html)
+- [Wider Canterbury](https://dentalcompare.co.nz/wider-canterbury.html)
+- [Otago](https://dentalcompare.co.nz/otago.html)
+- [Wider Otago](https://dentalcompare.co.nz/wider-otago.html)
+- [Southland](https://dentalcompare.co.nz/southland.html)
+
+## More
+- [Sitemap (XML)](https://dentalcompare.co.nz/sitemap.xml): Full list of indexable pages
