@@ -147,6 +147,15 @@ const TREATMENT_MAP = {
     return cur >= range[0] && cur < range[1];
   }
 
+  function getFavourites() {
+    try { return new Set(JSON.parse(localStorage.getItem('dc_favourites') || '[]')); }
+    catch { return new Set(); }
+  }
+  function saveFavourites(favSet) {
+    try { localStorage.setItem('dc_favourites', JSON.stringify([...favSet])); }
+    catch {}
+  }
+
   // ===== Listings Page Logic =====
   const dentistGrid = document.getElementById('dentist-grid');
   const resultsCount = document.getElementById('results-count');
@@ -262,6 +271,8 @@ const TREATMENT_MAP = {
     let maxPrice = Infinity;
     let maxHygienistPrice = Infinity;
     let activeTreatmentPriceType = null;
+    let showFavouritesOnly = false;
+    let _favs = getFavourites();
 
     function cardHTML(d) {
       const initials = d.name.split(' ').filter(w => w.length > 0).map(w => w[0]).join('').slice(0, 2).toUpperCase();
@@ -299,11 +310,15 @@ const TREATMENT_MAP = {
         ? '<span class="badge badge--closed">Closed</span>'
         : '';
 
+      const isFav = !!d.id && _favs.has(d.id);
+      const favBtn = d.id ? `<button class="fav-btn${isFav ? ' fav-btn--active' : ''}" data-fav-id="${d.id}" aria-label="${isFav ? 'Remove from saved' : 'Save clinic'}" title="${isFav ? 'Remove from saved' : 'Save clinic'}">♥</button>` : '';
+
       // Use id for Supabase records, slug for static
       const profileLink = d.id ? `dentist.html?id=${d.id}&region=${encodeURIComponent(d.region || '')}` : `dentist.html?slug=${d.slug}&region=${encodeURIComponent(d.region || '')}`;
 
       return `
         <article class="dentist-card" data-suburb="${d.suburb}" data-rating="${d.rating || 0}" data-name="${d.name}">
+          ${favBtn}
           <div class="dentist-card__avatar">${initials}</div>
           <div class="dentist-card__body">
             <h3 class="dentist-card__name">
@@ -335,7 +350,9 @@ const TREATMENT_MAP = {
     let visibleCount = ITEMS_PER_PAGE;
 
     function render() {
+      _favs = getFavourites();
       let filtered = allDentists.filter(d => {
+        if (showFavouritesOnly && !_favs.has(d.id)) return false;
         if (activeSuburbs.length && !activeSuburbs.includes(d.suburb)) return false;
         if (activeServices.length && !activeServices.every(s => d.services.includes(s))) return false;
         if (d.rating < minRating) return false;
@@ -379,25 +396,36 @@ const TREATMENT_MAP = {
       }
 
       if (filtered.length === 0) {
-        const activeLabels = [];
-        if (searchQuery) activeLabels.push(`"${searchQuery}"`);
-        activeServices.forEach(s => activeLabels.push(s));
-        activeSuburbs.forEach(s => activeLabels.push(s));
-        if (minRating > 0) activeLabels.push(`★ ${minRating.toFixed(1)}+`);
-        if (maxPrice !== Infinity) activeLabels.push(`under $${maxPrice}`);
-        if (maxHygienistPrice !== Infinity) activeLabels.push(`hygienist under $${maxHygienistPrice}`);
+        if (showFavouritesOnly && _favs.size === 0) {
+          dentistGrid.innerHTML = `
+            <div class="no-results">
+              <div class="no-results__icon">♥</div>
+              <p class="no-results__desc">No saved clinics yet. Click ♥ on any card to save a clinic.</p>
+              <button class="btn btn--outline clear-filters-btn">Clear all filters</button>
+            </div>
+          `;
+        } else {
+          const activeLabels = [];
+          if (showFavouritesOnly) activeLabels.push('Saved');
+          if (searchQuery) activeLabels.push(`"${searchQuery}"`);
+          activeServices.forEach(s => activeLabels.push(s));
+          activeSuburbs.forEach(s => activeLabels.push(s));
+          if (minRating > 0) activeLabels.push(`★ ${minRating.toFixed(1)}+`);
+          if (maxPrice !== Infinity) activeLabels.push(`under $${maxPrice}`);
+          if (maxHygienistPrice !== Infinity) activeLabels.push(`hygienist under $${maxHygienistPrice}`);
 
-        const filtersDesc = activeLabels.length
-          ? `No results for <strong>${activeLabels.join(' + ')}</strong>.`
-          : 'No dentists found.';
+          const filtersDesc = activeLabels.length
+            ? `No results for <strong>${activeLabels.join(' + ')}</strong>.`
+            : 'No dentists found.';
 
-        dentistGrid.innerHTML = `
-          <div class="no-results">
-            <div class="no-results__icon">🔍</div>
-            <p class="no-results__desc">${filtersDesc}</p>
-            <button class="btn btn--outline clear-filters-btn">Clear all filters</button>
-          </div>
-        `;
+          dentistGrid.innerHTML = `
+            <div class="no-results">
+              <div class="no-results__icon">🔍</div>
+              <p class="no-results__desc">${filtersDesc}</p>
+              <button class="btn btn--outline clear-filters-btn">Clear all filters</button>
+            </div>
+          `;
+        }
       } else {
         const showing = filtered.slice(0, visibleCount);
         const remaining = filtered.length - showing.length;
@@ -459,6 +487,14 @@ const TREATMENT_MAP = {
       render();
     }
 
+    function updateFavToggle() {
+      const btn = document.getElementById('fav-toggle');
+      if (!btn) return;
+      const count = getFavourites().size;
+      btn.textContent = count > 0 ? `♥ Saved (${count})` : '♥ Saved';
+      btn.classList.toggle('fav-toggle--active', showFavouritesOnly);
+    }
+
     function clearAllFilters() {
       activeSuburbs = [];
       activeServices = [];
@@ -467,6 +503,8 @@ const TREATMENT_MAP = {
       maxPrice = Infinity;
       maxHygienistPrice = Infinity;
       activeTreatmentPriceType = null;
+      showFavouritesOnly = false;
+      updateFavToggle();
 
       document.querySelectorAll('.filter-suburb, .filter-service').forEach(cb => { cb.checked = false; });
       if (searchInput) searchInput.value = '';
@@ -485,9 +523,26 @@ const TREATMENT_MAP = {
       renderWithReset();
     }
 
-    // Clear-filters button in the empty state (event delegation)
+    // Card interaction: favourite toggle + clear-filters (event delegation)
     dentistGrid.addEventListener('click', (e) => {
-      if (e.target.closest('.clear-filters-btn')) clearAllFilters();
+      if (e.target.closest('.clear-filters-btn')) { clearAllFilters(); return; }
+
+      const favBtnEl = e.target.closest('.fav-btn');
+      if (favBtnEl) {
+        e.preventDefault();
+        e.stopPropagation();
+        const id = parseInt(favBtnEl.dataset.favId, 10);
+        const favs = getFavourites();
+        if (favs.has(id)) favs.delete(id); else favs.add(id);
+        saveFavourites(favs);
+        _favs = favs;
+        const isFav = favs.has(id);
+        favBtnEl.classList.toggle('fav-btn--active', isFav);
+        favBtnEl.setAttribute('aria-label', isFav ? 'Remove from saved' : 'Save clinic');
+        favBtnEl.title = isFav ? 'Remove from saved' : 'Save clinic';
+        updateFavToggle();
+        if (showFavouritesOnly) renderWithReset();
+      }
     });
 
     // Suburb filters
@@ -576,6 +631,21 @@ const TREATMENT_MAP = {
     if (sortSelect) {
       sortSelect.addEventListener('change', (e) => {
         sortBy = e.target.value;
+        renderWithReset();
+      });
+    }
+
+    // Favourites toggle — injected next to sort select
+    const listingsHeader = document.querySelector('.listings-header');
+    if (listingsHeader && sortSelect) {
+      const favToggleBtn = document.createElement('button');
+      favToggleBtn.id = 'fav-toggle';
+      favToggleBtn.className = 'fav-toggle';
+      listingsHeader.insertBefore(favToggleBtn, sortSelect);
+      updateFavToggle();
+      favToggleBtn.addEventListener('click', () => {
+        showFavouritesOnly = !showFavouritesOnly;
+        updateFavToggle();
         renderWithReset();
       });
     }
