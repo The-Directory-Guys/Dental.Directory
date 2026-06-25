@@ -416,6 +416,7 @@ const TREATMENT_MAP = {
         if (hygPrice !== null && maxHygienistPrice !== Infinity && hygPrice > maxHygienistPrice) return false;
         return true;
       });
+      if (activeAmenities.length) console.log('[DC] render: activeAmenities=', activeAmenities, 'filtered to', filtered.length, 'of', allDentists.length);
 
       if (activeTreatmentPriceType === 'checkup') {
         filtered.sort((a, b) => {
