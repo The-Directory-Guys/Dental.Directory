@@ -279,14 +279,19 @@ const TREATMENT_MAP = {
     // Fetch and attach practitioner specialties + amenity flags for the whole region
     if (!savedMode) {
       const ids = allDentists.map(d => d.id).filter(Boolean);
+      console.log('[DC] fetching amenities for', ids.length, 'clinics, first id:', ids[0]);
       const [specMap, amenMap] = await Promise.all([
         fetchPractitionersForClinics(ids),
         fetchAmenitiesForClinics(ids),
       ]);
+      console.log('[DC] amenMap keys:', Object.keys(amenMap).length, 'sample:', JSON.stringify(Object.values(amenMap).slice(0, 2)));
       allDentists.forEach(d => {
         if (d.id && specMap[d.id]) d.practitionerSpecialties = specMap[d.id];
         if (d.id && amenMap[d.id]) d.amenityFlags = amenMap[d.id];
       });
+      const withFlags = allDentists.filter(d => d.amenityFlags).length;
+      const withAnxiety = allDentists.filter(d => d.amenityFlags && d.amenityFlags.dental_anxiety_friendly === true).length;
+      console.log('[DC] clinics with amenityFlags:', withFlags, '| dental_anxiety_friendly=true:', withAnxiety);
     }
 
     // Setup filtering & rendering
@@ -785,10 +790,13 @@ const TREATMENT_MAP = {
     });
 
     // Amenity filters (injected dynamically by buildAmenitiesFilter)
-    document.querySelectorAll('.filter-amenity').forEach(cb => {
+    const amenityCheckboxes = document.querySelectorAll('.filter-amenity');
+    console.log('[DC] amenity checkboxes found:', amenityCheckboxes.length);
+    amenityCheckboxes.forEach(cb => {
       cb.addEventListener('change', () => {
         document.querySelectorAll(`.filter-amenity[value="${cb.value}"]`).forEach(p => { p.checked = cb.checked; });
         activeAmenities = [...new Set(Array.from(document.querySelectorAll('.filter-amenity:checked')).map(el => el.value))];
+        console.log('[DC] amenity changed, activeAmenities:', activeAmenities);
         renderWithReset();
       });
     });
@@ -809,6 +817,7 @@ const TREATMENT_MAP = {
     const available = AMENITY_FILTERS.filter(af =>
       allDentists.some(d => d.amenityFlags && d.amenityFlags[af.key] === true)
     );
+    console.log('[DC] buildAmenitiesFilter: available=', available.map(a => a.key));
     if (available.length === 0) return;
 
     const html = available.map(af => `
