@@ -312,6 +312,8 @@ const TREATMENT_MAP = {
         } else {
           pricingPreview = `<div class="pricing-summary pricing-summary--muted">💰 Pricing available</div>`;
         }
+      } else {
+        pricingPreview = `<div class="pricing-summary pricing-summary--muted">No prices listed</div>`;
       }
 
       const ratingDisplay = d.rating ? `<span class="stars">${starsHTML(d.rating)}</span> <strong>${d.rating}</strong>` : '<span style="color:var(--clr-gray-400)">No rating yet</span>';

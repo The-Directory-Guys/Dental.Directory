@@ -372,7 +372,7 @@ def get_hygienist_price(pricing: list) -> int | None:
 
 def pricing_summary_html(pricing: list) -> str:
     if not pricing:
-        return ""
+        return '<div class="pricing-summary pricing-summary--muted">No prices listed</div>'
     checkup = get_checkup_price(pricing)
     hyg     = get_hygienist_price(pricing)
     parts   = []
