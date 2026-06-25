@@ -241,6 +241,35 @@ async function fetchClinics(region) {
   }
 }
 
+// Fetch practitioners for a single clinic
+async function fetchClinicPractitioners(clinicId) {
+  try {
+    const url = `${SUPABASE_URL}/rest/v1/clinic_practitioners?clinic_id=eq.${clinicId}&select=name,experience,specialties,bio,languages&order=id`;
+    const response = await fetch(url, {
+      headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+    });
+    if (!response.ok) return [];
+    return await response.json();
+  } catch (e) {
+    return [];
+  }
+}
+
+// Fetch amenities row for a single clinic
+async function fetchClinicAmenities(clinicId) {
+  try {
+    const url = `${SUPABASE_URL}/rest/v1/clinic_amenities?clinic_id=eq.${clinicId}&select=parking_access,wheelchair_accessible,same_day_emergency,saturday_evening_hours,in_house_specialists,sedation_options,calming_amenities,dental_anxiety_friendly,online_booking,payment_partners,membership_plans,kids_family_friendly`;
+    const response = await fetch(url, {
+      headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+    });
+    if (!response.ok) return null;
+    const data = await response.json();
+    return data.length > 0 ? data[0] : null;
+  } catch (e) {
+    return null;
+  }
+}
+
 // Fetch a single clinic by ID (including its pricing)
 async function fetchClinicById(id) {
   try {
@@ -268,6 +297,14 @@ async function fetchClinicById(id) {
     // Fetch reviews for this specific clinic
     const reviews = await fetchSingleClinicReviews(id);
     clinic.reviews = reviews;
+
+    // Fetch amenities for this specific clinic
+    const amenities = await fetchClinicAmenities(id);
+    clinic.amenities = amenities;
+
+    // Fetch practitioners for this specific clinic
+    const practitioners = await fetchClinicPractitioners(id);
+    clinic.practitioners = practitioners;
 
     return clinic;
   } catch (error) {

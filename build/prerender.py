@@ -383,7 +383,10 @@ def pricing_summary_html(pricing: list) -> str:
     if parts:
         sep = '<span class="pricing-summary__sep">·</span>'
         return f'<div class="pricing-summary">💰 {sep.join(parts)}</div>'
-    return '<div class="pricing-summary pricing-summary--muted">💰 Pricing available</div>'
+    has_dollar = any(_first_dollar(p.get("price", "")) is not None for p in pricing)
+    if has_dollar:
+        return '<div class="pricing-summary pricing-summary--muted">💰 Pricing available</div>'
+    return '<div class="pricing-summary pricing-summary--muted">No prices listed</div>'
 
 
 def card_html(clinic: dict, pricing: list, region: str) -> str:

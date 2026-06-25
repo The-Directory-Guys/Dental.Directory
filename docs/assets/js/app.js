@@ -142,7 +142,7 @@ const TREATMENT_MAP = {
 
   function isOpenNow(d) {
     if (!d.hrs) return null;
-    const now = new Date();
+    const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Pacific/Auckland' }));
     const range = d.hrs[String(now.getDay())];
     if (range === undefined) return null;
     if (range === null) return false;
@@ -289,6 +289,7 @@ const TREATMENT_MAP = {
     let maxHygienistPrice = Infinity;
     let activeTreatmentPriceType = null;
     let showFavouritesOnly = false;
+    let showOpenOnly = false;
     let _favs = getFavourites();
 
     function cardHTML(d) {
@@ -309,8 +310,10 @@ const TREATMENT_MAP = {
         if (hygPrice) parts.push(`Scale &amp; clean from $${hygPrice}`);
         if (parts.length > 0) {
           pricingPreview = `<div class="pricing-summary">💰 ${parts.join('<span class="pricing-summary__sep">·</span>')}</div>`;
-        } else {
+        } else if (d.pricing.some(p => /\$\d/.test(p.price))) {
           pricingPreview = `<div class="pricing-summary pricing-summary--muted">💰 Pricing available</div>`;
+        } else {
+          pricingPreview = `<div class="pricing-summary pricing-summary--muted">No prices listed</div>`;
         }
       } else {
         pricingPreview = `<div class="pricing-summary pricing-summary--muted">No prices listed</div>`;
@@ -372,6 +375,7 @@ const TREATMENT_MAP = {
       _favs = getFavourites();
       let filtered = allDentists.filter(d => {
         if (showFavouritesOnly && !_favs.has(d.id)) return false;
+        if (showOpenOnly && isOpenNow(d) !== true) return false;
         if (activeSuburbs.length && !activeSuburbs.includes(d.suburb)) return false;
         if (activeServices.length && !activeServices.every(s => d.services.includes(s))) return false;
         if (d.rating < minRating) return false;
@@ -426,6 +430,7 @@ const TREATMENT_MAP = {
         } else {
           const activeLabels = [];
           if (showFavouritesOnly) activeLabels.push('Saved');
+          if (showOpenOnly) activeLabels.push('Open now');
           if (searchQuery) activeLabels.push(`"${searchQuery}"`);
           activeServices.forEach(s => activeLabels.push(s));
           activeSuburbs.forEach(s => activeLabels.push(s));
@@ -514,6 +519,12 @@ const TREATMENT_MAP = {
       btn.classList.toggle('fav-toggle--active', showFavouritesOnly);
     }
 
+    function updateOpenToggle() {
+      const btn = document.getElementById('open-toggle');
+      if (!btn) return;
+      btn.classList.toggle('fav-toggle--active', showOpenOnly);
+    }
+
     function clearAllFilters() {
       activeSuburbs = [];
       activeServices = [];
@@ -523,7 +534,9 @@ const TREATMENT_MAP = {
       maxHygienistPrice = Infinity;
       activeTreatmentPriceType = null;
       showFavouritesOnly = false;
+      showOpenOnly = false;
       updateFavToggle();
+      updateOpenToggle();
 
       document.querySelectorAll('.filter-suburb, .filter-service').forEach(cb => { cb.checked = false; });
       if (searchInput) searchInput.value = '';
@@ -657,6 +670,17 @@ const TREATMENT_MAP = {
     // Favourites toggle — injected next to sort select
     const listingsHeader = document.querySelector('.listings-header');
     if (listingsHeader && sortSelect) {
+      const openToggleBtn = document.createElement('button');
+      openToggleBtn.id = 'open-toggle';
+      openToggleBtn.className = 'fav-toggle';
+      openToggleBtn.textContent = '🟢 Open now';
+      listingsHeader.insertBefore(openToggleBtn, sortSelect);
+      openToggleBtn.addEventListener('click', () => {
+        showOpenOnly = !showOpenOnly;
+        updateOpenToggle();
+        renderWithReset();
+      });
+
       const favToggleBtn = document.createElement('button');
       favToggleBtn.id = 'fav-toggle';
       favToggleBtn.className = 'fav-toggle';
@@ -932,8 +956,9 @@ const TREATMENT_MAP = {
 
     // Pricing table — always show, with empty state if no data
     let pricingHTML = '';
-    if (dentist.pricing && dentist.pricing.length > 0) {
-      const rows = dentist.pricing.map(p => {
+    const pricingRows = (dentist.pricing || []).filter(p => /\$\d/.test(p.price));
+    if (pricingRows.length > 0) {
+      const rows = pricingRows.map(p => {
         const notesHtml = p.notes ? `<div class="pricing-note">${p.notes}</div>` : '';
         return `<tr><td>${p.service}${notesHtml}</td><td>${p.price}</td></tr>`;
       }).join('');
@@ -1002,6 +1027,71 @@ const TREATMENT_MAP = {
       ? `<button id="profile-save-btn" class="btn btn--outline btn--block profile-save-btn${profileIsFav ? ' profile-save-btn--active' : ''}" style="margin-top:.5rem;">${profileIsFav ? '♥ Saved' : '♥ Save clinic'}</button>`
       : '';
 
+    // Meet the Team section
+    let teamHTML = '';
+    if (dentist.practitioners && dentist.practitioners.length > 0) {
+      const cards = dentist.practitioners.map(p => {
+        const initials = p.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+        const specialtyPills = p.specialties
+          ? p.specialties.split(',').map(s => `<span class="pill pill--sm">${s.trim()}</span>`).join('')
+          : '';
+        const languageNote = p.languages ? `<div class="team-card__languages">🌐 ${p.languages}</div>` : '';
+        return `
+          <div class="team-card">
+            <div class="team-card__avatar">${initials}</div>
+            <div class="team-card__body">
+              <div class="team-card__name">${p.name}</div>
+              ${p.experience ? `<div class="team-card__experience">${p.experience}</div>` : ''}
+              ${specialtyPills ? `<div class="team-card__specialties">${specialtyPills}</div>` : ''}
+              ${p.bio ? `<p class="team-card__bio">${p.bio}</p>` : ''}
+              ${languageNote}
+            </div>
+          </div>`;
+      }).join('');
+      teamHTML = `
+        <div class="profile-section">
+          <h2 class="profile-section__title">Meet the Team</h2>
+          <div class="team-list">${cards}</div>
+        </div>`;
+    }
+
+    // Miscellaneous section from amenities
+    let miscHTML = '';
+    const am = dentist.amenities;
+    if (am) {
+      const TEXT_FIELDS = [
+        ['in_house_specialists', 'In-house specialists'],
+        ['sedation_options', 'Sedation options'],
+        ['calming_amenities', 'Comfort amenities'],
+        ['parking_access', 'Parking'],
+        ['payment_partners', 'Payment options'],
+        ['membership_plans', 'Membership plans'],
+      ];
+      const BOOL_FIELDS = [
+        ['wheelchair_accessible', 'Wheelchair accessible'],
+        ['dental_anxiety_friendly', 'Dental anxiety friendly'],
+        ['kids_family_friendly', 'Kids & family friendly'],
+        ['online_booking', 'Online booking available'],
+        ['same_day_emergency', 'Same-day emergencies'],
+        ['saturday_evening_hours', 'Saturday / evening hours'],
+      ];
+      const items = [];
+      TEXT_FIELDS.forEach(([key, label]) => {
+        if (am[key]) items.push(`<div class="misc-item"><span class="misc-item__label">${label}</span><span class="misc-item__value">${am[key]}</span></div>`);
+      });
+      BOOL_FIELDS.forEach(([key, label]) => {
+        if (am[key] === true) items.push(`<div class="misc-item"><span class="misc-item__label">${label}</span><span class="misc-item__value misc-item__value--yes">✓ Yes</span></div>`);
+        else if (am[key] === false) items.push(`<div class="misc-item"><span class="misc-item__label">${label}</span><span class="misc-item__value misc-item__value--no">✗ No</span></div>`);
+      });
+      if (items.length > 0) {
+        miscHTML = `
+        <div class="profile-section">
+          <h2 class="profile-section__title">Miscellaneous</h2>
+          <div class="misc-list">${items.join('')}</div>
+        </div>`;
+      }
+    }
+
     profileContainer.innerHTML = `
       <div class="profile-main">
         ${dentist.description ? `
@@ -1023,13 +1113,19 @@ const TREATMENT_MAP = {
           <div class="hours-table-wrap"><table class="hours-table">${hoursHTML}</table></div>
         </div>` : ''}
 
+        ${teamHTML}
+
+        ${miscHTML}
+
         <div class="profile-section">
           <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;">
             <h2 class="profile-section__title" style="margin-bottom:0;">Reviews${dentist.reviewCount ? ` (${dentist.reviewCount})` : ''}</h2>
             ${dentist.googleMapsUrl ? `<a href="${dentist.googleMapsUrl}" target="_blank" rel="noopener" style="font-size:.8rem;color:#4285F4;text-decoration:none;font-weight:500;">★ Write a Google Review →</a>` : ''}
           </div>
           ${reviewsHTML
-            ? `<div class="review-list">${reviewsHTML}</div>`
+            ? `<div class="review-list">${reviewsHTML}</div>
+               ${dentist.reviewCount > (dentist.reviews || []).length ? `
+               <p style="font-size:.8rem;color:var(--clr-gray-400);margin-top:var(--sp-4);">Showing ${(dentist.reviews || []).length} of ${dentist.reviewCount} reviews.${dentist.googleMapsUrl ? ` <a href="${dentist.googleMapsUrl}" target="_blank" rel="noopener" style="color:#4285F4;text-decoration:none;">See all on Google →</a>` : ''}</p>` : ''}`
             : `<p style="color:var(--clr-gray-400);font-size:.9rem;">No reviews yet. Be the first to leave one!</p>`
           }
         </div>

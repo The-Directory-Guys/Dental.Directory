@@ -1774,6 +1774,93 @@ h4 {
     font-size: var(--fs-sm) !important;
 }
 
+/* Meet the Team */
+.team-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-6);
+}
+
+.team-card {
+    display: flex;
+    gap: var(--sp-4);
+    align-items: flex-start;
+}
+
+.team-card__avatar {
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: var(--clr-teal);
+    color: #fff;
+    font-weight: 700;
+    font-size: var(--fs-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.team-card__name {
+    font-weight: 700;
+    color: var(--clr-navy);
+    margin-bottom: var(--sp-1);
+}
+
+.team-card__experience {
+    font-size: var(--fs-sm);
+    color: var(--clr-gray-500);
+    margin-bottom: var(--sp-2);
+}
+
+.team-card__specialties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-1);
+    margin-bottom: var(--sp-2);
+}
+
+.team-card__bio {
+    font-size: var(--fs-sm);
+    color: var(--clr-gray-600);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.team-card__languages {
+    font-size: var(--fs-sm);
+    color: var(--clr-gray-500);
+    margin-top: var(--sp-2);
+}
+
+/* Miscellaneous section */
+.misc-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+}
+
+.misc-item {
+    display: flex;
+    gap: var(--sp-4);
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+}
+
+.misc-item__label {
+    flex-shrink: 0;
+    width: 11rem;
+    font-weight: 600;
+    color: var(--clr-navy);
+}
+
+.misc-item__value {
+    color: var(--clr-gray-600);
+}
+
+.misc-item__value--yes { color: #166534; }
+.misc-item__value--no  { color: var(--clr-gray-400); }
+
 /* ===================================================
    NO RESULTS
    =================================================== */
