@@ -241,6 +241,28 @@ async function fetchClinics(region) {
   }
 }
 
+// Fetch amenity flags for a batch of clinic IDs, returns map of clinic_id → {flag: bool}
+async function fetchAmenitiesForClinics(clinicIds) {
+  if (!clinicIds || clinicIds.length === 0) return {};
+  const map = {};
+  const BATCH = 100;
+  const FIELDS = 'clinic_id,dental_anxiety_friendly,wheelchair_accessible,online_booking,saturday_evening_hours,same_day_emergency';
+  try {
+    for (let i = 0; i < clinicIds.length; i += BATCH) {
+      const batch = clinicIds.slice(i, i + BATCH);
+      const idsParam = batch.map(id => `clinic_id.eq.${id}`).join(',');
+      const url = `${SUPABASE_URL}/rest/v1/clinic_amenities?or=(${idsParam})&select=${FIELDS}&limit=1000`;
+      const response = await fetch(url, {
+        headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+      });
+      if (!response.ok) continue;
+      const data = await response.json();
+      data.forEach(row => { map[row.clinic_id] = row; });
+    }
+  } catch (e) {}
+  return map;
+}
+
 // Fetch practitioners for a batch of clinic IDs, returns map of clinic_id → [specialties string]
 async function fetchPractitionersForClinics(clinicIds) {
   if (!clinicIds || clinicIds.length === 0) return {};
