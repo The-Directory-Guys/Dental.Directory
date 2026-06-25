@@ -1666,16 +1666,38 @@ h4 {
     text-align: center;
     padding: var(--sp-16) var(--sp-6);
     color: var(--clr-gray-500);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-4);
 }
 
 .no-results__icon {
     font-size: 3rem;
-    margin-bottom: var(--sp-4);
 }
 
-.no-results h3 {
+.no-results__desc {
     color: var(--clr-gray-600);
-    margin-bottom: var(--sp-2);
+    font-size: var(--fs-md);
+    max-width: 36ch;
+    line-height: 1.5;
+}
+
+.btn--outline {
+    background: transparent;
+    border: 1.5px solid var(--clr-gray-300);
+    color: var(--clr-gray-700);
+    padding: var(--sp-2) var(--sp-6);
+    border-radius: var(--radius-md);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+}
+
+.btn--outline:hover {
+    border-color: var(--clr-teal);
+    color: var(--clr-teal);
 }
 
 /* ===================================================

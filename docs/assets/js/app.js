@@ -356,11 +356,23 @@ const TREATMENT_MAP = {
       }
 
       if (filtered.length === 0) {
+        const activeLabels = [];
+        if (searchQuery) activeLabels.push(`"${searchQuery}"`);
+        activeServices.forEach(s => activeLabels.push(s));
+        activeSuburbs.forEach(s => activeLabels.push(s));
+        if (minRating > 0) activeLabels.push(`★ ${minRating.toFixed(1)}+`);
+        if (maxPrice !== Infinity) activeLabels.push(`under $${maxPrice}`);
+        if (maxHygienistPrice !== Infinity) activeLabels.push(`hygienist under $${maxHygienistPrice}`);
+
+        const filtersDesc = activeLabels.length
+          ? `No results for <strong>${activeLabels.join(' + ')}</strong>.`
+          : 'No dentists found.';
+
         dentistGrid.innerHTML = `
           <div class="no-results">
             <div class="no-results__icon">🔍</div>
-            <h3>No dentists found</h3>
-            <p>Try adjusting your filters or search query.</p>
+            <p class="no-results__desc">${filtersDesc}</p>
+            <button class="btn btn--outline clear-filters-btn">Clear all filters</button>
           </div>
         `;
       } else {
@@ -423,6 +435,37 @@ const TREATMENT_MAP = {
       visibleCount = ITEMS_PER_PAGE;
       render();
     }
+
+    function clearAllFilters() {
+      activeSuburbs = [];
+      activeServices = [];
+      minRating = 0;
+      searchQuery = '';
+      maxPrice = Infinity;
+      maxHygienistPrice = Infinity;
+      activeTreatmentPriceType = null;
+
+      document.querySelectorAll('.filter-suburb, .filter-service').forEach(cb => { cb.checked = false; });
+      if (searchInput) searchInput.value = '';
+
+      // Reset sliders + labels without triggering extra renders
+      const ratingLabel = 'Any';
+      [document.getElementById('desktop-rating-range'), document.getElementById('mobile-rating-range')].forEach(el => { if (el) el.value = 0; });
+      [document.getElementById('desktop-rating-value'), document.getElementById('mobile-rating-value')].forEach(el => { if (el) el.textContent = ratingLabel; });
+
+      [document.getElementById('desktop-price-range'), document.getElementById('mobile-price-range')].forEach(el => { if (el) el.value = 300; });
+      [document.getElementById('desktop-price-value'), document.getElementById('mobile-price-value')].forEach(el => { if (el) el.textContent = 'Any'; });
+
+      [document.getElementById('desktop-hygienist-range'), document.getElementById('mobile-hygienist-range')].forEach(el => { if (el) el.value = 200; });
+      [document.getElementById('desktop-hygienist-value'), document.getElementById('mobile-hygienist-value')].forEach(el => { if (el) el.textContent = 'Any'; });
+
+      renderWithReset();
+    }
+
+    // Clear-filters button in the empty state (event delegation)
+    dentistGrid.addEventListener('click', (e) => {
+      if (e.target.closest('.clear-filters-btn')) clearAllFilters();
+    });
 
     // Suburb filters
     document.querySelectorAll('.filter-suburb').forEach(cb => {
