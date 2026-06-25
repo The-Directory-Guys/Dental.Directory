@@ -54,6 +54,7 @@ function transformClinic(clinic) {
     hasPricingFlag: clinic.price || null,  // 'full_prices', 'some_prices', or null
     description: clinic.description || '',
     hours: parseOpeningHours(clinic.opening_hours),
+    hrs: clinic.hrs || null,  // compact hours from prefetch JSON {dayNum: [openMin, closeMin] | null}
     reviews: [],
     googleMapsUrl: clinic.google_maps_url || '',
     businessStatus: clinic.business_status || 'OPERATIONAL'
