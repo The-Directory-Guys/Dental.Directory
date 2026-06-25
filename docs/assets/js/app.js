@@ -854,6 +854,17 @@ const TREATMENT_MAP = {
       return;
     }
 
+    // Track the profile view in GA4 (clinic name + id + region).
+    // Register dentist_name / dentist_id / dentist_region as event-scoped
+    // custom dimensions in GA4 Admin to report on them.
+    if (typeof gtag === 'function') {
+      gtag('event', 'view_dentist', {
+        dentist_id: dentist.id,
+        dentist_name: dentist.name,
+        dentist_region: dentist.region || '(not set)'
+      });
+    }
+
     // Update hero
     const heroName = document.getElementById('profile-name');
     const heroMeta = document.getElementById('profile-meta');
