@@ -1515,6 +1515,31 @@ h4 {
 /* ===================================================
    PRICING PREVIEW (listing cards)
    =================================================== */
+.pricing-summary {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    flex-wrap: wrap;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--clr-navy);
+    margin-bottom: var(--sp-4);
+    padding: var(--sp-2) var(--sp-3);
+    background: var(--clr-gray-50);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--clr-gray-100);
+}
+
+.pricing-summary--muted {
+    color: var(--clr-gray-500);
+    font-weight: 400;
+}
+
+.pricing-summary__sep {
+    color: var(--clr-gray-300);
+    margin: 0 var(--sp-1);
+}
+
 .pricing-preview {
     margin-bottom: var(--sp-4);
     padding: var(--sp-3) var(--sp-4);

@@ -264,11 +264,16 @@ const TREATMENT_MAP = {
 
       let pricingPreview = '';
       if (d.pricing && d.pricing.length > 0) {
-        const previewItems = d.pricing.slice(0, 3).map(p =>
-          `<div class="pricing-preview__row"><span>${p.service}</span><span class="pricing-preview__price">${p.price}</span></div>`
-        ).join('');
-        const moreCount = d.pricing.length > 3 ? `<div class="pricing-preview__more">+ ${d.pricing.length - 3} more services</div>` : '';
-        pricingPreview = `<div class="pricing-preview">${previewItems}${moreCount}</div>`;
+        const checkupPrice = getCheckupPrice(d);
+        const hygPrice = getHygienistPrice(d);
+        const parts = [];
+        if (checkupPrice) parts.push(`Checkup from $${checkupPrice}`);
+        if (hygPrice) parts.push(`Scale &amp; clean from $${hygPrice}`);
+        if (parts.length > 0) {
+          pricingPreview = `<div class="pricing-summary">💰 ${parts.join('<span class="pricing-summary__sep">·</span>')}</div>`;
+        } else {
+          pricingPreview = `<div class="pricing-summary pricing-summary--muted">💰 Pricing available</div>`;
+        }
       }
 
       const ratingDisplay = d.rating ? `<span class="stars">${starsHTML(d.rating)}</span> <strong>${d.rating}</strong>` : '<span style="color:var(--clr-gray-400)">No rating yet</span>';

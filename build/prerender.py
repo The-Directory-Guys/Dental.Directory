@@ -293,6 +293,43 @@ def stars_html(rating: float) -> str:
     return "★" * full + "½" * half + "☆" * empty
 
 
+def _first_dollar(price_str: str) -> int | None:
+    m = re.search(r"\$(\d[\d,]*)", price_str.replace(",", ""))
+    return int(m.group(1)) if m else None
+
+
+def get_checkup_price(pricing: list) -> int | None:
+    for p in pricing:
+        s = p["service"].lower()
+        if any(k in s for k in ("checkup", "check-up", "exam", "consult")):
+            return _first_dollar(p["price"])
+    return None
+
+
+def get_hygienist_price(pricing: list) -> int | None:
+    for p in pricing:
+        s = p["service"].lower()
+        if "hygienist" in s or "hygiene" in s or ("scale" in s and ("polish" in s or "clean" in s)):
+            return _first_dollar(p["price"])
+    return None
+
+
+def pricing_summary_html(pricing: list) -> str:
+    if not pricing:
+        return ""
+    checkup = get_checkup_price(pricing)
+    hyg     = get_hygienist_price(pricing)
+    parts   = []
+    if checkup:
+        parts.append(f"Checkup from ${checkup}")
+    if hyg:
+        parts.append(f"Scale &amp; clean from ${hyg}")
+    if parts:
+        sep = '<span class="pricing-summary__sep">·</span>'
+        return f'<div class="pricing-summary">💰 {sep.join(parts)}</div>'
+    return '<div class="pricing-summary pricing-summary--muted">💰 Pricing available</div>'
+
+
 def card_html(clinic: dict, pricing: list, region: str) -> str:
     name    = clinic.get("name") or "Unknown Clinic"
     suburb  = clinic.get("suburb_town") or clinic.get("town") or ""
@@ -329,20 +366,7 @@ def card_html(clinic: dict, pricing: list, region: str) -> str:
         f'<span class="pill pill--sm">{html.escape(s)}</span>'
         for s in services[:4]
     )
-    pricing_preview = ""
-    if pricing:
-        rows_html = "".join(
-            f'<div class="pricing-preview__row">'
-            f'<span>{html.escape(p["service"])}</span>'
-            f'<span class="pricing-preview__price">{html.escape(p["price"])}</span>'
-            f'</div>'
-            for p in pricing[:3]
-        )
-        more = (
-            f'<div class="pricing-preview__more">+ {len(pricing)-3} more services</div>'
-            if len(pricing) > 3 else ""
-        )
-        pricing_preview = f'<div class="pricing-preview">{rows_html}{more}</div>'
+    pricing_preview = pricing_summary_html(pricing)
 
     phone_text = ""
     if phone:
