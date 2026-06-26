@@ -1274,6 +1274,12 @@ const TREATMENT_MAP = {
           ${mapLink}
           ${writeReviewBtn}
         </div>
+
+        <div style="margin-top:1rem; padding:.85rem 1rem; background:var(--clr-gray-50); border-radius:10px; font-size:.82rem; color:var(--clr-gray-500); line-height:1.55;">
+          <strong style="color:var(--clr-gray-700);">Are you the owner?</strong><br>
+          <a href="mailto:dentalcomparenz@gmail.com?subject=Claim%20listing%3A%20${encodeURIComponent(dentist.name)}" style="color:var(--clr-teal); text-decoration:none; font-weight:500;">Claim this listing →</a>
+          to update your hours, pricing and services.
+        </div>
       </aside>
     `;
 

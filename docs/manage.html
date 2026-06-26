@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Your Listing | Dental Compare NZ</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <style>
+    .manage-card { background:#fff; border:1px solid var(--clr-gray-100); border-radius:12px; padding:1.75rem 2rem; margin-bottom:1.5rem; }
+    .manage-card h2 { margin:0 0 1.25rem; font-size:1.05rem; color:var(--clr-gray-900); }
+    .field-group { margin-bottom:1rem; }
+    .field-group label { display:block; font-size:.82rem; font-weight:600; color:var(--clr-gray-600); text-transform:uppercase; letter-spacing:.04em; margin-bottom:.35rem; }
+    .field-group input, .field-group textarea { width:100%; box-sizing:border-box; padding:.6rem .85rem; border:1.5px solid var(--clr-gray-200); border-radius:8px; font-size:.9rem; font-family:inherit; color:var(--clr-gray-900); background:#fff; }
+    .field-group textarea { resize:vertical; min-height:100px; line-height:1.55; }
+    .field-group input:focus, .field-group textarea:focus { outline:none; border-color:var(--clr-teal); }
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .hours-row { display:grid; grid-template-columns:130px 1fr; align-items:center; gap:.75rem; padding:.35rem 0; border-bottom:1px solid var(--clr-gray-50); }
+    .hours-row:last-child { border-bottom:none; }
+    .hours-row__day { display:flex; align-items:center; gap:.5rem; font-size:.9rem; font-weight:500; color:var(--clr-gray-700); }
+    .hours-row__day input[type=checkbox] { width:16px; height:16px; cursor:pointer; accent-color:var(--clr-teal); }
+    .hours-row__times { display:flex; align-items:center; gap:.5rem; }
+    .hours-row__times input[type=time] { padding:.4rem .6rem; border:1.5px solid var(--clr-gray-200); border-radius:6px; font-size:.85rem; flex:1; min-width:0; }
+    .hours-row__times input[type=time]:disabled { background:var(--clr-gray-50); color:var(--clr-gray-400); }
+    .hours-row__times span { color:var(--clr-gray-400); font-size:.85rem; white-space:nowrap; }
+    .services-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(190px,1fr)); gap:.4rem .75rem; margin-bottom:.5rem; }
+    .service-check { display:flex; align-items:center; gap:.45rem; font-size:.875rem; color:var(--clr-gray-700); cursor:pointer; padding:.2rem 0; }
+    .service-check input { width:15px; height:15px; cursor:pointer; accent-color:var(--clr-teal); flex-shrink:0; }
+    .price-header { display:grid; grid-template-columns:2fr 1fr 2fr 32px; gap:.5rem; margin-bottom:.35rem; }
+    .price-header span { font-size:.75rem; font-weight:600; color:var(--clr-gray-400); text-transform:uppercase; letter-spacing:.05em; }
+    .price-row { display:grid; grid-template-columns:2fr 1fr 2fr 32px; gap:.5rem; margin-bottom:.4rem; align-items:center; }
+    .price-row input { padding:.5rem .7rem; border:1.5px solid var(--clr-gray-200); border-radius:6px; font-size:.875rem; width:100%; box-sizing:border-box; font-family:inherit; }
+    .price-row input:focus { outline:none; border-color:var(--clr-teal); }
+    .price-row__del { background:none; border:none; color:var(--clr-gray-300); cursor:pointer; font-size:1.2rem; padding:0; line-height:1; text-align:center; }
+    .price-row__del:hover { color:#ef4444; }
+    .add-row-btn { width:100%; background:none; border:1.5px dashed var(--clr-gray-200); border-radius:8px; padding:.5rem; font-size:.85rem; color:var(--clr-gray-400); cursor:pointer; margin-top:.25rem; font-family:inherit; }
+    .add-row-btn:hover { border-color:var(--clr-teal); color:var(--clr-teal); }
+    .save-btn { background:var(--clr-teal); color:#fff; border:none; border-radius:8px; padding:.6rem 1.4rem; font-weight:600; font-size:.9rem; cursor:pointer; margin-top:.85rem; font-family:inherit; }
+    .save-btn:hover { filter:brightness(1.07); }
+    .save-btn:disabled { opacity:.6; cursor:default; }
+    .toast { position:fixed; bottom:1.5rem; right:1.5rem; background:#1e293b; color:#fff; padding:.7rem 1.2rem; border-radius:10px; font-size:.875rem; opacity:0; transition:opacity .25s; z-index:9999; pointer-events:none; box-shadow:0 4px 16px rgba(0,0,0,.18); }
+    .toast.show { opacity:1; }
+    @media(max-width:600px) {
+      .manage-card { padding:1.25rem 1rem; }
+      .two-col { grid-template-columns:1fr; }
+      .hours-row { grid-template-columns:1fr; gap:.35rem; }
+      .price-header, .price-row { grid-template-columns:1fr 1fr; }
+      .price-header span:nth-child(3), .price-row input.p-notes { grid-column:1/-1; }
+      .price-row__del { grid-column:2; justify-self:end; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container header__inner">
+    <a href="/" class="logo">
+      <img src="assets/images/logo.png" alt="Dental Compare" class="logo__img">
+    </a>
+    <nav class="nav">
+      <a href="/" class="nav__link">Home</a>
+      <a href="faq.html" class="nav__link">FAQ</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Loading -->
+<section id="pg-loading" class="section" style="text-align:center; padding:6rem 0;">
+  <p style="color:var(--clr-gray-400);">Loading…</p>
+</section>
+
+<!-- Not authenticated -->
+<section id="pg-unauth" class="section" style="display:none;">
+  <div class="container" style="max-width:520px; text-align:center;">
+    <div style="font-size:2.5rem; margin-bottom:1rem;">🔒</div>
+    <h1 class="section-title" style="font-size:1.5rem;">Manage Your Listing</h1>
+    <p style="color:var(--clr-gray-600); line-height:1.7; margin-bottom:1.5rem;">Access this page using the link we email you after verifying your ownership. Haven't claimed your listing yet? Get in touch and we'll set it up.</p>
+    <a href="mailto:dentalcomparenz@gmail.com" class="btn btn--primary">Contact us to claim</a>
+  </div>
+</section>
+
+<!-- App -->
+<section id="pg-app" class="section" style="display:none;">
+  <div class="container" style="max-width:740px;">
+
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem; margin-bottom:2rem;">
+      <div>
+        <h1 id="clinic-name" style="margin:0; font-size:1.5rem; color:var(--clr-gray-900);"></h1>
+        <p id="clinic-suburb" style="margin:.3rem 0 0; color:var(--clr-gray-500); font-size:.9rem;"></p>
+      </div>
+      <button id="sign-out-btn" style="background:none; border:none; color:var(--clr-gray-400); font-size:.85rem; cursor:pointer; text-decoration:underline; font-family:inherit;">Sign out</button>
+    </div>
+
+    <!-- Basic Info -->
+    <div class="manage-card">
+      <h2>Basic Information</h2>
+      <form id="form-basic">
+        <div class="field-group">
+          <label for="f-description">Description</label>
+          <textarea id="f-description" name="description" placeholder="Describe your practice, team, and what makes you stand out…"></textarea>
+        </div>
+        <div class="two-col">
+          <div class="field-group">
+            <label for="f-phone">Phone</label>
+            <input type="tel" id="f-phone" name="phone" placeholder="(03) 123 4567">
+          </div>
+          <div class="field-group">
+            <label for="f-website">Website</label>
+            <input type="url" id="f-website" name="website" placeholder="https://yourclinic.co.nz">
+          </div>
+        </div>
+        <button type="submit" class="save-btn">Save changes</button>
+      </form>
+    </div>
+
+    <!-- Opening Hours -->
+    <div class="manage-card">
+      <h2>Opening Hours</h2>
+      <form id="form-hours">
+        <div id="hours-rows"></div>
+        <button type="submit" class="save-btn">Save hours</button>
+      </form>
+    </div>
+
+    <!-- Services -->
+    <div class="manage-card">
+      <h2>Services</h2>
+      <form id="form-services">
+        <div class="services-grid" id="services-grid"></div>
+        <button type="submit" class="save-btn">Save services</button>
+      </form>
+    </div>
+
+    <!-- Pricing -->
+    <div class="manage-card">
+      <h2>Pricing</h2>
+      <div class="price-header">
+        <span>Treatment</span><span>Price</span><span>Notes</span><span></span>
+      </div>
+      <div id="pricing-rows"></div>
+      <button type="button" class="add-row-btn" id="add-price-btn">+ Add row</button>
+      <br>
+      <button type="button" class="save-btn" id="save-pricing-btn">Save pricing</button>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container"><div class="footer__copy">Built in New Zealand</div></div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  const SUPABASE_URL = 'https://ankyjpgcocsvvtyyymys.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFua3lqcGdjb2NzdnZ0eXl5bXlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MTM1MTQsImV4cCI6MjA4OTM4OTUxNH0.SXxTLBdiNVSEDXy95yU0x0ctYFOjIby8hZbJ7B1LPK8';
+
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+
+  const ALL_SERVICES = [
+    'General Dentistry','Cosmetic Dentistry','Orthodontics','Dental Implants',
+    'Teeth Whitening','Veneers','Root Canal','Wisdom Teeth','Teen Dental',
+    'Emergency Dental','Dentures','Dental Hygienist','Pediatric Dentistry',
+    'Periodontics','Oral Surgery','Sleep Dentistry / Sedation',
+    'Mouth Guards','Invisalign','ACC Treatment','Afterpay / Payment Plans',
+  ];
+
+  let clinicId = null;
+  let dbPricingRows = [];
+
+  // ---- State helpers ----
+  const states = { loading: 'pg-loading', unauth: 'pg-unauth', app: 'pg-app' };
+  function showState(name) {
+    Object.values(states).forEach(id => document.getElementById(id).style.display = 'none');
+    document.getElementById(states[name]).style.display = '';
+  }
+
+  function toast(msg, error = false) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.style.background = error ? '#dc2626' : '#1e293b';
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 3000);
+  }
+
+  function setBusy(btn, busy, label) {
+    btn.disabled = busy;
+    btn.textContent = busy ? 'Saving…' : label;
+  }
+
+  // ---- Auth ----
+  db.auth.onAuthStateChange(async (event, session) => {
+    if (!session) { showState('unauth'); return; }
+    await loadApp(session.user.id);
+  });
+
+  document.getElementById('sign-out-btn').addEventListener('click', async () => {
+    await db.auth.signOut();
+    showState('unauth');
+  });
+
+  // ---- Load ----
+  async function loadApp(userId) {
+    showState('loading');
+
+    const { data: ownerRow } = await db
+      .from('clinic_owners').select('clinic_id').eq('user_id', userId).single();
+
+    if (!ownerRow) { showState('unauth'); return; }
+    clinicId = ownerRow.clinic_id;
+
+    const [{ data: clinic }, { data: pricing }] = await Promise.all([
+      db.from('dental_clinics')
+        .select('name, suburb_town, description, phone_national, phone_international, website, opening_hours, services')
+        .eq('id', clinicId).single(),
+      db.from('scraped_prices')
+        .select('id, treatment, price_label, notes')
+        .eq('clinic_id', clinicId).order('id'),
+    ]);
+
+    if (!clinic) { showState('unauth'); return; }
+
+    dbPricingRows = pricing || [];
+    populateAll(clinic, dbPricingRows);
+    showState('app');
+  }
+
+  function populateAll(clinic, pricing) {
+    document.getElementById('clinic-name').textContent = clinic.name;
+    document.getElementById('clinic-suburb').textContent = clinic.suburb_town || '';
+    document.getElementById('f-description').value = clinic.description || '';
+    document.getElementById('f-phone').value = clinic.phone_national || clinic.phone_international || '';
+    document.getElementById('f-website').value = clinic.website || '';
+    renderHours(clinic.opening_hours);
+    renderServices(clinic.services);
+    renderPricing(pricing);
+  }
+
+  // ---- Hours ----
+  function timeInputTo12h(t) {
+    if (!t) return '';
+    const [h, m] = t.split(':').map(Number);
+    return `${h % 12 || 12}:${String(m).padStart(2, '0')} ${h >= 12 ? 'PM' : 'AM'}`;
+  }
+
+  function time12hToInput(t) {
+    const m = t && t.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+    if (!m) return '';
+    let h = parseInt(m[1]);
+    if (m[3].toUpperCase() === 'PM' && h !== 12) h += 12;
+    if (m[3].toUpperCase() === 'AM' && h === 12) h = 0;
+    return `${String(h).padStart(2, '0')}:${m[2]}`;
+  }
+
+  function parseHoursStr(str) {
+    const map = {};
+    if (!str) return map;
+    str.split(';').forEach(seg => {
+      const ci = seg.indexOf(':');
+      if (ci === -1) return;
+      const day = seg.substring(0, ci).trim();
+      const rest = seg.substring(ci + 1).trim();
+      const m = rest.match(/(\d{1,2}:\d{2}\s*(?:AM|PM))\s*[–—\-]\s*(\d{1,2}:\d{2}\s*(?:AM|PM))/i);
+      map[day] = m
+        ? { isOpen: true, open: time12hToInput(m[1]), close: time12hToInput(m[2]) }
+        : { isOpen: false };
+    });
+    return map;
+  }
+
+  function renderHours(hoursStr) {
+    const parsed = parseHoursStr(hoursStr);
+    document.getElementById('hours-rows').innerHTML = DAYS.map(day => {
+      const d = parsed[day] || { isOpen: false };
+      return `
+        <div class="hours-row">
+          <label class="hours-row__day">
+            <input type="checkbox" name="${day}_enabled" ${d.isOpen ? 'checked' : ''}>
+            ${day}
+          </label>
+          <div class="hours-row__times">
+            <input type="time" name="${day}_from" value="${d.open || '08:30'}" ${d.isOpen ? '' : 'disabled'}>
+            <span>to</span>
+            <input type="time" name="${day}_to"   value="${d.close || '17:00'}" ${d.isOpen ? '' : 'disabled'}>
+          </div>
+        </div>`;
+    }).join('');
+
+    document.getElementById('hours-rows').querySelectorAll('input[type=checkbox]').forEach(cb => {
+      cb.addEventListener('change', () => {
+        cb.closest('.hours-row').querySelectorAll('input[type=time]').forEach(inp => {
+          inp.disabled = !cb.checked;
+        });
+      });
+    });
+  }
+
+  document.getElementById('form-hours').addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = e.submitter;
+    setBusy(btn, true, 'Save hours');
+    const fd = new FormData(e.target);
+    const parts = DAYS.map(day => {
+      if (!fd.has(`${day}_enabled`)) return `${day}: Closed`;
+      return `${day}: ${timeInputTo12h(fd.get(`${day}_from`))} – ${timeInputTo12h(fd.get(`${day}_to`))}`;
+    });
+    const { error } = await db.from('dental_clinics')
+      .update({ opening_hours: parts.join('; ') }).eq('id', clinicId);
+    setBusy(btn, false, 'Save hours');
+    error ? toast('Error: ' + error.message, true) : toast('Hours saved ✓');
+  });
+
+  // ---- Services ----
+  function renderServices(servicesStr) {
+    const active = new Set((servicesStr || '').split(',').map(s => s.trim()).filter(Boolean));
+    document.getElementById('services-grid').innerHTML = ALL_SERVICES.map(svc => `
+      <label class="service-check">
+        <input type="checkbox" name="svc" value="${svc}" ${active.has(svc) ? 'checked' : ''}>
+        ${svc}
+      </label>`).join('');
+  }
+
+  document.getElementById('form-services').addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = e.submitter;
+    setBusy(btn, true, 'Save services');
+    const checked = [...e.target.querySelectorAll('input[name=svc]:checked')].map(cb => cb.value);
+    const { error } = await db.from('dental_clinics')
+      .update({ services: checked.join(', ') }).eq('id', clinicId);
+    setBusy(btn, false, 'Save services');
+    error ? toast('Error: ' + error.message, true) : toast('Services saved ✓');
+  });
+
+  // ---- Basic info ----
+  document.getElementById('form-basic').addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = e.submitter;
+    setBusy(btn, true, 'Save changes');
+    const fd = new FormData(e.target);
+    const { error } = await db.from('dental_clinics').update({
+      description:    fd.get('description').trim(),
+      phone_national: fd.get('phone').trim(),
+      website:        fd.get('website').trim(),
+    }).eq('id', clinicId);
+    setBusy(btn, false, 'Save changes');
+    error ? toast('Error: ' + error.message, true) : toast('Saved ✓');
+  });
+
+  // ---- Pricing ----
+  function esc(s) { return String(s || '').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
+
+  function priceRowHTML(row) {
+    return `<div class="price-row" data-id="${row.id || ''}">
+      <input type="text" class="p-treatment" placeholder="e.g. Exam + 2 x-rays"  value="${esc(row.treatment)}">
+      <input type="text" class="p-price"     placeholder="e.g. $115"             value="${esc(row.price_label)}">
+      <input type="text" class="p-notes"     placeholder="e.g. 30 min"           value="${esc(row.notes)}">
+      <button type="button" class="price-row__del" title="Remove row">×</button>
+    </div>`;
+  }
+
+  function renderPricing(rows) {
+    document.getElementById('pricing-rows').innerHTML = rows.map(priceRowHTML).join('');
+  }
+
+  // Event delegation — set up once
+  document.getElementById('pricing-rows').addEventListener('click', e => {
+    if (e.target.classList.contains('price-row__del')) e.target.closest('.price-row').remove();
+  });
+
+  document.getElementById('add-price-btn').addEventListener('click', () => {
+    document.getElementById('pricing-rows')
+      .insertAdjacentHTML('beforeend', priceRowHTML({ treatment: '', price_label: '', notes: '' }));
+  });
+
+  document.getElementById('save-pricing-btn').addEventListener('click', async () => {
+    const btn = document.getElementById('save-pricing-btn');
+    setBusy(btn, true, 'Save pricing');
+
+    const formRows = [...document.querySelectorAll('#pricing-rows .price-row')].map(el => ({
+      id:          el.dataset.id || null,
+      treatment:   el.querySelector('.p-treatment').value.trim(),
+      price_label: el.querySelector('.p-price').value.trim(),
+      notes:       el.querySelector('.p-notes').value.trim() || null,
+    })).filter(r => r.treatment || r.price_label);
+
+    const toUpdate = formRows.filter(r => r.id);
+    const toInsert = formRows.filter(r => !r.id);
+    const keptIds  = new Set(toUpdate.map(r => r.id));
+    const toDelete = dbPricingRows.map(r => String(r.id)).filter(id => !keptIds.has(id));
+
+    let err = null;
+
+    if (toDelete.length) {
+      const { error } = await db.from('scraped_prices').delete().in('id', toDelete);
+      if (error) err = error;
+    }
+    for (const r of toUpdate) {
+      const { error } = await db.from('scraped_prices').update({
+        treatment: r.treatment, price_label: r.price_label, notes: r.notes,
+        source: 'owner', source_url: 'owner_submitted',
+      }).eq('id', r.id);
+      if (error) err = error;
+    }
+    if (toInsert.length) {
+      const { error } = await db.from('scraped_prices').insert(
+        toInsert.map(r => ({
+          clinic_id: clinicId, source: 'owner', source_url: 'owner_submitted',
+          treatment: r.treatment, price_label: r.price_label, notes: r.notes,
+        }))
+      );
+      if (error) err = error;
+    }
+
+    // Refresh local state
+    const { data: fresh } = await db.from('scraped_prices')
+      .select('id, treatment, price_label, notes').eq('clinic_id', clinicId).order('id');
+    dbPricingRows = fresh || [];
+    renderPricing(dbPricingRows);
+
+    setBusy(btn, false, 'Save pricing');
+    err ? toast('Error: ' + err.message, true) : toast('Pricing saved ✓');
+  });
+
+})();
+</script>
+
+</body>
+</html>
