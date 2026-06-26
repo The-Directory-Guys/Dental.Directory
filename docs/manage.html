@@ -74,8 +74,8 @@
   <div class="container" style="max-width:520px; text-align:center;">
     <div style="font-size:2.5rem; margin-bottom:1rem;">🔒</div>
     <h1 class="section-title" style="font-size:1.5rem;">Manage Your Listing</h1>
-    <p style="color:var(--clr-gray-600); line-height:1.7; margin-bottom:1.5rem;">Access this page using the link we email you after verifying your ownership. Haven't claimed your listing yet? Get in touch and we'll set it up.</p>
-    <a href="mailto:dentalcomparenz@gmail.com" class="btn btn--primary">Contact us to claim</a>
+    <p id="unauth-msg" style="color:var(--clr-gray-600); line-height:1.7; margin-bottom:1.5rem;"></p>
+    <a id="unauth-btn" href="mailto:dentalcomparenz@gmail.com" class="btn btn--primary"></a>
   </div>
 </section>
 
@@ -192,15 +192,38 @@
     btn.textContent = busy ? 'Saving…' : label;
   }
 
+  // Capture before Supabase SDK clears it from the URL
+  const hadTokenInUrl = location.hash.includes('access_token=');
+
+  function showUnauth() {
+    if (hadTokenInUrl) {
+      document.getElementById('unauth-msg').textContent = 'Your login link has expired (links are valid for 1 hour). Email us and we\'ll send you a fresh one.';
+      document.getElementById('unauth-btn').textContent = 'Request a new link';
+      document.getElementById('unauth-btn').href = 'mailto:dentalcomparenz@gmail.com?subject=New%20login%20link%20needed';
+    } else {
+      document.getElementById('unauth-msg').textContent = "Access this page using the link we email you. Haven't claimed your listing yet? Get in touch and we'll set it up.";
+      document.getElementById('unauth-btn').textContent = 'Contact us to claim';
+      document.getElementById('unauth-btn').href = 'mailto:dentalcomparenz@gmail.com';
+    }
+    showState('unauth');
+  }
+
   // ---- Auth ----
   db.auth.onAuthStateChange(async (event, session) => {
-    if (!session) { showState('unauth'); return; }
-    await loadApp(session.user.id);
+    if (event === 'SIGNED_IN' && session) { await loadApp(session.user.id); return; }
+    if (event === 'SIGNED_OUT') { showUnauth(); return; }
   });
+
+  // Initial check — getSession() also processes URL hash tokens
+  (async () => {
+    const { data: { session } } = await db.auth.getSession();
+    if (session) { await loadApp(session.user.id); }
+    else { showUnauth(); }
+  })();
 
   document.getElementById('sign-out-btn').addEventListener('click', async () => {
     await db.auth.signOut();
-    showState('unauth');
+    showUnauth();
   });
 
   // ---- Load ----
