@@ -295,7 +295,10 @@ const TREATMENT_MAP = {
         fetchAmenitiesForClinics(ids),
       ]);
       allDentists.forEach(d => {
-        if (d.id && specMap[d.id]) d.practitionerSpecialties = specMap[d.id];
+        if (d.id && specMap[d.id]) {
+          d.practitionerSpecialties = specMap[d.id].specialties;
+          d.practitionerNames = specMap[d.id].names;
+        }
         if (d.id && amenMap[d.id]) d.amenityFlags = amenMap[d.id];
       });
     }
@@ -413,7 +416,8 @@ const TREATMENT_MAP = {
           const q = searchQuery.toLowerCase();
           const matchesName = d.name.toLowerCase().includes(q);
           const matchesService = d.services.some(s => s.toLowerCase().includes(q));
-          if (!matchesName && !matchesService) return false;
+          const matchesPractitioner = (d.practitionerNames || []).some(n => n.toLowerCase().includes(q));
+          if (!matchesName && !matchesService && !matchesPractitioner) return false;
         }
         const price = getCheckupPrice(d);
         if (price !== null && maxPrice !== Infinity && price > maxPrice) return false;

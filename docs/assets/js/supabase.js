@@ -263,7 +263,7 @@ async function fetchAmenitiesForClinics(clinicIds) {
   return map;
 }
 
-// Fetch practitioners for a batch of clinic IDs, returns map of clinic_id → [specialties string]
+// Fetch practitioners for a batch of clinic IDs, returns map of clinic_id → { specialties, names }
 async function fetchPractitionersForClinics(clinicIds) {
   if (!clinicIds || clinicIds.length === 0) return {};
   const map = {};
@@ -272,19 +272,26 @@ async function fetchPractitionersForClinics(clinicIds) {
     for (let i = 0; i < clinicIds.length; i += BATCH) {
       const batch = clinicIds.slice(i, i + BATCH);
       const idsParam = batch.map(id => `clinic_id.eq.${id}`).join(',');
-      const url = `${SUPABASE_URL}/rest/v1/clinic_practitioners?or=(${idsParam})&select=clinic_id,specialties&limit=1000`;
+      const url = `${SUPABASE_URL}/rest/v1/clinic_practitioners?or=(${idsParam})&select=clinic_id,name,specialties&limit=1000`;
       const response = await fetch(url, {
         headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
       });
       if (!response.ok) continue;
       const data = await response.json();
       data.forEach(row => {
-        if (!row.specialties) return;
-        if (!map[row.clinic_id]) map[row.clinic_id] = [];
-        row.specialties.split(',').forEach(s => {
-          const norm = s.trim().toLowerCase();
-          if (norm && !map[row.clinic_id].includes(norm)) map[row.clinic_id].push(norm);
-        });
+        if (!map[row.clinic_id]) map[row.clinic_id] = { specialties: [], names: [] };
+        if (row.name) {
+          const cleanName = row.name.replace(/^Dr\.?\s*/i, '').trim();
+          if (cleanName && !map[row.clinic_id].names.includes(cleanName)) {
+            map[row.clinic_id].names.push(cleanName);
+          }
+        }
+        if (row.specialties) {
+          row.specialties.split(',').forEach(s => {
+            const norm = s.trim().toLowerCase();
+            if (norm && !map[row.clinic_id].specialties.includes(norm)) map[row.clinic_id].specialties.push(norm);
+          });
+        }
       });
     }
   } catch (e) {}
