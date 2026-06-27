@@ -411,7 +411,7 @@ const TREATMENT_MAP = {
         }
         if (activeSuburbs.length && !activeSuburbs.includes(d.suburb)) return false;
         if (activeServices.length && !activeServices.every(s => d.services.includes(s))) return false;
-        if (d.rating < minRating) return false;
+        if (minRating > 0 && (d.rating == null || d.rating < minRating)) return false;
         if (searchQuery) {
           const q = searchQuery.toLowerCase();
           const matchesName = d.name.toLowerCase().includes(q);
