@@ -449,6 +449,10 @@ const TREATMENT_MAP = {
         filtered.sort((a, b) => (b.reviewCount || 0) - (a.reviewCount || 0));
       } else if (sortBy === 'price') {
         filtered.sort((a, b) => (getCheckupPrice(a) || 999) - (getCheckupPrice(b) || 999));
+      } else if (sortBy === 'price-desc') {
+        filtered.sort((a, b) => (getCheckupPrice(b) || 0) - (getCheckupPrice(a) || 0));
+      } else if (sortBy === 'rating-asc') {
+        filtered.sort((a, b) => (a.rating || 0) - (b.rating || 0));
       }
 
       if (filtered.length === 0) {
