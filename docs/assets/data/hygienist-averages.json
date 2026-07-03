@@ -1,0 +1,42 @@
+{
+  "cities": {
+    "Te Puke": {
+      "avg": 149.0,
+      "clinics": 2
+    },
+    "Tauranga": {
+      "avg": 149.0,
+      "clinics": 2
+    },
+    "Manukau": {
+      "avg": 133.0,
+      "clinics": 3
+    },
+    "Christchurch": {
+      "avg": 197.0,
+      "clinics": 2
+    },
+    "North Shore": {
+      "avg": 163.0,
+      "clinics": 4
+    }
+  },
+  "regions": {
+    "Bay of Plenty": {
+      "avg": 149.0,
+      "clinics": 5
+    },
+    "Auckland": {
+      "avg": 150.1,
+      "clinics": 9
+    },
+    "Waikato": {
+      "avg": 165.0,
+      "clinics": 2
+    },
+    "Canterbury": {
+      "avg": 197.0,
+      "clinics": 2
+    }
+  }
+}

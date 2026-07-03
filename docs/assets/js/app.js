@@ -127,7 +127,7 @@ const TREATMENT_MAP = {
     return match ? parseInt(match[1], 10) : null;
   }
 
-  // City price averages loaded lazily from price-averages.json
+  // Checkup price averages loaded lazily from price-averages.json
   let _cityAverages = null;
   let _cityAveragesPromise = null;
   function loadCityAverages() {
@@ -139,6 +139,20 @@ const TREATMENT_MAP = {
         .catch(() => { _cityAverages = {}; return {}; });
     }
     return _cityAveragesPromise;
+  }
+
+  // Hygienist price averages loaded lazily from hygienist-averages.json
+  let _hygienistAverages = null;
+  let _hygienistAveragesPromise = null;
+  function loadHygienistAverages() {
+    if (_hygienistAverages) return Promise.resolve(_hygienistAverages);
+    if (!_hygienistAveragesPromise) {
+      _hygienistAveragesPromise = fetch('assets/data/hygienist-averages.json')
+        .then(r => r.json())
+        .then(data => { _hygienistAverages = data; return data; })
+        .catch(() => { _hygienistAverages = {}; return {}; });
+    }
+    return _hygienistAveragesPromise;
   }
 
   function _cmpEntry(price, entry, label) {
@@ -154,6 +168,16 @@ const TREATMENT_MAP = {
     if (!_cityAverages || !price) return { city: null, region: null };
     const cityEntry = city ? (_cityAverages.cities || {})[city] : null;
     const regionEntry = region ? (_cityAverages.regions || {})[region] : null;
+    return {
+      city: _cmpEntry(price, cityEntry, city),
+      region: _cmpEntry(price, regionEntry, region),
+    };
+  }
+
+  function getHygienistComparisons(price, city, region) {
+    if (!_hygienistAverages || !price) return { city: null, region: null };
+    const cityEntry = city ? (_hygienistAverages.cities || {})[city] : null;
+    const regionEntry = region ? (_hygienistAverages.regions || {})[region] : null;
     return {
       city: _cmpEntry(price, cityEntry, city),
       region: _cmpEntry(price, regionEntry, region),
@@ -320,8 +344,9 @@ const TREATMENT_MAP = {
       return;
     }
 
-    // Load city averages in parallel with other fetches
+    // Load price averages in parallel with other fetches
     loadCityAverages();
+    loadHygienistAverages();
 
     // Fetch and attach practitioner specialties + amenity flags for the whole region
     if (!savedMode) {
@@ -376,7 +401,12 @@ const TREATMENT_MAP = {
             : '';
           parts.push(`Checkup from $${checkupPrice}${cmpBadge}`);
         }
-        if (hygPrice) parts.push(`Scale &amp; clean from $${hygPrice}`);
+        if (hygPrice) {
+          const hCmps = getHygienistComparisons(hygPrice, d.city, d.region);
+          const hCmp = hCmps.city || hCmps.region;
+          const hBadge = hCmp ? ` <span class="price-cmp price-cmp--${hCmp.dir}">${hCmp.text}</span>` : '';
+          parts.push(`Scale &amp; clean from $${hygPrice}${hBadge}`);
+        }
         if (parts.length > 0) {
           pricingPreview = `<div class="pricing-summary">💰 ${parts.join('<span class="pricing-summary__sep">·</span>')}</div>`;
         } else if (d.pricing.some(p => /\$\d/.test(p.price))) {
@@ -1019,8 +1049,9 @@ const TREATMENT_MAP = {
     // Set back button immediately from URL param so it works before async fetch completes
     if (regionParam) setBackButton(regionParam);
 
-    // Load city averages in parallel with clinic fetch
+    // Load price averages in parallel with clinic fetch
     loadCityAverages();
+    loadHygienistAverages();
 
     // Try Supabase first (by id)
     if (id && typeof fetchClinicById === 'function') {
@@ -1125,16 +1156,24 @@ const TREATMENT_MAP = {
     if (pricingRows.length > 0) {
       const checkupPrice = getCheckupPrice(dentist);
       const cmps = getPriceComparisons(checkupPrice, dentist.city, dentist.region);
+      const hygPrice = getHygienistPrice(dentist);
+      const hygCmps = getHygienistComparisons(hygPrice, dentist.city, dentist.region);
       const rows = pricingRows.map(p => {
         const notesHtml = p.notes ? `<div class="pricing-note">${p.notes}</div>` : '';
         const s = p.service.toLowerCase();
         const isCheckup = s.includes('checkup') || s.includes('check-up') || s.includes('exam') ||
           s.includes('consult') || s.includes('assessment') || s.includes('new patient') ||
           s.includes('initial') || s.includes('comprehensive') || s.includes('oral health');
+        const isHygienist = s.includes('hygienist') || s.includes('hygiene') ||
+          (s.includes('scale') && (s.includes('polish') || s.includes('clean')));
         let cmpHtml = '';
         if (isCheckup) {
           if (cmps.city) cmpHtml += ` <span class="price-cmp price-cmp--${cmps.city.dir}">${cmps.city.text}</span>`;
           if (cmps.region) cmpHtml += ` <span class="price-cmp price-cmp--${cmps.region.dir}">${cmps.region.text}</span>`;
+        }
+        if (isHygienist) {
+          if (hygCmps.city) cmpHtml += ` <span class="price-cmp price-cmp--${hygCmps.city.dir}">${hygCmps.city.text}</span>`;
+          if (hygCmps.region) cmpHtml += ` <span class="price-cmp price-cmp--${hygCmps.region.dir}">${hygCmps.region.text}</span>`;
         }
         return `<tr><td>${p.service}${notesHtml}</td><td>${p.price}${cmpHtml}</td></tr>`;
       }).join('');
