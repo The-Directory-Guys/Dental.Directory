@@ -25,6 +25,28 @@ function parseOpeningHours(hoursStr) {
   return Object.keys(hours).length > 0 ? hours : null;
 }
 
+// Convert parsed hours object {DayName: "8:00 AM – 5:00 PM"} into compact numeric format
+// {dayNum: [openMinutes, closeMinutes] | null}  where 0=Sunday … 6=Saturday
+function compactHours(hoursObj) {
+  if (!hoursObj) return null;
+  const DAY_MAP = { Sunday: 0, Monday: 1, Tuesday: 2, Wednesday: 3, Thursday: 4, Friday: 5, Saturday: 6 };
+  const result = {};
+  const toMin = (h, mn, ampm) => {
+    let hour = parseInt(h, 10);
+    if (ampm.toUpperCase() === 'PM' && hour !== 12) hour += 12;
+    if (ampm.toUpperCase() === 'AM' && hour === 12) hour = 0;
+    return hour * 60 + parseInt(mn, 10);
+  };
+  for (const [day, range] of Object.entries(hoursObj)) {
+    const dayNum = DAY_MAP[day];
+    if (dayNum === undefined) continue;
+    if (!range || /closed/i.test(range)) { result[dayNum] = null; continue; }
+    const m = range.match(/(\d+):(\d+)\s*(AM|PM)\s*[–\-]\s*(\d+):(\d+)\s*(AM|PM)/i);
+    if (m) result[dayNum] = [toMin(m[1], m[2], m[3]), toMin(m[4], m[5], m[6])];
+  }
+  return Object.keys(result).length > 0 ? result : null;
+}
+
 // Generate a URL-friendly slug from a name
 function generateSlug(name) {
   return name
@@ -55,7 +77,7 @@ function transformClinic(clinic) {
     hasPricingFlag: clinic.price || null,  // 'full_prices', 'some_prices', or null
     description: clinic.description || '',
     hours: parseOpeningHours(clinic.opening_hours),
-    hrs: clinic.hrs || null,  // compact hours from prefetch JSON {dayNum: [openMin, closeMin] | null}
+    hrs: compactHours(parseOpeningHours(clinic.opening_hours)),
     reviews: [],
     googleMapsUrl: clinic.google_maps_url || '',
     businessStatus: clinic.business_status || 'OPERATIONAL'
