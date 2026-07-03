@@ -1,7 +1,7 @@
 {
   "cities": {
     "North Shore": {
-      "avg": 155.1,
+      "avg": 154.8,
       "clinics": 14
     },
     "Rotorua": {
@@ -21,8 +21,8 @@
       "clinics": 3
     },
     "Tauranga": {
-      "avg": 168.4,
-      "clinics": 5
+      "avg": 189.5,
+      "clinics": 6
     },
     "Hamilton": {
       "avg": 145.8,
@@ -37,24 +37,44 @@
       "clinics": 2
     },
     "Christchurch": {
-      "avg": 182.4,
-      "clinics": 36
+      "avg": 177.8,
+      "clinics": 38
+    },
+    "Porirua": {
+      "avg": 179.2,
+      "clinics": 6
     },
     "Whangārei": {
       "avg": 139.4,
       "clinics": 5
     },
     "Rodney": {
-      "avg": 146.8,
+      "avg": 141.8,
       "clinics": 4
     },
+    "Waitakere": {
+      "avg": 144.7,
+      "clinics": 6
+    },
     "Auckland City": {
-      "avg": 187.3,
-      "clinics": 19
+      "avg": 179.0,
+      "clinics": 22
+    },
+    "Upper Hutt": {
+      "avg": 171.7,
+      "clinics": 3
+    },
+    "Paraparaumu": {
+      "avg": 146.0,
+      "clinics": 3
     },
     "Wellington": {
-      "avg": 201.2,
-      "clinics": 6
+      "avg": 197.7,
+      "clinics": 27
+    },
+    "Lower Hutt": {
+      "avg": 189.7,
+      "clinics": 10
     },
     "Wānaka": {
       "avg": 182.5,
@@ -63,20 +83,16 @@
     "Napier": {
       "avg": 174.7,
       "clinics": 3
-    },
-    "Waitakere": {
-      "avg": 141.2,
-      "clinics": 4
     }
   },
   "regions": {
     "Auckland": {
-      "avg": 166.4,
-      "clinics": 51
+      "avg": 163.3,
+      "clinics": 56
     },
     "Bay of Plenty": {
-      "avg": 162.7,
-      "clinics": 10
+      "avg": 174.7,
+      "clinics": 11
     },
     "Waikato": {
       "avg": 150.2,
@@ -87,16 +103,20 @@
       "clinics": 6
     },
     "Canterbury": {
-      "avg": 180.8,
-      "clinics": 40
+      "avg": 176.7,
+      "clinics": 42
     },
     "Wellington": {
-      "avg": 198.6,
-      "clinics": 9
+      "avg": 189.0,
+      "clinics": 49
     },
     "Northland": {
-      "avg": 151.0,
+      "avg": 133.1,
       "clinics": 7
+    },
+    "Wairarapa": {
+      "avg": 157.5,
+      "clinics": 2
     },
     "Hawke's Bay": {
       "avg": 174.7,
