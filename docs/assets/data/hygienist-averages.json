@@ -40,6 +40,14 @@
       "avg": 177.8,
       "clinics": 38
     },
+    "Te Awamutu": {
+      "avg": 160.0,
+      "clinics": 1
+    },
+    "Whanganui": {
+      "avg": 145.0,
+      "clinics": 1
+    },
     "Porirua": {
       "avg": 179.2,
       "clinics": 6
@@ -47,6 +55,10 @@
     "Whangārei": {
       "avg": 139.4,
       "clinics": 5
+    },
+    "Thames": {
+      "avg": 158.0,
+      "clinics": 1
     },
     "Rodney": {
       "avg": 141.8,
@@ -59,6 +71,14 @@
     "Auckland City": {
       "avg": 179.0,
       "clinics": 22
+    },
+    "Prebbleton": {
+      "avg": 185.0,
+      "clinics": 1
+    },
+    "Rangiora": {
+      "avg": 160.0,
+      "clinics": 1
     },
     "Upper Hutt": {
       "avg": 171.7,
@@ -76,13 +96,57 @@
       "avg": 189.7,
       "clinics": 10
     },
+    "Masterton": {
+      "avg": 170.0,
+      "clinics": 1
+    },
+    "Greytown": {
+      "avg": 145.0,
+      "clinics": 1
+    },
     "Wānaka": {
       "avg": 182.5,
       "clinics": 2
     },
+    "New Plymouth": {
+      "avg": 150.0,
+      "clinics": 1
+    },
+    "Hokitika": {
+      "avg": 195.0,
+      "clinics": 1
+    },
     "Napier": {
       "avg": 174.7,
       "clinics": 3
+    },
+    "Kerikeri": {
+      "avg": 75.0,
+      "clinics": 1
+    },
+    "Mangawhai": {
+      "avg": 160.0,
+      "clinics": 1
+    },
+    "Nelson": {
+      "avg": 99.0,
+      "clinics": 1
+    },
+    "Ashburton": {
+      "avg": 160.0,
+      "clinics": 1
+    },
+    "Rolleston": {
+      "avg": 160.0,
+      "clinics": 1
+    },
+    "Taupō": {
+      "avg": 170.0,
+      "clinics": 1
+    },
+    "Auckland": {
+      "avg": 149.0,
+      "clinics": 1
     }
   },
   "regions": {
@@ -106,6 +170,10 @@
       "avg": 176.7,
       "clinics": 42
     },
+    "Manawatū-Whanganui": {
+      "avg": 145.0,
+      "clinics": 1
+    },
     "Wellington": {
       "avg": 189.0,
       "clinics": 49
@@ -118,9 +186,21 @@
       "avg": 157.5,
       "clinics": 2
     },
+    "Taranaki": {
+      "avg": 150.0,
+      "clinics": 1
+    },
+    "West Coast": {
+      "avg": 195.0,
+      "clinics": 1
+    },
     "Hawke's Bay": {
       "avg": 174.7,
       "clinics": 3
+    },
+    "Nelson & Tasman": {
+      "avg": 99.0,
+      "clinics": 1
     }
   }
 }

@@ -9,7 +9,7 @@
       "clinics": 3
     },
     "Cambridge": {
-      "avg": 78.5,
+      "avg": 72.2,
       "clinics": 4
     },
     "Te Puke": {
@@ -21,20 +21,24 @@
       "clinics": 2
     },
     "Hamilton": {
-      "avg": 110.1,
+      "avg": 105.9,
       "clinics": 12
     },
-    "Christchurch": {
-      "avg": 128.0,
-      "clinics": 64
-    },
     "Tauranga": {
-      "avg": 130.3,
+      "avg": 124.9,
       "clinics": 13
     },
     "Rolleston": {
       "avg": 132.5,
       "clinics": 2
+    },
+    "Christchurch": {
+      "avg": 125.8,
+      "clinics": 62
+    },
+    "Hokitika": {
+      "avg": 55.0,
+      "clinics": 1
     },
     "Alexandra": {
       "avg": 155.0,
@@ -49,19 +53,23 @@
       "clinics": 7
     },
     "Whangārei": {
-      "avg": 112.5,
+      "avg": 100.8,
       "clinics": 6
+    },
+    "Thames": {
+      "avg": 63.0,
+      "clinics": 1
     },
     "Rodney": {
-      "avg": 86.7,
-      "clinics": 6
+      "avg": 90.6,
+      "clinics": 7
     },
     "Auckland City": {
-      "avg": 108.5,
-      "clinics": 40
+      "avg": 110.9,
+      "clinics": 41
     },
     "North Shore": {
-      "avg": 96.5,
+      "avg": 91.0,
       "clinics": 25
     },
     "Kerikeri": {
@@ -72,17 +80,29 @@
       "avg": 109.8,
       "clinics": 36
     },
+    "Paihia": {
+      "avg": 99.0,
+      "clinics": 1
+    },
     "Wānaka": {
       "avg": 114.5,
       "clinics": 2
     },
     "Manukau": {
-      "avg": 90.6,
+      "avg": 86.6,
       "clinics": 16
     },
     "Napier": {
       "avg": 109.0,
       "clinics": 5
+    },
+    "Whanganui": {
+      "avg": 50.0,
+      "clinics": 1
+    },
+    "Richmond": {
+      "avg": 180.0,
+      "clinics": 1
     },
     "Nelson": {
       "avg": 115.8,
@@ -92,6 +112,10 @@
       "avg": 110.4,
       "clinics": 5
     },
+    "Mangawhai": {
+      "avg": 90.0,
+      "clinics": 1
+    },
     "Waitakere": {
       "avg": 81.7,
       "clinics": 7
@@ -100,17 +124,69 @@
       "avg": 99.0,
       "clinics": 2
     },
+    "Ashburton": {
+      "avg": 80.0,
+      "clinics": 1
+    },
     "Lower Hutt": {
       "avg": 141.3,
       "clinics": 14
+    },
+    "Auckland": {
+      "avg": 99.0,
+      "clinics": 1
     },
     "Masterton": {
       "avg": 92.0,
       "clinics": 2
     },
+    "Greytown": {
+      "avg": 150.0,
+      "clinics": 1
+    },
     "Paraparaumu": {
       "avg": 121.0,
       "clinics": 6
+    },
+    "Feilding": {
+      "avg": 99.0,
+      "clinics": 1
+    },
+    "Lincoln": {
+      "avg": 99.0,
+      "clinics": 1
+    },
+    "Rangiora": {
+      "avg": 99.0,
+      "clinics": 1
+    },
+    "Cromwell": {
+      "avg": 160.0,
+      "clinics": 1
+    },
+    "Ohakune": {
+      "avg": 100.0,
+      "clinics": 1
+    },
+    "Greymouth": {
+      "avg": 99.0,
+      "clinics": 1
+    },
+    "Waikanae": {
+      "avg": 99.0,
+      "clinics": 1
+    },
+    "Whitianga": {
+      "avg": 99.0,
+      "clinics": 1
+    },
+    "Ōmokoroa": {
+      "avg": 50.0,
+      "clinics": 1
+    },
+    "Rotorua": {
+      "avg": 85.0,
+      "clinics": 1
     }
   },
   "regions": {
@@ -123,19 +199,19 @@
       "clinics": 3
     },
     "Waikato": {
-      "avg": 106.9,
+      "avg": 100.6,
       "clinics": 20
     },
     "Bay of Plenty": {
-      "avg": 135.1,
+      "avg": 114.2,
       "clinics": 18
     },
     "Canterbury": {
-      "avg": 126.6,
-      "clinics": 69
+      "avg": 124.6,
+      "clinics": 67
     },
     "West Coast": {
-      "avg": 174.5,
+      "avg": 77.0,
       "clinics": 2
     },
     "Wellington": {
@@ -143,20 +219,20 @@
       "clinics": 69
     },
     "Northland": {
-      "avg": 107.4,
+      "avg": 98.4,
       "clinics": 10
     },
     "Auckland": {
-      "avg": 98.9,
-      "clinics": 95
+      "avg": 98.0,
+      "clinics": 97
     },
     "Hawke's Bay": {
       "avg": 109.0,
       "clinics": 5
     },
     "Manawatū-Whanganui": {
-      "avg": 104.2,
-      "clinics": 4
+      "avg": 89.4,
+      "clinics": 5
     },
     "Nelson & Tasman": {
       "avg": 128.6,
