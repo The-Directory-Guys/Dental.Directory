@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stats | Dental Compare</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <style>
+    /* ── Gate ────────────────────────────────────────────── */
+    #gate {
+      position: fixed; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: #0c1f2e;
+      z-index: 9999;
+    }
+    .gate-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 2.75rem 2.5rem 2.25rem;
+      width: 100%; max-width: 360px;
+      text-align: center;
+      box-shadow: 0 24px 64px rgba(0,0,0,.45);
+    }
+    .gate-logo { width: 130px; margin-bottom: 1.75rem; }
+    .gate-eyebrow {
+      font-size: .7rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: #64748b; margin-bottom: .35rem;
+    }
+    .gate-heading {
+      font-size: 1.2rem; font-weight: 700; color: #0c1f2e;
+      margin-bottom: 1.75rem;
+    }
+    .gate-input {
+      width: 100%; box-sizing: border-box;
+      padding: .75rem 1rem;
+      border: 1.5px solid #e2e8f0; border-radius: 8px;
+      font-size: .95rem; outline: none;
+      transition: border-color .15s;
+      margin-bottom: .6rem;
+    }
+    .gate-input:focus { border-color: var(--clr-teal, #0d9488); }
+    .gate-btn {
+      width: 100%; padding: .75rem;
+      background: var(--clr-teal, #0d9488); color: #fff;
+      border: none; border-radius: 8px;
+      font-size: .95rem; font-weight: 600; cursor: pointer;
+      transition: opacity .15s;
+    }
+    .gate-btn:hover { opacity: .88; }
+    .gate-error {
+      min-height: 1.4em; margin-top: .5rem;
+      font-size: .8rem; color: #dc2626;
+    }
+
+    /* ── Dashboard shell ─────────────────────────────────── */
+    #dashboard { display: none; }
+    .dash-header {
+      background: #0c1f2e; color: #fff;
+      padding: .9rem 1.75rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .dash-header img { height: 32px; }
+    .dash-header__label {
+      font-size: .8rem; font-weight: 600;
+      letter-spacing: .05em; text-transform: uppercase;
+      color: rgba(255,255,255,.55);
+    }
+    .dash-header__sep { color: rgba(255,255,255,.2); }
+    .dash-header__title { font-size: .95rem; font-weight: 600; color: #fff; }
+    .dash-header__time {
+      margin-left: auto; font-size: .72rem; color: rgba(255,255,255,.4);
+    }
+    .dash-header__logout {
+      background: none; border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.6); border-radius: 6px;
+      padding: .3rem .75rem; font-size: .75rem; cursor: pointer;
+      transition: all .15s;
+    }
+    .dash-header__logout:hover { border-color: rgba(255,255,255,.5); color: #fff; }
+
+    /* ── Main container ──────────────────────────────────── */
+    .dash-main {
+      max-width: 1120px; margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* ── Metric strip ────────────────────────────────────── */
+    .metric-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem; margin-bottom: 2.25rem;
+    }
+    .metric-card {
+      background: #fff;
+      border: 1px solid #e8edf2;
+      border-radius: 10px;
+      padding: 1.25rem 1.4rem;
+    }
+    .metric-card__label {
+      font-size: .7rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .07em;
+      color: #8395a7; margin-bottom: .45rem;
+    }
+    .metric-card__value {
+      font-size: 2.1rem; font-weight: 700;
+      color: #0c1f2e; line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .metric-card__sub {
+      font-size: .75rem; color: #a0aec0; margin-top: .3rem;
+    }
+
+    /* ── Sections ────────────────────────────────────────── */
+    .dash-section { margin-bottom: 2.5rem; }
+    .dash-section__head {
+      font-size: .68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .09em;
+      color: #8395a7;
+      padding-bottom: .6rem;
+      border-bottom: 1px solid #e8edf2;
+      margin-bottom: 1.1rem;
+    }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .col-label {
+      font-size: .8rem; font-weight: 600;
+      color: #334155; margin-bottom: .75rem;
+    }
+
+    /* ── Tables ──────────────────────────────────────────── */
+    .dt { width: 100%; border-collapse: collapse; font-size: .855rem; }
+    .dt th {
+      text-align: left; padding: .45rem .8rem;
+      font-size: .67rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .06em;
+      color: #a0aec0; border-bottom: 1px solid #e8edf2;
+      white-space: nowrap;
+    }
+    .dt td {
+      padding: .55rem .8rem;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+      font-variant-numeric: tabular-nums;
+    }
+    .dt tr:last-child td { border-bottom: none; }
+    .dt tbody tr:hover td { background: #f8fafc; }
+    .dt--scroll { overflow-x: auto; }
+    td.num { font-weight: 600; color: #0c1f2e; }
+    td.muted { color: #94a3b8; font-size: .8rem; }
+    td.rank { color: #a0aec0; font-weight: 700; width: 1.5rem; }
+    .loading-state td {
+      text-align: center; color: #a0aec0;
+      font-style: italic; padding: 2rem;
+    }
+
+    /* ── Coverage bar ────────────────────────────────────── */
+    .cov-cell { display: flex; align-items: center; gap: .6rem; }
+    .cov-track {
+      background: #f1f5f9; border-radius: 99px;
+      height: 5px; width: 72px; overflow: hidden;
+      flex-shrink: 0;
+    }
+    .cov-fill { height: 100%; border-radius: 99px; }
+    .cov-pct { font-variant-numeric: tabular-nums; font-size: .8rem; color: #64748b; }
+    .badge {
+      display: inline-block; font-size: .66rem; font-weight: 700;
+      padding: 1px 7px; border-radius: 99px; white-space: nowrap;
+    }
+    .badge--high  { background: #dcfce7; color: #15803d; }
+    .badge--mid   { background: #fef3c7; color: #b45309; }
+    .badge--low   { background: #fee2e2; color: #b91c1c; }
+
+    /* ── Histogram ───────────────────────────────────────── */
+    .hist-wrap { padding: .5rem 0 0; }
+    .hist-bars {
+      display: flex; align-items: flex-end;
+      gap: 6px; height: 110px; margin-bottom: 4px;
+    }
+    .hist-col { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
+    .hist-count { font-size: .62rem; color: #a0aec0; margin-bottom: 2px; font-variant-numeric: tabular-nums; min-height: .9em; }
+    .hist-bar {
+      width: 100%; border-radius: 4px 4px 0 0;
+      background: var(--clr-teal, #0d9488); opacity: .8;
+      min-height: 2px;
+    }
+    .hist-row-labels { display: flex; gap: 6px; }
+    .hist-lbl { flex: 1; text-align: center; font-size: .62rem; color: #a0aec0; }
+
+    /* ── Responsive ──────────────────────────────────────── */
+    @media (max-width: 700px) {
+      .metric-strip { grid-template-columns: 1fr 1fr; }
+      .two-col { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 420px) {
+      .metric-strip { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════ GATE ════════════════ -->
+<div id="gate">
+  <div class="gate-card">
+    <img src="assets/images/logo.png" alt="Dental Compare" class="gate-logo">
+    <div class="gate-eyebrow">Dental Compare</div>
+    <div class="gate-heading">Stats Dashboard</div>
+    <form onsubmit="submitGate(event)">
+      <input id="gate-pw" type="password" class="gate-input"
+             placeholder="Password" autocomplete="current-password">
+      <button type="submit" class="gate-btn">Enter</button>
+      <div class="gate-error" id="gate-err"></div>
+    </form>
+  </div>
+</div>
+
+<!-- ════════════════ DASHBOARD ════════════════ -->
+<div id="dashboard">
+
+  <header class="dash-header">
+    <img src="assets/images/logo.png" alt="Dental Compare">
+    <span class="dash-header__label">Dental Compare</span>
+    <span class="dash-header__sep">·</span>
+    <span class="dash-header__title">Stats Dashboard</span>
+    <span class="dash-header__time" id="dash-time"></span>
+    <button class="dash-header__logout" onclick="logout()">Sign out</button>
+  </header>
+
+  <main class="dash-main">
+
+    <!-- Overview -->
+    <div class="metric-strip">
+      <div class="metric-card">
+        <div class="metric-card__label">Total Clinics</div>
+        <div class="metric-card__value" id="m-total">—</div>
+        <div class="metric-card__sub">operational</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-card__label">With Checkup Price</div>
+        <div class="metric-card__value" id="m-priced">—</div>
+        <div class="metric-card__sub">unique clinics</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-card__label">Overall Coverage</div>
+        <div class="metric-card__value" id="m-coverage">—</div>
+        <div class="metric-card__sub">of all clinics</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-card__label">NZ Average Checkup</div>
+        <div class="metric-card__value" id="m-avg">—</div>
+        <div class="metric-card__sub" id="m-avg-sub">across all regions</div>
+      </div>
+    </div>
+
+    <!-- Averages -->
+    <div class="dash-section">
+      <div class="dash-section__head">Price Averages</div>
+      <div class="two-col">
+        <div>
+          <div class="col-label">By Region</div>
+          <div class="dt--scroll">
+            <table class="dt" id="tbl-regions">
+              <thead><tr><th>Region</th><th>Avg</th><th>Clinics</th></tr></thead>
+              <tbody><tr class="loading-state"><td colspan="3">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <div class="col-label">By City <span style="font-weight:400;color:#a0aec0">(≥ 2 clinics)</span></div>
+          <div class="dt--scroll">
+            <table class="dt" id="tbl-cities">
+              <thead><tr><th>City</th><th>Avg</th><th>Clinics</th></tr></thead>
+              <tbody><tr class="loading-state"><td colspan="3">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coverage -->
+    <div class="dash-section">
+      <div class="dash-section__head">Price Coverage by Region</div>
+      <div class="dt--scroll">
+        <table class="dt" id="tbl-coverage">
+          <thead><tr><th>Region</th><th>Total Clinics</th><th>With Price</th><th>Coverage</th><th>Status</th></tr></thead>
+          <tbody><tr class="loading-state"><td colspan="5">Loading…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Distribution -->
+    <div class="dash-section">
+      <div class="dash-section__head">Checkup Price Distribution</div>
+      <div class="hist-wrap">
+        <div class="hist-bars" id="hist-bars"></div>
+        <div class="hist-row-labels" id="hist-labels"></div>
+      </div>
+    </div>
+
+    <!-- Extremes -->
+    <div class="dash-section">
+      <div class="dash-section__head">Extremes — Checkup Price</div>
+      <div class="two-col">
+        <div>
+          <div class="col-label" style="color:#15803d">5 Cheapest</div>
+          <div class="dt--scroll">
+            <table class="dt" id="tbl-cheapest">
+              <thead><tr><th>#</th><th>Clinic</th><th>City</th><th>Price</th></tr></thead>
+              <tbody><tr class="loading-state"><td colspan="4">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <div class="col-label" style="color:#b91c1c">5 Most Expensive</div>
+          <div class="dt--scroll">
+            <table class="dt" id="tbl-priciest">
+              <thead><tr><th>#</th><th>Clinic</th><th>City</th><th>Price</th></tr></thead>
+              <tbody><tr class="loading-state"><td colspan="4">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  const SUPABASE_URL = 'https://ankyjpgcocsvvtyyymys.supabase.co';
+  const ANON_KEY    = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFua3lqcGdjb2NzdnZ0eXl5bXlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MTM1MTQsImV4cCI6MjA4OTM4OTUxNH0.SXxTLBdiNVSEDXy95yU0x0ctYFOjIby8hZbJ7B1LPK8';
+  const SESS_KEY    = 'dc_stats_v1';
+  const PASSWORD    = 'stats2026';
+
+  const CHECKUP = new Set(['exam / checkup','checkup','exam','examination','check-up']);
+
+  // ── Auth ──────────────────────────────────────────────────
+  function submitGate(e) {
+    e.preventDefault();
+    if (document.getElementById('gate-pw').value === PASSWORD) {
+      sessionStorage.setItem(SESS_KEY, '1');
+      open();
+    } else {
+      document.getElementById('gate-err').textContent = 'Incorrect password.';
+    }
+  }
+  function logout() {
+    sessionStorage.removeItem(SESS_KEY);
+    location.reload();
+  }
+  function open() {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    document.getElementById('dash-time').textContent =
+      new Date().toLocaleDateString('en-NZ', { day:'numeric', month:'short', year:'numeric' });
+    loadAll();
+  }
+  if (sessionStorage.getItem(SESS_KEY) === '1') open();
+
+  // ── Supabase helpers ──────────────────────────────────────
+  const H = { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}` };
+
+  async function sbPage(path, limit, offset) {
+    const sep = path.includes('?') ? '&' : '?';
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/${path}${sep}limit=${limit}&offset=${offset}`, { headers: H });
+    return r.json();
+  }
+  async function sbAll(path, size = 1000) {
+    const rows = []; let off = 0;
+    while (true) {
+      const page = await sbPage(path, size, off);
+      if (!Array.isArray(page) || !page.length) break;
+      rows.push(...page);
+      if (page.length < size) break;
+      off += size;
+    }
+    return rows;
+  }
+  async function sbGet(path) {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, { headers: H });
+    return r.json();
+  }
+
+  // ── Price extraction ──────────────────────────────────────
+  function extractPrice(nzd, label) {
+    if (nzd != null) return parseFloat(nzd);
+    if (label) {
+      const m = String(label).replace(/,/g, '').match(/\$(\d+)/);
+      if (m) return parseInt(m[1]);
+    }
+    return null;
+  }
+  const fmt = n => `$${Math.round(n)}`;
+
+  // ── Load everything ───────────────────────────────────────
+  async function loadAll() {
+    const [averages, clinics, priceRows] = await Promise.all([
+      fetch('assets/data/price-averages.json').then(r => r.json()),
+      sbAll('dental_clinics?select=id,region,city&business_status=eq.OPERATIONAL'),
+      sbAll('scraped_prices?select=clinic_id,treatment,price_nzd,price_label'),
+    ]);
+
+    // Extract usable checkup prices
+    const checkup = [];
+    for (const p of priceRows) {
+      if (!p.treatment || !CHECKUP.has(p.treatment.toLowerCase())) continue;
+      const val = extractPrice(p.price_nzd, p.price_label);
+      if (val !== null && val >= 20 && val <= 1000) checkup.push({ id: p.clinic_id, price: val });
+    }
+
+    // Best (lowest) price per clinic
+    const best = {};
+    for (const p of checkup) {
+      if (!(p.id in best) || p.price < best[p.id]) best[p.id] = p.price;
+    }
+
+    const clinicMap = Object.fromEntries(clinics.map(c => [c.id, c]));
+
+    renderOverview(clinics, best, checkup);
+    renderAverages(averages);
+    renderCoverage(clinics, averages);
+    renderDist(checkup);
+    await renderExtremes(best, clinicMap);
+  }
+
+  // ── Overview ──────────────────────────────────────────────
+  function renderOverview(clinics, best, checkup) {
+    const total  = clinics.length;
+    const priced = Object.keys(best).length;
+    const pct    = Math.round(priced / total * 100);
+    const vals   = checkup.map(p => p.price);
+    const avg    = vals.length ? vals.reduce((a,b) => a+b, 0) / vals.length : 0;
+
+    setText('m-total',    total.toLocaleString());
+    setText('m-priced',   priced.toLocaleString());
+    setText('m-coverage', `${pct}%`);
+    setText('m-avg',      fmt(avg));
+    setText('m-avg-sub',  `based on ${vals.length} prices`);
+  }
+
+  // ── Averages ──────────────────────────────────────────────
+  function renderAverages(av) {
+    setTbody('tbl-regions', Object.entries(av.regions || {})
+      .sort((a,b) => b[1].clinics - a[1].clinics)
+      .map(([name, v]) =>
+        `<tr><td>${name}</td><td class="num">${fmt(v.avg)}</td><td class="muted">${v.clinics}</td></tr>`)
+      .join('') || loading(3));
+
+    setTbody('tbl-cities', Object.entries(av.cities || {})
+      .filter(([, v]) => v.clinics >= 2)
+      .sort((a,b) => b[1].clinics - a[1].clinics)
+      .map(([name, v]) =>
+        `<tr><td>${name}</td><td class="num">${fmt(v.avg)}</td><td class="muted">${v.clinics}</td></tr>`)
+      .join('') || loading(3));
+  }
+
+  // ── Coverage ──────────────────────────────────────────────
+  function renderCoverage(clinics, av) {
+    const totals = {};
+    for (const c of clinics) if (c.region) totals[c.region] = (totals[c.region] || 0) + 1;
+
+    const regions = av.regions || {};
+    const rows = Object.entries(totals)
+      .sort((a,b) => b[1] - a[1])
+      .map(([r, total]) => {
+        const priced = regions[r] ? regions[r].clinics : 0;
+        const pct    = Math.round(priced / total * 100);
+        const color  = pct >= 60 ? '#16a34a' : pct >= 30 ? '#d97706' : '#dc2626';
+        const cls    = pct >= 60 ? 'high' : pct >= 30 ? 'mid' : 'low';
+        const label  = pct >= 60 ? 'Good' : pct >= 30 ? 'Partial' : 'Low';
+        return `<tr>
+          <td>${r}</td>
+          <td class="muted">${total}</td>
+          <td>${priced}</td>
+          <td><div class="cov-cell">
+            <div class="cov-track"><div class="cov-fill" style="width:${pct}%;background:${color}"></div></div>
+            <span class="cov-pct">${pct}%</span>
+          </div></td>
+          <td><span class="badge badge--${cls}">${label}</span></td>
+        </tr>`;
+      }).join('');
+    setTbody('tbl-coverage', rows || loading(5));
+  }
+
+  // ── Distribution ──────────────────────────────────────────
+  function renderDist(checkup) {
+    const buckets = [
+      { label: '<$80',     min: 0,   max: 80  },
+      { label: '$80–100',  min: 80,  max: 100 },
+      { label: '$100–120', min: 100, max: 120 },
+      { label: '$120–140', min: 120, max: 140 },
+      { label: '$140–160', min: 140, max: 160 },
+      { label: '$160–200', min: 160, max: 200 },
+      { label: '$200+',    min: 200, max: Infinity },
+    ];
+    const counts = buckets.map(b => ({
+      ...b, n: checkup.filter(p => p.price >= b.min && p.price < b.max).length
+    }));
+    const max = Math.max(...counts.map(b => b.n), 1);
+
+    document.getElementById('hist-bars').innerHTML = counts.map(b => `
+      <div class="hist-col">
+        <div class="hist-count">${b.n || ''}</div>
+        <div class="hist-bar" style="height:${Math.max(b.n / max * 100, b.n ? 2 : 0)}%"></div>
+      </div>`).join('');
+
+    document.getElementById('hist-labels').innerHTML = counts.map(b =>
+      `<div class="hist-lbl">${b.label}</div>`).join('');
+  }
+
+  // ── Extremes ──────────────────────────────────────────────
+  async function renderExtremes(best, clinicMap) {
+    const entries = Object.entries(best)
+      .map(([id, price]) => ({ id: +id, price }))
+      .sort((a,b) => a.price - b.price);
+
+    const cheapest = entries.slice(0, 5);
+    const priciest = entries.slice(-5).reverse();
+
+    const ids = [...new Set([...cheapest, ...priciest].map(e => e.id))];
+    const nameRows = await sbGet(`dental_clinics?select=id,name,city&id=in.(${ids.join(',')})`);
+    const nameMap  = Object.fromEntries((Array.isArray(nameRows) ? nameRows : []).map(c => [c.id, c]));
+
+    const rows = (list, colorFn) => list.map((e, i) => {
+      const c = nameMap[e.id] || clinicMap[e.id] || {};
+      return `<tr>
+        <td class="rank">${i+1}</td>
+        <td>${c.name || `Clinic #${e.id}`}</td>
+        <td class="muted">${c.city || '—'}</td>
+        <td class="num">${fmt(e.price)}</td>
+      </tr>`;
+    }).join('');
+
+    setTbody('tbl-cheapest', rows(cheapest) || loading(4));
+    setTbody('tbl-priciest', rows(priciest) || loading(4));
+  }
+
+  // ── Helpers ───────────────────────────────────────────────
+  function setText(id, val) { document.getElementById(id).textContent = val; }
+  function setTbody(id, html) { document.querySelector(`#${id} tbody`).innerHTML = html; }
+  function loading(cols) { return `<tr class="loading-state"><td colspan="${cols}">No data</td></tr>`; }
+</script>
+
+</body>
+</html>
