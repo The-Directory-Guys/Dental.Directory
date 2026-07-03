@@ -1,0 +1,138 @@
+{
+  "cities": {
+    "Ashburton": {
+      "avg": 80.0,
+      "clinics": 1
+    },
+    "Cambridge": {
+      "avg": 88.75,
+      "clinics": 2
+    },
+    "Christchurch": {
+      "avg": 135.23,
+      "clinics": 52
+    },
+    "Dunedin": {
+      "avg": 132.67,
+      "clinics": 2
+    },
+    "Greytown": {
+      "avg": 150.0,
+      "clinics": 1
+    },
+    "Hamilton": {
+      "avg": 124.71,
+      "clinics": 6
+    },
+    "Hokitika": {
+      "avg": 250.0,
+      "clinics": 1
+    },
+    "Lower Hutt": {
+      "avg": 146.17,
+      "clinics": 12
+    },
+    "Mangawhai": {
+      "avg": 100.0,
+      "clinics": 1
+    },
+    "Masterton": {
+      "avg": 85.0,
+      "clinics": 1
+    },
+    "Napier": {
+      "avg": 190.0,
+      "clinics": 1
+    },
+    "New Plymouth": {
+      "avg": 160.0,
+      "clinics": 2
+    },
+    "Paraparaumu": {
+      "avg": 121.0,
+      "clinics": 6
+    },
+    "Porirua": {
+      "avg": 101.5,
+      "clinics": 6
+    },
+    "Queenstown": {
+      "avg": 210.0,
+      "clinics": 1
+    },
+    "Rolleston": {
+      "avg": 80.0,
+      "clinics": 1
+    },
+    "Te Awamutu": {
+      "avg": 60.0,
+      "clinics": 1
+    },
+    "Thames": {
+      "avg": 114.0,
+      "clinics": 1
+    },
+    "Upper Hutt": {
+      "avg": 121.67,
+      "clinics": 3
+    },
+    "Wellington": {
+      "avg": 116.87,
+      "clinics": 29
+    },
+    "Whanganui": {
+      "avg": 140.0,
+      "clinics": 1
+    },
+    "Whangārei": {
+      "avg": 89.0,
+      "clinics": 5
+    },
+    "Wānaka": {
+      "avg": 134.0,
+      "clinics": 1
+    }
+  },
+  "regions": {
+    "Canterbury": {
+      "avg": 133.22,
+      "clinics": 54
+    },
+    "Hawke's Bay": {
+      "avg": 190.0,
+      "clinics": 1
+    },
+    "Manawatū-Whanganui": {
+      "avg": 140.0,
+      "clinics": 1
+    },
+    "Northland": {
+      "avg": 91.44,
+      "clinics": 6
+    },
+    "Otago": {
+      "avg": 158.67,
+      "clinics": 4
+    },
+    "Taranaki": {
+      "avg": 160.0,
+      "clinics": 2
+    },
+    "Waikato": {
+      "avg": 107.85,
+      "clinics": 10
+    },
+    "Wairarapa": {
+      "avg": 117.5,
+      "clinics": 2
+    },
+    "Wellington": {
+      "avg": 122.11,
+      "clinics": 56
+    },
+    "West Coast": {
+      "avg": 250.0,
+      "clinics": 1
+    }
+  }
+}

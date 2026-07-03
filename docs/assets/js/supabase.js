@@ -43,6 +43,7 @@ function transformClinic(clinic) {
     slug: generateSlug(clinic.name || 'unknown'),
     suburb: clinic.suburb_town || clinic.town || '',
     city: clinic.city && clinic.city !== 'NA' ? clinic.city : '',
+    region: clinic.region || '',
     address: clinic.address || '',
     phone: clinic.phone_national || clinic.phone_international || clinic.phone || '',
     email: clinic.email || '',

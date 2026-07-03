@@ -1630,6 +1630,26 @@ h4 {
     margin: 0 var(--sp-1);
 }
 
+.price-cmp {
+    display: inline-block;
+    font-size: .7rem;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 99px;
+    vertical-align: middle;
+    margin-left: 4px;
+}
+
+.price-cmp--below {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.price-cmp--above {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
 .pricing-preview {
     margin-bottom: var(--sp-4);
     padding: var(--sp-3) var(--sp-4);

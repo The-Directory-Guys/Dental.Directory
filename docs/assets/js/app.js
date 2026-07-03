@@ -127,6 +127,39 @@ const TREATMENT_MAP = {
     return match ? parseInt(match[1], 10) : null;
   }
 
+  // City price averages loaded lazily from price-averages.json
+  let _cityAverages = null;
+  let _cityAveragesPromise = null;
+  function loadCityAverages() {
+    if (_cityAverages) return Promise.resolve(_cityAverages);
+    if (!_cityAveragesPromise) {
+      _cityAveragesPromise = fetch('assets/data/price-averages.json')
+        .then(r => r.json())
+        .then(data => { _cityAverages = data; return data; })
+        .catch(() => { _cityAverages = {}; return {}; });
+    }
+    return _cityAveragesPromise;
+  }
+
+  function _cmpEntry(price, entry, label) {
+    if (!entry || entry.clinics < 2) return null;
+    const diff = price - entry.avg;
+    const pct = Math.round(Math.abs(diff) / entry.avg * 100);
+    if (pct < 5) return null;
+    const dir = diff < 0 ? 'below' : 'above';
+    return { dir, text: `${pct}% ${dir} ${label} avg (${entry.clinics} clinics)` };
+  }
+
+  function getPriceComparisons(price, city, region) {
+    if (!_cityAverages || !price) return { city: null, region: null };
+    const cityEntry = city ? (_cityAverages.cities || {})[city] : null;
+    const regionEntry = region ? (_cityAverages.regions || {})[region] : null;
+    return {
+      city: _cmpEntry(price, cityEntry, city),
+      region: _cmpEntry(price, regionEntry, region),
+    };
+  }
+
 
   function getHygienistPrice(d) {
     if (!d.pricing || d.pricing.length === 0) return null;
@@ -287,6 +320,9 @@ const TREATMENT_MAP = {
       return;
     }
 
+    // Load city averages in parallel with other fetches
+    loadCityAverages();
+
     // Fetch and attach practitioner specialties + amenity flags for the whole region
     if (!savedMode) {
       const ids = allDentists.map(d => d.id).filter(Boolean);
@@ -332,7 +368,14 @@ const TREATMENT_MAP = {
         const checkupPrice = getCheckupPrice(d);
         const hygPrice = getHygienistPrice(d);
         const parts = [];
-        if (checkupPrice) parts.push(`Checkup from $${checkupPrice}`);
+        if (checkupPrice) {
+          const cmps = getPriceComparisons(checkupPrice, d.city, d.region);
+          const cmp = cmps.city || cmps.region;
+          const cmpBadge = cmp
+            ? ` <span class="price-cmp price-cmp--${cmp.dir}">${cmp.text}</span>`
+            : '';
+          parts.push(`Checkup from $${checkupPrice}${cmpBadge}`);
+        }
         if (hygPrice) parts.push(`Scale &amp; clean from $${hygPrice}`);
         if (parts.length > 0) {
           pricingPreview = `<div class="pricing-summary">💰 ${parts.join('<span class="pricing-summary__sep">·</span>')}</div>`;
@@ -976,6 +1019,9 @@ const TREATMENT_MAP = {
     // Set back button immediately from URL param so it works before async fetch completes
     if (regionParam) setBackButton(regionParam);
 
+    // Load city averages in parallel with clinic fetch
+    loadCityAverages();
+
     // Try Supabase first (by id)
     if (id && typeof fetchClinicById === 'function') {
       dentist = await fetchClinicById(id);
@@ -1077,9 +1123,20 @@ const TREATMENT_MAP = {
     let pricingHTML = '';
     const pricingRows = (dentist.pricing || []).filter(p => /\$\d/.test(p.price));
     if (pricingRows.length > 0) {
+      const checkupPrice = getCheckupPrice(dentist);
+      const cmps = getPriceComparisons(checkupPrice, dentist.city, dentist.region);
       const rows = pricingRows.map(p => {
         const notesHtml = p.notes ? `<div class="pricing-note">${p.notes}</div>` : '';
-        return `<tr><td>${p.service}${notesHtml}</td><td>${p.price}</td></tr>`;
+        const s = p.service.toLowerCase();
+        const isCheckup = s.includes('checkup') || s.includes('check-up') || s.includes('exam') ||
+          s.includes('consult') || s.includes('assessment') || s.includes('new patient') ||
+          s.includes('initial') || s.includes('comprehensive') || s.includes('oral health');
+        let cmpHtml = '';
+        if (isCheckup) {
+          if (cmps.city) cmpHtml += ` <span class="price-cmp price-cmp--${cmps.city.dir}">${cmps.city.text}</span>`;
+          if (cmps.region) cmpHtml += ` <span class="price-cmp price-cmp--${cmps.region.dir}">${cmps.region.text}</span>`;
+        }
+        return `<tr><td>${p.service}${notesHtml}</td><td>${p.price}${cmpHtml}</td></tr>`;
       }).join('');
       pricingHTML = `
         <div class="profile-section">
