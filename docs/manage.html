@@ -70,13 +70,19 @@
   <p style="color:var(--clr-gray-400);">Loading…</p>
 </section>
 
-<!-- Not authenticated -->
+<!-- Pending approval (signed in but not yet linked to a clinic) -->
 <section id="pg-unauth" class="section" style="display:none;">
   <div class="container" style="max-width:520px; text-align:center;">
-    <div style="font-size:2.5rem; margin-bottom:1rem;">🔒</div>
-    <h1 class="section-title" style="font-size:1.5rem;">Manage Your Listing</h1>
-    <p id="unauth-msg" style="color:var(--clr-gray-600); line-height:1.7; margin-bottom:1.5rem;"></p>
-    <a id="unauth-btn" href="mailto:dentalcomparenz@gmail.com" class="btn btn--primary"></a>
+    <div style="font-size:2.5rem; margin-bottom:1rem;">⏳</div>
+    <h1 class="section-title" style="font-size:1.5rem;">Account pending approval</h1>
+    <p style="color:var(--clr-gray-600); line-height:1.7; margin-bottom:1.5rem;">
+      Your account is set up — we just need to link it to your practice.
+      We'll send you an email once that's done, usually within one business day.
+    </p>
+    <p style="color:var(--clr-gray-500); font-size:.875rem; margin-bottom:1.75rem;">
+      Questions? Email us at <a href="mailto:dentalcomparenz@gmail.com" style="color:var(--clr-teal);">dentalcomparenz@gmail.com</a>
+    </p>
+    <button id="unauth-signout-btn" class="btn btn--outline" style="font-size:.875rem;">Sign out</button>
   </div>
 </section>
 
@@ -193,38 +199,25 @@
     btn.textContent = busy ? 'Saving…' : label;
   }
 
-  // Capture before Supabase SDK clears it from the URL
-  const hadTokenInUrl = location.hash.includes('access_token=');
-
-  function showUnauth() {
-    if (hadTokenInUrl) {
-      document.getElementById('unauth-msg').textContent = 'Your login link has expired (links are valid for 1 hour). Email us and we\'ll send you a fresh one.';
-      document.getElementById('unauth-btn').textContent = 'Request a new link';
-      document.getElementById('unauth-btn').href = 'mailto:dentalcomparenz@gmail.com?subject=New%20login%20link%20needed';
-    } else {
-      document.getElementById('unauth-msg').textContent = "Access this page using the link we email you. Haven't claimed your listing yet? Get in touch and we'll set it up.";
-      document.getElementById('unauth-btn').textContent = 'Contact us to claim';
-      document.getElementById('unauth-btn').href = 'mailto:dentalcomparenz@gmail.com';
-    }
-    showState('unauth');
-  }
-
   // ---- Auth ----
   db.auth.onAuthStateChange(async (event, session) => {
     if (event === 'SIGNED_IN' && session) { await loadApp(session.user.id); return; }
-    if (event === 'SIGNED_OUT') { showUnauth(); return; }
+    if (event === 'SIGNED_OUT') { window.location.href = 'login.html'; return; }
   });
 
   // Initial check — getSession() also processes URL hash tokens
   (async () => {
     const { data: { session } } = await db.auth.getSession();
     if (session) { await loadApp(session.user.id); }
-    else { showUnauth(); }
+    else { window.location.href = 'login.html'; }
   })();
+
+  document.getElementById('unauth-signout-btn').addEventListener('click', async () => {
+    await db.auth.signOut();
+  });
 
   document.getElementById('sign-out-btn').addEventListener('click', async () => {
     await db.auth.signOut();
-    showUnauth();
   });
 
   // ---- Load ----
@@ -234,7 +227,7 @@
     const { data: ownerRow } = await db
       .from('clinic_owners').select('clinic_id').eq('user_id', userId).single();
 
-    if (!ownerRow) { showState('unauth'); return; }
+    if (!ownerRow) { showState('unauth'); return; } // signed in but not yet linked
     clinicId = ownerRow.clinic_id;
 
     const [{ data: clinic }, { data: pricing }] = await Promise.all([

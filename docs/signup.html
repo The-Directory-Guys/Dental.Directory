@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account | Dental Compare</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <style>
+    body { background: #0c1f2e; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 2.75rem 2.5rem 2.25rem;
+      width: 100%; max-width: 380px;
+      text-align: center;
+      box-shadow: 0 24px 64px rgba(0,0,0,.45);
+      margin: 1rem;
+    }
+    .card__logo { width: 130px; margin-bottom: 1.75rem; }
+    .card__eyebrow {
+      font-size: .7rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: #64748b; margin-bottom: .35rem;
+    }
+    .card__title { font-size: 1.3rem; font-weight: 700; color: #0c1f2e; margin-bottom: .4rem; }
+    .card__sub { font-size: .875rem; color: #64748b; margin-bottom: 1.75rem; line-height: 1.5; }
+
+    .field { text-align: left; margin-bottom: .75rem; }
+    .field label { display: block; font-size: .78rem; font-weight: 600; color: #334155; margin-bottom: .35rem; }
+    .field input {
+      width: 100%; box-sizing: border-box;
+      padding: .75rem 1rem;
+      border: 1.5px solid #e2e8f0; border-radius: 8px;
+      font-size: .95rem; outline: none;
+      transition: border-color .15s;
+    }
+    .field input:focus { border-color: #0d9488; }
+
+    .btn-primary {
+      width: 100%; padding: .78rem;
+      background: #0d9488; color: #fff;
+      border: none; border-radius: 8px;
+      font-size: .95rem; font-weight: 600; cursor: pointer;
+      transition: opacity .15s;
+    }
+    .btn-primary:hover:not(:disabled) { opacity: .88; }
+    .btn-primary:disabled { opacity: .5; cursor: default; }
+
+    .msg { font-size: .82rem; margin-top: .6rem; min-height: 1.2em; }
+    .msg--err { color: #dc2626; }
+
+    .sent__icon { font-size: 2.5rem; margin-bottom: .75rem; }
+    .sent__title { font-size: 1.1rem; font-weight: 700; color: #0c1f2e; margin-bottom: .5rem; }
+    .sent__body { font-size: .875rem; color: #64748b; line-height: 1.6; }
+    .sent__email { font-weight: 600; color: #0c1f2e; }
+
+    .card__footer {
+      margin-top: 1.5rem; padding-top: 1.25rem;
+      border-top: 1px solid #f1f5f9;
+      font-size: .78rem; color: #94a3b8;
+    }
+    .card__footer a { color: #0d9488; text-decoration: none; }
+    .card__footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="assets/images/logo.png" alt="Dental Compare" class="card__logo">
+
+    <!-- Sign-up form -->
+    <div id="form-state">
+      <div class="card__eyebrow">Clinic Owner Portal</div>
+      <div class="card__title">Create account</div>
+      <div class="card__sub">Set up your clinic owner account. Once verified, we'll link it to your practice.</div>
+
+      <form onsubmit="submitSignup(event)">
+        <div class="field">
+          <label for="email">Email address</label>
+          <input type="email" id="email" placeholder="you@yourclinic.co.nz" required autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="At least 8 characters" required autocomplete="new-password">
+        </div>
+        <div class="field">
+          <label for="password2">Confirm password</label>
+          <input type="password" id="password2" placeholder="••••••••" required autocomplete="new-password">
+        </div>
+        <button type="submit" class="btn-primary" id="submit-btn">Create account</button>
+        <div class="msg msg--err" id="err-msg"></div>
+      </form>
+
+      <div class="card__footer">
+        Already have an account? <a href="login.html">Sign in</a>
+      </div>
+    </div>
+
+    <!-- Email verification sent -->
+    <div id="sent-state" style="display:none">
+      <div class="sent__icon">📬</div>
+      <div class="sent__title">Verify your email</div>
+      <div class="sent__body">
+        We sent a verification link to <span class="sent__email" id="sent-email"></span>.
+        Click it to activate your account — then sign in to get started.
+      </div>
+      <div style="margin-top:1.5rem; font-size:.82rem; color:#94a3b8;">
+        <a href="login.html" style="color:#0d9488; text-decoration:none;">Back to sign in</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script>
+    const db = window.supabase.createClient(
+      'https://ankyjpgcocsvvtyyymys.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFua3lqcGdjb2NzdnZ0eXl5bXlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MTM1MTQsImV4cCI6MjA4OTM4OTUxNH0.SXxTLBdiNVSEDXy95yU0x0ctYFOjIby8hZbJ7B1LPK8'
+    );
+
+    // If already signed in, skip to manage
+    db.auth.getSession().then(({ data: { session } }) => {
+      if (session) window.location.href = 'manage.html';
+    });
+
+    async function submitSignup(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const pw1   = document.getElementById('password').value;
+      const pw2   = document.getElementById('password2').value;
+      const btn   = document.getElementById('submit-btn');
+      const err   = document.getElementById('err-msg');
+
+      err.textContent = '';
+
+      if (pw1.length < 8) {
+        err.textContent = 'Password must be at least 8 characters.';
+        return;
+      }
+      if (pw1 !== pw2) {
+        err.textContent = 'Passwords do not match.';
+        return;
+      }
+
+      btn.disabled = true; btn.textContent = 'Creating account…';
+
+      const { error } = await db.auth.signUp({
+        email,
+        password: pw1,
+        options: { emailRedirectTo: 'https://dentalcompare.co.nz/manage.html' }
+      });
+
+      if (!error) {
+        document.getElementById('sent-email').textContent = email;
+        document.getElementById('form-state').style.display = 'none';
+        document.getElementById('sent-state').style.display = '';
+      } else {
+        err.textContent = error.message;
+        btn.disabled = false; btn.textContent = 'Create account';
+      }
+    }
+  </script>
+</body>
+</html>

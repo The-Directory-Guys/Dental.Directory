@@ -81,31 +81,78 @@
     <div id="form-state">
       <div class="card__eyebrow">Clinic Owner Portal</div>
       <div class="card__title">Sign in</div>
-      <div class="card__sub">Enter your email and we'll send you a secure sign-in link — no password needed.</div>
+      <div class="card__sub">Sign in to manage your clinic listing.</div>
 
-      <form id="login-form" onsubmit="submitLogin(event)">
+      <form onsubmit="submitLogin(event)">
         <div class="field">
           <label for="email">Email address</label>
           <input type="email" id="email" placeholder="you@yourclinic.co.nz" required autocomplete="email">
         </div>
-        <button type="submit" class="btn-primary" id="submit-btn">Send sign-in link</button>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn-primary" id="submit-btn">Sign in</button>
         <div class="msg msg--err" id="err-msg"></div>
       </form>
 
+      <div style="text-align:center; margin-top:.75rem;">
+        <button onclick="showState('forgot')" style="background:none;border:none;color:#0d9488;font-size:.82rem;cursor:pointer;text-decoration:underline;text-underline-offset:2px;">Forgot password?</button>
+      </div>
+
       <div class="card__footer">
-        Not yet a partner? <a href="claim.html">Claim your listing →</a>
+        New clinic owner? <a href="signup.html">Create an account</a> &nbsp;·&nbsp; <a href="claim.html">Claim listing</a>
       </div>
     </div>
 
-    <!-- Sent confirmation -->
-    <div id="sent-state" class="sent">
+    <!-- Forgot password -->
+    <div id="forgot-state" style="display:none">
+      <div class="card__eyebrow">Clinic Owner Portal</div>
+      <div class="card__title">Reset password</div>
+      <div class="card__sub">Enter your email and we'll send a reset link.</div>
+
+      <form onsubmit="submitForgot(event)">
+        <div class="field">
+          <label for="forgot-email">Email address</label>
+          <input type="email" id="forgot-email" placeholder="you@yourclinic.co.nz" required autocomplete="email">
+        </div>
+        <button type="submit" class="btn-primary" id="forgot-btn">Send reset link</button>
+      </form>
+
+      <div style="text-align:center; margin-top:.75rem;">
+        <button onclick="showState('form')" style="background:none;border:none;color:#0d9488;font-size:.82rem;cursor:pointer;text-decoration:underline;text-underline-offset:2px;">Back to sign in</button>
+      </div>
+    </div>
+
+    <!-- Set new password (after clicking reset link) -->
+    <div id="reset-state" style="display:none">
+      <div class="card__eyebrow">Clinic Owner Portal</div>
+      <div class="card__title">Set new password</div>
+      <div class="card__sub">Choose a new password for your account.</div>
+
+      <form onsubmit="submitReset(event)">
+        <div class="field">
+          <label for="new-pw">New password</label>
+          <input type="password" id="new-pw" placeholder="At least 8 characters" required autocomplete="new-password">
+        </div>
+        <div class="field">
+          <label for="new-pw2">Confirm password</label>
+          <input type="password" id="new-pw2" placeholder="••••••••" required autocomplete="new-password">
+        </div>
+        <button type="submit" class="btn-primary" id="reset-btn">Set password</button>
+        <div class="msg msg--err" id="reset-err"></div>
+      </form>
+    </div>
+
+    <!-- Sent confirmation (reset link) -->
+    <div id="sent-state" style="display:none">
       <div class="sent__icon">📬</div>
       <div class="sent__title">Check your inbox</div>
       <div class="sent__body">
-        We sent a sign-in link to <span class="sent__email" id="sent-email"></span>.
-        Click the link in that email to continue — it expires in 1 hour.
+        We sent a link to <span class="sent__email" id="sent-email"></span>.
+        <span id="sent-desc">Click it to set a new password.</span>
       </div>
-      <button class="sent__resend" onclick="resetForm()">Wrong email? Start over</button>
+      <button class="sent__resend" onclick="showState('form')">Back to sign in</button>
     </div>
 
   </div>
@@ -117,46 +164,81 @@
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFua3lqcGdjb2NzdnZ0eXl5bXlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MTM1MTQsImV4cCI6MjA4OTM4OTUxNH0.SXxTLBdiNVSEDXy95yU0x0ctYFOjIby8hZbJ7B1LPK8'
     );
 
-    const REDIRECT = 'https://dentalcompare.co.nz/manage.html';
-
-    // If already logged in, skip to manage
-    db.auth.getSession().then(({ data: { session } }) => {
-      if (session) window.location.href = REDIRECT;
+    // If a password-reset link was clicked, show the new-password form
+    db.auth.onAuthStateChange((event) => {
+      if (event === 'PASSWORD_RECOVERY') showState('reset');
     });
 
+    // If already signed in (and not a recovery), skip to manage
+    db.auth.getSession().then(({ data: { session } }) => {
+      if (session) window.location.href = 'manage.html';
+    });
+
+    function showState(name) {
+      ['form-state','forgot-state','reset-state','sent-state'].forEach(id => {
+        document.getElementById(id).style.display = id === name + '-state' ? '' : 'none';
+      });
+    }
+
+    // ── Sign in ──────────────────────────────────────────
     async function submitLogin(e) {
       e.preventDefault();
-      const email = document.getElementById('email').value.trim();
-      const btn   = document.getElementById('submit-btn');
-      const err   = document.getElementById('err-msg');
+      const email    = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const btn      = document.getElementById('submit-btn');
+      const err      = document.getElementById('err-msg');
 
-      btn.disabled = true;
-      btn.textContent = 'Sending…';
-      err.textContent = '';
+      btn.disabled = true; btn.textContent = 'Signing in…'; err.textContent = '';
 
-      const { error } = await db.auth.signInWithOtp({
-        email,
-        options: { emailRedirectTo: REDIRECT, shouldCreateUser: false }
-      });
-
+      const { error } = await db.auth.signInWithPassword({ email, password });
       if (!error) {
-        document.getElementById('sent-email').textContent = email;
-        document.getElementById('form-state').style.display = 'none';
-        document.getElementById('sent-state').style.display = 'block';
+        window.location.href = 'manage.html';
       } else {
-        err.textContent = 'Could not send the link — make sure your email is registered with us.';
-        btn.disabled = false;
-        btn.textContent = 'Send sign-in link';
+        err.textContent = error.message === 'Invalid login credentials'
+          ? 'Incorrect email or password.'
+          : error.message;
+        btn.disabled = false; btn.textContent = 'Sign in';
       }
     }
 
-    function resetForm() {
-      document.getElementById('form-state').style.display = 'block';
-      document.getElementById('sent-state').style.display = 'none';
-      document.getElementById('submit-btn').disabled = false;
-      document.getElementById('submit-btn').textContent = 'Send sign-in link';
-      document.getElementById('email').value = '';
+    // ── Forgot password ───────────────────────────────────
+    async function submitForgot(e) {
+      e.preventDefault();
+      const email = document.getElementById('forgot-email').value.trim();
+      const btn   = document.getElementById('forgot-btn');
+      btn.disabled = true; btn.textContent = 'Sending…';
+
+      await db.auth.resetPasswordForEmail(email, {
+        redirectTo: 'https://dentalcompare.co.nz/login.html'
+      });
+
+      document.getElementById('sent-email').textContent = email;
+      document.getElementById('sent-desc').textContent = 'Click the link in that email to set a new password.';
+      showState('sent');
     }
+
+    // ── Set new password (after reset link) ──────────────
+    async function submitReset(e) {
+      e.preventDefault();
+      const pw1 = document.getElementById('new-pw').value;
+      const pw2 = document.getElementById('new-pw2').value;
+      const err = document.getElementById('reset-err');
+
+      if (pw1 !== pw2) { err.textContent = 'Passwords do not match.'; return; }
+      if (pw1.length < 8) { err.textContent = 'Password must be at least 8 characters.'; return; }
+
+      const btn = document.getElementById('reset-btn');
+      btn.disabled = true; btn.textContent = 'Saving…'; err.textContent = '';
+
+      const { error } = await db.auth.updateUser({ password: pw1 });
+      if (!error) {
+        window.location.href = 'manage.html';
+      } else {
+        err.textContent = error.message;
+        btn.disabled = false; btn.textContent = 'Set password';
+      }
+    }
+
   </script>
 </body>
 </html>
