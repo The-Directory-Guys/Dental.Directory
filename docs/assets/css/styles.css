@@ -1607,9 +1607,8 @@ h4 {
    =================================================== */
 .pricing-summary {
     display: flex;
-    align-items: center;
-    gap: var(--sp-2);
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: var(--sp-1);
     font-size: var(--fs-sm);
     font-weight: 500;
     color: var(--clr-navy);
@@ -1618,6 +1617,13 @@ h4 {
     background: var(--clr-gray-50);
     border-radius: var(--radius-md);
     border: 1px solid var(--clr-gray-100);
+}
+
+.pricing-line {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
 }
 
 .pricing-summary--muted {
