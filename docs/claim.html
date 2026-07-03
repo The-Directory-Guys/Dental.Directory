@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claim Your Listing | Dental Compare</title>
+  <meta name="description" content="Claim your dental practice on Dental Compare to manage your listing and see how your prices compare.">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <style>
+    .claim-hero {
+      background: #0c1f2e;
+      color: #fff;
+      padding: 3.5rem 1.5rem 3rem;
+      text-align: center;
+    }
+    .claim-hero__eyebrow {
+      font-size: .75rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--clr-teal, #0d9488);
+      margin-bottom: .75rem;
+    }
+    .claim-hero__title { font-size: 2rem; font-weight: 700; margin-bottom: .75rem; text-wrap: balance; }
+    .claim-hero__sub { font-size: 1rem; color: rgba(255,255,255,.65); max-width: 520px; margin: 0 auto; line-height: 1.6; }
+
+    .claim-benefits {
+      display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
+      padding: 2rem 1.5rem;
+      border-bottom: 1px solid #e8edf2;
+      max-width: 820px; margin: 0 auto;
+    }
+    .benefit {
+      display: flex; align-items: flex-start; gap: .75rem;
+      flex: 1; min-width: 200px; max-width: 240px;
+    }
+    .benefit__icon { font-size: 1.3rem; flex-shrink: 0; margin-top: .1rem; }
+    .benefit__title { font-size: .875rem; font-weight: 600; color: #1e293b; margin-bottom: .2rem; }
+    .benefit__desc { font-size: .8rem; color: #64748b; line-height: 1.5; }
+
+    .claim-form-wrap {
+      max-width: 600px; margin: 2.5rem auto; padding: 0 1.5rem 4rem;
+    }
+
+    .form-card {
+      background: #fff;
+      border: 1px solid #e8edf2;
+      border-radius: 14px;
+      padding: 2rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,.06);
+    }
+    .form-card__title { font-size: 1.1rem; font-weight: 700; color: #0c1f2e; margin-bottom: 1.5rem; }
+
+    .field { margin-bottom: 1.1rem; }
+    .field label {
+      display: block; font-size: .8rem; font-weight: 600;
+      color: #334155; margin-bottom: .35rem;
+    }
+    .field input, .field select, .field textarea {
+      width: 100%; box-sizing: border-box;
+      padding: .7rem .9rem;
+      border: 1.5px solid #e2e8f0; border-radius: 8px;
+      font-size: .9rem; font-family: inherit;
+      outline: none; transition: border-color .15s;
+      color: #1e293b;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color: var(--clr-teal, #0d9488);
+    }
+    .field textarea { resize: vertical; min-height: 80px; }
+    .field__hint { font-size: .75rem; color: #94a3b8; margin-top: .3rem; }
+
+    /* Clinic search */
+    .search-wrap { position: relative; }
+    .search-results {
+      position: absolute; top: 100%; left: 0; right: 0; z-index: 10;
+      background: #fff; border: 1.5px solid #e2e8f0; border-top: none;
+      border-radius: 0 0 8px 8px;
+      max-height: 220px; overflow-y: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,.1);
+      display: none;
+    }
+    .search-results.open { display: block; }
+    .search-result {
+      padding: .65rem .9rem; cursor: pointer;
+      border-bottom: 1px solid #f1f5f9;
+      transition: background .1s;
+    }
+    .search-result:last-child { border-bottom: none; }
+    .search-result:hover, .search-result.active { background: #f0fdfa; }
+    .search-result__name { font-size: .875rem; font-weight: 600; color: #1e293b; }
+    .search-result__loc  { font-size: .75rem; color: #94a3b8; }
+    .search-result--none { color: #94a3b8; font-size: .85rem; font-style: italic; }
+
+    .selected-clinic {
+      display: none;
+      background: #f0fdfa; border: 1.5px solid var(--clr-teal, #0d9488);
+      border-radius: 8px; padding: .65rem .9rem;
+      margin-top: .35rem;
+      display: none; align-items: center; justify-content: space-between;
+    }
+    .selected-clinic.show { display: flex; }
+    .selected-clinic__name { font-size: .875rem; font-weight: 600; color: #0c1f2e; }
+    .selected-clinic__loc  { font-size: .75rem; color: #64748b; }
+    .selected-clinic__clear {
+      background: none; border: none; color: #94a3b8;
+      cursor: pointer; font-size: 1.1rem; line-height: 1; padding: 0 .2rem;
+    }
+    .selected-clinic__clear:hover { color: #dc2626; }
+
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .submit-btn {
+      width: 100%; padding: .85rem;
+      background: var(--clr-teal, #0d9488); color: #fff;
+      border: none; border-radius: 8px;
+      font-size: 1rem; font-weight: 600; cursor: pointer;
+      transition: opacity .15s; margin-top: .5rem;
+    }
+    .submit-btn:hover:not(:disabled) { opacity: .88; }
+    .submit-btn:disabled { opacity: .5; cursor: default; }
+
+    .form-err { color: #dc2626; font-size: .82rem; margin-top: .5rem; }
+
+    /* Success screen */
+    .success { display: none; text-align: center; padding: 2rem; }
+    .success__icon { font-size: 3rem; margin-bottom: 1rem; }
+    .success__title { font-size: 1.2rem; font-weight: 700; color: #0c1f2e; margin-bottom: .75rem; }
+    .success__body { font-size: .9rem; color: #64748b; line-height: 1.6; max-width: 380px; margin: 0 auto; }
+    .success__back { display: inline-block; margin-top: 1.5rem; color: var(--clr-teal, #0d9488); font-weight: 600; font-size: .9rem; text-decoration: none; }
+
+    @media (max-width: 480px) { .field-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a href="/" class="logo">
+        <img src="assets/images/logo.png" alt="Dental Compare" class="logo__img">
+      </a>
+      <nav class="nav" id="main-nav">
+        <a href="/" class="nav__link">Home</a>
+        <a href="/#locations" class="nav__link">All Regions</a>
+        <a href="faq.html" class="nav__link">FAQ</a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="claim-hero">
+    <div class="claim-hero__eyebrow">For Practice Owners</div>
+    <h1 class="claim-hero__title">Claim your listing</h1>
+    <p class="claim-hero__sub">Take control of how your practice appears on Dental Compare and see how your prices compare to others in your area.</p>
+  </section>
+
+  <div class="claim-benefits">
+    <div class="benefit">
+      <div class="benefit__icon">📊</div>
+      <div>
+        <div class="benefit__title">Price benchmarking</div>
+        <div class="benefit__desc">See how your checkup prices compare to other clinics in your city and region.</div>
+      </div>
+    </div>
+    <div class="benefit">
+      <div class="benefit__icon">✏️</div>
+      <div>
+        <div class="benefit__title">Update your details</div>
+        <div class="benefit__desc">Correct your address, phone, hours, and services — all in one place.</div>
+      </div>
+    </div>
+    <div class="benefit">
+      <div class="benefit__icon">🔔</div>
+      <div>
+        <div class="benefit__title">Review alerts</div>
+        <div class="benefit__desc">Get notified when a new patient review is posted about your practice.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="claim-form-wrap">
+    <div class="form-card">
+
+      <!-- Claim form -->
+      <div id="claim-form-state">
+        <div class="form-card__title">Submit a claim request</div>
+        <form id="claim-form" onsubmit="submitClaim(event)" novalidate>
+
+          <div class="field">
+            <label for="clinic-search">Your practice <span style="color:#dc2626">*</span></label>
+            <div class="search-wrap">
+              <input type="text" id="clinic-search" placeholder="Start typing your practice name…"
+                     autocomplete="off" oninput="searchClinics(this.value)" onfocus="onSearchFocus()">
+              <div class="search-results" id="search-results"></div>
+            </div>
+            <div class="selected-clinic" id="selected-clinic">
+              <div>
+                <div class="selected-clinic__name" id="sel-name"></div>
+                <div class="selected-clinic__loc"  id="sel-loc"></div>
+              </div>
+              <button type="button" class="selected-clinic__clear" onclick="clearClinic()" aria-label="Clear">×</button>
+            </div>
+            <input type="hidden" id="clinic-id">
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="owner-name">Your name <span style="color:#dc2626">*</span></label>
+              <input type="text" id="owner-name" placeholder="Jane Smith" required>
+            </div>
+            <div class="field">
+              <label for="owner-role">Your role <span style="color:#dc2626">*</span></label>
+              <select id="owner-role" required>
+                <option value="">Select…</option>
+                <option value="owner">Owner / Principal dentist</option>
+                <option value="manager">Practice manager</option>
+                <option value="staff">Receptionist / Admin</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="owner-email">Email address <span style="color:#dc2626">*</span></label>
+              <input type="email" id="owner-email" placeholder="you@practice.co.nz" required autocomplete="email">
+              <div class="field__hint">We'll use this to send your sign-in link.</div>
+            </div>
+            <div class="field">
+              <label for="owner-phone">Phone (optional)</label>
+              <input type="tel" id="owner-phone" placeholder="09 000 0000">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="owner-msg">Anything else? (optional)</label>
+            <textarea id="owner-msg" placeholder="e.g. I am the owner and have been operating since 2015…"></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn" id="claim-btn">Submit claim request</button>
+          <div class="form-err" id="claim-err"></div>
+        </form>
+      </div>
+
+      <!-- Success screen -->
+      <div id="claim-success" class="success">
+        <div class="success__icon">✅</div>
+        <div class="success__title">Request received</div>
+        <div class="success__body">
+          Thanks — we'll review your claim and get back to you at <strong id="success-email"></strong> within 1–2 business days.
+          Once approved, you'll receive a sign-in link to access your dashboard.
+        </div>
+        <a href="/" class="success__back">← Back to directory</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="assets/js/supabase.js"></script>
+  <script>
+    const SB_URL = 'https://ankyjpgcocsvvtyyymys.supabase.co';
+    const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFua3lqcGdjb2NzdnZ0eXl5bXlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MTM1MTQsImV4cCI6MjA4OTM4OTUxNH0.SXxTLBdiNVSEDXy95yU0x0ctYFOjIby8hZbJ7B1LPK8';
+    const H = { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}`, 'Content-Type': 'application/json' };
+
+    let selectedClinic = null;
+    let searchTimer = null;
+
+    function searchClinics(q) {
+      clearTimeout(searchTimer);
+      if (q.length < 2) { closeResults(); return; }
+      searchTimer = setTimeout(async () => {
+        const enc = encodeURIComponent(q);
+        const url = `${SB_URL}/rest/v1/dental_clinics?select=id,name,city,suburb_town&name=ilike.*${enc}*&business_status=eq.OPERATIONAL&limit=8`;
+        const r = await fetch(url, { headers: H });
+        const data = await r.json();
+        showResults(Array.isArray(data) ? data : []);
+      }, 250);
+    }
+
+    function showResults(items) {
+      const el = document.getElementById('search-results');
+      if (!items.length) {
+        el.innerHTML = '<div class="search-result search-result--none">No matching practices found</div>';
+      } else {
+        el.innerHTML = items.map(c => `
+          <div class="search-result" onclick="selectClinic(${c.id}, '${esc(c.name)}', '${esc(c.suburb_town || c.city || '')}')">
+            <div class="search-result__name">${c.name}</div>
+            <div class="search-result__loc">${c.suburb_town || ''} ${c.city || ''}</div>
+          </div>`).join('');
+      }
+      el.classList.add('open');
+    }
+
+    function closeResults() {
+      document.getElementById('search-results').classList.remove('open');
+    }
+
+    function onSearchFocus() {
+      const q = document.getElementById('clinic-search').value;
+      if (q.length >= 2) searchClinics(q);
+    }
+
+    function selectClinic(id, name, loc) {
+      selectedClinic = { id, name, loc };
+      document.getElementById('clinic-id').value = id;
+      document.getElementById('sel-name').textContent = name;
+      document.getElementById('sel-loc').textContent = loc;
+      document.getElementById('selected-clinic').classList.add('show');
+      document.getElementById('clinic-search').style.display = 'none';
+      closeResults();
+    }
+
+    function clearClinic() {
+      selectedClinic = null;
+      document.getElementById('clinic-id').value = '';
+      document.getElementById('selected-clinic').classList.remove('show');
+      document.getElementById('clinic-search').style.display = '';
+      document.getElementById('clinic-search').value = '';
+      document.getElementById('clinic-search').focus();
+    }
+
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.search-wrap')) closeResults();
+    });
+
+    function esc(s) { return String(s).replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
+
+    async function submitClaim(e) {
+      e.preventDefault();
+      const err = document.getElementById('claim-err');
+      err.textContent = '';
+
+      const clinicId  = parseInt(document.getElementById('clinic-id').value);
+      const name      = document.getElementById('owner-name').value.trim();
+      const role      = document.getElementById('owner-role').value;
+      const email     = document.getElementById('owner-email').value.trim();
+      const phone     = document.getElementById('owner-phone').value.trim();
+      const message   = document.getElementById('owner-msg').value.trim();
+
+      if (!clinicId) { err.textContent = 'Please select your practice from the list.'; return; }
+      if (!name)     { err.textContent = 'Please enter your name.'; return; }
+      if (!role)     { err.textContent = 'Please select your role.'; return; }
+      if (!email)    { err.textContent = 'Please enter your email address.'; return; }
+
+      const btn = document.getElementById('claim-btn');
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+
+      const payload = { clinic_id: clinicId, name, role, email, phone: phone || null, message: message || null };
+      const r = await fetch(`${SB_URL}/rest/v1/clinic_claims`, {
+        method: 'POST', headers: { ...H, Prefer: 'return=minimal' },
+        body: JSON.stringify(payload)
+      });
+
+      if (r.ok || r.status === 201) {
+        document.getElementById('success-email').textContent = email;
+        document.getElementById('claim-form-state').style.display = 'none';
+        document.getElementById('claim-success').style.display = 'block';
+      } else {
+        err.textContent = 'Something went wrong — please try again or email us directly.';
+        btn.disabled = false;
+        btn.textContent = 'Submit claim request';
+      }
+    }
+
+    // Mobile nav
+    const toggle = document.getElementById('menu-toggle');
+    const nav    = document.getElementById('main-nav');
+    if (toggle) toggle.addEventListener('click', () => nav.classList.toggle('active'));
+  </script>
+</body>
+</html>

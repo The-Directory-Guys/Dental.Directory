@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In | Dental Compare</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <style>
+    body { background: #0c1f2e; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 2.75rem 2.5rem 2.25rem;
+      width: 100%; max-width: 380px;
+      text-align: center;
+      box-shadow: 0 24px 64px rgba(0,0,0,.45);
+      margin: 1rem;
+    }
+    .card__logo { width: 130px; margin-bottom: 1.75rem; }
+    .card__eyebrow {
+      font-size: .7rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: #64748b; margin-bottom: .35rem;
+    }
+    .card__title { font-size: 1.3rem; font-weight: 700; color: #0c1f2e; margin-bottom: .4rem; }
+    .card__sub { font-size: .875rem; color: #64748b; margin-bottom: 1.75rem; line-height: 1.5; }
+
+    .field { text-align: left; margin-bottom: .75rem; }
+    .field label { display: block; font-size: .78rem; font-weight: 600; color: #334155; margin-bottom: .35rem; }
+    .field input {
+      width: 100%; box-sizing: border-box;
+      padding: .75rem 1rem;
+      border: 1.5px solid #e2e8f0; border-radius: 8px;
+      font-size: .95rem; outline: none;
+      transition: border-color .15s;
+    }
+    .field input:focus { border-color: var(--clr-teal, #0d9488); }
+
+    .btn-primary {
+      width: 100%; padding: .78rem;
+      background: var(--clr-teal, #0d9488); color: #fff;
+      border: none; border-radius: 8px;
+      font-size: .95rem; font-weight: 600; cursor: pointer;
+      transition: opacity .15s;
+    }
+    .btn-primary:hover:not(:disabled) { opacity: .88; }
+    .btn-primary:disabled { opacity: .5; cursor: default; }
+
+    .msg { font-size: .82rem; margin-top: .6rem; min-height: 1.2em; }
+    .msg--err { color: #dc2626; }
+    .msg--ok  { color: #15803d; }
+
+    /* Sent state */
+    .sent { display: none; }
+    .sent__icon { font-size: 2.5rem; margin-bottom: .75rem; }
+    .sent__title { font-size: 1.1rem; font-weight: 700; color: #0c1f2e; margin-bottom: .5rem; }
+    .sent__body { font-size: .875rem; color: #64748b; line-height: 1.6; }
+    .sent__email { font-weight: 600; color: #0c1f2e; }
+    .sent__resend {
+      background: none; border: none; color: var(--clr-teal, #0d9488);
+      font-size: .82rem; cursor: pointer; margin-top: 1.25rem;
+      text-decoration: underline; text-underline-offset: 2px;
+    }
+
+    .card__footer {
+      margin-top: 1.5rem; padding-top: 1.25rem;
+      border-top: 1px solid #f1f5f9;
+      font-size: .78rem; color: #94a3b8;
+    }
+    .card__footer a { color: var(--clr-teal, #0d9488); text-decoration: none; }
+    .card__footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="card" id="card">
+
+    <img src="assets/images/logo.png" alt="Dental Compare" class="card__logo">
+
+    <!-- Sign-in form -->
+    <div id="form-state">
+      <div class="card__eyebrow">Clinic Owner Portal</div>
+      <div class="card__title">Sign in</div>
+      <div class="card__sub">Enter your email and we'll send you a secure sign-in link — no password needed.</div>
+
+      <form id="login-form" onsubmit="submitLogin(event)">
+        <div class="field">
+          <label for="email">Email address</label>
+          <input type="email" id="email" placeholder="you@yourclinic.co.nz" required autocomplete="email">
+        </div>
+        <button type="submit" class="btn-primary" id="submit-btn">Send sign-in link</button>
+        <div class="msg msg--err" id="err-msg"></div>
+      </form>
+
+      <div class="card__footer">
+        Not yet a partner? <a href="claim.html">Claim your listing →</a>
+      </div>
+    </div>
+
+    <!-- Sent confirmation -->
+    <div id="sent-state" class="sent">
+      <div class="sent__icon">📬</div>
+      <div class="sent__title">Check your inbox</div>
+      <div class="sent__body">
+        We sent a sign-in link to <span class="sent__email" id="sent-email"></span>.
+        Click the link in that email to continue — it expires in 1 hour.
+      </div>
+      <button class="sent__resend" onclick="resetForm()">Wrong email? Start over</button>
+    </div>
+
+  </div>
+
+  <script src="assets/js/auth.js"></script>
+  <script>
+    // If arriving from a magic link, hash will contain access_token
+    (async function handleCallback() {
+      const p = DCAuth.parseHash();
+      if (!p.access_token) return;
+      // Clear the hash so it's not visible in the URL bar
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+      DCAuth.saveSession(p);
+      const next = new URLSearchParams(window.location.search).get('next');
+      window.location.href = next && next.startsWith(window.location.origin)
+        ? next
+        : 'stats.html';
+    })();
+
+    // If already logged in, skip straight to the destination
+    (async function checkExisting() {
+      const s = await DCAuth.getValidSession();
+      if (!s) return;
+      const next = new URLSearchParams(window.location.search).get('next');
+      window.location.href = next && next.startsWith(window.location.origin)
+        ? next
+        : 'stats.html';
+    })();
+
+    const REDIRECT = `${window.location.origin}/login.html`;
+
+    async function submitLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const btn   = document.getElementById('submit-btn');
+      const err   = document.getElementById('err-msg');
+
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      err.textContent = '';
+
+      const { ok } = await DCAuth.sendMagicLink(email, REDIRECT);
+
+      if (ok) {
+        document.getElementById('sent-email').textContent = email;
+        document.getElementById('form-state').style.display = 'none';
+        document.getElementById('sent-state').style.display = 'block';
+      } else {
+        err.textContent = 'Could not send the link — make sure your email is registered with us.';
+        btn.disabled = false;
+        btn.textContent = 'Send sign-in link';
+      }
+    }
+
+    function resetForm() {
+      document.getElementById('form-state').style.display = 'block';
+      document.getElementById('sent-state').style.display = 'none';
+      document.getElementById('submit-btn').disabled = false;
+      document.getElementById('submit-btn').textContent = 'Send sign-in link';
+      document.getElementById('email').value = '';
+    }
+  </script>
+</body>
+</html>
