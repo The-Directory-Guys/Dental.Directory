@@ -110,32 +110,19 @@
 
   </div>
 
-  <script src="assets/js/auth.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script>
-    // If arriving from a magic link, hash will contain access_token
-    (async function handleCallback() {
-      const p = DCAuth.parseHash();
-      if (!p.access_token) return;
-      // Clear the hash so it's not visible in the URL bar
-      history.replaceState(null, '', window.location.pathname + window.location.search);
-      DCAuth.saveSession(p);
-      const next = new URLSearchParams(window.location.search).get('next');
-      window.location.href = next && next.startsWith(window.location.origin)
-        ? next
-        : 'stats.html';
-    })();
+    const db = window.supabase.createClient(
+      'https://ankyjpgcocsvvtyyymys.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFua3lqcGdjb2NzdnZ0eXl5bXlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MTM1MTQsImV4cCI6MjA4OTM4OTUxNH0.SXxTLBdiNVSEDXy95yU0x0ctYFOjIby8hZbJ7B1LPK8'
+    );
 
-    // If already logged in, skip straight to the destination
-    (async function checkExisting() {
-      const s = await DCAuth.getValidSession();
-      if (!s) return;
-      const next = new URLSearchParams(window.location.search).get('next');
-      window.location.href = next && next.startsWith(window.location.origin)
-        ? next
-        : 'stats.html';
-    })();
+    const REDIRECT = 'https://dentalcompare.co.nz/manage.html';
 
-    const REDIRECT = `${window.location.origin}/login.html`;
+    // If already logged in, skip to manage
+    db.auth.getSession().then(({ data: { session } }) => {
+      if (session) window.location.href = REDIRECT;
+    });
 
     async function submitLogin(e) {
       e.preventDefault();
@@ -147,9 +134,12 @@
       btn.textContent = 'Sending…';
       err.textContent = '';
 
-      const { ok } = await DCAuth.sendMagicLink(email, REDIRECT);
+      const { error } = await db.auth.signInWithOtp({
+        email,
+        options: { emailRedirectTo: REDIRECT, shouldCreateUser: false }
+      });
 
-      if (ok) {
+      if (!error) {
         document.getElementById('sent-email').textContent = email;
         document.getElementById('form-state').style.display = 'none';
         document.getElementById('sent-state').style.display = 'block';

@@ -268,24 +268,24 @@
   </main>
 </div>
 
-<script src="assets/js/auth.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script>
   const SUPABASE_URL = 'https://ankyjpgcocsvvtyyymys.supabase.co';
   const ANON_KEY    = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFua3lqcGdjb2NzdnZ0eXl5bXlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MTM1MTQsImV4cCI6MjA4OTM4OTUxNH0.SXxTLBdiNVSEDXy95yU0x0ctYFOjIby8hZbJ7B1LPK8';
+  const db = window.supabase.createClient(SUPABASE_URL, ANON_KEY);
 
   const CHECKUP = new Set(['exam / checkup','checkup','exam','examination','check-up']);
 
   // ── Auth ──────────────────────────────────────────────────
   async function logout() {
-    await DCAuth.signOut();
+    await db.auth.signOut();
     window.location.href = 'login.html';
   }
 
-  async function openDashboard(session) {
+  function openDashboard(session) {
     document.getElementById('dashboard').style.display = 'block';
     document.getElementById('dash-time').textContent =
       new Date().toLocaleDateString('en-NZ', { day:'numeric', month:'short', year:'numeric' });
-    // Show signed-in email if available
     const email = session?.user?.email;
     if (email) {
       document.getElementById('user-email').textContent = email;
@@ -295,8 +295,9 @@
   }
 
   // Require a valid session — redirect to login if none
-  DCAuth.requireAuth('login.html').then(session => {
+  db.auth.getSession().then(({ data: { session } }) => {
     if (session) openDashboard(session);
+    else window.location.href = 'login.html';
   });
 
   // ── Supabase helpers ──────────────────────────────────────
