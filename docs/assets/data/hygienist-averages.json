@@ -1,32 +1,48 @@
 {
   "cities": {
     "North Shore": {
-      "avg": 153.2,
-      "clinics": 13
+      "avg": 155.1,
+      "clinics": 14
     },
     "Rotorua": {
       "avg": 169.0,
       "clinics": 2
     },
-    "Te Puke": {
-      "avg": 149.0,
+    "Cambridge": {
+      "avg": 145.0,
+      "clinics": 3
+    },
+    "Queenstown": {
+      "avg": 192.5,
       "clinics": 2
     },
-    "Tauranga": {
-      "avg": 173.2,
-      "clinics": 4
+    "Te Puke": {
+      "avg": 149.0,
+      "clinics": 3
     },
-    "Manukau": {
-      "avg": 169.8,
-      "clinics": 8
+    "Tauranga": {
+      "avg": 168.4,
+      "clinics": 5
     },
     "Hamilton": {
-      "avg": 165.0,
+      "avg": 145.8,
+      "clinics": 5
+    },
+    "Manukau": {
+      "avg": 161.4,
+      "clinics": 9
+    },
+    "Dunedin": {
+      "avg": 137.0,
       "clinics": 2
     },
     "Christchurch": {
-      "avg": 179.4,
-      "clinics": 7
+      "avg": 180.1,
+      "clinics": 10
+    },
+    "Whangārei": {
+      "avg": 139.4,
+      "clinics": 5
     },
     "Rodney": {
       "avg": 146.8,
@@ -40,31 +56,51 @@
       "avg": 201.2,
       "clinics": 6
     },
-    "Waitakere": {
-      "avg": 130.0,
+    "Wānaka": {
+      "avg": 182.5,
+      "clinics": 2
+    },
+    "Napier": {
+      "avg": 174.7,
       "clinics": 3
+    },
+    "Waitakere": {
+      "avg": 141.2,
+      "clinics": 4
     }
   },
   "regions": {
     "Auckland": {
-      "avg": 167.4,
-      "clinics": 48
+      "avg": 166.4,
+      "clinics": 51
     },
     "Bay of Plenty": {
-      "avg": 166.1,
-      "clinics": 8
+      "avg": 162.7,
+      "clinics": 10
     },
     "Waikato": {
-      "avg": 165.0,
-      "clinics": 4
+      "avg": 150.2,
+      "clinics": 11
+    },
+    "Otago": {
+      "avg": 170.7,
+      "clinics": 6
     },
     "Canterbury": {
-      "avg": 175.1,
-      "clinics": 9
+      "avg": 176.8,
+      "clinics": 12
     },
     "Wellington": {
-      "avg": 199.0,
-      "clinics": 8
+      "avg": 198.6,
+      "clinics": 9
+    },
+    "Northland": {
+      "avg": 151.0,
+      "clinics": 7
+    },
+    "Hawke's Bay": {
+      "avg": 174.7,
+      "clinics": 3
     }
   }
 }
