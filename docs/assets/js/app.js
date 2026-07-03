@@ -408,7 +408,7 @@ const TREATMENT_MAP = {
           parts.push(`Scale &amp; clean from $${hygPrice}${hBadge}`);
         }
         if (parts.length > 0) {
-          pricingPreview = `<div class="pricing-summary">💰 ${parts.join('<span class="pricing-summary__sep">·</span>')}</div>`;
+          pricingPreview = `<div class="pricing-summary">${parts.map(p => `💰 ${p}`).join('<br>')}</div>`;
         } else if (d.pricing.some(p => /\$\d/.test(p.price))) {
           pricingPreview = `<div class="pricing-summary pricing-summary--muted">💰 Pricing available</div>`;
         } else {
