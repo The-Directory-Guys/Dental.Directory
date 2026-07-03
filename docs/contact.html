@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="assets/images/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="assets/images/favicon-192.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Dental Compare NZ</title>
+    <meta name="description" content="Get in touch with Dental Compare — update a clinic listing, report incorrect information, or ask a general question.">
+    <meta property="og:title" content="Contact | Dental Compare NZ">
+    <meta property="og:description" content="Get in touch with Dental Compare — update a clinic listing, report incorrect information, or ask a general question.">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://dentalcompare.co.nz/contact.html">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dentalcompare.co.nz/"},
+        {"@type": "ListItem", "position": 2, "name": "Contact", "item": "https://dentalcompare.co.nz/contact.html"}
+      ]
+    }
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4J758VJQVX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4J758VJQVX');
+    </script>
+    <style>
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: var(--sp-10);
+        }
+        @media (max-width: 540px) {
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+        .contact-card {
+            display: block;
+            border: 1.5px solid var(--clr-gray-200);
+            border-radius: 10px;
+            padding: 1.25rem 1.4rem;
+            text-decoration: none;
+            color: inherit;
+            transition: border-color .15s, box-shadow .15s;
+        }
+        .contact-card:hover {
+            border-color: var(--clr-teal);
+            box-shadow: 0 2px 12px rgba(13,148,136,.1);
+        }
+        .contact-card__icon {
+            font-size: 1.4rem;
+            margin-bottom: .55rem;
+        }
+        .contact-card__title {
+            font-weight: 700;
+            font-size: .95rem;
+            color: var(--clr-navy);
+            margin-bottom: .25rem;
+        }
+        .contact-card__desc {
+            font-size: .83rem;
+            color: var(--clr-gray-600);
+            line-height: 1.5;
+        }
+        .contact-email-block {
+            background: var(--clr-gray-50, #f8fafc);
+            border-radius: 10px;
+            padding: 1.4rem 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .contact-email-block__label {
+            font-size: .82rem;
+            color: var(--clr-gray-600);
+            flex: 1 1 120px;
+        }
+        .contact-email-block__addr {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--clr-teal);
+            text-decoration: none;
+            word-break: break-all;
+        }
+        .contact-email-block__addr:hover { text-decoration: underline; }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header__inner">
+            <a href="/" class="logo">
+                <img src="assets/images/logo.png" alt="Dental Compare" class="logo__img">
+            </a>
+            <nav class="nav" id="main-nav">
+                <a href="/" class="nav__link">Home</a>
+                <a href="/#locations" class="nav__link">All Regions</a>
+                <a href="faq.html" class="nav__link">FAQ</a>
+                <a href="contact.html" class="nav__link nav__link--active">Contact</a>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container" style="max-width: 680px;">
+            <nav aria-label="Breadcrumb" style="font-size:.85rem; color:var(--clr-gray-400); margin-bottom:var(--sp-6);">
+                <a href="/" style="color:var(--clr-gray-400); text-decoration:none;">Home</a>
+                <span style="margin:0 .4rem;">/</span>
+                <span>Contact</span>
+            </nav>
+
+            <h1 class="section-title" style="text-align:left; margin-bottom:.5rem;">Contact us</h1>
+            <p style="color:var(--clr-gray-600); margin-bottom:var(--sp-8);">We're a small team. Email is the best way to reach us — we typically reply within one business day.</p>
+
+            <div class="contact-grid">
+                <a class="contact-card" href="mailto:dentalcomparenz@gmail.com?subject=Clinic%20listing%20update">
+                    <div class="contact-card__icon">🏥</div>
+                    <div class="contact-card__title">Update my clinic listing</div>
+                    <div class="contact-card__desc">Change your phone number, website, hours, prices, or description.</div>
+                </a>
+                <a class="contact-card" href="mailto:dentalcomparenz@gmail.com?subject=Claim%20my%20clinic%20listing">
+                    <div class="contact-card__icon">🔑</div>
+                    <div class="contact-card__title">Claim my listing</div>
+                    <div class="contact-card__desc">Get access to manage your clinic's page directly.</div>
+                </a>
+                <a class="contact-card" href="mailto:dentalcomparenz@gmail.com?subject=Incorrect%20information">
+                    <div class="contact-card__icon">✏️</div>
+                    <div class="contact-card__title">Report incorrect information</div>
+                    <div class="contact-card__desc">Spotted something that's out of date or wrong on a clinic page.</div>
+                </a>
+                <a class="contact-card" href="mailto:dentalcomparenz@gmail.com?subject=General%20enquiry">
+                    <div class="contact-card__icon">💬</div>
+                    <div class="contact-card__title">General enquiry</div>
+                    <div class="contact-card__desc">Anything else — feedback, ideas, or questions about the site.</div>
+                </a>
+            </div>
+
+            <div class="contact-email-block">
+                <div class="contact-email-block__label">Or email us directly at</div>
+                <a class="contact-email-block__addr" href="mailto:dentalcomparenz@gmail.com">dentalcomparenz@gmail.com</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__copy">Built in New Zealand</div>
+        </div>
+    </footer>
+
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
