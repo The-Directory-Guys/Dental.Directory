@@ -2226,42 +2226,45 @@ details[open] .faq__question::after {
    =================================================== */
 #fb-widget {
     position: fixed;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    right: 1.5rem;
+    bottom: 1.5rem;
     z-index: 400;
-    display: flex;
-    align-items: center;
 }
 
 #fb-tab {
-    writing-mode: vertical-lr;
-    transform: rotate(180deg);
     background: var(--clr-teal);
     color: var(--clr-white);
     border: none;
-    border-radius: 0 0 var(--radius-md) var(--radius-md);
-    padding: var(--sp-5) var(--sp-2);
+    border-radius: var(--radius-full);
+    padding: var(--sp-3) var(--sp-5);
     font-family: var(--ff-body);
     font-size: var(--fs-sm);
     font-weight: 600;
-    letter-spacing: .04em;
+    letter-spacing: .03em;
     cursor: pointer;
-    box-shadow: -2px 0 8px rgba(0,0,0,.15);
-    transition: background var(--transition);
+    box-shadow: 0 4px 16px rgba(14,165,233,.4);
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
     white-space: nowrap;
-    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+}
+
+#fb-tab::before {
+    content: '💬';
+    font-size: 1rem;
 }
 
 #fb-tab:hover {
     background: var(--clr-teal-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(14,165,233,.5);
 }
 
 #fb-panel {
     position: absolute;
-    right: 100%;
-    top: 50%;
-    transform: translateY(-50%);
+    right: 0;
+    bottom: calc(100% + 0.75rem);
     width: 320px;
     background: var(--clr-white);
     border-radius: var(--radius-xl);
@@ -2271,8 +2274,8 @@ details[open] .faq__question::after {
 }
 
 @keyframes fb-slide-in {
-    from { opacity: 0; transform: translateY(-50%) translateX(12px); }
-    to   { opacity: 1; transform: translateY(-50%) translateX(0); }
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .fb-header {
@@ -2497,25 +2500,14 @@ details[open] .faq__question::after {
 
 @media (max-width: 640px) {
     #fb-widget {
-        top: auto;
-        bottom: 0;
-        right: 0;
-        transform: none;
-        flex-direction: column;
-        align-items: flex-end;
-    }
-    #fb-tab {
-        writing-mode: horizontal-tb;
-        transform: none;
-        border-radius: var(--radius-md) 0 0 0;
-        padding: var(--sp-2) var(--sp-4);
+        right: 1rem;
+        bottom: 1rem;
     }
     #fb-panel {
         position: fixed;
         right: 0;
         bottom: 0;
         top: auto;
-        transform: none;
         width: 100%;
         border-radius: var(--radius-xl) var(--radius-xl) 0 0;
         animation: fb-slide-up .2s ease;
