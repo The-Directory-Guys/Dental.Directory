@@ -501,7 +501,7 @@ const TREATMENT_MAP = {
         }
         if (minExperience > 0 && (d.maxExperience == null || d.maxExperience < minExperience)) return false;
         if (activeSuburbs.length && !activeSuburbs.includes(d.suburb)) return false;
-        if (activeServices.length && !activeServices.every(s => d.services.includes(s))) return false;
+        if (activeServices.length && !activeServices.every(s => (SERVICE_ALIASES[s] || [s]).some(a => d.services.includes(a)))) return false;
         if (minRating > 0 && (d.rating == null || d.rating < minRating)) return false;
         if (searchQuery) {
           const q = searchQuery.toLowerCase();
@@ -902,6 +902,12 @@ const TREATMENT_MAP = {
     render();
   }
 
+  // Merged filter aliases — one checkbox value matches multiple raw service strings
+  const SERVICE_ALIASES = {
+    'Oral Surgery': ['Oral Surgery', 'Oral and Maxillofacial Surgery'],
+    'Cosmetic':     ['Cosmetic', 'Teeth Whitening'],
+  };
+
   const AMENITY_FILTERS = [
     { key: 'dental_anxiety_friendly', label: 'Dental anxiety friendly' },
     { key: 'wheelchair_accessible',   label: 'Wheelchair accessible' },
@@ -957,15 +963,10 @@ const TREATMENT_MAP = {
     });
   }
 
-  // Specialty filter definitions — label shown to user, keyword matched against normalised practitioner specialties
+  // Specialty filter definitions — only show specialties not already covered by service filters
   const SPECIALTY_FILTERS = [
-    { label: 'Cosmetic Dentistry',        keyword: 'cosmetic' },
-    { label: 'Dental Implants',           keyword: 'implant' },
-    { label: 'Orthodontics / Invisalign', keyword: 'orthodont' },
-    { label: 'Oral Surgery',             keyword: 'oral surgery' },
-    { label: 'Endodontics',              keyword: 'endodontic' },
-    { label: 'IV Sedation',              keyword: 'sedation' },
-    { label: 'Oral Health Therapy',      keyword: 'oral health therap' },
+    { label: 'IV Sedation',         keyword: 'sedation' },
+    { label: 'Oral Health Therapy', keyword: 'oral health therap' },
   ];
 
   function buildSpecialtyFilters(allDentists) {
