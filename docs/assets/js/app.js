@@ -141,6 +141,20 @@ const TREATMENT_MAP = {
     return _cityAveragesPromise;
   }
 
+  // Clinic experience map loaded lazily from clinic-experience.json
+  let _experienceMap = null;
+  let _experienceMapPromise = null;
+  function loadExperienceMap() {
+    if (_experienceMap) return Promise.resolve(_experienceMap);
+    if (!_experienceMapPromise) {
+      _experienceMapPromise = fetch('assets/data/clinic-experience.json')
+        .then(r => r.json())
+        .then(data => { _experienceMap = data; return data; })
+        .catch(() => { _experienceMap = {}; return {}; });
+    }
+    return _experienceMapPromise;
+  }
+
   // Hygienist price averages loaded lazily from hygienist-averages.json
   let _hygienistAverages = null;
   let _hygienistAveragesPromise = null;
@@ -351,9 +365,10 @@ const TREATMENT_MAP = {
     // Fetch and attach practitioner specialties + amenity flags for the whole region
     if (!savedMode) {
       const ids = allDentists.map(d => d.id).filter(Boolean);
-      const [specMap, amenMap] = await Promise.all([
+      const [specMap, amenMap, expMap] = await Promise.all([
         fetchPractitionersForClinics(ids),
         fetchAmenitiesForClinics(ids),
+        loadExperienceMap(),
       ]);
       allDentists.forEach(d => {
         if (d.id && specMap[d.id]) {
@@ -361,6 +376,7 @@ const TREATMENT_MAP = {
           d.practitionerNames = specMap[d.id].names;
         }
         if (d.id && amenMap[d.id]) d.amenityFlags = amenMap[d.id];
+        if (d.id && expMap[d.id]) d.maxExperience = expMap[d.id];
       });
     }
 
@@ -375,6 +391,7 @@ const TREATMENT_MAP = {
     let activeTreatmentPriceType = null;
     let activeSpecialties = [];
     let activeAmenities = [];
+    let minExperience = 0;
     let showFavouritesOnly = false;
     let showOpenOnly = false;
     let _favs = getFavourites();
@@ -482,6 +499,7 @@ const TREATMENT_MAP = {
         if (activeAmenities.length) {
           if (!activeAmenities.every(key => checkAmenity(key, d))) return false;
         }
+        if (minExperience > 0 && (d.maxExperience == null || d.maxExperience < minExperience)) return false;
         if (activeSuburbs.length && !activeSuburbs.includes(d.suburb)) return false;
         if (activeServices.length && !activeServices.every(s => d.services.includes(s))) return false;
         if (minRating > 0 && (d.rating == null || d.rating < minRating)) return false;
@@ -632,12 +650,14 @@ const TREATMENT_MAP = {
       activeTreatmentPriceType = null;
       activeSpecialties = [];
       activeAmenities = [];
+      minExperience = 0;
       showFavouritesOnly = false;
       showOpenOnly = false;
       updateFavToggle();
       updateOpenToggle();
 
       document.querySelectorAll('.filter-suburb, .filter-service, .filter-specialty, .filter-amenity').forEach(cb => { cb.checked = false; });
+      document.querySelectorAll('.filter-exp-select').forEach(s => { s.value = '0'; });
       if (searchInput) searchInput.value = '';
 
       // Reset sliders + labels without triggering extra renders
@@ -845,10 +865,11 @@ const TREATMENT_MAP = {
       cb.checked = activeServices.includes('General Dentistry');
     });
 
-    // Build dynamic suburb + specialty + amenity filters (after state vars are declared)
+    // Build dynamic suburb + specialty + amenity + experience filters (after state vars are declared)
     buildSuburbFilters(allDentists);
     buildSpecialtyFilters(allDentists);
     buildAmenitiesFilter(allDentists);
+    buildExperienceFilter(allDentists);
 
     // Specialty filters (injected dynamically by buildSpecialtyFilters)
     document.querySelectorAll('.filter-specialty').forEach(cb => {
@@ -864,6 +885,15 @@ const TREATMENT_MAP = {
       cb.addEventListener('change', () => {
         document.querySelectorAll(`.filter-amenity[value="${cb.value}"]`).forEach(p => { p.checked = cb.checked; });
         activeAmenities = [...new Set(Array.from(document.querySelectorAll('.filter-amenity:checked')).map(el => el.value))];
+        renderWithReset();
+      });
+    });
+
+    // Experience filter (injected dynamically by buildExperienceFilter)
+    document.querySelectorAll('.filter-exp-select').forEach(sel => {
+      sel.addEventListener('change', () => {
+        minExperience = parseInt(sel.value, 10);
+        document.querySelectorAll('.filter-exp-select').forEach(s => { s.value = sel.value; });
         renderWithReset();
       });
     });
@@ -902,6 +932,27 @@ const TREATMENT_MAP = {
 
     document.querySelectorAll('.sidebar, .filter-drawer').forEach(container => {
       if (container.querySelector('[data-filter="amenity"]')) return;
+      container.insertAdjacentHTML('beforeend', groupHTML);
+    });
+  }
+
+  function buildExperienceFilter(allDentists) {
+    if (!allDentists.some(d => d.maxExperience != null)) return;
+
+    const groupHTML = `
+      <div class="filter-group" data-filter="experience">
+        <div class="filter-group__label">Experience</div>
+        <select class="filter-exp-select">
+          <option value="0">Any experience</option>
+          <option value="5">5+ years</option>
+          <option value="10">10+ years</option>
+          <option value="15">15+ years</option>
+          <option value="20">20+ years</option>
+        </select>
+      </div>`;
+
+    document.querySelectorAll('.sidebar, .filter-drawer').forEach(container => {
+      if (container.querySelector('[data-filter="experience"]')) return;
       container.insertAdjacentHTML('beforeend', groupHTML);
     });
   }
