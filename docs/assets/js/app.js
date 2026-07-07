@@ -1157,7 +1157,27 @@ const TREATMENT_MAP = {
 
     const serviceIcons = {
       'General Dentistry': '🦷', 'Cosmetic': '✨', 'Teeth Whitening': '💎',
-      'Implants': '🔩', 'Orthodontics': '😁', 'Emergency': '🚨'
+      'Dental Implants': '🔩', 'Implants': '🔩', 'Orthodontics': '😁', 'Emergency': '🚨',
+      'Dentures': '🦷', 'Oral Surgery': '🩺', 'Endodontics': '🔬',
+      'Periodontal Care': '🦠', 'Oral and Maxillofacial Surgery': '🩺',
+      'Hygienist': '🪥', 'Teen Dental': '🧒',
+    };
+
+    const serviceDescs = {
+      'General Dentistry':              'Checkups, fillings, extractions, and all routine dental care for the whole family.',
+      'Cosmetic':                       'Smile makeovers including veneers, bonding, and aesthetic restorations.',
+      'Teeth Whitening':                'In-chair and take-home whitening treatments to brighten your smile.',
+      'Dental Implants':                'Permanent tooth replacements that look, feel, and function like natural teeth.',
+      'Implants':                       'Permanent tooth replacements that look, feel, and function like natural teeth.',
+      'Orthodontics':                   'Braces and clear aligners to straighten teeth and correct bite issues.',
+      'Emergency':                      'Same-day appointments for toothache, broken teeth, lost fillings, and dental trauma.',
+      'Dentures':                       'Custom-made full and partial dentures to replace missing teeth.',
+      'Oral Surgery':                   'Tooth extractions, wisdom teeth removal, and minor surgical procedures.',
+      'Endodontics':                    'Root canal treatment to save infected or damaged teeth.',
+      'Periodontal Care':               'Treatment for gum disease, including deep cleaning and ongoing gum health management.',
+      'Oral and Maxillofacial Surgery': 'Surgical treatment of conditions affecting the mouth, jaw, and face.',
+      'Hygienist':                      'Professional scale and clean, stain removal, and personalised oral hygiene advice.',
+      'Teen Dental':                    'Subsidised dental care for eligible patients aged 18 and under.',
     };
 
     const servicesHTML = dentist.services.map(s => `
@@ -1165,7 +1185,7 @@ const TREATMENT_MAP = {
         <div class="service-item__icon">${serviceIcons[s] || '🦷'}</div>
         <div class="service-item__content">
           <div class="service-item__name">${s}</div>
-          <div class="service-item__desc">Professional ${s.toLowerCase()} services tailored to your needs.</div>
+          <div class="service-item__desc">${serviceDescs[s] || `${s} provided by qualified dental professionals.`}</div>
         </div>
       </div>
     `).join('');
