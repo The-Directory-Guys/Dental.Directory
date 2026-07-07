@@ -78,7 +78,18 @@
             <h3>Filters</h3>
             <button class="filter-drawer__close" id="filter-drawer-close">✕</button>
         </div>
-        <div class="filter-group">
+        
+<div class="filter-group">
+            <div class="filter-group__label">Rating</div>
+            <div class="price-slider">
+                <input type="range" class="rating-range" id="mobile-rating-range" min="0" max="5" value="0" step="0.5">
+                <div class="price-slider__labels">
+                    <span>Any</span>
+                    <span class="price-slider__value" id="mobile-rating-value">Any</span>
+                    <span>★ 5.0</span>
+                </div>
+            </div>
+        </div><div class="filter-group">
             <div class="filter-group__label">Max Checkup Price</div>
             <div class="price-slider">
                 <input type="range" class="price-range" id="mobile-price-range" min="100" max="300" value="300" step="5">
@@ -100,17 +111,7 @@
                 </div>
             </div>
         </div>
-        <div class="filter-group">
-            <div class="filter-group__label">Rating</div>
-            <div class="price-slider">
-                <input type="range" class="rating-range" id="mobile-rating-range" min="0" max="5" value="0" step="0.5">
-                <div class="price-slider__labels">
-                    <span>Any</span>
-                    <span class="price-slider__value" id="mobile-rating-value">Any</span>
-                    <span>★ 5.0</span>
-                </div>
-            </div>
-        </div>
+        
         <div class="filter-group">
             <div class="filter-group__label">Service</div>
             <div class="filter-group__items">
@@ -159,6 +160,17 @@
                             <input type="text" id="listings-search" placeholder="Search by service...">
                         </div>
                     </div>
+<div class="filter-group">
+                        <div class="filter-group__label">Rating</div>
+                        <div class="price-slider">
+                            <input type="range" class="rating-range" id="desktop-rating-range" min="0" max="5" value="0" step="0.5">
+                            <div class="price-slider__labels">
+                                <span>Any</span>
+                                <span class="price-slider__value" id="desktop-rating-value">Any</span>
+                                <span>★ 5.0</span>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="filter-group">
                         <div class="filter-group__label">Max Checkup Price</div>
@@ -183,17 +195,7 @@
                         </div>
                     </div>
 
-                    <div class="filter-group">
-                        <div class="filter-group__label">Rating</div>
-                        <div class="price-slider">
-                            <input type="range" class="rating-range" id="desktop-rating-range" min="0" max="5" value="0" step="0.5">
-                            <div class="price-slider__labels">
-                                <span>Any</span>
-                                <span class="price-slider__value" id="desktop-rating-value">Any</span>
-                                <span>★ 5.0</span>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                     <div class="filter-group">
                         <div class="filter-group__label">Service</div>
