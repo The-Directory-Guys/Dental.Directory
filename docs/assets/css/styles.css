@@ -2152,19 +2152,18 @@ details[open] .faq__question::after {
     top: 50%;
     transform: translateY(-50%);
     z-index: 400;
+    display: flex;
+    align-items: center;
 }
 
 #fb-tab {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%) rotate(90deg) translateX(50%);
-    transform-origin: right center;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
     background: var(--clr-teal);
     color: var(--clr-white);
     border: none;
-    border-radius: var(--radius-md) var(--radius-md) 0 0;
-    padding: var(--sp-2) var(--sp-4);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    padding: var(--sp-5) var(--sp-2);
     font-family: var(--ff-body);
     font-size: var(--fs-sm);
     font-weight: 600;
@@ -2173,6 +2172,7 @@ details[open] .faq__question::after {
     box-shadow: -2px 0 8px rgba(0,0,0,.15);
     transition: background var(--transition);
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 #fb-tab:hover {
@@ -2181,7 +2181,7 @@ details[open] .faq__question::after {
 
 #fb-panel {
     position: absolute;
-    right: 40px;
+    right: 100%;
     top: 50%;
     transform: translateY(-50%);
     width: 320px;
@@ -2418,6 +2418,20 @@ details[open] .faq__question::after {
 }
 
 @media (max-width: 640px) {
+    #fb-widget {
+        top: auto;
+        bottom: 0;
+        right: 0;
+        transform: none;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    #fb-tab {
+        writing-mode: horizontal-tb;
+        transform: none;
+        border-radius: var(--radius-md) 0 0 0;
+        padding: var(--sp-2) var(--sp-4);
+    }
     #fb-panel {
         position: fixed;
         right: 0;
@@ -2431,10 +2445,5 @@ details[open] .faq__question::after {
     @keyframes fb-slide-up {
         from { transform: translateY(20px); opacity: 0; }
         to   { transform: translateY(0);   opacity: 1; }
-    }
-    #fb-tab {
-        transform: rotate(90deg) translateX(50%);
-        top: auto;
-        bottom: 80px;
     }
 }
