@@ -1183,8 +1183,23 @@ h4 {
 }
 
 .profile-section {
-    margin-bottom: var(--sp-10);
+    background: var(--clr-white);
+    border: 1px solid var(--clr-gray-200);
+    border-top: 4px solid var(--clr-gray-200);
+    border-radius: var(--radius-xl);
+    padding: var(--sp-6);
+    margin-bottom: var(--sp-6);
+    box-shadow: 0 1px 6px rgba(0,0,0,.05);
 }
+
+/* Per-section accent colours */
+.profile-section--about    { border-top-color: #0ea5e9; }
+.profile-section--services { border-top-color: #8b5cf6; }
+.profile-section--pricing  { border-top-color: #f59e0b; }
+.profile-section--hours    { border-top-color: #10b981; }
+.profile-section--team     { border-top-color: #ec4899; }
+.profile-section--misc     { border-top-color: #6366f1; }
+.profile-section--reviews  { border-top-color: #f97316; }
 
 .profile-section__title {
     font-size: var(--fs-xl);
@@ -1194,6 +1209,14 @@ h4 {
     padding-bottom: var(--sp-3);
     border-bottom: 2px solid var(--clr-gray-100);
 }
+
+.profile-section--about    .profile-section__title { border-bottom-color: rgba(14,165,233,.2); }
+.profile-section--services .profile-section__title { border-bottom-color: rgba(139,92,246,.2); }
+.profile-section--pricing  .profile-section__title { border-bottom-color: rgba(245,158,11,.2); }
+.profile-section--hours    .profile-section__title { border-bottom-color: rgba(16,185,129,.2); }
+.profile-section--team     .profile-section__title { border-bottom-color: rgba(236,72,153,.2); }
+.profile-section--misc     .profile-section__title { border-bottom-color: rgba(99,102,241,.2); }
+.profile-section--reviews  .profile-section__title { border-bottom-color: rgba(249,115,22,.2); }
 
 /* Services list */
 .service-list {
@@ -1340,8 +1363,10 @@ h4 {
 .contact-box {
     background: var(--clr-white);
     border: 1px solid var(--clr-gray-200);
+    border-top: 4px solid var(--clr-navy);
     border-radius: var(--radius-xl);
     padding: var(--sp-6);
+    box-shadow: 0 1px 6px rgba(0,0,0,.05);
     position: sticky;
     top: 88px;
 }

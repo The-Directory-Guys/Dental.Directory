@@ -1249,7 +1249,7 @@ const TREATMENT_MAP = {
         return `<tr><td>${p.service}${notesHtml}</td><td>${p.price}${cmpHtml}</td></tr>`;
       }).join('');
       pricingHTML = `
-        <div class="profile-section">
+        <div class="profile-section profile-section--pricing">
           <h2 class="profile-section__title">Pricing</h2>
           <p style="font-size:.875rem;color:var(--clr-gray-500);margin-bottom:1rem;">Prices are indicative and may vary. Contact the practice for an exact quote.</p>
           <div style="overflow-x: auto;">
@@ -1263,7 +1263,7 @@ const TREATMENT_MAP = {
     } else {
       // Empty pricing state — placeholder for when we don't have data yet
       pricingHTML = `
-        <div class="profile-section">
+        <div class="profile-section profile-section--pricing">
           <h2 class="profile-section__title">Pricing</h2>
           <div class="pricing-empty">
             <div class="pricing-empty__icon">💰</div>
@@ -1349,7 +1349,7 @@ const TREATMENT_MAP = {
           </div>`;
       }).join('');
       teamHTML = `
-        <div class="profile-section">
+        <div class="profile-section profile-section--team">
           <h2 class="profile-section__title">Meet the Team</h2>
           <div class="team-list">${cards}</div>
         </div>`;
@@ -1385,7 +1385,7 @@ const TREATMENT_MAP = {
       });
       if (items.length > 0) {
         miscHTML = `
-        <div class="profile-section">
+        <div class="profile-section profile-section--misc">
           <h2 class="profile-section__title">Miscellaneous</h2>
           <div class="misc-list">${items.join('')}</div>
         </div>`;
@@ -1395,12 +1395,12 @@ const TREATMENT_MAP = {
     profileContainer.innerHTML = `
       <div class="profile-main">
         ${dentist.description ? `
-        <div class="profile-section">
+        <div class="profile-section profile-section--about">
           <h2 class="profile-section__title">About</h2>
           <p>${dentist.description}</p>
         </div>` : ''}
 
-        <div class="profile-section">
+        <div class="profile-section profile-section--services">
           <h2 class="profile-section__title">Services</h2>
           <div class="service-list">${servicesHTML}</div>
         </div>
@@ -1408,7 +1408,7 @@ const TREATMENT_MAP = {
         ${pricingHTML}
 
         ${hoursHTML ? `
-        <div class="profile-section">
+        <div class="profile-section profile-section--hours">
           <h2 class="profile-section__title">Opening Hours</h2>
           <div class="hours-table-wrap"><table class="hours-table">${hoursHTML}</table></div>
         </div>` : ''}
@@ -1417,7 +1417,7 @@ const TREATMENT_MAP = {
 
         ${miscHTML}
 
-        <div class="profile-section">
+        <div class="profile-section profile-section--reviews">
           <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;">
             <h2 class="profile-section__title" style="margin-bottom:0;">Reviews${dentist.reviewCount ? ` (${dentist.reviewCount})` : ''}</h2>
             ${dentist.googleMapsUrl ? `<a href="${dentist.googleMapsUrl}" target="_blank" rel="noopener" style="font-size:.8rem;color:#4285F4;text-decoration:none;font-weight:500;">★ Write a Google Review →</a>` : ''}
