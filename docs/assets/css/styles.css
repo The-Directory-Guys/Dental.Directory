@@ -247,6 +247,21 @@ h4 {
     border-radius: var(--radius-full);
 }
 
+.nav__coming-soon {
+    display: inline-block;
+    font-size: .6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    background: var(--clr-teal);
+    color: #fff;
+    padding: .1rem .35rem;
+    border-radius: var(--radius-full);
+    vertical-align: middle;
+    margin-left: .25rem;
+    line-height: 1.4;
+}
+
 .nav__link--owners {
     color: var(--clr-teal);
     border: 1.5px solid var(--clr-teal);
@@ -2221,6 +2236,42 @@ details[open] .faq__question::after {
     margin-top: var(--sp-1);
     color: var(--clr-gray-500);
     font-size: var(--fs-xs);
+}
+
+/* ===================================================
+   SUBMIT NUDGE
+   =================================================== */
+.submit-nudge {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    margin-top: var(--sp-5);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--clr-gray-100);
+}
+
+.submit-nudge__text {
+    font-size: var(--fs-sm);
+    color: var(--clr-gray-500);
+}
+
+.submit-nudge__btn {
+    background: none;
+    border: 1.5px solid var(--clr-teal);
+    color: var(--clr-teal);
+    border-radius: var(--radius-full);
+    padding: var(--sp-1) var(--sp-4);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    font-family: var(--ff-body);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background .15s, color .15s;
+}
+
+.submit-nudge__btn:hover {
+    background: var(--clr-teal);
+    color: #fff;
 }
 
 /* ===================================================

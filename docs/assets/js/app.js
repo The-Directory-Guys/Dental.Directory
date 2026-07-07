@@ -1263,6 +1263,10 @@ const TREATMENT_MAP = {
               <tbody>${rows}</tbody>
             </table>
           </div>
+          <div class="submit-nudge">
+            <span class="submit-nudge__text">Know a different price?</span>
+            <button data-action="submit-info" class="submit-nudge__btn">Help the community &rarr;</button>
+          </div>
         </div>
       `;
     } else {
@@ -1276,6 +1280,10 @@ const TREATMENT_MAP = {
             <p class="pricing-empty__text">We're working on getting pricing information for this practice. In the meantime, contact them directly for a quote.</p>
             ${dentist.phone ? `<a href="tel:${dentist.phone.replace(/\s/g, '')}" class="btn btn--outline btn--sm pricing-empty__btn">📞 Call for Pricing</a>` : ''}
             ${dentist.website ? `<a href="${dentist.website}" target="_blank" class="btn btn--outline btn--sm pricing-empty__btn">🌐 Check Website</a>` : ''}
+          </div>
+          <div class="submit-nudge">
+            <span class="submit-nudge__text">Do you know the price?</span>
+            <button data-action="submit-info" class="submit-nudge__btn">Help the community &rarr;</button>
           </div>
         </div>
       `;
