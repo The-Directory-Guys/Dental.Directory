@@ -314,6 +314,7 @@ const TREATMENT_MAP = {
     let allDentists = [];
     const savedMode = dentistGrid.dataset.mode === 'saved';
     const region = dentistGrid.dataset.region || 'Canterbury';
+    const displayLocation = dentistGrid.dataset.city || region;
 
     if (savedMode) {
       const ids = [...getFavourites()];
@@ -613,9 +614,9 @@ const TREATMENT_MAP = {
         const totalFiltered = filtered.length;
         const showingCount = Math.min(visibleCount, totalFiltered);
         if (showingCount < totalFiltered) {
-          resultsCount.textContent = `Showing ${showingCount} of ${totalFiltered} ${savedMode ? 'saved clinics' : `dentists in ${region}`}`;
+          resultsCount.textContent = `Showing ${showingCount} of ${totalFiltered} ${savedMode ? 'saved clinics' : `dentists in ${displayLocation}`}`;
         } else {
-          resultsCount.textContent = `Showing ${totalFiltered} ${savedMode ? `saved clinic${totalFiltered !== 1 ? 's' : ''}` : `dentist${totalFiltered !== 1 ? 's' : ''} in ${region}`}`;
+          resultsCount.textContent = `Showing ${totalFiltered} ${savedMode ? `saved clinic${totalFiltered !== 1 ? 's' : ''}` : `dentist${totalFiltered !== 1 ? 's' : ''} in ${displayLocation}`}`;
         }
       }
     }
