@@ -2144,6 +2144,59 @@ details[open] .faq__question::after {
     max-width: 72ch;
 }
 /* ===================================================
+   AVAILABILITY BADGES
+   =================================================== */
+.avail-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: var(--sp-2) var(--sp-3);
+    border-radius: var(--radius-md);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    margin-bottom: var(--sp-3);
+}
+.avail-badge--yes {
+    background: #dcfce7;
+    color: #166534;
+}
+.avail-badge--no {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* ===================================================
+   CLAIM NUDGE
+   =================================================== */
+.claim-nudge {
+    margin-top: var(--sp-4);
+    padding: var(--sp-4) var(--sp-5);
+    background: var(--clr-gray-50);
+    border: 1px solid var(--clr-gray-200);
+    border-radius: var(--radius-lg);
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+}
+.claim-nudge__question {
+    font-weight: 700;
+    color: var(--clr-navy);
+    margin-bottom: var(--sp-1);
+}
+.claim-nudge__link {
+    color: var(--clr-teal);
+    font-weight: 600;
+    text-decoration: none;
+}
+.claim-nudge__link:hover {
+    text-decoration: underline;
+}
+.claim-nudge__sub {
+    margin-top: var(--sp-1);
+    color: var(--clr-gray-500);
+    font-size: var(--fs-xs);
+}
+
+/* ===================================================
    FEEDBACK WIDGET
    =================================================== */
 #fb-widget {

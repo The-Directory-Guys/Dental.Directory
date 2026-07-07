@@ -1307,6 +1307,20 @@ const TREATMENT_MAP = {
       ? `<a href="${dentist.website}" target="_blank" class="btn btn--primary btn--block">Visit Website ↗</a>`
       : '';
 
+    // Availability
+    const availabilityHTML = (() => {
+      const parts = [];
+      if (dentist.acceptingNewPatients === true) {
+        parts.push(`<div class="avail-badge avail-badge--yes">✓ Accepting new patients</div>`);
+      } else if (dentist.acceptingNewPatients === false) {
+        parts.push(`<div class="avail-badge avail-badge--no">✗ Not currently accepting new patients</div>`);
+      }
+      if (dentist.bookingUrl) {
+        parts.push(`<a href="${dentist.bookingUrl}" target="_blank" rel="noopener" class="btn btn--primary btn--block">📅 Book Online</a>`);
+      }
+      return parts.join('');
+    })();
+
     // Save button
     const profileIsFav = dentist.id && getFavourites().has(dentist.id);
     const saveBtn = dentist.id
@@ -1443,6 +1457,7 @@ const TREATMENT_MAP = {
               <div style="font-size:.75rem;color:var(--clr-gray-400)">Address</div>
             </div>
           </div>
+          ${availabilityHTML}
           ${websiteBtn}
           ${saveBtn}
           ${mapEmbed}
@@ -1450,10 +1465,10 @@ const TREATMENT_MAP = {
           ${writeReviewBtn}
         </div>
 
-        <div style="margin-top:1rem; padding:.85rem 1rem; background:var(--clr-gray-50); border-radius:10px; font-size:.82rem; color:var(--clr-gray-500); line-height:1.55;">
-          <strong style="color:var(--clr-gray-700);">Are you the owner?</strong><br>
-          <a href="mailto:dentalcomparenz@gmail.com?subject=Claim%20listing%3A%20${encodeURIComponent(dentist.name)}" style="color:var(--clr-teal); text-decoration:none; font-weight:500;">Claim this listing →</a>
-          to update your hours, pricing and services.
+        <div class="claim-nudge">
+          <div class="claim-nudge__question">Are you the owner?</div>
+          <a href="claim.html?id=${dentist.id || ''}&name=${encodeURIComponent(dentist.name)}" class="claim-nudge__link">Claim this listing →</a>
+          <div class="claim-nudge__sub">Update your hours, pricing, services and availability.</div>
         </div>
       </aside>
     `;
