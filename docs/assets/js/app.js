@@ -658,7 +658,11 @@ const TREATMENT_MAP = {
       updateOpenToggle();
 
       document.querySelectorAll('.filter-suburb, .filter-service, .filter-specialty, .filter-amenity').forEach(cb => { cb.checked = false; });
-      document.querySelectorAll('.filter-exp-select').forEach(s => { s.value = '0'; });
+      document.querySelectorAll('.filter-exp-slider').forEach(s => {
+        s.value = '0';
+        const val = s.closest('[data-filter="experience"]')?.querySelector('.filter-exp-val');
+        if (val) val.textContent = 'Any';
+      });
       if (searchInput) searchInput.value = '';
 
       // Reset sliders + labels without triggering extra renders
@@ -891,10 +895,14 @@ const TREATMENT_MAP = {
     });
 
     // Experience filter (injected dynamically by buildExperienceFilter)
-    document.querySelectorAll('.filter-exp-select').forEach(sel => {
-      sel.addEventListener('change', () => {
-        minExperience = parseInt(sel.value, 10);
-        document.querySelectorAll('.filter-exp-select').forEach(s => { s.value = sel.value; });
+    document.querySelectorAll('.filter-exp-slider').forEach(slider => {
+      slider.addEventListener('input', () => {
+        minExperience = parseInt(slider.value, 10);
+        document.querySelectorAll('.filter-exp-slider').forEach(s => {
+          s.value = slider.value;
+          s.closest('[data-filter="experience"]').querySelector('.filter-exp-val').textContent =
+            slider.value === '0' ? 'Any' : slider.value + '+ yrs';
+        });
         renderWithReset();
       });
     });
@@ -948,14 +956,9 @@ const TREATMENT_MAP = {
 
     const groupHTML = `
       <div class="filter-group" data-filter="experience">
-        <div class="filter-group__label">Practitioner Experience (Years)</div>
-        <select class="filter-exp-select">
-          <option value="0">Any experience</option>
-          <option value="5">5+ years</option>
-          <option value="10">10+ years</option>
-          <option value="15">15+ years</option>
-          <option value="20">20+ years</option>
-        </select>
+        <div class="filter-group__label">Practitioner Experience (Years) <span class="filter-exp-val">Any</span></div>
+        <input type="range" class="filter-exp-slider" min="0" max="10" step="5" value="0">
+        <div class="filter-exp-ticks"><span>Any</span><span>5+</span><span>10+</span></div>
       </div>`;
 
     document.querySelectorAll('.sidebar, .filter-drawer').forEach(container => {

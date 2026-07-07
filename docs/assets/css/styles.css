@@ -1054,22 +1054,24 @@ h4 {
     background: var(--clr-teal);
 }
 
-.filter-exp-select {
-    width: 100%;
-    padding: var(--sp-2) var(--sp-3);
-    border: 1px solid var(--clr-gray-200);
-    border-radius: var(--radius-md);
-    font-family: var(--ff-body);
-    font-size: var(--fs-sm);
-    color: var(--clr-gray-700);
-    background: var(--clr-white);
-    cursor: pointer;
-    outline: none;
+.filter-exp-val {
+    font-weight: 400;
+    color: var(--clr-teal);
+    margin-left: var(--sp-2);
 }
 
-.filter-exp-select:focus {
-    border-color: var(--clr-teal);
-    box-shadow: 0 0 0 3px var(--clr-teal-glow);
+.filter-exp-slider {
+    width: 100%;
+    margin: var(--sp-2) 0 var(--sp-1);
+    accent-color: var(--clr-teal);
+    cursor: pointer;
+}
+
+.filter-exp-ticks {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--fs-xs);
+    color: var(--clr-gray-400);
 }
 
 .filter-check {
