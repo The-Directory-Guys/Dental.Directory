@@ -941,7 +941,7 @@ const TREATMENT_MAP = {
 
     const groupHTML = `
       <div class="filter-group" data-filter="experience">
-        <div class="filter-group__label">Experience</div>
+        <div class="filter-group__label">Practitioner Experience (Years)</div>
         <select class="filter-exp-select">
           <option value="0">Any experience</option>
           <option value="5">5+ years</option>
