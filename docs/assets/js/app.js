@@ -89,6 +89,18 @@ const TREATMENT_MAP = {
   'cosmetic dentistry':   { service: 'Cosmetic', priceType: null },
 };
 
+// Exact match first; fall back to prefix match on any key (min 3 chars typed)
+function matchTreatment(raw) {
+  const q = raw.trim().toLowerCase();
+  if (!q) return null;
+  if (TREATMENT_MAP[q]) return TREATMENT_MAP[q];
+  if (q.length >= 3) {
+    const key = Object.keys(TREATMENT_MAP).find(k => k.startsWith(q));
+    if (key) return TREATMENT_MAP[key];
+  }
+  return null;
+}
+
 (function () {
   'use strict';
 
@@ -745,7 +757,7 @@ const TREATMENT_MAP = {
     if (searchInput) {
       searchInput.addEventListener('input', (e) => {
         const raw = e.target.value;
-        const treatment = TREATMENT_MAP[raw.trim().toLowerCase()];
+        const treatment = matchTreatment(raw);
         if (treatment) {
           document.querySelectorAll(`.filter-service[value="${treatment.service}"]`).forEach(cb => { cb.checked = true; });
           activeServices = [...new Set(Array.from(document.querySelectorAll('.filter-service:checked')).map(el => el.value))];
@@ -761,7 +773,7 @@ const TREATMENT_MAP = {
       const urlQ = new URLSearchParams(window.location.search).get('q');
       if (urlQ) {
         const qLower = urlQ.trim().toLowerCase();
-        const treatment = TREATMENT_MAP[qLower];
+        const treatment = matchTreatment(urlQ);
         if (treatment) {
           if (treatment.service) {
             document.querySelectorAll(`.filter-service[value="${treatment.service}"]`).forEach(cb => { cb.checked = true; });
