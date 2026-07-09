@@ -25,18 +25,18 @@ const TREATMENT_MAP = {
   'tooth extraction':     { service: 'General Dentistry', priceType: null },
   'wisdom tooth':         { service: 'General Dentistry', priceType: null },
   'wisdom teeth':         { service: 'General Dentistry', priceType: null },
-  // Hygienist
-  'hygienist':            { service: 'Hygienist', priceType: 'hygienist' },
-  'hygienists':           { service: 'Hygienist', priceType: 'hygienist' },
-  'hygiene':              { service: 'Hygienist', priceType: 'hygienist' },
-  'clean':                { service: 'Hygienist', priceType: 'hygienist' },
-  'cleaning':             { service: 'Hygienist', priceType: 'hygienist' },
-  'dental clean':         { service: 'Hygienist', priceType: 'hygienist' },
-  'dental cleaning':      { service: 'Hygienist', priceType: 'hygienist' },
-  'scale and polish':     { service: 'Hygienist', priceType: 'hygienist' },
-  'scale and clean':      { service: 'Hygienist', priceType: 'hygienist' },
-  'scale & polish':       { service: 'Hygienist', priceType: 'hygienist' },
-  'scale & clean':        { service: 'Hygienist', priceType: 'hygienist' },
+  // Hygienist — no service filter; sort all clinics by scale & clean price
+  'hygienist':            { service: null, priceType: 'hygienist' },
+  'hygienists':           { service: null, priceType: 'hygienist' },
+  'hygiene':              { service: null, priceType: 'hygienist' },
+  'clean':                { service: null, priceType: 'hygienist' },
+  'cleaning':             { service: null, priceType: 'hygienist' },
+  'dental clean':         { service: null, priceType: 'hygienist' },
+  'dental cleaning':      { service: null, priceType: 'hygienist' },
+  'scale and polish':     { service: null, priceType: 'hygienist' },
+  'scale and clean':      { service: null, priceType: 'hygienist' },
+  'scale & polish':       { service: null, priceType: 'hygienist' },
+  'scale & clean':        { service: null, priceType: 'hygienist' },
   // Orthodontics
   'braces':               { service: 'Orthodontics', priceType: null },
   'brace':                { service: 'Orthodontics', priceType: null },
@@ -763,8 +763,10 @@ const TREATMENT_MAP = {
         const qLower = urlQ.trim().toLowerCase();
         const treatment = TREATMENT_MAP[qLower];
         if (treatment) {
-          document.querySelectorAll(`.filter-service[value="${treatment.service}"]`).forEach(cb => { cb.checked = true; });
-          activeServices = [treatment.service];
+          if (treatment.service) {
+            document.querySelectorAll(`.filter-service[value="${treatment.service}"]`).forEach(cb => { cb.checked = true; });
+            activeServices = [treatment.service];
+          }
           activeTreatmentPriceType = treatment.priceType;
         } else {
           // Fall back to direct service checkbox match
