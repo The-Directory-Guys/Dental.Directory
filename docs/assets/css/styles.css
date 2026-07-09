@@ -1832,6 +1832,27 @@ h4 {
     white-space: nowrap;
 }
 
+@media (max-width: 600px) {
+    .pricing-table thead { display: none; }
+    .pricing-table tbody td {
+        display: block;
+        padding: var(--sp-2) var(--sp-4);
+        text-align: left !important;
+        white-space: normal;
+    }
+    .pricing-table tbody td:first-child {
+        padding-top: var(--sp-3);
+    }
+    .pricing-table tbody td:last-child {
+        padding-bottom: var(--sp-3);
+        font-size: var(--fs-base);
+    }
+    .pricing-table tbody tr {
+        display: block;
+        border-bottom: 1px solid var(--clr-gray-100);
+    }
+}
+
 /* Pricing notes (under treatment name in table) */
 .pricing-note {
     font-size: var(--fs-xs);
