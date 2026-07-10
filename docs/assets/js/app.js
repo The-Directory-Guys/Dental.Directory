@@ -514,7 +514,10 @@ function matchTreatment(raw) {
         }
         if (minExperience > 0 && (d.maxExperience == null || d.maxExperience < minExperience)) return false;
         if (activeSuburbs.length && !activeSuburbs.includes(d.suburb)) return false;
-        if (activeServices.length && !activeServices.every(s => (SERVICE_ALIASES[s] || [s]).some(a => d.services.includes(a)))) return false;
+        if (activeServices.length && !activeServices.every(s => {
+          if (s === 'Hygienist') return getHygienistPrice(d) !== null;
+          return (SERVICE_ALIASES[s] || [s]).some(a => d.services.includes(a));
+        })) return false;
         if (minRating > 0 && (d.rating == null || d.rating < minRating)) return false;
         if (searchQuery) {
           const q = searchQuery.toLowerCase();
@@ -729,6 +732,11 @@ function matchTreatment(raw) {
           paired.checked = cb.checked;
         });
         activeServices = [...new Set(Array.from(document.querySelectorAll('.filter-service:checked')).map(el => el.value))];
+        if (activeServices.includes('Hygienist')) {
+          activeTreatmentPriceType = 'hygienist';
+        } else if (activeTreatmentPriceType === 'hygienist') {
+          activeTreatmentPriceType = null;
+        }
         renderWithReset();
       });
     });
