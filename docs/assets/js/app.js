@@ -387,6 +387,7 @@ function matchTreatment(raw) {
         if (d.id && specMap[d.id]) {
           d.practitionerSpecialties = specMap[d.id].specialties;
           d.practitionerNames = specMap[d.id].names;
+          d.practitionerLanguages = specMap[d.id].languages;
         }
         if (d.id && amenMap[d.id]) d.amenityFlags = amenMap[d.id];
         if (d.id && expMap[d.id]) d.maxExperience = expMap[d.id];
@@ -395,6 +396,7 @@ function matchTreatment(raw) {
 
     // Setup filtering & rendering
     let activeSuburbs = [];
+    let activeLanguages = [];
     let activeServices = ['General Dentistry'];
     let minRating = 0;
     let searchQuery = '';
@@ -509,6 +511,10 @@ function matchTreatment(raw) {
           const specs = d.practitionerSpecialties || [];
           if (!activeSpecialties.every(kw => specs.some(s => s.includes(kw)))) return false;
         }
+        if (activeLanguages.length) {
+          const langs = d.practitionerLanguages || [];
+          if (!activeLanguages.some(l => langs.includes(l))) return false;
+        }
         if (activeAmenities.length) {
           if (!activeAmenities.every(key => checkAmenity(key, d))) return false;
         }
@@ -579,6 +585,7 @@ function matchTreatment(raw) {
           activeAmenities.forEach(a => activeLabels.push(a.replace(/_/g, ' ')));
           if (searchQuery) activeLabels.push(`"${searchQuery}"`);
           activeServices.forEach(s => activeLabels.push(s));
+          activeLanguages.forEach(l => activeLabels.push(l));
           activeSuburbs.forEach(s => activeLabels.push(s));
           if (minRating > 0) activeLabels.push(`★ ${minRating.toFixed(1)}+`);
           if (maxPrice !== Infinity) activeLabels.push(`under $${maxPrice}`);
@@ -658,6 +665,7 @@ function matchTreatment(raw) {
 
     function clearAllFilters() {
       activeSuburbs = [];
+      activeLanguages = [];
       activeServices = [];
       minRating = 0;
       searchQuery = '';
@@ -672,7 +680,7 @@ function matchTreatment(raw) {
       updateFavToggle();
       updateOpenToggle();
 
-      document.querySelectorAll('.filter-suburb, .filter-service, .filter-specialty, .filter-amenity').forEach(cb => { cb.checked = false; });
+      document.querySelectorAll('.filter-suburb, .filter-service, .filter-specialty, .filter-amenity, .filter-language').forEach(cb => { cb.checked = false; });
       document.querySelectorAll('.filter-exp-slider').forEach(s => {
         s.value = '0';
         const val = s.closest('[data-filter="experience"]')?.querySelector('.filter-exp-val');
@@ -892,11 +900,12 @@ function matchTreatment(raw) {
       cb.checked = activeServices.includes('General Dentistry');
     });
 
-    // Build dynamic suburb + specialty + amenity + experience filters (after state vars are declared)
+    // Build dynamic suburb + specialty + amenity + experience + language filters
     buildSuburbFilters(allDentists);
     buildSpecialtyFilters(allDentists);
     buildAmenitiesFilter(allDentists);
     buildExperienceFilter(allDentists);
+    buildLanguageFilters(allDentists);
 
     // Specialty filters (injected dynamically by buildSpecialtyFilters)
     document.querySelectorAll('.filter-specialty').forEach(cb => {
@@ -912,6 +921,15 @@ function matchTreatment(raw) {
       cb.addEventListener('change', () => {
         document.querySelectorAll(`.filter-amenity[value="${cb.value}"]`).forEach(p => { p.checked = cb.checked; });
         activeAmenities = [...new Set(Array.from(document.querySelectorAll('.filter-amenity:checked')).map(el => el.value))];
+        renderWithReset();
+      });
+    });
+
+    // Language filters (injected dynamically by buildLanguageFilters)
+    document.querySelectorAll('.filter-language').forEach(cb => {
+      cb.addEventListener('change', () => {
+        document.querySelectorAll(`.filter-language[value="${cb.value}"]`).forEach(p => { p.checked = cb.checked; });
+        activeLanguages = [...new Set(Array.from(document.querySelectorAll('.filter-language:checked')).map(el => el.value))];
         renderWithReset();
       });
     });
@@ -1052,6 +1070,37 @@ function matchTreatment(raw) {
     // Update mobile drawer
     const mobileSuburbItems = document.querySelector('.filter-drawer [data-filter="suburb"] .filter-group__items');
     if (mobileSuburbItems) mobileSuburbItems.innerHTML = checkboxHtml;
+  }
+
+  function buildLanguageFilters(allDentists) {
+    // Count clinics per language
+    const counts = {};
+    allDentists.forEach(d => {
+      (d.practitionerLanguages || []).forEach(lang => {
+        counts[lang] = (counts[lang] || 0) + 1;
+      });
+    });
+    const available = Object.entries(counts)
+      .filter(([, n]) => n >= 1)
+      .sort((a, b) => b[1] - a[1]);
+    if (available.length === 0) return;
+
+    const html = available.map(([lang, count]) => `
+      <label class="filter-check">
+        <input type="checkbox" class="filter-language" value="${lang}">
+        <span>${lang} <span class="filter-check__count">${count}</span></span>
+      </label>`).join('');
+
+    const groupHTML = `
+      <div class="filter-group" data-filter="language">
+        <div class="filter-group__label">Language</div>
+        <div class="filter-group__items">${html}</div>
+      </div>`;
+
+    document.querySelectorAll('.sidebar, .filter-drawer').forEach(container => {
+      if (container.querySelector('[data-filter="language"]')) return;
+      container.insertAdjacentHTML('beforeend', groupHTML);
+    });
   }
 
   // ===== Mobile Filter Drawer =====

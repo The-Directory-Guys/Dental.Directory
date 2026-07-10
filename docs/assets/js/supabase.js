@@ -286,7 +286,41 @@ async function fetchAmenitiesForClinics(clinicIds) {
   return map;
 }
 
-// Fetch practitioners for a batch of clinic IDs, returns map of clinic_id → { specialties, names }
+// Normalise free-text language strings into canonical language names
+const LANG_PATTERNS = [
+  { key: 'Mandarin',     re: /mandarin|chinese/i },
+  { key: 'Cantonese',    re: /cantonese/i },
+  { key: 'Korean',       re: /korean/i },
+  { key: 'Hindi',        re: /hindi/i },
+  { key: 'Malay',        re: /malay|bahasa/i },
+  { key: 'Arabic',       re: /arabic/i },
+  { key: 'Japanese',     re: /japanese/i },
+  { key: 'Spanish',      re: /spanish/i },
+  { key: 'Filipino',     re: /tagalog|filipino/i },
+  { key: 'Vietnamese',   re: /vietnamese/i },
+  { key: 'Punjabi',      re: /punjabi/i },
+  { key: 'Gujarati',     re: /gujarati/i },
+  { key: 'Tamil',        re: /tamil/i },
+  { key: 'Afrikaans',    re: /afrikaans/i },
+  { key: 'Tongan',       re: /tongan/i },
+  { key: 'Samoan',       re: /samoan/i },
+  { key: 'Thai',         re: /thai/i },
+  { key: 'Portuguese',   re: /portuguese/i },
+  { key: 'French',       re: /french/i },
+  { key: 'German',       re: /german/i },
+  { key: 'Sign Language',re: /sign language/i },
+];
+
+function normaliseLangs(raw) {
+  if (!raw) return [];
+  const found = [];
+  for (const { key, re } of LANG_PATTERNS) {
+    if (re.test(raw) && !found.includes(key)) found.push(key);
+  }
+  return found;
+}
+
+// Fetch practitioners for a batch of clinic IDs, returns map of clinic_id → { specialties, names, languages }
 async function fetchPractitionersForClinics(clinicIds) {
   if (!clinicIds || clinicIds.length === 0) return {};
   const map = {};
@@ -295,14 +329,14 @@ async function fetchPractitionersForClinics(clinicIds) {
     for (let i = 0; i < clinicIds.length; i += BATCH) {
       const batch = clinicIds.slice(i, i + BATCH);
       const idsParam = batch.map(id => `clinic_id.eq.${id}`).join(',');
-      const url = `${SUPABASE_URL}/rest/v1/clinic_practitioners?or=(${idsParam})&select=clinic_id,name,specialties&limit=1000`;
+      const url = `${SUPABASE_URL}/rest/v1/clinic_practitioners?or=(${idsParam})&select=clinic_id,name,specialties,languages&limit=1000`;
       const response = await fetch(url, {
         headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
       });
       if (!response.ok) continue;
       const data = await response.json();
       data.forEach(row => {
-        if (!map[row.clinic_id]) map[row.clinic_id] = { specialties: [], names: [] };
+        if (!map[row.clinic_id]) map[row.clinic_id] = { specialties: [], names: [], languages: [] };
         if (row.name) {
           const cleanName = row.name.replace(/^Dr\.?\s*/i, '').trim();
           if (cleanName && !map[row.clinic_id].names.includes(cleanName)) {
@@ -315,6 +349,9 @@ async function fetchPractitionersForClinics(clinicIds) {
             if (norm && !map[row.clinic_id].specialties.includes(norm)) map[row.clinic_id].specialties.push(norm);
           });
         }
+        normaliseLangs(row.languages).forEach(lang => {
+          if (!map[row.clinic_id].languages.includes(lang)) map[row.clinic_id].languages.push(lang);
+        });
       });
     }
   } catch (e) {}
