@@ -1910,6 +1910,23 @@ h4 {
     align-items: flex-start;
 }
 
+.team-card__avatar-wrap {
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+
+.team-card__photo {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
 .team-card__avatar {
     flex-shrink: 0;
     width: 3rem;

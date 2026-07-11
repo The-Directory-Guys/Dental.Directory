@@ -1420,9 +1420,13 @@ function matchTreatment(raw) {
           ? p.specialties.split(',').map(s => `<span class="pill pill--sm">${s.trim()}</span>`).join('')
           : '';
         const languageNote = p.languages ? `<div class="team-card__languages">🌐 ${p.languages}</div>` : '';
+        const avatar = p.photo_url
+          ? `<img class="team-card__photo" src="${p.photo_url}" alt="${p.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+          : '';
+        const initialsEl = `<div class="team-card__avatar"${p.photo_url ? ' style="display:none"' : ''}>${initials}</div>`;
         return `
           <div class="team-card">
-            <div class="team-card__avatar">${initials}</div>
+            <div class="team-card__avatar-wrap">${avatar}${initialsEl}</div>
             <div class="team-card__body">
               <div class="team-card__name">${p.name}</div>
               ${p.experience ? `<div class="team-card__experience">${p.experience}</div>` : ''}

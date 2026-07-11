@@ -361,7 +361,7 @@ async function fetchPractitionersForClinics(clinicIds) {
 // Fetch practitioners for a single clinic
 async function fetchClinicPractitioners(clinicId) {
   try {
-    const url = `${SUPABASE_URL}/rest/v1/clinic_practitioners?clinic_id=eq.${clinicId}&select=name,experience,specialties,bio,languages&order=id`;
+    const url = `${SUPABASE_URL}/rest/v1/clinic_practitioners?clinic_id=eq.${clinicId}&select=name,experience,specialties,bio,languages,photo_url&order=id`;
     const response = await fetch(url, {
       headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
     });
