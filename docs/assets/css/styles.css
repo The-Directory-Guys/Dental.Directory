@@ -1970,11 +1970,42 @@ h4 {
     margin-bottom: var(--sp-2);
 }
 
+.team-card__bio-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+}
+
 .team-card__bio {
     font-size: var(--fs-sm);
     color: var(--clr-gray-600);
     line-height: 1.6;
     margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.team-card__bio--expanded {
+    display: block;
+    overflow: visible;
+}
+
+.team-card__read-more {
+    align-self: flex-start;
+    background: none;
+    border: none;
+    color: var(--clr-primary);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+.team-card__read-more:hover {
+    text-decoration: underline;
 }
 
 .team-card__languages {
