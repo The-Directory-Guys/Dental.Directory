@@ -1443,17 +1443,37 @@ function matchTreatment(raw) {
         </div>`;
     }
 
+    // Payment options section
+    let paymentHTML = '';
+    const am = dentist.amenities;
+    if (am) {
+      const rawPartners = am.payment_partners;
+      const rawPlans = am.membership_plans;
+      let chips = [];
+      if (rawPartners) {
+        try { chips = JSON.parse(rawPartners).map(s => String(s).trim()).filter(Boolean); }
+        catch { chips = rawPartners.split(',').map(s => s.trim()).filter(Boolean); }
+      }
+      if (chips.length > 0 || rawPlans) {
+        const chipsHTML = chips.map(c => `<span class="payment-chip">${c}</span>`).join('');
+        const plansHTML = rawPlans ? `<p class="payment-plans">${rawPlans}</p>` : '';
+        paymentHTML = `
+        <div class="profile-section profile-section--payment">
+          <h2 class="profile-section__title">Payment Options</h2>
+          ${chipsHTML ? `<div class="payment-chips">${chipsHTML}</div>` : ''}
+          ${plansHTML}
+        </div>`;
+      }
+    }
+
     // Miscellaneous section from amenities
     let miscHTML = '';
-    const am = dentist.amenities;
     if (am) {
       const TEXT_FIELDS = [
         ['in_house_specialists', 'In-house specialists'],
         ['sedation_options', 'Sedation options'],
         ['calming_amenities', 'Comfort amenities'],
         ['parking_access', 'Parking'],
-        ['payment_partners', 'Payment options'],
-        ['membership_plans', 'Membership plans'],
       ];
       const BOOL_FIELDS = [
         ['wheelchair_accessible', 'Wheelchair accessible'],
@@ -1494,6 +1514,8 @@ function matchTreatment(raw) {
         </div>
 
         ${pricingHTML}
+
+        ${paymentHTML}
 
         ${hoursHTML ? `
         <div class="profile-section profile-section--hours">

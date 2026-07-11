@@ -1215,6 +1215,7 @@ h4 {
 .profile-section--pricing  { border-top-color: #f59e0b; }
 .profile-section--hours    { border-top-color: #10b981; }
 .profile-section--team     { border-top-color: #ec4899; }
+.profile-section--payment  { border-top-color: #0ea5e9; }
 .profile-section--misc     { border-top-color: #6366f1; }
 .profile-section--reviews  { border-top-color: #f97316; }
 
@@ -1232,6 +1233,7 @@ h4 {
 .profile-section--pricing  .profile-section__title { border-bottom-color: rgba(245,158,11,.2); }
 .profile-section--hours    .profile-section__title { border-bottom-color: rgba(16,185,129,.2); }
 .profile-section--team     .profile-section__title { border-bottom-color: rgba(236,72,153,.2); }
+.profile-section--payment  .profile-section__title { border-bottom-color: rgba(14,165,233,.2); }
 .profile-section--misc     .profile-section__title { border-bottom-color: rgba(99,102,241,.2); }
 .profile-section--reviews  .profile-section__title { border-bottom-color: rgba(249,115,22,.2); }
 
@@ -1795,7 +1797,7 @@ h4 {
 }
 
 .pricing-table thead th:last-child {
-    text-align: right;
+    text-align: left;
 }
 
 .pricing-table tbody tr {
@@ -1826,7 +1828,7 @@ h4 {
 }
 
 .pricing-table tbody td:last-child {
-    text-align: right;
+    text-align: left;
     font-weight: 700;
     color: var(--clr-teal-dark);
     white-space: nowrap;
@@ -2000,6 +2002,46 @@ h4 {
 
 .misc-item__value--yes { color: #166534; }
 .misc-item__value--no  { color: var(--clr-gray-400); }
+
+/* Payment chips */
+.payment-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-3);
+}
+
+.payment-chip {
+    display: inline-block;
+    padding: .25rem .75rem;
+    border-radius: 999px;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    background: rgba(14,165,233,.1);
+    color: #0369a1;
+    border: 1px solid rgba(14,165,233,.25);
+    white-space: nowrap;
+}
+
+@media (prefers-color-scheme: dark) {
+    .payment-chip {
+        background: rgba(14,165,233,.15);
+        color: #7dd3fc;
+        border-color: rgba(14,165,233,.3);
+    }
+}
+:root[data-theme="dark"] .payment-chip {
+    background: rgba(14,165,233,.15);
+    color: #7dd3fc;
+    border-color: rgba(14,165,233,.3);
+}
+
+.payment-plans {
+    font-size: var(--fs-sm);
+    color: var(--clr-gray-600);
+    margin: 0;
+    line-height: 1.6;
+}
 
 /* ===================================================
    NO RESULTS
