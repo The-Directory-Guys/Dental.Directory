@@ -1417,7 +1417,7 @@ function matchTreatment(raw) {
       const cards = dentist.practitioners.map(p => {
         const initials = p.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
         const specialtyPills = p.specialties
-          ? p.specialties.split(',').map(s => `<span class="pill pill--sm">${s.trim()}</span>`).join('')
+          ? p.specialties.split(',').map(s => `<span class="pill pill--sm">${s.trim()}</span>`).join(' ')
           : '';
         const languageNote = p.languages ? `<div class="team-card__languages">🌐 ${p.languages}</div>` : '';
         const avatar = p.photo_url
