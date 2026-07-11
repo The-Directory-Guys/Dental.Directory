@@ -472,7 +472,7 @@ function matchTreatment(raw) {
       return `
         <article class="dentist-card" data-suburb="${d.suburb}" data-rating="${d.rating || 0}" data-name="${d.name}">
           ${favBtn}
-          <div class="dentist-card__avatar">${initials}</div>
+          <div class="dentist-card__avatar">${d.photoUrl ? `<img src="${d.photoUrl}" alt="${d.name}" class="dentist-card__avatar-img" loading="lazy" onerror="this.parentElement.innerHTML='${initials}'">` : initials}</div>
           <div class="dentist-card__body">
             <h3 class="dentist-card__name">
               <a href="${profileLink}">${d.name}</a>

@@ -920,6 +920,14 @@ h4 {
     place-items: center;
     font-size: 2rem;
     flex-shrink: 0;
+    overflow: hidden;
+}
+
+.dentist-card__avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .dentist-card__body {

@@ -80,7 +80,8 @@ function transformClinic(clinic) {
     hrs: compactHours(parseOpeningHours(clinic.opening_hours)),
     reviews: [],
     googleMapsUrl: clinic.google_maps_url || '',
-    businessStatus: clinic.business_status || 'OPERATIONAL'
+    businessStatus: clinic.business_status || 'OPERATIONAL',
+    photoUrl: clinic.photo_url || ''
   };
 }
 
