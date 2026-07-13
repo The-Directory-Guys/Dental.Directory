@@ -1220,9 +1220,11 @@ function matchTreatment(raw) {
       const ratingHtml = dentist.rating
         ? `<span class="stars stars--lg">${starsHTML(dentist.rating)}</span> <strong style="color:#fff">${dentist.rating}</strong> <span>(${dentist.reviewCount} review${dentist.reviewCount === 1 ? '' : 's'})</span>`
         : '<span style="color:var(--clr-gray-300)">No rating yet</span>';
+      const foundedHtml = dentist.foundedYear ? `<span class="profile-hero__meta-item">Est. ${dentist.foundedYear}</span>` : '';
       heroMeta.innerHTML = `
         <span class="profile-hero__meta-item">${ratingHtml}</span>
         <span class="profile-hero__meta-item">📍 ${dentist.address}</span>
+        ${foundedHtml}
       `;
     }
 
@@ -1431,7 +1433,7 @@ function matchTreatment(raw) {
               <div class="team-card__name">${p.name}</div>
               ${p.experience ? `<div class="team-card__experience">${p.experience}</div>` : ''}
               ${specialtyPills ? `<div class="team-card__specialties">${specialtyPills}</div>` : ''}
-              ${p.bio ? `<p class="team-card__bio">${p.bio}</p>` : ''}
+              ${p.bio ? `<div class="team-card__bio-wrap"><p class="team-card__bio">${p.bio}</p><button class="team-card__read-more" onclick="var w=this.previousElementSibling;var expanded=w.classList.toggle('team-card__bio--expanded');this.textContent=expanded?'Read less ▲':'Read more ▼'">Read more ▼</button></div>` : ''}
               ${languageNote}
             </div>
           </div>`;

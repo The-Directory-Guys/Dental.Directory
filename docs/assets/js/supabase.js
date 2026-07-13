@@ -81,7 +81,8 @@ function transformClinic(clinic) {
     reviews: [],
     googleMapsUrl: clinic.google_maps_url || '',
     businessStatus: clinic.business_status || 'OPERATIONAL',
-    photoUrl: clinic.photo_url || ''
+    photoUrl: clinic.photo_url || '',
+    foundedYear: clinic.founded_year || null
   };
 }
 
