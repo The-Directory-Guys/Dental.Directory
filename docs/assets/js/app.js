@@ -1476,6 +1476,7 @@ function matchTreatment(raw) {
         ['sedation_options', 'Sedation options'],
         ['calming_amenities', 'Comfort amenities'],
         ['parking_access', 'Parking'],
+        ['special_offers', 'Special offers'],
       ];
       const BOOL_FIELDS = [
         ['wheelchair_accessible', 'Wheelchair accessible'],
