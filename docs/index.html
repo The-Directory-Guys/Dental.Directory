@@ -13,6 +13,10 @@
     <meta property="og:type" content="website">
     <link rel="canonical" href="https://dentalcompare.co.nz/">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .to-top-btn { font-size:.8rem; color:var(--clr-gray-400); text-decoration:none; border:1px solid var(--clr-gray-200); border-radius:20px; padding:.3rem .9rem; display:inline-block; transition:color .15s, border-color .15s; }
+        .to-top-btn:hover { color:var(--clr-teal); border-color:var(--clr-teal); }
+    </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4J758VJQVX"></script>
     <script>
@@ -39,6 +43,7 @@
                 <a href="saved.html" class="nav__link">Saved</a>
                 <a href="leaderboard.html" class="nav__link">Leaderboard <span class="nav__coming-soon">Soon</span></a>
                 <a href="claim.html" class="nav__link nav__link--owners">Clinic owners</a>
+                <a href="contact.html" class="nav__link">Contact</a>
             </nav>
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
                 <span></span><span></span><span></span>
@@ -50,8 +55,12 @@
     <section class="hero">
         <div class="container">
             <h1>Find Your Perfect <span class="hero__highlight">Dentist</span> in New Zealand</h1>
-            <p>Compare top-rated dental practices, read real patient reviews, and book your next appointment — all in
-                one place.</p>
+            <p style="text-align:center; line-height:2;">
+                Compare top-rated dental practices.<br>
+                Read real patient reviews.<br>
+                Find the right clinic near you.<br>
+                Book your next appointment.
+            </p>
 
             <div class="hero-search">
                 <input type="text" class="hero-search__input" placeholder="Search by service...">
@@ -95,8 +104,7 @@
     <section class="section section--hiw">
         <div class="container">
             <h2 class="section-title">How It Works</h2>
-            <p class="section-subtitle">Finding the right dentist should be simple. Here's how Dental Compare makes it easy.
-            </p>
+            <p class="section-subtitle">Finding the right dentist should be simple.<br>Here's how Dental Compare makes it easy.</p>
 
             <div class="steps">
                 <div class="step">
@@ -115,6 +123,9 @@
                     <h4 class="step__title">Contact</h4>
                     <p class="step__desc">Found the one? Get in touch directly via phone or visit their website to book.</p>
                 </div>
+            </div>
+            <div style="text-align:right; margin-top:var(--sp-6);">
+                <a href="#" class="to-top-btn">↑ To Top</a>
             </div>
         </div>
     </section>
@@ -242,6 +253,9 @@
                     <div class="location-card__count">7 dentists</div>
                 </a>
             </div>
+            <div style="text-align:right; margin-top:var(--sp-4);">
+                <a href="#" class="to-top-btn">↑ To Top</a>
+            </div>
         </div>
     </section>
 
@@ -253,6 +267,9 @@
             <h2 class="section-title">Got Questions?</h2>
             <p class="section-subtitle">From free teen dental care to ACC claims and payment plans, we've put together answers to the most common questions.</p>
             <a href="faq.html" class="btn btn--primary" style="display:inline-block; margin-top:var(--sp-4);">Read our FAQ</a>
+            <div style="text-align:right; margin-top:var(--sp-6);">
+                <a href="#" class="to-top-btn">↑ To Top</a>
+            </div>
         </div>
     </section>
 
