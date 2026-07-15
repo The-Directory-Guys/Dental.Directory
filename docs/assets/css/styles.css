@@ -2396,6 +2396,42 @@ details[open] .faq__question::after {
 /* ===================================================
    FEEDBACK WIDGET
    =================================================== */
+#to-top-btn {
+    position: fixed;
+    left: 1.5rem;
+    bottom: 1.5rem;
+    z-index: 400;
+    background: var(--clr-teal);
+    color: var(--clr-white);
+    border: none;
+    border-radius: var(--radius-full);
+    padding: var(--sp-3) var(--sp-5);
+    font-family: var(--ff-body);
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    letter-spacing: .03em;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(14,165,233,.4);
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition), opacity .25s, visibility .25s;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+#to-top-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+#to-top-btn:hover {
+    background: var(--clr-teal-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(14,165,233,.5);
+}
+
 #fb-widget {
     position: fixed;
     right: 1.5rem;

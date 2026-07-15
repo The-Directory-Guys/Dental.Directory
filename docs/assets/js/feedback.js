@@ -207,9 +207,31 @@
     }
   }
 
+  function initToTop() {
+    const btn = document.createElement('button');
+    btn.id = 'to-top-btn';
+    btn.setAttribute('aria-label', 'Back to top');
+    btn.textContent = '↑ To Top';
+    document.body.appendChild(btn);
+
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          btn.classList.toggle('visible', window.scrollY > 300);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', () => { init(); initToTop(); });
   } else {
     init();
+    initToTop();
   }
 })();
