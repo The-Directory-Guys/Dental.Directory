@@ -1622,6 +1622,37 @@ function matchTreatment(raw) {
   // ===== Hero Search =====
   const heroSearchBtn = document.getElementById('hero-search-btn');
   const heroSearchInput = document.querySelector('.hero-search__input');
+  const searchSuggestions = document.getElementById('search-suggestions');
+
+  async function fetchClinicSuggestions(q) {
+    if (!q || q.length < 2) return [];
+    const url = `${SUPABASE_URL}/rest/v1/dental_clinics?name=ilike.*${encodeURIComponent(q)}*&select=id,name,city,suburb_town,region&order=total_ratings.desc.nullslast&limit=7`;
+    try {
+      const res = await fetch(url, { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } });
+      return res.ok ? await res.json() : [];
+    } catch { return []; }
+  }
+
+  function showSuggestions(clinics) {
+    if (!searchSuggestions || !clinics.length) { hideSuggestions(); return; }
+    searchSuggestions.innerHTML = clinics.map(c =>
+      `<div class="hero-search__suggestion" data-id="${c.id}" data-region="${encodeURIComponent(c.region)}">
+        <span class="hero-search__suggestion-name">${c.name}</span>
+        <span class="hero-search__suggestion-loc">${c.suburb_town ? c.suburb_town + ', ' : ''}${c.city}</span>
+      </div>`
+    ).join('');
+    searchSuggestions.hidden = false;
+    searchSuggestions.querySelectorAll('.hero-search__suggestion').forEach(el => {
+      el.addEventListener('mousedown', e => {
+        e.preventDefault();
+        window.location.href = `dentist.html?id=${el.dataset.id}&region=${el.dataset.region}`;
+      });
+    });
+  }
+
+  function hideSuggestions() {
+    if (searchSuggestions) searchSuggestions.hidden = true;
+  }
 
   // ===== Homepage: Near Me Toggle + Search =====
   const nearMeBtn = document.getElementById('near-me-btn');
@@ -1685,6 +1716,22 @@ function matchTreatment(raw) {
     setTimeout(typePlaceholder, 800);
   }
 
+  // Autocomplete: show clinic name suggestions as user types
+  let suggestTimer;
+  if (heroSearchInput) {
+    heroSearchInput.addEventListener('input', () => {
+      clearTimeout(suggestTimer);
+      const q = heroSearchInput.value.trim();
+      if (q.length < 2) { hideSuggestions(); return; }
+      suggestTimer = setTimeout(async () => showSuggestions(await fetchClinicSuggestions(q)), 260);
+    });
+    heroSearchInput.addEventListener('blur', () => setTimeout(hideSuggestions, 160));
+    heroSearchInput.addEventListener('focus', () => {
+      const q = heroSearchInput.value.trim();
+      if (q.length >= 2) fetchClinicSuggestions(q).then(showSuggestions);
+    });
+  }
+
   function resolveLocation(locationStr) {
     const coords = typeof SUBURB_COORDS !== 'undefined' ? SUBURB_COORDS : {};
     const lower = locationStr.toLowerCase().trim();
@@ -1735,13 +1782,27 @@ function matchTreatment(raw) {
       return;
     }
 
-    // No GPS — try treating full query as a location
+    // No GPS — try treating full query as a location or clinic name
     if (q) {
       let coord = resolveLocation(q);
       if (!coord) {
         if (heroSearchBtn) { heroSearchBtn.textContent = 'Searching…'; heroSearchBtn.disabled = true; }
-        try { coord = await geocodeFallback(q); } catch (e) {}
+        let nameResults = [];
+        try {
+          [coord, nameResults] = await Promise.all([
+            geocodeFallback(q).catch(() => null),
+            fetchClinicSuggestions(q)
+          ]);
+        } catch (e) {}
         if (heroSearchBtn) { heroSearchBtn.textContent = 'Search'; heroSearchBtn.disabled = false; }
+        if (!coord && nameResults.length) {
+          if (nameResults.length === 1) {
+            window.location.href = `dentist.html?id=${nameResults[0].id}&region=${encodeURIComponent(nameResults[0].region)}`;
+          } else {
+            showSuggestions(nameResults);
+          }
+          return;
+        }
       }
       if (coord) {
         window.location.href = `nearby.html?lat=${coord.lat}&lng=${coord.lng}&q=${encodeURIComponent(q)}`;
@@ -1750,7 +1811,7 @@ function matchTreatment(raw) {
     }
 
     if (nearMeBtn) nearMeBtn.classList.add('hero-nearby__btn--nudge');
-    nearMeStatus.textContent = q ? 'Location not found. Try "Dentures in Wellington".' : 'Enter a suburb, or use your location.';
+    nearMeStatus.textContent = q ? 'No results found. Try "Dentures in Wellington".' : 'Enter a clinic name, suburb, or use your location.';
     setTimeout(() => {
       if (nearMeBtn) nearMeBtn.classList.remove('hero-nearby__btn--nudge');
       nearMeStatus.textContent = '';
