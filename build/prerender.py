@@ -408,7 +408,8 @@ def card_html(clinic: dict, pricing: list, region: str) -> str:
         services = ["Teen Dental"] + [s for s in services if s != "Teen Dental"]
     cid          = clinic["id"]
 
-    initials = "".join(w[0] for w in name.split() if w)[:2].upper()
+    initials  = "".join(w[0] for w in name.split() if w)[:2].upper()
+    photo_url = clinic.get("photo_url") or ""
     location = (
         f"{suburb}, {city}" if suburb and city and suburb != city
         else city or suburb or "Unknown"
@@ -442,7 +443,15 @@ def card_html(clinic: dict, pricing: list, region: str) -> str:
         f'data-suburb="{html.escape(suburb)}" '
         f'data-rating="{rating}" '
         f'data-name="{html.escape(name)}">\n'
-        f'          <div class="dentist-card__avatar">{initials}</div>\n'
+        + (
+            f'          <div class="dentist-card__avatar">'
+            f'<img src="{html.escape(photo_url)}" alt="{html.escape(name)}" '
+            f'class="dentist-card__avatar-img" loading="lazy" '
+            f'onerror="this.parentElement.innerHTML=\'{initials}\'">'
+            f'</div>\n'
+            if photo_url else
+            f'          <div class="dentist-card__avatar">{initials}</div>\n'
+        )
         f'          <div class="dentist-card__body">\n'
         f'            <h3 class="dentist-card__name">'
         f'<a href="{profile_link}">{html.escape(name)}</a></h3>\n'
@@ -582,6 +591,7 @@ def inject_page(
         "id","name","suburb_town","town","city",
         "phone_national","phone_international","phone",
         "rating","total_ratings","services","price","description",
+        "photo_url",
     }
     slim_clinics = []
     for c in clinics:
