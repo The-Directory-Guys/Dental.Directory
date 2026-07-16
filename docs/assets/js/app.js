@@ -417,7 +417,7 @@ function matchTreatment(raw) {
         ? ['Teen Dental', ...d.services.filter(s => s !== 'Teen Dental')]
         : d.services;
       const servicePills = orderedServices.slice(0, 4).map(s =>
-        `<span class="pill pill--sm">${s}</span>`
+        `<span class="pill pill--sm">${s === 'Hygienist' ? 'Hygienist: Scale & clean' : s}</span>`
       ).join('');
 
       let pricingPreview = '';
@@ -437,7 +437,7 @@ function matchTreatment(raw) {
           const hCmps = getHygienistComparisons(hygPrice, d.city, d.region);
           const hCmp = hCmps.city || hCmps.region;
           const hBadge = hCmp ? ` <span class="price-cmp price-cmp--${hCmp.dir}">${hCmp.text}</span>` : '';
-          parts.push(`Scale &amp; clean from $${hygPrice}${hBadge}`);
+          parts.push(`Hygienist: scale &amp; clean from $${hygPrice}${hBadge}`);
         }
         if (parts.length > 0) {
           pricingPreview = `<div class="pricing-summary">${parts.map(p => `<div class="pricing-line">💰 ${p}</div>`).join('')}</div>`;
@@ -1238,7 +1238,7 @@ function matchTreatment(raw) {
       'Dental Implants': '🔩', 'Implants': '🔩', 'Orthodontics': '😁', 'Emergency': '🚨',
       'Dentures': '🦷', 'Oral Surgery': '🩺', 'Endodontics': '🔬',
       'Periodontal Care': '🦠', 'Oral and Maxillofacial Surgery': '🩺',
-      'Hygienist': '🪥', 'Teen Dental': '🧒',
+      'Hygienist': '🪥', 'Scale & clean': '🪥', 'Teen Dental': '🧒',
     };
 
     const serviceDescs = {
@@ -1255,18 +1255,22 @@ function matchTreatment(raw) {
       'Periodontal Care':               'Treatment for gum disease, including deep cleaning and ongoing gum health management.',
       'Oral and Maxillofacial Surgery': 'Surgical treatment of conditions affecting the mouth, jaw, and face.',
       'Hygienist':                      'Professional scale and clean, stain removal, and personalised oral hygiene advice.',
+      'Scale & clean':                  'Professional scale and clean, stain removal, and personalised oral hygiene advice.',
       'Teen Dental':                    'Subsidised dental care for eligible patients aged 18 and under.',
     };
 
-    const servicesHTML = dentist.services.map(s => `
+    const servicesHTML = dentist.services.map(s => {
+      const displayName = s === 'Hygienist' ? 'Hygienist: Scale & clean' : s;
+      return `
       <div class="service-item">
         <div class="service-item__icon">${serviceIcons[s] || '🦷'}</div>
         <div class="service-item__content">
-          <div class="service-item__name">${s}</div>
+          <div class="service-item__name">${displayName}</div>
           <div class="service-item__desc">${serviceDescs[s] || `${s} provided by qualified dental professionals.`}</div>
         </div>
       </div>
-    `).join('');
+    `;
+    }).join('');
 
     // Opening hours
     let hoursHTML = '';
@@ -1324,7 +1328,8 @@ function matchTreatment(raw) {
           if (hygCmps.city) cmpHtml += ` <span class="price-cmp price-cmp--${hygCmps.city.dir}">${hygCmps.city.text}</span>`;
           if (hygCmps.region) cmpHtml += ` <span class="price-cmp price-cmp--${hygCmps.region.dir}">${hygCmps.region.text}</span>`;
         }
-        return `<tr><td>${p.service}${notesHtml}</td><td>${p.price}${cmpHtml}</td></tr>`;
+        const displayService = isHygienist ? 'Hygienist: Scale & clean' : p.service;
+        return `<tr><td>${displayService}${notesHtml}</td><td>${p.price}${cmpHtml}</td></tr>`;
       }).join('');
       pricingHTML = `
         <div class="profile-section profile-section--pricing">
