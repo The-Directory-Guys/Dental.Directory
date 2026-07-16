@@ -1125,18 +1125,6 @@ function matchTreatment(raw) {
   }
 
   // ===== Dentist Profile Page =====
-  const profileContainer = document.getElementById('profile-content');
-  if (profileContainer) {
-    // Show loading
-    profileContainer.innerHTML = `
-      <div class="no-results">
-        <div class="no-results__icon">⏳</div>
-        <h3>Loading profile...</h3>
-      </div>
-    `;
-    initProfile();
-  }
-
   const REGION_FILES = {
     'Auckland': 'auckland.html',
     'Bay of Plenty': 'tauranga.html',
@@ -1164,6 +1152,18 @@ function matchTreatment(raw) {
     backBtn.href = fileName;
     const displayName = region === 'Nelson' ? 'Nelson/Tasman' : region;
     backBtn.textContent = `← Back to ${displayName} listings`;
+  }
+
+  const profileContainer = document.getElementById('profile-content');
+  if (profileContainer) {
+    // Show loading
+    profileContainer.innerHTML = `
+      <div class="no-results">
+        <div class="no-results__icon">⏳</div>
+        <h3>Loading profile...</h3>
+      </div>
+    `;
+    initProfile();
   }
 
   async function initProfile() {
