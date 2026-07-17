@@ -3,6 +3,11 @@ DELETED CLINICS
 Clinics removed from the directory and the reason why.
 Do not re-add these.
 
+CHILDRENS' DENTAL CLINIC (ID 2816)
+Region: Wellington
+Address: 244-256 Willis Street, Te Aro, Wellington
+Reason: Heritage New Zealand listed building — a historic children's dental clinic, not an active practice. Website links to heritage.org.nz register entry.
+
 WAHAORA DENTAL CLINIC (ID 2937)
 Region: Gisborne
 Address: 80 De Lautour Road, Inner Kaiti, Gisborne
