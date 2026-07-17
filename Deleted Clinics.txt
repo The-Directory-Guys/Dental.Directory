@@ -1,0 +1,9 @@
+DELETED CLINICS
+===============
+Clinics removed from the directory and the reason why.
+Do not re-add these.
+
+WAHAORA DENTAL CLINIC (ID 2937)
+Region: Gisborne
+Address: 80 De Lautour Road, Inner Kaiti, Gisborne
+Reason: DHB/Health New Zealand community dental clinic (Hauora Tairāwhiti). Free or heavily subsidised for eligible groups only — not a private practice and not suitable for a consumer comparison directory.
