@@ -1474,8 +1474,8 @@ function matchTreatment(raw) {
         </div>`;
     }
 
-    // Payment options section
-    let paymentHTML = '';
+    // Payment options from amenities (payment_partners / membership_plans)
+    let amenityPaymentHTML = '';
     const am = dentist.amenities;
     if (am) {
       const rawPartners = am.payment_partners;
@@ -1486,12 +1486,12 @@ function matchTreatment(raw) {
         catch { chips = rawPartners.split(',').map(s => s.trim()).filter(Boolean); }
       }
       if (chips.length > 0 || rawPlans) {
-        const chipsHTML = chips.map(c => `<span class="payment-chip">${c}</span>`).join('');
+        const chipsHTML = chips.map(c => `<span class="payment-pill">${c}</span>`).join('');
         const plansHTML = rawPlans ? `<p class="payment-plans">${rawPlans}</p>` : '';
-        paymentHTML = `
+        amenityPaymentHTML = `
         <div class="profile-section profile-section--payment">
           <h2 class="profile-section__title">Payment Options</h2>
-          ${chipsHTML ? `<div class="payment-chips">${chipsHTML}</div>` : ''}
+          ${chipsHTML ? `<div class="payment-pills">${chipsHTML}</div>` : ''}
           ${plansHTML}
         </div>`;
       }
@@ -1548,6 +1548,8 @@ function matchTreatment(raw) {
         ${pricingHTML}
 
         ${paymentHTML}
+
+        ${amenityPaymentHTML}
 
         ${hoursHTML ? `
         <div class="profile-section profile-section--hours">
