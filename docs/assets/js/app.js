@@ -116,12 +116,10 @@ function matchTreatment(raw) {
   // ===== Shared Helpers =====
   function starsHTML(rating) {
     if (!rating) return '<span class="empty">★</span>'.repeat(5);
-    const full = Math.floor(rating);
-    const half = rating % 1 >= 0.5 ? 1 : 0;
-    const empty = 5 - full - half;
+    const full = Math.round(rating);
+    const empty = 5 - full;
     let html = '';
     for (let i = 0; i < full; i++) html += '<span>★</span>';
-    if (half) html += '<span>★</span>';
     for (let i = 0; i < empty; i++) html += '<span class="empty">★</span>';
     return html;
   }

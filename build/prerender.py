@@ -341,10 +341,9 @@ def compact_hours(opening_hours: str | None) -> dict | None:
 # ---------------------------------------------------------------------------
 
 def stars_html(rating: float) -> str:
-    full  = int(rating)
-    half  = 1 if (rating - full) >= 0.25 else 0
-    empty = 5 - full - half
-    return "★" * full + "½" * half + "☆" * empty
+    full  = round(rating)
+    empty = 5 - full
+    return "★" * full + "☆" * empty
 
 
 def _first_dollar(price_str: str) -> int | None:
