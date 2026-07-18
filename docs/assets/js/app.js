@@ -1376,20 +1376,11 @@ function matchTreatment(raw) {
       `;
     }
 
-    // Payment methods section
-    let paymentHTML = '';
-    if (paymentRows.length > 0) {
-      const pills = paymentRows.map(p => {
-        const tip = p.price && p.price !== p.service ? ` title="${p.price}${p.notes ? ' — ' + p.notes : ''}"` : '';
-        return `<span class="payment-pill"${tip}>${p.service}</span>`;
-      }).join('');
-      paymentHTML = `
-        <div class="profile-section profile-section--payment">
-          <h2 class="profile-section__title">Payment Options</h2>
-          <div class="payment-pills">${pills}</div>
-        </div>
-      `;
-    }
+    // Collect payment pills from scraped_prices (merged with amenity data below)
+    const scrapedPaymentPills = paymentRows.map(p => {
+      const tip = p.price && p.price !== p.service ? ` title="${p.price}${p.notes ? ' — ' + p.notes : ''}"` : '';
+      return `<span class="payment-pill"${tip}>${p.service}</span>`;
+    });
 
     // Embedded map
     const encodedAddress = encodeURIComponent(dentist.address || dentist.name + ', New Zealand');
@@ -1474,24 +1465,26 @@ function matchTreatment(raw) {
         </div>`;
     }
 
-    // Payment options from amenities (payment_partners / membership_plans)
-    let amenityPaymentHTML = '';
+    // Merge scraped payment methods + amenity payment_partners into one section
+    let paymentHTML = '';
     const am = dentist.amenities;
-    if (am) {
-      const rawPartners = am.payment_partners;
-      const rawPlans = am.membership_plans;
-      let chips = [];
+    {
+      const rawPartners = am && am.payment_partners;
+      const rawPlans = am && am.membership_plans;
+      let amenityChips = [];
       if (rawPartners) {
-        try { chips = JSON.parse(rawPartners).map(s => String(s).trim()).filter(Boolean); }
-        catch { chips = rawPartners.split(',').map(s => s.trim()).filter(Boolean); }
+        try { amenityChips = JSON.parse(rawPartners).map(s => String(s).trim()).filter(Boolean); }
+        // Split on commas not inside parentheses
+        catch { amenityChips = rawPartners.split(/,(?![^(]*\))/).map(s => s.trim()).filter(Boolean); }
       }
-      if (chips.length > 0 || rawPlans) {
-        const chipsHTML = chips.map(c => `<span class="payment-pill">${c}</span>`).join('');
-        const plansHTML = rawPlans ? `<p class="payment-plans">${rawPlans}</p>` : '';
-        amenityPaymentHTML = `
+      const amenityPills = amenityChips.map(c => `<span class="payment-pill">${c}</span>`);
+      const allPills = [...scrapedPaymentPills, ...amenityPills];
+      const plansHTML = rawPlans ? `<p class="payment-plans">${rawPlans}</p>` : '';
+      if (allPills.length > 0 || plansHTML) {
+        paymentHTML = `
         <div class="profile-section profile-section--payment">
           <h2 class="profile-section__title">Payment Options</h2>
-          ${chipsHTML ? `<div class="payment-pills">${chipsHTML}</div>` : ''}
+          ${allPills.length > 0 ? `<div class="payment-pills">${allPills.join('')}</div>` : ''}
           ${plansHTML}
         </div>`;
       }
@@ -1548,8 +1541,6 @@ function matchTreatment(raw) {
         ${pricingHTML}
 
         ${paymentHTML}
-
-        ${amenityPaymentHTML}
 
         ${hoursHTML ? `
         <div class="profile-section profile-section--hours">
