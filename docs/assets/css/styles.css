@@ -1908,6 +1908,31 @@ h4 {
     font-size: var(--fs-sm) !important;
 }
 
+/* Payment methods pills */
+.payment-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+}
+
+.payment-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--sp-1) var(--sp-3);
+    background: var(--clr-gray-50);
+    border: 1px solid var(--clr-gray-200);
+    border-radius: 999px;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--clr-navy);
+    white-space: nowrap;
+    cursor: default;
+}
+
+.payment-pill[title] {
+    cursor: help;
+}
+
 /* Meet the Team */
 .team-list {
     display: flex;

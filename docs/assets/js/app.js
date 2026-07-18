@@ -1305,7 +1305,18 @@ function matchTreatment(raw) {
 
     // Pricing table — always show, with empty state if no data
     let pricingHTML = '';
+    const PAYMENT_KEYWORDS = [
+      'q card','afterpay','zip','laybuy','winz','work and income','southern cross',
+      'acc','gem visa','gem finance','farmers','credit card','visa','mastercard',
+      'eftpos','cash','payment plan','instalment','installment','interest-free',
+      'supergold','gold card','humm','genoapay','partpay','flexicare',
+    ];
+    const isPaymentMethod = p => {
+      const s = (p.service || '').toLowerCase();
+      return PAYMENT_KEYWORDS.some(k => s.includes(k));
+    };
     const pricingRows = (dentist.pricing || []).filter(p => /\$\d/.test(p.price));
+    const paymentRows = (dentist.pricing || []).filter(p => !(/\$\d/.test(p.price)) && isPaymentMethod(p));
     if (pricingRows.length > 0) {
       const checkupPrice = getCheckupPrice(dentist);
       const cmps = getPriceComparisons(checkupPrice, dentist.city, dentist.region);
@@ -1363,6 +1374,21 @@ function matchTreatment(raw) {
             <span class="submit-nudge__text">Do you know the price?</span>
             <button data-action="submit-info" class="submit-nudge__btn">Help the community &rarr;</button>
           </div>
+        </div>
+      `;
+    }
+
+    // Payment methods section
+    let paymentHTML = '';
+    if (paymentRows.length > 0) {
+      const pills = paymentRows.map(p => {
+        const tip = p.price && p.price !== p.service ? ` title="${p.price}${p.notes ? ' — ' + p.notes : ''}"` : '';
+        return `<span class="payment-pill"${tip}>${p.service}</span>`;
+      }).join('');
+      paymentHTML = `
+        <div class="profile-section profile-section--payment">
+          <h2 class="profile-section__title">Payment Options</h2>
+          <div class="payment-pills">${pills}</div>
         </div>
       `;
     }
