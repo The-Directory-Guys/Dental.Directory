@@ -452,7 +452,7 @@ def card_html(clinic: dict, pricing: list, region: str) -> str:
             if photo_url else
             f'          <div class="dentist-card__avatar">{initials}</div>\n'
         )
-        f'          <div class="dentist-card__body">\n'
+        + f'          <div class="dentist-card__body">\n'
         f'            <h3 class="dentist-card__name">'
         f'<a href="{profile_link}">{html.escape(name)}</a></h3>\n'
         f'            <div class="dentist-card__meta">\n'
