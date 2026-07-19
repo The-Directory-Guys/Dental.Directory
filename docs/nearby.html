@@ -235,6 +235,9 @@
 
                 <!-- Listings -->
                 <main>
+                    <div id="ors-notice" style="display:none; background:#fef3c7; border:1px solid #fde68a; border-radius:8px; padding:.625rem 1rem; margin-bottom:1rem; font-size:.85rem; color:#92400e;">
+                      ⚠️ Driving distances have hit their daily limit — showing straight-line distances instead.
+                    </div>
                     <div id="nearby-map"></div>
                     <div class="listings-header">
                         <span class="listings-header__count" id="results-count">Loading...</span>
@@ -276,10 +279,14 @@
         const sortSelect  = document.getElementById('sort-select');
         const mobileBtn   = document.getElementById('mobile-filter-btn');
 
+        const ORS_API_KEY = 'eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImNjMDc0MmM4MWU5MTRjYzZiMmM5NDEwOGU5ODQ1YmFiIiwiaCI6Im11cm11cjY0In0=';
+
         let userLat, userLng, allClinics = [];
         let map, clinicMarkers = [], radiusCircle, userMarker;
         let activeServices = [], activeSuburbs = [], minRating = 0, maxPrice = Infinity, maxHygienistPrice = Infinity;
         let activeTreatmentPriceType = null;
+        let drivingDistances = null; // clinic id → driving km; null = not yet fetched
+        let orsRateLimited = false;
 
         const params = new URLSearchParams(window.location.search);
 
@@ -290,6 +297,56 @@
           const a = Math.sin(dLat/2)**2 +
                     Math.cos(lat1 * Math.PI/180) * Math.cos(lat2 * Math.PI/180) * Math.sin(dLng/2)**2;
           return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        }
+
+        async function fetchDrivingDistances(lat, lng, clinics) {
+          const cacheKey = `ors_${lat.toFixed(2)}_${lng.toFixed(2)}`;
+          const cached = sessionStorage.getItem(cacheKey);
+          if (cached) return JSON.parse(cached);
+
+          const coords = [[lng, lat], ...clinics.map(c => [c.lng, c.lat])];
+          const resp = await fetch('https://api.openrouteservice.org/v2/matrix/driving-car', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${ORS_API_KEY}`,
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              locations: coords,
+              sources: [0],
+              destinations: clinics.map((_, i) => i + 1),
+              metrics: ['distance'],
+              units: 'km'
+            })
+          });
+
+          if (resp.status === 429) { const err = new Error('rate_limited'); err.code = 429; throw err; }
+          if (!resp.ok) throw new Error(`ORS ${resp.status}`);
+
+          const data = await resp.json();
+          const rows = data.distances[0];
+          const result = {};
+          clinics.forEach((c, i) => { result[c.id] = rows[i] != null ? rows[i] : null; });
+          sessionStorage.setItem(cacheKey, JSON.stringify(result));
+          return result;
+        }
+
+        async function enrichWithDrivingDistances() {
+          if (orsRateLimited) return;
+          const noticeEl = document.getElementById('ors-notice');
+          const candidates = allClinics.filter(c => haversineKm(userLat, userLng, c.lat, c.lng) <= 50);
+          if (!candidates.length) return;
+          try {
+            drivingDistances = await fetchDrivingDistances(userLat, userLng, candidates);
+            if (noticeEl) noticeEl.style.display = 'none';
+            render(false);
+          } catch (e) {
+            if (e.code === 429) {
+              orsRateLimited = true;
+              if (noticeEl) noticeEl.style.display = '';
+            }
+          }
         }
 
         function starsHTML(rating) {
@@ -342,7 +399,7 @@
               <div class="dentist-card__body">
                 <h3 class="dentist-card__name">
                   <a href="${link}">${d.name}</a>
-                  <span class="distance-badge">${d.distKm.toFixed(1)} km</span>
+                  <span class="distance-badge">${d.distKm.toFixed(1)} km${d.isDriving ? ' by road' : ''}</span>
                 </h3>
                 <div class="dentist-card__meta">
                   <span class="dentist-card__meta-item">${rating}</span>
@@ -398,7 +455,9 @@
             userLat = e.latlng.lat;
             userLng = e.latlng.lng;
             setUserMarker(userLat, userLng);
+            drivingDistances = null;
             render(true, false);
+            enrichWithDrivingDistances();
           });
 
           // Map hint
@@ -436,7 +495,7 @@
               <strong style="font-size:.88rem;">${c.name}</strong><br>
               <span style="font-size:.76rem;color:#6b7280;">📍 ${c.suburb||c.region}</span><br>
               ${c.rating ? `<span style="font-size:.76rem;color:#f59e0b;">★ ${c.rating}</span><br>` : ''}
-              <span style="font-size:.76rem;color:#0d9488;font-weight:600;">${c.distKm.toFixed(1)} km away</span><br>
+              <span style="font-size:.76rem;color:#0d9488;font-weight:600;">${c.distKm.toFixed(1)} km${c.isDriving ? ' by road' : ''} away</span><br>
               <a href="${link}" style="font-size:.76rem;color:#2563eb;">View Profile →</a>
             </div>`;
             clinicMarkers.push(L.marker([c.lat, c.lng], { icon }).addTo(map).bindPopup(popup));
@@ -454,7 +513,10 @@
 
           // First pass: all clinics within radius (for suburb filter population)
           const inRadius = allClinics
-            .map(c => ({ ...c, distKm: haversineKm(userLat, userLng, c.lat, c.lng) }))
+            .map(c => {
+              const driving = drivingDistances && drivingDistances[c.id] != null ? drivingDistances[c.id] : null;
+              return { ...c, distKm: driving !== null ? driving : haversineKm(userLat, userLng, c.lat, c.lng), isDriving: driving !== null };
+            })
             .filter(c => c.distKm <= radius);
 
           if (rebuildSuburbs !== false) buildSuburbFilters(inRadius);
@@ -657,6 +719,7 @@
           });
 
           render();
+          enrichWithDrivingDistances();
         }
 
         const lat = parseFloat(params.get('lat'));
