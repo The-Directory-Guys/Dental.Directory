@@ -3012,3 +3012,81 @@ details[open] .faq__question::after {
         right: calc(var(--sp-4) + 32px);
     }
 }
+
+/* ===================================================
+   NAV "MORE" DROPDOWN
+   =================================================== */
+.nav__more {
+    position: relative;
+}
+
+.nav__more-btn {
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--clr-gray-600);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--sp-2) 0;
+    font-family: inherit;
+    transition: color var(--transition);
+}
+
+.nav__more:hover .nav__more-btn,
+.nav__more:focus-within .nav__more-btn {
+    color: var(--clr-teal);
+}
+
+.nav__more-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 180px;
+    background: #fff;
+    border: 1px solid var(--clr-gray-200);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: var(--sp-2);
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    z-index: 150;
+}
+
+.nav__more:hover .nav__more-menu,
+.nav__more:focus-within .nav__more-menu {
+    display: flex;
+}
+
+.nav__more-menu .nav__link {
+    padding: var(--sp-2) var(--sp-3);
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+}
+
+.nav__more-menu .nav__link:hover {
+    background: var(--clr-gray-50);
+}
+
+.nav__more-menu .nav__link--active::after {
+    display: none;
+}
+
+.nav__more-menu .nav__link--active {
+    background: var(--clr-gray-50);
+}
+
+/* Mobile: flatten the dropdown inside the hamburger panel */
+@media (max-width: 768px) {
+    .nav__more {
+        display: contents;
+    }
+
+    .nav__more-btn {
+        display: none;
+    }
+
+    .nav__more-menu {
+        display: contents;
+    }
+}
