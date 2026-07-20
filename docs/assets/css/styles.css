@@ -3099,3 +3099,18 @@ details[open] .faq__question::after {
         padding-right: 0;
     }
 }
+
+/* Lift the floating feedback pill above the compare tray when it's open */
+#fb-widget {
+    transition: bottom 0.25s ease;
+}
+
+body.compare-tray-open #fb-widget {
+    bottom: calc(1.5rem + 64px);
+}
+
+@media (max-width: 640px) {
+    body.compare-tray-open #fb-widget {
+        bottom: calc(1rem + 72px);
+    }
+}
