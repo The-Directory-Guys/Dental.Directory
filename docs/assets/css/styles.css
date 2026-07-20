@@ -941,6 +941,8 @@ h4 {
     font-size: var(--fs-lg);
     color: var(--clr-navy);
     margin-bottom: var(--sp-1);
+    /* Keep long names clear of the absolute-positioned Compare + save buttons */
+    padding-right: 150px;
 }
 
 .dentist-card__name a {
@@ -3088,5 +3090,12 @@ details[open] .faq__question::after {
 
     .nav__more-menu {
         display: contents;
+    }
+}
+
+/* Mobile cards are column layout — buttons sit beside the avatar, not the title */
+@media (max-width: 768px) {
+    .dentist-card__name {
+        padding-right: 0;
     }
 }
