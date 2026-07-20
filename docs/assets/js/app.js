@@ -251,6 +251,50 @@ function matchTreatment(raw) {
     catch {}
   }
 
+  // ===== Compare feature =====
+  const COMPARE_MAX = 4;
+  function getCompare() {
+    try { return JSON.parse(localStorage.getItem('dc_compare') || '[]'); }
+    catch { return []; }
+  }
+  function saveCompare(list) {
+    try { localStorage.setItem('dc_compare', JSON.stringify(list)); } catch {}
+  }
+  function compareIds() { return new Set(getCompare().map(c => c.id)); }
+
+  function renderCompareTray() {
+    const list = getCompare();
+    let tray = document.getElementById('compare-tray');
+    if (list.length === 0) { if (tray) tray.remove(); return; }
+    if (!tray) {
+      tray = document.createElement('div');
+      tray.id = 'compare-tray';
+      tray.className = 'compare-tray';
+      document.body.appendChild(tray);
+    }
+    tray.innerHTML = `
+      <div class="compare-tray__inner">
+        <div class="compare-tray__info">
+          <span class="compare-tray__count">${list.length} of ${COMPARE_MAX} selected</span>
+          <span class="compare-tray__names">${list.map(c => c.name).join('  ·  ')}</span>
+        </div>
+        <div class="compare-tray__actions">
+          <button class="compare-tray__clear" id="compare-clear">Clear</button>
+          <a href="compare.html" class="btn btn--primary">Compare now →</a>
+        </div>
+      </div>`;
+    tray.querySelector('#compare-clear').addEventListener('click', () => {
+      saveCompare([]);
+      document.querySelectorAll('.cmp-btn--active').forEach(b => {
+        b.classList.remove('cmp-btn--active');
+        b.innerHTML = '⚖ Compare';
+        b.title = 'Add to comparison';
+      });
+      renderCompareTray();
+    });
+  }
+  renderCompareTray();
+
   // ===== Listings Page Logic =====
   const dentistGrid = document.getElementById('dentist-grid');
   const resultsCount = document.getElementById('results-count');
@@ -408,6 +452,7 @@ function matchTreatment(raw) {
     let showFavouritesOnly = false;
     let showOpenOnly = false;
     let _favs = getFavourites();
+    let _cmpIds = compareIds();
 
     function cardHTML(d) {
       const initials = d.name.split(' ').filter(w => w.length > 0).map(w => w[0]).join('').slice(0, 2).toUpperCase();
@@ -463,6 +508,8 @@ function matchTreatment(raw) {
 
       const isFav = !!d.id && _favs.has(d.id);
       const favBtn = d.id ? `<button class="fav-btn${isFav ? ' fav-btn--active' : ''}" data-fav-id="${d.id}" aria-label="${isFav ? 'Remove from saved' : 'Save clinic'}" title="${isFav ? 'Remove from saved' : 'Save clinic'}">♥</button>` : '';
+      const inCmp = !!d.id && _cmpIds.has(d.id);
+      const cmpBtn = d.id ? `<button class="cmp-btn${inCmp ? ' cmp-btn--active' : ''}" data-cmp-id="${d.id}" aria-label="${inCmp ? 'Remove from comparison' : 'Add to comparison'}" title="${inCmp ? 'Remove from comparison' : 'Add to comparison'}">${inCmp ? '✓ Added' : '⚖ Compare'}</button>` : '';
 
       // Use id for Supabase records, slug for static
       const profileLink = d.id ? `dentist.html?id=${d.id}&region=${encodeURIComponent(d.region || '')}` : `dentist.html?slug=${d.slug}&region=${encodeURIComponent(d.region || '')}`;
@@ -470,6 +517,7 @@ function matchTreatment(raw) {
       return `
         <article class="dentist-card" data-suburb="${d.suburb}" data-rating="${d.rating || 0}" data-name="${d.name}">
           ${favBtn}
+          ${cmpBtn}
           <div class="dentist-card__avatar">${d.photoUrl ? `<img src="${d.photoUrl}" alt="${d.name}" class="dentist-card__avatar-img" loading="lazy" onerror="this.parentElement.innerHTML='${initials}'">` : initials}</div>
           <div class="dentist-card__body">
             <h3 class="dentist-card__name">
@@ -502,6 +550,7 @@ function matchTreatment(raw) {
 
     function render() {
       _favs = getFavourites();
+      _cmpIds = compareIds();
       let filtered = allDentists.filter(d => {
         if (showFavouritesOnly && !_favs.has(d.id)) return false;
         if (showOpenOnly && isOpenNow(d) !== true) return false;
@@ -719,6 +768,45 @@ function matchTreatment(raw) {
         favBtnEl.title = isFav ? 'Remove from saved' : 'Save clinic';
         updateFavToggle();
         if (showFavouritesOnly) renderWithReset();
+        return;
+      }
+
+      const cmpBtnEl = e.target.closest('.cmp-btn');
+      if (cmpBtnEl) {
+        e.preventDefault();
+        e.stopPropagation();
+        const id = parseInt(cmpBtnEl.dataset.cmpId, 10);
+        let list = getCompare();
+        const idx = list.findIndex(c => c.id === id);
+        if (idx >= 0) {
+          list.splice(idx, 1);
+        } else {
+          if (list.length >= COMPARE_MAX) {
+            alert(`You can compare up to ${COMPARE_MAX} clinics at a time. Remove one first.`);
+            return;
+          }
+          const d = allDentists.find(x => x.id === id);
+          if (!d) return;
+          // Snapshot the fields compare.html needs so it renders without refetching
+          list.push({
+            id: d.id, name: d.name, slug: d.slug, suburb: d.suburb, city: d.city,
+            address: d.address || '', phone: d.phone || '', website: d.website || '',
+            rating: d.rating || 0, reviewCount: d.reviewCount || 0,
+            services: d.services || [], pricing: d.pricing || [],
+            photoUrl: d.photoUrl || ''
+          });
+          if (typeof gtag === 'function') {
+            gtag('event', 'add_to_compare', { dentist_id: d.id, dentist_name: d.name });
+          }
+        }
+        saveCompare(list);
+        _cmpIds = compareIds();
+        const nowIn = idx < 0;
+        cmpBtnEl.classList.toggle('cmp-btn--active', nowIn);
+        cmpBtnEl.innerHTML = nowIn ? '✓ Added' : '⚖ Compare';
+        cmpBtnEl.setAttribute('aria-label', nowIn ? 'Remove from comparison' : 'Add to comparison');
+        cmpBtnEl.title = nowIn ? 'Remove from comparison' : 'Add to comparison';
+        renderCompareTray();
       }
     });
 

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="assets/images/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="assets/images/favicon-192.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Clinics Side by Side | Dental Compare</title>
+    <meta name="description" content="Compare your shortlisted dental clinics side by side — prices, ratings, services and contact details in one table.">
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4J758VJQVX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4J758VJQVX');
+    </script>
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xn7ylrmc33");
+    </script>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header__inner">
+            <a href="/" class="logo">
+                <img src="assets/images/logo.png" alt="Dental Compare" class="logo__img">
+            </a>
+            <nav class="nav" id="main-nav">
+                <a href="/" class="nav__link">Home</a>
+                <a href="/#locations" class="nav__link">All Regions</a>
+                <a href="leaderboard.html" class="nav__link">Leaderboard <span class="nav__coming-soon">Soon</span></a>
+                <a href="claim.html" class="nav__link nav__link--owners">Clinic owners</a>
+                <a href="contact.html" class="nav__link">Contact</a>
+                <a href="faq.html" class="nav__link">FAQ</a>
+                <a href="saved.html" class="nav__link">Saved</a>
+                <a href="compare.html" class="nav__link nav__link--active">Compare</a>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Page hero -->
+    <section class="hero hero--sm">
+        <div class="container">
+            <h1>Compare Clinics</h1>
+            <p>Your shortlisted clinics side by side — prices, ratings and services at a glance.</p>
+        </div>
+    </section>
+
+    <!-- Comparison table -->
+    <section class="section" style="padding-top: var(--sp-8);">
+        <div class="container" id="compare-root"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__copy">Built in New Zealand</div>
+        </div>
+    </footer>
+
+    <script>
+    (function () {
+      // Mobile menu (compare.html doesn't load app.js)
+      const menuToggle = document.getElementById('menu-toggle');
+      const mainNav = document.getElementById('main-nav');
+      if (menuToggle && mainNav) {
+        menuToggle.addEventListener('click', () => mainNav.classList.toggle('nav--open'));
+      }
+
+      const root = document.getElementById('compare-root');
+
+      function getCompare() {
+        try { return JSON.parse(localStorage.getItem('dc_compare') || '[]'); }
+        catch { return []; }
+      }
+      function saveCompare(list) {
+        try { localStorage.setItem('dc_compare', JSON.stringify(list)); } catch {}
+      }
+
+      function starsHTML(rating) {
+        const full = Math.floor(rating);
+        const half = rating - full >= 0.5;
+        return '★'.repeat(full) + (half ? '½' : '');
+      }
+
+      function priceNum(entry) {
+        if (!entry) return null;
+        const m = entry.price.replace(/,/g, '').match(/\$(\d+)/);
+        return m ? parseInt(m[1], 10) : null;
+      }
+
+      function findPrice(d, keywords) {
+        if (!d.pricing || !d.pricing.length) return null;
+        return d.pricing.find(p => {
+          const s = p.service.toLowerCase();
+          return keywords.some(k => s.includes(k));
+        }) || null;
+      }
+
+      const CHECKUP_KEYS = ['checkup', 'check-up', 'exam', 'consult', 'assessment', 'new patient', 'initial', 'comprehensive', 'oral health'];
+      const HYG_KEYS = ['hygienist', 'hygiene', 'scale'];
+
+      function esc(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+
+      function render() {
+        const list = getCompare();
+
+        if (list.length === 0) {
+          root.innerHTML = `
+            <div class="compare-empty">
+              <div class="no-results__icon" style="font-size:2.5rem;">⚖️</div>
+              <h3 style="margin: var(--sp-4) 0 var(--sp-2);">Nothing to compare yet</h3>
+              <p style="color: var(--clr-gray-500); max-width: 420px; margin: 0 auto;">Browse a region and tap <strong>⚖ Compare</strong> on any clinic card to add it here. Pick two or more, then come back to see them side by side.</p>
+              <a href="/" class="btn btn--primary" style="margin-top: var(--sp-6);">Browse regions</a>
+            </div>`;
+          return;
+        }
+
+        // Best-value highlights
+        const ratings = list.map(d => d.rating || 0);
+        const bestRating = Math.max(...ratings);
+        const checkups = list.map(d => priceNum(findPrice(d, CHECKUP_KEYS)));
+        const validCheckups = checkups.filter(v => v !== null);
+        const cheapestCheckup = validCheckups.length ? Math.min(...validCheckups) : null;
+        const hygs = list.map(d => priceNum(findPrice(d, HYG_KEYS)));
+        const validHygs = hygs.filter(v => v !== null);
+        const cheapestHyg = validHygs.length ? Math.min(...validHygs) : null;
+
+        const cols = list.length;
+
+        function row(label, cellFn, bestFn) {
+          const cells = list.map((d, i) => {
+            const isBest = bestFn ? bestFn(d, i) : false;
+            return `<td${isBest ? ' class="cmp-best"' : ''}>${cellFn(d, i)}${isBest ? '<span class="cmp-best__tag">BEST</span>' : ''}</td>`;
+          }).join('');
+          return `<tr><td>${label}</td>${cells}</tr>`;
+        }
+
+        const headCells = list.map((d, i) => {
+          const initials = d.name.split(' ').filter(w => w).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+          const avatar = d.photoUrl
+            ? `<div class="dentist-card__avatar"><img src="${esc(d.photoUrl)}" alt="${esc(d.name)}" class="dentist-card__avatar-img" loading="lazy" onerror="this.parentElement.innerHTML='${initials}'"></div>`
+            : `<div class="dentist-card__avatar">${initials}</div>`;
+          return `
+            <th class="compare-col-head">
+              ${avatar}
+              <a class="compare-col-head__name" href="dentist.html?id=${d.id}">${esc(d.name)}</a>
+              <button class="compare-remove" data-remove="${i}">Remove</button>
+            </th>`;
+        }).join('');
+
+        const table = `
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: var(--sp-4); flex-wrap: wrap; gap: var(--sp-2);">
+            <span class="listings-header__count">Comparing ${cols} clinic${cols === 1 ? '' : 's'}${cols === 1 ? ' — add at least one more for a real comparison' : ''}</span>
+            <div style="display:flex; gap: var(--sp-3); align-items:center;">
+              <a href="/" style="font-size:.85rem;">+ Add more clinics</a>
+              <button class="compare-remove" id="compare-clear-all">Clear all</button>
+            </div>
+          </div>
+          <div class="compare-wrap">
+          <table class="compare-table" style="min-width: ${140 + cols * 200}px;">
+            <colgroup><col style="width:140px">${'<col>'.repeat(cols)}</colgroup>
+            <thead><tr><td></td>${headCells}</tr></thead>
+            <tbody>
+              ${row('Rating',
+                d => d.rating ? `<span class="stars">${starsHTML(d.rating)}</span> <strong>${d.rating}</strong>` : '<span style="color:var(--clr-gray-400)">No rating</span>',
+                d => d.rating === bestRating && bestRating > 0 && cols > 1)}
+              ${row('Reviews', d => d.reviewCount ? `${d.reviewCount} review${d.reviewCount === 1 ? '' : 's'}` : '—')}
+              ${row('Location', d => esc(d.suburb && d.suburb !== d.city ? `${d.suburb}, ${d.city}` : (d.city || d.suburb || '—')))}
+              ${row('Checkup / exam',
+                (d, i) => checkups[i] !== null ? `<strong>from $${checkups[i]}</strong>` : '<span style="color:var(--clr-gray-400)">Not listed</span>',
+                (d, i) => checkups[i] !== null && checkups[i] === cheapestCheckup && validCheckups.length > 1)}
+              ${row('Scale &amp; clean',
+                (d, i) => hygs[i] !== null ? `<strong>from $${hygs[i]}</strong>` : '<span style="color:var(--clr-gray-400)">Not listed</span>',
+                (d, i) => hygs[i] !== null && hygs[i] === cheapestHyg && validHygs.length > 1)}
+              ${row('Services', d => {
+                const pills = (d.services || []).map(s => `<span class="pill pill--sm">${esc(s)}</span>`).join(' ');
+                return pills ? `<div class="cmp-clamp">${pills}</div>` : '—';
+              })}
+              ${row('All listed prices', d => {
+                if (!d.pricing || !d.pricing.length) return '<span style="color:var(--clr-gray-400)">See profile</span>';
+                const items = d.pricing.map(p => `<li><span>${esc(p.service)}</span><span>${esc(p.price)}</span></li>`).join('');
+                return `<div class="cmp-clamp"><ul class="compare-price-list">${items}</ul></div>`;
+              })}
+              ${row('Phone', d => d.phone ? `<a href="tel:${esc(d.phone.replace(/\s/g, ''))}">${esc(d.phone)}</a>` : '—')}
+              ${row('Website', d => d.website ? `<a href="${esc(d.website)}" target="_blank" rel="noopener">Visit site ↗</a>` : '—')}
+              ${row('', d => `<a href="dentist.html?id=${d.id}" class="btn btn--primary" style="white-space:nowrap;">View Profile</a>`)}
+            </tbody>
+          </table>
+          </div>
+          <p style="margin-top: var(--sp-4); font-size: .78rem; color: var(--clr-gray-400);">Prices are indicative, sourced from each clinic's published fees — always confirm with the practice.</p>`;
+
+        root.innerHTML = table;
+
+        // Clamp tall cells and add a Read more toggle where content overflows
+        root.querySelectorAll('.cmp-clamp').forEach(el => {
+          if (el.scrollHeight > el.clientHeight + 12) {
+            el.classList.add('cmp-clamp--clipped');
+            const btn = document.createElement('button');
+            btn.className = 'cmp-readmore';
+            btn.textContent = 'Read more ▾';
+            btn.addEventListener('click', () => {
+              const expanded = el.classList.toggle('cmp-clamp--expanded');
+              el.classList.toggle('cmp-clamp--clipped', !expanded);
+              btn.textContent = expanded ? 'Show less ▴' : 'Read more ▾';
+            });
+            el.after(btn);
+          }
+        });
+
+        root.querySelectorAll('[data-remove]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const l = getCompare();
+            l.splice(parseInt(btn.dataset.remove, 10), 1);
+            saveCompare(l);
+            render();
+          });
+        });
+        const clearAll = document.getElementById('compare-clear-all');
+        if (clearAll) clearAll.addEventListener('click', () => { saveCompare([]); render(); });
+      }
+
+      render();
+
+      const initial = getCompare();
+      if (initial.length > 0 && typeof gtag === 'function') {
+        gtag('event', 'view_compare', {
+          compare_count: initial.length,
+          compare_names: initial.map(d => d.name).join(' | ').slice(0, 100)
+        });
+      }
+    })();
+    </script>
+<script src="assets/js/feedback.js"></script>
+</body>
+
+</html>
