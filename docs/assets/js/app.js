@@ -265,7 +265,12 @@ function matchTreatment(raw) {
   function renderCompareTray() {
     const list = getCompare();
     let tray = document.getElementById('compare-tray');
-    if (list.length === 0) { if (tray) tray.remove(); return; }
+    if (list.length === 0) {
+      if (tray) tray.remove();
+      document.body.classList.remove('compare-tray-open');
+      return;
+    }
+    document.body.classList.add('compare-tray-open');
     if (!tray) {
       tray = document.createElement('div');
       tray.id = 'compare-tray';
