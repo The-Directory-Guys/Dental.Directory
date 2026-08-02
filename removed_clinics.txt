@@ -1,0 +1,8 @@
+Removed Clinics
+===============
+Clinics removed from the directory and the reason why.
+Check this list before re-adding any clinic from scraped data.
+
+ID    | Name                          | City      | Reason
+------|-------------------------------|-----------|-------------------------------------------------------
+2917  | Pacific Dental Specialties Ltd| Hastings  | Dental supplier/lab, not a patient-facing dental clinic

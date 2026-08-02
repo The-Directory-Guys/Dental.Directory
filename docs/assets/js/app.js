@@ -991,12 +991,9 @@ function matchTreatment(raw) {
     buildLanguageFilters(allDentists);
 
     // Suburb filters (injected dynamically by buildSuburbFilters)
-    const _scbs = document.querySelectorAll('.filter-suburb');
-    console.log('[v4] suburb checkboxes found:', _scbs.length);
-    _scbs.forEach(cb => {
+    document.querySelectorAll('.filter-suburb').forEach(cb => {
       cb.addEventListener('change', () => {
         activeSuburbs = Array.from(document.querySelectorAll('.filter-suburb:checked')).map(el => el.value);
-        console.log('[v4] activeSuburbs:', activeSuburbs);
         renderWithReset();
       });
     });
