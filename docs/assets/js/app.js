@@ -1534,7 +1534,7 @@ function matchTreatment(raw) {
           : '';
         const languageNote = p.languages ? `<div class="team-card__languages">🌐 ${p.languages}</div>` : '';
         const avatar = p.photo_url
-          ? `<img class="team-card__photo" src="${p.photo_url}" alt="${p.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+          ? `<button class="team-card__photo-btn" data-src="${p.photo_url}" data-name="${p.name}" aria-label="View photo of ${p.name}"><img class="team-card__photo" src="${p.photo_url}" alt="${p.name}" loading="lazy" onerror="this.closest('.team-card__photo-btn').style.display='none';this.closest('.team-card__avatar-wrap').querySelector('.team-card__avatar').style.display='flex'"></button>`
           : '';
         const initialsEl = `<div class="team-card__avatar"${p.photo_url ? ' style="display:none"' : ''}>${initials}</div>`;
         return `
@@ -1735,6 +1735,27 @@ function matchTreatment(raw) {
       const b2 = document.getElementById('sticky-save-btn');
       if (b1) b1.addEventListener('click', onProfileSaveClick);
       if (b2) b2.addEventListener('click', onProfileSaveClick);
+    }
+
+    // Photo lightbox
+    const teamList = document.querySelector('.team-list');
+    if (teamList) {
+      if (!document.getElementById('photo-lightbox')) {
+        const lb = document.createElement('div');
+        lb.id = 'photo-lightbox';
+        lb.innerHTML = '<div class="photo-lightbox__backdrop"></div><figure class="photo-lightbox__frame"><img class="photo-lightbox__img" alt=""><figcaption class="photo-lightbox__caption"></figcaption></figure>';
+        document.body.appendChild(lb);
+        lb.querySelector('.photo-lightbox__backdrop').addEventListener('click', () => lb.classList.remove('photo-lightbox--open'));
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('photo-lightbox--open'); });
+      }
+      teamList.addEventListener('click', e => {
+        const btn = e.target.closest('.team-card__photo-btn');
+        if (!btn) return;
+        const lb = document.getElementById('photo-lightbox');
+        lb.querySelector('.photo-lightbox__img').src = btn.dataset.src;
+        lb.querySelector('.photo-lightbox__caption').textContent = btn.dataset.name;
+        lb.classList.add('photo-lightbox--open');
+      });
     }
   }
 
