@@ -572,7 +572,7 @@ function matchTreatment(raw) {
         }
         if (minExperience > 0 && (d.maxExperience == null || d.maxExperience < minExperience)) return false;
         if (activeSuburbs.length && !activeSuburbs.includes(d.suburb)) return false;
-        if (activeServices.length && !activeServices.every(s => {
+        if (activeServices.length && !searchQuery && !activeServices.every(s => {
           if (s === 'Hygienist') return getHygienistPrice(d) !== null;
           return (SERVICE_ALIASES[s] || [s]).some(a => d.services.includes(a));
         })) return false;
@@ -815,14 +815,6 @@ function matchTreatment(raw) {
       }
     });
 
-    // Suburb filters
-    document.querySelectorAll('.filter-suburb').forEach(cb => {
-      cb.addEventListener('change', () => {
-        activeSuburbs = Array.from(document.querySelectorAll('.filter-suburb:checked')).map(el => el.value);
-        renderWithReset();
-      });
-    });
-
     // Service filters
     document.querySelectorAll('.filter-service').forEach(cb => {
       cb.addEventListener('change', () => {
@@ -998,6 +990,14 @@ function matchTreatment(raw) {
     buildExperienceFilter(allDentists);
     buildLanguageFilters(allDentists);
 
+    // Suburb filters (injected dynamically by buildSuburbFilters)
+    document.querySelectorAll('.filter-suburb').forEach(cb => {
+      cb.addEventListener('change', () => {
+        activeSuburbs = Array.from(document.querySelectorAll('.filter-suburb:checked')).map(el => el.value);
+        renderWithReset();
+      });
+    });
+
     // Specialty filters (injected dynamically by buildSpecialtyFilters)
     document.querySelectorAll('.filter-specialty').forEach(cb => {
       cb.addEventListener('change', () => {
@@ -1154,11 +1154,9 @@ function matchTreatment(raw) {
 
     const checkboxHtml = buildCheckboxes(sortedSuburbs);
 
-    // Update desktop sidebar — find by data-filter attribute, independent of DOM order
     const desktopSuburbItems = document.querySelector('.sidebar [data-filter="suburb"] .filter-group__items');
     if (desktopSuburbItems) desktopSuburbItems.innerHTML = checkboxHtml;
 
-    // Update mobile drawer
     const mobileSuburbItems = document.querySelector('.filter-drawer [data-filter="suburb"] .filter-group__items');
     if (mobileSuburbItems) mobileSuburbItems.innerHTML = checkboxHtml;
   }
@@ -1570,7 +1568,13 @@ function matchTreatment(raw) {
         // Split on commas not inside parentheses
         catch { amenityChips = rawPartners.split(/,(?![^(]*\))/).map(s => s.trim()).filter(Boolean); }
       }
-      const amenityPills = amenityChips.map(c => `<span class="payment-pill">${c}</span>`);
+      // Filter amenity chips that are already covered by a scraped payment (containment match)
+      const scrapedLabels = paymentRows.map(p => p.service.toLowerCase().trim());
+      const uniqueAmenityChips = amenityChips.filter(c => {
+        const cLower = c.toLowerCase().trim();
+        return !scrapedLabels.some(s => cLower === s || cLower.includes(s) || s.includes(cLower));
+      });
+      const amenityPills = uniqueAmenityChips.map(c => `<span class="payment-pill">${c}</span>`);
       const allPills = [...scrapedPaymentPills, ...amenityPills];
       const plansHTML = rawPlans ? `<p class="payment-plans">${rawPlans}</p>` : '';
       if (allPills.length > 0 || plansHTML) {
