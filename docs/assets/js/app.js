@@ -1374,23 +1374,7 @@ function matchTreatment(raw) {
       `).join('');
     }
 
-    // Reviews
-    const reviewsHTML = (dentist.reviews || []).map(r => {
-      const initials = r.name.split(' ').map(w => w[0]).join('');
-      return `
-        <div class="review-card">
-          <div class="review-card__header">
-            <div class="review-card__avatar">${initials}</div>
-            <div class="review-card__info">
-              <div class="review-card__name">${r.name}</div>
-              <div class="review-card__date">${r.date}</div>
-            </div>
-            <div class="stars" style="margin-left:auto">${starsHTML(r.rating)}</div>
-          </div>
-          <p class="review-card__text">${r.text}</p>
-        </div>
-      `;
-    }).join('');
+    // Reviews rendered dynamically after profile HTML is set (supports sorting)
 
     // Pricing table — always show, with empty state if no data
     let pricingHTML = '';
@@ -1652,14 +1636,18 @@ function matchTreatment(raw) {
         <div class="profile-section profile-section--reviews">
           <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;">
             <h2 class="profile-section__title" style="margin-bottom:0;">Reviews${dentist.reviewCount ? ` (${dentist.reviewCount})` : ''}</h2>
-            ${dentist.googleMapsUrl ? `<a href="${dentist.googleMapsUrl}" target="_blank" rel="noopener" style="font-size:.8rem;color:#4285F4;text-decoration:none;font-weight:500;">★ Write a Google Review →</a>` : ''}
+            <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;">
+              ${(dentist.reviews || []).length > 1 ? `
+              <select id="review-sort" style="font-size:.8rem;border:1px solid var(--clr-gray-200);border-radius:6px;padding:.3rem .6rem;color:var(--clr-gray-600);background:#fff;cursor:pointer;">
+                <option value="newest">Newest first</option>
+                <option value="oldest">Oldest first</option>
+                <option value="highest">Highest rated</option>
+                <option value="lowest">Lowest rated</option>
+              </select>` : ''}
+              ${dentist.googleMapsUrl ? `<a href="${dentist.googleMapsUrl}" target="_blank" rel="noopener" style="font-size:.8rem;color:#4285F4;text-decoration:none;font-weight:500;">★ Write a Google Review →</a>` : ''}
+            </div>
           </div>
-          ${reviewsHTML
-            ? `<div class="review-list">${reviewsHTML}</div>
-               ${dentist.reviewCount > (dentist.reviews || []).length ? `
-               <p style="font-size:.8rem;color:var(--clr-gray-400);margin-top:var(--sp-4);">Showing ${(dentist.reviews || []).length} of ${dentist.reviewCount} reviews.${dentist.googleMapsUrl ? ` <a href="${dentist.googleMapsUrl}" target="_blank" rel="noopener" style="color:#4285F4;text-decoration:none;">See all on Google →</a>` : ''}</p>` : ''}`
-            : `<p style="color:var(--clr-gray-400);font-size:.9rem;">No reviews yet. Be the first to leave one!</p>`
-          }
+          <div id="review-list-container"></div>
         </div>
       </div>
 
@@ -1736,6 +1724,53 @@ function matchTreatment(raw) {
       if (b1) b1.addEventListener('click', onProfileSaveClick);
       if (b2) b2.addEventListener('click', onProfileSaveClick);
     }
+
+    // Reviews — dynamic render with sort
+    const allReviews = dentist.reviews || [];
+    function parseRelDate(s) {
+      if (!s) return 0;
+      const m = s.match(/(\d+|a|an)\s+(day|week|month|year)/i);
+      if (!m) return 0;
+      const n = (m[1] === 'a' || m[1] === 'an') ? 1 : parseInt(m[1]);
+      const mult = { day: 1, week: 7, month: 30, year: 365 }[m[2].toLowerCase()] || 1;
+      return -(n * mult);
+    }
+    function renderReviews(order) {
+      const container = document.getElementById('review-list-container');
+      if (!container) return;
+      if (!allReviews.length) {
+        container.innerHTML = `<p style="color:var(--clr-gray-400);font-size:.9rem;">No reviews yet. Be the first to leave one!</p>`;
+        return;
+      }
+      const sorted = [...allReviews].sort((a, b) => {
+        if (order === 'highest') return (b.rating || 0) - (a.rating || 0);
+        if (order === 'lowest')  return (a.rating || 0) - (b.rating || 0);
+        if (order === 'oldest')  return parseRelDate(a.date) - parseRelDate(b.date);
+        return parseRelDate(b.date) - parseRelDate(a.date); // newest
+      });
+      const cards = sorted.map(r => {
+        const initials = r.name.split(' ').map(w => w[0]).join('');
+        return `
+          <div class="review-card">
+            <div class="review-card__header">
+              <div class="review-card__avatar">${initials}</div>
+              <div class="review-card__info">
+                <div class="review-card__name">${r.name}</div>
+                <div class="review-card__date">${r.date}</div>
+              </div>
+              <div class="stars" style="margin-left:auto">${starsHTML(r.rating)}</div>
+            </div>
+            <p class="review-card__text">${r.text}</p>
+          </div>`;
+      }).join('');
+      const showingNote = dentist.reviewCount > allReviews.length
+        ? `<p style="font-size:.8rem;color:var(--clr-gray-400);margin-top:var(--sp-4);">Showing ${allReviews.length} of ${dentist.reviewCount} reviews.${dentist.googleMapsUrl ? ` <a href="${dentist.googleMapsUrl}" target="_blank" rel="noopener" style="color:#4285F4;text-decoration:none;">See all on Google →</a>` : ''}</p>`
+        : '';
+      container.innerHTML = `<div class="review-list">${cards}</div>${showingNote}`;
+    }
+    renderReviews('newest');
+    const reviewSortEl = document.getElementById('review-sort');
+    if (reviewSortEl) reviewSortEl.addEventListener('change', () => renderReviews(reviewSortEl.value));
 
     // Photo lightbox
     const teamList = document.querySelector('.team-list');
