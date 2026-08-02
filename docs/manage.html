@@ -1,11 +1,11 @@
-Ôªø<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
     <link rel="icon" href="assets/images/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="assets/images/favicon-192.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manage Your Listing | Dental Compare NZ</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=2">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <style>
     .manage-card { background:#fff; border:1px solid var(--clr-gray-100); border-radius:12px; padding:1.75rem 2rem; margin-bottom:1.5rem; }
@@ -75,16 +75,16 @@
 
 <!-- Loading -->
 <section id="pg-loading" class="section" style="text-align:center; padding:6rem 0;">
-  <p style="color:var(--clr-gray-400);">Loading‚Ä¶</p>
+  <p style="color:var(--clr-gray-400);">LoadingÖ</p>
 </section>
 
 <!-- Pending approval (signed in but not yet linked to a clinic) -->
 <section id="pg-unauth" class="section" style="display:none;">
   <div class="container" style="max-width:520px; text-align:center;">
-    <div style="font-size:2.5rem; margin-bottom:1rem;">‚è≥</div>
+    <div style="font-size:2.5rem; margin-bottom:1rem;">?</div>
     <h1 class="section-title" style="font-size:1.5rem;">Account pending approval</h1>
     <p style="color:var(--clr-gray-600); line-height:1.7; margin-bottom:1.5rem;">
-      Your account is set up ‚Äî we just need to link it to your practice.
+      Your account is set up ó we just need to link it to your practice.
       We'll send you an email once that's done, usually within one business day.
     </p>
     <p style="color:var(--clr-gray-500); font-size:.875rem; margin-bottom:1.75rem;">
@@ -112,7 +112,7 @@
       <form id="form-basic">
         <div class="field-group">
           <label for="f-description">Description</label>
-          <textarea id="f-description" name="description" placeholder="Describe your practice, team, and what makes you stand out‚Ä¶"></textarea>
+          <textarea id="f-description" name="description" placeholder="Describe your practice, team, and what makes you stand outÖ"></textarea>
         </div>
         <div class="two-col">
           <div class="field-group">
@@ -204,7 +204,7 @@
 
   function setBusy(btn, busy, label) {
     btn.disabled = busy;
-    btn.textContent = busy ? 'Saving‚Ä¶' : label;
+    btn.textContent = busy ? 'SavingÖ' : label;
   }
 
   // ---- Auth ----
@@ -213,7 +213,7 @@
     if (event === 'SIGNED_OUT') { window.location.href = 'login.html'; return; }
   });
 
-  // Initial check ‚Äî getSession() also processes URL hash tokens
+  // Initial check ó getSession() also processes URL hash tokens
   (async () => {
     const { data: { session } } = await db.auth.getSession();
     if (session) { await loadApp(session.user.id); }
@@ -289,7 +289,7 @@
       if (ci === -1) return;
       const day = seg.substring(0, ci).trim();
       const rest = seg.substring(ci + 1).trim();
-      const m = rest.match(/(\d{1,2}:\d{2}\s*(?:AM|PM))\s*[‚Äì‚Äî\-]\s*(\d{1,2}:\d{2}\s*(?:AM|PM))/i);
+      const m = rest.match(/(\d{1,2}:\d{2}\s*(?:AM|PM))\s*[ñó\-]\s*(\d{1,2}:\d{2}\s*(?:AM|PM))/i);
       map[day] = m
         ? { isOpen: true, open: time12hToInput(m[1]), close: time12hToInput(m[2]) }
         : { isOpen: false };
@@ -331,12 +331,12 @@
     const fd = new FormData(e.target);
     const parts = DAYS.map(day => {
       if (!fd.has(`${day}_enabled`)) return `${day}: Closed`;
-      return `${day}: ${timeInputTo12h(fd.get(`${day}_from`))} ‚Äì ${timeInputTo12h(fd.get(`${day}_to`))}`;
+      return `${day}: ${timeInputTo12h(fd.get(`${day}_from`))} ñ ${timeInputTo12h(fd.get(`${day}_to`))}`;
     });
     const { error } = await db.from('dental_clinics')
       .update({ opening_hours: parts.join('; ') }).eq('id', clinicId);
     setBusy(btn, false, 'Save hours');
-    error ? toast('Error: ' + error.message, true) : toast('Hours saved ‚úì');
+    error ? toast('Error: ' + error.message, true) : toast('Hours saved ?');
   });
 
   // ---- Services ----
@@ -357,7 +357,7 @@
     const { error } = await db.from('dental_clinics')
       .update({ services: checked.join(', ') }).eq('id', clinicId);
     setBusy(btn, false, 'Save services');
-    error ? toast('Error: ' + error.message, true) : toast('Services saved ‚úì');
+    error ? toast('Error: ' + error.message, true) : toast('Services saved ?');
   });
 
   // ---- Basic info ----
@@ -372,7 +372,7 @@
       website:        fd.get('website').trim(),
     }).eq('id', clinicId);
     setBusy(btn, false, 'Save changes');
-    error ? toast('Error: ' + error.message, true) : toast('Saved ‚úì');
+    error ? toast('Error: ' + error.message, true) : toast('Saved ?');
   });
 
   // ---- Pricing ----
@@ -383,7 +383,7 @@
       <input type="text" class="p-treatment" placeholder="e.g. Exam + 2 x-rays"  value="${esc(row.treatment)}">
       <input type="text" class="p-price"     placeholder="e.g. $115"             value="${esc(row.price_label)}">
       <input type="text" class="p-notes"     placeholder="e.g. 30 min"           value="${esc(row.notes)}">
-      <button type="button" class="price-row__del" title="Remove row">√ó</button>
+      <button type="button" class="price-row__del" title="Remove row">◊</button>
     </div>`;
   }
 
@@ -391,7 +391,7 @@
     document.getElementById('pricing-rows').innerHTML = rows.map(priceRowHTML).join('');
   }
 
-  // Event delegation ‚Äî set up once
+  // Event delegation ó set up once
   document.getElementById('pricing-rows').addEventListener('click', e => {
     if (e.target.classList.contains('price-row__del')) e.target.closest('.price-row').remove();
   });
@@ -447,7 +447,7 @@
     renderPricing(dbPricingRows);
 
     setBusy(btn, false, 'Save pricing');
-    err ? toast('Error: ' + err.message, true) : toast('Pricing saved ‚úì');
+    err ? toast('Error: ' + err.message, true) : toast('Pricing saved ?');
   });
 
 })();
