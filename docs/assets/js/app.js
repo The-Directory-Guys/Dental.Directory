@@ -1638,6 +1638,7 @@ function matchTreatment(raw) {
             <h2 class="profile-section__title" style="margin-bottom:0;">Reviews${dentist.reviewCount ? ` (${dentist.reviewCount})` : ''}</h2>
             <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;">
               ${(dentist.reviews || []).length > 1 ? `
+              <input id="review-search" type="search" placeholder="Search reviews…" style="font-size:.8rem;border:1px solid var(--clr-gray-200);border-radius:6px;padding:.3rem .6rem;color:var(--clr-gray-600);width:160px;">
               <select id="review-sort" style="font-size:.8rem;border:1px solid var(--clr-gray-200);border-radius:6px;padding:.3rem .6rem;color:var(--clr-gray-600);background:#fff;cursor:pointer;">
                 <option value="newest">Newest first</option>
                 <option value="oldest">Oldest first</option>
@@ -1735,14 +1736,22 @@ function matchTreatment(raw) {
       const mult = { day: 1, week: 7, month: 30, year: 365 }[m[2].toLowerCase()] || 1;
       return -(n * mult);
     }
-    function renderReviews(order) {
+    function renderReviews(order, query) {
       const container = document.getElementById('review-list-container');
       if (!container) return;
       if (!allReviews.length) {
         container.innerHTML = `<p style="color:var(--clr-gray-400);font-size:.9rem;">No reviews yet. Be the first to leave one!</p>`;
         return;
       }
-      const sorted = [...allReviews].sort((a, b) => {
+      const q = (query || '').trim().toLowerCase();
+      const filtered = q
+        ? allReviews.filter(r => (r.text || '').toLowerCase().includes(q) || (r.name || '').toLowerCase().includes(q))
+        : allReviews;
+      if (!filtered.length) {
+        container.innerHTML = `<p style="color:var(--clr-gray-400);font-size:.9rem;">No reviews match "${query}".</p>`;
+        return;
+      }
+      const sorted = [...filtered].sort((a, b) => {
         if (order === 'highest') return (b.rating || 0) - (a.rating || 0);
         if (order === 'lowest')  return (a.rating || 0) - (b.rating || 0);
         if (order === 'oldest')  return parseRelDate(a.date) - parseRelDate(b.date);
@@ -1768,9 +1777,14 @@ function matchTreatment(raw) {
         : '';
       container.innerHTML = `<div class="review-list">${cards}</div>${showingNote}`;
     }
-    renderReviews('newest');
+    renderReviews('newest', '');
     const reviewSortEl = document.getElementById('review-sort');
-    if (reviewSortEl) reviewSortEl.addEventListener('change', () => renderReviews(reviewSortEl.value));
+    const reviewSearchEl = document.getElementById('review-search');
+    function refreshReviews() {
+      renderReviews(reviewSortEl ? reviewSortEl.value : 'newest', reviewSearchEl ? reviewSearchEl.value : '');
+    }
+    if (reviewSortEl) reviewSortEl.addEventListener('change', refreshReviews);
+    if (reviewSearchEl) reviewSearchEl.addEventListener('input', refreshReviews);
 
     // Photo lightbox
     const teamList = document.querySelector('.team-list');
