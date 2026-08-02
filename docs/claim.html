@@ -149,7 +149,7 @@
                 <a href="/#locations" class="nav__link">All Regions</a>
                 <a href="compare.html" class="nav__link">Compare</a>
                 <div class="nav__more">
-                    <button class="nav__more-btn" aria-haspopup="true">More ?</button>
+                    <button class="nav__more-btn" aria-haspopup="true">More ‚ñæ</button>
                     <div class="nav__more-menu">
                         <a href="/" class="nav__link">Home</a>
                         <a href="saved.html" class="nav__link">Saved</a>
@@ -174,21 +174,21 @@
 
   <div class="claim-benefits">
     <div class="benefit">
-      <div class="benefit__icon">??</div>
+      <div class="benefit__icon">üìä</div>
       <div>
         <div class="benefit__title">Price benchmarking</div>
         <div class="benefit__desc">See how your checkup prices compare to other clinics in your city and region.</div>
       </div>
     </div>
     <div class="benefit">
-      <div class="benefit__icon">??</div>
+      <div class="benefit__icon">‚úèÔ∏è</div>
       <div>
         <div class="benefit__title">Update your details</div>
-        <div class="benefit__desc">Correct your address, phone, hours, and services ó all in one place.</div>
+        <div class="benefit__desc">Correct your address, phone, hours, and services ‚Äî all in one place.</div>
       </div>
     </div>
     <div class="benefit">
-      <div class="benefit__icon">??</div>
+      <div class="benefit__icon">üîî</div>
       <div>
         <div class="benefit__title">Review alerts</div>
         <div class="benefit__desc">Get notified when a new patient review is posted about your practice.</div>
@@ -207,7 +207,7 @@
           <div class="field">
             <label for="clinic-search">Your practice <span style="color:#dc2626">*</span></label>
             <div class="search-wrap">
-              <input type="text" id="clinic-search" placeholder="Start typing your practice nameÖ"
+              <input type="text" id="clinic-search" placeholder="Start typing your practice name‚Ä¶"
                      autocomplete="off" oninput="searchClinics(this.value)" onfocus="onSearchFocus()">
               <div class="search-results" id="search-results"></div>
             </div>
@@ -216,7 +216,7 @@
                 <div class="selected-clinic__name" id="sel-name"></div>
                 <div class="selected-clinic__loc"  id="sel-loc"></div>
               </div>
-              <button type="button" class="selected-clinic__clear" onclick="clearClinic()" aria-label="Clear">◊</button>
+              <button type="button" class="selected-clinic__clear" onclick="clearClinic()" aria-label="Clear">√ó</button>
             </div>
             <input type="hidden" id="clinic-id">
           </div>
@@ -229,7 +229,7 @@
             <div class="field">
               <label for="owner-role">Your role <span style="color:#dc2626">*</span></label>
               <select id="owner-role" required>
-                <option value="">SelectÖ</option>
+                <option value="">Select‚Ä¶</option>
                 <option value="owner">Owner / Principal dentist</option>
                 <option value="manager">Practice manager</option>
                 <option value="staff">Receptionist / Admin</option>
@@ -252,7 +252,7 @@
 
           <div class="field">
             <label for="owner-msg">Anything else? (optional)</label>
-            <textarea id="owner-msg" placeholder="e.g. I am the owner and have been operating since 2015Ö"></textarea>
+            <textarea id="owner-msg" placeholder="e.g. I am the owner and have been operating since 2015‚Ä¶"></textarea>
           </div>
 
           <button type="submit" class="submit-btn" id="claim-btn">Submit claim request</button>
@@ -266,13 +266,13 @@
       </p>
 
       <div id="claim-success" class="success">
-        <div class="success__icon">?</div>
+        <div class="success__icon">‚úÖ</div>
         <div class="success__title">Request received</div>
         <div class="success__body">
-          Thanks ó we'll review your claim and get back to you at <strong id="success-email"></strong> within 1ñ2 business days.
+          Thanks ‚Äî we'll review your claim and get back to you at <strong id="success-email"></strong> within 1‚Äì2 business days.
           Once approved, you'll receive a sign-in link to access your dashboard.
         </div>
-        <a href="/" class="success__back">? Back to directory</a>
+        <a href="/" class="success__back">‚Üê Back to directory</a>
       </div>
 
     </div>
@@ -366,7 +366,7 @@
 
       const btn = document.getElementById('claim-btn');
       btn.disabled = true;
-      btn.textContent = 'SubmittingÖ';
+      btn.textContent = 'Submitting‚Ä¶';
 
       const payload = { clinic_id: clinicId, name, role, email, phone: phone || null, message: message || null };
       const r = await fetch(`${SB_URL}/rest/v1/clinic_claims`, {
@@ -379,7 +379,7 @@
         document.getElementById('claim-form-state').style.display = 'none';
         document.getElementById('claim-success').style.display = 'block';
       } else {
-        err.textContent = 'Something went wrong ó please try again or email us directly.';
+        err.textContent = 'Something went wrong ‚Äî please try again or email us directly.';
         btn.disabled = false;
         btn.textContent = 'Submit claim request';
       }
