@@ -1249,9 +1249,9 @@ h4 {
 .profile-section--reviews  .profile-section__title { border-bottom-color: rgba(249,115,22,.2); }
 
 /* Profile about description (supports HTML paragraphs) */
-.profile-desc p { margin: 0 0 1rem; line-height: 1.7; color: var(--clr-text); }
+.profile-desc p { margin: 0 0 1rem; line-height: 1.7; color: var(--clr-gray-700); }
 .profile-desc p:last-child { margin-bottom: 0; }
-.profile-desc h3 { font-size: var(--fs-lg); font-weight: 700; margin: 2rem 0 .5rem; color: var(--clr-navy); }
+.profile-desc .about-subheading { font-size: var(--fs-md); font-weight: 700; margin: 2rem 0 .25rem; color: var(--clr-navy); }
 
 /* Services list */
 .service-list {
