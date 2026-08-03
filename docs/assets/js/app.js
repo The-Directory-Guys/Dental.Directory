@@ -1804,10 +1804,13 @@ function matchTreatment(raw) {
             ${mentionHTML}
           </div>`;
       }).join('');
+      const filterNote = q && filtered.length < allReviews.length
+        ? `<p style="font-size:.8rem;color:var(--clr-sky);margin-bottom:var(--sp-4);">Showing ${filtered.length} of ${allReviews.length} reviews matching "${query}"</p>`
+        : '';
       const showingNote = dentist.reviewCount > allReviews.length
         ? `<p style="font-size:.8rem;color:var(--clr-gray-400);margin-top:var(--sp-4);">Showing ${allReviews.length} of ${dentist.reviewCount} reviews.${dentist.googleMapsUrl ? ` <a href="${dentist.googleMapsUrl}" target="_blank" rel="noopener" style="color:#4285F4;text-decoration:none;">See all on Google →</a>` : ''}</p>`
         : '';
-      container.innerHTML = `<div class="review-list">${cards}</div>${showingNote}`;
+      container.innerHTML = `${filterNote}<div class="review-list">${cards}</div>${showingNote}`;
     }
     renderReviews('newest', '');
     const reviewSortEl = document.getElementById('review-sort');
@@ -1816,7 +1819,11 @@ function matchTreatment(raw) {
       renderReviews(reviewSortEl ? reviewSortEl.value : 'newest', reviewSearchEl ? reviewSearchEl.value : '');
     }
     if (reviewSortEl) reviewSortEl.addEventListener('change', refreshReviews);
-    if (reviewSearchEl) reviewSearchEl.addEventListener('input', refreshReviews);
+    if (reviewSearchEl) {
+      reviewSearchEl.addEventListener('input', refreshReviews);
+      reviewSearchEl.addEventListener('search', refreshReviews); // fires when × is clicked
+      reviewSearchEl.addEventListener('keyup', refreshReviews);  // fallback for any missed input events
+    }
 
     // Photo lightbox
     const teamList = document.querySelector('.team-list');
