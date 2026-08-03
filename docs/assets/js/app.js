@@ -444,7 +444,7 @@ function matchTreatment(raw) {
     // Setup filtering & rendering
     let activeSuburbs = [];
     let activeLanguages = [];
-    let activeServices = ['General Dentistry'];
+    let activeServices = [];
     let minRating = 0;
     let searchQuery = '';
     let sortBy = 'reviews';
