@@ -1590,7 +1590,6 @@ function matchTreatment(raw) {
         ['kids_family_friendly', 'Kids & family friendly'],
         ['online_booking', 'Online booking available'],
         ['same_day_emergency', 'Same-day emergencies'],
-        ['saturday_evening_hours', 'Saturday / evening hours'],
       ];
       const items = [];
       TEXT_FIELDS.forEach(([key, label]) => {
