@@ -1807,6 +1807,16 @@ function matchTreatment(raw) {
         lb.querySelector('.photo-lightbox__caption').textContent = btn.dataset.name;
         lb.classList.add('photo-lightbox--open');
       });
+
+      // Hide "Read more" buttons where the bio text isn't actually clipped
+      requestAnimationFrame(() => {
+        teamList.querySelectorAll('.team-card__bio').forEach(bio => {
+          if (bio.scrollHeight <= bio.clientHeight) {
+            const btn = bio.nextElementSibling;
+            if (btn && btn.classList.contains('team-card__read-more')) btn.style.display = 'none';
+          }
+        });
+      });
     }
   }
 
