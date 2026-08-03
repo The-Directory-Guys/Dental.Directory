@@ -500,7 +500,9 @@ function matchTreatment(raw) {
 
       const ratingDisplay = d.rating ? `<span class="stars">${starsHTML(d.rating)}</span> <strong>${d.rating}</strong>` : '<span style="color:var(--clr-gray-400)">No rating yet</span>';
       const reviewText = d.reviewCount ? `💬 ${d.reviewCount} review${d.reviewCount === 1 ? '' : 's'}` : '';
-      const descText = d.description || '';
+      const descText = d.description
+        ? d.description.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 200)
+        : '';
       const phoneText = d.phone ? `<a href="tel:${d.phone.replace(/\\s/g, '')}" style="text-decoration:none; color:inherit;">📞 ${d.phone}</a>` : '';
       const emailText = d.email ? `<a href="mailto:${d.email}" style="text-decoration:none; color:inherit; margin-left:1rem;">✉️ Email</a>` : '';
 
@@ -1611,7 +1613,7 @@ function matchTreatment(raw) {
         ${dentist.description ? `
         <div class="profile-section profile-section--about">
           <h2 class="profile-section__title">About</h2>
-          <p>${dentist.description}</p>
+          <div class="profile-desc">${dentist.description}</div>
         </div>` : ''}
 
         <div class="profile-section profile-section--services">
