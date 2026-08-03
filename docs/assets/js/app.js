@@ -1523,8 +1523,9 @@ function matchTreatment(raw) {
           ? `<button class="team-card__photo-btn" data-src="${p.photo_url}" data-name="${p.name}" aria-label="View photo of ${p.name}"><img class="team-card__photo" src="${p.photo_url}" alt="${p.name}" loading="lazy" onerror="this.closest('.team-card__photo-btn').style.display='none';this.closest('.team-card__avatar-wrap').querySelector('.team-card__avatar').style.display='flex'"></button>`
           : '';
         const initialsEl = `<div class="team-card__avatar"${p.photo_url ? ' style="display:none"' : ''}>${initials}</div>`;
+        const cardSlug = p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
         return `
-          <div class="team-card">
+          <div class="team-card" id="team-card-${cardSlug}">
             <div class="team-card__avatar-wrap">${avatar}${initialsEl}</div>
             <div class="team-card__body">
               <div class="team-card__name">${p.name}</div>
@@ -1738,6 +1739,30 @@ function matchTreatment(raw) {
       const mult = { day: 1, week: 7, month: 30, year: 365 }[m[2].toLowerCase()] || 1;
       return -(n * mult);
     }
+    // Build practitioner name patterns for review → team card linking
+    const _practPatterns = [];
+    (dentist.practitioners || []).forEach(p => {
+      const slug = p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      const cardId = `team-card-${slug}`;
+      const add = pat => _practPatterns.push({ pat: pat.toLowerCase(), cardId, displayName: p.name });
+      add(p.name);
+      const noDr = p.name.replace(/^Dr\.?\s+/i, '');
+      if (noDr !== p.name) {
+        add(noDr);
+        const parts = noDr.split(' ');
+        if (parts.length >= 2) { add('Dr ' + parts[parts.length - 1]); add('Dr. ' + parts[parts.length - 1]); }
+      }
+    });
+    _practPatterns.sort((a, b) => b.pat.length - a.pat.length);
+    function findMentions(text) {
+      const low = (text || '').toLowerCase();
+      const found = [], seen = new Set();
+      for (const { pat, cardId, displayName } of _practPatterns) {
+        if (!seen.has(cardId) && low.includes(pat)) { found.push({ cardId, displayName }); seen.add(cardId); }
+      }
+      return found;
+    }
+
     function renderReviews(order, query) {
       const container = document.getElementById('review-list-container');
       if (!container) return;
@@ -1761,6 +1786,10 @@ function matchTreatment(raw) {
       });
       const cards = sorted.map(r => {
         const initials = r.name.split(' ').map(w => w[0]).join('');
+        const mentions = findMentions(r.text);
+        const mentionHTML = mentions.length
+          ? `<div class="review-card__mentions">${mentions.map(m => `<a href="#${m.cardId}" class="review-card__mention">👤 ${m.displayName}</a>`).join('')}</div>`
+          : '';
         return `
           <div class="review-card">
             <div class="review-card__header">
@@ -1772,6 +1801,7 @@ function matchTreatment(raw) {
               <div class="stars" style="margin-left:auto">${starsHTML(r.rating)}</div>
             </div>
             <p class="review-card__text">${r.text}</p>
+            ${mentionHTML}
           </div>`;
       }).join('');
       const showingNote = dentist.reviewCount > allReviews.length

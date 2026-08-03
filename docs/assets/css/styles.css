@@ -1390,6 +1390,27 @@ h4 {
     overflow-wrap: break-word;
 }
 
+.review-card__mentions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .3rem;
+    margin-top: .5rem;
+}
+.review-card__mention {
+    display: inline-flex;
+    align-items: center;
+    gap: .2rem;
+    font-size: var(--fs-xs);
+    color: var(--clr-sky);
+    background: rgba(14,165,233,.07);
+    border: 1px solid rgba(14,165,233,.2);
+    border-radius: 999px;
+    padding: .15rem .55rem;
+    text-decoration: none;
+    transition: background .15s;
+}
+.review-card__mention:hover { background: rgba(14,165,233,.15); }
+
 .review-card__name {
     overflow-wrap: break-word;
 }
