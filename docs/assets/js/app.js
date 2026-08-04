@@ -1640,6 +1640,10 @@ function matchTreatment(raw) {
             <h2 class="profile-section__title" style="margin-bottom:0;">Reviews${dentist.reviewCount ? ` (${dentist.reviewCount})` : ''}</h2>
             <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;">
               ${(dentist.reviews || []).length > 1 ? `
+              <div style="display:flex;gap:2px;background:var(--clr-gray-100);border-radius:6px;padding:2px;flex-shrink:0;" role="group" aria-label="Review filter">
+                <button id="review-tab-curated" style="font-size:.8rem;padding:.25rem .65rem;border-radius:4px;border:none;cursor:pointer;background:var(--clr-navy);color:#fff;font-weight:500;">Curated</button>
+                <button id="review-tab-all" style="font-size:.8rem;padding:.25rem .65rem;border-radius:4px;border:none;cursor:pointer;background:transparent;color:var(--clr-gray-500);">All reviews</button>
+              </div>
               <input id="review-search" type="search" placeholder="Search reviews…" style="font-size:.8rem;border:1px solid var(--clr-gray-200);border-radius:6px;padding:.3rem .6rem;color:var(--clr-gray-600);width:160px;">
               <select id="review-sort" style="font-size:.8rem;border:1px solid var(--clr-gray-200);border-radius:6px;padding:.3rem .6rem;color:var(--clr-gray-600);background:#fff;cursor:pointer;">
                 <option value="newest">Newest first</option>
@@ -1650,6 +1654,7 @@ function matchTreatment(raw) {
               ${dentist.googleMapsUrl ? `<a href="${dentist.googleMapsUrl}" target="_blank" rel="noopener" style="font-size:.8rem;color:#4285F4;text-decoration:none;font-weight:500;">★ Write a Google Review →</a>` : ''}
             </div>
           </div>
+          <p id="curated-rating-note" style="font-size:.8rem;color:var(--clr-gray-400);margin-bottom:var(--sp-4);display:none;"></p>
           <div id="review-list-container"></div>
         </div>
       </div>
@@ -1728,8 +1733,14 @@ function matchTreatment(raw) {
       if (b2) b2.addEventListener('click', onProfileSaveClick);
     }
 
-    // Reviews — dynamic render with sort
+    // Reviews — dynamic render with sort + curated/all toggle
     const allReviews = dentist.reviews || [];
+    const curatedReviews = allReviews.filter(r => r.curated);
+    const curatedRatingReviews = allReviews.filter(r => r.curatedRating);
+    const curatedAvg = curatedRatingReviews.length
+      ? (curatedRatingReviews.reduce((s, r) => s + (r.rating || 0), 0) / curatedRatingReviews.length).toFixed(1)
+      : null;
+    let reviewMode = 'curated';
     function parseRelDate(s) {
       if (!s) return 0;
       const m = s.match(/(\d+|a|an)\s+(day|week|month|year)/i);
@@ -1765,14 +1776,15 @@ function matchTreatment(raw) {
     function renderReviews(order, query) {
       const container = document.getElementById('review-list-container');
       if (!container) return;
-      if (!allReviews.length) {
+      const activeSet = reviewMode === 'curated' ? curatedReviews : allReviews;
+      if (!activeSet.length) {
         container.innerHTML = `<p style="color:var(--clr-gray-400);font-size:.9rem;">No reviews yet. Be the first to leave one!</p>`;
         return;
       }
       const q = (query || '').trim().toLowerCase();
       const filtered = q
-        ? allReviews.filter(r => (r.text || '').toLowerCase().includes(q) || (r.name || '').toLowerCase().includes(q))
-        : allReviews;
+        ? activeSet.filter(r => (r.text || '').toLowerCase().includes(q) || (r.name || '').toLowerCase().includes(q))
+        : activeSet;
       if (!filtered.length) {
         container.innerHTML = `<p style="color:var(--clr-gray-400);font-size:.9rem;">No reviews match "${query}".</p>`;
         return;
@@ -1803,20 +1815,46 @@ function matchTreatment(raw) {
             ${mentionHTML}
           </div>`;
       }).join('');
-      const filterNote = q && filtered.length < allReviews.length
-        ? `<p style="font-size:.8rem;color:var(--clr-sky);margin-bottom:var(--sp-4);">Showing ${filtered.length} of ${allReviews.length} reviews matching "${query}"</p>`
+      const filterNote = q && filtered.length < activeSet.length
+        ? `<p style="font-size:.8rem;color:var(--clr-sky);margin-bottom:var(--sp-4);">Showing ${filtered.length} of ${activeSet.length} reviews matching "${query}"</p>`
         : '';
       const showingNote = dentist.reviewCount > allReviews.length
         ? `<p style="font-size:.8rem;color:var(--clr-gray-400);margin-top:var(--sp-4);">Showing ${allReviews.length} of ${dentist.reviewCount} reviews.${dentist.googleMapsUrl ? ` <a href="${dentist.googleMapsUrl}" target="_blank" rel="noopener" style="color:#4285F4;text-decoration:none;">See all on Google →</a>` : ''}</p>`
         : '';
       container.innerHTML = `${filterNote}<div class="review-list">${cards}</div>${showingNote}`;
     }
+    const ratingNote = document.getElementById('curated-rating-note');
+    if (ratingNote && curatedAvg) {
+      ratingNote.innerHTML = `Curated average: <strong style="color:var(--clr-navy)">${curatedAvg} ★</strong> based on ${curatedRatingReviews.length} verified reviews`;
+      ratingNote.style.display = '';
+    }
     renderReviews('newest', '');
     const reviewSortEl = document.getElementById('review-sort');
     const reviewSearchEl = document.getElementById('review-search');
+    const tabCurated = document.getElementById('review-tab-curated');
+    const tabAll = document.getElementById('review-tab-all');
     function refreshReviews() {
       renderReviews(reviewSortEl ? reviewSortEl.value : 'newest', reviewSearchEl ? reviewSearchEl.value : '');
     }
+    function setReviewTab(mode) {
+      reviewMode = mode;
+      if (tabCurated) {
+        tabCurated.style.background = mode === 'curated' ? 'var(--clr-navy)' : 'transparent';
+        tabCurated.style.color = mode === 'curated' ? '#fff' : 'var(--clr-gray-500)';
+        tabCurated.style.fontWeight = mode === 'curated' ? '500' : 'normal';
+      }
+      if (tabAll) {
+        tabAll.style.background = mode === 'all' ? 'var(--clr-navy)' : 'transparent';
+        tabAll.style.color = mode === 'all' ? '#fff' : 'var(--clr-gray-500)';
+        tabAll.style.fontWeight = mode === 'all' ? '500' : 'normal';
+      }
+      const ratingNote = document.getElementById('curated-rating-note');
+      if (ratingNote) ratingNote.style.display = mode === 'curated' ? '' : 'none';
+      if (reviewSearchEl) reviewSearchEl.value = '';
+      refreshReviews();
+    }
+    if (tabCurated) tabCurated.addEventListener('click', () => setReviewTab('curated'));
+    if (tabAll) tabAll.addEventListener('click', () => setReviewTab('all'));
     if (reviewSortEl) reviewSortEl.addEventListener('change', refreshReviews);
     if (reviewSearchEl) {
       reviewSearchEl.addEventListener('input', refreshReviews);
@@ -1840,6 +1878,7 @@ function matchTreatment(raw) {
         if (!btn) return;
         const lb = document.getElementById('photo-lightbox');
         lb.querySelector('.photo-lightbox__img').src = btn.dataset.src;
+        lb.querySelector('.photo-lightbox__img').alt = btn.dataset.name;
         lb.querySelector('.photo-lightbox__caption').textContent = btn.dataset.name;
         lb.classList.add('photo-lightbox--open');
       });

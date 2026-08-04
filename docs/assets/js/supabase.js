@@ -474,7 +474,9 @@ async function fetchSingleClinicReviews(clinicId) {
         date: r.date_text || 'Recently',
         rating: r.rating || 5,
         text: r.snippet || '',
-        daysAgo: parseDateTextToDaysAgo(r.date_text)
+        daysAgo: parseDateTextToDaysAgo(r.date_text),
+        curated: r.is_curated || false,
+        curatedRating: r.is_curated_rating || false
       }))
       .sort((a, b) => a.daysAgo - b.daysAgo);
   } catch (error) {
