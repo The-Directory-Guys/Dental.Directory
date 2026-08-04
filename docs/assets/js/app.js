@@ -1440,8 +1440,8 @@ function matchTreatment(raw) {
           <h2 class="profile-section__title">Pricing</h2>
           <div class="pricing-empty">
             <div class="pricing-empty__icon">💰</div>
-            <h4 class="pricing-empty__title">Pricing Coming Soon</h4>
-            <p class="pricing-empty__text">We're working on getting pricing information for this practice. In the meantime, contact them directly for a quote.</p>
+            <h4 class="pricing-empty__title">No prices listed on website</h4>
+            <p class="pricing-empty__text">This practice hasn't published prices on their website. Contact them directly for a quote.</p>
             ${dentist.phone ? `<a href="tel:${dentist.phone.replace(/\s/g, '')}" class="btn btn--outline btn--sm pricing-empty__btn">📞 Call for Pricing</a>` : ''}
             ${dentist.website ? `<a href="${dentist.website}" target="_blank" class="btn btn--outline btn--sm pricing-empty__btn">🌐 Check Website</a>` : ''}
           </div>
@@ -1640,9 +1640,12 @@ function matchTreatment(raw) {
             <h2 class="profile-section__title" style="margin-bottom:0;">Reviews${dentist.reviewCount ? ` (${dentist.reviewCount})` : ''}</h2>
             <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;">
               ${(dentist.reviews || []).length > 1 ? `
-              <div style="display:flex;gap:2px;background:var(--clr-gray-100);border-radius:6px;padding:2px;flex-shrink:0;" role="group" aria-label="Review filter">
-                <button id="review-tab-curated" style="font-size:.8rem;padding:.25rem .65rem;border-radius:4px;border:none;cursor:pointer;background:var(--clr-navy);color:#fff;font-weight:500;">Curated</button>
-                <button id="review-tab-all" style="font-size:.8rem;padding:.25rem .65rem;border-radius:4px;border:none;cursor:pointer;background:transparent;color:var(--clr-gray-500);">All reviews</button>
+              <div style="display:flex;align-items:center;gap:.4rem;">
+                <div style="display:flex;gap:2px;background:var(--clr-gray-100);border-radius:6px;padding:2px;flex-shrink:0;" role="group" aria-label="Review filter">
+                  <button id="review-tab-curated" style="font-size:.8rem;padding:.25rem .65rem;border-radius:4px;border:none;cursor:pointer;background:var(--clr-navy);color:#fff;font-weight:500;">Curated</button>
+                  <button id="review-tab-all" style="font-size:.8rem;padding:.25rem .65rem;border-radius:4px;border:none;cursor:pointer;background:transparent;color:var(--clr-gray-500);">All reviews</button>
+                </div>
+                <button id="curated-info-btn" aria-label="What are curated reviews?" style="width:1.2rem;height:1.2rem;border-radius:50%;border:1.5px solid var(--clr-gray-300);background:transparent;color:var(--clr-gray-400);font-size:.7rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1;">ℹ</button>
               </div>
               <input id="review-search" type="search" placeholder="Search reviews…" style="font-size:.8rem;border:1px solid var(--clr-gray-200);border-radius:6px;padding:.3rem .6rem;color:var(--clr-gray-600);width:160px;">
               <select id="review-sort" style="font-size:.8rem;border:1px solid var(--clr-gray-200);border-radius:6px;padding:.3rem .6rem;color:var(--clr-gray-600);background:#fff;cursor:pointer;">
@@ -1653,6 +1656,17 @@ function matchTreatment(raw) {
               </select>` : ''}
               ${dentist.googleMapsUrl ? `<a href="${dentist.googleMapsUrl}" target="_blank" rel="noopener" style="font-size:.8rem;color:#4285F4;text-decoration:none;font-weight:500;">★ Write a Google Review →</a>` : ''}
             </div>
+          </div>
+          <div id="curated-info-box" style="display:none;background:var(--clr-sky-50,#f0f7ff);border:1px solid var(--clr-sky-200,#bfdbfe);border-radius:8px;padding:.75rem 1rem;margin-bottom:.75rem;font-size:.82rem;color:var(--clr-gray-600);line-height:1.55;">
+            <strong style="display:block;margin-bottom:.35rem;color:var(--clr-navy);">What are curated reviews?</strong>
+            Curated reviews are a filtered selection of Google reviews designed to give a clearer picture of the genuine patient experience. We automatically remove:
+            <ul style="margin:.4rem 0 0 1.1rem;padding:0;">
+              <li>Reviews with no written text</li>
+              <li>Very short reviews under 20 characters</li>
+              <li>Duplicate reviews from the same person</li>
+              <li>Identical reviews posted across multiple clinics</li>
+            </ul>
+            <span style="display:block;margin-top:.4rem;">Individual reviews may also be manually removed if they appear suspicious or off-topic. Switch to <em>All reviews</em> to see everything on file.</span>
           </div>
           <p id="curated-rating-note" style="font-size:.8rem;color:var(--clr-gray-400);margin-bottom:var(--sp-4);display:none;"></p>
           <div id="review-list-container"></div>
@@ -1822,6 +1836,17 @@ function matchTreatment(raw) {
         ? `<p style="font-size:.8rem;color:var(--clr-gray-400);margin-top:var(--sp-4);">Showing ${allReviews.length} of ${dentist.reviewCount} reviews.${dentist.googleMapsUrl ? ` <a href="${dentist.googleMapsUrl}" target="_blank" rel="noopener" style="color:#4285F4;text-decoration:none;">See all on Google →</a>` : ''}</p>`
         : '';
       container.innerHTML = `${filterNote}<div class="review-list">${cards}</div>${showingNote}`;
+    }
+    const curatedInfoBtn = document.getElementById('curated-info-btn');
+    const curatedInfoBox = document.getElementById('curated-info-box');
+    if (curatedInfoBtn && curatedInfoBox) {
+      curatedInfoBtn.addEventListener('click', () => {
+        const open = curatedInfoBox.style.display !== 'none';
+        curatedInfoBox.style.display = open ? 'none' : 'block';
+        curatedInfoBtn.style.background = open ? 'transparent' : 'var(--clr-sky-50,#f0f7ff)';
+        curatedInfoBtn.style.borderColor = open ? 'var(--clr-gray-300)' : 'var(--clr-sky-200,#bfdbfe)';
+        curatedInfoBtn.style.color = open ? 'var(--clr-gray-400)' : 'var(--clr-navy)';
+      });
     }
     const ratingNote = document.getElementById('curated-rating-note');
     if (ratingNote && curatedAvg) {
