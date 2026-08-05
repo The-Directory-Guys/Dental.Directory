@@ -991,6 +991,7 @@ function matchTreatment(raw) {
     buildAmenitiesFilter(allDentists);
     buildExperienceFilter(allDentists);
     buildLanguageFilters(allDentists);
+    addFilterInfoButtons();
 
     // Suburb filters (injected dynamically by buildSuburbFilters)
     document.querySelectorAll('.filter-suburb').forEach(cb => {
@@ -1128,6 +1129,73 @@ function matchTreatment(raw) {
     document.querySelectorAll('.sidebar, .filter-drawer').forEach(container => {
       if (container.querySelector('[data-filter="specialty"]')) return;
       container.insertAdjacentHTML('beforeend', groupHTML);
+    });
+  }
+
+  // Info buttons on filter labels
+  const FILTER_DESCS = {
+    'General Dentistry':  'Checkups, fillings, extractions, and routine dental care for the whole family.',
+    'Cosmetic':           'Smile makeovers including veneers, teeth whitening, bonding, and aesthetic restorations.',
+    'Dental Implants':    'Permanent tooth replacements surgically placed in the jaw — look, feel, and function like natural teeth.',
+    'Dentures':           'Custom-made full or partial dentures to replace missing teeth.',
+    'Endodontics':        'Root canal treatment to save infected or damaged teeth from extraction.',
+    'Hygienist':          'Professional scale and clean, stain removal, and personalised oral hygiene advice.',
+    'Oral Surgery':       'Tooth extractions, wisdom teeth removal, and minor surgical procedures.',
+    'Orthodontics':       'Braces and clear aligners (including Invisalign) to straighten teeth and correct bite issues.',
+    'Periodontal Care':   'Treatment for gum disease, including deep cleaning and ongoing gum health management.',
+    'Teen Dental':        'Subsidised dental care for eligible patients aged 18 and under.',
+    'sedation':           'Intravenous sedation for patients with dental anxiety or for complex procedures — you remain conscious but deeply relaxed.',
+    'oral health therap': 'Oral health therapists provide preventive care, hygiene treatments, and dental treatment for children and adolescents.',
+  };
+
+  function addFilterInfoButtons() {
+    let tooltip = document.getElementById('filter-info-tooltip');
+    if (!tooltip) {
+      tooltip = document.createElement('div');
+      tooltip.id = 'filter-info-tooltip';
+      tooltip.style.cssText = 'position:fixed;z-index:9999;max-width:220px;background:var(--clr-navy,#1a3c5e);color:#fff;font-size:.78rem;line-height:1.5;padding:.5rem .75rem;border-radius:7px;box-shadow:0 4px 14px rgba(0,0,0,.25);display:none;pointer-events:none;';
+      document.body.appendChild(tooltip);
+    }
+
+    document.querySelectorAll('.filter-check').forEach(label => {
+      const cb = label.querySelector('.filter-service, .filter-specialty');
+      if (!cb || label.querySelector('.filter-info-btn')) return;
+      const desc = FILTER_DESCS[cb.value];
+      if (!desc) return;
+
+      const btn = document.createElement('button');
+      btn.className = 'filter-info-btn';
+      btn.type = 'button';
+      btn.setAttribute('aria-label', `About ${cb.value}`);
+      btn.innerHTML = 'i';
+      btn.style.cssText = 'width:1rem;height:1rem;border-radius:50%;border:1.5px solid var(--clr-gray-300,#d1d5db);background:transparent;color:var(--clr-gray-400,#9ca3af);font-size:.6rem;font-weight:700;font-style:italic;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;line-height:1;margin-left:.35rem;flex-shrink:0;vertical-align:middle;padding:0;';
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (tooltip.style.display === 'block' && tooltip._src === btn) {
+          tooltip.style.display = 'none';
+          tooltip._src = null;
+          return;
+        }
+        tooltip.textContent = desc;
+        tooltip.style.display = 'block';
+        tooltip._src = btn;
+        const r = btn.getBoundingClientRect();
+        let left = r.left;
+        if (left + 224 > window.innerWidth - 8) left = window.innerWidth - 232;
+        let top = r.bottom + 6;
+        if (top + 100 > window.innerHeight) top = r.top - 106;
+        tooltip.style.left = `${Math.max(8, left)}px`;
+        tooltip.style.top = `${top}px`;
+      });
+      label.appendChild(btn);
+    });
+
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.filter-info-btn')) {
+        tooltip.style.display = 'none';
+        tooltip._src = null;
+      }
     });
   }
 
