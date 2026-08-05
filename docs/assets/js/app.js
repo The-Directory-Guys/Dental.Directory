@@ -465,7 +465,7 @@ function matchTreatment(raw) {
         ? ['Teen Dental', ...d.services.filter(s => s !== 'Teen Dental')]
         : d.services;
       const servicePills = orderedServices.slice(0, 4).map(s =>
-        `<span class="pill pill--sm">${s === 'Hygienist' ? 'Hygienist: Scale & clean' : s}</span>`
+        `<span class="pill pill--sm" data-service="${s}" role="button" tabindex="0" style="cursor:pointer;">${s === 'Hygienist' ? 'Hygienist: Scale & clean' : s}</span>`
       ).join('');
 
       let pricingPreview = '';
@@ -775,6 +775,36 @@ function matchTreatment(raw) {
         favBtnEl.title = isFav ? 'Remove from saved' : 'Save clinic';
         updateFavToggle();
         if (showFavouritesOnly) renderWithReset();
+        return;
+      }
+
+      const servicePillEl = e.target.closest('.pill[data-service]');
+      if (servicePillEl) {
+        e.preventDefault();
+        e.stopPropagation();
+        const svc = servicePillEl.dataset.service;
+        const desc = FILTER_DESCS[svc];
+        if (!desc) return;
+        let tt = document.getElementById('filter-info-tooltip');
+        if (!tt) {
+          tt = document.createElement('div');
+          tt.id = 'filter-info-tooltip';
+          tt.style.cssText = 'position:fixed;z-index:9999;max-width:220px;background:var(--clr-navy,#1a3c5e);color:#fff;font-size:.78rem;line-height:1.5;padding:.5rem .75rem;border-radius:7px;box-shadow:0 4px 14px rgba(0,0,0,.25);display:none;pointer-events:none;';
+          document.body.appendChild(tt);
+        }
+        if (tt.style.display === 'block' && tt._src === servicePillEl) {
+          tt.style.display = 'none'; tt._src = null; return;
+        }
+        tt.innerHTML = `<strong style="display:block;margin-bottom:.2rem;">${svc === 'Hygienist' ? 'Hygienist: Scale & clean' : svc}</strong>${desc}`;
+        tt.style.display = 'block';
+        tt._src = servicePillEl;
+        const r = servicePillEl.getBoundingClientRect();
+        let left = r.left;
+        if (left + 224 > window.innerWidth - 8) left = window.innerWidth - 232;
+        let top = r.bottom + 6;
+        if (top + 100 > window.innerHeight) top = r.top - 106;
+        tt.style.left = `${Math.max(8, left)}px`;
+        tt.style.top = `${top}px`;
         return;
       }
 
