@@ -695,6 +695,12 @@ function matchTreatment(raw) {
           resultsCount.textContent = `Showing ${totalFiltered} ${savedMode ? `saved clinic${totalFiltered !== 1 ? 's' : ''}` : `dentist${totalFiltered !== 1 ? 's' : ''} in ${displayLocation}`}`;
         }
       }
+
+      // Keep apply-button count in sync
+      const n = filtered.length;
+      document.querySelectorAll('.filter-apply-btn').forEach(btn => {
+        btn.textContent = `Show ${n} result${n !== 1 ? 's' : ''} →`;
+      });
     }
 
     // Reset pagination when filters change
@@ -1022,6 +1028,7 @@ function matchTreatment(raw) {
     buildExperienceFilter(allDentists);
     buildLanguageFilters(allDentists);
     addFilterInfoButtons();
+    addApplyFilterButton();
 
     // Suburb filters (injected dynamically by buildSuburbFilters)
     document.querySelectorAll('.filter-suburb').forEach(cb => {
@@ -1226,6 +1233,29 @@ function matchTreatment(raw) {
         tooltip.style.display = 'none';
         tooltip._src = null;
       }
+    });
+  }
+
+  function addApplyFilterButton() {
+    const drawer = document.querySelector('.filter-drawer');
+    const overlay = document.querySelector('.filter-overlay');
+
+    document.querySelectorAll('.sidebar, .filter-drawer').forEach(container => {
+      if (container.querySelector('.filter-apply-btn')) return;
+      const btn = document.createElement('button');
+      btn.className = 'btn btn--primary filter-apply-btn';
+      btn.type = 'button';
+      btn.style.cssText = 'width:100%;margin-top:1.25rem;font-size:.9rem;padding:.6rem 1rem;';
+      btn.textContent = 'Show results';
+      btn.addEventListener('click', () => {
+        if (drawer && drawer.classList.contains('active')) {
+          drawer.classList.remove('active');
+          overlay && overlay.classList.remove('active');
+        }
+        const grid = document.getElementById('dentist-grid');
+        if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      container.appendChild(btn);
     });
   }
 
