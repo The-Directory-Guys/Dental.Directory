@@ -264,9 +264,7 @@
     </section>
 
     <!-- Mobile Filter Button -->
-    <div class="container" style="padding-top: 1.5rem;">
-        <button class="btn btn--outline mobile-filter-btn" id="mobile-filter-btn">&#9776; Filters</button>
-    </div>
+
 
     <!-- Mobile Filter Overlay -->
     <div class="filter-overlay" id="filter-overlay"></div>
@@ -428,6 +426,7 @@
                 <main>
                     <div class="listings-header">
                         <span class="listings-header__count" id="results-count">Loading dentists...</span>
+                        <button class="fav-toggle mobile-filter-btn" id="mobile-filter-btn">&#9776; Filters</button>
                         <select class="sort-select" id="sort-select">
                             <option value="reviews" selected>Most reviewed</option>
                             <option value="rating">Highest rated</option>
@@ -678,7 +677,7 @@
 
     <script src="assets/js/dentists.js"></script>
     <script src="assets/js/supabase.js"></script>
-    <script src="assets/js/app.js?v=23"></script>
+    <script src="assets/js/app.js?v=24"></script>
 <script src="assets/js/feedback.js"></script>
 </body>
 

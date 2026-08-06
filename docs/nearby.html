@@ -248,6 +248,7 @@
                     <div id="nearby-map"></div>
                     <div class="listings-header">
                         <span class="listings-header__count" id="results-count">Loading...</span>
+                        <button class="fav-toggle mobile-filter-btn" id="mobile-filter-btn">&#9776; Filters</button>
                         <select class="sort-select" id="sort-select">
                             <option value="distance">Sort by: Distance</option>
                             <option value="rating">Sort by: Rating</option>
@@ -269,7 +270,7 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="assets/js/supabase.js"></script>
-    <script src="assets/js/app.js?v=23"></script>
+    <script src="assets/js/app.js?v=24"></script>
     <script>
       (function () {
         const grid        = document.getElementById('nearby-grid');

@@ -945,23 +945,6 @@ function matchTreatment(raw) {
     // Favourites toggle — injected next to sort select
     const listingsHeader = document.querySelector('.listings-header');
     if (listingsHeader && sortSelect) {
-      // Inject a mobile-only filter button as the first item in the header row
-      const standaloneFilterBtn = document.getElementById('mobile-filter-btn');
-      if (standaloneFilterBtn) {
-        standaloneFilterBtn.style.display = 'none';
-        if (standaloneFilterBtn.parentElement) standaloneFilterBtn.parentElement.style.display = 'none';
-      }
-      const headerFilterBtn = document.createElement('button');
-      headerFilterBtn.className = 'fav-toggle mobile-filter-btn';
-      headerFilterBtn.innerHTML = '⚙ Filters';
-      headerFilterBtn.addEventListener('click', () => {
-        const drawer = document.querySelector('.filter-drawer');
-        const overlay = document.querySelector('.filter-overlay');
-        if (drawer) drawer.classList.add('active');
-        if (overlay) overlay.classList.add('active');
-      });
-      listingsHeader.insertBefore(headerFilterBtn, sortSelect);
-
       const openToggleBtn = document.createElement('button');
       openToggleBtn.id = 'open-toggle';
       openToggleBtn.className = 'fav-toggle';
