@@ -1526,8 +1526,8 @@ function matchTreatment(raw) {
       const s = (p.service || '').toLowerCase();
       return PAYMENT_KEYWORDS.some(k => s.includes(k));
     };
-    const pricingRows = (dentist.pricing || []).filter(p => /\$\d/.test(p.price));
-    const paymentRows = (dentist.pricing || []).filter(p => !(/\$\d/.test(p.price)) && isPaymentMethod(p));
+    const pricingRows = (dentist.pricing || []).filter(p => /\$\d/.test(p.price) && !isPaymentMethod(p));
+    const paymentRows = (dentist.pricing || []).filter(p => isPaymentMethod(p));
     if (pricingRows.length > 0) {
       const checkupPrice = getCheckupPrice(dentist);
       const cmps = getPriceComparisons(checkupPrice, dentist.city, dentist.region);
