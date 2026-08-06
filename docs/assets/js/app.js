@@ -945,13 +945,13 @@ function matchTreatment(raw) {
     // Favourites toggle — injected next to sort select
     const listingsHeader = document.querySelector('.listings-header');
     if (listingsHeader && sortSelect) {
-      // Move the mobile filter button to be first in the header row
+      // Move the mobile filter button to be first among the toggle buttons
       const existingFilterBtn = document.querySelector('.mobile-filter-btn');
       if (existingFilterBtn) {
         const oldParent = existingFilterBtn.parentElement;
         existingFilterBtn.className = 'fav-toggle mobile-filter-btn';
         existingFilterBtn.innerHTML = '⚙ Filters';
-        listingsHeader.insertBefore(existingFilterBtn, listingsHeader.firstChild);
+        listingsHeader.insertBefore(existingFilterBtn, sortSelect);
         if (oldParent) oldParent.style.display = 'none';
       }
 
