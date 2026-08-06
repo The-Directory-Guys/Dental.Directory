@@ -966,6 +966,14 @@ function matchTreatment(raw) {
         updateFavToggle();
         renderWithReset();
       });
+
+      // Ensure mobile filter button is first in the row (before Open now)
+      // Works for both cached HTML (button may be outside listingsHeader) and fresh HTML
+      const mobileFilterBtn = document.getElementById('mobile-filter-btn');
+      if (mobileFilterBtn) {
+        mobileFilterBtn.remove();
+        listingsHeader.insertBefore(mobileFilterBtn, openToggleBtn);
+      }
     }
 
     // Price slider (sync desktop & mobile)
