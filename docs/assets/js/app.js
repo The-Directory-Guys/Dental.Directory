@@ -459,6 +459,17 @@ function matchTreatment(raw) {
     let _favs = getFavourites();
     let _cmpIds = compareIds();
 
+    const PAYMENT_KEYWORDS = [
+      'q card','afterpay','zip','laybuy','winz','work and income','southern cross',
+      'acc','gem visa','gem finance','farmers','credit card','visa','mastercard',
+      'eftpos','cash','payment plan','instalment','installment','interest-free',
+      'supergold','gold card','humm','genoapay','partpay','flexicare',
+    ];
+    const isPaymentMethod = p => {
+      const s = (p.service || '').toLowerCase();
+      return PAYMENT_KEYWORDS.some(k => s.includes(k));
+    };
+
     function cardHTML(d) {
       const initials = d.name.split(' ').filter(w => w.length > 0).map(w => w[0]).join('').slice(0, 2).toUpperCase();
       const orderedServices = d.services.includes('Teen Dental')
@@ -489,7 +500,7 @@ function matchTreatment(raw) {
         }
         if (parts.length > 0) {
           pricingPreview = `<div class="pricing-summary">${parts.map(p => `<div class="pricing-line">💰 ${p}</div>`).join('')}</div>`;
-        } else if (d.pricing.some(p => /\$\d/.test(p.price))) {
+        } else if (d.pricing.some(p => /\$\d/.test(p.price) && !isPaymentMethod(p))) {
           pricingPreview = `<div class="pricing-summary pricing-summary--muted">💰 Pricing available</div>`;
         } else {
           pricingPreview = `<div class="pricing-summary pricing-summary--muted">No prices listed</div>`;
@@ -1516,16 +1527,6 @@ function matchTreatment(raw) {
 
     // Pricing table — always show, with empty state if no data
     let pricingHTML = '';
-    const PAYMENT_KEYWORDS = [
-      'q card','afterpay','zip','laybuy','winz','work and income','southern cross',
-      'acc','gem visa','gem finance','farmers','credit card','visa','mastercard',
-      'eftpos','cash','payment plan','instalment','installment','interest-free',
-      'supergold','gold card','humm','genoapay','partpay','flexicare',
-    ];
-    const isPaymentMethod = p => {
-      const s = (p.service || '').toLowerCase();
-      return PAYMENT_KEYWORDS.some(k => s.includes(k));
-    };
     const pricingRows = (dentist.pricing || []).filter(p => /\$\d/.test(p.price) && !isPaymentMethod(p));
     const paymentRows = (dentist.pricing || []).filter(p => isPaymentMethod(p));
     if (pricingRows.length > 0) {
