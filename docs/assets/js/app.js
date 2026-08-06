@@ -1518,7 +1518,7 @@ function matchTreatment(raw) {
       pricingHTML = `
         <div class="profile-section profile-section--pricing">
           <h2 class="profile-section__title">Pricing</h2>
-          <p style="font-size:.875rem;color:var(--clr-gray-500);margin-bottom:1rem;">Prices are indicative and may vary. Contact the practice for an exact quote.</p>
+          <p style="font-size:.875rem;color:var(--clr-gray-500);margin-bottom:1rem;">Prices are indicative and may vary. Contact the practice for an exact quote.${dentist.pricesLastUpdated ? ` <span style="white-space:nowrap;">Last updated: ${new Date(dentist.pricesLastUpdated).toLocaleDateString('en-NZ', {month:'long',year:'numeric'})}</span>` : ''}</p>
           <div style="overflow-x: auto;">
             <table class="pricing-table">
               <thead><tr><th>Service</th><th>Price (NZD)</th></tr></thead>

@@ -75,6 +75,7 @@ function transformClinic(clinic) {
     services: clinic.services ? clinic.services.split(',').map(s => s.trim()) : ['General Dentistry'],
     pricing: [],  // Will be populated from scraped_prices table
     hasPricingFlag: clinic.price || null,  // 'full_prices', 'some_prices', or null
+    pricesLastUpdated: clinic.prices_last_updated || null,
     description: clinic.description || '',
     hours: parseOpeningHours(clinic.opening_hours),
     hrs: compactHours(parseOpeningHours(clinic.opening_hours)),
