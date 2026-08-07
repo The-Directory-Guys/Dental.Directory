@@ -1987,8 +1987,8 @@ h4 {
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    object-fit: cover;
-    object-position: 50% 30%;
+    object-fit: contain;
+    object-position: center;
     display: block;
 }
 
@@ -2133,8 +2133,8 @@ h4 {
     width: min(400px, 80vw);
     height: min(400px, 80vw);
     border-radius: 50%;
-    object-fit: cover;
-    object-position: 50% 30%;
+    object-fit: contain;
+    object-position: center;
     box-shadow: 0 8px 40px rgba(0, 0, 0, .6);
     display: block;
 }
