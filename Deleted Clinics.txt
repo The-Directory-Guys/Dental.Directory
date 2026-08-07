@@ -12,3 +12,12 @@ WAHAORA DENTAL CLINIC (ID 2937)
 Region: Gisborne
 Address: 80 De Lautour Road, Inner Kaiti, Gisborne
 Reason: DHB/Health New Zealand community dental clinic (Hauora Tairāwhiti). Free or heavily subsidised for eligible groups only — not a private practice and not suitable for a consumer comparison directory.
+
+PACIFIC DENTAL SPECIALTIES LTD (ID 2917)
+Region: Hawke's Bay
+Reason: Not a specific clinic — no identifiable practice, address, or web presence found. Likely a holding company or duplicate entry.
+
+DENTAL CLINICS (ID 1289)
+Region: Hawke's Bay
+Address: 243 Kennedy Road, Onekawa, Napier
+Reason: Generic non-specific listing — not a named dental practice.

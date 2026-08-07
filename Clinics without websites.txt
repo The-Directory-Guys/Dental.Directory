@@ -1,7 +1,7 @@
 CLINICS WITHOUT WEBSITES
 ========================
-Total: 130 clinics
-Last updated: 2026-07-14
+Total: 129 clinics
+Last updated: 2026-08-07
 
 CLINICS WITH HTTP (NOT SECURE) WEBSITES
 ----------------------------------------
@@ -90,7 +90,7 @@ Choice Dentures (Parkwood)
 HASTINGS
 --------
 Hastings Denture Studio Ltd
-Helen Cho & Ken Joe Dental
+Helen Cho & Ken Joe Dental — Healthpoint: healthpoint.co.nz/dentistry/general-dentist/helen-cho-ken-joe-dental/
 Pearly Whites NZ
 smiletech
 
@@ -149,9 +149,10 @@ Mosgiel Denture Care
 NAPIER
 ------
 Artisan Denture Studio - Dentures in Napier (Bluff Hill)
+Hawkes Bay Periodontics & Dental Implants — website is very basic (hawkesbayperiodontics.co.nz)
 Kennedy Road Dental (Napier South) — Healthpoint: healthpoint.co.nz/dentistry/general-dentist/kennedy-road-dental/
-Dental Clinics (Onekawa)
 Dentures Direct Karen Pedersen (Pirimai)
+Ocean Orthodontics — website is very basic (oceanorthodontics.co.nz)
 
 NELSON
 ------
@@ -303,8 +304,8 @@ Waipawa Dental - S Jenkinson
 
 WAIPUKURAU
 ----------
-Be Dental Ltd
-Bishop's Dental Surgery
+Be Dental Ltd — Healthpoint: healthpoint.co.nz/dentistry/general-dentist/be-dental/
+Bishop's Dental Surgery — Healthpoint: healthpoint.co.nz/dentistry/general-dentist/bishops-dental-surgery/
 
 WAITAKERE
 ---------
