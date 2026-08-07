@@ -1782,7 +1782,7 @@ function matchTreatment(raw) {
 
         <div class="profile-section profile-section--reviews">
           <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;">
-            <h2 class="profile-section__title" style="margin-bottom:0;">Reviews${dentist.reviewCount ? ` (${dentist.reviewCount})` : ''}</h2>
+            <h2 id="reviews-heading" class="profile-section__title" style="margin-bottom:0;">Reviews${dentist.reviewCount ? ` (${dentist.reviewCount})` : ''}</h2>
             <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;">
               ${(dentist.reviews || []).length > 1 ? `
               <div style="display:flex;align-items:center;gap:.4rem;">
@@ -2020,6 +2020,11 @@ function matchTreatment(raw) {
       }
       const ratingNote = document.getElementById('curated-rating-note');
       if (ratingNote) ratingNote.style.display = mode === 'curated' ? '' : 'none';
+      const heading = document.getElementById('reviews-heading');
+      if (heading) {
+        const count = mode === 'curated' ? curatedReviews.length : allReviews.length;
+        heading.textContent = count ? `Reviews (${count})` : 'Reviews';
+      }
       if (reviewSearchEl) reviewSearchEl.value = '';
       refreshReviews();
     }
