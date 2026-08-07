@@ -1407,7 +1407,9 @@ function matchTreatment(raw) {
         <h3>Loading profile...</h3>
       </div>
     `;
-    initProfile();
+    initProfile().catch(err => {
+      profileContainer.innerHTML = `<div class="no-results"><div class="no-results__icon">⚠️</div><h3>Profile error</h3><p style="font-family:monospace;font-size:.85rem;color:red;">${err.message}</p></div>`;
+    });
   }
 
   async function initProfile() {
