@@ -1674,7 +1674,7 @@ function matchTreatment(raw) {
             <div class="team-card__avatar-wrap">${avatar}${initialsEl}</div>
             <div class="team-card__body">
               <div class="team-card__name">${p.name}</div>
-              ${p.experience ? `<div class="team-card__experience">${p.experience}</div>` : ''}
+              ${p.experience ? `<div class="team-card__experience"><span class="team-card__exp-label">Experience:</span> ${p.experience}</div>` : ''}
               ${specialtyPills ? `<div class="team-card__specialties">${specialtyPills}</div>` : ''}
               ${p.bio ? `<div class="team-card__bio-wrap"><p class="team-card__bio">${p.bio}</p><button class="team-card__read-more" onclick="var w=this.previousElementSibling;var expanded=w.classList.toggle('team-card__bio--expanded');this.textContent=expanded?'Read less ▲':'Read more ▼'">Read more ▼</button></div>` : ''}
               ${languageNote}
