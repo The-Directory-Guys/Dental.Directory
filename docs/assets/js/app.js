@@ -467,7 +467,13 @@ function matchTreatment(raw) {
     ];
     const isPaymentMethod = p => {
       const s = (p.service || '').toLowerCase();
-      return PAYMENT_KEYWORDS.some(k => s.includes(k));
+      return PAYMENT_KEYWORDS.some(k => {
+        const i = s.indexOf(k);
+        if (i === -1) return false;
+        const before = i === 0 || !/[a-z0-9]/.test(s[i - 1]);
+        const after = i + k.length >= s.length || !/[a-z0-9]/.test(s[i + k.length]);
+        return before && after;
+      });
     };
 
     function cardHTML(d) {
