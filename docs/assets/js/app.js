@@ -369,6 +369,23 @@ function matchTreatment(raw) {
     'tauranga-city': ['Tauranga', 'Mount Maunganui', 'Papamoa']
   };
 
+  const PAYMENT_KEYWORDS = [
+    'q card','afterpay','zip','laybuy','winz','work and income','southern cross',
+    'acc','gem visa','gem finance','farmers','credit card','visa','mastercard',
+    'eftpos','cash','payment plan','instalment','installment','interest-free',
+    'supergold','gold card','humm','genoapay','partpay','flexicare',
+  ];
+  const isPaymentMethod = p => {
+    const s = (p.service || '').toLowerCase();
+    return PAYMENT_KEYWORDS.some(k => {
+      const i = s.indexOf(k);
+      if (i === -1) return false;
+      const before = i === 0 || !/[a-z0-9]/.test(s[i - 1]);
+      const after = i + k.length >= s.length || !/[a-z0-9]/.test(s[i + k.length]);
+      return before && after;
+    });
+  };
+
   async function initListings() {
     let allDentists = [];
     const savedMode = dentistGrid.dataset.mode === 'saved';
@@ -458,23 +475,6 @@ function matchTreatment(raw) {
     let showOpenOnly = false;
     let _favs = getFavourites();
     let _cmpIds = compareIds();
-
-    const PAYMENT_KEYWORDS = [
-      'q card','afterpay','zip','laybuy','winz','work and income','southern cross',
-      'acc','gem visa','gem finance','farmers','credit card','visa','mastercard',
-      'eftpos','cash','payment plan','instalment','installment','interest-free',
-      'supergold','gold card','humm','genoapay','partpay','flexicare',
-    ];
-    const isPaymentMethod = p => {
-      const s = (p.service || '').toLowerCase();
-      return PAYMENT_KEYWORDS.some(k => {
-        const i = s.indexOf(k);
-        if (i === -1) return false;
-        const before = i === 0 || !/[a-z0-9]/.test(s[i - 1]);
-        const after = i + k.length >= s.length || !/[a-z0-9]/.test(s[i + k.length]);
-        return before && after;
-      });
-    };
 
     function cardHTML(d) {
       const initials = d.name.split(' ').filter(w => w.length > 0).map(w => w[0]).join('').slice(0, 2).toUpperCase();
