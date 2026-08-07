@@ -1977,19 +1977,21 @@ h4 {
 .team-card__avatar-wrap {
     flex-shrink: 0;
     width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    overflow: hidden;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
 }
 
 .team-card__photo {
     width: 3rem;
-    height: 3rem;
+    height: 4rem;
     border-radius: 50%;
     object-fit: contain;
     object-position: center;
     display: block;
+    overflow: hidden;
 }
 
 .team-card__avatar {
@@ -2130,7 +2132,7 @@ h4 {
 }
 
 .photo-lightbox__img {
-    width: min(400px, 80vw);
+    width: min(320px, 70vw);
     height: min(400px, 80vw);
     border-radius: 50%;
     object-fit: contain;
