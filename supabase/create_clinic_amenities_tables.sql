@@ -14,7 +14,7 @@ CREATE TABLE clinic_amenities (
   saturday_evening_hours    boolean,
   in_house_specialists      text,
   practice_size             text,
-  sedation_options          text,
+  sedation_options          text, 
   calming_amenities         text,
   dental_anxiety_friendly   boolean,
   years_open                text,

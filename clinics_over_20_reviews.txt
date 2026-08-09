@@ -1,0 +1,403 @@
+CLINICS WITH MORE THAN 20 REVIEWS
+==================================
+Total: 372 clinics
+Generated: 2026-07-25
+
+Rank  Reviews  City                   Name
+----  -------  ---------------------  ------------------------------------------------
+1       514    Wānaka                 Aspiring Dental
+2       485    Waitakere              Affordable Dentist Te Atatu
+3       484    North Shore            Coast Dental
+4       398    Manukau                Auckland Family Dental: Drury Dental
+5       372    Lower Hutt             Central Hutt Dental
+6       366    Greymouth              Coast Smiles Dental & Dental Spa
+7       363    Auckland City          Affordable Dentists Ellerslie
+8       357    Waitakere              Blockhouse Bay Dental Centre
+9       336    Auckland City          Accent Dentists - Cosmetic Dentist
+10      309    North Shore            Auckland Family Dental: Milford
+11      308    Hamilton               City Smile Dental - Anglesea St Dentist Hamilton
+12      295    Wellington             City Dentists
+13      286    Christchurch           Christchurch Boutique Dental
+14      283    Auckland City          Alpers Dental Epsom
+15      277    Tauranga               Beyond Dental Papamoa
+16      269    Manukau                Chapel Park Dental
+17      250    Nelson                 Access Dental NZ Ltd | Nelson Dental Surgery
+18      218    North Shore            Bayside Dental Centre
+19      218    Lower Hutt             Capital Dental Petone
+20      194    Auckland City          Caring 4 Smiles Dental Group
+21      192    Upper Hutt             Capital Dental Upper Hutt
+22      191    Auckland City          Auckland Family Dental: Parnell Dentistry
+23      188    Auckland City          Auckland City Orthodontics CBD
+24      186    North Shore            Auckland Dental Care
+25      176    Christchurch           Colombo Street Dental
+26      165    Whangārei              Dental North
+27      158    Manukau                Dental Planet Manukau
+28      153    Auckland               A+ Dentists
+29      151    Gisborne               Amber Dental
+30      142    North Shore            Bays Dental
+31      129    Wellington             Capital Dental Newtown
+32      129    North Shore            Clean Teeth Dental
+33      128    Christchurch           Carlton Dental Care
+34      123    Timaru                 Silver Birches Dental Centre
+35      117    Auckland City          All Smiles Dental
+36      117    Tauranga               Complete Dental Care
+37      105    Auckland City          Auckland Central | Lumino The Dentists
+38      105    Auckland City          City Dental Lounge
+39      104    Christchurch           Bush Dental
+40      104    Wellington             Capital Dental The Terrace
+41      103    Waitakere              Auckland Family Dental: New Lynn Dental Care
+42      103    Manukau                Clendon Dental Centre
+43      101    Whangārei              Bank Street Whangarei | Lumino The Dentists
+44       99    Auckland City          Avondale Dental
+45       97    Lower Hutt             Capital Dental Lower Hutt
+46       97    Manukau                VS Dental Studio
+47       95    Christchurch           Church Corner Dental Surgery
+48       92    Auckland City          Apex Dental
+49       92    Upper Hutt             Art of Dentistry
+50       92    Wānaka                 Bespoke Smiles Wanaka
+51       92    Manukau                Botany Family Dentist
+52       89    Napier                 Dental on Raffles
+53       87    Christchurch           Better Smiles Ltd
+54       86    Manukau                Auckland Family Dental: Southern Care Dental
+55       86    Porirua                Champion Dental Centre
+56       84    Auckland City          Avondale Dental Centre
+57       84    Auckland City          Dental on Richmond
+58       83    Taupō                  All About Smiles
+59       79    Manukau                Dental Planet Mangere
+60       78    Tauranga               Baywide Smiles Dental
+61       77    Dunedin                Bell Hill Dental
+62       76    Auckland City          Burford Dental
+63       74    Manukau                Botany South Dental
+64       74    Auckland City          Classics Dental Panmure
+65       73    Palmerston North       Carpenters Dental Palmerston North
+66       71    Wellington             Capital Dental Thorndon
+67       68    Manukau                Advanced Dental Care Manurewa | Lumino The Dentists
+68       67    Manukau                Bishop Dental
+69       65    Christchurch           Bealey Dental
+70       64    North Shore            Albany Mega Centre Dental
+71       64    North Shore            Albany Village Dental
+72       64    Hamilton               City Smile Dental - Victoria St Dentist Hamilton
+73       64    Hamilton               Clinico Denture & Hearing - Hamilton
+74       61    Auckland City          Confi Dental Hillsborough
+75       59    Taupō                  Chilukuri Dental
+76       58    Wellington             Burton & Brown Wellington | Lumino The Dentists
+77       57    Manukau                Ardmore Dental
+78       57    Hastings               Bay Dental Care
+79       57    Christchurch           Bright Smiles Children's Dentistry
+80       55    Nelson                 AM Dental Ltd.
+81       55    Auckland City          Auckland Oral & Maxillofacial Surgery Group
+82       54    Tauranga               City Dental On The Park Tauranga | Lumino The Dentists
+83       53    Hamilton               Anglesea OMS
+84       53    Whangārei              Caleb Lawrence Orthodontics
+85       53    Prebbleton             Prebbleton Dental
+86       52    Cromwell               Central Dental
+87       51    Lower Hutt             32 Gems Dental Care
+88       51    Rodney                 Adent dental
+89       51    North Shore            Byron Dental - Dentist Takapuna
+90       50    Palmerston North       BDL Denture Clinic
+91       50    Wellington             Central Dental Surgery
+92       50    Christchurch           Christchurch Periohygiene
+93       48    Christchurch           Halswell Dental
+94       47    Christchurch           Beale & Cullen - Dentist
+95       47    Auckland City          Caredent Denture Clinic - Lynfield
+96       47    Christchurch           Dental Care on Barrington
+97       46    Cambridge              Cambridge Dental
+98       46    Christchurch           Windsor Dental Centre
+99       45    Auckland City          Alba Smile Lounge
+100      44    Hamilton               Avalon Dental
+101      44    Auckland City          Beaming Smile
+102      44    Manukau                Botany Orthodontist - Coreen Loke
+103      43    Rotorua                Absolute Dental Limited - Rotorua
+104      43    Manukau                Browns Road Dental Centre
+105      43    Wellington             Capital Dental Brandon Street
+106      43    Waitakere              Confidentures Denture Clinic - Henderson
+107      43    Christchurch           Warrington Dental
+108      42    North Shore            Albany Dental
+109      42    Christchurch           Linwood Ave Dental
+110      40    Manukau                Airport Oaks Dental Centre
+111      40    Wellington             Centre of Dental Excellence
+112      39    Auckland City          Balmoral Dental Centre
+113      39    Te Awamutu             Dental On Mahoe
+114      39    Christchurch           Highsted Dental
+115      38    Rotorua                Complete Dental
+116      38    Christchurch           Longhurst Dental
+117      37    Tauranga               Bethlehem Dentists Tauranga | Lumino The Dentists
+118      37    Paraparaumu            Coastlands Dental Health Centre | Lumino The Dentists
+119      37    Auckland City          Dental on Mount Albert
+120      36    Prebbleton             Antoun | Nichols Orthodontics
+121      36    Manukau                Botany Dental Clinic
+122      36    Manukau                Botany Dental Practice | Lumino The Dentists
+123      36    Christchurch           Waltham Dental Centre
+124      35    Auckland City          Clinical Smiles
+125      34    North Shore            Bachmann Orthodontics
+126      34    Christchurch           Just Teeth
+127      33    North Shore            Northcote Dental Clinic
+128      32    Auckland City          Aevitas Dentistry
+129      32    Christchurch           Avonhead Dental
+130      32    Havelock North         Lumino Havelock North | Lumino The Dentists
+131      32    Christchurch           Precision Dental 1985 Ltd
+132      31    Tauranga               Chris Bell Dental - Dentures Tauranga
+133      31    Whanganui              Cliff Dental
+134      31    Paihia                 Paihia Dental Practice | Lumino The Dentists
+135      31    Christchurch           Smiles Oral Health
+136      30    Auckland City          Cole Nicholas Periodontics & Implants
+137      30    Wānaka                 Wanaka Dental Practice | Lumino The Dentists
+138      29    Christchurch           Lumino The Dentists - Dentistry on Merivale
+139      29    Kaiapoi                PAG Silverstream Dental
+140      29    Christchurch           Papanui Dental Centre- Open Wide
+141      28    Ashburton              Ashburton Dental Centre
+142      28    Wellington             Courtenay Orthodontics
+143      28    Lower Hutt             Dental Reflections Lower Hutt
+144      28    Christchurch           Dentistry With A Smile
+145      28    Upper Hutt             Denture Services Upper Hutt
+146      28    Rodney                 DentureTech Millwater
+147      28    Waitakere              Denturology- Denture clinic
+148      28    Wellington             Dr Dikesh Parmar - Endodontist
+149      28    North Shore            Dr Kimberley Timmins Specialist Orthodontist Ltd
+150      28    Christchurch           Duxton Dental
+151      28    Christchurch           Elmwood Dental Centre
+152      28    Richmond               Emmaus Dental | Richmond
+153      28    Christchurch           Essential Dental
+154      28    Dunedin                Faculty of Dentistry
+155      28    Christchurch           Fendalton Dental
+156      28    Christchurch           G&E Dental
+157      28    Christchurch           Garden City Dental
+158      28    North Shore            Lumino Dental on the Shore | Lumino The Dentists
+159      27    Manukau                Auckland Dental Facility, University of Otago
+160      27    Christchurch           Cashmere Dentists
+161      27    Palmerston North       Lumino Manawatu Dental | Lumino The Dentists
+162      27    Tūrangi                Turangi Dental
+163      26    Alexandra              Central Dental
+164      26    Christchurch           Ferry Road Dental Centre
+165      26    Dunedin                Paterson Orthodontics
+166      25    Nelson                 Advanced Dental
+167      25    Auckland City          Auckland Denture Clinic
+168      25    Wellington             Bing Dental
+169      25    Paraparaumu            Care Dental
+170      25    Taupō                  Chapman O'Brien Dental Surgery
+171      25    Dunedin                Chew Dental
+172      25    Hamilton               Clarence Dental
+173      25    North Shore            Confidentures Denture Clinic - Rosedale
+174      25    Oamaru                 Cooper & Hunt Dental Care
+175      25    Auckland City          Cosmetic Dental
+176      25    Christchurch           Cosmetic Denture Clinic
+177      25    Wellington             Courtenay Place Dental | Lumino The Dentists
+178      25    Cromwell               Cromwell Dental Centre
+179      25    Auckland City          Customs Street Dentist, Auckland CBD
+180      25    Tauranga               Dan Smethurst Orthodontist
+181      25    Porirua                Darling Dental
+182      25    Hastings               David Marriott Dental
+183      25    Rodney                 Dazzle family dental
+184      25    North Shore            DBS Dental Studio
+185      25    North Shore            Dent1st
+186      25    Tauranga               Denta Care
+187      25    Auckland City          Dental Artistry - Auckland Dentist
+188      25    Tauranga               Dental Associates Papamoa
+189      25    Auckland City          Dental Boutique Auckland
+190      25    Gisborne               Dental Care Centre
+191      25    Lower Hutt             Dental care centre Lower Hutt
+192      25    Dunedin                Dental Care Dunedin
+193      25    Kaiapoi                Dental Care Kaiapoi
+194      25    New Plymouth           Dental Delight Hori Street
+195      25    New Plymouth           Dental Delight Molesworth Street
+196      25    New Plymouth           Dental Delight The Valley
+197      25    Mangawhai              Dental Domain Mangawhai
+198      25    Hamilton               Dental Holistix
+199      25    Tauranga               Dental Solutions
+200      25    North Shore            Dental Studio 114
+201      25    Auckland City          Dental Today Onehunga
+202      25    Auckland City          Dental World Panmure
+203      25    Hastings               Dental@105
+204      25    Waitakere              DentalCare West
+205      25    Auckland City          DentalOne Remuera | Lumino The Dentists
+206      25    Tauranga               DentalPlus Mount Maunganui
+207      25    Auckland City          Dentalworks
+208      25    Waitakere              Dentic Denture Clinic
+209      25    Napier                 Dentiq
+210      25    Whanganui              Dentist On Glasgow
+211      25    Waitakere              Dentist on Lincoln
+212      25    North Shore            Dentist On Shakespeare
+213      25    Auckland City          Dentistry for Chickens
+214      25    Ashburton              Dentistry on Parkside
+215      25    North Shore            Dentists on Birkenhead
+216      25    Christchurch           Denture South Barrington
+217      25    Christchurch           Dentures Plus
+218      25    Tauranga               Dentures Tauranga Ltd
+219      25    North Shore            DentureTech Albany
+220      25    North Shore            Devonport Dental
+221      25    Auckland City          Dominion Dental Centre
+222      25    Auckland City          Downtown Dental
+223      25    Auckland City          Dr Dave Richards Dentist Auckland
+224      25    Waitakere              Dr Reddy's Dental - West Auckland Dentists
+225      25    Christchurch           Dr. Keira Malone - Oral Surgeon
+226      25    Christchurch           Duchenne Denture Specialists
+227      25    Dunedin                Dunedin Dental
+228      25    Dunedin                Dunedin Orthodontics
+229      25    Blenheim               Durrheim & Associates
+230      25    North Shore            East Coast Bays Dental
+231      25    Manukau                East Tamaki Dentist
+232      25    Manukau                Eastcare Dental Services
+233      25    Auckland City          Eden Dental Centre
+234      25    Auckland City          Eden Orthodontics
+235      25    Gisborne               Edgar Dental
+236      25    North Shore            Elite Dental Care
+237      25    Auckland City          Ellerslie Hway Dental Centre
+238      25    Invercargill           Embrace Orthodontics
+239      25    Christchurch           Endo With Jay
+240      25    Auckland City          Epsom Dental Centre - Dr. Joe Yen
+241      25    Auckland City          Epsom Dentists
+242      25    Ōmokoroa               ER Dental at Omokoroa
+243      25    Tauranga               ER Dental at Pyes Pa
+244      25    Tauranga               ER Dental at Seventh
+245      25    Tauranga               Essential Dentures Limited
+246      25    Manukau                Family Dentist Pakuranga
+247      25    Dunedin                Farella Orthodontics
+248      25    Queenstown             Fine Orthodontist Queenstown
+249      25    Waitakere              First Dental
+250      25    Lower Hutt             Fisher Dental
+251      25    Auckland City          Flash Dental Mt Eden
+252      25    Manukau                Flat Bush Dental
+253      25    North Shore            Floss Dental Birkenhead
+254      25    Hamilton               Focus 32 Dental
+255      25    Geraldine              Four Peaks Dental
+256      25    Rangiora               Fox Dental Care
+257      25    Queenstown             Frankton Dental Queenstown | Lumino The Dentists
+258      25    Waitakere              Fraser Dental
+259      25    Auckland City          Freemans Bay Dental Centre
+260      25    Hastings               Frimley Dental
+261      25    Ashburton              G&E Dental Ashburton
+262      25    Rolleston              G&E Dental Rolleston
+263      25    Hamilton               Garden Place Dental Hamilton | Lumino The Dentists
+264      25    Tauranga               Gardens Dental
+265      25    Greymouth              Garry Rae Dental Greymouth | Lumino The Dentists
+266      25    Auckland City          Gentle Care Dentist
+267      25    Cambridge              Gentle Dental Cambridge
+268      25    Wellington             Gentle Dental Centre Ghuznee Street
+269      25    Wellington             Gentle Dental Centre Lambton Quay
+270      25    Lower Hutt             Gentle Dental Centre Lower Hutt
+271      25    Upper Hutt             Gentle Dental Centre Upper Hutt
+272      25    Hamilton               Gentle Dental Hamilton
+273      25    Katikati               Gentle Dental KatiKati
+274      25    Nelson                 Gentle Dental Nelson Ltd
+275      25    Auckland City          Gentle Dentists Ellerslie | Lumino The Dentists
+276      25    Auckland City          Glen Innes Dental Centre
+277      25    Auckland City          Glendowie Dental Centre
+278      25    Palmerston North       Glenn Kirk Oral Surgeon Ltd
+279      25    Auckland City          Glow Dental - Stonefields, Auckland
+280      25    Manukau                Golflands Dental
+281      25    Rangiora               Good Street Dental
+282      25    Gore                   Gore Dental | Lumino The Dentists
+283      25    Auckland City          Grafton Dental
+284      25    Wellington             Great Teeth Wellington Dentists
+285      25    North Shore            Greenhithe Dental Boutique
+286      25    Auckland City          Greenlane Dental
+287      25    North Shore            Greville Dental
+288      25    Palmerston North       Grey Street Dental Surgery
+289      25    Greytown               Greytown Dental
+290      25    Manukau                Guardian Dental
+291      25    Manukau                Guardian Dental Care
+292      25    Auckland City          Harish Lala Endodontist
+293      25    Rodney                 Headspace Clinic - Dental hygiene & Aesthetics
+294      25    Auckland City          Hello Dental
+295      25    Waitakere              Henderson Dental Centre
+296      25    Waitakere              Henderson Dental Practice | Lumino The Dentists
+297      25    Rodney                 Hibiscus Care Dental
+298      25    Manukau                Highland Park Dental Centre
+299      25    Manukau                Hill Park Dental
+300      25    North Shore            Hinemoa Street Dental
+301      25    Waitakere              Hobsonville Point Dental
+302      25    Manukau                Howick Dental Surgery
+303      25    Manukau                Howick Village Dental
+304      25    Manukau                Hunters Corner Dental
+305      25    Lower Hutt             Hutt Dental Implant Centre Lower Hutt
+306      25    Auckland City          Janice Sommerville Ltd
+307      25    Manukau                JD Patel Dental Surgeon
+308      25    North Shore            JJ Dental Care
+309      25    Auckland City          Keith Nelson & Associates
+310      25    Waitakere              Kelston Dental Care
+311      25    Auckland City          Kidz-Teeth Meadowbank | Lumino The Dentists
+312      25    Rodney                 Kowhai Coast Dental | Warkworth Dentist
+313      25    Waitakere              Lake Panorama Dental
+314      25    North Shore            Lake Road Dentists
+315      25    Manukau                Leabank Dental
+316      25    Auckland City          Li & Lawson Dental
+317      25    Waitakere              Lincoln Dental (formerly CM Dental)
+318      25    Manukau                Loudon Dental - Manurewa
+319      25    Auckland City          Lumino City Dental at Quay Park
+320      25    North Shore            Lumino Glenfield | Lumino The Dentists
+321      25    Invercargill           Lumino Invercargill | Lumino The Dentists
+322      25    North Shore            Lumino Long Bay | Lumino The Dentists
+323      25    Auckland City          Lumino Mount Eden Village | Lumino The Dentists
+324      25    North Shore            Lumino Rosedale | Lumino The Dentists
+325      25    Manukau                Lumino Sanctuary Dental | Lumino The Dentists
+326      25    Manukau                Lumino Seddon Street Pukekohe | Lumino The Dentists
+327      25    Auckland City          Lumino St Heliers | Lumino The Dentists
+328      25    Waitakere              Lumino The Dentists | New Lynn
+329      25    Auckland City          Lumino The Dentists Mount Eden - Dominion Road
+330      25    Auckland City          Lumino The Dentists: Remuera Dental Centre
+331      25    Auckland City          Lumino Three Kings | Lumino The Dentists
+332      25    Manukau                Lumino Waiuku | Lumino The Dentists
+333      25    Whanganui              Lumino Whanganui | Lumino The Dentists
+334      25    Auckland City          Lunn Dental Spa
+335      25    Manukau                Macleans Dentist
+336      25    Rodney                 Mahi Dental, Warkworth
+337      25    Manukau                Mahu Dental - Manurewa
+338      25    Auckland City          Mahu Dental - Otahuhu
+339      25    Auckland City          Malimali Dental
+340      25    Mangawhai              Mangawhai Dental Clinic
+341      25    Manukau                Mangere Dental Centre
+342      25    Auckland City          Manukau Road Dental
+343      25    Manukau                Manurewa Dental Centre
+344      25    Christchurch           Oral Design NZ
+345      24    Auckland City          Belich Dental
+346      24    North Shore            Birkenhead Avenue Dental Centre
+347      24    Cambridge              Bright Cambridge Dental & Denture Clinic
+348      24    Christchurch           Dental on Kilmore
+349      24    Lower Hutt             Denture Care Services
+350      24    Wellington             Edward Leung Dental Surgery
+351      24    Nelson                 Fresh Dental
+352      24    Manukau                Griffin Dental World
+353      24    Waitakere              Hobsonville Dental Centre
+354      24    Waitakere              Katavich Dental
+355      24    Auckland City          Otahuhu Budget Dental Care
+356      24    Christchurch           Redcliffs Dental
+357      24    Kerikeri               The Smile Clinic
+358      23    North Shore            Albany Central Dental
+359      23    Cambridge              Alpers Dental Cambridge
+360      23    Napier                 Clive Square Dental Associates
+361      23    Dunedin                Faculty of Dentistry (Dental School)
+362      23    Dunedin                Knight Dental Specialists
+363      23    Auckland City          Pearl Dental Centre Remuera | Lumino The Dentists
+364      23    Christchurch           Periodontal Services
+365      23    Rangiora               Rangiora Denture Clinic
+366      23    Manukau                seddon dental
+367      23    Te Awamutu             Te Awamutu Dental
+368      23    Thames                 True Smile Dentures
+369      23    Waihi                  Waihi Family Dental Centre
+370      23    Whitianga              Whitianga Dental Practice | Lumino The Dentists
+371      22    Morrinsville           Absolute Dental Limited-Morrinsville
+372      22    Manukau                Ace Dental Centre
+373      22    Christchurch           Bradley Wood Dentists
+374      22    Richmond               Dental Care Richmond
+375      22    Auckland City          Dental Hygiene Clinic
+376      22    Manukau                Dentspa Karaka
+377      22    Napier                 Dentures Direct Karen Pedersen
+378      22    Lower Hutt             Hutt Endodontics
+379      22    Auckland City          Inspire Dental
+380      22    North Shore            JJY Dental Ltd
+381      22    Manukau                Karaka Orthodontics
+382      22    Whangārei              Kowhai Dental Kensington
+383      22    Manukau                Queen Street Dental
+384      22    Christchurch           Riccarton Dentists
+385      22    Auckland City          Sapphire Dental
+386      22    Thames                 The Dental Health Group
+387      22    Napier                 The Oral Surgery Centre
+388      21    Nelson                 Aesthetic Denture Designs
+389      21    Christchurch           Barrington Dental Centre
+390      21    Richmond               Bays Dentures
+391      21    Dunedin                Gentle Dental
+392      21    Masterton              Grace Dental
+393      21    Paraparaumu            Kapiti Oral Health Clinic
+394      21    Feilding               Lumino Feilding | Lumino The Dentists
+395      21    Ohakune                Ohakune Dental
+396      21    Motueka                Steph Wills Dental Motueka

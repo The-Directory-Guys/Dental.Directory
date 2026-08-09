@@ -1,77 +1,184 @@
 
-1. Capital Dental Ngaio [MANUAL]
-   Address: 42 Ottawa Road, Ngaio, Wellington 6035
-   Region: Greater Wellington
-   Status:  [Checked: Accurate]
-   Website: https://www.dentistwellington.co.nz/ngaio
-   - New patient offer: $109 (valued at $320; includes check-up, 2 x-rays, clean & polish, consultation; new patients only; Tue & Wed only; redeem within 90 days; 48-hr cancellation policy)
-
-
-2. Capital Dental Petone [scraped]
-   Address: 272 Jackson Street, Petone, Lower Hutt 5012
+1. Andrew Middlemiss Dental | Lumino The Terrace [scraped]
+   Address: 50 The Terrace, Wellington Central, Wellington 6011
    Region: Greater Wellington
    Status:  [ ]
-   Website: https://www.dentistwellington.co.nz/petone
-   - ACC: Registered provider
-   - Free teen dental care: Available for teenagers and kids under Ministry of Health
+   Website: http://www.middlemissdental.com/
 
 
-3. Capital Dental Tawa [scraped]
-   Address: Tawa, Wellington 5028
+2. Ashwin Magan Dental Surgery [scraped]
+   Address: CBD Towers Level 3, 84/90 Main Street, Upper Hutt Central, Upper Hutt 5018
    Region: Greater Wellington
    Status:  [ ]
-   Website: https://www.dentistwellington.co.nz/tawa
-   - Laybuy: Available
+   Website: http://ashwinmagandentalsurgery.co.nz/
 
 
-4. Capital Dental Upper Hutt [scraped]
-   Address: 21 Main Street, Upper Hutt Central, Upper Hutt 5018
+3. Bing Dental [scraped]
+   Address: 223 Main Road, Tawa, Wellington 5028
    Region: Greater Wellington
    Status:  [ ]
-   Website: https://www.dentistwellington.co.nz/clinic/capital-dental-upper-hutt
-   - Laybuy: Available
+   Website: http://bingdental.co.nz/
 
 
-5. Central Dental Surgery [scraped]
-   Address: Harbour City Tower tower level 6/29 Brandon Street, Te Aro, Wellington 6011
+4. Dental Reflections (Wainuiomata) [scraped]
+   Address: 10 The Strand Square, Wainuiomata, Lower Hutt 5014
    Region: Greater Wellington
    Status:  [ ]
-   Website: https://www.healthpoint.co.nz/dentistry/general-dentist/central-dental-surgery/
+   Website: https://dentalreflections.co.nz/
 
 
-6. Edward Leung Dental Surgery [scraped]
-   Address: Level 3/128 Featherston Street, Wellington Central, Wellington 6011
+5. Dental Reflections (Upper Hutt) [scraped]
+   Address: 124 Main Street, Upper Hutt Central, Upper Hutt 5018
    Region: Greater Wellington
    Status:  [ ]
-   Website: https://www.healthpoint.co.nz/dentistry/general-dentist/edward-leung-dentistry/ [website broken — edwardleung.co.nz; switched to Healthpoint fallback]
+   Website: https://dentalreflections.co.nz/
 
 
-7. Gee Dental Centre [website broken — dentist.co.nz listing; switched to Healthpoint fallback]
-   Address: 22 Cornwall Street, Hutt Central, Lower Hutt 5010
+6. Dental Reflections Lower Hutt [scraped]
+   Address: 29 Kings Crescent, Hutt Central, Lower Hutt 5010
    Region: Greater Wellington
    Status:  [ ]
-   Website: https://www.healthpoint.co.nz/dentistry/general-dentist/gee-dental-centre/
+   Website: https://dentalreflections.co.nz/
 
 
-8. Lange M H BDS [scraped]
-   Address: 368 Tinakori Road, Thorndon, Wellington 6011
+7. Discover Dental [scraped]
+   Address: Level 1 Wakefield House, 90 The Terrace, Wellington Central, Wellington 6011
    Region: Greater Wellington
    Status:  [ ]
-   Website: https://www.healthpoint.co.nz/dentistry/general-dentist/michael-lange-dental/
+   Website: https://www.discoverdental.co.nz/
 
 
-9. Michael Walton Dental [scraped]
-   Address: 22 Royal Street, Upper Hutt Central, Upper Hutt 5018
+8. Fisher Dental [scraped]
+   Address: 49 Witako Street, Epuni, Lower Hutt 5011
    Region: Greater Wellington
    Status:  [ ]
-   Website: https://www.healthpoint.co.nz/dentistry/general-dentist/waltdental/
+   Website: http://www.fisherdental.co.nz/
 
 
-10. Raine Street Dental [scraped]
-   Address: 4 Raine Street, Karori, Wellington 6012
+9. Gentle Dental Centre Lower Hutt [scraped]
+   Address: Level 1/131 Queens Drive, Hutt Central, Lower Hutt 5016
    Region: Greater Wellington
    Status:  [ ]
-   Website: https://www.healthpoint.co.nz/dentistry/general-dentist/raine-street-dental/
-   - Free teen dental care: Free dental care for adolescents from the beginning of year 9 (first year of high school) until their 18th birthday
+   Website: https://www.gentledental.co.nz/contact-us#lowerhutt
+
+
+10. Hutt City Dental Centre | Lumino [scraped]
+    Address: 40 Bloomfield Terrace, Hutt Central, Lower Hutt 5010
+    Region: Greater Wellington
+    Status:  [ ]
+    Website: https://lumino.co.nz/dentists/hutt-city-dental-centre-lower-hutt/
+    Note: Jon Beere (formerly J D Beere Dental, 14 Laings Road) relocated here
+
+
+11. Kapiti Oral Health Clinic [scraped]
+    Address: 90 Kapiti Road, Paraparaumu 5032
+    Region: Greater Wellington
+    Status:  [ ]
+    Website: http://www.kapitiohc.co.nz/
+
+
+12. Lumino The Dentists (Panama Street) [scraped]
+    Address: Level 6/40 Panama Street, Wellington Central, Wellington 6011
+    Region: Greater Wellington
+    Status:  [ ]
+    Website: https://lumino.co.nz/find-a-practice/north-island/wellington/
+
+
+13. Lumino The Terrace Dental Practice [scraped]
+    Address: 1st Floor/50 The Terrace, Wellington Central, Wellington 6011
+    Region: Greater Wellington
+    Status:  [ ]
+    Website: https://lumino.co.nz/dentists/the-terrace-dental-practice-wellington-cbd/
+
+
+14. Mana Dental Surgery [scraped]
+    Address: 33 Broderick Road, Johnsonville, Wellington 6037
+    Region: Greater Wellington
+    Status:  [ ]
+    Website: http://www.dentist.co.nz/dentist-detail/wellington/mana-dental-surgery-ltd/A11007032
+
+
+15. Mary McBride Dentist [scraped]
+    Address: Suite 3/310 Tinakori Road, Thorndon, Wellington 6011
+    Region: Greater Wellington
+    Status:  [ ]
+    Website: http://marymcbridedentist.com/
+
+
+16. Naenae Dental Clinic [scraped]
+    Address: 9 Hillary Court, Naenae, Lower Hutt 5010
+    Region: Greater Wellington
+    Status:  [ ]
+    Website: http://www.naenaedentalclinic.co.nz/
+
+
+17. Peninsula Dental Centre [scraped]
+    Address: 58 Miramar Avenue, Miramar, Wellington 6022
+    Region: Greater Wellington
+    Status:  [ ]
+    Website: http://www.peninsuladental.co.nz/
+
+
+19. Petone Dental Centre [scraped]
+    Address: 374 Jackson Street, Petone, Lower Hutt 5012
+    Region: Greater Wellington
+    Status:  [ ]
+    Website: https://www.petonedentalcentre.co.nz/
+
+
+20. Raumati Dental Centre [scraped]
+    Address: 17 Raumati Road, Raumati Beach 5032
+    Region: Greater Wellington
+    Status:  [ ]
+    Website: http://raumatidentalcentre.co.nz/
+
+
+21. Tawa Dental Care [scraped]
+    Address: 196 Main Road, Tawa, Wellington 5028
+    Region: Greater Wellington
+    Status:  [ ]
+    Website: http://www.tawadental.com/
+
+
+22. The Dental Studio - Laura Ng [scraped]
+    Address: 2 Connolly Street, Hutt Central, Lower Hutt 5010
+    Region: Greater Wellington
+    Status:  [ ]
+    Website: https://www.thedentalstudio.co.nz/
+
+
+23. The Dental Studio - Laura Ng (Johnsonville) [scraped]
+    Address: 123 Moorefield Road, Johnsonville, Wellington 6037
+    Region: Greater Wellington
+    Status:  [ ]
+    Website: https://www.thedentalstudio.co.nz/
+
+
+24. The Steps Dental Care [scraped]
+    Address: Gilmer Terrace, Wellington Central, Wellington 6011
+    Region: Greater Wellington
+    Status:  [ ]
+    Website: https://stepsdental.co.nz/
+
+
+25. Waikanae Dental Surgery [scraped]
+    Address: 8 Mahara Place, Waikanae 5036
+    Region: Greater Wellington
+    Status:  [ ]
+    Website:
+
+
+26. Wellington Dental Hygienists [scraped]
+    Address: 126 Willis Street, Te Aro, Wellington 6011
+    Region: Greater Wellington
+    Status:  [ ]
+    Website: http://www.dentalhygienist.co.nz/
+
+
+27. WellOral Ltd [scraped]
+    Address: The Wellington Clinic, 62 Vivian Street, Te Aro, Wellington 6011
+    Region: Greater Wellington
+    Status:  [ ]
+    Website: http://www.welloral.co.nz/
 
 

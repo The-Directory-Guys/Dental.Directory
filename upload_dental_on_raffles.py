@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv(r"c:\Users\Ciaran\Desktop\Dental_Directory\.env")
 
 SUPABASE_URL = os.environ["SUPABASE_URL"]
-SUPABASE_JWT = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFua3lqcGdjb2NzdnZ0eXl5bXlzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MzgxMzUxNCwiZXhwIjoyMDg5Mzg5NTE0fQ.9wfSt-mM39fqQbihr8sTCPB80k3UhoAnMX5LQv8Q9VU"
+SUPABASE_JWT = os.environ['SUPABASE_JWT']
 MGMT_KEY = os.environ["SUPABASE_MANAGEMENT_KEY"]
 BUCKET = "practitioner-photos"
 CLINIC_ID = 1509

@@ -1932,6 +1932,7 @@ function matchTreatment(raw) {
       return found;
     }
 
+    let practitionerFilter = null;
     function renderReviews(order, query) {
       const container = document.getElementById('review-list-container');
       if (!container) return;
@@ -1941,11 +1942,15 @@ function matchTreatment(raw) {
         return;
       }
       const q = (query || '').trim().toLowerCase();
-      const filtered = q
+      const textFiltered = q
         ? activeSet.filter(r => (r.text || '').toLowerCase().includes(q) || (r.name || '').toLowerCase().includes(q))
         : activeSet;
+      const filtered = practitionerFilter
+        ? textFiltered.filter(r => findMentions(r.text).some(m => m.cardId === practitionerFilter))
+        : textFiltered;
       if (!filtered.length) {
-        container.innerHTML = `<p style="color:var(--clr-gray-400);font-size:.9rem;">No reviews match "${query}".</p>`;
+        const noMsg = practitionerFilter && !q ? 'No reviews mention this team member.' : q ? `No reviews match "${q}".` : 'No reviews yet.';
+        container.innerHTML = `<p style="color:var(--clr-gray-400);font-size:.9rem;">${noMsg}</p>`;
         return;
       }
       const sorted = [...filtered].sort((a, b) => {
@@ -1974,13 +1979,17 @@ function matchTreatment(raw) {
             ${mentionHTML}
           </div>`;
       }).join('');
-      const filterNote = q && filtered.length < activeSet.length
-        ? `<p style="font-size:.8rem;color:var(--clr-sky);margin-bottom:var(--sp-4);">Showing ${filtered.length} of ${activeSet.length} reviews matching "${query}"</p>`
+      const practPattern = practitionerFilter ? _practPatterns.find(pp => pp.cardId === practitionerFilter) : null;
+      const practBanner = practPattern
+        ? `<div class="review-filter-banner">Showing reviews mentioning <strong>${practPattern.displayName}</strong><button class="review-filter-clear">✕ Clear</button></div>`
+        : '';
+      const filterNote = q && textFiltered.length < activeSet.length
+        ? `<p style="font-size:.8rem;color:var(--clr-sky);margin-bottom:var(--sp-4);">Showing ${filtered.length} of ${activeSet.length} reviews matching "${q}"</p>`
         : '';
       const showingNote = dentist.reviewCount > allReviews.length
         ? `<p style="font-size:.8rem;color:var(--clr-gray-400);margin-top:var(--sp-4);">Showing ${allReviews.length} of ${dentist.reviewCount} reviews.${dentist.googleMapsUrl ? ` <a href="${dentist.googleMapsUrl}" target="_blank" rel="noopener" style="color:#4285F4;text-decoration:none;">See all on Google →</a>` : ''}</p>`
         : '';
-      container.innerHTML = `${filterNote}<div class="review-list">${cards}</div>${showingNote}`;
+      container.innerHTML = `${practBanner}${filterNote}<div class="review-list">${cards}</div>${showingNote}`;
     }
     const curatedInfoBtn = document.getElementById('curated-info-btn');
     const curatedInfoBox = document.getElementById('curated-info-box');
@@ -2025,6 +2034,7 @@ function matchTreatment(raw) {
         const count = mode === 'curated' ? curatedReviews.length : allReviews.length;
         heading.textContent = count ? `Reviews (${count})` : 'Reviews';
       }
+      practitionerFilter = null;
       if (reviewSearchEl) reviewSearchEl.value = '';
       refreshReviews();
     }
@@ -2067,6 +2077,41 @@ function matchTreatment(raw) {
           }
         });
       });
+
+      // Inject "Show relevant reviews" button on team cards that are mentioned in reviews
+      teamList.querySelectorAll('.team-card').forEach(card => {
+        const cnt = allReviews.filter(r => findMentions(r.text).some(m => m.cardId === card.id)).length;
+        if (cnt > 0) {
+          const btn = document.createElement('button');
+          btn.className = 'team-card__reviews-btn';
+          btn.dataset.cardId = card.id;
+          btn.textContent = `Show ${cnt} relevant review${cnt !== 1 ? 's' : ''}`;
+          card.querySelector('.team-card__body').appendChild(btn);
+        }
+      });
+      teamList.addEventListener('click', e => {
+        const btn = e.target.closest('.team-card__reviews-btn');
+        if (!btn) return;
+        practitionerFilter = btn.dataset.cardId;
+        reviewMode = 'all';
+        if (tabCurated) { tabCurated.style.background = 'transparent'; tabCurated.style.color = 'var(--clr-gray-500)'; tabCurated.style.fontWeight = 'normal'; }
+        if (tabAll) { tabAll.style.background = 'var(--clr-navy)'; tabAll.style.color = '#fff'; tabAll.style.fontWeight = '500'; }
+        const ratingNote = document.getElementById('curated-rating-note');
+        if (ratingNote) ratingNote.style.display = 'none';
+        if (reviewSortEl) reviewSortEl.value = 'newest';
+        if (reviewSearchEl) reviewSearchEl.value = '';
+        renderReviews('newest', '');
+        document.getElementById('reviews-heading')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      const reviewContainer = document.getElementById('review-list-container');
+      if (reviewContainer) {
+        reviewContainer.addEventListener('click', e => {
+          if (e.target.closest('.review-filter-clear')) {
+            practitionerFilter = null;
+            refreshReviews();
+          }
+        });
+      }
     }
   }
 

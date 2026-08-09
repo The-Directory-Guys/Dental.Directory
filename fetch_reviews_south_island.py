@@ -32,7 +32,7 @@ if not API_KEY:
     sys.exit(1)
 
 SUPABASE_URL = os.getenv('SUPABASE_URL', 'https://ankyjpgcocsvvtyyymys.supabase.co')
-SUPABASE_ANON_KEY = os.getenv('SUPABASE_ANON_KEY', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFua3lqcGdjb2NzdnZ0eXl5bXlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MTM1MTQsImV4cCI6MjA4OTM4OTUxNH0.SXxTLBdiNVSEDXy95yU0x0ctYFOjIby8hZbJ7B1LPK8')
+SUPABASE_ANON_KEY = os.getenv('SUPABASE_ANON_KEY', os.environ['SUPABASE_ANON_KEY'])
 
 OUTPUT_FILE = 'south_island_reviews.json'
 DELAY = 0.2  # seconds between API requests

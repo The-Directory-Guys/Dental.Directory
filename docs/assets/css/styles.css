@@ -2075,6 +2075,52 @@ h4 {
     margin-top: var(--sp-2);
 }
 
+.team-card__reviews-btn {
+    display: inline-block;
+    margin-top: var(--sp-3);
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--clr-sky);
+    font-size: var(--fs-sm);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.team-card__reviews-btn:hover {
+    color: var(--clr-navy);
+}
+
+.review-filter-banner {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .5rem .75rem;
+    background: var(--clr-sky-50, #f0f7ff);
+    border: 1px solid var(--clr-sky-200, #bfdbfe);
+    border-radius: 6px;
+    font-size: .85rem;
+    color: var(--clr-navy);
+    margin-bottom: 1rem;
+}
+
+.review-filter-clear {
+    margin-left: auto;
+    background: none;
+    border: 1px solid var(--clr-gray-300);
+    border-radius: 4px;
+    color: var(--clr-gray-500);
+    font-size: .75rem;
+    padding: .15rem .45rem;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.review-filter-clear:hover {
+    border-color: var(--clr-navy);
+    color: var(--clr-navy);
+}
+
 .team-card__photo-btn {
     all: unset;
     display: block;

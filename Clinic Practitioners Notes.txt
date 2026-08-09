@@ -1,0 +1,13 @@
+CLINIC PRACTITIONERS NOTES
+==========================
+Clinics where practitioner assignment is uncertain or pending.
+
+CENTRAL DENTAL (centraldental.co.nz)
+-------------------------------------
+Clinics: Central Dental — Cromwell (ID 1772), Central Dental — Alexandra (ID 2406), Central Dental Ranfurly (ID 1774)
+Team page: https://centraldental.co.nz/about-us/
+Issue: All three clinics share one website and one team page (Dr Amelia Paterson,
+Dr Lucy O'Connor, Dr Ella Chibnall, Vivienne McGregor, Sarah Hall, Annabelle Fraser).
+No indication of which practitioners work at which location.
+Action: Practitioners removed from Cromwell (1772) pending clarification.
+To resolve: Call the practice or check if location-specific team pages exist.

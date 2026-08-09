@@ -1,0 +1,43 @@
+POTENTIAL FUTURE UPDATES
+========================
+
+CLINICS WITH HTTP (NOT SECURE) WEBSITES — photos may not load on HTTPS pages
+------------------------------------------------------------------------------
+- Otago Orthodontics (ID 1835): http://www.otago-orthodontics.co.nz — photos saved as HTTP URLs, may be blocked by browser mixed content policy
+- KT Orthodontics (ID 2938): http://www.ktorthodontics.co.nz — HTTP only, team photos not saved as they would be blocked as mixed content
+
+
+
+1. Yes/No Feedback Popup
+   "Did you find a relevant dentist?"
+   - Trigger: after a user clicks through to a clinic profile and presses back
+   - That's the moment they've evaluated a result, so the question is genuinely relevant
+   - Log responses to Supabase or as GA events to track yes/no split over time
+   - Only show once per session to avoid being annoying
+   - Exit intent (mouse leaving browser) as a fallback trigger on desktop;
+     60-second timer as fallback on mobile (exit intent doesn't work on mobile)
+
+
+2. Calendar Availability
+   - Show real-time or indicative appointment availability on clinic profiles
+   - Could integrate with booking systems (e.g. Cliniko, Dentally) via API
+   - Or a simple manual flag: "Next available: within 1 week / 2–4 weeks / 4+ weeks"
+
+3. Accepting New Patients
+   - Filter/badge indicating whether a clinic is currently taking on new patients
+   - Many clinics have waiting lists or are closed to new patients entirely
+   - Could be self-reported by clinic owners via the manage page
+
+5. Fix "Pricing Available"
+   - Some clinic cards show "Pricing Available" even when the data is not useful
+     (e.g. only payment/insurance info scraped, no actual dollar amounts)
+   - Should only show "Pricing Available" when at least one real price can be extracted
+
+6. Review Translation
+   - Allow users to translate non-English reviews into English
+   - Useful for clinics with many international patients leaving reviews in other languages
+
+4. Within 2km of Workplace
+   - Allow users to enter a work address separately from their home address
+   - Filter clinics near workplace (useful for lunchtime appointments)
+   - Extends the existing nearby/distance search with a second saved location
