@@ -242,6 +242,19 @@ function matchTreatment(raw) {
     return cur >= range[0] && cur < range[1];
   }
 
+  // ===== Clean clinic URLs (/clinic/<slug>) =====
+  // Slug rule mirrors the static page generator. Bases that collide across the
+  // dataset get the suburb appended; everything else is just the name slug.
+  const DC_COLLISIONS = new Set(["central-dental","dental-reflections","lumino-implant-centre","northmed-dental","nsoms-oral-maxillofacial-surgeons","phoenix-house-dental-centre","queen-street-dental-centre","rapid-response-dental","supreme-dental-concepts","tam-dental-group-cosmetic-general-dentistry","teeth-whitening-associates","the-denture-man"]);
+  function dcSlugBase(s) {
+    return (s || '').toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/ /g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '');
+  }
+  function dcClinicSlug(name, suburb) {
+    const b = dcSlugBase(name);
+    return DC_COLLISIONS.has(b) ? (b + '-' + dcSlugBase(suburb)).replace(/^-+|-+$/g, '') : b;
+  }
+  function clinicUrl(d) { return '/clinic/' + dcClinicSlug(d.name, d.suburb); }
+
   function getFavourites() {
     try { return new Set(JSON.parse(localStorage.getItem('dc_favourites') || '[]')); }
     catch { return new Set(); }
@@ -536,7 +549,7 @@ function matchTreatment(raw) {
       const cmpBtn = d.id ? `<button class="cmp-btn${inCmp ? ' cmp-btn--active' : ''}" data-cmp-id="${d.id}" aria-label="${inCmp ? 'Remove from comparison' : 'Add to comparison'}" title="${inCmp ? 'Remove from comparison' : 'Add to comparison'}">${inCmp ? '✓ Added' : '⚖ Compare'}</button>` : '';
 
       // Use id for Supabase records, slug for static
-      const profileLink = d.id ? `dentist.html?id=${d.id}&region=${encodeURIComponent(d.region || '')}` : `dentist.html?slug=${d.slug}&region=${encodeURIComponent(d.region || '')}`;
+      const profileLink = clinicUrl(d);
 
       return `
         <article class="dentist-card" data-suburb="${d.suburb}" data-rating="${d.rating || 0}" data-name="${d.name}">
@@ -1444,6 +1457,12 @@ function matchTreatment(raw) {
           <p>The profile you're looking for doesn't exist. <a href="/" style="color: var(--clr-teal);">Go back to listings</a>.</p>
         </div>
       `;
+      return;
+    }
+
+    // Legacy dentist.html?id= links now redirect to the clean /clinic/<slug> URL
+    if (/\/dentist\.html$/.test(location.pathname)) {
+      location.replace(clinicUrl(dentist));
       return;
     }
 

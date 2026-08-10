@@ -118,6 +118,11 @@
       const CHECKUP_KEYS = ['checkup', 'check-up', 'exam', 'consult', 'assessment', 'new patient', 'initial', 'comprehensive', 'oral health'];
       const HYG_KEYS = ['hygienist', 'hygiene', 'scale'];
 
+      // Clean clinic URL (mirrors the generator + app.js rule)
+      const DC_COLLISIONS = new Set(["central-dental","dental-reflections","lumino-implant-centre","northmed-dental","nsoms-oral-maxillofacial-surgeons","phoenix-house-dental-centre","queen-street-dental-centre","rapid-response-dental","supreme-dental-concepts","tam-dental-group-cosmetic-general-dentistry","teeth-whitening-associates","the-denture-man"]);
+      function dcSlugBase(s){ return (s||'').toLowerCase().replace(/[^a-z0-9\s-]/g,'').replace(/ /g,'-').replace(/-+/g,'-').replace(/^-+|-+$/g,''); }
+      function clinicUrl(d){ const b=dcSlugBase(d.name); return '/clinic/' + (DC_COLLISIONS.has(b) ? (b+'-'+dcSlugBase(d.suburb)).replace(/^-+|-+$/g,'') : b); }
+
       function esc(s) {
         return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
       }
@@ -164,7 +169,7 @@
           return `
             <th class="compare-col-head">
               ${avatar}
-              <a class="compare-col-head__name" href="dentist.html?id=${d.id}">${esc(d.name)}</a>
+              <a class="compare-col-head__name" href="${clinicUrl(d)}">${esc(d.name)}</a>
               <button class="compare-remove" data-remove="${i}">Remove</button>
             </th>`;
         }).join('');
@@ -204,7 +209,7 @@
               })}
               ${row('Phone', d => d.phone ? `<a href="tel:${esc(d.phone.replace(/\s/g, ''))}">${esc(d.phone)}</a>` : '—')}
               ${row('Website', d => d.website ? `<a href="${esc(d.website)}" target="_blank" rel="noopener">Visit site ↗</a>` : '—')}
-              ${row('', d => `<a href="dentist.html?id=${d.id}" class="btn btn--primary" style="white-space:nowrap;">View Profile</a>`)}
+              ${row('', d => `<a href="${clinicUrl(d)}" class="btn btn--primary" style="white-space:nowrap;">View Profile</a>`)}
             </tbody>
           </table>
           </div>
