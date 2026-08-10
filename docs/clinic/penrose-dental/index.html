@@ -13,7 +13,7 @@
     <meta property="og:title" content="Penrose Dental | Dental Compare">
     <meta property="og:description" content="Penrose Dental in Penrose, Auckland City. See services, prices, opening hours and patient reviews — compare with other Auckland City dentists on Dental Compa">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="/assets/css/styles.css?v=12">
+    <link rel="stylesheet" href="/assets/css/styles.css?v=13">
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -62,34 +62,26 @@
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
         </div>
     </header>
-    <section class="hero hero--sm">
+    <section class="profile-hero">
         <div class="container">
-            <a href="/auckland.html" class="clinic-back">&larr; Back to Auckland dentists</a>
-            <h1>Penrose Dental</h1>
-            <p class="clinic-sub"><span class="stars">★★★★★</span> <strong>4.9</strong> <span style="color:var(--clr-gray-300)">(111 reviews)</span> &nbsp;&#183;&nbsp; &#128205; Penrose, Auckland City</p>
+            <a href="/" class="profile-hero__back">&larr; Back to listings</a>
+            <h1 id="profile-name">Penrose Dental</h1>
+            <div class="profile-hero__meta" id="profile-meta"></div>
         </div>
     </section>
-    <section class="section" style="padding-top:var(--sp-10)">
-        <div class="container clinic-wrap">
-            <div class="clinic-main">
-                <h2>Services</h2>
-                <div class="clinic-services"><span class="pill pill--sm">General Dentistry</span></div>
-                <h2>Prices</h2>
-                <table class="seo-price-table"><thead><tr><th>Treatment</th><th>Price</th></tr></thead><tbody><tr><td>Payment plan</td><td>Fee Funders third-party financing available; process involves consultation, treatment plan with costs, credit checks, invoice generation, and installment payments with initial deposit required</td></tr><tr><td>Crown warranty</td><td>5-year warranty on crowns; 2-year warranty on all work</td></tr><tr><td>Exam / checkup</td><td>$95</td></tr><tr><td>New patient offer</td><td>$95 Check Ups &amp; $175 Hygiene Appts</td></tr><tr><td>Dental hygiene visit</td><td>$175</td></tr></tbody></table>
-                <h2>Opening hours</h2><ul class="clinic-hours"><li><span>Monday</span><span>8:15 AM – 5:00 PM</span></li><li><span>Tuesday</span><span>7:30 AM – 4:00 PM</span></li><li><span>Wednesday</span><span>8:15 AM – 5:00 PM</span></li><li><span>Thursday</span><span>7:30 AM – 4:00 PM</span></li><li><span>Friday</span><span>Closed</span></li><li><span>Saturday</span><span>Closed</span></li><li><span>Sunday</span><span>Closed</span></li></ul>
-                <h2>Meet the team</h2><div class="clinic-team"><div class="clinic-team__card"><div class="clinic-team__initials">CL</div><div class="clinic-team__name">Chris Lim</div><div class="clinic-team__spec">Implant dentistry, cosmetic dentistry, restorative dentistry</div></div><div class="clinic-team__card"><div class="clinic-team__initials">KK</div><div class="clinic-team__name">Kiran Kaur</div><div class="clinic-team__spec">Dental hygiene</div></div><div class="clinic-team__card"><div class="clinic-team__initials">ST</div><div class="clinic-team__name">Seetha Thissera</div><div class="clinic-team__spec">Dental assistance, patient care</div></div><div class="clinic-team__card"><div class="clinic-team__initials">AL</div><div class="clinic-team__name">Ashwani Lal</div><div class="clinic-team__spec">Front desk coordination</div></div></div>
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="profile-layout" id="profile-content">
+                <div class="no-results"><div class="no-results__icon">&#9203;</div><h3>Loading profile...</h3></div>
             </div>
-            <aside class="clinic-side">
-                <div class="clinic-contact">
-                    <h3>Contact Penrose Dental</h3>
-                    <p style="color:var(--clr-gray-500);font-size:.9rem">367 Great South Road, Penrose, Auckland 1051, New Zealand</p>
-                    <div class="clinic-contact__btns"><a href="tel:095798956" class="btn btn--outline">&#128222; 09 579 8956</a><a href="http://www.penrosedental.co.nz/" target="_blank" rel="noopener" class="btn btn--primary">Visit website &#8599;</a><a href="https://maps.google.com/?cid=5103721994982288401&amp;g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener" class="btn btn--outline">&#128205; Directions</a></div>
-                </div>
-            </aside>
         </div>
     </section>
     <footer class="footer"><div class="container"><div class="footer__copy">Built in New Zealand</div></div></footer>
+    <script>window.__CLINIC_ID__ = 884;</script>
+    <script src="/assets/js/dentists.js"></script>
+    <script src="/assets/js/supabase.js"></script>
+    <script src="/assets/js/app.js?v=33"></script>
+    <script src="/assets/js/submit.js"></script>
     <script src="/assets/js/feedback.js"></script>
-    <script>document.getElementById('menu-toggle').addEventListener('click',()=>document.getElementById('main-nav').classList.toggle('active'));</script>
 </body>
 </html>

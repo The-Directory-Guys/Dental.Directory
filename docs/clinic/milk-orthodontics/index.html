@@ -13,7 +13,7 @@
     <meta property="og:title" content="Milk Orthodontics | Dental Compare">
     <meta property="og:description" content="Milk Orthodontics in Newmarket, Auckland City. See services, prices, opening hours and patient reviews — compare with other Auckland City dentists on Dental ">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="/assets/css/styles.css?v=12">
+    <link rel="stylesheet" href="/assets/css/styles.css?v=13">
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -62,34 +62,26 @@
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
         </div>
     </header>
-    <section class="hero hero--sm">
+    <section class="profile-hero">
         <div class="container">
-            <a href="/auckland.html" class="clinic-back">&larr; Back to Auckland dentists</a>
-            <h1>Milk Orthodontics</h1>
-            <p class="clinic-sub"><span class="stars">★★★★★</span> <strong>5</strong> <span style="color:var(--clr-gray-300)">(71 reviews)</span> &nbsp;&#183;&nbsp; &#128205; Newmarket, Auckland City</p>
+            <a href="/" class="profile-hero__back">&larr; Back to listings</a>
+            <h1 id="profile-name">Milk Orthodontics</h1>
+            <div class="profile-hero__meta" id="profile-meta"></div>
         </div>
     </section>
-    <section class="section" style="padding-top:var(--sp-10)">
-        <div class="container clinic-wrap">
-            <div class="clinic-main">
-                <h2>Services</h2>
-                <div class="clinic-services"><span class="pill pill--sm">Orthodontics</span></div>
-                <h2>Prices</h2>
-                <p style="color:var(--clr-gray-500)">This practice hasn't published prices. <a href="tel:09 520 1880">Call Milk Orthodontics</a> for a quote.</p>
-                <h2>Opening hours</h2><ul class="clinic-hours"><li><span>Monday</span><span>8:00 AM – 5:00 PM</span></li><li><span>Tuesday</span><span>8:00 AM – 5:00 PM</span></li><li><span>Wednesday</span><span>8:00 AM – 5:00 PM</span></li><li><span>Thursday</span><span>8:00 AM – 5:00 PM</span></li><li><span>Friday</span><span>8:00 AM – 12:00 PM</span></li><li><span>Saturday</span><span>Closed</span></li><li><span>Sunday</span><span>Closed</span></li></ul>
-                <h2>Meet the team</h2><div class="clinic-team"><div class="clinic-team__card"><div class="clinic-team__initials">DS</div><div class="clinic-team__name">Dr Shahrzad MacAvoy</div><div class="clinic-team__spec">Specialist orthodontist. Comprehensive Class I, II and III malocclusion, impacted canines and surgical exposure/traction, combined surgical-orthodontic (orthognathic) cases, growth modification and interceptive treatment, crowding, spacing, crossbite, deep bite, open bite, adult comprehensive and pre-restorative alignment, clear aligners, fixed appliances.</div></div></div>
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="profile-layout" id="profile-content">
+                <div class="no-results"><div class="no-results__icon">&#9203;</div><h3>Loading profile...</h3></div>
             </div>
-            <aside class="clinic-side">
-                <div class="clinic-contact">
-                    <h3>Contact Milk Orthodontics</h3>
-                    <p style="color:var(--clr-gray-500);font-size:.9rem">2 Nuffield Street Corner of Nuffield St and, Remuera Road, Newmarket, Auckland 1023, New Zealand</p>
-                    <div class="clinic-contact__btns"><a href="tel:095201880" class="btn btn--outline">&#128222; 09 520 1880</a><a href="https://www.milkorthodontics.co.nz/" target="_blank" rel="noopener" class="btn btn--primary">Visit website &#8599;</a><a href="https://maps.google.com/?cid=16535372694050718188&amp;g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener" class="btn btn--outline">&#128205; Directions</a></div>
-                </div>
-            </aside>
         </div>
     </section>
     <footer class="footer"><div class="container"><div class="footer__copy">Built in New Zealand</div></div></footer>
+    <script>window.__CLINIC_ID__ = 2950;</script>
+    <script src="/assets/js/dentists.js"></script>
+    <script src="/assets/js/supabase.js"></script>
+    <script src="/assets/js/app.js?v=33"></script>
+    <script src="/assets/js/submit.js"></script>
     <script src="/assets/js/feedback.js"></script>
-    <script>document.getElementById('menu-toggle').addEventListener('click',()=>document.getElementById('main-nav').classList.toggle('active'));</script>
 </body>
 </html>

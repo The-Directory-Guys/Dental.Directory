@@ -13,7 +13,7 @@
     <meta property="og:title" content="Hoki Dental | Dental Compare">
     <meta property="og:description" content="Hoki Dental in Hokitika. See services, prices, opening hours and patient reviews — compare with other Hokitika dentists on Dental Compare.">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="/assets/css/styles.css?v=12">
+    <link rel="stylesheet" href="/assets/css/styles.css?v=13">
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -62,34 +62,26 @@
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
         </div>
     </header>
-    <section class="hero hero--sm">
+    <section class="profile-hero">
         <div class="container">
-            <a href="/west-coast.html" class="clinic-back">&larr; Back to West Coast dentists</a>
-            <h1>Hoki Dental</h1>
-            <p class="clinic-sub"><span class="stars">★★★★★</span> <strong>4.7</strong> <span style="color:var(--clr-gray-300)">(26 reviews)</span> &nbsp;&#183;&nbsp; &#128205; Hokitika</p>
+            <a href="/" class="profile-hero__back">&larr; Back to listings</a>
+            <h1 id="profile-name">Hoki Dental</h1>
+            <div class="profile-hero__meta" id="profile-meta"></div>
         </div>
     </section>
-    <section class="section" style="padding-top:var(--sp-10)">
-        <div class="container clinic-wrap">
-            <div class="clinic-main">
-                <h2>Services</h2>
-                <div class="clinic-services"><span class="pill pill--sm">General Dentistry</span></div>
-                <h2>Prices</h2>
-                <table class="seo-price-table"><thead><tr><th>Treatment</th><th>Price</th></tr></thead><tbody><tr><td>Smile design consultation</td><td>Interdisciplinary Planning And Smile Test-Drive: $1,450</td></tr><tr><td>Exam / checkup</td><td>Platinum Exam: $250</td></tr><tr><td>Implant</td><td>Surgical implant placement: $3,300</td></tr><tr><td>Consultation</td><td>Consultation (per tooth/condition): $55</td></tr><tr><td>X-ray – intraoral</td><td>In-Mouth X-Ray: $44</td></tr><tr><td>X-ray – OPG</td><td>Full Mouth X-Ray (OPG): $145</td></tr><tr><td>Scale and polish</td><td>30 Minute Hygiene: $195</td></tr><tr><td>Filling – composite</td><td>Front Teeth: $325 (one surface) - $595 (4+ surfaces)</td></tr><tr><td>Filling – amalgam</td><td>One Surface: $295</td></tr><tr><td>Extraction – simple</td><td>Conventional Extraction: $340</td></tr><tr><td>Extraction – surgical</td><td>Surgical Extraction: $545</td></tr><tr><td>Root canal – front tooth</td><td>Incisor/Canine (Front) Tooth: $1,580</td></tr><tr><td>Root canal – premolar</td><td>Premolar (Middle) Tooth: $1,950 (includes 3D CAT Scan)</td></tr><tr><td>Root canal – molar</td><td>Molar (Back) Tooth: $2,200 (includes 3D CAT Scan)</td></tr><tr><td>Veneer – composite</td><td>Composite Veneer: $650</td></tr><tr><td>Veneer – porcelain</td><td>Ceramic Veneer: $2,200</td></tr><tr><td>Crown</td><td>Gold or Ceramic Inlay/Onlay: $2,200</td></tr><tr><td>Crown – ceramic</td><td>Gold or Ceramic Crown: $2,400</td></tr><tr><td>Orthodontics – aligners</td><td>Simple cases from $6,000; complex up to $11,000</td></tr><tr><td>Whitening – in-chair</td><td>Upper &amp; Lower Whitening: $750</td></tr><tr><td>Denture – partial</td><td>Valplast Denture: $1,750</td></tr></tbody></table>
-                <h2>Opening hours</h2><ul class="clinic-hours"><li><span>Monday</span><span>9:00 AM – 4:30 PM</span></li><li><span>Tuesday</span><span>9:00 AM – 4:30 PM</span></li><li><span>Wednesday</span><span>9:00 AM – 4:30 PM</span></li><li><span>Thursday</span><span>9:00 AM – 4:30 PM</span></li><li><span>Friday</span><span>9:00 AM – 4:30 PM</span></li><li><span>Saturday</span><span>Closed</span></li><li><span>Sunday</span><span>Closed</span></li></ul>
-                
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="profile-layout" id="profile-content">
+                <div class="no-results"><div class="no-results__icon">&#9203;</div><h3>Loading profile...</h3></div>
             </div>
-            <aside class="clinic-side">
-                <div class="clinic-contact">
-                    <h3>Contact Hoki Dental</h3>
-                    <p style="color:var(--clr-gray-500);font-size:.9rem">18 Revell Street, Hokitika 7810, New Zealand</p>
-                    <div class="clinic-contact__btns"><a href="tel:032225030" class="btn btn--outline">&#128222; 03 222 5030</a><a href="http://www.hokidental.co.nz/" target="_blank" rel="noopener" class="btn btn--primary">Visit website &#8599;</a><a href="https://maps.google.com/?cid=8231699531250143515&amp;g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener" class="btn btn--outline">&#128205; Directions</a></div>
-                </div>
-            </aside>
         </div>
     </section>
     <footer class="footer"><div class="container"><div class="footer__copy">Built in New Zealand</div></div></footer>
+    <script>window.__CLINIC_ID__ = 2383;</script>
+    <script src="/assets/js/dentists.js"></script>
+    <script src="/assets/js/supabase.js"></script>
+    <script src="/assets/js/app.js?v=33"></script>
+    <script src="/assets/js/submit.js"></script>
     <script src="/assets/js/feedback.js"></script>
-    <script>document.getElementById('menu-toggle').addEventListener('click',()=>document.getElementById('main-nav').classList.toggle('active'));</script>
 </body>
 </html>

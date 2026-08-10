@@ -13,7 +13,7 @@
     <meta property="og:title" content="York Place Dental | Dental Compare">
     <meta property="og:description" content="York Place Dental in Dunedin North, Dunedin. See services, prices, opening hours and patient reviews — compare with other Dunedin dentists on Dental Compare.">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="/assets/css/styles.css?v=12">
+    <link rel="stylesheet" href="/assets/css/styles.css?v=13">
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -62,34 +62,26 @@
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
         </div>
     </header>
-    <section class="hero hero--sm">
+    <section class="profile-hero">
         <div class="container">
-            <a href="/dunedin.html" class="clinic-back">&larr; Back to Otago dentists</a>
-            <h1>York Place Dental</h1>
-            <p class="clinic-sub"><span class="stars">★★★★★</span> <strong>5</strong> <span style="color:var(--clr-gray-300)">(2 reviews)</span> &nbsp;&#183;&nbsp; &#128205; Dunedin North, Dunedin</p>
+            <a href="/" class="profile-hero__back">&larr; Back to listings</a>
+            <h1 id="profile-name">York Place Dental</h1>
+            <div class="profile-hero__meta" id="profile-meta"></div>
         </div>
     </section>
-    <section class="section" style="padding-top:var(--sp-10)">
-        <div class="container clinic-wrap">
-            <div class="clinic-main">
-                <h2>Services</h2>
-                <div class="clinic-services"><span class="pill pill--sm">General Dentistry</span></div>
-                <h2>Prices</h2>
-                <table class="seo-price-table"><thead><tr><th>Treatment</th><th>Price</th></tr></thead><tbody><tr><td>Credit card</td><td>Visa, Mastercard accepted on day of treatment</td></tr><tr><td>ACC</td><td>ACC-registered dentists available; co-payments may apply for accident-related injuries</td></tr><tr><td>WINZ</td><td>WINZ quotes available for eligible urgent care up to $1,000 per 52-week period</td></tr><tr><td>Free teen dental care</td><td>Free basic dental services for ages 13-18 for check-ups and hygiene</td></tr></tbody></table>
-                <h2>Opening hours</h2><ul class="clinic-hours"><li><span>Monday</span><span>9:00 AM – 5:00 PM</span></li><li><span>Tuesday</span><span>9:00 AM – 5:00 PM</span></li><li><span>Wednesday</span><span>9:00 AM – 5:00 PM</span></li><li><span>Thursday</span><span>9:00 AM – 5:00 PM</span></li><li><span>Friday</span><span>9:00 AM – 1:00 PM</span></li><li><span>Saturday</span><span>Closed</span></li><li><span>Sunday</span><span>Closed</span></li></ul>
-                <h2>Meet the team</h2><div class="clinic-team"><div class="clinic-team__card"><div class="clinic-team__initials">JL</div><div class="clinic-team__name">Jed Lim</div></div><div class="clinic-team__card"><div class="clinic-team__initials">TR</div><div class="clinic-team__name">Tony Ryder</div></div><div class="clinic-team__card"><div class="clinic-team__initials">TC</div><div class="clinic-team__name">Tessa Chirayath</div><div class="clinic-team__spec">Special interest in minimally-invasive and restorative work. Focuses on all aspects of general dentistry.</div></div></div>
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="profile-layout" id="profile-content">
+                <div class="no-results"><div class="no-results__icon">&#9203;</div><h3>Loading profile...</h3></div>
             </div>
-            <aside class="clinic-side">
-                <div class="clinic-contact">
-                    <h3>Contact York Place Dental</h3>
-                    <p style="color:var(--clr-gray-500);font-size:.9rem">504 George Street, Dunedin North, Dunedin 9016, New Zealand</p>
-                    <div class="clinic-contact__btns"><a href="tel:034740557" class="btn btn--outline">&#128222; 03 474 0557</a><a href="https://dunedindentalcare.nz/yorkdental/" target="_blank" rel="noopener" class="btn btn--primary">Visit website &#8599;</a><a href="https://maps.google.com/?cid=17114331551976613263&amp;g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener" class="btn btn--outline">&#128205; Directions</a></div>
-                </div>
-            </aside>
         </div>
     </section>
     <footer class="footer"><div class="container"><div class="footer__copy">Built in New Zealand</div></div></footer>
+    <script>window.__CLINIC_ID__ = 1874;</script>
+    <script src="/assets/js/dentists.js"></script>
+    <script src="/assets/js/supabase.js"></script>
+    <script src="/assets/js/app.js?v=33"></script>
+    <script src="/assets/js/submit.js"></script>
     <script src="/assets/js/feedback.js"></script>
-    <script>document.getElementById('menu-toggle').addEventListener('click',()=>document.getElementById('main-nav').classList.toggle('active'));</script>
 </body>
 </html>

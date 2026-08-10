@@ -13,7 +13,7 @@
     <meta property="og:title" content="Mangere Dental Centre | Dental Compare">
     <meta property="og:description" content="Mangere Dental Centre in Māngere, Manukau. See services, prices, opening hours and patient reviews — compare with other Manukau dentists on Dental Compare.">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="/assets/css/styles.css?v=12">
+    <link rel="stylesheet" href="/assets/css/styles.css?v=13">
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -62,34 +62,26 @@
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
         </div>
     </header>
-    <section class="hero hero--sm">
+    <section class="profile-hero">
         <div class="container">
-            <a href="/auckland.html" class="clinic-back">&larr; Back to Auckland dentists</a>
-            <h1>Mangere Dental Centre</h1>
-            <p class="clinic-sub"><span class="stars">★★★★</span> <strong>4.5</strong> <span style="color:var(--clr-gray-300)">(32 reviews)</span> &nbsp;&#183;&nbsp; &#128205; Māngere, Manukau</p>
+            <a href="/" class="profile-hero__back">&larr; Back to listings</a>
+            <h1 id="profile-name">Mangere Dental Centre</h1>
+            <div class="profile-hero__meta" id="profile-meta"></div>
         </div>
     </section>
-    <section class="section" style="padding-top:var(--sp-10)">
-        <div class="container clinic-wrap">
-            <div class="clinic-main">
-                <h2>Services</h2>
-                <div class="clinic-services"><span class="pill pill--sm">General Dentistry</span><span class="pill pill--sm">Teen Dental</span></div>
-                <h2>Prices</h2>
-                <table class="seo-price-table"><thead><tr><th>Treatment</th><th>Price</th></tr></thead><tbody><tr><td>Scale and polish</td><td>Starts from $175</td></tr><tr><td>Filling - composite</td><td>Starts from $280</td></tr><tr><td>Filling - amalgam</td><td>Starts from $250</td></tr><tr><td>Extraction</td><td>Starts from $150</td></tr><tr><td>Crown</td><td>$1400-$1600</td></tr><tr><td>Whitening</td><td>Starts from $550</td></tr><tr><td>Whitening - take-home</td><td>Starts from $550</td></tr><tr><td>Denture - full</td><td>$2200-$2500</td></tr><tr><td>Denture - partial</td><td>Starts from $1200</td></tr><tr><td>Consultation</td><td>Free</td></tr><tr><td>ACC</td><td>Free dental treatment for teeth damaged through ACC-related accidents</td></tr><tr><td>WINZ</td><td>Free consultations for WINZ dental quotes</td></tr><tr><td>Southern Cross</td><td>Affiliated - bring policy number for direct billing</td></tr><tr><td>Free teen dental care</td><td>Free basic dental treatment (check-ups, cleans, fillings) for ages 13-18 under government dental benefit scheme</td></tr></tbody></table>
-                <h2>Opening hours</h2><ul class="clinic-hours"><li><span>Monday</span><span>8:00 AM – 4:00 PM</span></li><li><span>Tuesday</span><span>8:00 AM – 4:00 PM</span></li><li><span>Wednesday</span><span>8:00 AM – 4:00 PM</span></li><li><span>Thursday</span><span>8:00 AM – 4:00 PM</span></li><li><span>Friday</span><span>8:00 AM – 3:00 PM</span></li><li><span>Saturday</span><span>Closed</span></li><li><span>Sunday</span><span>Closed</span></li></ul>
-                <h2>Meet the team</h2><div class="clinic-team"><div class="clinic-team__card"><img class="clinic-team__photo" src="https://images.squarespace-cdn.com/content/v1/60d01c0bbb807927ef610a2d/1626594191627-5SDRD9FB5B9QTEDPX1VO/dr-dee-removebg.png" alt="Dr Da&#x27;ad Al-Falahi (Dee)" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'clinic-team__initials',textContent:'DD'}))"><div class="clinic-team__name">Dr Da&#x27;ad Al-Falahi (Dee)</div><div class="clinic-team__spec">Paediatric Dentistry, managing anxious children and parents</div></div><div class="clinic-team__card"><div class="clinic-team__initials">S</div><div class="clinic-team__name">Sam</div></div><div class="clinic-team__card"><div class="clinic-team__initials">D</div><div class="clinic-team__name">Diana</div></div></div>
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="profile-layout" id="profile-content">
+                <div class="no-results"><div class="no-results__icon">&#9203;</div><h3>Loading profile...</h3></div>
             </div>
-            <aside class="clinic-side">
-                <div class="clinic-contact">
-                    <h3>Contact Mangere Dental Centre</h3>
-                    <p style="color:var(--clr-gray-500);font-size:.9rem">Mangere Town Centre, Bader Drive, Māngere, Auckland 2022, New Zealand</p>
-                    <div class="clinic-contact__btns"><a href="tel:092757754" class="btn btn--outline">&#128222; 09 275 7754</a><a href="http://www.mangeredentalcentre.co.nz/" target="_blank" rel="noopener" class="btn btn--primary">Visit website &#8599;</a><a href="https://maps.google.com/?cid=8880226018179806760&amp;g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener" class="btn btn--outline">&#128205; Directions</a></div>
-                </div>
-            </aside>
         </div>
     </section>
     <footer class="footer"><div class="container"><div class="footer__copy">Built in New Zealand</div></div></footer>
+    <script>window.__CLINIC_ID__ = 767;</script>
+    <script src="/assets/js/dentists.js"></script>
+    <script src="/assets/js/supabase.js"></script>
+    <script src="/assets/js/app.js?v=33"></script>
+    <script src="/assets/js/submit.js"></script>
     <script src="/assets/js/feedback.js"></script>
-    <script>document.getElementById('menu-toggle').addEventListener('click',()=>document.getElementById('main-nav').classList.toggle('active'));</script>
 </body>
 </html>

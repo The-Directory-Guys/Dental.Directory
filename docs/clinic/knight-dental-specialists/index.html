@@ -13,7 +13,7 @@
     <meta property="og:title" content="Knight Dental Specialists | Dental Compare">
     <meta property="og:description" content="Knight Dental Specialists in Dunedin Central, Dunedin. See services, prices, opening hours and patient reviews — compare with other Dunedin dentists on Denta">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="/assets/css/styles.css?v=12">
+    <link rel="stylesheet" href="/assets/css/styles.css?v=13">
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -62,34 +62,26 @@
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
         </div>
     </header>
-    <section class="hero hero--sm">
+    <section class="profile-hero">
         <div class="container">
-            <a href="/dunedin.html" class="clinic-back">&larr; Back to Otago dentists</a>
-            <h1>Knight Dental Specialists</h1>
-            <p class="clinic-sub"><span class="stars">★★★★★</span> <strong>4.8</strong> <span style="color:var(--clr-gray-300)">(19 reviews)</span> &nbsp;&#183;&nbsp; &#128205; Dunedin Central, Dunedin</p>
+            <a href="/" class="profile-hero__back">&larr; Back to listings</a>
+            <h1 id="profile-name">Knight Dental Specialists</h1>
+            <div class="profile-hero__meta" id="profile-meta"></div>
         </div>
     </section>
-    <section class="section" style="padding-top:var(--sp-10)">
-        <div class="container clinic-wrap">
-            <div class="clinic-main">
-                <h2>Services</h2>
-                <div class="clinic-services"><span class="pill pill--sm">General Dentistry</span></div>
-                <h2>Prices</h2>
-                <p style="color:var(--clr-gray-500)">This practice hasn't published prices. <a href="tel:03 777 3990">Call Knight Dental Specialists</a> for a quote.</p>
-                <h2>Opening hours</h2><ul class="clinic-hours"><li><span>Monday</span><span>9:00 AM – 5:00 PM</span></li><li><span>Tuesday</span><span>9:00 AM – 5:00 PM</span></li><li><span>Wednesday</span><span>9:00 AM – 5:00 PM</span></li><li><span>Thursday</span><span>9:00 AM – 5:00 PM</span></li><li><span>Friday</span><span>9:00 AM – 5:00 PM</span></li><li><span>Saturday</span><span>Closed</span></li><li><span>Sunday</span><span>Closed</span></li></ul>
-                <h2>Meet the team</h2><div class="clinic-team"><div class="clinic-team__card"><div class="clinic-team__initials">EK</div><div class="clinic-team__name">Ellie Knight</div><div class="clinic-team__spec">Specialist Periodontist. Treatment of gum diseases such as periodontitis and peri-implantitis. Periodontal plastic surgery to correct gingival recession. Placement of dental implants for missing teeth or denture stability. Crown lengthening surgery. Orthodontic tooth exposures. Biopsy. Oral hygiene advice and smoking cessation.</div></div><div class="clinic-team__card"><div class="clinic-team__initials">NK</div><div class="clinic-team__name">Nick Knight</div><div class="clinic-team__spec">Specialist Prosthodontist. Replacing missing teeth including dental implants, bridges and dentures. Restoration of teeth with fillings, dental crowns, and bridges. Restoration of severely worn teeth. Aesthetic dental treatment such as veneers and bleaching. Planning and orchestrating complex dental treatment that will involve other specialists.</div></div><div class="clinic-team__card"><div class="clinic-team__initials">NH</div><div class="clinic-team__name">Ness Holmquist</div><div class="clinic-team__spec">Dental Hygienist. Deep scaling and airflow prophylaxis. Intra-oral radiographs. Administration of local anaesthesia if necessary. Tooth whitening. Digital teeth impressions (intra-oral scans). Oral hygiene advice and smoking cessation.</div></div></div>
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="profile-layout" id="profile-content">
+                <div class="no-results"><div class="no-results__icon">&#9203;</div><h3>Loading profile...</h3></div>
             </div>
-            <aside class="clinic-side">
-                <div class="clinic-contact">
-                    <h3>Contact Knight Dental Specialists</h3>
-                    <p style="color:var(--clr-gray-500);font-size:.9rem">Trevian House | Lower Ground Floor/60 Tennyson Street, Central Dunedin, Dunedin 9016, New Zealand</p>
-                    <div class="clinic-contact__btns"><a href="tel:037773990" class="btn btn--outline">&#128222; 03 777 3990</a><a href="http://www.knightdental.co.nz/" target="_blank" rel="noopener" class="btn btn--primary">Visit website &#8599;</a><a href="https://maps.google.com/?cid=2574024117141237694&amp;g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener" class="btn btn--outline">&#128205; Directions</a></div>
-                </div>
-            </aside>
         </div>
     </section>
     <footer class="footer"><div class="container"><div class="footer__copy">Built in New Zealand</div></div></footer>
+    <script>window.__CLINIC_ID__ = 1818;</script>
+    <script src="/assets/js/dentists.js"></script>
+    <script src="/assets/js/supabase.js"></script>
+    <script src="/assets/js/app.js?v=33"></script>
+    <script src="/assets/js/submit.js"></script>
     <script src="/assets/js/feedback.js"></script>
-    <script>document.getElementById('menu-toggle').addEventListener('click',()=>document.getElementById('main-nav').classList.toggle('active'));</script>
 </body>
 </html>

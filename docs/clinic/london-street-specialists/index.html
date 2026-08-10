@@ -13,7 +13,7 @@
     <meta property="og:title" content="London Street Specialists | Dental Compare">
     <meta property="og:description" content="London Street Specialists in Dunedin Central, Dunedin. See services, prices, opening hours and patient reviews — compare with other Dunedin dentists on Denta">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="/assets/css/styles.css?v=12">
+    <link rel="stylesheet" href="/assets/css/styles.css?v=13">
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -62,34 +62,26 @@
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
         </div>
     </header>
-    <section class="hero hero--sm">
+    <section class="profile-hero">
         <div class="container">
-            <a href="/dunedin.html" class="clinic-back">&larr; Back to Otago dentists</a>
-            <h1>London Street Specialists</h1>
-            <p class="clinic-sub"><span class="stars">★★★★</span> <strong>4.1</strong> <span style="color:var(--clr-gray-300)">(13 reviews)</span> &nbsp;&#183;&nbsp; &#128205; Dunedin Central, Dunedin</p>
+            <a href="/" class="profile-hero__back">&larr; Back to listings</a>
+            <h1 id="profile-name">London Street Specialists</h1>
+            <div class="profile-hero__meta" id="profile-meta"></div>
         </div>
     </section>
-    <section class="section" style="padding-top:var(--sp-10)">
-        <div class="container clinic-wrap">
-            <div class="clinic-main">
-                <h2>Services</h2>
-                <div class="clinic-services"><span class="pill pill--sm">General Dentistry</span></div>
-                <h2>Prices</h2>
-                <p style="color:var(--clr-gray-500)">This practice hasn't published prices. <a href="tel:03 477 3123">Call London Street Specialists</a> for a quote.</p>
-                <h2>Opening hours</h2><ul class="clinic-hours"><li><span>Monday</span><span>8:30 AM – 5:00 PM</span></li><li><span>Tuesday</span><span>8:30 AM – 5:00 PM</span></li><li><span>Wednesday</span><span>8:30 AM – 5:00 PM</span></li><li><span>Thursday</span><span>8:30 AM – 5:00 PM</span></li><li><span>Friday</span><span>8:30 AM – 5:00 PM</span></li><li><span>Saturday</span><span>Closed</span></li><li><span>Sunday</span><span>Closed</span></li></ul>
-                <h2>Meet the team</h2><div class="clinic-team"><div class="clinic-team__card"><div class="clinic-team__initials">SS</div><div class="clinic-team__name">Sergio Salis</div><div class="clinic-team__spec">Prosthodontics - aesthetic restoration and replacement of teeth</div></div><div class="clinic-team__card"><div class="clinic-team__initials">CR</div><div class="clinic-team__name">Chris Robertson</div><div class="clinic-team__spec">Orthodontics, obstructive sleep apnoea and sleep disordered breathing</div></div><div class="clinic-team__card"><div class="clinic-team__initials">WD</div><div class="clinic-team__name">Warwick Duncan</div><div class="clinic-team__spec">Periodontics - treatment of gum diseases, dental implants</div></div><div class="clinic-team__card"><div class="clinic-team__initials">AP</div><div class="clinic-team__name">Ajith Polonowita</div><div class="clinic-team__spec">Oral Medicine - diagnosis and medical management of disorders associated with the mouth, face, salivary glands and jaws</div></div><div class="clinic-team__card"><div class="clinic-team__initials">SM</div><div class="clinic-team__name">Sunyoung Ma</div><div class="clinic-team__spec">Prosthodontics - replacement of missing teeth and associated tissues, restoration of natural teeth, removable prosthodontics and dental implants</div></div><div class="clinic-team__card"><div class="clinic-team__initials">TM</div><div class="clinic-team__name">Tino Mercado</div><div class="clinic-team__spec">Periodontics and implant dentistry</div></div></div>
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="profile-layout" id="profile-content">
+                <div class="no-results"><div class="no-results__icon">&#9203;</div><h3>Loading profile...</h3></div>
             </div>
-            <aside class="clinic-side">
-                <div class="clinic-contact">
-                    <h3>Contact London Street Specialists</h3>
-                    <p style="color:var(--clr-gray-500);font-size:.9rem">Vero House 34 London Street, Central Dunedin, Dunedin 9016, New Zealand</p>
-                    <div class="clinic-contact__btns"><a href="tel:034773123" class="btn btn--outline">&#128222; 03 477 3123</a><a href="https://londonst.co.nz/" target="_blank" rel="noopener" class="btn btn--primary">Visit website &#8599;</a><a href="https://maps.google.com/?cid=4186135094953242646&amp;g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener" class="btn btn--outline">&#128205; Directions</a></div>
-                </div>
-            </aside>
         </div>
     </section>
     <footer class="footer"><div class="container"><div class="footer__copy">Built in New Zealand</div></div></footer>
+    <script>window.__CLINIC_ID__ = 1822;</script>
+    <script src="/assets/js/dentists.js"></script>
+    <script src="/assets/js/supabase.js"></script>
+    <script src="/assets/js/app.js?v=33"></script>
+    <script src="/assets/js/submit.js"></script>
     <script src="/assets/js/feedback.js"></script>
-    <script>document.getElementById('menu-toggle').addEventListener('click',()=>document.getElementById('main-nav').classList.toggle('active'));</script>
 </body>
 </html>
