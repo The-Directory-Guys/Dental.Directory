@@ -9,7 +9,6 @@ def q(sql):
         json={'query': sql}, verify=False)
     return r.json()
 
-print('Clinic:', q("SELECT id, name, founded_year FROM dental_clinics WHERE id = 1510"))
+bio = "Ian Rosenberg is a dental surgeon who founded Dental@105 in 1980. With over four decades of experience, he is known for his genuine interest in his patients and his warm, personal approach to care."
 
-# Clear duplicate experience/bio from Ian Rosenberg
-print(q("UPDATE clinic_practitioners SET experience = NULL, bio = NULL WHERE id = 1389 RETURNING id, name, experience, bio"))
+print(q(f"UPDATE clinic_practitioners SET bio = $${bio}$$ WHERE id = 1389 RETURNING id, name, bio"))

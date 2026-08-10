@@ -1895,9 +1895,11 @@ function matchTreatment(raw) {
     // Reviews — dynamic render with sort + curated/all toggle
     const allReviews = dentist.reviews || [];
     const curatedReviews = allReviews.filter(r => r.curated);
-    const curatedRatingReviews = allReviews.filter(r => r.curatedRating);
-    const curatedAvg = curatedRatingReviews.length
-      ? (curatedRatingReviews.reduce((s, r) => s + (r.rating || 0), 0) / curatedRatingReviews.length).toFixed(1)
+    const curatedAvg = curatedReviews.length
+      ? (curatedReviews.reduce((s, r) => s + (r.rating || 0), 0) / curatedReviews.length).toFixed(1)
+      : null;
+    const allAvg = allReviews.length
+      ? (allReviews.reduce((s, r) => s + (r.rating || 0), 0) / allReviews.length).toFixed(1)
       : null;
     let reviewMode = 'curated';
     function parseRelDate(s) {
@@ -2014,7 +2016,7 @@ function matchTreatment(raw) {
     }
     const ratingNote = document.getElementById('curated-rating-note');
     if (ratingNote && curatedAvg) {
-      ratingNote.innerHTML = `Curated average: <strong style="color:var(--clr-navy)">${curatedAvg} ★</strong> based on ${curatedRatingReviews.length} verified reviews`;
+      ratingNote.innerHTML = `Curated average: <strong style="color:var(--clr-navy)">${curatedAvg} ★</strong> based on ${curatedReviews.length} verified reviews`;
       ratingNote.style.display = '';
     }
     renderReviews('newest', '');
@@ -2038,7 +2040,17 @@ function matchTreatment(raw) {
         tabAll.style.fontWeight = mode === 'all' ? '500' : 'normal';
       }
       const ratingNote = document.getElementById('curated-rating-note');
-      if (ratingNote) ratingNote.style.display = mode === 'curated' ? '' : 'none';
+      if (ratingNote) {
+        if (mode === 'curated' && curatedAvg) {
+          ratingNote.innerHTML = `Curated average: <strong style="color:var(--clr-navy)">${curatedAvg} ★</strong> based on ${curatedReviews.length} verified reviews`;
+          ratingNote.style.display = '';
+        } else if (mode === 'all' && allAvg) {
+          ratingNote.innerHTML = `All reviews average: <strong style="color:var(--clr-navy)">${allAvg} ★</strong> based on ${allReviews.length} reviews`;
+          ratingNote.style.display = '';
+        } else {
+          ratingNote.style.display = 'none';
+        }
+      }
       const heading = document.getElementById('reviews-heading');
       if (heading) {
         const count = mode === 'curated' ? curatedReviews.length : allReviews.length;
