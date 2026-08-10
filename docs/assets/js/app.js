@@ -1427,7 +1427,7 @@ function matchTreatment(raw) {
 
   async function initProfile() {
     const params = new URLSearchParams(window.location.search);
-    const id = params.get('id');
+    const id = params.get('id') || (window.__CLINIC_ID__ ? String(window.__CLINIC_ID__) : null);
     const slug = params.get('slug');
     const regionParam = params.get('region');
     let dentist = null;

@@ -13,7 +13,7 @@
     <meta property="og:title" content="David Marriott Dental | Dental Compare">
     <meta property="og:description" content="David Marriott Dental in St Leonards, Hastings. See services, prices, opening hours and patient reviews — compare with other Hastings dentists on Dental Comp">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="/assets/css/styles.css?v=12">
+    <link rel="stylesheet" href="/assets/css/styles.css?v=13">
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -62,34 +62,26 @@
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
         </div>
     </header>
-    <section class="hero hero--sm">
+    <section class="profile-hero">
         <div class="container">
-            <a href="/hawkes-bay.html" class="clinic-back">&larr; Back to Hawke&#x27;s Bay dentists</a>
-            <h1>David Marriott Dental</h1>
-            <p class="clinic-sub"><span class="stars">★★★★★</span> <strong>4.8</strong> <span style="color:var(--clr-gray-300)">(95 reviews)</span> &nbsp;&#183;&nbsp; &#128205; St Leonards, Hastings</p>
+            <a href="/" class="profile-hero__back">&larr; Back to listings</a>
+            <h1 id="profile-name">David Marriott Dental</h1>
+            <div class="profile-hero__meta" id="profile-meta"></div>
         </div>
     </section>
-    <section class="section" style="padding-top:var(--sp-10)">
-        <div class="container clinic-wrap">
-            <div class="clinic-main">
-                <h2>Services</h2>
-                <div class="clinic-services"><span class="pill pill--sm">General Dentistry</span><span class="pill pill--sm">Teen Dental</span><span class="pill pill--sm">Cosmetic</span><span class="pill pill--sm">Dentures</span></div>
-                <h2>Prices</h2>
-                <table class="seo-price-table"><thead><tr><th>Treatment</th><th>Price</th></tr></thead><tbody><tr><td>New patient offer</td><td>Book a New Patient exam scale and polish and receive a FREE electric toothbrush</td></tr><tr><td>Afterpay</td><td>Available</td></tr><tr><td>Credit card</td><td>All major credit and debit cards accepted, no bank surcharges payable</td></tr><tr><td>ACC</td><td>Registered provider of dental services for ACC</td></tr><tr><td>Free teen dental care</td><td>FREE dental care for teenagers under 18 years under Government&#x27;s Oral Health Services for Adolescents scheme</td></tr></tbody></table>
-                <h2>Opening hours</h2><ul class="clinic-hours"><li><span>Monday</span><span>8:00 AM – 5:00 PM</span></li><li><span>Tuesday</span><span>8:00 AM – 5:00 PM</span></li><li><span>Wednesday</span><span>8:00 AM – 5:00 PM</span></li><li><span>Thursday</span><span>8:00 AM – 5:00 PM</span></li><li><span>Friday</span><span>8:00 AM – 5:00 PM</span></li><li><span>Saturday</span><span>Closed</span></li><li><span>Sunday</span><span>Closed</span></li></ul>
-                <h2>Meet the team</h2><div class="clinic-team"><div class="clinic-team__card"><img class="clinic-team__photo" src="https://ankyjpgcocsvvtyyymys.supabase.co/storage/v1/object/public/practitioner-photos/practitioners/david-marriott.jpg" alt="David Marriott" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'clinic-team__initials',textContent:'DM'}))"><div class="clinic-team__name">David Marriott</div><div class="clinic-team__spec">Principal Dentist, Restorative Dentistry</div></div><div class="clinic-team__card"><img class="clinic-team__photo" src="https://ankyjpgcocsvvtyyymys.supabase.co/storage/v1/object/public/practitioner-photos/practitioners/aidan-khoo.jpg" alt="Aidan Khoo" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'clinic-team__initials',textContent:'AK'}))"><div class="clinic-team__name">Aidan Khoo</div><div class="clinic-team__spec">Associate Dentist</div></div></div>
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="profile-layout" id="profile-content">
+                <div class="no-results"><div class="no-results__icon">&#9203;</div><h3>Loading profile...</h3></div>
             </div>
-            <aside class="clinic-side">
-                <div class="clinic-contact">
-                    <h3>Contact David Marriott Dental</h3>
-                    <p style="color:var(--clr-gray-500);font-size:.9rem">300 Southampton Street West, St Leonards, Hastings 4122, New Zealand</p>
-                    <div class="clinic-contact__btns"><a href="tel:068765797" class="btn btn--outline">&#128222; 06 876 5797</a><a href="http://www.davidmarriottdental.co.nz/" target="_blank" rel="noopener" class="btn btn--primary">Visit website &#8599;</a><a href="https://maps.google.com/?cid=3017001541305396071&amp;g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener" class="btn btn--outline">&#128205; Directions</a></div>
-                </div>
-            </aside>
         </div>
     </section>
     <footer class="footer"><div class="container"><div class="footer__copy">Built in New Zealand</div></div></footer>
+    <script>window.__CLINIC_ID__ = 1507;</script>
+    <script src="/assets/js/dentists.js"></script>
+    <script src="/assets/js/supabase.js"></script>
+    <script src="/assets/js/app.js?v=33"></script>
+    <script src="/assets/js/submit.js"></script>
     <script src="/assets/js/feedback.js"></script>
-    <script>document.getElementById('menu-toggle').addEventListener('click',()=>document.getElementById('main-nav').classList.toggle('active'));</script>
 </body>
 </html>

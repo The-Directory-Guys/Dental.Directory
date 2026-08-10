@@ -13,7 +13,7 @@
     <meta property="og:title" content="Lumino Implant Centre | Dental Compare">
     <meta property="og:description" content="Lumino Implant Centre in Remuera, Auckland City. See services, prices, opening hours — compare with other Auckland City dentists on Dental Compare.">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="/assets/css/styles.css?v=12">
+    <link rel="stylesheet" href="/assets/css/styles.css?v=13">
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -57,34 +57,26 @@
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
         </div>
     </header>
-    <section class="hero hero--sm">
+    <section class="profile-hero">
         <div class="container">
-            <a href="/auckland.html" class="clinic-back">&larr; Back to Auckland dentists</a>
-            <h1>Lumino Implant Centre</h1>
-            <p class="clinic-sub"><span style="color:var(--clr-gray-300)">No rating yet</span> &nbsp;&#183;&nbsp; &#128205; Remuera, Auckland City</p>
+            <a href="/" class="profile-hero__back">&larr; Back to listings</a>
+            <h1 id="profile-name">Lumino Implant Centre</h1>
+            <div class="profile-hero__meta" id="profile-meta"></div>
         </div>
     </section>
-    <section class="section" style="padding-top:var(--sp-10)">
-        <div class="container clinic-wrap">
-            <div class="clinic-main">
-                <h2>Services</h2>
-                <div class="clinic-services"><span class="pill pill--sm">General Dentistry</span><span class="pill pill--sm">Dental Implants</span></div>
-                <h2>Prices</h2>
-                <table class="seo-price-table"><thead><tr><th>Treatment</th><th>Price</th></tr></thead><tbody><tr><td>Exam / checkup</td><td>$99</td></tr><tr><td>New patient offer</td><td>$99</td></tr><tr><td>Afterpay</td><td>4 fortnightly interest free payments</td></tr><tr><td>Q Card</td><td>18 months interest free</td></tr><tr><td>ACC</td><td>Registered provider</td></tr><tr><td>WINZ</td><td>Registered provider</td></tr><tr><td>Southern Cross</td><td>Easy-Claim Insurance available, Members Offer</td></tr><tr><td>Free teen dental care</td><td>Available</td></tr><tr><td>SuperGold Card</td><td>Available</td></tr><tr><td>Q Card extended payment option</td><td>36 months interest free</td></tr><tr><td>Implant</td><td>$5,000 to $8,000</td></tr></tbody></table>
-                <h2>Opening hours</h2><ul class="clinic-hours"><li><span>Monday</span><span>8:00 AM – 5:30 PM</span></li><li><span>Tuesday</span><span>7:30 AM – 5:00 PM</span></li><li><span>Wednesday</span><span>7:30 AM – 5:30 PM</span></li><li><span>Thursday</span><span>7:30 AM – 4:00 PM</span></li><li><span>Friday</span><span>7:30 AM – 1:30 PM</span></li><li><span>Saturday</span><span>Closed</span></li><li><span>Sunday</span><span>Closed</span></li></ul>
-                
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="profile-layout" id="profile-content">
+                <div class="no-results"><div class="no-results__icon">&#9203;</div><h3>Loading profile...</h3></div>
             </div>
-            <aside class="clinic-side">
-                <div class="clinic-contact">
-                    <h3>Contact Lumino Implant Centre</h3>
-                    <p style="color:var(--clr-gray-500);font-size:.9rem">Level 1/134 Remuera Road, Remuera, Auckland 1050, New Zealand</p>
-                    <div class="clinic-contact__btns"><a href="tel:093617171" class="btn btn--outline">&#128222; 09 361 7171</a><a href="https://lumino.co.nz/treatments/cosmetic-dental-services/dental-implants/" target="_blank" rel="noopener" class="btn btn--primary">Visit website &#8599;</a><a href="https://maps.google.com/?cid=10581552432790840178&amp;g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener" class="btn btn--outline">&#128205; Directions</a></div>
-                </div>
-            </aside>
         </div>
     </section>
     <footer class="footer"><div class="container"><div class="footer__copy">Built in New Zealand</div></div></footer>
+    <script>window.__CLINIC_ID__ = 2385;</script>
+    <script src="/assets/js/dentists.js"></script>
+    <script src="/assets/js/supabase.js"></script>
+    <script src="/assets/js/app.js?v=33"></script>
+    <script src="/assets/js/submit.js"></script>
     <script src="/assets/js/feedback.js"></script>
-    <script>document.getElementById('menu-toggle').addEventListener('click',()=>document.getElementById('main-nav').classList.toggle('active'));</script>
 </body>
 </html>

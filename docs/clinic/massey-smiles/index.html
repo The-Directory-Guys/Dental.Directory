@@ -13,7 +13,7 @@
     <meta property="og:title" content="Massey Smiles | Dental Compare">
     <meta property="og:description" content="Massey Smiles in Westgate, Waitakere. See services, prices, opening hours and patient reviews — compare with other Waitakere dentists on Dental Compare.">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="/assets/css/styles.css?v=12">
+    <link rel="stylesheet" href="/assets/css/styles.css?v=13">
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -62,34 +62,26 @@
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
         </div>
     </header>
-    <section class="hero hero--sm">
+    <section class="profile-hero">
         <div class="container">
-            <a href="/auckland.html" class="clinic-back">&larr; Back to Auckland dentists</a>
-            <h1>Massey Smiles</h1>
-            <p class="clinic-sub"><span class="stars">★★★★★</span> <strong>4.9</strong> <span style="color:var(--clr-gray-300)">(106 reviews)</span> &nbsp;&#183;&nbsp; &#128205; Westgate, Waitakere</p>
+            <a href="/" class="profile-hero__back">&larr; Back to listings</a>
+            <h1 id="profile-name">Massey Smiles</h1>
+            <div class="profile-hero__meta" id="profile-meta"></div>
         </div>
     </section>
-    <section class="section" style="padding-top:var(--sp-10)">
-        <div class="container clinic-wrap">
-            <div class="clinic-main">
-                <h2>Services</h2>
-                <div class="clinic-services"><span class="pill pill--sm">General Dentistry</span></div>
-                <h2>Prices</h2>
-                <table class="seo-price-table"><thead><tr><th>Treatment</th><th>Price</th></tr></thead><tbody><tr><td>Q Card</td><td>12 months interest free, low setup fee</td></tr><tr><td>Payment plan</td><td>Emergency Dental Care under $500: No interest or fees, 25% deposit required, rest paid over three installments</td></tr><tr><td>ACC</td><td>Registered provider</td></tr><tr><td>WINZ</td><td>Able to provide WINZ quotes</td></tr></tbody></table>
-                <h2>Opening hours</h2><ul class="clinic-hours"><li><span>Monday</span><span>8:00 AM – 5:00 PM</span></li><li><span>Tuesday</span><span>8:00 AM – 5:00 PM</span></li><li><span>Wednesday</span><span>8:00 AM – 7:00 PM</span></li><li><span>Thursday</span><span>8:00 AM – 7:00 PM</span></li><li><span>Friday</span><span>8:00 AM – 5:00 PM</span></li><li><span>Saturday</span><span>8:00 AM – 5:00 PM</span></li><li><span>Sunday</span><span>Closed</span></li></ul>
-                <h2>Meet the team</h2><div class="clinic-team"><div class="clinic-team__card"><img class="clinic-team__photo" src="https://images.squarespace-cdn.com/content/v1/58686f53e3df2818c00fd1a7/1499596386768-0TZ1AMIL32U1QCB5SJZM/andrea-lakeland-femaile-dentist.jpg" alt="Dr Andrea Lakeland" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'clinic-team__initials',textContent:'DA'}))"><div class="clinic-team__name">Dr Andrea Lakeland</div></div><div class="clinic-team__card"><div class="clinic-team__initials">DM</div><div class="clinic-team__name">Dr Mariam Alzaher</div></div><div class="clinic-team__card"><div class="clinic-team__initials">DH</div><div class="clinic-team__name">Dani Hendry</div><div class="clinic-team__spec">Periodontal and dental issues, holistic mouth and body connection</div></div><div class="clinic-team__card"><div class="clinic-team__initials">SY</div><div class="clinic-team__name">Shirley Yeh</div></div><div class="clinic-team__card"><div class="clinic-team__initials">C</div><div class="clinic-team__name">Carly</div></div><div class="clinic-team__card"><div class="clinic-team__initials">L</div><div class="clinic-team__name">Lisa</div></div><div class="clinic-team__card"><div class="clinic-team__initials">M</div><div class="clinic-team__name">Mihinui</div></div></div>
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="profile-layout" id="profile-content">
+                <div class="no-results"><div class="no-results__icon">&#9203;</div><h3>Loading profile...</h3></div>
             </div>
-            <aside class="clinic-side">
-                <div class="clinic-contact">
-                    <h3>Contact Massey Smiles</h3>
-                    <p style="color:var(--clr-gray-500);font-size:.9rem">5/575 Don Buck Road, Westgate, Auckland 0614, New Zealand</p>
-                    <div class="clinic-contact__btns"><a href="tel:098338182" class="btn btn--outline">&#128222; 09 833 8182</a><a href="https://www.massey-smiles.co.nz/" target="_blank" rel="noopener" class="btn btn--primary">Visit website &#8599;</a><a href="https://maps.google.com/?cid=18102432301140855576&amp;g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener" class="btn btn--outline">&#128205; Directions</a></div>
-                </div>
-            </aside>
         </div>
     </section>
     <footer class="footer"><div class="container"><div class="footer__copy">Built in New Zealand</div></div></footer>
+    <script>window.__CLINIC_ID__ = 784;</script>
+    <script src="/assets/js/dentists.js"></script>
+    <script src="/assets/js/supabase.js"></script>
+    <script src="/assets/js/app.js?v=33"></script>
+    <script src="/assets/js/submit.js"></script>
     <script src="/assets/js/feedback.js"></script>
-    <script>document.getElementById('menu-toggle').addEventListener('click',()=>document.getElementById('main-nav').classList.toggle('active'));</script>
 </body>
 </html>

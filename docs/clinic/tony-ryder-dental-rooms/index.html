@@ -13,7 +13,7 @@
     <meta property="og:title" content="Tony Ryder Dental Rooms | Dental Compare">
     <meta property="og:description" content="Tony Ryder Dental Rooms in Dunedin Central, Dunedin. See services, prices, opening hours — compare with other Dunedin dentists on Dental Compare.">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="/assets/css/styles.css?v=12">
+    <link rel="stylesheet" href="/assets/css/styles.css?v=13">
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -57,34 +57,26 @@
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
         </div>
     </header>
-    <section class="hero hero--sm">
+    <section class="profile-hero">
         <div class="container">
-            <a href="/dunedin.html" class="clinic-back">&larr; Back to Otago dentists</a>
-            <h1>Tony Ryder Dental Rooms</h1>
-            <p class="clinic-sub"><span style="color:var(--clr-gray-300)">No rating yet</span> &nbsp;&#183;&nbsp; &#128205; Dunedin Central, Dunedin</p>
+            <a href="/" class="profile-hero__back">&larr; Back to listings</a>
+            <h1 id="profile-name">Tony Ryder Dental Rooms</h1>
+            <div class="profile-hero__meta" id="profile-meta"></div>
         </div>
     </section>
-    <section class="section" style="padding-top:var(--sp-10)">
-        <div class="container clinic-wrap">
-            <div class="clinic-main">
-                <h2>Services</h2>
-                <div class="clinic-services"><span class="pill pill--sm">General Dentistry</span></div>
-                <h2>Prices</h2>
-                <p style="color:var(--clr-gray-500)">This practice hasn't published prices. <a href="tel:(03) 477 8751">Call Tony Ryder Dental Rooms</a> for a quote.</p>
-                
-                
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="profile-layout" id="profile-content">
+                <div class="no-results"><div class="no-results__icon">&#9203;</div><h3>Loading profile...</h3></div>
             </div>
-            <aside class="clinic-side">
-                <div class="clinic-contact">
-                    <h3>Contact Tony Ryder Dental Rooms</h3>
-                    <p style="color:var(--clr-gray-500);font-size:.9rem">4th Floor, Westpac Trust Building, 106 George Street, Dunedin Central, Dunedin 9016, New Zealand</p>
-                    <div class="clinic-contact__btns"><a href="tel:(03)4778751" class="btn btn--outline">&#128222; (03) 477 8751</a><a href="https://www.healthpoint.co.nz/dentistry/general-dentist/ryder-dental-rooms/" target="_blank" rel="noopener" class="btn btn--primary">Visit website &#8599;</a><a href="https://maps.google.com/?cid=2366294769912942694&amp;g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener" class="btn btn--outline">&#128205; Directions</a></div>
-                </div>
-            </aside>
         </div>
     </section>
     <footer class="footer"><div class="container"><div class="footer__copy">Built in New Zealand</div></div></footer>
+    <script>window.__CLINIC_ID__ = 2529;</script>
+    <script src="/assets/js/dentists.js"></script>
+    <script src="/assets/js/supabase.js"></script>
+    <script src="/assets/js/app.js?v=33"></script>
+    <script src="/assets/js/submit.js"></script>
     <script src="/assets/js/feedback.js"></script>
-    <script>document.getElementById('menu-toggle').addEventListener('click',()=>document.getElementById('main-nav').classList.toggle('active'));</script>
 </body>
 </html>

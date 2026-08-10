@@ -13,7 +13,7 @@
     <meta property="og:title" content="Dental Care Centre | Dental Compare">
     <meta property="og:description" content="Dental Care Centre in Gisborne. See services, prices, opening hours and patient reviews — compare with other Gisborne dentists on Dental Compare.">
     <meta property="og:type" content="website">
-    <link rel="stylesheet" href="/assets/css/styles.css?v=12">
+    <link rel="stylesheet" href="/assets/css/styles.css?v=13">
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -62,34 +62,26 @@
             <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
         </div>
     </header>
-    <section class="hero hero--sm">
+    <section class="profile-hero">
         <div class="container">
-            <a href="/gisborne.html" class="clinic-back">&larr; Back to Gisborne dentists</a>
-            <h1>Dental Care Centre</h1>
-            <p class="clinic-sub"><span class="stars">★★★★★</span> <strong>4.8</strong> <span style="color:var(--clr-gray-300)">(168 reviews)</span> &nbsp;&#183;&nbsp; &#128205; Gisborne</p>
+            <a href="/" class="profile-hero__back">&larr; Back to listings</a>
+            <h1 id="profile-name">Dental Care Centre</h1>
+            <div class="profile-hero__meta" id="profile-meta"></div>
         </div>
     </section>
-    <section class="section" style="padding-top:var(--sp-10)">
-        <div class="container clinic-wrap">
-            <div class="clinic-main">
-                <h2>Services</h2>
-                <div class="clinic-services"><span class="pill pill--sm">General Dentistry</span><span class="pill pill--sm">Orthodontics</span><span class="pill pill--sm">Invisalign</span></div>
-                <h2>Prices</h2>
-                <table class="seo-price-table"><thead><tr><th>Treatment</th><th>Price</th></tr></thead><tbody><tr><td>Credit card</td><td>Cash, EFTPOS or Visa accepted</td></tr><tr><td>ACC</td><td>Treatment may be subsidised if accident has affected teeth; dentist will advise on treatment surcharges and apply for approvals on patient&#x27;s behalf</td></tr><tr><td>WINZ</td><td>WINZ quotes provided; Work and Income may be able to help pay towards cost of dental treatment for those on low income or benefit</td></tr><tr><td>Southern Cross</td><td>Easy-claim available for members</td></tr><tr><td>Free teen dental care</td><td>Free dental care provided to children aged 13-18, including annual check and necessary work (excluding orthodontics)</td></tr></tbody></table>
-                <h2>Opening hours</h2><ul class="clinic-hours"><li><span>Monday</span><span>8:30 AM – 5:00 PM</span></li><li><span>Tuesday</span><span>8:30 AM – 5:00 PM</span></li><li><span>Wednesday</span><span>8:30 AM – 5:00 PM</span></li><li><span>Thursday</span><span>8:30 AM – 5:00 PM</span></li><li><span>Friday</span><span>8:30 AM – 4:00 PM</span></li><li><span>Saturday</span><span>Closed</span></li><li><span>Sunday</span><span>Closed</span></li></ul>
-                <h2>Meet the team</h2><div class="clinic-team"><div class="clinic-team__card"><img class="clinic-team__photo" src="https://dentalcarecentre.co.nz/wp-content/uploads/2024/01/Dental-Care-Centre-Dr-Tim.jpg" alt="Tim Amess" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'clinic-team__initials',textContent:'TA'}))"><div class="clinic-team__name">Tim Amess</div><div class="clinic-team__spec">Orthodontics (Progressive Orthodontics Training Programme graduate, Master member of Prime Practice)</div></div><div class="clinic-team__card"><div class="clinic-team__initials">JP</div><div class="clinic-team__name">John Partington</div><div class="clinic-team__spec">General dentistry</div></div><div class="clinic-team__card"><div class="clinic-team__initials">HG</div><div class="clinic-team__name">Hannah Galloway</div><div class="clinic-team__spec">General practice dentistry</div></div><div class="clinic-team__card"><div class="clinic-team__initials">TH</div><div class="clinic-team__name">Tianna Henry</div><div class="clinic-team__spec">Dental Hygienist and Oral Health Therapist; gum health, plaque and tartar removal, gum rejuvenation, sensitivity and gum recession issues</div></div></div>
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="profile-layout" id="profile-content">
+                <div class="no-results"><div class="no-results__icon">&#9203;</div><h3>Loading profile...</h3></div>
             </div>
-            <aside class="clinic-side">
-                <div class="clinic-contact">
-                    <h3>Contact Dental Care Centre</h3>
-                    <p style="color:var(--clr-gray-500);font-size:.9rem">19 Derby Street, Gisborne 4010, New Zealand</p>
-                    <div class="clinic-contact__btns"><a href="tel:068679108" class="btn btn--outline">&#128222; 06 867 9108</a><a href="https://dentalcarecentre.co.nz/" target="_blank" rel="noopener" class="btn btn--primary">Visit website &#8599;</a><a href="https://maps.google.com/?cid=10784187209415179110&amp;g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQQAhgEIAA" target="_blank" rel="noopener" class="btn btn--outline">&#128205; Directions</a></div>
-                </div>
-            </aside>
         </div>
     </section>
     <footer class="footer"><div class="container"><div class="footer__copy">Built in New Zealand</div></div></footer>
+    <script>window.__CLINIC_ID__ = 1484;</script>
+    <script src="/assets/js/dentists.js"></script>
+    <script src="/assets/js/supabase.js"></script>
+    <script src="/assets/js/app.js?v=33"></script>
+    <script src="/assets/js/submit.js"></script>
     <script src="/assets/js/feedback.js"></script>
-    <script>document.getElementById('menu-toggle').addEventListener('click',()=>document.getElementById('main-nav').classList.toggle('active'));</script>
 </body>
 </html>
