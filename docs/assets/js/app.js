@@ -1910,10 +1910,18 @@ function matchTreatment(raw) {
     }
     // Build practitioner name patterns for review → team card linking
     const _practPatterns = [];
+    const _firstNameCount = {};
+    (dentist.practitioners || []).forEach(p => {
+      const fn = p.name.replace(/^Dr\.?\s+/i, '').split(' ')[0].toLowerCase();
+      _firstNameCount[fn] = (_firstNameCount[fn] || 0) + 1;
+    });
     (dentist.practitioners || []).forEach(p => {
       const slug = p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
       const cardId = `team-card-${slug}`;
-      const add = pat => _practPatterns.push({ pat: pat.toLowerCase(), cardId, displayName: p.name });
+      const add = str => {
+        const esc = str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        _practPatterns.push({ pat: new RegExp('\\b' + esc + '\\b', 'i'), cardId, displayName: p.name });
+      };
       add(p.name);
       const noDr = p.name.replace(/^Dr\.?\s+/i, '');
       if (noDr !== p.name) {
@@ -1921,13 +1929,15 @@ function matchTreatment(raw) {
         const parts = noDr.split(' ');
         if (parts.length >= 2) { add('Dr ' + parts[parts.length - 1]); add('Dr. ' + parts[parts.length - 1]); }
       }
+      const firstName = noDr.split(' ')[0];
+      if (firstName && _firstNameCount[firstName.toLowerCase()] === 1) add(firstName);
     });
-    _practPatterns.sort((a, b) => b.pat.length - a.pat.length);
+    _practPatterns.sort((a, b) => b.pat.source.length - a.pat.source.length);
     function findMentions(text) {
-      const low = (text || '').toLowerCase();
+      const t = text || '';
       const found = [], seen = new Set();
       for (const { pat, cardId, displayName } of _practPatterns) {
-        if (!seen.has(cardId) && low.includes(pat)) { found.push({ cardId, displayName }); seen.add(cardId); }
+        if (!seen.has(cardId) && pat.test(t)) { found.push({ cardId, displayName }); seen.add(cardId); }
       }
       return found;
     }
