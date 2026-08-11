@@ -2182,11 +2182,11 @@ h4 {
 }
 
 .photo-lightbox__img {
-    width: min(320px, 70vw);
-    height: min(400px, 80vw);
-    border-radius: 50%;
-    object-fit: contain;
-    object-position: center;
+    width: auto;
+    height: auto;
+    max-width: min(400px, 88vw);
+    max-height: 80vh;
+    border-radius: 8px;
     box-shadow: 0 8px 40px rgba(0, 0, 0, .6);
     display: block;
 }
