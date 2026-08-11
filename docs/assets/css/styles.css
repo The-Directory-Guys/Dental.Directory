@@ -1131,7 +1131,7 @@ h4 {
 /* Listings search */
 .listings-search {
     display: flex;
-    margin-bottom: var(--sp-6);
+    margin-bottom: var(--sp-2);
 }
 
 .listings-search input {

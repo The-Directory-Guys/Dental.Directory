@@ -484,6 +484,8 @@ function matchTreatment(raw) {
     let activeSpecialties = [];
     let activeAmenities = [];
     let minExperience = 0;
+    let searchMode = 'clinic'; // 'clinic' | 'practitioner'
+    let minReviews = 0;
     let showFavouritesOnly = false;
     let showOpenOnly = false;
     let _favs = getFavourites();
@@ -609,12 +611,17 @@ function matchTreatment(raw) {
           return (SERVICE_ALIASES[s] || [s]).some(a => d.services.includes(a));
         })) return false;
         if (minRating > 0 && (d.rating == null || d.rating < minRating)) return false;
+        if (minReviews > 0 && (d.reviewCount || 0) < minReviews) return false;
         if (searchQuery) {
           const q = searchQuery.toLowerCase();
-          const matchesName = d.name.toLowerCase().includes(q);
-          const matchesService = d.services.some(s => s.toLowerCase().includes(q));
-          const matchesPractitioner = (d.practitionerNames || []).some(n => n.toLowerCase().includes(q));
-          if (!matchesName && !matchesService && !matchesPractitioner) return false;
+          if (searchMode === 'practitioner') {
+            if (!(d.practitionerNames || []).some(n => n.toLowerCase().includes(q))) return false;
+          } else {
+            const matchesName = d.name.toLowerCase().includes(q);
+            const matchesService = d.services.some(s => s.toLowerCase().includes(q));
+            const matchesPractitioner = (d.practitionerNames || []).some(n => n.toLowerCase().includes(q));
+            if (!matchesName && !matchesService && !matchesPractitioner) return false;
+          }
         }
         const price = getCheckupPrice(d);
         if (price !== null && maxPrice !== Infinity && price > maxPrice) return false;
@@ -667,11 +674,13 @@ function matchTreatment(raw) {
           if (showOpenOnly) activeLabels.push('Open now');
           activeSpecialties.forEach(s => activeLabels.push(s));
           activeAmenities.forEach(a => activeLabels.push(a.replace(/_/g, ' ')));
-          if (searchQuery) activeLabels.push(`"${searchQuery}"`);
+          if (searchQuery && searchMode === 'practitioner') activeLabels.push(`practitioner "${searchQuery}"`);
+          else if (searchQuery) activeLabels.push(`"${searchQuery}"`);
           activeServices.forEach(s => activeLabels.push(s));
           activeLanguages.forEach(l => activeLabels.push(l));
           activeSuburbs.forEach(s => activeLabels.push(s));
           if (minRating > 0) activeLabels.push(`★ ${minRating.toFixed(1)}+`);
+          if (minReviews > 0) activeLabels.push(`${minReviews}+ reviews`);
           if (maxPrice !== Infinity) activeLabels.push(`under $${maxPrice}`);
           if (maxHygienistPrice !== Infinity) activeLabels.push(`hygienist under $${maxHygienistPrice}`);
 
@@ -765,6 +774,18 @@ function matchTreatment(raw) {
       activeSpecialties = [];
       activeAmenities = [];
       minExperience = 0;
+      searchMode = 'clinic';
+      minReviews = 0;
+      document.querySelectorAll('.search-mode-btn').forEach(btn => {
+        btn.classList.toggle('search-mode-btn--active', btn.dataset.mode === 'clinic');
+      });
+      const _ph = 'Search clinics & services...';
+      document.querySelectorAll('#listings-search, #mobile-listings-search').forEach(el => { if (el) el.placeholder = _ph; });
+      document.querySelectorAll('.filter-min-reviews-slider').forEach(s => {
+        s.value = '0';
+        const val = s.closest('[data-filter="min-reviews"]')?.querySelector('.filter-min-reviews-val');
+        if (val) val.textContent = 'Any';
+      });
       showFavouritesOnly = false;
       showOpenOnly = false;
       updateFavToggle();
@@ -919,11 +940,12 @@ function matchTreatment(raw) {
     if (desktopRatingSlider) desktopRatingSlider.addEventListener('input', (e) => updateRatingSlider(e.target.value));
     if (mobileRatingSlider) mobileRatingSlider.addEventListener('input', (e) => updateRatingSlider(e.target.value));
 
-    // Search
-    const searchInput = document.getElementById('listings-search');
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        const raw = e.target.value;
+    // Search — shared handler used by both desktop and mobile inputs
+    function handleSearchInput(raw) {
+      if (searchMode === 'practitioner') {
+        activeTreatmentPriceType = null;
+        searchQuery = raw;
+      } else {
         const treatment = matchTreatment(raw);
         if (treatment) {
           document.querySelectorAll(`.filter-service[value="${treatment.service}"]`).forEach(cb => { cb.checked = true; });
@@ -934,8 +956,22 @@ function matchTreatment(raw) {
           activeTreatmentPriceType = null;
           searchQuery = raw;
         }
-        renderWithReset();
+      }
+      renderWithReset();
+    }
+
+    function updateSearchModeUI() {
+      document.querySelectorAll('.search-mode-btn').forEach(btn => {
+        btn.classList.toggle('search-mode-btn--active', btn.dataset.mode === searchMode);
       });
+      const ph = searchMode === 'practitioner' ? 'Search by practitioner name...' : 'Search clinics & services...';
+      document.querySelectorAll('#listings-search, #mobile-listings-search').forEach(el => { if (el) el.placeholder = ph; });
+    }
+
+    const searchInput = document.getElementById('listings-search');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => handleSearchInput(e.target.value));
+
       // Pre-fill from ?q= URL param (passed by home page search)
       const urlQ = new URLSearchParams(window.location.search).get('q');
       if (urlQ) {
@@ -960,6 +996,64 @@ function matchTreatment(raw) {
             searchQuery = urlQ;
           }
         }
+      }
+
+      // Inject Clinics / Practitioners toggle below search input (desktop sidebar)
+      const searchWrapper = searchInput.closest('.filter-group');
+      if (searchWrapper && !searchWrapper.querySelector('.search-mode-toggle')) {
+        searchWrapper.insertAdjacentHTML('beforeend', `
+          <div class="search-mode-toggle">
+            <button class="search-mode-btn search-mode-btn--active" data-mode="clinic" type="button">Clinics</button>
+            <button class="search-mode-btn" data-mode="practitioner" type="button">Practitioners</button>
+          </div>`);
+      }
+
+      // Inject search + toggle at top of mobile filter drawer
+      const mobileDrawer = document.querySelector('.filter-drawer');
+      if (mobileDrawer && !mobileDrawer.querySelector('[data-filter="search"]')) {
+        const drawerHeader = mobileDrawer.querySelector('.filter-drawer__header');
+        const mobileSearchHTML = `
+          <div class="filter-group" data-filter="search">
+            <div class="filter-group__label">Search</div>
+            <div class="listings-search">
+              <input type="text" id="mobile-listings-search" placeholder="Search clinics &amp; services...">
+            </div>
+            <div class="search-mode-toggle">
+              <button class="search-mode-btn search-mode-btn--active" data-mode="clinic" type="button">Clinics</button>
+              <button class="search-mode-btn" data-mode="practitioner" type="button">Practitioners</button>
+            </div>
+          </div>`;
+        if (drawerHeader) drawerHeader.insertAdjacentHTML('afterend', mobileSearchHTML);
+        else mobileDrawer.insertAdjacentHTML('afterbegin', mobileSearchHTML);
+
+        const mobileSearchInput = document.getElementById('mobile-listings-search');
+        if (mobileSearchInput) {
+          mobileSearchInput.addEventListener('input', (e) => {
+            if (searchInput) searchInput.value = e.target.value;
+            handleSearchInput(e.target.value);
+          });
+        }
+      }
+
+      // Wire all mode toggle buttons (desktop + mobile)
+      document.querySelectorAll('.search-mode-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          searchMode = btn.dataset.mode;
+          updateSearchModeUI();
+          if (searchQuery) renderWithReset();
+        });
+      });
+
+      // Inject toggle CSS once
+      if (!document.getElementById('search-toggle-css')) {
+        const s = document.createElement('style');
+        s.id = 'search-toggle-css';
+        s.textContent = [
+          '.search-mode-toggle{display:flex;gap:4px;margin-top:8px;}',
+          '.search-mode-btn{flex:1;padding:4px 10px;font-size:.78rem;border:1.5px solid var(--clr-gray-300,#d1d5db);border-radius:999px;background:transparent;color:var(--clr-gray-500,#6b7280);cursor:pointer;transition:all .15s;line-height:1.4;}',
+          '.search-mode-btn--active{background:var(--clr-navy,#1a3c5e);border-color:var(--clr-navy,#1a3c5e);color:#fff;}',
+        ].join('');
+        document.head.appendChild(s);
       }
     }
 
@@ -1065,8 +1159,22 @@ function matchTreatment(raw) {
     buildAmenitiesFilter(allDentists);
     buildExperienceFilter(allDentists);
     buildLanguageFilters(allDentists);
+    buildMinReviewsFilter(allDentists);
     addFilterInfoButtons();
     addApplyFilterButton();
+
+    // Min reviews slider events (injected by buildMinReviewsFilter)
+    document.querySelectorAll('.filter-min-reviews-slider').forEach(slider => {
+      slider.addEventListener('input', () => {
+        minReviews = parseInt(slider.value, 10);
+        document.querySelectorAll('.filter-min-reviews-slider').forEach(s => {
+          s.value = slider.value;
+          const val = s.closest('[data-filter="min-reviews"]')?.querySelector('.filter-min-reviews-val');
+          if (val) val.textContent = slider.value === '0' ? 'Any' : slider.value + '+';
+        });
+        renderWithReset();
+      });
+    });
 
     // Suburb filters (injected dynamically by buildSuburbFilters)
     document.querySelectorAll('.filter-suburb').forEach(cb => {
@@ -1173,6 +1281,29 @@ function matchTreatment(raw) {
     document.querySelectorAll('.sidebar, .filter-drawer').forEach(container => {
       if (container.querySelector('[data-filter="experience"]')) return;
       container.insertAdjacentHTML('beforeend', groupHTML);
+    });
+  }
+
+  function buildMinReviewsFilter(allDentists) {
+    const maxR = Math.max(0, ...allDentists.map(d => d.reviewCount || 0));
+    if (maxR < 10) return;
+    const cap = maxR >= 200 ? 200 : maxR >= 100 ? 100 : 50;
+    const step = cap >= 100 ? 10 : 5;
+
+    const groupHTML = `
+      <div class="filter-group" data-filter="min-reviews">
+        <div class="filter-group__label">Min Reviews <span class="filter-min-reviews-val">Any</span></div>
+        <input type="range" class="filter-min-reviews-slider" min="0" max="${cap}" step="${step}" value="0">
+        <div class="filter-exp-ticks"><span>Any</span><span>${Math.round(cap / 2)}+</span><span>${cap}+</span></div>
+      </div>`;
+
+    document.querySelectorAll('.sidebar, .filter-drawer').forEach(container => {
+      if (container.querySelector('[data-filter="min-reviews"]')) return;
+      // Insert after the rating group
+      const ratingInput = container.querySelector('.rating-range');
+      const ratingGroup = ratingInput?.closest('.filter-group');
+      if (ratingGroup) ratingGroup.insertAdjacentHTML('afterend', groupHTML);
+      else container.insertAdjacentHTML('beforeend', groupHTML);
     });
   }
 
@@ -1772,6 +1903,16 @@ function matchTreatment(raw) {
       }
     }
 
+    // Compute review sets before building HTML so heading count is always correct
+    const allReviews = dentist.reviews || [];
+    const curatedReviews = allReviews.filter(r => r.curated);
+    const curatedAvg = curatedReviews.length
+      ? (curatedReviews.reduce((s, r) => s + (r.rating || 0), 0) / curatedReviews.length).toFixed(1)
+      : null;
+    const allAvg = allReviews.length
+      ? (allReviews.reduce((s, r) => s + (r.rating || 0), 0) / allReviews.length).toFixed(1)
+      : null;
+    const _initReviewHeading = curatedReviews.length ? `Reviews (${curatedReviews.length})` : (dentist.reviewCount ? `Reviews (${dentist.reviewCount})` : 'Reviews');
     profileContainer.innerHTML = `
       <div class="profile-main">
         ${dentist.description ? `
@@ -1801,7 +1942,7 @@ function matchTreatment(raw) {
 
         <div class="profile-section profile-section--reviews">
           <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;">
-            <h2 id="reviews-heading" class="profile-section__title" style="margin-bottom:0;">Reviews${dentist.reviewCount ? ` (${dentist.reviewCount})` : ''}</h2>
+            <h2 id="reviews-heading" class="profile-section__title" style="margin-bottom:0;">${_initReviewHeading}</h2>
             <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;">
               ${(dentist.reviews || []).length > 1 ? `
               <div style="display:flex;align-items:center;gap:.4rem;">
@@ -1912,14 +2053,6 @@ function matchTreatment(raw) {
     }
 
     // Reviews — dynamic render with sort + curated/all toggle
-    const allReviews = dentist.reviews || [];
-    const curatedReviews = allReviews.filter(r => r.curated);
-    const curatedAvg = curatedReviews.length
-      ? (curatedReviews.reduce((s, r) => s + (r.rating || 0), 0) / curatedReviews.length).toFixed(1)
-      : null;
-    const allAvg = allReviews.length
-      ? (allReviews.reduce((s, r) => s + (r.rating || 0), 0) / allReviews.length).toFixed(1)
-      : null;
     let reviewMode = 'curated';
     function parseRelDate(s) {
       if (!s) return 0;
@@ -1930,11 +2063,35 @@ function matchTreatment(raw) {
       return -(n * mult);
     }
     // Build practitioner name patterns for review → team card linking
+    const _nicknames = {
+      'andrew': ['andy'], 'william': ['will', 'bill'], 'robert': ['rob', 'bob'],
+      'michael': ['mike', 'mick'], 'james': ['jim'], 'david': ['dave'],
+      'christopher': ['chris'], 'nicholas': ['nick'], 'jonathan': ['jon', 'jono'],
+      'thomas': ['tom'], 'stephen': ['steve'], 'steven': ['steve'],
+      'timothy': ['tim'], 'benjamin': ['ben'], 'philip': ['phil'], 'phillip': ['phil'],
+      'peter': ['pete'], 'richard': ['rick'], 'gregory': ['greg'],
+      'alexander': ['alex'], 'edward': ['ed', 'eddie', 'ted'], 'anthony': ['tony'],
+      'joseph': ['joe'], 'charles': ['charlie'], 'daniel': ['dan', 'danny'],
+      'katherine': ['kate', 'kathy'], 'catherine': ['kate', 'kathy', 'cathy'],
+      'elizabeth': ['liz', 'beth', 'lizzie'], 'margaret': ['maggie', 'meg'],
+      'patricia': ['pat', 'trish'], 'jacqueline': ['jackie', 'jacqui'],
+      'victoria': ['vicky'], 'deborah': ['deb', 'debbie'], 'debra': ['deb', 'debbie'],
+      'samantha': ['sam'], 'jennifer': ['jen', 'jenny'], 'joanna': ['jo'], 'joanne': ['jo'],
+      'stephanie': ['steph'], 'rebecca': ['becca', 'becky'], 'susan': ['sue'],
+      'alexandra': ['alex'], 'natalie': ['nat'], 'josephine': ['jo', 'josie'],
+      'barbara': ['barb'], 'dorothy': ['dot'], 'rosemary': ['rosie'],
+      'genevieve': ['gen'], 'amanda': ['mandy'],
+    };
     const _practPatterns = [];
     const _firstNameCount = {};
+    const _nicknameCount = {};
     (dentist.practitioners || []).forEach(p => {
-      const fn = p.name.replace(/^Dr\.?\s+/i, '').split(' ')[0].toLowerCase();
+      const noDr = p.name.replace(/^Dr\.?\s+/i, '');
+      const fn = noDr.split(' ')[0].toLowerCase();
       _firstNameCount[fn] = (_firstNameCount[fn] || 0) + 1;
+      for (const nick of (_nicknames[fn] || [])) {
+        _nicknameCount[nick] = (_nicknameCount[nick] || 0) + 1;
+      }
     });
     (dentist.practitioners || []).forEach(p => {
       const slug = p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
@@ -1952,6 +2109,12 @@ function matchTreatment(raw) {
       }
       const firstName = noDr.split(' ')[0];
       if (firstName && _firstNameCount[firstName.toLowerCase()] === 1) add(firstName);
+      // Add nickname variants (e.g. Andrew → Andy Parton, and Andy if unique)
+      const lastName = noDr.split(' ').slice(1).join(' ');
+      for (const nick of (_nicknames[firstName.toLowerCase()] || [])) {
+        if (lastName) add(nick + ' ' + lastName);
+        if (_nicknameCount[nick] === 1) add(nick);
+      }
     });
     _practPatterns.sort((a, b) => b.pat.source.length - a.pat.source.length);
     function findMentions(text) {
@@ -2087,6 +2250,7 @@ function matchTreatment(raw) {
       reviewSearchEl.addEventListener('search', refreshReviews); // fires when × is clicked
       reviewSearchEl.addEventListener('keyup', refreshReviews);  // fallback for any missed input events
     }
+    setReviewTab('curated');
 
     // Photo lightbox
     const teamList = document.querySelector('.team-list');

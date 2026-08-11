@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -8,7 +8,7 @@
     <title>Dentists Near Me | Dental Compare</title>
     <meta name="description" content="Find dental practices near your location in New Zealand.">
     <link rel="canonical" href="https://dentalcompare.co.nz/nearby.html">
-    <link rel="stylesheet" href="assets/css/styles.css?v=13">
+    <link rel="stylesheet" href="assets/css/styles.css?v=14">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4J758VJQVX"></script>
     <script>
@@ -48,7 +48,7 @@
                 <a href="/#locations" class="nav__link">All Regions</a>
                 <a href="compare.html" class="nav__link">Compare</a>
                 <div class="nav__more">
-                    <button class="nav__more-btn" aria-haspopup="true">More ▾</button>
+                    <button class="nav__more-btn" aria-haspopup="true">More â–¾</button>
                     <div class="nav__more-menu">
                         <a href="/" class="nav__link">Home</a>
                         <a href="saved.html" class="nav__link">Saved</a>
@@ -86,7 +86,7 @@
 
     <!-- Mobile Filter Button -->
     <div class="container" style="padding-top: 1.5rem;">
-        <button class="btn btn--outline mobile-filter-btn" id="mobile-filter-btn" style="display:none;">☰ Filters</button>
+        <button class="btn btn--outline mobile-filter-btn" id="mobile-filter-btn" style="display:none;">â˜° Filters</button>
     </div>
 
     <!-- Mobile Filter Overlay + Drawer -->
@@ -94,7 +94,7 @@
     <div class="filter-drawer" id="filter-drawer">
         <div class="filter-drawer__header">
             <h3>Filters</h3>
-            <button class="filter-drawer__close" id="filter-drawer-close">✕</button>
+            <button class="filter-drawer__close" id="filter-drawer-close">âœ•</button>
         </div>
         
 <div class="filter-group">
@@ -104,7 +104,7 @@
                 <div class="price-slider__labels">
                     <span>Any</span>
                     <span class="price-slider__value" id="mobile-rating-value">Any</span>
-                    <span>★ 5.0</span>
+                    <span>â˜… 5.0</span>
                 </div>
             </div>
         </div><div class="filter-group">
@@ -168,7 +168,7 @@
 
                 <!-- Desktop Sidebar -->
                 <aside class="sidebar">
-                    <div class="sidebar__title">☰ Filters</div>
+                    <div class="sidebar__title">â˜° Filters</div>
 
                     <div class="filter-group">
                         <div class="filter-group__label">Search</div>
@@ -183,7 +183,7 @@
                             <div class="price-slider__labels">
                                 <span>Any</span>
                                 <span class="price-slider__value" id="desktop-rating-value">Any</span>
-                                <span>★ 5.0</span>
+                                <span>â˜… 5.0</span>
                             </div>
                         </div>
                     </div>
@@ -243,7 +243,7 @@
                 <!-- Listings -->
                 <main>
                     <div id="ors-notice" style="display:none; background:#fef3c7; border:1px solid #fde68a; border-radius:8px; padding:.625rem 1rem; margin-bottom:1rem; font-size:.85rem; color:#92400e;">
-                      ⚠️ Driving distances have hit their daily limit — showing straight-line distances instead.
+                      âš ï¸ Driving distances have hit their daily limit â€” showing straight-line distances instead.
                     </div>
                     <div id="nearby-map"></div>
                     <div class="listings-header">
@@ -254,7 +254,7 @@
                             <option value="rating">Sort by: Rating</option>
                             <option value="reviews">Sort by: Most Reviews</option>
                             <option value="price">Sort by: Lowest Price</option>
-                            <option value="name">Sort by: Name A–Z</option>
+                            <option value="name">Sort by: Name Aâ€“Z</option>
                         </select>
                     </div>
                     <div class="dentist-grid" id="nearby-grid"></div>
@@ -293,7 +293,7 @@
         let map, clinicMarkers = [], radiusCircle, userMarker;
         let activeServices = [], activeSuburbs = [], minRating = 0, maxPrice = Infinity, maxHygienistPrice = Infinity;
         let activeTreatmentPriceType = null;
-        let drivingDistances = null; // clinic id → driving km; null = not yet fetched
+        let drivingDistances = null; // clinic id â†’ driving km; null = not yet fetched
         let orsRateLimited = false;
 
         const params = new URLSearchParams(window.location.search);
@@ -359,7 +359,7 @@
 
         function starsHTML(rating) {
           const full = Math.floor(rating), half = rating % 1 >= 0.5 ? 1 : 0;
-          return '★'.repeat(full) + (half ? '★' : '') + '☆'.repeat(5 - full - half);
+          return 'â˜…'.repeat(full) + (half ? 'â˜…' : '') + 'â˜†'.repeat(5 - full - half);
         }
 
         function getCheckupPrice(d) {
@@ -389,7 +389,7 @@
           const initials = d.name.split(' ').filter(w => w).map(w => w[0]).join('').slice(0,2).toUpperCase();
           const pills = (d.services||[]).slice(0,4).map(s=>`<span class="pill pill--sm">${s}</span>`).join('');
           const rating = d.rating ? `<span class="stars">${starsHTML(d.rating)}</span> <strong>${d.rating}</strong>` : '<span style="color:var(--clr-gray-400)">No rating yet</span>';
-          const reviews = d.reviewCount ? `💬 ${d.reviewCount} review${d.reviewCount === 1 ? '' : 's'}` : '';
+          const reviews = d.reviewCount ? `ðŸ’¬ ${d.reviewCount} review${d.reviewCount === 1 ? '' : 's'}` : '';
           const loc = d.suburb ? `${d.suburb}, ${d.region}` : d.region;
           const link = `dentist.html?id=${d.id}&region=${encodeURIComponent(d.region||'')}`;
           const checkupP = getCheckupPrice(d);
@@ -411,7 +411,7 @@
                 </h3>
                 <div class="dentist-card__meta">
                   <span class="dentist-card__meta-item">${rating}</span>
-                  <span class="dentist-card__meta-item">📍 ${loc}</span>
+                  <span class="dentist-card__meta-item">ðŸ“ ${loc}</span>
                   ${reviews ? `<span class="dentist-card__meta-item">${reviews}</span>` : ''}
                 </div>
                 ${pills ? `<div class="dentist-card__services">${pills}</div>` : ''}
@@ -453,7 +453,7 @@
         function initMap() {
           map = L.map('nearby-map').setView([userLat, userLng], 13);
           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            attribution: 'Â© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             maxZoom: 19
           }).addTo(map);
           setUserMarker(userLat, userLng);
@@ -501,10 +501,10 @@
             const link = `dentist.html?id=${c.id}&region=${encodeURIComponent(c.region||'')}`;
             const popup = `<div style="min-width:150px;line-height:1.6;">
               <strong style="font-size:.88rem;">${c.name}</strong><br>
-              <span style="font-size:.76rem;color:#6b7280;">📍 ${c.suburb||c.region}</span><br>
-              ${c.rating ? `<span style="font-size:.76rem;color:#f59e0b;">★ ${c.rating}</span><br>` : ''}
+              <span style="font-size:.76rem;color:#6b7280;">ðŸ“ ${c.suburb||c.region}</span><br>
+              ${c.rating ? `<span style="font-size:.76rem;color:#f59e0b;">â˜… ${c.rating}</span><br>` : ''}
               <span style="font-size:.76rem;color:#0d9488;font-weight:600;">${c.distKm.toFixed(1)} km${c.isDriving ? ' by road' : ''} away</span><br>
-              <a href="${link}" style="font-size:.76rem;color:#2563eb;">View Profile →</a>
+              <a href="${link}" style="font-size:.76rem;color:#2563eb;">View Profile â†’</a>
             </div>`;
             clinicMarkers.push(L.marker([c.lat, c.lng], { icon }).addTo(map).bindPopup(popup));
           });
@@ -546,7 +546,7 @@
             return true;
           });
 
-          // Sort — price-boost takes precedence when a priceable treatment alias is active
+          // Sort â€” price-boost takes precedence when a priceable treatment alias is active
           if (activeTreatmentPriceType === 'checkup') {
             filtered.sort((a, b) => {
               const pa = getCheckupPrice(a), pb = getCheckupPrice(b);
@@ -718,7 +718,7 @@
           document.querySelectorAll('.rating-range').forEach(el => {
             el.addEventListener('input', e => {
               minRating = parseFloat(e.target.value);
-              const label = minRating === 0 ? 'Any' : `★ ${minRating.toFixed(1)}+`;
+              const label = minRating === 0 ? 'Any' : `â˜… ${minRating.toFixed(1)}+`;
               document.querySelectorAll('.price-slider__value').forEach(el2 => {
                 if (el2.id.includes('rating')) el2.textContent = label;
               });
