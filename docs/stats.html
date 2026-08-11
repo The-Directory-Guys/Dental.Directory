@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,7 +7,7 @@
   <title>Stats | Dental Compare</title>
   <link rel="stylesheet" href="assets/css/styles.css?v=14">
   <style>
-    /* â”€â”€ Dashboard shell â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── Dashboard shell ─────────────────────────────────── */
     #dashboard { display: none; }
     .dash-header {
       background: #0c1f2e; color: #fff;
@@ -33,13 +33,13 @@
     }
     .dash-header__logout:hover { border-color: rgba(255,255,255,.5); color: #fff; }
 
-    /* â”€â”€ Main container â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── Main container ──────────────────────────────────── */
     .dash-main {
       max-width: 1120px; margin: 0 auto;
       padding: 2rem 1.5rem 4rem;
     }
 
-    /* â”€â”€ Metric strip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── Metric strip ────────────────────────────────────── */
     .metric-strip {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -65,7 +65,7 @@
       font-size: .75rem; color: #a0aec0; margin-top: .3rem;
     }
 
-    /* â”€â”€ Sections â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── Sections ────────────────────────────────────────── */
     .dash-section { margin-bottom: 2.5rem; }
     .dash-section__head {
       font-size: .68rem; font-weight: 700;
@@ -81,7 +81,7 @@
       color: #334155; margin-bottom: .75rem;
     }
 
-    /* â”€â”€ Tables â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── Tables ──────────────────────────────────────────── */
     .dt { width: 100%; border-collapse: collapse; font-size: .855rem; }
     .dt th {
       text-align: left; padding: .45rem .8rem;
@@ -107,7 +107,7 @@
       font-style: italic; padding: 2rem;
     }
 
-    /* â”€â”€ Coverage bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── Coverage bar ────────────────────────────────────── */
     .cov-cell { display: flex; align-items: center; gap: .6rem; }
     .cov-track {
       background: #f1f5f9; border-radius: 99px;
@@ -124,7 +124,7 @@
     .badge--mid   { background: #fef3c7; color: #b45309; }
     .badge--low   { background: #fee2e2; color: #b91c1c; }
 
-    /* â”€â”€ Histogram â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── Histogram ───────────────────────────────────────── */
     .hist-wrap { padding: .5rem 0 0; }
     .hist-bars {
       display: flex; align-items: flex-end;
@@ -140,7 +140,7 @@
     .hist-row-labels { display: flex; gap: 6px; }
     .hist-lbl { flex: 1; text-align: center; font-size: .62rem; color: #a0aec0; }
 
-    /* â”€â”€ Responsive â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    /* ── Responsive ──────────────────────────────────────── */
     @media (max-width: 700px) {
       .metric-strip { grid-template-columns: 1fr 1fr; }
       .two-col { grid-template-columns: 1fr; }
@@ -160,15 +160,15 @@
 </head>
 <body>
 
-<!-- Gate removed â€” auth handled by DCAuth in script below -->
+<!-- Gate removed — auth handled by DCAuth in script below -->
 
-<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• DASHBOARD â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- ════════════════ DASHBOARD ════════════════ -->
 <div id="dashboard">
 
   <header class="dash-header">
     <img src="assets/images/logo.png" alt="Dental Compare">
     <span class="dash-header__label">Dental Compare</span>
-    <span class="dash-header__sep">Â·</span>
+    <span class="dash-header__sep">·</span>
     <span class="dash-header__title">Stats Dashboard</span>
     <span class="dash-header__time" id="dash-time"></span>
     <button class="dash-header__logout" onclick="logout()">Sign out</button>
@@ -183,22 +183,22 @@
     <div class="metric-strip">
       <div class="metric-card">
         <div class="metric-card__label">Total Clinics</div>
-        <div class="metric-card__value" id="m-total">â€”</div>
+        <div class="metric-card__value" id="m-total">—</div>
         <div class="metric-card__sub">operational</div>
       </div>
       <div class="metric-card">
         <div class="metric-card__label">With Checkup Price</div>
-        <div class="metric-card__value" id="m-priced">â€”</div>
+        <div class="metric-card__value" id="m-priced">—</div>
         <div class="metric-card__sub">unique clinics</div>
       </div>
       <div class="metric-card">
         <div class="metric-card__label">Overall Coverage</div>
-        <div class="metric-card__value" id="m-coverage">â€”</div>
+        <div class="metric-card__value" id="m-coverage">—</div>
         <div class="metric-card__sub">of all clinics</div>
       </div>
       <div class="metric-card">
         <div class="metric-card__label">NZ Average Checkup</div>
-        <div class="metric-card__value" id="m-avg">â€”</div>
+        <div class="metric-card__value" id="m-avg">—</div>
         <div class="metric-card__sub" id="m-avg-sub">across all regions</div>
       </div>
     </div>
@@ -212,16 +212,16 @@
           <div class="dt--scroll">
             <table class="dt" id="tbl-regions">
               <thead><tr><th>Region</th><th>Avg</th><th>Clinics</th></tr></thead>
-              <tbody><tr class="loading-state"><td colspan="3">Loadingâ€¦</td></tr></tbody>
+              <tbody><tr class="loading-state"><td colspan="3">Loading…</td></tr></tbody>
             </table>
           </div>
         </div>
         <div>
-          <div class="col-label">By City <span style="font-weight:400;color:#a0aec0">(â‰¥ 2 clinics)</span></div>
+          <div class="col-label">By City <span style="font-weight:400;color:#a0aec0">(≥ 2 clinics)</span></div>
           <div class="dt--scroll">
             <table class="dt" id="tbl-cities">
               <thead><tr><th>City</th><th>Avg</th><th>Clinics</th></tr></thead>
-              <tbody><tr class="loading-state"><td colspan="3">Loadingâ€¦</td></tr></tbody>
+              <tbody><tr class="loading-state"><td colspan="3">Loading…</td></tr></tbody>
             </table>
           </div>
         </div>
@@ -234,7 +234,7 @@
       <div class="dt--scroll">
         <table class="dt" id="tbl-coverage">
           <thead><tr><th>Region</th><th>Total Clinics</th><th>With Price</th><th>Coverage</th><th>Status</th></tr></thead>
-          <tbody><tr class="loading-state"><td colspan="5">Loadingâ€¦</td></tr></tbody>
+          <tbody><tr class="loading-state"><td colspan="5">Loading…</td></tr></tbody>
         </table>
       </div>
     </div>
@@ -250,14 +250,14 @@
 
     <!-- Extremes -->
     <div class="dash-section">
-      <div class="dash-section__head">Extremes â€” Checkup Price</div>
+      <div class="dash-section__head">Extremes — Checkup Price</div>
       <div class="two-col">
         <div>
           <div class="col-label" style="color:#15803d">5 Cheapest</div>
           <div class="dt--scroll">
             <table class="dt" id="tbl-cheapest">
               <thead><tr><th>#</th><th>Clinic</th><th>City</th><th>Price</th></tr></thead>
-              <tbody><tr class="loading-state"><td colspan="4">Loadingâ€¦</td></tr></tbody>
+              <tbody><tr class="loading-state"><td colspan="4">Loading…</td></tr></tbody>
             </table>
           </div>
         </div>
@@ -266,7 +266,7 @@
           <div class="dt--scroll">
             <table class="dt" id="tbl-priciest">
               <thead><tr><th>#</th><th>Clinic</th><th>City</th><th>Price</th></tr></thead>
-              <tbody><tr class="loading-state"><td colspan="4">Loadingâ€¦</td></tr></tbody>
+              <tbody><tr class="loading-state"><td colspan="4">Loading…</td></tr></tbody>
             </table>
           </div>
         </div>
@@ -284,7 +284,7 @@
 
   const CHECKUP = new Set(['exam / checkup','checkup','exam','examination','check-up']);
 
-  // â”€â”€ Auth â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Auth ──────────────────────────────────────────────────
   async function logout() {
     await db.auth.signOut();
     window.location.href = 'login.html';
@@ -302,13 +302,13 @@
     loadAll();
   }
 
-  // Require a valid session â€” redirect to login if none
+  // Require a valid session — redirect to login if none
   db.auth.getSession().then(({ data: { session } }) => {
     if (session) openDashboard(session);
     else window.location.href = 'login.html';
   });
 
-  // â”€â”€ Supabase helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Supabase helpers ──────────────────────────────────────
   const H = { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}` };
 
   async function sbPage(path, limit, offset) {
@@ -332,7 +332,7 @@
     return r.json();
   }
 
-  // â”€â”€ Price extraction â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Price extraction ──────────────────────────────────────
   function extractPrice(nzd, label) {
     if (nzd != null) return parseFloat(nzd);
     if (label) {
@@ -343,7 +343,7 @@
   }
   const fmt = n => `$${Math.round(n)}`;
 
-  // â”€â”€ Load everything â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Load everything ───────────────────────────────────────
   async function loadAll() {
     const [averages, clinics, priceRows] = await Promise.all([
       fetch('assets/data/price-averages.json').then(r => r.json()),
@@ -374,7 +374,7 @@
     await renderExtremes(best, clinicMap);
   }
 
-  // â”€â”€ Overview â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Overview ──────────────────────────────────────────────
   function renderOverview(clinics, best, checkup) {
     const total  = clinics.length;
     const priced = Object.keys(best).length;
@@ -389,7 +389,7 @@
     setText('m-avg-sub',  `based on ${vals.length} prices`);
   }
 
-  // â”€â”€ Averages â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Averages ──────────────────────────────────────────────
   function renderAverages(av) {
     setTbody('tbl-regions', Object.entries(av.regions || {})
       .sort((a,b) => b[1].clinics - a[1].clinics)
@@ -405,7 +405,7 @@
       .join('') || loading(3));
   }
 
-  // â”€â”€ Coverage â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Coverage ──────────────────────────────────────────────
   function renderCoverage(clinics, av) {
     const totals = {};
     for (const c of clinics) if (c.region) totals[c.region] = (totals[c.region] || 0) + 1;
@@ -433,15 +433,15 @@
     setTbody('tbl-coverage', rows || loading(5));
   }
 
-  // â”€â”€ Distribution â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Distribution ──────────────────────────────────────────
   function renderDist(checkup) {
     const buckets = [
       { label: '<$80',     min: 0,   max: 80  },
-      { label: '$80â€“100',  min: 80,  max: 100 },
-      { label: '$100â€“120', min: 100, max: 120 },
-      { label: '$120â€“140', min: 120, max: 140 },
-      { label: '$140â€“160', min: 140, max: 160 },
-      { label: '$160â€“200', min: 160, max: 200 },
+      { label: '$80–100',  min: 80,  max: 100 },
+      { label: '$100–120', min: 100, max: 120 },
+      { label: '$120–140', min: 120, max: 140 },
+      { label: '$140–160', min: 140, max: 160 },
+      { label: '$160–200', min: 160, max: 200 },
       { label: '$200+',    min: 200, max: Infinity },
     ];
     const counts = buckets.map(b => ({
@@ -459,7 +459,7 @@
       `<div class="hist-lbl">${b.label}</div>`).join('');
   }
 
-  // â”€â”€ Extremes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Extremes ──────────────────────────────────────────────
   async function renderExtremes(best, clinicMap) {
     const entries = Object.entries(best)
       .map(([id, price]) => ({ id: +id, price }))
@@ -477,7 +477,7 @@
       return `<tr>
         <td class="rank">${i+1}</td>
         <td>${c.name || `Clinic #${e.id}`}</td>
-        <td class="muted">${c.city || 'â€”'}</td>
+        <td class="muted">${c.city || '—'}</td>
         <td class="num">${fmt(e.price)}</td>
       </tr>`;
     }).join('');
@@ -486,7 +486,7 @@
     setTbody('tbl-priciest', rows(priciest) || loading(4));
   }
 
-  // â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Helpers ───────────────────────────────────────────────
   function setText(id, val) { document.getElementById(id).textContent = val; }
   function setTbody(id, html) { document.querySelector(`#${id} tbody`).innerHTML = html; }
   function loading(cols) { return `<tr class="loading-state"><td colspan="${cols}">No data</td></tr>`; }

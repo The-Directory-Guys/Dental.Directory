@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -93,7 +93,7 @@
         </div>
         <div class="field">
           <label for="password2">Confirm password</label>
-          <input type="password" id="password2" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" required autocomplete="new-password">
+          <input type="password" id="password2" placeholder="••••••••" required autocomplete="new-password">
         </div>
         <button type="submit" class="btn-primary" id="submit-btn">Create account</button>
         <div class="msg msg--err" id="err-msg"></div>
@@ -106,11 +106,11 @@
 
     <!-- Email verification sent -->
     <div id="sent-state" style="display:none">
-      <div class="sent__icon">ðŸ“¬</div>
+      <div class="sent__icon">📬</div>
       <div class="sent__title">Verify your email</div>
       <div class="sent__body">
         We sent a verification link to <span class="sent__email" id="sent-email"></span>.
-        Click it to activate your account â€” then sign in to get started.
+        Click it to activate your account — then sign in to get started.
       </div>
       <div style="margin-top:1.5rem; font-size:.82rem; color:#94a3b8;">
         <a href="login.html" style="color:#0d9488; text-decoration:none;">Back to sign in</a>
@@ -149,7 +149,7 @@
         return;
       }
 
-      btn.disabled = true; btn.textContent = 'Creating accountâ€¦';
+      btn.disabled = true; btn.textContent = 'Creating account…';
 
       const { error } = await db.auth.signUp({
         email,

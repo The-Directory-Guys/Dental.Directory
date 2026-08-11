@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,7 +6,7 @@
     <link rel="icon" href="assets/images/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="assets/images/favicon-192.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compare Clinics Side by Side | Dental Compare</title>
-    <meta name="description" content="Compare your shortlisted dental clinics side by side â€” prices, ratings, services and contact details in one table.">
+    <meta name="description" content="Compare your shortlisted dental clinics side by side — prices, ratings, services and contact details in one table.">
     <meta name="robots" content="noindex">
     <link rel="stylesheet" href="assets/css/styles.css?v=14">
     <!-- Google tag (gtag.js) -->
@@ -39,7 +39,7 @@
                 <a href="/#locations" class="nav__link">All Regions</a>
                 <a href="compare.html" class="nav__link nav__link--active">Compare</a>
                 <div class="nav__more">
-                    <button class="nav__more-btn" aria-haspopup="true">More â–¾</button>
+                    <button class="nav__more-btn" aria-haspopup="true">More ▾</button>
                     <div class="nav__more-menu">
                         <a href="/" class="nav__link">Home</a>
                         <a href="saved.html" class="nav__link">Saved</a>
@@ -60,7 +60,7 @@
     <section class="hero hero--sm">
         <div class="container">
             <h1>Compare Clinics</h1>
-            <p>Your shortlisted clinics side by side â€” prices, ratings and services at a glance.</p>
+            <p>Your shortlisted clinics side by side — prices, ratings and services at a glance.</p>
         </div>
     </section>
 
@@ -98,7 +98,7 @@
       function starsHTML(rating) {
         const full = Math.floor(rating);
         const half = rating - full >= 0.5;
-        return 'â˜…'.repeat(full) + (half ? 'Â½' : '');
+        return '★'.repeat(full) + (half ? '½' : '');
       }
 
       function priceNum(entry) {
@@ -133,9 +133,9 @@
         if (list.length === 0) {
           root.innerHTML = `
             <div class="compare-empty">
-              <div class="no-results__icon" style="font-size:2.5rem;">âš–ï¸</div>
+              <div class="no-results__icon" style="font-size:2.5rem;">⚖️</div>
               <h3 style="margin: var(--sp-4) 0 var(--sp-2);">Nothing to compare yet</h3>
-              <p style="color: var(--clr-gray-500); max-width: 420px; margin: 0 auto;">Browse a region and tap <strong>âš– Compare</strong> on any clinic card to add it here. Pick two or more, then come back to see them side by side.</p>
+              <p style="color: var(--clr-gray-500); max-width: 420px; margin: 0 auto;">Browse a region and tap <strong>⚖ Compare</strong> on any clinic card to add it here. Pick two or more, then come back to see them side by side.</p>
               <a href="/" class="btn btn--primary" style="margin-top: var(--sp-6);">Browse regions</a>
             </div>`;
           return;
@@ -176,7 +176,7 @@
 
         const table = `
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: var(--sp-4); flex-wrap: wrap; gap: var(--sp-2);">
-            <span class="listings-header__count">Comparing ${cols} clinic${cols === 1 ? '' : 's'}${cols === 1 ? ' â€” add at least one more for a real comparison' : ''}</span>
+            <span class="listings-header__count">Comparing ${cols} clinic${cols === 1 ? '' : 's'}${cols === 1 ? ' — add at least one more for a real comparison' : ''}</span>
             <div style="display:flex; gap: var(--sp-3); align-items:center;">
               <a href="/" style="font-size:.85rem;">+ Add more clinics</a>
               <button class="compare-remove" id="compare-clear-all">Clear all</button>
@@ -190,8 +190,8 @@
               ${row('Rating',
                 d => d.rating ? `<span class="stars">${starsHTML(d.rating)}</span> <strong>${d.rating}</strong>` : '<span style="color:var(--clr-gray-400)">No rating</span>',
                 d => d.rating === bestRating && bestRating > 0 && cols > 1)}
-              ${row('Reviews', d => d.reviewCount ? `${d.reviewCount} review${d.reviewCount === 1 ? '' : 's'}` : 'â€”')}
-              ${row('Location', d => esc(d.suburb && d.suburb !== d.city ? `${d.suburb}, ${d.city}` : (d.city || d.suburb || 'â€”')))}
+              ${row('Reviews', d => d.reviewCount ? `${d.reviewCount} review${d.reviewCount === 1 ? '' : 's'}` : '—')}
+              ${row('Location', d => esc(d.suburb && d.suburb !== d.city ? `${d.suburb}, ${d.city}` : (d.city || d.suburb || '—')))}
               ${row('Checkup / exam',
                 (d, i) => checkups[i] !== null ? `<strong>from $${checkups[i]}</strong>` : '<span style="color:var(--clr-gray-400)">Not listed</span>',
                 (d, i) => checkups[i] !== null && checkups[i] === cheapestCheckup && validCheckups.length > 1)}
@@ -200,20 +200,20 @@
                 (d, i) => hygs[i] !== null && hygs[i] === cheapestHyg && validHygs.length > 1)}
               ${row('Services', d => {
                 const pills = (d.services || []).map(s => `<span class="pill pill--sm">${esc(s)}</span>`).join(' ');
-                return pills ? `<div class="cmp-clamp">${pills}</div>` : 'â€”';
+                return pills ? `<div class="cmp-clamp">${pills}</div>` : '—';
               })}
               ${row('All listed prices', d => {
                 if (!d.pricing || !d.pricing.length) return '<span style="color:var(--clr-gray-400)">See profile</span>';
                 const items = d.pricing.map(p => `<li><span>${esc(p.service)}</span><span>${esc(p.price)}</span></li>`).join('');
                 return `<div class="cmp-clamp"><ul class="compare-price-list">${items}</ul></div>`;
               })}
-              ${row('Phone', d => d.phone ? `<a href="tel:${esc(d.phone.replace(/\s/g, ''))}">${esc(d.phone)}</a>` : 'â€”')}
-              ${row('Website', d => d.website ? `<a href="${esc(d.website)}" target="_blank" rel="noopener">Visit site â†—</a>` : 'â€”')}
+              ${row('Phone', d => d.phone ? `<a href="tel:${esc(d.phone.replace(/\s/g, ''))}">${esc(d.phone)}</a>` : '—')}
+              ${row('Website', d => d.website ? `<a href="${esc(d.website)}" target="_blank" rel="noopener">Visit site ↗</a>` : '—')}
               ${row('', d => `<a href="${clinicUrl(d)}" class="btn btn--primary" style="white-space:nowrap;">View Profile</a>`)}
             </tbody>
           </table>
           </div>
-          <p style="margin-top: var(--sp-4); font-size: .78rem; color: var(--clr-gray-400);">Prices are indicative, sourced from each clinic's published fees â€” always confirm with the practice.</p>`;
+          <p style="margin-top: var(--sp-4); font-size: .78rem; color: var(--clr-gray-400);">Prices are indicative, sourced from each clinic's published fees — always confirm with the practice.</p>`;
 
         root.innerHTML = table;
 
@@ -223,11 +223,11 @@
             el.classList.add('cmp-clamp--clipped');
             const btn = document.createElement('button');
             btn.className = 'cmp-readmore';
-            btn.textContent = 'Read more â–¾';
+            btn.textContent = 'Read more ▾';
             btn.addEventListener('click', () => {
               const expanded = el.classList.toggle('cmp-clamp--expanded');
               el.classList.toggle('cmp-clamp--clipped', !expanded);
-              btn.textContent = expanded ? 'Show less â–´' : 'Read more â–¾';
+              btn.textContent = expanded ? 'Show less ▴' : 'Read more ▾';
             });
             el.after(btn);
           }

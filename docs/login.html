@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -98,7 +98,7 @@
         </div>
         <div class="field">
           <label for="password">Password</label>
-          <input type="password" id="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" required autocomplete="current-password">
+          <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
         </div>
         <button type="submit" class="btn-primary" id="submit-btn">Sign in</button>
         <div class="msg msg--err" id="err-msg"></div>
@@ -109,7 +109,7 @@
       </div>
 
       <div class="card__footer">
-        New clinic owner? <a href="signup.html">Create an account</a> &nbsp;Â·&nbsp; <a href="claim.html">Claim listing</a>
+        New clinic owner? <a href="signup.html">Create an account</a> &nbsp;·&nbsp; <a href="claim.html">Claim listing</a>
       </div>
     </div>
 
@@ -145,7 +145,7 @@
         </div>
         <div class="field">
           <label for="new-pw2">Confirm password</label>
-          <input type="password" id="new-pw2" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" required autocomplete="new-password">
+          <input type="password" id="new-pw2" placeholder="••••••••" required autocomplete="new-password">
         </div>
         <button type="submit" class="btn-primary" id="reset-btn">Set password</button>
         <div class="msg msg--err" id="reset-err"></div>
@@ -154,7 +154,7 @@
 
     <!-- Sent confirmation (reset link) -->
     <div id="sent-state" style="display:none">
-      <div class="sent__icon">ðŸ“¬</div>
+      <div class="sent__icon">📬</div>
       <div class="sent__title">Check your inbox</div>
       <div class="sent__body">
         We sent a link to <span class="sent__email" id="sent-email"></span>.
@@ -188,7 +188,7 @@
       });
     }
 
-    // â”€â”€ Sign in â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Sign in ──────────────────────────────────────────
     async function submitLogin(e) {
       e.preventDefault();
       const email    = document.getElementById('email').value.trim();
@@ -196,7 +196,7 @@
       const btn      = document.getElementById('submit-btn');
       const err      = document.getElementById('err-msg');
 
-      btn.disabled = true; btn.textContent = 'Signing inâ€¦'; err.textContent = '';
+      btn.disabled = true; btn.textContent = 'Signing in…'; err.textContent = '';
 
       const { error } = await db.auth.signInWithPassword({ email, password });
       if (!error) {
@@ -209,12 +209,12 @@
       }
     }
 
-    // â”€â”€ Forgot password â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Forgot password ───────────────────────────────────
     async function submitForgot(e) {
       e.preventDefault();
       const email = document.getElementById('forgot-email').value.trim();
       const btn   = document.getElementById('forgot-btn');
-      btn.disabled = true; btn.textContent = 'Sendingâ€¦';
+      btn.disabled = true; btn.textContent = 'Sending…';
 
       await db.auth.resetPasswordForEmail(email, {
         redirectTo: 'https://dentalcompare.co.nz/login.html'
@@ -225,7 +225,7 @@
       showState('sent');
     }
 
-    // â”€â”€ Set new password (after reset link) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // ── Set new password (after reset link) ──────────────
     async function submitReset(e) {
       e.preventDefault();
       const pw1 = document.getElementById('new-pw').value;
@@ -236,7 +236,7 @@
       if (pw1.length < 8) { err.textContent = 'Password must be at least 8 characters.'; return; }
 
       const btn = document.getElementById('reset-btn');
-      btn.disabled = true; btn.textContent = 'Savingâ€¦'; err.textContent = '';
+      btn.disabled = true; btn.textContent = 'Saving…'; err.textContent = '';
 
       const { error } = await db.auth.updateUser({ password: pw1 });
       if (!error) {

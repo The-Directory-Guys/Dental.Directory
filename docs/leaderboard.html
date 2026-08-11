@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -234,7 +234,7 @@
                 <a href="/#locations" class="nav__link">All Regions</a>
                 <a href="compare.html" class="nav__link">Compare</a>
                 <div class="nav__more">
-                    <button class="nav__more-btn" aria-haspopup="true">More â–¾</button>
+                    <button class="nav__more-btn" aria-haspopup="true">More ▾</button>
                     <div class="nav__more-menu">
                         <a href="/" class="nav__link">Home</a>
                         <a href="saved.html" class="nav__link">Saved</a>
@@ -257,15 +257,15 @@
             <p>Real prices, submitted by real people helping New Zealanders find better dental care.</p>
             <div class="lb-stats" id="lb-hero-stats">
                 <div class="lb-stat">
-                    <div class="lb-stat__num" id="stat-submissions">â€”</div>
+                    <div class="lb-stat__num" id="stat-submissions">—</div>
                     <div class="lb-stat__label">Submissions</div>
                 </div>
                 <div class="lb-stat">
-                    <div class="lb-stat__num" id="stat-approved">â€”</div>
+                    <div class="lb-stat__num" id="stat-approved">—</div>
                     <div class="lb-stat__label">Approved</div>
                 </div>
                 <div class="lb-stat">
-                    <div class="lb-stat__num" id="stat-contributors">â€”</div>
+                    <div class="lb-stat__num" id="stat-contributors">—</div>
                     <div class="lb-stat__label">Contributors</div>
                 </div>
             </div>
@@ -279,22 +279,22 @@
                 <h2>How it works</h2>
                 <div class="lb-how-steps">
                     <div class="lb-how-step">
-                        <div class="lb-how-step__icon">ðŸ”</div>
+                        <div class="lb-how-step__icon">🔍</div>
                         <div class="lb-how-step__title">Find a clinic</div>
                         <div class="lb-how-step__desc">Browse any dentist profile on Dental Compare.</div>
                     </div>
                     <div class="lb-how-step">
-                        <div class="lb-how-step__icon">ðŸ’°</div>
+                        <div class="lb-how-step__icon">💰</div>
                         <div class="lb-how-step__title">Submit a price</div>
                         <div class="lb-how-step__desc">Click "Help the community" in the Pricing section and enter what you paid or were quoted.</div>
                     </div>
                     <div class="lb-how-step">
-                        <div class="lb-how-step__icon">âœ…</div>
+                        <div class="lb-how-step__icon">✅</div>
                         <div class="lb-how-step__title">We review it</div>
                         <div class="lb-how-step__desc">Approved submissions go live on the site to help others compare costs.</div>
                     </div>
                     <div class="lb-how-step">
-                        <div class="lb-how-step__icon">ðŸ†</div>
+                        <div class="lb-how-step__icon">🏆</div>
                         <div class="lb-how-step__title">Earn recognition</div>
                         <div class="lb-how-step__desc">Your contributions are counted here. Climb the leaderboard as you help more people.</div>
                     </div>
@@ -303,7 +303,7 @@
 
             <h2 class="lb-section-title">Top Contributors</h2>
             <div class="lb-table-wrap">
-                <div class="lb-loading" id="lb-loading">Loading contributorsâ€¦</div>
+                <div class="lb-loading" id="lb-loading">Loading contributors…</div>
                 <table class="lb-table" id="lb-table" style="display:none;">
                     <thead>
                         <tr>
@@ -318,7 +318,7 @@
                 </table>
                 <div id="lb-empty" style="display:none;">
                     <div class="lb-empty">
-                        <div class="lb-empty__icon">ðŸŒ±</div>
+                        <div class="lb-empty__icon">🌱</div>
                         <div class="lb-empty__title">No contributors yet</div>
                         <p>Be the first! Find a clinic and submit a price.</p>
                     </div>
@@ -355,9 +355,9 @@
             }
 
             function rankDisplay(i) {
-                if (i === 0) return '<span class="lb-rank--medal">ðŸ¥‡</span>';
-                if (i === 1) return '<span class="lb-rank--medal">ðŸ¥ˆ</span>';
-                if (i === 2) return '<span class="lb-rank--medal">ðŸ¥‰</span>';
+                if (i === 0) return '<span class="lb-rank--medal">🥇</span>';
+                if (i === 1) return '<span class="lb-rank--medal">🥈</span>';
+                if (i === 2) return '<span class="lb-rank--medal">🥉</span>';
                 return `#${i + 1}`;
             }
 
