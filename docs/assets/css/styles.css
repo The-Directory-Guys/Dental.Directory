@@ -358,53 +358,87 @@ h4 {
     z-index: 1;
 }
 
-/* Hero search bar */
-.hero-search {
-    position: relative;
-    z-index: 1;
-    max-width: 780px;
-    margin: 0 auto;
+/* Smart search — two-field form */
+.smart-search {
     display: flex;
+    align-items: stretch;
     background: var(--clr-white);
-    border-radius: var(--radius-xl);
+    border-radius: 14px;
     overflow: hidden;
     box-shadow: var(--shadow-xl), 0 0 0 1px rgba(255, 255, 255, .1);
+    max-width: 780px;
+    margin: 0 auto;
 }
 
-.hero-search__input {
+.smart-search__field {
     flex: 1;
-    padding: var(--sp-5) var(--sp-6);
-    border: none;
-    font-family: var(--ff-body);
-    font-size: var(--fs-base);
-    color: var(--clr-gray-700);
-    outline: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: .85rem 1.25rem;
     min-width: 0;
+    cursor: text;
 }
 
-.hero-search__input::placeholder {
+.smart-search__field--location {
+    flex: 1.6;
+}
+
+.smart-search__label {
+    display: block;
+    font-size: .65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--clr-gray-400);
+    margin-bottom: .25rem;
+    user-select: none;
+    pointer-events: none;
+}
+
+.smart-search__sep {
+    width: 1px;
+    background: var(--clr-gray-200);
+    align-self: stretch;
+    margin: .7rem 0;
+    flex-shrink: 0;
+}
+
+.smart-search__input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-family: var(--ff-body);
+    font-size: .975rem;
+    color: var(--clr-gray-800);
+    background: transparent;
+    padding: 0;
+}
+
+.smart-search__input::placeholder {
     color: var(--clr-gray-400);
 }
 
-.hero-search__select {
-    padding: var(--sp-4) 2.5rem var(--sp-4) var(--sp-5);
+.smart-search__input--nudge {
+    animation: nudge .35s ease;
+}
+
+.smart-search__select {
+    width: 100%;
     border: none;
-    border-left: 1px solid var(--clr-gray-200);
+    outline: none;
     font-family: var(--ff-body);
-    font-size: var(--fs-sm);
-    color: var(--clr-gray-600);
-    background-color: var(--clr-gray-50);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath stroke='%236b7280' stroke-width='1.5' fill='none' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
+    font-size: .975rem;
+    color: var(--clr-gray-700);
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E") no-repeat right 0 center;
     appearance: none;
     -webkit-appearance: none;
     cursor: pointer;
-    outline: none;
-    min-width: 150px;
+    padding: 0;
+    padding-right: 1.25rem;
 }
 
-.hero-search__btn {
+.smart-search__btn {
     padding: var(--sp-4) var(--sp-8);
     background: linear-gradient(135deg, var(--clr-teal), var(--clr-teal-dark));
     color: var(--clr-white);
@@ -412,10 +446,84 @@ h4 {
     font-size: var(--fs-sm);
     transition: opacity var(--transition);
     white-space: nowrap;
+    border: none;
+    cursor: pointer;
+    border-radius: 0 14px 14px 0;
+    min-width: 90px;
 }
 
-.hero-search__btn:hover {
+.smart-search__btn:hover {
     opacity: .9;
+}
+
+/* Location + clinic dropdown */
+.location-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, .14);
+    border: 1px solid var(--clr-gray-100);
+    z-index: 300;
+    overflow: hidden;
+}
+
+.location-dropdown__group {
+    padding: .35rem 0;
+}
+
+.location-dropdown__group + .location-dropdown__group {
+    border-top: 1px solid var(--clr-gray-100);
+}
+
+.location-dropdown__group-header {
+    padding: .4rem 1rem .15rem;
+    font-size: .65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--clr-gray-400);
+}
+
+.location-dropdown__item {
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+    padding: .6rem 1rem;
+    cursor: pointer;
+    font-size: .9rem;
+    color: var(--clr-gray-800);
+    transition: background .1s;
+}
+
+.location-dropdown__item:hover {
+    background: var(--clr-gray-50);
+}
+
+.location-dropdown__icon {
+    flex-shrink: 0;
+    color: var(--clr-gray-400);
+}
+
+.location-dropdown__info {
+    display: flex;
+    flex-direction: column;
+    gap: .1rem;
+    min-width: 0;
+}
+
+.location-dropdown__name {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.location-dropdown__sub {
+    font-size: .75rem;
+    color: var(--clr-gray-400);
 }
 
 /* Near Me */
@@ -2409,12 +2517,20 @@ h4 {
         padding: var(--sp-16) 0 var(--sp-12);
     }
 
-    .hero-search {
+    .smart-search {
         flex-direction: column;
-        border-radius: var(--radius-lg);
+        border-radius: 14px;
     }
 
-    .hero-search__btn {
+    .smart-search__sep {
+        width: auto;
+        height: 1px;
+        margin: 0 1.25rem;
+        align-self: auto;
+    }
+
+    .smart-search__btn {
+        border-radius: 0 0 14px 14px;
         padding: var(--sp-4);
     }
 

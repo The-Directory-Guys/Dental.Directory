@@ -15,13 +15,6 @@
     <link rel="stylesheet" href="assets/css/styles.css?v=16">
     <style>
         .hero-search-wrap { position:relative; max-width:780px; margin:0 auto; }
-        .hero-search-wrap .hero-search { max-width:none; margin:0; }
-        #search-suggestions { position:absolute; top:calc(100% + 6px); left:0; right:0; background:#fff; border:1px solid var(--clr-gray-200); border-radius:12px; box-shadow:0 8px 28px rgba(0,0,0,.13); z-index:200; overflow:hidden; }
-        .hero-search__suggestion { padding:.7rem 1rem; cursor:pointer; border-bottom:1px solid var(--clr-gray-100); display:flex; flex-direction:column; gap:.1rem; }
-        .hero-search__suggestion:last-child { border-bottom:none; }
-        .hero-search__suggestion:hover { background:#f8fafc; }
-        .hero-search__suggestion-name { font-weight:600; font-size:.9rem; color:#0f172a; }
-        .hero-search__suggestion-loc { font-size:.78rem; color:var(--clr-gray-400); }
     </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4J758VJQVX"></script>
@@ -83,17 +76,40 @@
             </p>
 
             <div class="hero-search-wrap">
-                <div class="hero-search">
-                    <input type="text" class="hero-search__input" placeholder="Suburb, city, or service type">
-                    <button class="hero-search__btn" id="hero-search-btn">Search</button>
+                <div class="smart-search" id="smart-search">
+                    <div class="smart-search__field smart-search__field--location">
+                        <label class="smart-search__label" for="location-input">Location</label>
+                        <input type="text" id="location-input" class="smart-search__input"
+                               placeholder="Suburb, city or region" autocomplete="off" spellcheck="false">
+                    </div>
+                    <div class="smart-search__sep"></div>
+                    <div class="smart-search__field smart-search__field--service">
+                        <label class="smart-search__label" for="service-select">Service</label>
+                        <select id="service-select" class="smart-search__select">
+                            <option value="">Any service</option>
+                            <option value="general dentistry">General Dentistry</option>
+                            <option value="hygienist">Hygiene &amp; Cleaning</option>
+                            <option value="orthodontics">Orthodontics</option>
+                            <option value="dental implants">Dental Implants</option>
+                            <option value="teeth whitening">Teeth Whitening</option>
+                            <option value="emergency">Emergency Dentist</option>
+                            <option value="dentures">Dentures</option>
+                            <option value="root canal">Root Canal</option>
+                            <option value="oral surgery">Oral Surgery</option>
+                            <option value="periodontics">Periodontal Care</option>
+                            <option value="cosmetic dentistry">Cosmetic Dentistry</option>
+                        </select>
+                    </div>
+                    <button class="smart-search__btn" id="hero-search-btn">Search</button>
                 </div>
-                <div id="search-suggestions" hidden></div>
+                <div id="location-dropdown" class="location-dropdown" hidden></div>
                 <div class="search-hints">
-                    <span class="search-hints__label">Try:</span>
-                    <button class="search-hint" type="button" data-query="Dentist in Auckland">Dentist in Auckland</button>
-                    <button class="search-hint" type="button" data-query="Orthodontist Wellington">Orthodontist Wellington</button>
-                    <button class="search-hint" type="button" data-query="Dental implants Christchurch">Dental implants Christchurch</button>
-                    <button class="search-hint" type="button" data-query="Emergency dentist">Emergency dentist</button>
+                    <span class="search-hints__label">Popular:</span>
+                    <button class="search-hint" type="button" data-location="Auckland CBD" data-lat="-36.84891" data-lng="174.76523">Auckland</button>
+                    <button class="search-hint" type="button" data-location="Wellington Central" data-lat="-41.2821" data-lng="174.77595">Wellington</button>
+                    <button class="search-hint" type="button" data-location="Christchurch Central" data-lat="-43.5299" data-lng="172.63155">Christchurch</button>
+                    <button class="search-hint" type="button" data-location="Hamilton" data-lat="-37.78081" data-lng="175.25240">Hamilton</button>
+                    <button class="search-hint" type="button" data-location="Tauranga" data-lat="-37.6859" data-lng="176.16751">Tauranga</button>
                 </div>
             </div>
             <div class="hero-nearby">

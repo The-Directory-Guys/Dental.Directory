@@ -2338,10 +2338,75 @@ function matchTreatment(raw) {
     }
   }
 
-  // ===== Hero Search =====
+  // ===== Smart Search =====
   const heroSearchBtn = document.getElementById('hero-search-btn');
-  const heroSearchInput = document.querySelector('.hero-search__input');
-  const searchSuggestions = document.getElementById('search-suggestions');
+  const locationInput = document.getElementById('location-input');
+  const serviceSelect = document.getElementById('service-select');
+  const locationDropdown = document.getElementById('location-dropdown');
+
+  const CITY_ALIASES = {
+    'Auckland':         [-36.84891, 174.76523],
+    'Wellington':       [-41.28210, 174.77595],
+    'Christchurch':     [-43.52990, 172.63155],
+    'Hamilton':         [-37.78081, 175.25240],
+    'Tauranga':         [-37.68590, 176.16751],
+    'Dunedin':          [-45.87411, 170.50366],
+    'Palmerston North': [-40.35608, 175.61125],
+    'Whangarei':        [-35.72753, 174.31942],
+    'Whangārei':        [-35.72753, 174.31942],
+    'Napier':           [-39.49021, 176.91784],
+    'Hastings':         [-39.64060, 176.84080],
+    'Nelson':           [-41.27000, 173.28400],
+    'New Plymouth':     [-39.07174, 174.05808],
+    'Invercargill':     [-46.41329, 168.35372],
+    'Rotorua':          [-38.13607, 176.25254],
+    'Gisborne':         [-38.66236, 178.01743],
+    'Whanganui':        [-39.93249, 175.05193],
+    'Blenheim':         [-41.51203, 173.95140],
+    'Queenstown':       [-45.03219, 168.66100],
+    'Lower Hutt':       [-41.21149, 174.90801],
+    'Upper Hutt':       [-41.12492, 175.07047],
+    'Porirua':          [-41.13542, 174.83981],
+    'Timaru':           [-44.39303, 171.25098],
+    'Ashburton':        [-43.90244, 171.75033],
+    'Kerikeri':         [-35.22699, 173.94789],
+    'Dargaville':       [-35.94121, 173.86857],
+    'Warkworth':        [-36.39767, 174.66585],
+    'Pukekohe':         [-37.20064, 174.90369],
+    'Manukau':          [-36.99294, 174.87992],
+    'Paraparaumu':      [-40.91446, 175.00620],
+    'Kapiti':           [-40.91446, 175.00620],
+    'Levin':            [-40.62200, 175.27500],
+    'Masterton':        [-40.95213, 175.65790],
+    'Carterton':        [-41.02430, 175.52595],
+    'Oamaru':           [-45.09768, 170.96952],
+    'Alexandra':        [-45.25508, 169.39218],
+    'Wanaka':           [-44.69417, 169.13646],
+    'Wānaka':           [-44.69417, 169.13646],
+    'Cromwell':         [-45.03713, 169.19700],
+    'Gore':             [-46.09700, 168.94600],
+    'Winton':           [-46.14144, 168.32399],
+    'Thames':           [-37.13798, 175.54180],
+    'Taupo':            [-38.68662, 176.06948],
+    'Taupō':            [-38.68662, 176.06948],
+    'Tokoroa':          [-38.21687, 175.87054],
+    'Whakatane':        [-37.95192, 176.99460],
+    'Whakatāne':        [-37.95192, 176.99460],
+    'Stratford':        [-39.33969, 174.28409],
+    'Eltham':           [-39.42822, 174.30483],
+    'Dannevirke':       [-40.20739, 176.09824],
+    'Feilding':         [-40.22628, 175.56444],
+    'Rangiora':         [-43.30317, 172.59615],
+    'Rolleston':        [-43.59665, 172.38500],
+    'Kaitaia':          [-35.11400, 173.26600],
+    'Kaitāia':          [-35.11400, 173.26600],
+    'Paihia':           [-35.28124, 174.09209],
+    'Paeroa':           [-37.38047, 175.67043],
+    'Greymouth':        [-42.45527, 171.20610],
+    'Westport':         [-41.75418, 171.60357],
+    'Picton':           [-41.29356, 174.00020],
+    'Richmond':         [-41.33810, 173.18723],
+  };
 
   function levenshtein(a, b) {
     const m = a.length, n = b.length;
@@ -2354,25 +2419,52 @@ function matchTreatment(raw) {
     return dp[m][n];
   }
 
-  // Fuzzy-match a list of words against SUBURB_COORDS keys; returns best-match coord + the matched word
-  function fuzzyFindLocation(words) {
-    const coords = typeof SUBURB_COORDS !== 'undefined' ? SUBURB_COORDS : {};
-    const keys = Object.keys(coords);
-    let bestWord = null, bestKey = null, bestDist = Infinity;
-    for (const word of words) {
-      if (word.length < 4) continue;
-      const wl = word.toLowerCase();
-      for (const k of keys) {
-        const kl = k.toLowerCase();
-        if (Math.abs(kl.length - wl.length) > Math.max(3, wl.length * 0.4)) continue;
-        const d = levenshtein(wl, kl);
-        if (d < bestDist) { bestDist = d; bestKey = k; bestWord = word; }
+  function esc(s) {
+    return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function getLocationSuggestions(q) {
+    const lower = q.toLowerCase().trim();
+    if (!lower || lower.length < 2) return [];
+    const results = [], seen = new Set();
+
+    // 1. City aliases — prefix or word-contains
+    for (const [name, [lat, lng]] of Object.entries(CITY_ALIASES)) {
+      const nl = name.toLowerCase();
+      if (nl.startsWith(lower) || nl.includes(lower)) {
+        if (!seen.has(nl)) { seen.add(nl); results.push({ name, lat, lng }); }
       }
     }
-    const threshold = bestWord ? Math.max(1, Math.floor(bestWord.length * 0.3)) : 0;
-    if (bestKey && bestDist <= threshold)
-      return { coord: { lat: coords[bestKey][0], lng: coords[bestKey][1] }, locationWord: bestWord };
-    return null;
+
+    // 2. SUBURB_COORDS — prefix or contains
+    const coords = typeof SUBURB_COORDS !== 'undefined' ? SUBURB_COORDS : {};
+    for (const [name, [lat, lng]] of Object.entries(coords)) {
+      if (name === 'suburb_town') continue;
+      const nl = name.toLowerCase();
+      if (seen.has(nl)) continue;
+      if (nl.startsWith(lower) || nl.includes(lower)) {
+        seen.add(nl); results.push({ name, lat, lng });
+      }
+      if (results.length >= 20) break;
+    }
+
+    // 3. Fuzzy typo fallback (≥4 chars typed, fewer than 3 hits so far)
+    if (results.length < 3 && lower.length >= 4) {
+      for (const [name, [lat, lng]] of Object.entries(coords)) {
+        if (name === 'suburb_town') continue;
+        const nl = name.toLowerCase();
+        if (seen.has(nl)) continue;
+        for (const word of nl.split(/[\s,()]+/)) {
+          if (word.length < 3) continue;
+          if (levenshtein(lower, word) <= Math.max(1, Math.floor(lower.length * 0.3))) {
+            seen.add(nl); results.push({ name, lat, lng }); break;
+          }
+        }
+        if (results.length >= 8) break;
+      }
+    }
+
+    return results.slice(0, 8);
   }
 
   async function fetchClinicSuggestions(q) {
@@ -2380,40 +2472,74 @@ function matchTreatment(raw) {
     const hdrs = { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` };
     const base = `${SUPABASE_URL}/rest/v1/dental_clinics`;
     try {
-      const res = await fetch(`${base}?name=ilike.*${encodeURIComponent(q)}*&select=id,name,city,suburb_town,region&order=total_ratings.desc.nullslast&limit=7`, { headers: hdrs });
+      const res = await fetch(`${base}?name=ilike.*${encodeURIComponent(q)}*&select=id,name,city,suburb_town,region&order=total_ratings.desc.nullslast&limit=5`, { headers: hdrs });
       const results = res.ok ? await res.json() : [];
       if (results.length > 0) return results;
-      // Fallback: search each significant word separately
       const words = q.split(/\s+/).filter(w => w.length >= 4);
       if (!words.length) return [];
       const seen = new Set(), all = [];
       for (const word of words) {
-        const wr = await fetch(`${base}?name=ilike.*${encodeURIComponent(word)}*&select=id,name,city,suburb_town,region&order=total_ratings.desc.nullslast&limit=5`, { headers: hdrs });
+        const wr = await fetch(`${base}?name=ilike.*${encodeURIComponent(word)}*&select=id,name,city,suburb_town,region&order=total_ratings.desc.nullslast&limit=4`, { headers: hdrs });
         if (wr.ok) for (const c of await wr.json()) if (!seen.has(c.id)) { seen.add(c.id); all.push(c); }
       }
-      return all.slice(0, 7);
+      return all.slice(0, 5);
     } catch { return []; }
   }
 
-  function showSuggestions(clinics) {
-    if (!searchSuggestions || !clinics.length) { hideSuggestions(); return; }
-    searchSuggestions.innerHTML = clinics.map(c =>
-      `<div class="hero-search__suggestion" data-id="${c.id}" data-region="${encodeURIComponent(c.region)}">
-        <span class="hero-search__suggestion-name">${c.name}</span>
-        <span class="hero-search__suggestion-loc">${c.suburb_town ? c.suburb_town + ', ' : ''}${c.city}</span>
-      </div>`
-    ).join('');
-    searchSuggestions.hidden = false;
-    searchSuggestions.querySelectorAll('.hero-search__suggestion').forEach(el => {
+  let selectedLocation = null;
+  let locSuggestTimer;
+
+  function hideLocationDropdown() {
+    if (locationDropdown) locationDropdown.hidden = true;
+  }
+
+  async function showLocationDropdown(q) {
+    if (!locationDropdown) return;
+    const [locs, clinics] = await Promise.all([
+      Promise.resolve(getLocationSuggestions(q)),
+      fetchClinicSuggestions(q)
+    ]);
+    if (!locs.length && !clinics.length) { hideLocationDropdown(); return; }
+
+    const pinIcon = `<svg class="location-dropdown__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>`;
+    const bldIcon = `<svg class="location-dropdown__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`;
+
+    let html = '';
+    if (locs.length) {
+      html += '<div class="location-dropdown__group"><div class="location-dropdown__group-header">Locations</div>';
+      for (const loc of locs)
+        html += `<div class="location-dropdown__item" data-type="loc" data-name="${esc(loc.name)}" data-lat="${loc.lat}" data-lng="${loc.lng}">${pinIcon}<span>${esc(loc.name)}</span></div>`;
+      html += '</div>';
+    }
+    if (clinics.length) {
+      html += '<div class="location-dropdown__group"><div class="location-dropdown__group-header">Clinics</div>';
+      for (const c of clinics) {
+        const sub = c.suburb_town ? `${c.suburb_town}, ${c.city}` : c.city;
+        html += `<div class="location-dropdown__item" data-type="clinic" data-id="${c.id}" data-region="${esc(c.region)}">${bldIcon}<div class="location-dropdown__info"><span class="location-dropdown__name">${esc(c.name)}</span><span class="location-dropdown__sub">${esc(sub)}</span></div></div>`;
+      }
+      html += '</div>';
+    }
+
+    locationDropdown.innerHTML = html;
+    locationDropdown.hidden = false;
+
+    locationDropdown.querySelectorAll('.location-dropdown__item').forEach(el => {
       el.addEventListener('mousedown', e => {
         e.preventDefault();
-        window.location.href = `dentist.html?id=${el.dataset.id}&region=${el.dataset.region}`;
+        if (el.dataset.type === 'clinic') {
+          window.location.href = `dentist.html?id=${el.dataset.id}&region=${encodeURIComponent(el.dataset.region)}`;
+        } else {
+          selectLocation(el.dataset.name, parseFloat(el.dataset.lat), parseFloat(el.dataset.lng));
+        }
       });
     });
   }
 
-  function hideSuggestions() {
-    if (searchSuggestions) searchSuggestions.hidden = true;
+  function selectLocation(name, lat, lng) {
+    selectedLocation = { name, lat, lng };
+    if (locationInput) locationInput.value = name;
+    hideLocationDropdown();
+    if (serviceSelect) serviceSelect.focus();
   }
 
   // ===== Homepage: Near Me Toggle + Search =====
@@ -2453,142 +2579,54 @@ function matchTreatment(raw) {
     );
   }
 
-  // Animated placeholder typewriter
-  if (heroSearchInput) {
-    const examples = [
-      "Try 'Dentures in Wellington'…",
-      "Try 'Orthodontics near Riccarton'…",
-      "Try 'Christchurch'…",
-      "Or use 'Use my location' below…",
-    ];
-    let exIdx = 0, charIdx = 0, erasing = false;
-    function typePlaceholder() {
-      if (document.activeElement === heroSearchInput || heroSearchInput.value) return;
-      const target = examples[exIdx];
-      if (!erasing) {
-        heroSearchInput.placeholder = target.slice(0, ++charIdx);
-        if (charIdx === target.length) { erasing = true; setTimeout(typePlaceholder, 2000); return; }
-        setTimeout(typePlaceholder, 55);
-      } else {
-        heroSearchInput.placeholder = target.slice(0, --charIdx);
-        if (charIdx === 0) { erasing = false; exIdx = (exIdx + 1) % examples.length; setTimeout(typePlaceholder, 400); return; }
-        setTimeout(typePlaceholder, 30);
-      }
-    }
-    setTimeout(typePlaceholder, 800);
-  }
-
-  // Autocomplete: show clinic name suggestions as user types
-  let suggestTimer;
-  if (heroSearchInput) {
-    heroSearchInput.addEventListener('input', () => {
-      clearTimeout(suggestTimer);
-      const q = heroSearchInput.value.trim();
-      if (q.length < 2) { hideSuggestions(); return; }
-      suggestTimer = setTimeout(async () => showSuggestions(await fetchClinicSuggestions(q)), 260);
+  // Location input — show dropdown as user types
+  if (locationInput) {
+    locationInput.addEventListener('input', () => {
+      clearTimeout(locSuggestTimer);
+      selectedLocation = null;
+      const q = locationInput.value.trim();
+      if (q.length < 2) { hideLocationDropdown(); return; }
+      locSuggestTimer = setTimeout(() => showLocationDropdown(q), 200);
     });
-    heroSearchInput.addEventListener('blur', () => setTimeout(hideSuggestions, 160));
-    heroSearchInput.addEventListener('focus', () => {
-      const q = heroSearchInput.value.trim();
-      if (q.length >= 2) fetchClinicSuggestions(q).then(showSuggestions);
+    locationInput.addEventListener('blur', () => setTimeout(hideLocationDropdown, 200));
+    locationInput.addEventListener('focus', () => {
+      const q = locationInput.value.trim();
+      if (q.length >= 2 && !selectedLocation) showLocationDropdown(q);
+    });
+    locationInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') doSearch();
+      if (e.key === 'Escape') hideLocationDropdown();
     });
   }
 
-  function resolveLocation(locationStr) {
-    const coords = typeof SUBURB_COORDS !== 'undefined' ? SUBURB_COORDS : {};
-    const lower = locationStr.toLowerCase().trim();
-    const entry = Object.entries(coords).find(([k]) =>
-      k.toLowerCase() === lower || k.toLowerCase() === lower.split(',')[0].trim()
-    );
-    return entry ? { lat: entry[1][0], lng: entry[1][1], fromCache: true } : null;
-  }
-
-  async function geocodeFallback(locationStr) {
-    const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(locationStr + ', New Zealand')}&format=json&limit=1&countrycodes=nz`);
-    const data = await res.json();
-    if (data.length > 0) return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon), fromCache: false };
-    return null;
-  }
-
-  function normalizeService(str) {
-    const t = TREATMENT_MAP[str.toLowerCase().trim()];
-    return t ? t.service : str;
+  if (serviceSelect) {
+    serviceSelect.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
   }
 
   async function doSearch() {
-    const q = heroSearchInput ? heroSearchInput.value.trim() : '';
+    const svc = serviceSelect ? serviceSelect.value : '';
+    const qParam = svc ? `&q=${encodeURIComponent(svc)}` : '';
 
-    // Parse "service in/near location" pattern
-    const locationMatch = q.match(/^(.+?)\s+(?:in|near)\s+(.+)$/i);
-    const service = locationMatch ? normalizeService(locationMatch[1].trim()) : null;
-    const locationStr = locationMatch ? locationMatch[2].trim() : null;
-
-    // If explicit "X in/near Y" — geocode Y and use X as service filter
-    if (locationMatch) {
-      let coord = resolveLocation(locationStr);
-      if (!coord) {
-        if (heroSearchBtn) { heroSearchBtn.textContent = 'Searching…'; heroSearchBtn.disabled = true; }
-        try { coord = await geocodeFallback(locationStr); } catch (e) {}
-        if (heroSearchBtn) { heroSearchBtn.textContent = 'Search'; heroSearchBtn.disabled = false; }
-      }
-      if (!coord) coord = fuzzyFindLocation([locationStr])?.coord || null;
-      if (coord) {
-        window.location.href = `nearby.html?lat=${coord.lat}&lng=${coord.lng}&q=${encodeURIComponent(service)}`;
-        return;
-      }
-    }
-
-    // GPS active — use it
+    // GPS location takes priority
     if (savedLat !== null) {
-      const qParam = q ? `&q=${encodeURIComponent(q)}` : '';
       window.location.href = `nearby.html?lat=${savedLat}&lng=${savedLng}${qParam}`;
       return;
     }
 
-    // No GPS — try treating full query as a location or clinic name
-    if (q) {
-      let coord = resolveLocation(q);
-      if (!coord) {
-        // Try fuzzy suburb/city detection before hitting Nominatim — Nominatim can misinterpret
-        // multi-word queries like "Dental Clinic Christchurch" and return wrong coordinates.
-        const words = q.split(/\s+/);
-        const fuzzy = fuzzyFindLocation(words);
-        if (fuzzy) {
-          const svc = words.filter(w => w.toLowerCase() !== fuzzy.locationWord.toLowerCase()).join(' ');
-          const qParam = svc ? `&q=${encodeURIComponent(normalizeService(svc))}` : '';
-          window.location.href = `nearby.html?lat=${fuzzy.coord.lat}&lng=${fuzzy.coord.lng}${qParam}`;
-          return;
-        }
-        if (heroSearchBtn) { heroSearchBtn.textContent = 'Searching…'; heroSearchBtn.disabled = true; }
-        let nameResults = [];
-        try {
-          [coord, nameResults] = await Promise.all([
-            geocodeFallback(q).catch(() => null),
-            fetchClinicSuggestions(q)
-          ]);
-        } catch (e) {}
-        if (heroSearchBtn) { heroSearchBtn.textContent = 'Search'; heroSearchBtn.disabled = false; }
-        if (!coord && nameResults.length) {
-          if (nameResults.length === 1) {
-            window.location.href = `dentist.html?id=${nameResults[0].id}&region=${encodeURIComponent(nameResults[0].region)}`;
-          } else {
-            showSuggestions(nameResults);
-          }
-          return;
-        }
-      }
-      if (coord) {
-        window.location.href = `nearby.html?lat=${coord.lat}&lng=${coord.lng}&q=${encodeURIComponent(q)}`;
-        return;
-      }
+    // Location selected from dropdown
+    if (selectedLocation) {
+      window.location.href = `nearby.html?lat=${selectedLocation.lat}&lng=${selectedLocation.lng}${qParam}`;
+      return;
     }
 
-    if (nearMeBtn) nearMeBtn.classList.add('hero-nearby__btn--nudge');
-    nearMeStatus.textContent = q ? 'No results found. Try "Dentures in Wellington".' : 'Enter a clinic name, suburb, or use your location.';
-    setTimeout(() => {
-      if (nearMeBtn) nearMeBtn.classList.remove('hero-nearby__btn--nudge');
-      nearMeStatus.textContent = '';
-    }, 3000);
+    // No location set — nudge the input
+    if (locationInput) {
+      locationInput.classList.add('smart-search__input--nudge');
+      locationInput.focus();
+      setTimeout(() => locationInput.classList.remove('smart-search__input--nudge'), 600);
+    }
+    nearMeStatus.textContent = 'Enter a location or use your location below.';
+    setTimeout(() => { if (nearMeStatus) nearMeStatus.textContent = ''; }, 3000);
   }
 
   // "Use my location" → show modal (if location not yet granted) or clear it (if already on)
@@ -2607,16 +2645,12 @@ function matchTreatment(raw) {
   }
 
   if (heroSearchBtn) heroSearchBtn.addEventListener('click', doSearch);
-  if (heroSearchInput) {
-    heroSearchInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') doSearch();
-    });
-  }
 
   document.querySelectorAll('.search-hint').forEach(chip => {
     chip.addEventListener('click', () => {
-      if (heroSearchInput) heroSearchInput.value = chip.dataset.query;
-      doSearch();
+      const svc = serviceSelect ? serviceSelect.value : '';
+      const qParam = svc ? `&q=${encodeURIComponent(svc)}` : '';
+      window.location.href = `nearby.html?lat=${chip.dataset.lat}&lng=${chip.dataset.lng}${qParam}`;
     });
   });
 
