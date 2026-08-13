@@ -375,6 +375,7 @@ h4 {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     padding: .85rem 1.25rem;
     min-width: 0;
     cursor: text;
@@ -413,10 +414,12 @@ h4 {
     color: var(--clr-gray-800);
     background: transparent;
     padding: 0;
+    text-align: center;
 }
 
 .smart-search__input::placeholder {
     color: var(--clr-gray-400);
+    text-align: center;
 }
 
 .smart-search__input--nudge {
@@ -436,6 +439,7 @@ h4 {
     cursor: pointer;
     padding: 0;
     padding-right: 1.25rem;
+    text-align: center;
 }
 
 .smart-search__btn {
