@@ -1073,6 +1073,65 @@ function matchTreatment(raw) {
         ].join('');
         document.head.appendChild(s);
       }
+
+      // Clinic name autocomplete — predictive suggestions from loaded data
+      function escAC(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+      function initClinicAutocomplete(inputEl) {
+        if (!inputEl) return;
+        const wrap = inputEl.closest('.listings-search') || inputEl.parentElement;
+        if (!wrap || wrap.querySelector('.clinic-ac-dropdown')) return;
+
+        const acd = document.createElement('div');
+        acd.className = 'clinic-ac-dropdown';
+        acd.hidden = true;
+        wrap.appendChild(acd);
+
+        function showClinicAC(q) {
+          if (!q || q.length < 2 || searchMode !== 'clinic') { acd.hidden = true; return; }
+          // Let the service filter handle recognised treatment keywords
+          if (matchTreatment(q)) { acd.hidden = true; return; }
+          const lower = q.toLowerCase();
+          const hits = allDentists.filter(d => d.name.toLowerCase().includes(lower)).slice(0, 8);
+          if (!hits.length) { acd.hidden = true; return; }
+          acd.innerHTML = hits.map(d => {
+            const loc = [d.suburb, d.city].filter(Boolean).join(', ');
+            return `<div class="clinic-ac-item" data-id="${d.id}" data-region="${encodeURIComponent(d.region||'')}">
+              <span class="clinic-ac-name">${escAC(d.name)}</span>
+              ${loc ? `<span class="clinic-ac-sub">${escAC(loc)}</span>` : ''}
+            </div>`;
+          }).join('');
+          acd.hidden = false;
+          acd.querySelectorAll('.clinic-ac-item').forEach(el => {
+            el.addEventListener('mousedown', ev => {
+              ev.preventDefault();
+              window.location.href = `dentist.html?id=${el.dataset.id}&region=${el.dataset.region}`;
+            });
+          });
+        }
+
+        inputEl.addEventListener('input', e => showClinicAC(e.target.value.trim()));
+        inputEl.addEventListener('blur', () => setTimeout(() => { acd.hidden = true; }, 200));
+        inputEl.addEventListener('focus', () => { if (inputEl.value.trim().length >= 2) showClinicAC(inputEl.value.trim()); });
+      }
+
+      if (!document.getElementById('clinic-ac-css')) {
+        const s = document.createElement('style');
+        s.id = 'clinic-ac-css';
+        s.textContent = [
+          '.listings-search{position:relative;}',
+          '.clinic-ac-dropdown{position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border:1px solid var(--clr-gray-200,#e2e8f0);border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.12);z-index:500;overflow:hidden;}',
+          '.clinic-ac-item{display:flex;flex-direction:column;gap:.1rem;padding:.6rem .9rem;cursor:pointer;transition:background .1s;border-bottom:1px solid var(--clr-gray-100,#f1f5f9);}',
+          '.clinic-ac-item:last-child{border-bottom:none;}',
+          '.clinic-ac-item:hover{background:var(--clr-gray-50,#f8fafc);}',
+          '.clinic-ac-name{font-size:.875rem;font-weight:500;color:var(--clr-gray-800,#1e293b);}',
+          '.clinic-ac-sub{font-size:.75rem;color:var(--clr-gray-400,#94a3b8);}',
+        ].join('');
+        document.head.appendChild(s);
+      }
+
+      initClinicAutocomplete(searchInput);
+      initClinicAutocomplete(document.getElementById('mobile-listings-search'));
     }
 
     // Sort
