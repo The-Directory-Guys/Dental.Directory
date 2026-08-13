@@ -84,10 +84,17 @@
 
             <div class="hero-search-wrap">
                 <div class="hero-search">
-                    <input type="text" class="hero-search__input" placeholder="Search by service...">
+                    <input type="text" class="hero-search__input" placeholder="Suburb, city, or service type">
                     <button class="hero-search__btn" id="hero-search-btn">Search</button>
                 </div>
                 <div id="search-suggestions" hidden></div>
+                <div class="search-hints">
+                    <span class="search-hints__label">Try:</span>
+                    <button class="search-hint" type="button" data-query="Dentist in Auckland">Dentist in Auckland</button>
+                    <button class="search-hint" type="button" data-query="Orthodontist Wellington">Orthodontist Wellington</button>
+                    <button class="search-hint" type="button" data-query="Dental implants Christchurch">Dental implants Christchurch</button>
+                    <button class="search-hint" type="button" data-query="Emergency dentist">Emergency dentist</button>
+                </div>
             </div>
             <div class="hero-nearby">
                 <button class="hero-nearby__btn" id="near-me-btn">
@@ -118,33 +125,6 @@
                 <div class="hero-stat">
                     <div class="hero-stat__number">NZ-Wide</div>
                     <div class="hero-stat__label">Coverage</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works -->
-    <section class="section section--hiw">
-        <div class="container">
-            <h2 class="section-title">How It Works</h2>
-            <p class="section-subtitle">Finding the right dentist should be simple.<br>Here's how Dental Compare makes it easy.</p>
-
-            <div class="steps">
-                <div class="step">
-                    <div class="step__icon">🔍</div>
-                    <h4 class="step__title">Search</h4>
-                    <p class="step__desc">Browse dentists by location, service, or name. Filter results to find the
-                        perfect match.</p>
-                </div>
-                <div class="step">
-                    <div class="step__icon">⚖️</div>
-                    <h4 class="step__title">Compare</h4>
-                    <p class="step__desc">Read genuine patient reviews, compare ratings, services, and opening hours.</p>
-                </div>
-                <div class="step">
-                    <div class="step__icon">📞</div>
-                    <h4 class="step__title">Contact</h4>
-                    <p class="step__desc">Found the one? Get in touch directly via phone or visit their website to book.</p>
                 </div>
             </div>
         </div>

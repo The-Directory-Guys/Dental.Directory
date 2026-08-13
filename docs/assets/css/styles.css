@@ -472,6 +472,44 @@ h4 {
     color: rgba(255,255,255,0.75);
 }
 
+/* Search hint chips */
+.search-hints {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .4rem .5rem;
+    justify-content: center;
+    margin-top: .875rem;
+}
+
+.search-hints__label {
+    font-size: .75rem;
+    color: rgba(255,255,255,.55);
+    font-weight: 500;
+    margin-right: .1rem;
+}
+
+.search-hint {
+    font-size: .75rem;
+    color: rgba(255,255,255,.8);
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 999px;
+    padding: .3rem .8rem;
+    cursor: pointer;
+    transition: background var(--transition), border-color var(--transition), color var(--transition);
+    white-space: nowrap;
+    font-family: inherit;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.search-hint:hover {
+    background: rgba(255,255,255,.22);
+    border-color: rgba(255,255,255,.6);
+    color: #fff;
+}
+
 /* Distance badge on nearby cards */
 .distance-badge {
     display: inline-block;
@@ -1744,6 +1782,13 @@ h4 {
 .pricing-summary--muted {
     color: var(--clr-gray-500);
     font-weight: 400;
+}
+
+.pricing-duration {
+    font-size: .75rem;
+    color: var(--clr-gray-400);
+    font-weight: 400;
+    margin-left: .25rem;
 }
 
 .pricing-summary__sep {

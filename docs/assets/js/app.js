@@ -124,16 +124,20 @@ function matchTreatment(raw) {
     return html;
   }
 
-  function getCheckupPrice(d) {
+  function getCheckupRow(d) {
     if (!d.pricing || d.pricing.length === 0) return null;
-    const checkup = d.pricing.find(p => {
+    return d.pricing.find(p => {
       const s = p.service.toLowerCase();
       return s.includes('checkup') || s.includes('check-up') || s.includes('exam') ||
              s.includes('consult') || s.includes('assessment') || s.includes('new patient') ||
              s.includes('initial') || s.includes('comprehensive') || s.includes('oral health');
-    });
-    if (!checkup) return null;
-    const match = checkup.price.replace(/,/g, '').match(/\$(\d+)/);
+    }) || null;
+  }
+
+  function getCheckupPrice(d) {
+    const row = getCheckupRow(d);
+    if (!row) return null;
+    const match = row.price.replace(/,/g, '').match(/\$(\d+)/);
     return match ? parseInt(match[1], 10) : null;
   }
 
@@ -209,16 +213,26 @@ function matchTreatment(raw) {
   }
 
 
-  function getHygienistPrice(d) {
+  function getHygienistRow(d) {
     if (!d.pricing || d.pricing.length === 0) return null;
-    const match = d.pricing.find(p => {
+    return d.pricing.find(p => {
       const s = p.service.toLowerCase();
       return s.includes('hygienist') || s.includes('hygiene') ||
              (s.includes('scale') && (s.includes('polish') || s.includes('clean')));
-    });
-    if (!match) return null;
-    const m = match.price.replace(/,/g, '').match(/\$(\d+)/);
+    }) || null;
+  }
+
+  function getHygienistPrice(d) {
+    const row = getHygienistRow(d);
+    if (!row) return null;
+    const m = row.price.replace(/,/g, '').match(/\$(\d+)/);
     return m ? parseInt(m[1], 10) : null;
+  }
+
+  function extractDuration(notes) {
+    if (!notes) return null;
+    const m = notes.match(/\b(\d+(?:\s*[-–]\s*\d+)?)\s*(?:minutes?|mins?|hours?|hrs?)\b/i);
+    return m ? m[0] : null;
   }
 
   const AMENITY_CHECKS = {
@@ -511,13 +525,17 @@ function matchTreatment(raw) {
           const cmpBadge = cmp
             ? ` <span class="price-cmp price-cmp--${cmp.dir}">${cmp.text}</span>`
             : '';
-          parts.push(`Checkup from $${checkupPrice}${cmpBadge}`);
+          const checkupDur = extractDuration(getCheckupRow(d)?.notes);
+          const durStr = checkupDur ? ` <span class="pricing-duration">${checkupDur}</span>` : '';
+          parts.push(`Checkup from $${checkupPrice}${durStr}${cmpBadge}`);
         }
         if (hygPrice) {
           const hCmps = getHygienistComparisons(hygPrice, d.city, d.region);
           const hCmp = hCmps.city || hCmps.region;
           const hBadge = hCmp ? ` <span class="price-cmp price-cmp--${hCmp.dir}">${hCmp.text}</span>` : '';
-          parts.push(`Hygienist: scale &amp; clean from $${hygPrice}${hBadge}`);
+          const hygDur = extractDuration(getHygienistRow(d)?.notes);
+          const hDurStr = hygDur ? ` <span class="pricing-duration">${hygDur}</span>` : '';
+          parts.push(`Hygienist: scale &amp; clean from $${hygPrice}${hDurStr}${hBadge}`);
         }
         if (parts.length > 0) {
           pricingPreview = `<div class="pricing-summary">${parts.map(p => `<div class="pricing-line">💰 ${p}</div>`).join('')}</div>`;
@@ -2325,12 +2343,55 @@ function matchTreatment(raw) {
   const heroSearchInput = document.querySelector('.hero-search__input');
   const searchSuggestions = document.getElementById('search-suggestions');
 
+  function levenshtein(a, b) {
+    const m = a.length, n = b.length;
+    const dp = [];
+    for (let i = 0; i <= m; i++) { dp[i] = new Array(n + 1); dp[i][0] = i; }
+    for (let j = 0; j <= n; j++) dp[0][j] = j;
+    for (let i = 1; i <= m; i++)
+      for (let j = 1; j <= n; j++)
+        dp[i][j] = a[i-1] === b[j-1] ? dp[i-1][j-1] : 1 + Math.min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+    return dp[m][n];
+  }
+
+  // Fuzzy-match a list of words against SUBURB_COORDS keys; returns best-match coord + the matched word
+  function fuzzyFindLocation(words) {
+    const coords = typeof SUBURB_COORDS !== 'undefined' ? SUBURB_COORDS : {};
+    const keys = Object.keys(coords);
+    let bestWord = null, bestKey = null, bestDist = Infinity;
+    for (const word of words) {
+      if (word.length < 4) continue;
+      const wl = word.toLowerCase();
+      for (const k of keys) {
+        const kl = k.toLowerCase();
+        if (Math.abs(kl.length - wl.length) > Math.max(3, wl.length * 0.4)) continue;
+        const d = levenshtein(wl, kl);
+        if (d < bestDist) { bestDist = d; bestKey = k; bestWord = word; }
+      }
+    }
+    const threshold = bestWord ? Math.max(1, Math.floor(bestWord.length * 0.3)) : 0;
+    if (bestKey && bestDist <= threshold)
+      return { coord: { lat: coords[bestKey][0], lng: coords[bestKey][1] }, locationWord: bestWord };
+    return null;
+  }
+
   async function fetchClinicSuggestions(q) {
     if (!q || q.length < 2) return [];
-    const url = `${SUPABASE_URL}/rest/v1/dental_clinics?name=ilike.*${encodeURIComponent(q)}*&select=id,name,city,suburb_town,region&order=total_ratings.desc.nullslast&limit=7`;
+    const hdrs = { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` };
+    const base = `${SUPABASE_URL}/rest/v1/dental_clinics`;
     try {
-      const res = await fetch(url, { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } });
-      return res.ok ? await res.json() : [];
+      const res = await fetch(`${base}?name=ilike.*${encodeURIComponent(q)}*&select=id,name,city,suburb_town,region&order=total_ratings.desc.nullslast&limit=7`, { headers: hdrs });
+      const results = res.ok ? await res.json() : [];
+      if (results.length > 0) return results;
+      // Fallback: search each significant word separately
+      const words = q.split(/\s+/).filter(w => w.length >= 4);
+      if (!words.length) return [];
+      const seen = new Set(), all = [];
+      for (const word of words) {
+        const wr = await fetch(`${base}?name=ilike.*${encodeURIComponent(word)}*&select=id,name,city,suburb_town,region&order=total_ratings.desc.nullslast&limit=5`, { headers: hdrs });
+        if (wr.ok) for (const c of await wr.json()) if (!seen.has(c.id)) { seen.add(c.id); all.push(c); }
+      }
+      return all.slice(0, 7);
     } catch { return []; }
   }
 
@@ -2470,6 +2531,7 @@ function matchTreatment(raw) {
         try { coord = await geocodeFallback(locationStr); } catch (e) {}
         if (heroSearchBtn) { heroSearchBtn.textContent = 'Search'; heroSearchBtn.disabled = false; }
       }
+      if (!coord) coord = fuzzyFindLocation([locationStr])?.coord || null;
       if (coord) {
         window.location.href = `nearby.html?lat=${coord.lat}&lng=${coord.lng}&q=${encodeURIComponent(service)}`;
         return;
@@ -2487,6 +2549,16 @@ function matchTreatment(raw) {
     if (q) {
       let coord = resolveLocation(q);
       if (!coord) {
+        // Try fuzzy suburb/city detection before hitting Nominatim — Nominatim can misinterpret
+        // multi-word queries like "Dental Clinic Christchurch" and return wrong coordinates.
+        const words = q.split(/\s+/);
+        const fuzzy = fuzzyFindLocation(words);
+        if (fuzzy) {
+          const svc = words.filter(w => w.toLowerCase() !== fuzzy.locationWord.toLowerCase()).join(' ');
+          const qParam = svc ? `&q=${encodeURIComponent(normalizeService(svc))}` : '';
+          window.location.href = `nearby.html?lat=${fuzzy.coord.lat}&lng=${fuzzy.coord.lng}${qParam}`;
+          return;
+        }
         if (heroSearchBtn) { heroSearchBtn.textContent = 'Searching…'; heroSearchBtn.disabled = true; }
         let nameResults = [];
         try {
@@ -2540,6 +2612,13 @@ function matchTreatment(raw) {
       if (e.key === 'Enter') doSearch();
     });
   }
+
+  document.querySelectorAll('.search-hint').forEach(chip => {
+    chip.addEventListener('click', () => {
+      if (heroSearchInput) heroSearchInput.value = chip.dataset.query;
+      doSearch();
+    });
+  });
 
   if (locationModalOverlay) {
     locationModalAllow.addEventListener('click', () => {

@@ -1,12 +1,13 @@
 CLINICS WITHOUT WEBSITES
 ========================
-Total: 129 clinics
-Last updated: 2026-08-07
+Total: 132 clinics
+Last updated: 2026-08-13
 
 CLINICS WITH HTTP (NOT SECURE) WEBSITES
 ----------------------------------------
 KT Orthodontics (Gisborne) — http://www.ktorthodontics.co.nz — no HTTPS certificate; team photos saved but won't display in Chrome/Firefox
 Otago Orthodontics (Dunedin) — http://www.otago-orthodontics.co.nz — no HTTPS certificate; team photos saved but won't display in Chrome/Firefox
+Hawkes Bay Periodontics & Dental Implants (Napier) — http://www.hawkesbayperiodontics.co.nz — HTTP only (not secure); website is very basic
 
 AUCKLAND CITY
 -------------
@@ -149,7 +150,7 @@ Mosgiel Denture Care
 NAPIER
 ------
 Artisan Denture Studio - Dentures in Napier (Bluff Hill)
-Hawkes Bay Periodontics & Dental Implants — website is very basic (hawkesbayperiodontics.co.nz)
+Hawkes Bay Periodontics & Dental Implants — HTTP only (not secure); very basic (hawkesbayperiodontics.co.nz)
 Kennedy Road Dental (Napier South) — Healthpoint: healthpoint.co.nz/dentistry/general-dentist/kennedy-road-dental/
 Dentures Direct Karen Pedersen (Pirimai)
 Ocean Orthodontics — website is very basic (oceanorthodontics.co.nz)
@@ -158,9 +159,7 @@ NELSON
 ------
 Dental Care Nelson
 McIntosh's Dental Surgery
-Community Oral Health Services (Nelson South)
 Aesthetic Denture Designs (Stoke)
-Community Oral Health (Stoke)
 
 NEW PLYMOUTH
 ------------
@@ -223,7 +222,7 @@ Raglan Smiles LTD
 RICHMOND
 --------
 Dental Care Richmond
-My Smile NZ
+My Smile NZ — broken link
 
 RODNEY
 ------
@@ -326,7 +325,10 @@ Evolution Dental Ltd (Te Kamo)
 Collier & Jones Denture Clinic
 Dental Laser Centre
 Gentle Dental Company - Gus Cameron
+The Gentle Dental Company - Joe Hermon — gentledental.net.nz domain no longer resolves
 Baylis Dental Services Ltd (Woodhill)
+The Whitening Co (Whangarei) — uses whiteningco.nz/pages/whangarei (parent brand page, not a standalone clinic website)
+Julie the Dental Hygienist (Morningside)
 
 WHITIANGA
 ---------
