@@ -2119,20 +2119,38 @@ h4 {
     align-items: flex-start;
     white-space: normal;
     border-radius: 12px;
-    gap: 2px;
-    cursor: default;
+    gap: 4px;
+    cursor: pointer;
+    user-select: none;
 }
 
 .payment-pill__name {
     font-weight: 600;
 }
 
+.payment-pill__chevron {
+    font-size: .7em;
+    opacity: 0.6;
+    display: inline-block;
+    transition: transform 0.15s ease;
+}
+
+.payment-pill--open .payment-pill__chevron {
+    transform: rotate(180deg);
+}
+
 .payment-pill__desc {
+    display: none;
     font-size: var(--fs-xs);
     font-weight: 400;
     color: var(--clr-gray-500);
     white-space: normal;
-    line-height: 1.3;
+    line-height: 1.4;
+    max-width: 280px;
+}
+
+.payment-pill--open .payment-pill__desc {
+    display: block;
 }
 
 /* Meet the Team */

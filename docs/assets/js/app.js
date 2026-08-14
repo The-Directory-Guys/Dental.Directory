@@ -1830,7 +1830,7 @@ function matchTreatment(raw) {
     const scrapedPaymentPills = paymentRows.map(p => {
       const desc = p.price && p.price !== p.service ? p.price : '';
       if (desc) {
-        return `<span class="payment-pill payment-pill--described"><strong class="payment-pill__name">${p.service}</strong><span class="payment-pill__desc">${desc}</span></span>`;
+        return `<span class="payment-pill payment-pill--described" role="button" tabindex="0" aria-expanded="false"><span class="payment-pill__name">${p.service} <span class="payment-pill__chevron">▾</span></span><span class="payment-pill__desc">${desc}</span></span>`;
       }
       return `<span class="payment-pill">${p.service}</span>`;
     });
@@ -2141,6 +2141,15 @@ function matchTreatment(raw) {
       if (b1) b1.addEventListener('click', onProfileSaveClick);
       if (b2) b2.addEventListener('click', onProfileSaveClick);
     }
+
+    // Payment pill expand/collapse
+    document.querySelectorAll('.payment-pill--described').forEach(pill => {
+      pill.addEventListener('click', () => {
+        const open = pill.classList.toggle('payment-pill--open');
+        pill.setAttribute('aria-expanded', open);
+      });
+      pill.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pill.click(); } });
+    });
 
     // Reviews — dynamic render with sort + curated/all toggle
     let reviewMode = 'curated';
