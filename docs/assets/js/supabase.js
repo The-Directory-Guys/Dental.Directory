@@ -83,7 +83,8 @@ function transformClinic(clinic) {
     googleMapsUrl: clinic.google_maps_url || '',
     businessStatus: clinic.business_status || 'OPERATIONAL',
     photoUrl: clinic.photo_url || '',
-    foundedYear: clinic.founded_year || null
+    foundedYear: clinic.founded_year || null,
+    facebookUrl: clinic.facebook_url || ''
   };
 }
 
@@ -347,8 +348,8 @@ async function fetchPractitionersForClinics(clinicIds) {
           }
         }
         if (row.specialties) {
-          row.specialties.split(',').forEach(s => {
-            const norm = s.trim().toLowerCase();
+          (Array.isArray(row.specialties) ? row.specialties : row.specialties.split(',')).forEach(s => {
+            const norm = String(s).trim().toLowerCase();
             if (norm && !map[row.clinic_id].specialties.includes(norm)) map[row.clinic_id].specialties.push(norm);
           });
         }

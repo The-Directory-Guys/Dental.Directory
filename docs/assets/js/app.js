@@ -401,6 +401,7 @@ function matchTreatment(raw) {
     'acc','gem visa','gem finance','farmers','credit card','visa','mastercard',
     'eftpos','cash','payment plan','instalment','installment','interest-free',
     'supergold','gold card','humm','genoapay','partpay','flexicare',
+    'health nz','teen dental','lumino dental plan','dental plan','membership plan',
   ];
   const isPaymentMethod = p => {
     const s = (p.service || '').toLowerCase();
@@ -1862,6 +1863,11 @@ function matchTreatment(raw) {
       ? `<a href="${dentist.website}" target="_blank" class="btn btn--primary btn--block">Visit Website ↗</a>`
       : '';
 
+    // Facebook button
+    const facebookBtn = dentist.facebookUrl
+      ? `<a href="${dentist.facebookUrl}" target="_blank" class="btn btn--outline btn--block" style="margin-top:.5rem;">Facebook ↗</a>`
+      : '';
+
     // Availability
     const availabilityHTML = (() => {
       const parts = [];
@@ -1888,7 +1894,8 @@ function matchTreatment(raw) {
       const cards = dentist.practitioners.map(p => {
         const initials = p.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
         const specialtyPills = p.specialties
-          ? p.specialties.split(',').map(s => `<span class="pill pill--sm">${s.trim()}</span>`).join(' ')
+          ? (Array.isArray(p.specialties) ? p.specialties : p.specialties.split(','))
+              .map(s => `<span class="pill pill--sm">${String(s).trim()}</span>`).join(' ')
           : '';
         const languageNote = p.languages ? `<div class="team-card__languages">🌐 ${p.languages}</div>` : '';
         const avatar = p.photo_url
@@ -2083,6 +2090,7 @@ function matchTreatment(raw) {
           </div>
           ${availabilityHTML}
           ${websiteBtn}
+          ${facebookBtn}
           ${saveBtn}
           ${mapEmbed}
           ${mapLink}
