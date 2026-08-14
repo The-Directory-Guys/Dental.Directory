@@ -348,7 +348,7 @@ async function fetchPractitionersForClinics(clinicIds) {
           }
         }
         if (row.specialties) {
-          (Array.isArray(row.specialties) ? row.specialties : row.specialties.split(',')).forEach(s => {
+          (Array.isArray(row.specialties) ? row.specialties : (() => { try { const p = JSON.parse(row.specialties); return Array.isArray(p) ? p : row.specialties.split(','); } catch(e) { return row.specialties.split(','); } })()).forEach(s => {
             const norm = String(s).trim().toLowerCase();
             if (norm && !map[row.clinic_id].specialties.includes(norm)) map[row.clinic_id].specialties.push(norm);
           });

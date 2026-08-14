@@ -1893,10 +1893,12 @@ function matchTreatment(raw) {
     if (dentist.practitioners && dentist.practitioners.length > 0) {
       const cards = dentist.practitioners.map(p => {
         const initials = p.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
-        const specialtyPills = p.specialties
-          ? (Array.isArray(p.specialties) ? p.specialties : p.specialties.split(','))
-              .map(s => `<span class="pill pill--sm">${String(s).trim()}</span>`).join(' ')
-          : '';
+        const specialtyPills = (() => {
+          if (!p.specialties) return '';
+          let arr = p.specialties;
+          if (!Array.isArray(arr)) { try { arr = JSON.parse(arr); if (!Array.isArray(arr)) arr = [arr]; } catch(e) { arr = arr.split(','); } }
+          return arr.map(s => `<span class="pill pill--sm">${String(s).trim()}</span>`).join(' ');
+        })();
         const languageNote = p.languages ? `<div class="team-card__languages">🌐 ${p.languages}</div>` : '';
         const avatar = p.photo_url
           ? `<button class="team-card__photo-btn" data-src="${p.photo_url}" data-name="${p.name}" aria-label="View photo of ${p.name}"><img class="team-card__photo" src="${p.photo_url}" alt="${p.name}" loading="lazy" onerror="this.closest('.team-card__photo-btn').style.display='none';this.closest('.team-card__avatar-wrap').querySelector('.team-card__avatar').style.display='flex'"></button>`
