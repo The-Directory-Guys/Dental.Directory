@@ -403,6 +403,28 @@ function matchTreatment(raw) {
     'supergold','gold card','humm','genoapay','partpay','flexicare',
     'health nz','teen dental','lumino dental plan','dental plan','membership plan',
   ];
+  const PAYMENT_DESCS = {
+    'acc': 'ACC (Accident Compensation Corporation) covers the cost of dental treatment caused by accidents.',
+    'winz': 'Work and Income New Zealand (WINZ) can provide financial assistance with dental costs for eligible patients.',
+    'southern cross': 'Southern Cross Health Insurance members may be able to claim dental treatment costs.',
+    'free teen dental care': 'Free dental treatment for secondary school students from Year 9 until age 18, funded by Health NZ.',
+    'teen dental': 'Free dental treatment for secondary school students from Year 9 until age 18, funded by Health NZ.',
+    'health nz': 'Free dental treatment for secondary school students from Year 9 until age 18, funded by Health NZ.',
+    'afterpay': 'Split your dental costs into 4 fortnightly payments with Afterpay — no interest.',
+    'laybuy': 'Split the cost into 6 weekly payments with Laybuy — no interest.',
+    'genoapay': 'Split the cost into weekly payments with Genoapay — no interest.',
+    'humm': 'Flexible buy now, pay later financing with Humm.',
+    'q card': 'Interest-free financing available with Q Card.',
+    'gem visa': 'Interest-free financing available with Gem Finance (Latitude).',
+    'gem finance': 'Interest-free financing available with Gem Finance (Latitude).',
+    'zip': 'Buy now, pay later financing with Zip.',
+    'payment plan': 'In-house payment plans available to spread the cost of treatment.',
+    'instalment': 'In-house instalment plans available to spread the cost of treatment.',
+    'installment': 'In-house instalment plans available to spread the cost of treatment.',
+    'lumino dental plan': 'Lumino Dental Plan membership provides ongoing discounts on dental treatment.',
+    'supergold': 'SuperGold card discounts may apply — ask the practice for details.',
+    'gold card': 'SuperGold card discounts may apply — ask the practice for details.',
+  };
   const isPaymentMethod = p => {
     const s = (p.service || '').toLowerCase();
     return PAYMENT_KEYWORDS.some(k => {
@@ -1828,7 +1850,10 @@ function matchTreatment(raw) {
 
     // Collect payment pills from scraped_prices (merged with amenity data below)
     const scrapedPaymentPills = paymentRows.map(p => {
-      const desc = p.price && p.price !== p.service ? p.price : '';
+      const dbDesc = p.price && p.price !== p.service ? p.price : '';
+      const svcKey = p.service.toLowerCase().trim();
+      const fallback = PAYMENT_DESCS[svcKey] || Object.entries(PAYMENT_DESCS).find(([k]) => svcKey.includes(k))?.[1] || '';
+      const desc = dbDesc || fallback;
       if (desc) {
         return `<span class="payment-pill payment-pill--described" role="button" tabindex="0" aria-expanded="false"><span class="payment-pill__name">${p.service} <span class="payment-pill__chevron">▾</span></span><span class="payment-pill__desc">${desc}</span></span>`;
       }
