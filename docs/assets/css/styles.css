@@ -2114,8 +2114,25 @@ h4 {
     cursor: default;
 }
 
-.payment-pill[title] {
-    cursor: help;
+.payment-pill--described {
+    flex-direction: column;
+    align-items: flex-start;
+    white-space: normal;
+    border-radius: 12px;
+    gap: 2px;
+    cursor: default;
+}
+
+.payment-pill__name {
+    font-weight: 600;
+}
+
+.payment-pill__desc {
+    font-size: var(--fs-xs);
+    font-weight: 400;
+    color: var(--clr-gray-500);
+    white-space: normal;
+    line-height: 1.3;
 }
 
 /* Meet the Team */

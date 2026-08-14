@@ -1828,8 +1828,11 @@ function matchTreatment(raw) {
 
     // Collect payment pills from scraped_prices (merged with amenity data below)
     const scrapedPaymentPills = paymentRows.map(p => {
-      const tip = p.price && p.price !== p.service ? ` title="${p.price}${p.notes ? ' — ' + p.notes : ''}"` : '';
-      return `<span class="payment-pill"${tip}>${p.service}</span>`;
+      const desc = p.price && p.price !== p.service ? p.price : '';
+      if (desc) {
+        return `<span class="payment-pill payment-pill--described"><strong class="payment-pill__name">${p.service}</strong><span class="payment-pill__desc">${desc}</span></span>`;
+      }
+      return `<span class="payment-pill">${p.service}</span>`;
     });
 
     // Embedded map
