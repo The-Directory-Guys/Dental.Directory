@@ -397,7 +397,7 @@ function matchTreatment(raw) {
   };
 
   const PAYMENT_KEYWORDS = [
-    'q card','afterpay','zip','laybuy','winz','work and income','southern cross',
+    'q card','afterpay','zip','laybuy','winz','work and income','southern cross','nib',
     'acc','gem visa','gem finance','farmers','credit card','visa','mastercard',
     'eftpos','cash','payment plan','instalment','installment','interest-free',
     'supergold','gold card','humm','genoapay','partpay','flexicare',
@@ -407,6 +407,7 @@ function matchTreatment(raw) {
     'acc': 'ACC (Accident Compensation Corporation) covers the cost of dental treatment caused by accidents.',
     'winz': 'Work and Income New Zealand (WINZ) can provide financial assistance with dental costs for eligible patients.',
     'southern cross': 'Southern Cross Health Insurance members may be able to claim dental treatment costs.',
+    'nib': 'NIB Health Insurance members may be able to claim dental treatment costs.',
     'free teen dental care': 'Free dental treatment for secondary school students from Year 9 until age 18, funded by Health NZ.',
     'teen dental': 'Free dental treatment for secondary school students from Year 9 until age 18, funded by Health NZ.',
     'health nz': 'Free dental treatment for secondary school students from Year 9 until age 18, funded by Health NZ.',
@@ -1151,6 +1152,54 @@ function matchTreatment(raw) {
           '.clinic-ac-sub{font-size:.75rem;color:var(--clr-gray-400,#94a3b8);}',
         ].join('');
         document.head.appendChild(s);
+      }
+
+      // Inject inline clinic search bar above the card grid (visible on all screen sizes)
+      if (!document.getElementById('inline-clinic-search-wrap') && dentistGrid) {
+        const barWrap = document.createElement('div');
+        barWrap.id = 'inline-clinic-search-wrap';
+        barWrap.className = 'inline-clinic-search-wrap listings-search';
+        barWrap.innerHTML = `<svg class="inline-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="inline-clinic-search" placeholder="Search by clinic name..." autocomplete="off"><button class="inline-search-clear" id="inline-search-clear" type="button" aria-label="Clear search" hidden>&times;</button>`;
+        dentistGrid.parentElement.insertBefore(barWrap, dentistGrid);
+
+        const inlineInput = document.getElementById('inline-clinic-search');
+        const inlineClear = document.getElementById('inline-search-clear');
+
+        inlineInput.addEventListener('input', (e) => {
+          const v = e.target.value;
+          if (searchInput) searchInput.value = v;
+          const mob = document.getElementById('mobile-listings-search');
+          if (mob) mob.value = v;
+          inlineClear.hidden = !v;
+          handleSearchInput(v);
+        });
+
+        inlineClear.addEventListener('click', () => {
+          inlineInput.value = '';
+          if (searchInput) searchInput.value = '';
+          const mob = document.getElementById('mobile-listings-search');
+          if (mob) mob.value = '';
+          inlineClear.hidden = true;
+          handleSearchInput('');
+          inlineInput.focus();
+        });
+
+        if (!document.getElementById('inline-search-css')) {
+          const s = document.createElement('style');
+          s.id = 'inline-search-css';
+          s.textContent = [
+            '.inline-clinic-search-wrap{display:flex;align-items:center;gap:.5rem;background:var(--clr-surface,#fff);border:1.5px solid var(--clr-gray-200,#e2e8f0);border-radius:10px;padding:.1rem .75rem;margin-bottom:.75rem;box-shadow:0 1px 4px rgba(0,0,0,.05);}',
+            '.inline-clinic-search-wrap:focus-within{border-color:var(--clr-navy,#1a3c5e);box-shadow:0 0 0 3px rgba(26,60,94,.1);}',
+            '.inline-search-icon{flex-shrink:0;color:var(--clr-gray-400,#94a3b8);}',
+            '.inline-clinic-search-wrap input{flex:1;border:none;background:transparent;padding:.6rem 0;font-size:.9rem;color:var(--clr-gray-800,#1e293b);outline:none;min-width:0;}',
+            '.inline-clinic-search-wrap input::placeholder{color:var(--clr-gray-400,#94a3b8);}',
+            '.inline-search-clear{background:none;border:none;font-size:1.1rem;line-height:1;cursor:pointer;color:var(--clr-gray-400,#94a3b8);padding:.2rem .3rem;border-radius:50%;}',
+            '.inline-search-clear:hover{color:var(--clr-gray-700,#334155);background:var(--clr-gray-100,#f1f5f9);}',
+          ].join('');
+          document.head.appendChild(s);
+        }
+
+        initClinicAutocomplete(inlineInput);
       }
 
       initClinicAutocomplete(searchInput);
@@ -1970,7 +2019,14 @@ function matchTreatment(raw) {
         const cLower = c.toLowerCase().trim();
         return !scrapedLabels.some(s => cLower === s || cLower.includes(s) || s.includes(cLower));
       });
-      const amenityPills = uniqueAmenityChips.map(c => `<span class="payment-pill">${c}</span>`);
+      const amenityPills = uniqueAmenityChips.map(c => {
+        const svcKey = c.toLowerCase().trim();
+        const fallback = PAYMENT_DESCS[svcKey] || Object.entries(PAYMENT_DESCS).find(([k]) => svcKey.includes(k))?.[1] || '';
+        if (fallback) {
+          return `<span class="payment-pill payment-pill--described" role="button" tabindex="0" aria-expanded="false"><span class="payment-pill__name">${c} <span class="payment-pill__chevron">▾</span></span><span class="payment-pill__desc">${fallback}</span></span>`;
+        }
+        return `<span class="payment-pill">${c}</span>`;
+      });
       const allPills = [...scrapedPaymentPills, ...amenityPills];
       const plansHTML = rawPlans ? `<p class="payment-plans">${rawPlans}</p>` : '';
       if (allPills.length > 0 || plansHTML) {
