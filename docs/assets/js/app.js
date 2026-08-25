@@ -1752,30 +1752,30 @@ function matchTreatment(raw) {
 
   // ===== Dentist Profile Page =====
   const REGION_FILES = {
-    'Auckland': 'auckland.html',
-    'Bay of Plenty': 'tauranga.html',
-    'Canterbury': 'christchurch.html',
-    'Gisborne': 'gisborne.html',
-    'Hawke\'s Bay': 'hawkes-bay.html',
-    'Manawatū-Whanganui': 'manawatu-whanganui.html',
-    'Marlborough': 'marlborough.html',
-    'Nelson': 'nelson-tasman.html',
-    'Nelson & Tasman': 'nelson-tasman.html',
-    'Northland': 'northland.html',
-    'Otago': 'dunedin.html',
-    'Southland': 'southland.html',
-    'Taranaki': 'taranaki.html',
-    'Waikato': 'hamilton.html',
-    'Wellington': 'wellington.html',
-    'Wairarapa': 'wairarapa.html',
-    'West Coast': 'west-coast.html'
+    'Auckland': '/auckland.html',
+    'Bay of Plenty': '/tauranga.html',
+    'Canterbury': '/christchurch.html',
+    'Gisborne': '/gisborne.html',
+    'Hawke\'s Bay': '/hawkes-bay.html',
+    'Manawatū-Whanganui': '/manawatu-whanganui.html',
+    'Marlborough': '/marlborough.html',
+    'Nelson': '/nelson-tasman.html',
+    'Nelson & Tasman': '/nelson-tasman.html',
+    'Northland': '/northland.html',
+    'Otago': '/dunedin.html',
+    'Southland': '/southland.html',
+    'Taranaki': '/taranaki.html',
+    'Waikato': '/hamilton.html',
+    'Wellington': '/wellington.html',
+    'Wairarapa': '/wairarapa.html',
+    'West Coast': '/west-coast.html'
   };
 
   const CITY_FILES = {
-    'Christchurch': { file: 'christchurch.html', label: 'Christchurch' },
-    'Dunedin':      { file: 'dunedin.html',      label: 'Dunedin' },
-    'Hamilton':     { file: 'hamilton.html',      label: 'Hamilton' },
-    'Tauranga':     { file: 'tauranga.html',      label: 'Tauranga' },
+    'Christchurch': { file: '/christchurch.html', label: 'Christchurch' },
+    'Dunedin':      { file: '/dunedin.html',      label: 'Dunedin' },
+    'Hamilton':     { file: '/hamilton.html',      label: 'Hamilton' },
+    'Tauranga':     { file: '/tauranga.html',      label: 'Tauranga' },
   };
   function setBackButton(region, city) {
     const backBtn = document.querySelector('.profile-hero__back');
