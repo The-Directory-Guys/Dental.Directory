@@ -273,7 +273,7 @@ async function fetchAmenitiesForClinics(clinicIds) {
   if (!clinicIds || clinicIds.length === 0) return {};
   const map = {};
   const BATCH = 100;
-  const FIELDS = 'clinic_id,dental_anxiety_friendly,wheelchair_accessible,online_booking,saturday_evening_hours,same_day_emergency';
+  const FIELDS = 'clinic_id,dental_anxiety_friendly,wheelchair_accessible,online_booking,online_booking_note,saturday_evening_hours,same_day_emergency';
   try {
     for (let i = 0; i < clinicIds.length; i += BATCH) {
       const batch = clinicIds.slice(i, i + BATCH);

@@ -236,9 +236,10 @@ function matchTreatment(raw) {
   }
 
   const AMENITY_CHECKS = {
-    saturday_hours: d => !!(d.hrs && Array.isArray(d.hrs['6'])),
-    sunday_hours:   d => !!(d.hrs && Array.isArray(d.hrs['0'])),
-    evening_hours:  d => !!(d.hrs && Object.values(d.hrs).some(v => Array.isArray(v) && v[1] > 1020)),
+    saturday_hours:   d => !!(d.hrs && Array.isArray(d.hrs['6'])),
+    sunday_hours:     d => !!(d.hrs && Array.isArray(d.hrs['0'])),
+    evening_hours:    d => !!(d.hrs && Object.values(d.hrs).some(v => Array.isArray(v) && v[1] > 1020)),
+    calendar_booking: d => !!(d.amenityFlags && d.amenityFlags.online_booking_note),
   };
 
   function checkAmenity(key, d) {
@@ -1433,6 +1434,7 @@ function matchTreatment(raw) {
     { key: 'dental_anxiety_friendly', label: 'Dental anxiety friendly' },
     { key: 'wheelchair_accessible',   label: 'Wheelchair accessible' },
     { key: 'online_booking',          label: 'Online booking' },
+    { key: 'calendar_booking',        label: 'Online calendar booking' },
     { key: 'saturday_hours',          label: 'Open Saturdays' },
     { key: 'sunday_hours',            label: 'Open Sundays' },
     { key: 'evening_hours',           label: 'Open evenings (after 5 PM)' },
