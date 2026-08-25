@@ -868,7 +868,7 @@ function matchTreatment(raw) {
       document.querySelectorAll('.filter-min-reviews-slider').forEach(s => {
         s.value = '0';
         const val = s.closest('[data-filter="min-reviews"]')?.querySelector('.filter-min-reviews-val');
-        if (val) val.textContent = 'Any';
+        if (val) val.textContent = '0+';
       });
       showFavouritesOnly = false;
       showOpenOnly = false;
@@ -879,12 +879,12 @@ function matchTreatment(raw) {
       document.querySelectorAll('.filter-exp-slider').forEach(s => {
         s.value = '0';
         const val = s.closest('[data-filter="experience"]')?.querySelector('.filter-exp-val');
-        if (val) val.textContent = 'Any';
+        if (val) val.textContent = '0 yrs';
       });
       if (searchInput) searchInput.value = '';
 
       // Reset sliders + labels without triggering extra renders
-      const ratingLabel = 'Any';
+      const ratingLabel = '★ 0+';
       [document.getElementById('desktop-rating-range'), document.getElementById('mobile-rating-range')].forEach(el => { if (el) el.value = 0; });
       [document.getElementById('desktop-rating-value'), document.getElementById('mobile-rating-value')].forEach(el => { if (el) el.textContent = ratingLabel; });
 
@@ -1014,7 +1014,7 @@ function matchTreatment(raw) {
 
     function updateRatingSlider(value) {
       minRating = parseFloat(value);
-      const label = minRating === 0 ? 'Any' : `★ ${minRating.toFixed(1)}+`;
+      const label = `★ ${minRating.toFixed(1)}+`;
       if (desktopRatingSlider) desktopRatingSlider.value = minRating;
       if (mobileRatingSlider) mobileRatingSlider.value = minRating;
       if (desktopRatingLabel) desktopRatingLabel.textContent = label;
@@ -1024,6 +1024,8 @@ function matchTreatment(raw) {
 
     if (desktopRatingSlider) desktopRatingSlider.addEventListener('input', (e) => updateRatingSlider(e.target.value));
     if (mobileRatingSlider) mobileRatingSlider.addEventListener('input', (e) => updateRatingSlider(e.target.value));
+    if (desktopRatingLabel) desktopRatingLabel.textContent = '★ 0+';
+    if (mobileRatingLabel) mobileRatingLabel.textContent = '★ 0+';
 
     // Search — shared handler used by both desktop and mobile inputs
     function handleSearchInput(raw) {
@@ -1364,7 +1366,7 @@ function matchTreatment(raw) {
         document.querySelectorAll('.filter-min-reviews-slider').forEach(s => {
           s.value = slider.value;
           const val = s.closest('[data-filter="min-reviews"]')?.querySelector('.filter-min-reviews-val');
-          if (val) val.textContent = slider.value === '0' ? 'Any' : slider.value + '+';
+          if (val) val.textContent = slider.value + '+';
         });
         renderWithReset();
       });
@@ -1425,7 +1427,7 @@ function matchTreatment(raw) {
         document.querySelectorAll('.filter-exp-slider').forEach(s => {
           s.value = slider.value;
           s.closest('[data-filter="experience"]').querySelector('.filter-exp-val').textContent =
-            slider.value === '0' ? 'Any' : slider.value + '+ yrs';
+            slider.value + '+ yrs';
         });
         renderWithReset();
       });
@@ -1481,9 +1483,9 @@ function matchTreatment(raw) {
 
     const groupHTML = `
       <div class="filter-group" data-filter="experience">
-        <div class="filter-group__label">Practitioner Experience (Years) <span class="filter-exp-val">Any</span></div>
+        <div class="filter-group__label">Practitioner Experience (Years) <span class="filter-exp-val">0 yrs</span></div>
         <input type="range" class="filter-exp-slider" min="0" max="10" step="1" value="0">
-        <div class="filter-exp-ticks"><span>Any</span><span>5+</span><span>10+</span></div>
+        <div class="filter-exp-ticks"><span>0</span><span>5+</span><span>10+</span></div>
       </div>`;
 
     document.querySelectorAll('.sidebar, .filter-drawer').forEach(container => {
@@ -1500,9 +1502,9 @@ function matchTreatment(raw) {
 
     const groupHTML = `
       <div class="filter-group" data-filter="min-reviews">
-        <div class="filter-group__label">Min Reviews <span class="filter-min-reviews-val">Any</span></div>
+        <div class="filter-group__label">Min Reviews <span class="filter-min-reviews-val">0+</span></div>
         <input type="range" class="filter-min-reviews-slider" min="0" max="${cap}" step="${step}" value="0">
-        <div class="filter-exp-ticks"><span>Any</span><span>${Math.round(cap / 2)}+</span><span>${cap}+</span></div>
+        <div class="filter-exp-ticks"><span>0</span><span>${Math.round(cap / 2)}+</span><span>${cap}+</span></div>
       </div>`;
 
     document.querySelectorAll('.sidebar, .filter-drawer').forEach(container => {
