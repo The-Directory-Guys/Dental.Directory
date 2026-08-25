@@ -708,10 +708,12 @@ function matchTreatment(raw) {
           return (b.rating || 0) - (a.rating || 0);
         });
       } else if (sortBy === 'rating') {
+        console.log('[sort] sortBy=rating activeTreatmentPriceType=', activeTreatmentPriceType, 'first3:', filtered.slice(0,3).map(d=>d.name+'='+d.rating));
         filtered.sort((a, b) => {
           const rd = (b.rating || 0) - (a.rating || 0);
           return rd !== 0 ? rd : (b.reviewCount || 0) - (a.reviewCount || 0);
         });
+        console.log('[sort] after:', filtered.slice(0,5).map(d=>d.name+'='+d.rating));
       } else if (sortBy === 'name') {
         filtered.sort((a, b) => a.name.localeCompare(b.name));
       } else if (sortBy === 'reviews') {
