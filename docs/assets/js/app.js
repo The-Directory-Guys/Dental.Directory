@@ -235,6 +235,15 @@ function matchTreatment(raw) {
     return m ? m[0] : null;
   }
 
+  function setSliderTrack(el) {
+    const min = parseFloat(el.min) || 0;
+    const max = parseFloat(el.max) || 100;
+    const pct = ((parseFloat(el.value) || 0) - min) / (max - min) * 100;
+    el.style.background = `linear-gradient(to right,var(--clr-teal) ${pct}%,var(--clr-gray-200) ${pct}%)`;
+  }
+  document.addEventListener('input', e => { if (e.target.type === 'range') setSliderTrack(e.target); });
+  document.querySelectorAll('input[type="range"]').forEach(setSliderTrack);
+
   const AMENITY_CHECKS = {
     saturday_hours:   d => !!(d.hrs && Array.isArray(d.hrs['6'])),
     sunday_hours:     d => !!(d.hrs && Array.isArray(d.hrs['0'])),
@@ -885,6 +894,7 @@ function matchTreatment(raw) {
       [document.getElementById('desktop-hygienist-range'), document.getElementById('mobile-hygienist-range')].forEach(el => { if (el) el.value = 200; });
       [document.getElementById('desktop-hygienist-value'), document.getElementById('mobile-hygienist-value')].forEach(el => { if (el) el.textContent = 'Any'; });
 
+      document.querySelectorAll('input[type="range"]').forEach(setSliderTrack);
       renderWithReset();
     }
 
@@ -1345,6 +1355,7 @@ function matchTreatment(raw) {
     buildMinReviewsFilter(allDentists);
     addFilterInfoButtons();
     addApplyFilterButton();
+    document.querySelectorAll('input[type="range"]').forEach(setSliderTrack);
 
     // Min reviews slider events (injected by buildMinReviewsFilter)
     document.querySelectorAll('.filter-min-reviews-slider').forEach(slider => {
