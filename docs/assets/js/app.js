@@ -1987,7 +1987,14 @@ function matchTreatment(raw) {
     }
 
     // Collect payment pills from scraped_prices (merged with amenity data below)
-    const scrapedPaymentPills = paymentRows.map(p => {
+    const seenPayment = new Set();
+    const uniquePaymentRows = paymentRows.filter(p => {
+      const key = p.service.toLowerCase().trim();
+      if (seenPayment.has(key)) return false;
+      seenPayment.add(key);
+      return true;
+    });
+    const scrapedPaymentPills = uniquePaymentRows.map(p => {
       const dbDesc = p.price && p.price !== p.service ? p.price : '';
       const svcKey = p.service.toLowerCase().trim();
       const fallback = PAYMENT_DESCS[svcKey] || Object.entries(PAYMENT_DESCS).find(([k]) => svcKey.includes(k))?.[1] || '';
@@ -2103,7 +2110,7 @@ function matchTreatment(raw) {
         catch { amenityChips = rawPartners.split(/,(?![^(]*\))/).map(s => s.trim()).filter(Boolean); }
       }
       // Filter amenity chips that are already covered by a scraped payment (containment match)
-      const scrapedLabels = paymentRows.map(p => p.service.toLowerCase().trim());
+      const scrapedLabels = uniquePaymentRows.map(p => p.service.toLowerCase().trim());
       const uniqueAmenityChips = amenityChips.filter(c => {
         const cLower = c.toLowerCase().trim();
         return !scrapedLabels.some(s => cLower === s || cLower.includes(s) || s.includes(cLower));
