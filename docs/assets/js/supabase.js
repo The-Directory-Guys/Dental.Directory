@@ -10,7 +10,7 @@ function parseOpeningHours(hoursStr) {
   const cleaned = hoursStr
     .replace(/\u202f/g, ' ')   // narrow no-break space
     .replace(/\u2009/g, '')    // thin space
-    .replace(/\u2013/g, '–');  // en dash
+    .replace(/[‐‑‒–—―−]/g, "-");  // all dashes -> hyphen
   
   cleaned.split(';').forEach(part => {
     const trimmed = part.trim();
@@ -41,7 +41,7 @@ function compactHours(hoursObj) {
     const dayNum = DAY_MAP[day];
     if (dayNum === undefined) continue;
     if (!range || /closed/i.test(range)) { result[dayNum] = null; continue; }
-    const m = range.match(/(\d+):(\d+)\s*(AM|PM)\s*[–\-]\s*(\d+):(\d+)\s*(AM|PM)/i);
+    const m = range.match(/(\d+):(\d+)\s*(AM|PM)\s*[-]\s*(\d+):(\d+)\s*(AM|PM)/i);
     if (m) result[dayNum] = [toMin(m[1], m[2], m[3]), toMin(m[4], m[5], m[6])];
   }
   return Object.keys(result).length > 0 ? result : null;
