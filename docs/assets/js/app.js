@@ -708,12 +708,10 @@ function matchTreatment(raw) {
           return (b.rating || 0) - (a.rating || 0);
         });
       } else if (sortBy === 'rating') {
-        console.log('[sort] sortBy=rating activeTreatmentPriceType=', activeTreatmentPriceType, 'first3:', filtered.slice(0,3).map(d=>d.name+'='+d.rating));
         filtered.sort((a, b) => {
           const rd = (b.rating || 0) - (a.rating || 0);
           return rd !== 0 ? rd : (b.reviewCount || 0) - (a.reviewCount || 0);
         });
-        console.log('[sort] after:', filtered.slice(0,5).map(d=>d.name+'='+d.rating));
       } else if (sortBy === 'name') {
         filtered.sort((a, b) => a.name.localeCompare(b.name));
       } else if (sortBy === 'reviews') {
@@ -1771,9 +1769,20 @@ function matchTreatment(raw) {
     'West Coast': 'west-coast.html'
   };
 
-  function setBackButton(region) {
+  const CITY_FILES = {
+    'Christchurch': { file: 'christchurch.html', label: 'Christchurch' },
+    'Dunedin':      { file: 'dunedin.html',      label: 'Dunedin' },
+    'Hamilton':     { file: 'hamilton.html',      label: 'Hamilton' },
+    'Tauranga':     { file: 'tauranga.html',      label: 'Tauranga' },
+  };
+  function setBackButton(region, city) {
     const backBtn = document.querySelector('.profile-hero__back');
     if (!backBtn || !region) return;
+    if (city && CITY_FILES[city]) {
+      backBtn.href = CITY_FILES[city].file;
+      backBtn.textContent = `← Back to ${CITY_FILES[city].label} listings`;
+      return;
+    }
     const fileName = REGION_FILES[region] || 'index.html';
     backBtn.href = fileName;
     const displayName = region === 'Nelson' ? 'Nelson/Tasman' : region;
@@ -1863,7 +1872,7 @@ function matchTreatment(raw) {
     }
 
     // Update Back button with confirmed region from loaded data
-    if (dentist.region) setBackButton(dentist.region);
+    if (dentist.region) setBackButton(dentist.region, dentist.city);
 
     document.title = `${dentist.name} | Dental Compare`;
 
