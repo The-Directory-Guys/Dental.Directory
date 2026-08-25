@@ -499,10 +499,20 @@ function matchTreatment(raw) {
         loadExperienceMap(),
       ]);
       allDentists.forEach(d => {
-        if (d.id && specMap[d.id]) {
-          d.practitionerSpecialties = specMap[d.id].specialties;
-          d.practitionerNames = specMap[d.id].names;
-          d.practitionerLanguages = specMap[d.id].languages;
+        const sm = d.id && specMap[d.id];
+        if (sm) {
+          d.practitionerSpecialties = sm.specialties;
+          d.practitionerNames = sm.names;
+          d.practitionerLanguages = sm.languages;
+          d.practitionerHasPhoto = sm.hasPhoto;
+          d.practitionerHasBio = sm.hasBio;
+          d.practitionerHasFemalePractitioner = sm.hasFemalePractitioner;
+          d.practitionerHasMalePractitioner = sm.hasMalePractitioner;
+        } else {
+          d.practitionerHasPhoto = false;
+          d.practitionerHasBio = false;
+          d.practitionerHasFemalePractitioner = false;
+          d.practitionerHasMalePractitioner = false;
         }
         if (d.id && amenMap[d.id]) d.amenityFlags = amenMap[d.id];
         if (d.id && expMap[d.id]) d.maxExperience = expMap[d.id];
@@ -515,7 +525,7 @@ function matchTreatment(raw) {
     let activeServices = [];
     let minRating = 0;
     let searchQuery = '';
-    let sortBy = 'reviews';
+    let sortBy = 'rating';
     let maxPrice = Infinity;
     let maxHygienistPrice = Infinity;
     let activeTreatmentPriceType = null;
@@ -526,6 +536,10 @@ function matchTreatment(raw) {
     let minReviews = 0;
     let showFavouritesOnly = false;
     let showOpenOnly = false;
+    let filterHasPhoto = false;
+    let filterHasBio = false;
+    let filterFemalePractitioner = false;
+    let filterMalePractitioner = false;
     let _favs = getFavourites();
     let _cmpIds = compareIds();
 
@@ -549,7 +563,8 @@ function matchTreatment(raw) {
           const cmpBadge = cmp
             ? ` <span class="price-cmp price-cmp--${cmp.dir}">${cmp.text}</span>`
             : '';
-          const checkupDur = extractDuration(getCheckupRow(d)?.notes);
+          const checkupRow = getCheckupRow(d);
+          const checkupDur = extractDuration(checkupRow?.notes) || extractDuration(checkupRow?.price);
           const durStr = checkupDur ? ` <span class="pricing-duration">${checkupDur}</span>` : '';
           parts.push(`Checkup from $${checkupPrice}${durStr}${cmpBadge}`);
         }
@@ -557,7 +572,8 @@ function matchTreatment(raw) {
           const hCmps = getHygienistComparisons(hygPrice, d.city, d.region);
           const hCmp = hCmps.city || hCmps.region;
           const hBadge = hCmp ? ` <span class="price-cmp price-cmp--${hCmp.dir}">${hCmp.text}</span>` : '';
-          const hygDur = extractDuration(getHygienistRow(d)?.notes);
+          const hygRow = getHygienistRow(d);
+          const hygDur = extractDuration(hygRow?.notes) || extractDuration(hygRow?.price);
           const hDurStr = hygDur ? ` <span class="pricing-duration">${hygDur}</span>` : '';
           parts.push(`Hygienist: scale &amp; clean from $${hygPrice}${hDurStr}${hBadge}`);
         }
@@ -647,6 +663,10 @@ function matchTreatment(raw) {
           if (!activeAmenities.every(key => checkAmenity(key, d))) return false;
         }
         if (minExperience > 0 && (d.maxExperience == null || d.maxExperience < minExperience)) return false;
+        if (filterHasPhoto && !d.practitionerHasPhoto) return false;
+        if (filterHasBio && !d.practitionerHasBio) return false;
+        if (filterFemalePractitioner && !d.practitionerHasFemalePractitioner) return false;
+        if (filterMalePractitioner && !d.practitionerHasMalePractitioner) return false;
         if (activeSuburbs.length && !activeSuburbs.includes(d.suburb)) return false;
         if (activeServices.length && !searchQuery && !activeServices.every(s => {
           if (s === 'Hygienist') return getHygienistPrice(d) !== null;
@@ -688,7 +708,10 @@ function matchTreatment(raw) {
           return (b.rating || 0) - (a.rating || 0);
         });
       } else if (sortBy === 'rating') {
-        filtered.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+        filtered.sort((a, b) => {
+          const rd = (b.rating || 0) - (a.rating || 0);
+          return rd !== 0 ? rd : (b.reviewCount || 0) - (a.reviewCount || 0);
+        });
       } else if (sortBy === 'name') {
         filtered.sort((a, b) => a.name.localeCompare(b.name));
       } else if (sortBy === 'reviews') {
@@ -720,6 +743,10 @@ function matchTreatment(raw) {
           else if (searchQuery) activeLabels.push(`"${searchQuery}"`);
           activeServices.forEach(s => activeLabels.push(s));
           activeLanguages.forEach(l => activeLabels.push(l));
+          if (filterFemalePractitioner) activeLabels.push('Female practitioner');
+          if (filterMalePractitioner) activeLabels.push('Male practitioner');
+          if (filterHasPhoto) activeLabels.push('Has team photos');
+          if (filterHasBio) activeLabels.push('Has team bios');
           activeSuburbs.forEach(s => activeLabels.push(s));
           if (minRating > 0) activeLabels.push(`★ ${minRating.toFixed(1)}+`);
           if (minReviews > 0) activeLabels.push(`${minReviews}+ reviews`);
@@ -808,6 +835,11 @@ function matchTreatment(raw) {
       activeSuburbs = [];
       activeLanguages = [];
       activeServices = [];
+      filterHasPhoto = false;
+      filterHasBio = false;
+      filterFemalePractitioner = false;
+      filterMalePractitioner = false;
+      document.querySelectorAll('.filter-practitioner-profile').forEach(el => { el.checked = false; });
       minRating = 0;
       searchQuery = '';
       maxPrice = Infinity;
@@ -1302,12 +1334,13 @@ function matchTreatment(raw) {
       cb.checked = activeServices.includes('General Dentistry');
     });
 
-    // Build dynamic suburb + specialty + amenity + experience + language filters
+    // Build dynamic suburb + specialty + amenity + experience + language + team profile filters
     buildSuburbFilters(allDentists);
     buildSpecialtyFilters(allDentists);
     buildAmenitiesFilter(allDentists);
     buildExperienceFilter(allDentists);
     buildLanguageFilters(allDentists);
+    buildPractitionerProfileFilters(allDentists);
     buildMinReviewsFilter(allDentists);
     addFilterInfoButtons();
     addApplyFilterButton();
@@ -1356,6 +1389,19 @@ function matchTreatment(raw) {
       cb.addEventListener('change', () => {
         document.querySelectorAll(`.filter-language[value="${cb.value}"]`).forEach(p => { p.checked = cb.checked; });
         activeLanguages = [...new Set(Array.from(document.querySelectorAll('.filter-language:checked')).map(el => el.value))];
+        renderWithReset();
+      });
+    });
+
+    // Practitioner profile filters (injected dynamically by buildPractitionerProfileFilters)
+    document.querySelectorAll('.filter-practitioner-profile').forEach(el => {
+      el.addEventListener('change', () => {
+        const profile = el.dataset.profile;
+        document.querySelectorAll(`.filter-practitioner-profile[data-profile="${profile}"]`).forEach(p => { p.checked = el.checked; });
+        if (profile === 'has-photo')    filterHasPhoto = el.checked;
+        if (profile === 'has-bio')      filterHasBio = el.checked;
+        if (profile === 'gender-F')     filterFemalePractitioner = el.checked;
+        if (profile === 'gender-M')     filterMalePractitioner = el.checked;
         renderWithReset();
       });
     });
@@ -1636,6 +1682,47 @@ function matchTreatment(raw) {
 
     document.querySelectorAll('.sidebar, .filter-drawer').forEach(container => {
       if (container.querySelector('[data-filter="language"]')) return;
+      container.insertAdjacentHTML('beforeend', groupHTML);
+    });
+  }
+
+  function buildPractitionerProfileFilters(allDentists) {
+    const hasAnyPhoto   = allDentists.some(d => d.practitionerHasPhoto);
+    const hasAnyBio     = allDentists.some(d => d.practitionerHasBio);
+    const hasAnyFemale  = allDentists.some(d => d.practitionerHasFemalePractitioner);
+    const hasAnyMale    = allDentists.some(d => d.practitionerHasMalePractitioner);
+    if (!hasAnyPhoto && !hasAnyBio && !hasAnyFemale && !hasAnyMale) return;
+
+    let html = '';
+    if (hasAnyFemale) html += `
+      <label class="filter-check">
+        <input type="checkbox" class="filter-practitioner-profile" data-profile="gender-F">
+        <span>Female practitioner</span>
+      </label>`;
+    if (hasAnyMale) html += `
+      <label class="filter-check">
+        <input type="checkbox" class="filter-practitioner-profile" data-profile="gender-M">
+        <span>Male practitioner</span>
+      </label>`;
+    if (hasAnyPhoto) html += `
+      <label class="filter-check">
+        <input type="checkbox" class="filter-practitioner-profile" data-profile="has-photo">
+        <span>Has team photos</span>
+      </label>`;
+    if (hasAnyBio) html += `
+      <label class="filter-check">
+        <input type="checkbox" class="filter-practitioner-profile" data-profile="has-bio">
+        <span>Has team bios</span>
+      </label>`;
+
+    const groupHTML = `
+      <div class="filter-group" data-filter="practitioner-profile">
+        <div class="filter-group__label">Team</div>
+        <div class="filter-group__items">${html}</div>
+      </div>`;
+
+    document.querySelectorAll('.sidebar, .filter-drawer').forEach(container => {
+      if (container.querySelector('[data-filter="practitioner-profile"]')) return;
       container.insertAdjacentHTML('beforeend', groupHTML);
     });
   }
