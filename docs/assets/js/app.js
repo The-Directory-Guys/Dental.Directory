@@ -879,7 +879,7 @@ function matchTreatment(raw) {
       document.querySelectorAll('.filter-exp-slider').forEach(s => {
         s.value = '0';
         const val = s.closest('[data-filter="experience"]')?.querySelector('.filter-exp-val');
-        if (val) val.textContent = '0 yrs';
+        if (val) val.textContent = 'Any';
       });
       if (searchInput) searchInput.value = '';
 
@@ -1427,7 +1427,7 @@ function matchTreatment(raw) {
         document.querySelectorAll('.filter-exp-slider').forEach(s => {
           s.value = slider.value;
           s.closest('[data-filter="experience"]').querySelector('.filter-exp-val').textContent =
-            slider.value + '+ yrs';
+            slider.value === '0' ? 'Any' : slider.value + '+ yrs';
         });
         renderWithReset();
       });
@@ -1483,9 +1483,9 @@ function matchTreatment(raw) {
 
     const groupHTML = `
       <div class="filter-group" data-filter="experience">
-        <div class="filter-group__label">Practitioner Experience (Years) <span class="filter-exp-val">0 yrs</span></div>
+        <div class="filter-group__label">Practitioner Experience (Years) <span class="filter-exp-val">Any</span></div>
         <input type="range" class="filter-exp-slider" min="0" max="10" step="1" value="0">
-        <div class="filter-exp-ticks"><span>0</span><span>5+</span><span>10+</span></div>
+        <div class="filter-exp-ticks"><span>Any</span><span>5+</span><span>10+</span></div>
       </div>`;
 
     document.querySelectorAll('.sidebar, .filter-drawer').forEach(container => {
