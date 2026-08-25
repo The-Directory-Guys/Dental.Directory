@@ -1236,7 +1236,8 @@ h4 {
     margin-left: var(--sp-2);
 }
 
-.filter-exp-slider {
+.filter-exp-slider,
+.filter-min-reviews-slider {
     width: 100%;
     margin: var(--sp-2) 0 var(--sp-1);
     accent-color: var(--clr-teal);
