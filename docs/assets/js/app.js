@@ -2166,8 +2166,13 @@ function matchTreatment(raw) {
         if (am[key]) items.push(`<div class="misc-item"><span class="misc-item__label">${label}</span><span class="misc-item__value">${am[key]}</span></div>`);
       });
       BOOL_FIELDS.forEach(([key, label]) => {
-        if (am[key] === true) items.push(`<div class="misc-item"><span class="misc-item__label">${label}</span><span class="misc-item__value misc-item__value--yes">✓ Yes</span></div>`);
-        else if (am[key] === false) items.push(`<div class="misc-item"><span class="misc-item__label">${label}</span><span class="misc-item__value misc-item__value--no">✗ No</span></div>`);
+        if (am[key] === true) {
+          const note = key === 'online_booking' && am.online_booking_note ? am.online_booking_note : '✓ Yes';
+          const cls = note === '✓ Yes' ? ' misc-item__value--yes' : '';
+          items.push(`<div class="misc-item"><span class="misc-item__label">${label}</span><span class="misc-item__value${cls}">${note}</span></div>`);
+        } else if (am[key] === false) {
+          items.push(`<div class="misc-item"><span class="misc-item__label">${label}</span><span class="misc-item__value misc-item__value--no">✗ No</span></div>`);
+        }
       });
       if (items.length > 0) {
         miscHTML = `
