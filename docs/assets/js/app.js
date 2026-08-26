@@ -2148,13 +2148,22 @@ function matchTreatment(raw) {
         return `<span class="payment-pill">${c}</span>`;
       });
       const allPills = [...scrapedPaymentPills, ...amenityPills];
-      const plansHTML = rawPlans ? `<p class="payment-plans">${rawPlans}</p>` : '';
-      if (allPills.length > 0 || plansHTML) {
+      if (rawPlans && rawPlans !== 'true') {
+        if (rawPlans.length <= 55) {
+          allPills.push(`<span class="payment-pill">${rawPlans}</span>`);
+        } else {
+          const colonIdx = rawPlans.indexOf(':');
+          const commaIdx = rawPlans.indexOf(',');
+          const cutIdx = colonIdx > 0 && colonIdx < 30 ? colonIdx : (commaIdx > 0 && commaIdx < 30 ? commaIdx : -1);
+          const pillLabel = cutIdx > 0 ? rawPlans.slice(0, cutIdx).trim() : 'Plans & Offers';
+          allPills.push(`<span class="payment-pill payment-pill--described" role="button" tabindex="0" aria-expanded="false"><span class="payment-pill__name">${pillLabel} <span class="payment-pill__chevron">▾</span></span><span class="payment-pill__desc">${rawPlans}</span></span>`);
+        }
+      }
+      if (allPills.length > 0) {
         paymentHTML = `
         <div class="profile-section profile-section--payment">
           <h2 class="profile-section__title">Payment Options</h2>
-          ${allPills.length > 0 ? `<div class="payment-pills">${allPills.join('')}</div>` : ''}
-          ${plansHTML}
+          <div class="payment-pills">${allPills.join('')}</div>
         </div>`;
       }
     }
