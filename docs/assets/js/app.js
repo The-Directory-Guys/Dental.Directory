@@ -418,9 +418,9 @@ function matchTreatment(raw) {
     'winz': 'Work and Income New Zealand (WINZ) can provide financial assistance with dental costs for eligible patients.',
     'southern cross': 'Southern Cross Health Insurance members may be able to claim dental treatment costs.',
     'nib': 'NIB Health Insurance members may be able to claim dental treatment costs.',
-    'free teen dental care': 'Free dental treatment for secondary school students from Year 9 until age 18, funded by Health NZ.',
-    'teen dental': 'Free dental treatment for secondary school students from Year 9 until age 18, funded by Health NZ.',
-    'health nz': 'Free dental treatment for secondary school students from Year 9 until age 18, funded by Health NZ.',
+    'free teen dental care': 'Free dental treatment for eligible youth (Year 9 to age 18), funded by Health NZ.',
+    'teen dental': 'Free dental treatment for eligible youth (Year 9 to age 18), funded by Health NZ.',
+    'health nz': 'Free dental treatment for eligible youth (Year 9 to age 18), funded by Health NZ.',
     'afterpay': 'Split your dental costs into 4 fortnightly payments with Afterpay — no interest.',
     'laybuy': 'Split the cost into 6 weekly payments with Laybuy — no interest.',
     'genoapay': 'Split the cost into weekly payments with Genoapay — no interest.',
@@ -555,8 +555,8 @@ function matchTreatment(raw) {
 
     function cardHTML(d) {
       const initials = d.name.split(' ').filter(w => w.length > 0).map(w => w[0]).join('').slice(0, 2).toUpperCase();
-      const orderedServices = d.services.includes('Teen Dental')
-        ? ['Teen Dental', ...d.services.filter(s => s !== 'Teen Dental')]
+      const orderedServices = d.services.includes('Free Teen Dental')
+        ? ['Free Teen Dental', ...d.services.filter(s => s !== 'Free Teen Dental')]
         : d.services;
       const servicePills = orderedServices.slice(0, 4).map(s =>
         `<span class="pill pill--sm" data-service="${s}" role="button" tabindex="0" style="cursor:pointer;">${s === 'Hygienist' ? 'Hygienist: Scale & clean' : s}</span>`
@@ -1559,7 +1559,7 @@ function matchTreatment(raw) {
     'Oral Surgery':       'Tooth extractions, wisdom teeth removal, and minor surgical procedures.',
     'Orthodontics':       'Braces and clear aligners (including Invisalign) to straighten teeth and correct bite issues.',
     'Periodontal Care':   'Treatment for gum disease, including deep cleaning and ongoing gum health management.',
-    'Teen Dental':        'Subsidised dental care for eligible patients aged 18 and under.',
+    'Free Teen Dental':        'Free dental treatment for eligible youth (Year 9 to age 18), funded by Health NZ.',
     'sedation':           'Intravenous sedation for patients with dental anxiety or for complex procedures — you remain conscious but deeply relaxed.',
     'oral health therap': 'Oral health therapists provide preventive care, hygiene treatments, and dental treatment for children and adolescents.',
   };
@@ -1896,7 +1896,7 @@ function matchTreatment(raw) {
       'Dental Implants': '🔩', 'Implants': '🔩', 'Orthodontics': '😁', 'Emergency': '🚨',
       'Dentures': '🦷', 'Oral Surgery': '🩺', 'Endodontics': '🔬',
       'Periodontal Care': '🦠', 'Oral and Maxillofacial Surgery': '🩺',
-      'Hygienist': '🪥', 'Scale & clean': '🪥', 'Teen Dental': '🧒',
+      'Hygienist': '🪥', 'Scale & clean': '🪥', 'Free Teen Dental': '🧒',
     };
 
     const serviceDescs = {
@@ -1914,7 +1914,7 @@ function matchTreatment(raw) {
       'Oral and Maxillofacial Surgery': 'Surgical treatment of conditions affecting the mouth, jaw, and face.',
       'Hygienist':                      'Professional scale and clean, stain removal, and personalised oral hygiene advice.',
       'Scale & clean':                  'Professional scale and clean, stain removal, and personalised oral hygiene advice.',
-      'Teen Dental':                    'Subsidised dental care for eligible patients aged 18 and under.',
+      'Free Teen Dental':                    'Free dental treatment for eligible youth (Year 9 to age 18), funded by Health NZ.',
     };
 
     const servicesHTML = dentist.services.map(s => {
