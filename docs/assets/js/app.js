@@ -2225,6 +2225,11 @@ function matchTreatment(raw) {
           <div class="profile-desc">${dentist.description}</div>
         </div>` : ''}
 
+        ${dentist.clinicPhotoUrl ? `
+        <div class="profile-section profile-section--clinic-photo">
+          <img src="${dentist.clinicPhotoUrl}" alt="${dentist.name}" class="profile-clinic-photo" loading="lazy" onerror="this.closest('.profile-section--clinic-photo').style.display='none'">
+        </div>` : ''}
+
         <div class="profile-section profile-section--services">
           <h2 class="profile-section__title">Services</h2>
           <div class="service-list">${servicesHTML}</div>

@@ -1396,6 +1396,10 @@ h4 {
 .profile-section--misc     .profile-section__title { border-bottom-color: rgba(99,102,241,.2); }
 .profile-section--reviews  .profile-section__title { border-bottom-color: rgba(249,115,22,.2); }
 
+/* Clinic facility photo */
+.profile-section--clinic-photo { padding: 0; border: none; background: none; }
+.profile-clinic-photo { width: 100%; max-height: 380px; object-fit: cover; border-radius: 10px; display: block; }
+
 /* Profile about description (supports HTML paragraphs) */
 .profile-desc p { margin: 0 0 1rem; line-height: 1.7; color: var(--clr-gray-700); }
 .profile-desc p:last-child { margin-bottom: 0; }

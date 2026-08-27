@@ -83,6 +83,7 @@ function transformClinic(clinic) {
     googleMapsUrl: clinic.google_maps_url || '',
     businessStatus: clinic.business_status || 'OPERATIONAL',
     photoUrl: clinic.photo_url || '',
+    clinicPhotoUrl: clinic.clinic_photo_url || '',
     foundedYear: clinic.founded_year || null,
     facebookUrl: clinic.facebook_url || ''
   };
