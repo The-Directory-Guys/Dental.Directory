@@ -2717,6 +2717,48 @@ details[open] .faq__question::after {
     line-height: 1.7;
     max-width: 72ch;
 }
+
+/* ===================================================
+   CONTACT PAGE
+   =================================================== */
+.contact-callout {
+    background: var(--clr-gray-50);
+    border: 1px solid var(--clr-gray-200);
+    border-left: 4px solid var(--clr-teal);
+    border-radius: var(--radius-lg);
+    padding: var(--sp-6);
+    color: var(--clr-gray-600);
+    line-height: 1.7;
+    margin-bottom: var(--sp-8);
+}
+
+.contact-callout a {
+    color: var(--clr-teal);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.contact-reasons {
+    color: var(--clr-gray-600);
+    line-height: 2;
+    margin: var(--sp-3) 0 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.contact-reasons li {
+    padding-left: var(--sp-6);
+    position: relative;
+}
+
+.contact-reasons li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--clr-teal);
+    font-weight: 700;
+}
 /* ===================================================
    AVAILABILITY BADGES
    =================================================== */
