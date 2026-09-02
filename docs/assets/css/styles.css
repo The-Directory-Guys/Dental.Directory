@@ -1398,7 +1398,7 @@ h4 {
 
 /* Clinic facility photo */
 .profile-section--clinic-photo { padding: 0; border: none; background: none; }
-.profile-clinic-photo { width: 100%; max-height: 380px; object-fit: cover; border-radius: 10px; display: block; }
+.profile-clinic-photo { width: 100%; max-height: 380px; object-fit: cover; object-position: center top; border-radius: 10px; display: block; }
 
 /* Profile about description (supports HTML paragraphs) */
 .profile-desc p { margin: 0 0 1rem; line-height: 1.7; color: var(--clr-gray-700); }
