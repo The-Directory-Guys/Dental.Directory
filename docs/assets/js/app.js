@@ -589,7 +589,7 @@ function matchTreatment(raw) {
         }
         if (parts.length > 0) {
           pricingPreview = `<div class="pricing-summary">${parts.map(p => `<div class="pricing-line">💰 ${p}</div>`).join('')}</div>`;
-        } else if (d.pricing.some(p => /\$\d/.test(p.price) && !isPaymentMethod(p))) {
+        } else if (d.pricing.some(p => p.price && p.price !== '—' && !isPaymentMethod(p))) {
           pricingPreview = `<div class="pricing-summary pricing-summary--muted">💰 Pricing available</div>`;
         } else {
           pricingPreview = `<div class="pricing-summary pricing-summary--muted">No prices listed</div>`;
@@ -1947,7 +1947,7 @@ function matchTreatment(raw) {
 
     // Pricing table — always show, with empty state if no data
     let pricingHTML = '';
-    const pricingRows = (dentist.pricing || []).filter(p => /\$\d/.test(p.price) && !isPaymentMethod(p));
+    const pricingRows = (dentist.pricing || []).filter(p => p.price && p.price !== '—' && !isPaymentMethod(p));
     const paymentRows = (dentist.pricing || []).filter(p => isPaymentMethod(p));
     if (pricingRows.length > 0) {
       const checkupPrice = getCheckupPrice(dentist);
