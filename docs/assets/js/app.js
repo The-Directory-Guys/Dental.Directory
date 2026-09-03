@@ -1680,7 +1680,7 @@ function matchTreatment(raw) {
     });
     const available = Object.entries(counts)
       .filter(([, n]) => n >= 1)
-      .sort((a, b) => b[1] - a[1]);
+      .sort((a, b) => a[0].localeCompare(b[0]));
     if (available.length === 0) return;
 
     const html = available.map(([lang, count]) => `
