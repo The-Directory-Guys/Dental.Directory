@@ -183,7 +183,7 @@
       <div class="benefit__icon">✏️</div>
       <div>
         <div class="benefit__title">Update your details</div>
-        <div class="benefit__desc">Correct your address, phone, hours, and services — all in one place.</div>
+        <div class="benefit__desc">Correct your address, phone, hours, and services, all in one place.</div>
       </div>
     </div>
     <div class="benefit">
@@ -268,10 +268,13 @@
         <div class="success__icon">✅</div>
         <div class="success__title">Request received</div>
         <div class="success__body">
-          Thanks — we'll review your claim and get back to you at <strong id="success-email"></strong> within 1–2 business days.
-          Once approved, you'll receive a sign-in link to access your dashboard.
+          Thanks. Next, create your account using <strong id="success-email"></strong>. If that matches the email we have on file for this practice, you'll get instant access to your dashboard as soon as you confirm your email.
+          If it doesn't match, we'll review your claim manually and get back to you within 1–2 business days.
         </div>
-        <a href="/" class="success__back">← Back to directory</a>
+        <a href="signup.html" class="btn btn--primary" style="display:inline-block; margin-top:1rem;">Create your account &rarr;</a>
+        <div style="margin-top:1rem;">
+          <a href="/" class="success__back">← Back to directory</a>
+        </div>
       </div>
 
     </div>
@@ -378,7 +381,7 @@
         document.getElementById('claim-form-state').style.display = 'none';
         document.getElementById('claim-success').style.display = 'block';
       } else {
-        err.textContent = 'Something went wrong — please try again or email us directly.';
+        err.textContent = 'Something went wrong. Please try again or email us directly.';
         btn.disabled = false;
         btn.textContent = 'Submit claim request';
       }
