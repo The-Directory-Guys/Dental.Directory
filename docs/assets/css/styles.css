@@ -274,6 +274,13 @@ h4 {
     background: var(--clr-teal);
     color: #fff;
 }
+.nav__link--owners.nav__link--active {
+    background: var(--clr-teal);
+    color: #fff;
+}
+.nav__link--owners.nav__link--active::after {
+    display: none;
+}
 
 /* Mobile hamburger */
 .menu-toggle {
