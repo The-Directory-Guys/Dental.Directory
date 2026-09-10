@@ -226,6 +226,8 @@
       <h2>Practitioner Photos</h2>
       <p style="font-size:.82rem;color:var(--clr-gray-400);margin:-.5rem 0 1rem;">Photos of your dentists and team members, shown on their profile cards.</p>
       <div id="practitioner-list"></div>
+      <div id="new-practitioner-form" style="display:none; margin-top:1rem; padding-top:1rem; border-top:1px solid var(--clr-gray-50);"></div>
+      <button type="button" class="add-row-btn" id="add-practitioner-btn">+ Add team member</button>
     </div>
 
   </div>
@@ -833,6 +835,95 @@
     }).eq('id', practitionerId);
     setBusy(btn, false, 'Save details');
     error ? toast('Error: ' + error.message, true) : toast('Details saved ✓');
+  });
+
+  async function reloadPractitioners() {
+    const { data } = await db.from('clinic_practitioners')
+      .select('id, name, photo_url, bio, gender, experience, specialties, languages, qualifications')
+      .eq('clinic_id', clinicId).order('id');
+    renderPractitioners(data || []);
+  }
+
+  function newPractitionerFormHTML() {
+    return `
+      <div class="field-group">
+        <label>Name</label>
+        <input type="text" id="new-pr-name" placeholder="e.g. Dr Jane Smith">
+      </div>
+      <div class="field-group">
+        <label>Bio</label>
+        <textarea id="new-pr-bio"></textarea>
+      </div>
+      <div class="two-col">
+        <div class="field-group">
+          <label>Gender</label>
+          <select id="new-pr-gender">
+            <option value="" selected>Prefer not to say</option>
+            <option value="F">Female</option>
+            <option value="M">Male</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label>Experience</label>
+          <input type="text" id="new-pr-experience" placeholder="e.g. 12 years">
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="field-group">
+          <label>Specialties</label>
+          <input type="text" id="new-pr-specialties" placeholder="e.g. Implants, Orthodontics">
+        </div>
+        <div class="field-group">
+          <label>Qualifications</label>
+          <input type="text" id="new-pr-qualifications" placeholder="e.g. BDS, University of Otago">
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Languages spoken</label>
+        <input type="text" id="new-pr-languages" placeholder="e.g. English, Mandarin">
+      </div>
+      <button type="button" class="save-btn" id="save-new-practitioner-btn">Add team member</button>
+      <button type="button" class="add-row-btn" id="cancel-new-practitioner-btn" style="margin-top:.5rem;">Cancel</button>
+    `;
+  }
+
+  document.getElementById('add-practitioner-btn').addEventListener('click', () => {
+    const formEl = document.getElementById('new-practitioner-form');
+    formEl.innerHTML = newPractitionerFormHTML();
+    formEl.style.display = '';
+    document.getElementById('add-practitioner-btn').style.display = 'none';
+
+    document.getElementById('cancel-new-practitioner-btn').addEventListener('click', () => {
+      formEl.style.display = 'none';
+      formEl.innerHTML = '';
+      document.getElementById('add-practitioner-btn').style.display = '';
+    });
+
+    document.getElementById('save-new-practitioner-btn').addEventListener('click', async e => {
+      const name = document.getElementById('new-pr-name').value.trim();
+      if (!name) { toast('Please enter a name', true); return; }
+
+      const btn = e.target;
+      setBusy(btn, true, 'Add team member');
+      const { error } = await db.from('clinic_practitioners').insert({
+        clinic_id:      clinicId,
+        name,
+        bio:            document.getElementById('new-pr-bio').value.trim() || null,
+        gender:         document.getElementById('new-pr-gender').value || null,
+        experience:     document.getElementById('new-pr-experience').value.trim() || null,
+        specialties:    document.getElementById('new-pr-specialties').value.trim() || null,
+        qualifications: document.getElementById('new-pr-qualifications').value.trim() || null,
+        languages:      document.getElementById('new-pr-languages').value.trim() || null,
+      });
+      setBusy(btn, false, 'Add team member');
+      if (error) { toast('Error: ' + error.message, true); return; }
+
+      formEl.style.display = 'none';
+      formEl.innerHTML = '';
+      document.getElementById('add-practitioner-btn').style.display = '';
+      await reloadPractitioners();
+      toast('Team member added ✓');
+    });
   });
 
 })();
