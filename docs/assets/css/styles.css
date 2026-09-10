@@ -231,20 +231,15 @@ h4 {
     position: relative;
 }
 
-.nav__link:hover,
-.nav__link--active {
+.nav__link:hover {
     color: var(--clr-teal);
 }
 
-.nav__link--active::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    right: 0;
-    height: 2px;
+.nav__link--active {
+    color: #fff;
     background: var(--clr-teal);
     border-radius: var(--radius-full);
+    padding: .3rem .85rem;
 }
 
 .nav__coming-soon {
@@ -273,13 +268,6 @@ h4 {
 .nav__link--owners:hover {
     background: var(--clr-teal);
     color: #fff;
-}
-.nav__link--owners.nav__link--active {
-    background: var(--clr-teal);
-    color: #fff;
-}
-.nav__link--owners.nav__link--active::after {
-    display: none;
 }
 
 /* Mobile hamburger */
@@ -3529,11 +3517,8 @@ details[open] .faq__question::after {
     background: var(--clr-gray-50);
 }
 
-.nav__more-menu .nav__link--active::after {
-    display: none;
-}
-
 .nav__more-menu .nav__link--active {
+    color: var(--clr-teal);
     background: var(--clr-gray-50);
 }
 
