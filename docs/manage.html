@@ -127,6 +127,7 @@
       <div>
         <h1 id="clinic-name" style="margin:0; font-size:1.5rem; color:var(--clr-gray-900);"></h1>
         <p id="clinic-suburb" style="margin:.3rem 0 0; color:var(--clr-gray-500); font-size:.9rem;"></p>
+        <a id="view-listing-link" href="#" target="_blank" style="display:inline-block; margin-top:.5rem; font-size:.85rem; color:var(--clr-teal); text-decoration:none;">View my public listing &#8599;</a>
       </div>
       <button id="sign-out-btn" style="background:none; border:none; color:var(--clr-gray-400); font-size:.85rem; cursor:pointer; text-decoration:underline; font-family:inherit;">Sign out</button>
     </div>
@@ -230,6 +231,81 @@
       <button type="button" class="add-row-btn" id="add-practitioner-btn">+ Add team member</button>
     </div>
 
+    <!-- Amenities & Payment Options -->
+    <div class="manage-card">
+      <h2>Amenities &amp; Payment Options</h2>
+      <p style="font-size:.82rem;color:var(--clr-gray-400);margin:-.5rem 0 1rem;">Shown on your profile under "Miscellaneous" and "Payment Options" - leave a toggle at "Not set" to hide that line entirely.</p>
+      <form id="form-amenities">
+        <div class="two-col">
+          <div class="field-group">
+            <label>Wheelchair accessible</label>
+            <select name="wheelchair_accessible"><option value="">Not set</option><option value="true">Yes</option><option value="false">No</option></select>
+          </div>
+          <div class="field-group">
+            <label>Dental anxiety friendly</label>
+            <select name="dental_anxiety_friendly"><option value="">Not set</option><option value="true">Yes</option><option value="false">No</option></select>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="field-group">
+            <label>Kids &amp; family friendly</label>
+            <select name="kids_family_friendly"><option value="">Not set</option><option value="true">Yes</option><option value="false">No</option></select>
+          </div>
+          <div class="field-group">
+            <label>Same-day emergencies</label>
+            <select name="same_day_emergency"><option value="">Not set</option><option value="true">Yes</option><option value="false">No</option></select>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="field-group">
+            <label>Saturday/evening hours</label>
+            <select name="saturday_evening_hours"><option value="">Not set</option><option value="true">Yes</option><option value="false">No</option></select>
+          </div>
+          <div class="field-group">
+            <label>Online booking available</label>
+            <select name="online_booking"><option value="">Not set</option><option value="true">Yes</option><option value="false">No</option></select>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Online booking details (shown instead of "Yes" if filled in)</label>
+          <input type="text" name="online_booking_note" placeholder="e.g. Book via online calendar on our website">
+        </div>
+        <div class="field-group">
+          <label>Parking</label>
+          <input type="text" name="parking_access" placeholder="e.g. Onsite parking available for patients">
+        </div>
+        <div class="two-col">
+          <div class="field-group">
+            <label>In-house specialists</label>
+            <input type="text" name="in_house_specialists" placeholder="e.g. Orthodontist on-site">
+          </div>
+          <div class="field-group">
+            <label>Sedation options</label>
+            <input type="text" name="sedation_options" placeholder="e.g. IV sedation available">
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="field-group">
+            <label>Comfort amenities</label>
+            <input type="text" name="calming_amenities" placeholder="e.g. TVs, blankets, noise-cancelling headphones">
+          </div>
+          <div class="field-group">
+            <label>Special offers</label>
+            <input type="text" name="special_offers" placeholder="e.g. Free consult for new patients">
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Payment options</label>
+          <input type="text" name="payment_partners" placeholder="e.g. Q Card, Afterpay, Southern Cross">
+        </div>
+        <div class="field-group">
+          <label>Membership plans</label>
+          <input type="text" name="membership_plans" placeholder="e.g. $25/month family care plan covering 2 checkups a year">
+        </div>
+        <button type="submit" class="save-btn">Save amenities</button>
+      </form>
+    </div>
+
   </div>
 </section>
 
@@ -310,7 +386,7 @@
     if (!ownerRow) { showState('unauth'); return; } // signed in but not yet linked
     clinicId = ownerRow.clinic_id;
 
-    const [{ data: clinic }, { data: pricing }, { data: reviews }, { data: photos }, { data: practitioners }] = await Promise.all([
+    const [{ data: clinic }, { data: pricing }, { data: reviews }, { data: photos }, { data: practitioners }, { data: amenities }] = await Promise.all([
       db.from('dental_clinics')
         .select('name, address, suburb_town, description, phone_national, phone_international, website, opening_hours, services, photo_url')
         .eq('id', clinicId).single(),
@@ -326,6 +402,9 @@
       db.from('clinic_practitioners')
         .select('id, name, photo_url, bio, gender, experience, specialties, languages, qualifications')
         .eq('clinic_id', clinicId).order('id'),
+      db.from('clinic_amenities')
+        .select('*')
+        .eq('clinic_id', clinicId).maybeSingle(),
     ]);
 
     if (!clinic) { showState('unauth'); return; }
@@ -336,12 +415,14 @@
     renderPhotos(photos || []);
     renderLogo(clinic.photo_url);
     renderPractitioners(practitioners || []);
+    populateAmenities(amenities);
     showState('app');
   }
 
   function populateAll(clinic, pricing) {
     document.getElementById('clinic-name').textContent = clinic.name;
     document.getElementById('clinic-suburb').textContent = clinic.suburb_town || '';
+    document.getElementById('view-listing-link').href = `dentist.html?id=${clinicId}`;
     document.getElementById('f-description').value = clinic.description || '';
     document.getElementById('f-address').value = clinic.address || '';
     document.getElementById('f-suburb').value = clinic.suburb_town || '';
@@ -924,6 +1005,55 @@
       await reloadPractitioners();
       toast('Team member added ✓');
     });
+  });
+
+  // ---- Amenities & Payment Options ----
+  const AMENITY_BOOL_FIELDS = [
+    'wheelchair_accessible', 'dental_anxiety_friendly', 'kids_family_friendly',
+    'same_day_emergency', 'saturday_evening_hours', 'online_booking',
+  ];
+  const AMENITY_TEXT_FIELDS = [
+    'online_booking_note', 'parking_access', 'in_house_specialists',
+    'sedation_options', 'calming_amenities', 'special_offers',
+    'payment_partners', 'membership_plans',
+  ];
+  let amenitiesRowExists = false;
+
+  function populateAmenities(am) {
+    amenitiesRowExists = !!am;
+    const form = document.getElementById('form-amenities');
+    AMENITY_BOOL_FIELDS.forEach(key => {
+      const val = am ? am[key] : null;
+      form.elements[key].value = val === true ? 'true' : val === false ? 'false' : '';
+    });
+    AMENITY_TEXT_FIELDS.forEach(key => {
+      form.elements[key].value = (am && am[key]) || '';
+    });
+  }
+
+  document.getElementById('form-amenities').addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = e.submitter;
+    setBusy(btn, true, 'Save amenities');
+
+    const fd = new FormData(e.target);
+    const data = {};
+    AMENITY_BOOL_FIELDS.forEach(key => {
+      const v = fd.get(key);
+      data[key] = v === 'true' ? true : v === 'false' ? false : null;
+    });
+    AMENITY_TEXT_FIELDS.forEach(key => {
+      data[key] = fd.get(key).trim() || null;
+    });
+
+    const { error } = amenitiesRowExists
+      ? await db.from('clinic_amenities').update(data).eq('clinic_id', clinicId)
+      : await db.from('clinic_amenities').insert({ clinic_id: clinicId, ...data });
+
+    setBusy(btn, false, 'Save amenities');
+    if (error) { toast('Error: ' + error.message, true); return; }
+    amenitiesRowExists = true;
+    toast('Amenities saved ✓');
   });
 
 })();
