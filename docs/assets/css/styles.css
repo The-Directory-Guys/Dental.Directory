@@ -258,16 +258,7 @@ h4 {
 }
 
 .nav__link--owners {
-    color: var(--clr-teal);
-    border: 1.5px solid var(--clr-teal);
-    border-radius: var(--radius-full);
-    padding: .3rem .85rem;
-    font-size: var(--fs-xs);
     white-space: nowrap;
-}
-.nav__link--owners:hover {
-    background: var(--clr-teal);
-    color: #fff;
 }
 
 /* Mobile hamburger */
