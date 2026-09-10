@@ -1015,11 +1015,6 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://dentalcompare.co.nz/clinic/central-endodontics</loc>
-    <priority>0.7</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
     <loc>https://dentalcompare.co.nz/clinic/central-hutt-dental</loc>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
@@ -4255,11 +4250,6 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://dentalcompare.co.nz/clinic/olliver-orthodontics-marlborough</loc>
-    <priority>0.7</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
     <loc>https://dentalcompare.co.nz/clinic/omega-dental</loc>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
@@ -4591,16 +4581,6 @@
   </url>
   <url>
     <loc>https://dentalcompare.co.nz/clinic/periodontal-services</loc>
-    <priority>0.7</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://dentalcompare.co.nz/clinic/perry-adank-dental-surgery</loc>
-    <priority>0.7</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://dentalcompare.co.nz/clinic/peter-ashton-dental-surgery</loc>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
@@ -6621,11 +6601,6 @@
   </url>
   <url>
     <loc>https://dentalcompare.co.nz/clinic/yes-dental</loc>
-    <priority>0.7</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://dentalcompare.co.nz/clinic/york-place-dental</loc>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>

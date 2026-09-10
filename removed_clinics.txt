@@ -6,3 +6,19 @@ Check this list before re-adding any clinic from scraped data.
 ID    | Name                          | City      | Reason
 ------|-------------------------------|-----------|-------------------------------------------------------
 2917  | Pacific Dental Specialties Ltd| Hastings  | Dental supplier/lab, not a patient-facing dental clinic
+1874  | York Place Dental             | Dunedin   | Duplicate of Dental Care Dunedin (id 1783): identical address (504 George Street, Dunedin North) and identical 3 dentists (Jed Lim, Tony Ryder, Tessa Chirayath). Legacy trading name from a shared website (dunedindentalcare.nz/yorkdental/). Phone number (03 474 0557) folded into id 1783's description; static page now redirects to /clinic/dental-care-dunedin.
+2887  | Perry Adank Dental Surgery    | Dunedin   | Duplicate of Dental Care Dunedin (id 1783): identical address and dentists (see York Place Dental above). Legacy name of a previous practice owner. Phone number (03 477 7553) folded into id 1783's description; static page now redirects to /clinic/dental-care-dunedin.
+2890  | Peter Ashton Dental Surgery   | Dunedin   | Duplicate of Dental Care Dunedin (id 1783): identical address and dentists (see York Place Dental above). Legacy name of a previous practice owner. Phone number (03 477 4440) folded into id 1783's description; static page now redirects to /clinic/dental-care-dunedin.
+1559  | Central Endodontics           | Palmerston North | Removed at clinic's request (office@pnendo.co.nz, 2026-09-10) - does not want to be listed on the directory. Static page now redirects to /manawatu-whanganui.html.
+1640  | Olliver Orthodontics Marlborough | Blenheim | Removed at clinic's request (hello@olliverortho.co.nz, 2026-09-10) - specialist referral-only practice, deliberately low-key on marketing, does not want to be listed. Static page now redirects to /marlborough.html.
+
+Removed Practitioners
+======================
+Practitioner records removed from a clinic's team due to data errors, and the reason why.
+Check this list before re-adding a practitioner from scraped data.
+
+ID   | Name          | Clinic (ID)                | Reason
+-----|---------------|-----------------------------|-------------------------------------------------------
+119  | Kelly Jenkins | Smiles Oral Health (1432)   | Smiles Oral Health is an unrelated general dentist practice at 30 Lincoln Road (Healthpoint-listed, own phone 03 338 4712), not Kelly Jenkins' business. She only belongs under Better Smiles Ltd (id 1258). Record was created after clinic 1432's website field was incorrectly set to bettersmiles.co.nz.
+2240 | Maria         | Accent Dentists (6)         | No longer listed on the clinic's redesigned team page (accentdentists.co.nz/team); appears to have left the practice. Removed at user's request.
+2233 | Sophia        | Auckland City Orthodontics Remuera (40) | No longer listed on the clinic's "Meet our staff" page; distinct from "Sophie" (id 2234), who is still listed and was updated separately. Appears to have left the practice. Removed at user's request.
