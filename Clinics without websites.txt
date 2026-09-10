@@ -1,13 +1,57 @@
 CLINICS WITHOUT WEBSITES
 ========================
-Total: 132 clinics
-Last updated: 2026-08-13
+Total: 202 clinics (162 with no web presence at all, 40 with a Healthpoint-only listing)
+Last updated: 2026-09-06 — recount corrected a stale total that had drifted from actual file content
 
 CLINICS WITH HTTP (NOT SECURE) WEBSITES
 ----------------------------------------
 KT Orthodontics (Gisborne) — http://www.ktorthodontics.co.nz — no HTTPS certificate; team photos saved but won't display in Chrome/Firefox
 Otago Orthodontics (Dunedin) — http://www.otago-orthodontics.co.nz — no HTTPS certificate; team photos saved but won't display in Chrome/Firefox
 Hawkes Bay Periodontics & Dental Implants (Napier) — http://www.hawkesbayperiodontics.co.nz — HTTP only (not secure); website is very basic
+
+CLINICS WITH HEALTHPOINT-ONLY LISTINGS (NO OWN WEBSITE)
+--------------------------------------------------------
+Note: "website" field points to a Healthpoint directory page, not a site the clinic owns/runs. Not individually re-verified for live status (unlike Te Kohao Dental and Alpha Dental Ltd below, whose Healthpoint links were confirmed dead and are listed under HAMILTON instead).
+Airport Dental Services (Māngere, Manukau)
+Blossom Dental (Hillmorton, Christchurch)
+Brent Wallwork Dental (Papakura, Manukau)
+Busfield Dental Care (Tokoroa)
+Central Dental Centre (Mount Roskill, Auckland City)
+Edward Leung Dental Surgery (Wellington Central)
+Gee Dental Centre (Hutt Central, Lower Hutt)
+Grey Street Dental Surgery (Palmerston North Central)
+Henderson Dental Centre (Henderson, Waitakere)
+Huntly Dental Centre
+JD Patel Dental Surgeon (Papatoetoe, Manukau)
+JJY Dental Ltd (Takapuna, North Shore)
+Jogia Dental Surgery (Claudelands, Hamilton)
+Joy Family Dental Clinic (Mount Eden, Auckland City)
+Kim's Dental Surgery (Glenfield, North Shore)
+Lake Road Dentists (Belmont, North Shore)
+Li & Lawson Dental (Auckland CBD, Auckland City)
+Linwood Ave Dental (Linwood, Christchurch)
+Mahu Dental - Manurewa (Manurewa, Manukau)
+Mairangi Bay Dental Centre (Mairangi Bay, North Shore)
+Malimali Dental (Onehunga, Auckland City)
+Mount Roskill Family Dentist (Mount Roskill, Auckland City)
+Mr P a M Van Kuijk (Kaiapoi)
+Mt Eden Road Dental Centre (Three Kings, Auckland City)
+Octagon Dental Suite (Dunedin Central)
+Otara Dental Centre (Ōtara, Manukau)
+Pacifica Dental (Manurewa, Auckland City)
+Palmerston Dental Surgery Limited (Palmerston)
+Panmure Dental Centre (Panmure, Auckland City)
+Peninsula Dental Care (Te Atatū Peninsula, Waitakere)
+Raine Street Dental (Karori, Wellington)
+Rockfield Dental Centre (Penrose, Auckland City)
+Te Aroha Family Dental Practice
+TMP Stevens Dental Surgery (Papakura, Manukau)
+Tony Ryder Dental Rooms (Dunedin Central)
+Victoria Liu Dental (Dunedin North)
+Wakatipu Community Oral Health Clinic (Queenstown)
+Wanaka Dental Clinic (Wānaka)
+Warrington Dental (St Albans, Christchurch)
+Young Dental Centre (Meadowbank, Auckland City)
 
 AUCKLAND CITY
 -------------
@@ -17,8 +61,14 @@ Dentist in Mt Roskill (Mount Roskill)
 Dr Sumaya Ershad (Mount Roskill)
 Mt Roskill South Dental Care (Mount Roskill)
 Danesh-Meyer Michael Periodontist (Newmarket)
+Dr W G D Brown Dental (Grey Lynn) — Healthpoint link confirmed dead (404) 2026-09-06; no working replacement found
+Mahu Dental - Otahuhu (Ōtāhuhu) — Healthpoint link confirmed dead (404) 2026-09-06; no working replacement found
+Metz & Hall Dental Surgeons (Grey Lynn) — Healthpoint link confirmed dead (404) 2026-09-06; no working replacement found
+Mt Wellington Dentists (Mount Wellington) — Healthpoint link confirmed dead (404) 2026-09-06; no working replacement found
+Otahuhu Budget Dental Care (Ōtāhuhu) — Healthpoint link confirmed dead (404) 2026-09-06; no working replacement found
 SIMONS Otahuhu Dentists (Ōtāhuhu)
 Smile Care Clinic (Remuera)
+St Michaels Clinic Dental Surgery (Remuera) — Healthpoint link confirmed dead (404) 2026-09-06; no working replacement found
 Saint Heliers Dental Centre (St Heliers)
 
 BLENHEIM
@@ -81,12 +131,13 @@ East Gore Dental Clinic
 
 HAMILTON
 --------
-Ian Ross (Claudelands) — possibly closed; no web presence, unverifiable (ph: 07 853-2929)
-Jogia Dental Surgery (Claudelands)
-Five Cross Rds Dental Centre (Fairfield)
-Victoria Denture (Hamilton Central)
-Collingwood Dental Centre (Hamilton Lake)
+Ian Ross (Claudelands) — possibly closed; no web presence, unverifiable (ph: 07 853-2929); no Healthpoint listing found; no evidence he works at another clinic
+Five Cross Rds Dental Centre (Fairfield) — no Healthpoint listing found (only Five Cross Roads Medical Centre, a GP practice, shows up)
+Victoria Denture (Hamilton Central) — no Healthpoint listing found
+Collingwood Dental Centre (Hamilton Lake) — no Healthpoint listing found; possibly rebranded as New Smile Dental (15 Galloway St, Hamilton East) — a New Smile staff bio says she's "been with Collingwood Dental Care/New Smile since 2007", but addresses don't match, so unconfirmed
 Choice Dentures (Parkwood)
+Te Kohao Dental (Hamilton East) — Healthpoint link is dead (404); no working replacement found; the general "Te Kōhao Health" listing at the same address doesn't include dentistry
+Alpha Dental Ltd — Healthpoint link is dead (404); no working replacement found
 
 HASTINGS
 --------
@@ -124,8 +175,12 @@ Platinum Teeth Whitening Ltd (Fairfield)
 MANUKAU
 -------
 Appearance Dentistry (Pukekohe)
+Dannemora Dental Centre (East Tāmaki) — Healthpoint link confirmed dead (404) 2026-09-06; no working replacement found
+Lee Bernard Lee Dental (Highland Park) — Healthpoint link confirmed dead (404) 2026-09-06; no working replacement found
 Modern Dentures Limited (Pukekohe)
+Smile Dental East Tamaki (Clover Park) — Healthpoint link confirmed dead (404) 2026-09-06; no working replacement found
 The Denture Man (Pukekohe)
+Tooth Factory Dental (Ōtara) — Healthpoint link confirmed dead (404) 2026-09-06; no working replacement found
 
 MĀPUA
 -----
@@ -180,7 +235,9 @@ Miracle Denture Clinic (Milford)
 Shoreline Dental Surgery (Milford)
 Simon Hill Dental (Milford)
 Anzac St Dental Centre (Takapuna)
+Auburn Dental Care (Takapuna) — Healthpoint link confirmed dead (404) 2026-09-06; no working replacement found
 Lumino the Dentists: Proudmouth Takapuna (Takapuna)
+North Shore Prosthodontics (Takapuna) — own domain (northshoreprosthodontist.com) confirmed dead (404) 2026-09-06; no Healthpoint listing found; no working replacement found
 Specialist Endodontist (Takapuna)
 
 OAMARU
@@ -256,6 +313,7 @@ TAURANGA
 Kaimai Dentures (Papamoa Beach)
 Te Manu Toroa Kaupapa Maori Dental Services (Papamoa Beach)
 Mount Maunganui Dental Centre
+Tauranga Dental — Healthpoint link confirmed dead (404) 2026-09-06; no working replacement found
 
 TE ANAU
 -------
@@ -311,12 +369,17 @@ WAITAKERE
 ---------
 Bright Smile Dental (Henderson)
 Katavich Dental (Te Atatū South)
+Marina Dental Centre (West Harbour) — Healthpoint link confirmed dead (404) 2026-09-06; no working replacement found
 
 WELLINGTON
 ----------
 Central Dental Surgery (Te Aro)
 Deborah Creagh Endodontics (Te Aro)
 Lange M H BDS (Thorndon)
+
+WHANGANUI
+---------
+Rapid Dental — "website" on file is a Yellow Pages listing (yellow.co.nz), not an owned site; that listing's own link (versyo.com) is dead and the domain is for sale. Email on file: rapiddental@clear.net.nz
 
 WHANGĀREI
 ----------
@@ -327,7 +390,7 @@ Dental Laser Centre
 Gentle Dental Company - Gus Cameron
 The Gentle Dental Company - Joe Hermon — gentledental.net.nz domain no longer resolves
 Baylis Dental Services Ltd (Woodhill)
-The Whitening Co (Whangarei) — uses whiteningco.nz/pages/whangarei (parent brand page, not a standalone clinic website)
+The Whitening Co (Whangarei) — whiteningco.nz/pages/whangarei now returns 404 (2026-09-06) and Whangārei is no longer listed on the parent brand's current studio locations page; may have closed, unconfirmed
 Julie the Dental Hygienist (Morningside)
 
 WHITIANGA
