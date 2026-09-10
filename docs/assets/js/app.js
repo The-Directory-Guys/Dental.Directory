@@ -2192,9 +2192,18 @@ function matchTreatment(raw) {
       });
       BOOL_FIELDS.forEach(([key, label]) => {
         if (am[key] === true) {
-          const note = key === 'online_booking' && am.online_booking_note ? am.online_booking_note : '✓ Yes';
-          const cls = note === '✓ Yes' ? ' misc-item__value--yes' : '';
-          items.push(`<div class="misc-item"><span class="misc-item__label">${label}</span><span class="misc-item__value${cls}">${note}</span></div>`);
+          const noteText = am[key + '_note'];
+          const link = key === 'online_booking' ? am.online_booking_link : null;
+          let value;
+          if (link) {
+            value = `<a href="${esc(link)}" target="_blank" rel="noopener">${noteText ? esc(noteText) : 'Book now'} &#8599;</a>`;
+          } else if (noteText) {
+            value = esc(noteText);
+          } else {
+            value = '✓ Yes';
+          }
+          const cls = value === '✓ Yes' ? ' misc-item__value--yes' : '';
+          items.push(`<div class="misc-item"><span class="misc-item__label">${label}</span><span class="misc-item__value${cls}">${value}</span></div>`);
         } else if (am[key] === false) {
           items.push(`<div class="misc-item"><span class="misc-item__label">${label}</span><span class="misc-item__value misc-item__value--no">✗ No</span></div>`);
         }

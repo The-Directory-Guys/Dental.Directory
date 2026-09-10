@@ -385,7 +385,7 @@ async function fetchClinicPractitioners(clinicId) {
 // Fetch amenities row for a single clinic
 async function fetchClinicAmenities(clinicId) {
   try {
-    const url = `${SUPABASE_URL}/rest/v1/clinic_amenities?clinic_id=eq.${clinicId}&select=parking_access,wheelchair_accessible,same_day_emergency,saturday_evening_hours,in_house_specialists,sedation_options,calming_amenities,dental_anxiety_friendly,online_booking,online_booking_note,payment_partners,membership_plans,kids_family_friendly,special_offers`;
+    const url = `${SUPABASE_URL}/rest/v1/clinic_amenities?clinic_id=eq.${clinicId}&select=parking_access,wheelchair_accessible,wheelchair_accessible_note,same_day_emergency,same_day_emergency_note,saturday_evening_hours,in_house_specialists,sedation_options,calming_amenities,dental_anxiety_friendly,dental_anxiety_friendly_note,online_booking,online_booking_note,online_booking_link,payment_partners,membership_plans,kids_family_friendly,kids_family_friendly_note,special_offers`;
     const response = await fetch(url, {
       headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
     });

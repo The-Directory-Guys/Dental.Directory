@@ -189,7 +189,7 @@
         <span>Treatment</span><span>Price</span><span>Notes</span><span></span>
       </div>
       <div id="pricing-rows"></div>
-      <button type="button" class="add-row-btn" id="add-price-btn">+ Add row</button>
+      <button type="button" class="add-row-btn" id="add-price-btn">+ Add service</button>
       <br>
       <button type="button" class="save-btn" id="save-pricing-btn">Save pricing</button>
     </div>
@@ -240,35 +240,39 @@
           <div class="field-group">
             <label>Wheelchair accessible</label>
             <select name="wheelchair_accessible"><option value="">Not set</option><option value="true">Yes</option><option value="false">No</option></select>
+            <input type="text" name="wheelchair_accessible_note" placeholder="Optional note" style="margin-top:.4rem;">
           </div>
           <div class="field-group">
             <label>Dental anxiety friendly</label>
             <select name="dental_anxiety_friendly"><option value="">Not set</option><option value="true">Yes</option><option value="false">No</option></select>
+            <input type="text" name="dental_anxiety_friendly_note" placeholder="Optional note" style="margin-top:.4rem;">
           </div>
         </div>
         <div class="two-col">
           <div class="field-group">
             <label>Kids &amp; family friendly</label>
             <select name="kids_family_friendly"><option value="">Not set</option><option value="true">Yes</option><option value="false">No</option></select>
+            <input type="text" name="kids_family_friendly_note" placeholder="Optional note" style="margin-top:.4rem;">
           </div>
           <div class="field-group">
             <label>Same-day emergencies</label>
             <select name="same_day_emergency"><option value="">Not set</option><option value="true">Yes</option><option value="false">No</option></select>
-          </div>
-        </div>
-        <div class="two-col">
-          <div class="field-group">
-            <label>Saturday/evening hours</label>
-            <select name="saturday_evening_hours"><option value="">Not set</option><option value="true">Yes</option><option value="false">No</option></select>
-          </div>
-          <div class="field-group">
-            <label>Online booking available</label>
-            <select name="online_booking"><option value="">Not set</option><option value="true">Yes</option><option value="false">No</option></select>
+            <input type="text" name="same_day_emergency_note" placeholder="Optional note" style="margin-top:.4rem;">
           </div>
         </div>
         <div class="field-group">
-          <label>Online booking details (shown instead of "Yes" if filled in)</label>
-          <input type="text" name="online_booking_note" placeholder="e.g. Book via online calendar on our website">
+          <label>Online booking available</label>
+          <select name="online_booking"><option value="">Not set</option><option value="true">Yes</option><option value="false">No</option></select>
+        </div>
+        <div class="two-col">
+          <div class="field-group">
+            <label>Online booking details (shown instead of "Yes" if filled in)</label>
+            <input type="text" name="online_booking_note" placeholder="e.g. Book via online calendar on our website">
+          </div>
+          <div class="field-group">
+            <label>Online booking link</label>
+            <input type="url" name="online_booking_link" placeholder="https://yourclinic.co.nz/book">
+          </div>
         </div>
         <div class="field-group">
           <label>Parking</label>
@@ -276,27 +280,24 @@
         </div>
         <div class="two-col">
           <div class="field-group">
-            <label>In-house specialists</label>
-            <input type="text" name="in_house_specialists" placeholder="e.g. Orthodontist on-site">
-          </div>
-          <div class="field-group">
             <label>Sedation options</label>
             <input type="text" name="sedation_options" placeholder="e.g. IV sedation available">
           </div>
-        </div>
-        <div class="two-col">
           <div class="field-group">
             <label>Comfort amenities</label>
             <input type="text" name="calming_amenities" placeholder="e.g. TVs, blankets, noise-cancelling headphones">
           </div>
-          <div class="field-group">
-            <label>Special offers</label>
-            <input type="text" name="special_offers" placeholder="e.g. Free consult for new patients">
-          </div>
+        </div>
+        <div class="field-group">
+          <label>Special offers</label>
+          <input type="text" name="special_offers" placeholder="e.g. Free consult for new patients">
         </div>
         <div class="field-group">
           <label>Payment options</label>
-          <input type="text" name="payment_partners" placeholder="e.g. Q Card, Afterpay, Southern Cross">
+          <div class="services-grid" id="payment-grid"></div>
+          <div id="payment-other-wrap" style="display:none; margin-top:.5rem;">
+            <input type="text" id="payment-other-text" placeholder="Describe other payment option(s)">
+          </div>
         </div>
         <div class="field-group">
           <label>Membership plans</label>
@@ -329,7 +330,7 @@
     'Teeth Whitening','Veneers','Root Canal','Wisdom Teeth','Teen Dental',
     'Emergency Dental','Dentures','Dental Hygienist','Pediatric Dentistry',
     'Periodontics','Oral Surgery','Sleep Dentistry / Sedation',
-    'Mouth Guards','Invisalign','ACC Treatment','Afterpay / Payment Plans',
+    'Mouth Guards','Invisalign','ACC Treatment',
   ];
 
   let clinicId = null;
@@ -1010,14 +1011,43 @@
   // ---- Amenities & Payment Options ----
   const AMENITY_BOOL_FIELDS = [
     'wheelchair_accessible', 'dental_anxiety_friendly', 'kids_family_friendly',
-    'same_day_emergency', 'saturday_evening_hours', 'online_booking',
+    'same_day_emergency', 'online_booking',
   ];
   const AMENITY_TEXT_FIELDS = [
-    'online_booking_note', 'parking_access', 'in_house_specialists',
-    'sedation_options', 'calming_amenities', 'special_offers',
-    'payment_partners', 'membership_plans',
+    'wheelchair_accessible_note', 'dental_anxiety_friendly_note',
+    'kids_family_friendly_note', 'same_day_emergency_note',
+    'online_booking_note', 'online_booking_link', 'parking_access',
+    'sedation_options', 'calming_amenities', 'special_offers', 'membership_plans',
+  ];
+  const ALL_PAYMENT_OPTIONS = [
+    'EFTPOS', 'Visa/Mastercard', 'Q Card', 'Afterpay', 'Laybuy',
+    'Southern Cross Easy-claim', 'Bank transfer', 'Cash',
   ];
   let amenitiesRowExists = false;
+
+  function renderPaymentGrid(selected, otherText) {
+    const known = new Set(ALL_PAYMENT_OPTIONS.map(o => o.toLowerCase()));
+    const grid = document.getElementById('payment-grid');
+    grid.innerHTML = ALL_PAYMENT_OPTIONS.map(opt => `
+      <label class="service-check">
+        <input type="checkbox" name="payment-opt" value="${opt}" ${selected.some(s => s.toLowerCase() === opt.toLowerCase()) ? 'checked' : ''}>
+        ${opt}
+      </label>`).join('') + `
+      <label class="service-check">
+        <input type="checkbox" id="payment-opt-other">
+        Other
+      </label>`;
+
+    const hasOther = otherText || selected.some(s => !known.has(s.toLowerCase()));
+    document.getElementById('payment-opt-other').checked = !!hasOther;
+    document.getElementById('payment-other-wrap').style.display = hasOther ? '' : 'none';
+    document.getElementById('payment-other-text').value =
+      otherText || selected.filter(s => !known.has(s.toLowerCase())).join(', ');
+
+    document.getElementById('payment-opt-other').addEventListener('change', e => {
+      document.getElementById('payment-other-wrap').style.display = e.target.checked ? '' : 'none';
+    });
+  }
 
   function populateAmenities(am) {
     amenitiesRowExists = !!am;
@@ -1029,6 +1059,14 @@
     AMENITY_TEXT_FIELDS.forEach(key => {
       form.elements[key].value = (am && am[key]) || '';
     });
+
+    const rawPartners = am && am.payment_partners;
+    let selected = [];
+    if (rawPartners) {
+      try { selected = JSON.parse(rawPartners); if (!Array.isArray(selected)) selected = [rawPartners]; }
+      catch { selected = rawPartners.split(',').map(s => s.trim()).filter(Boolean); }
+    }
+    renderPaymentGrid(selected, null);
   }
 
   document.getElementById('form-amenities').addEventListener('submit', async e => {
@@ -1045,6 +1083,12 @@
     AMENITY_TEXT_FIELDS.forEach(key => {
       data[key] = fd.get(key).trim() || null;
     });
+
+    const checkedPayments = [...document.querySelectorAll('input[name="payment-opt"]:checked')].map(cb => cb.value);
+    const otherChecked = document.getElementById('payment-opt-other').checked;
+    const otherText = document.getElementById('payment-other-text').value.trim();
+    if (otherChecked && otherText) checkedPayments.push(otherText);
+    data.payment_partners = checkedPayments.length ? checkedPayments.join(', ') : null;
 
     const { error } = amenitiesRowExists
       ? await db.from('clinic_amenities').update(data).eq('clinic_id', clinicId)
