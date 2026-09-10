@@ -198,6 +198,12 @@
   <div class="claim-form-wrap">
     <div class="form-card">
 
+      <!-- Shown instead of nothing when already signed in -->
+      <div id="signed-in-banner" style="display:none; background:#f0fdfa; border:1px solid var(--clr-teal,#0d9488); border-radius:10px; padding:1rem 1.25rem; margin-bottom:1.5rem; text-align:center;">
+        <div style="font-size:.9rem; color:#0c1f2e; margin-bottom:.6rem;">You're already signed in.</div>
+        <a href="manage.html" class="btn btn--primary" style="display:inline-block;">Go to your dashboard &rarr;</a>
+      </div>
+
       <!-- Claim form -->
       <div id="claim-form-state">
         <div class="form-card__title">Submit a claim request</div>
@@ -280,11 +286,19 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="assets/js/supabase.js"></script>
   <script>
     const SB_URL = 'https://ankyjpgcocsvvtyyymys.supabase.co';
     const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFua3lqcGdjb2NzdnZ0eXl5bXlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MTM1MTQsImV4cCI6MjA4OTM4OTUxNH0.SXxTLBdiNVSEDXy95yU0x0ctYFOjIby8hZbJ7B1LPK8';
     const H = { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}`, 'Content-Type': 'application/json' };
+
+    // If already signed in, show a shortcut to the dashboard instead of
+    // leaving the visitor to search for their own clinic from scratch.
+    const authClient = window.supabase.createClient(SB_URL, SB_KEY);
+    authClient.auth.getSession().then(({ data: { session } }) => {
+      if (session) document.getElementById('signed-in-banner').style.display = '';
+    });
 
     let selectedClinic = null;
     let searchTimer = null;
