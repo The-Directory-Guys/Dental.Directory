@@ -201,7 +201,7 @@
       <!-- Shown instead of nothing when already signed in -->
       <div id="signed-in-banner" style="display:none; background:#f0fdfa; border:1px solid var(--clr-teal,#0d9488); border-radius:10px; padding:1rem 1.25rem; margin-bottom:1.5rem; text-align:center;">
         <div style="font-size:.9rem; color:#0c1f2e; margin-bottom:.6rem;">You're already signed in.</div>
-        <a href="manage.html" class="btn btn--primary" style="display:inline-block;">Go to your dashboard &rarr;</a>
+        <a href="manage.html" class="btn btn--primary" style="display:inline-block;">Edit your clinic &rarr;</a>
       </div>
 
       <!-- Claim form -->
@@ -266,7 +266,7 @@
       </div>
 
       <!-- Success screen -->
-      <p style="text-align:center; margin-top:1.5rem; font-size:.875rem; color:#64748b;">
+      <p id="signin-prompt" style="text-align:center; margin-top:1.5rem; font-size:.875rem; color:#64748b;">
         Already have an account? <a href="login.html" style="color:var(--clr-teal,#0d9488); font-weight:600; text-decoration:none;">Sign in &rarr;</a>
       </p>
 
@@ -297,7 +297,10 @@
     // leaving the visitor to search for their own clinic from scratch.
     const authClient = window.supabase.createClient(SB_URL, SB_KEY);
     authClient.auth.getSession().then(({ data: { session } }) => {
-      if (session) document.getElementById('signed-in-banner').style.display = '';
+      if (session) {
+        document.getElementById('signed-in-banner').style.display = '';
+        document.getElementById('signin-prompt').style.display = 'none';
+      }
     });
 
     let selectedClinic = null;
