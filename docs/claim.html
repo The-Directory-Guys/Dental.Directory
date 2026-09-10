@@ -198,8 +198,8 @@
   <div class="claim-form-wrap">
     <div class="form-card">
 
-      <!-- Shown instead of nothing when already signed in -->
-      <div id="signed-in-banner" style="display:none; background:#f0fdfa; border:1px solid var(--clr-teal,#0d9488); border-radius:10px; padding:1rem 1.25rem; margin-bottom:1.5rem; text-align:center;">
+      <!-- Shown instead of the form when already signed in -->
+      <div id="signed-in-banner" style="display:none; background:#f0fdfa; border:1px solid var(--clr-teal,#0d9488); border-radius:10px; padding:1.5rem; text-align:center;">
         <div style="font-size:.9rem; color:#0c1f2e; margin-bottom:.6rem;">You're already signed in.</div>
         <a href="manage.html" class="btn btn--primary" style="display:inline-block;">Edit your clinic &rarr;</a>
         <div style="margin-top:.75rem;">
@@ -207,84 +207,93 @@
         </div>
       </div>
 
-      <!-- Claim form -->
+      <!-- Claim + account creation form -->
       <div id="claim-form-state">
-        <div class="form-card__title">Submit a claim request</div>
+        <div class="form-card__title">Claim your listing</div>
         <form id="claim-form" onsubmit="submitClaim(event)" novalidate>
 
           <div class="field">
-            <label for="clinic-search">Your practice <span style="color:#dc2626">*</span></label>
-            <div class="search-wrap">
-              <input type="text" id="clinic-search" placeholder="Start typing your practice name…"
-                     autocomplete="off" oninput="searchClinics(this.value)" onfocus="onSearchFocus()">
-              <div class="search-results" id="search-results"></div>
+            <label for="owner-email">Email address <span style="color:#dc2626">*</span></label>
+            <input type="email" id="owner-email" placeholder="you@practice.co.nz" required autocomplete="email">
+            <div class="field__hint">This will also be your login. We'll check it against the email on file for your practice.</div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="owner-password">Password <span style="color:#dc2626">*</span></label>
+              <input type="password" id="owner-password" placeholder="At least 8 characters" required autocomplete="new-password">
             </div>
-            <div class="selected-clinic" id="selected-clinic">
-              <div>
-                <div class="selected-clinic__name" id="sel-name"></div>
-                <div class="selected-clinic__loc"  id="sel-loc"></div>
+            <div class="field">
+              <label for="owner-password2">Confirm password <span style="color:#dc2626">*</span></label>
+              <input type="password" id="owner-password2" placeholder="••••••••" required autocomplete="new-password">
+            </div>
+          </div>
+
+          <div id="extra-fields" style="display:none;">
+            <p style="font-size:.85rem; color:#78716c; background:#fffbeb; border:1px solid #fde68a; border-radius:8px; padding:.75rem 1rem; margin-bottom:1.1rem;">
+              We don't have this email on file for a clinic. Tell us which practice you're claiming so we can verify manually.
+            </p>
+
+            <div class="field">
+              <label for="clinic-search">Your practice <span style="color:#dc2626">*</span></label>
+              <div class="search-wrap">
+                <input type="text" id="clinic-search" placeholder="Start typing your practice name…"
+                       autocomplete="off" oninput="searchClinics(this.value)" onfocus="onSearchFocus()">
+                <div class="search-results" id="search-results"></div>
               </div>
-              <button type="button" class="selected-clinic__clear" onclick="clearClinic()" aria-label="Clear">×</button>
+              <div class="selected-clinic" id="selected-clinic">
+                <div>
+                  <div class="selected-clinic__name" id="sel-name"></div>
+                  <div class="selected-clinic__loc"  id="sel-loc"></div>
+                </div>
+                <button type="button" class="selected-clinic__clear" onclick="clearClinic()" aria-label="Clear">×</button>
+              </div>
+              <input type="hidden" id="clinic-id">
             </div>
-            <input type="hidden" id="clinic-id">
-          </div>
 
-          <div class="field-row">
-            <div class="field">
-              <label for="owner-name">Your name <span style="color:#dc2626">*</span></label>
-              <input type="text" id="owner-name" placeholder="Jane Smith" required>
+            <div class="field-row">
+              <div class="field">
+                <label for="owner-name">Your name <span style="color:#dc2626">*</span></label>
+                <input type="text" id="owner-name" placeholder="Jane Smith">
+              </div>
+              <div class="field">
+                <label for="owner-role">Your role <span style="color:#dc2626">*</span></label>
+                <select id="owner-role">
+                  <option value="">Select…</option>
+                  <option value="owner">Owner / Principal dentist</option>
+                  <option value="manager">Practice manager</option>
+                  <option value="staff">Receptionist / Admin</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
             </div>
-            <div class="field">
-              <label for="owner-role">Your role <span style="color:#dc2626">*</span></label>
-              <select id="owner-role" required>
-                <option value="">Select…</option>
-                <option value="owner">Owner / Principal dentist</option>
-                <option value="manager">Practice manager</option>
-                <option value="staff">Receptionist / Admin</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-          </div>
 
-          <div class="field-row">
-            <div class="field">
-              <label for="owner-email">Email address <span style="color:#dc2626">*</span></label>
-              <input type="email" id="owner-email" placeholder="you@practice.co.nz" required autocomplete="email">
-              <div class="field__hint">We'll use this to send your sign-in link.</div>
-            </div>
             <div class="field">
               <label for="owner-phone">Phone (optional)</label>
               <input type="tel" id="owner-phone" placeholder="09 000 0000">
             </div>
+
+            <div class="field">
+              <label for="owner-msg">Anything else? (optional)</label>
+              <textarea id="owner-msg" placeholder="e.g. I am the owner and have been operating since 2015…"></textarea>
+            </div>
           </div>
 
-          <div class="field">
-            <label for="owner-msg">Anything else? (optional)</label>
-            <textarea id="owner-msg" placeholder="e.g. I am the owner and have been operating since 2015…"></textarea>
-          </div>
-
-          <button type="submit" class="submit-btn" id="claim-btn">Submit claim request</button>
+          <button type="submit" class="submit-btn" id="claim-btn">Create account</button>
           <div class="form-err" id="claim-err"></div>
         </form>
+
+        <p style="text-align:center; margin-top:1.5rem; font-size:.875rem; color:#64748b;">
+          Already have an account? <a href="login.html" style="color:var(--clr-teal,#0d9488); font-weight:600; text-decoration:none;">Sign in &rarr;</a>
+        </p>
       </div>
 
       <!-- Success screen -->
-      <p id="signin-prompt" style="text-align:center; margin-top:1.5rem; font-size:.875rem; color:#64748b;">
-        Already have an account? <a href="login.html" style="color:var(--clr-teal,#0d9488); font-weight:600; text-decoration:none;">Sign in &rarr;</a><br>
-        Don't have an account? <a href="signup.html" style="color:var(--clr-teal,#0d9488); font-weight:600; text-decoration:none;">Sign up &rarr;</a>
-      </p>
-
       <div id="claim-success" class="success">
         <div class="success__icon">✅</div>
-        <div class="success__title">Request received</div>
-        <div class="success__body">
-          Thanks. Next, create your account using <strong id="success-email"></strong>. If that matches the email we have on file for this practice, you'll get instant access to your dashboard as soon as you confirm your email.
-          If it doesn't match, we'll review your claim manually and get back to you within 1–2 business days.
-        </div>
-        <a href="signup.html" class="btn btn--primary" style="display:inline-block; margin-top:1rem;">Create your account &rarr;</a>
-        <div style="margin-top:1rem;">
-          <a href="/" class="success__back">← Back to directory</a>
-        </div>
+        <div class="success__title" id="success-title">Check your email</div>
+        <div class="success__body" id="success-body"></div>
+        <a href="/" class="success__back">← Back to directory</a>
       </div>
 
     </div>
@@ -297,24 +306,25 @@
     const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFua3lqcGdjb2NzdnZ0eXl5bXlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MTM1MTQsImV4cCI6MjA4OTM4OTUxNH0.SXxTLBdiNVSEDXy95yU0x0ctYFOjIby8hZbJ7B1LPK8';
     const H = { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}`, 'Content-Type': 'application/json' };
 
-    // If already signed in, show a shortcut to the dashboard instead of
-    // leaving the visitor to search for their own clinic from scratch.
+    // If already signed in, there's nothing to claim/sign up for here -
+    // show a shortcut to the dashboard instead of the form.
     const authClient = window.supabase.createClient(SB_URL, SB_KEY);
     authClient.auth.getSession().then(({ data: { session } }) => {
       if (session) {
         document.getElementById('signed-in-banner').style.display = '';
-        document.getElementById('signin-prompt').style.display = 'none';
+        document.getElementById('claim-form-state').style.display = 'none';
       }
     });
 
     document.getElementById('claim-signout-btn').addEventListener('click', async () => {
       await authClient.auth.signOut();
       document.getElementById('signed-in-banner').style.display = 'none';
-      document.getElementById('signin-prompt').style.display = '';
+      document.getElementById('claim-form-state').style.display = '';
     });
 
     let selectedClinic = null;
     let searchTimer = null;
+    let extraFieldsShown = false;
 
     function searchClinics(q) {
       clearTimeout(searchTimer);
@@ -376,42 +386,83 @@
 
     function esc(s) { return String(s).replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
 
+    async function findMatchingClinic(email) {
+      const url = `${SB_URL}/rest/v1/dental_clinics?select=id,name&email=ilike.${encodeURIComponent(email)}&limit=1`;
+      const r = await fetch(url, { headers: H });
+      const data = await r.json();
+      return Array.isArray(data) && data.length ? data[0] : null;
+    }
+
     async function submitClaim(e) {
       e.preventDefault();
       const err = document.getElementById('claim-err');
       err.textContent = '';
-
-      const clinicId  = parseInt(document.getElementById('clinic-id').value);
-      const name      = document.getElementById('owner-name').value.trim();
-      const role      = document.getElementById('owner-role').value;
-      const email     = document.getElementById('owner-email').value.trim();
-      const phone     = document.getElementById('owner-phone').value.trim();
-      const message   = document.getElementById('owner-msg').value.trim();
-
-      if (!clinicId) { err.textContent = 'Please select your practice from the list.'; return; }
-      if (!name)     { err.textContent = 'Please enter your name.'; return; }
-      if (!role)     { err.textContent = 'Please select your role.'; return; }
-      if (!email)    { err.textContent = 'Please enter your email address.'; return; }
-
       const btn = document.getElementById('claim-btn');
-      btn.disabled = true;
-      btn.textContent = 'Submitting…';
 
-      const payload = { clinic_id: clinicId, name, role, email, phone: phone || null, message: message || null };
-      const r = await fetch(`${SB_URL}/rest/v1/clinic_claims`, {
-        method: 'POST', headers: { ...H, Prefer: 'return=minimal' },
-        body: JSON.stringify(payload)
-      });
-
-      if (r.ok || r.status === 201) {
-        document.getElementById('success-email').textContent = email;
-        document.getElementById('claim-form-state').style.display = 'none';
-        document.getElementById('claim-success').style.display = 'block';
-      } else {
-        err.textContent = 'Something went wrong. Please try again or email us directly.';
+      function resetButton() {
         btn.disabled = false;
-        btn.textContent = 'Submit claim request';
+        btn.textContent = extraFieldsShown ? 'Submit for review' : 'Create account';
       }
+
+      const email = document.getElementById('owner-email').value.trim();
+      const pw1   = document.getElementById('owner-password').value;
+      const pw2   = document.getElementById('owner-password2').value;
+
+      if (!email)          { err.textContent = 'Please enter your email address.'; return; }
+      if (pw1.length < 8)  { err.textContent = 'Password must be at least 8 characters.'; return; }
+      if (pw1 !== pw2)     { err.textContent = 'Passwords do not match.'; return; }
+
+      let clinicId, name, role, phone, message;
+      if (extraFieldsShown) {
+        clinicId = parseInt(document.getElementById('clinic-id').value);
+        name     = document.getElementById('owner-name').value.trim();
+        role     = document.getElementById('owner-role').value;
+        phone    = document.getElementById('owner-phone').value.trim();
+        message  = document.getElementById('owner-msg').value.trim();
+        if (!clinicId) { err.textContent = 'Please select your practice from the list.'; return; }
+        if (!name)     { err.textContent = 'Please enter your name.'; return; }
+        if (!role)     { err.textContent = 'Please select your role.'; return; }
+      }
+
+      btn.disabled = true;
+      btn.textContent = extraFieldsShown ? 'Submitting…' : 'Checking…';
+
+      let match = null;
+      if (!extraFieldsShown) {
+        match = await findMatchingClinic(email);
+        if (!match) {
+          extraFieldsShown = true;
+          document.getElementById('extra-fields').style.display = '';
+          resetButton();
+          return;
+        }
+      }
+
+      btn.textContent = 'Creating account…';
+      const { error } = await authClient.auth.signUp({
+        email, password: pw1,
+        options: { emailRedirectTo: 'https://dentalcompare.co.nz/manage.html' }
+      });
+      if (error) { resetButton(); err.textContent = error.message; return; }
+
+      if (extraFieldsShown) {
+        const payload = { clinic_id: clinicId, name, role, email, phone: phone || null, message: message || null };
+        await fetch(`${SB_URL}/rest/v1/clinic_claims`, {
+          method: 'POST', headers: { ...H, Prefer: 'return=minimal' },
+          body: JSON.stringify(payload)
+        });
+
+        document.getElementById('success-title').textContent = 'Almost there';
+        document.getElementById('success-body').innerHTML =
+          `We've created your account. Confirm it at <strong>${esc(email)}</strong>. We couldn't find that email on file for <strong>${esc(selectedClinic.name)}</strong>, so we've also queued your claim for manual review, usually within 1–2 business days.`;
+      } else {
+        document.getElementById('success-title').textContent = 'Check your email';
+        document.getElementById('success-body').innerHTML =
+          `We found a matching practice: <strong>${esc(match.name)}</strong>. Confirm your email at <strong>${esc(email)}</strong> and you'll get instant access to your dashboard.`;
+      }
+
+      document.getElementById('claim-form-state').style.display = 'none';
+      document.getElementById('claim-success').style.display = 'block';
     }
 
     // Mobile nav
