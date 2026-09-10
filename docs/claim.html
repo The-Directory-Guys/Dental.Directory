@@ -202,6 +202,9 @@
       <div id="signed-in-banner" style="display:none; background:#f0fdfa; border:1px solid var(--clr-teal,#0d9488); border-radius:10px; padding:1rem 1.25rem; margin-bottom:1.5rem; text-align:center;">
         <div style="font-size:.9rem; color:#0c1f2e; margin-bottom:.6rem;">You're already signed in.</div>
         <a href="manage.html" class="btn btn--primary" style="display:inline-block;">Edit your clinic &rarr;</a>
+        <div style="margin-top:.75rem;">
+          <button type="button" id="claim-signout-btn" style="background:none; border:none; color:#64748b; font-size:.82rem; cursor:pointer; text-decoration:underline; font-family:inherit;">Sign out</button>
+        </div>
       </div>
 
       <!-- Claim form -->
@@ -301,6 +304,12 @@
         document.getElementById('signed-in-banner').style.display = '';
         document.getElementById('signin-prompt').style.display = 'none';
       }
+    });
+
+    document.getElementById('claim-signout-btn').addEventListener('click', async () => {
+      await authClient.auth.signOut();
+      document.getElementById('signed-in-banner').style.display = 'none';
+      document.getElementById('signin-prompt').style.display = '';
     });
 
     let selectedClinic = null;
