@@ -12,9 +12,9 @@
     .manage-card h2 { margin:0 0 1.25rem; font-size:1.05rem; color:var(--clr-gray-900); }
     .field-group { margin-bottom:1rem; }
     .field-group label { display:block; font-size:.82rem; font-weight:600; color:var(--clr-gray-600); text-transform:uppercase; letter-spacing:.04em; margin-bottom:.35rem; }
-    .field-group input, .field-group textarea { width:100%; box-sizing:border-box; padding:.6rem .85rem; border:1.5px solid var(--clr-gray-200); border-radius:8px; font-size:.9rem; font-family:inherit; color:var(--clr-gray-900); background:#fff; }
+    .field-group input, .field-group textarea, .field-group select { width:100%; box-sizing:border-box; padding:.6rem .85rem; border:1.5px solid var(--clr-gray-200); border-radius:8px; font-size:.9rem; font-family:inherit; color:var(--clr-gray-900); background:#fff; }
     .field-group textarea { resize:vertical; min-height:100px; line-height:1.55; }
-    .field-group input:focus, .field-group textarea:focus { outline:none; border-color:var(--clr-teal); }
+    .field-group input:focus, .field-group textarea:focus, .field-group select:focus { outline:none; border-color:var(--clr-teal); }
     .two-col { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
     .hours-row { display:grid; grid-template-columns:130px 1fr; align-items:center; gap:.75rem; padding:.35rem 0; border-bottom:1px solid var(--clr-gray-50); }
     .hours-row:last-child { border-bottom:none; }
@@ -41,6 +41,33 @@
     .save-btn:disabled { opacity:.6; cursor:default; }
     .toast { position:fixed; bottom:1.5rem; right:1.5rem; background:#1e293b; color:#fff; padding:.7rem 1.2rem; border-radius:10px; font-size:.875rem; opacity:0; transition:opacity .25s; z-index:9999; pointer-events:none; box-shadow:0 4px 16px rgba(0,0,0,.18); }
     .toast.show { opacity:1; }
+    .review-item { padding:1rem 0; border-bottom:1px solid var(--clr-gray-50); }
+    .review-item:last-child { border-bottom:none; }
+    .review-item__head { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:.35rem; }
+    .review-item__author { font-weight:600; font-size:.9rem; color:var(--clr-gray-900); }
+    .review-item__meta { font-size:.78rem; color:var(--clr-gray-400); }
+    .review-item__text { font-size:.875rem; color:var(--clr-gray-700); line-height:1.55; margin-bottom:.65rem; }
+    .review-item__reply-row { display:flex; gap:.5rem; align-items:flex-start; }
+    .review-item__reply-row textarea { flex:1; min-height:60px; }
+    .review-item__reply-row .save-btn { margin-top:0; white-space:nowrap; }
+    .review-empty { color:var(--clr-gray-400); font-size:.875rem; padding:.5rem 0; }
+    .photo-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(140px,1fr)); gap:.75rem; margin-bottom:1rem; }
+    .photo-tile { position:relative; border-radius:8px; overflow:hidden; aspect-ratio:1; background:var(--clr-gray-50); }
+    .photo-tile img { width:100%; height:100%; object-fit:cover; display:block; }
+    .photo-tile__del { position:absolute; top:.3rem; right:.3rem; width:22px; height:22px; border-radius:50%; border:none; background:rgba(15,23,42,.65); color:#fff; font-size:1rem; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+    .photo-tile__del:hover { background:#dc2626; }
+    .logo-row { display:flex; align-items:center; gap:1.25rem; }
+    .logo-preview { width:88px; height:88px; border-radius:12px; background:var(--clr-gray-50); border:1.5px dashed var(--clr-gray-200); display:flex; align-items:center; justify-content:center; overflow:hidden; flex-shrink:0; color:var(--clr-gray-300); font-size:.72rem; text-align:center; }
+    .logo-preview img { width:100%; height:100%; object-fit:cover; display:block; }
+    .logo-row__actions { display:flex; flex-direction:column; gap:.5rem; align-items:flex-start; }
+    .practitioner-row { padding:1rem 0; border-bottom:1px solid var(--clr-gray-50); }
+    .practitioner-row:last-child { border-bottom:none; }
+    .practitioner-row__head { display:flex; align-items:center; gap:1rem; margin-bottom:.85rem; }
+    .practitioner-row__photo { width:56px; height:56px; border-radius:50%; background:var(--clr-gray-50); border:1.5px dashed var(--clr-gray-200); overflow:hidden; flex-shrink:0; }
+    .practitioner-row__photo img { width:100%; height:100%; object-fit:cover; display:block; }
+    .practitioner-row__name { flex:1; font-size:.9rem; font-weight:600; color:var(--clr-gray-900); }
+    .practitioner-row__fields .two-col { margin-bottom:.75rem; }
+    .practitioner-row__fields .field-group { margin-bottom:.75rem; }
     @media(max-width:600px) {
       .manage-card { padding:1.25rem 1rem; }
       .two-col { grid-template-columns:1fr; }
@@ -84,11 +111,9 @@
     <div style="font-size:2.5rem; margin-bottom:1rem;">⏳</div>
     <h1 class="section-title" style="font-size:1.5rem;">Account pending approval</h1>
     <p style="color:var(--clr-gray-600); line-height:1.7; margin-bottom:1.5rem;">
-      Your account is set up — we just need to link it to your practice.
-      We'll send you an email once that's done, usually within one business day.
-    </p>
-    <p style="color:var(--clr-gray-500); font-size:.875rem; margin-bottom:1.75rem;">
-      Questions? Email us at <a href="mailto:dentalcomparenz@gmail.com" style="color:var(--clr-teal);">dentalcomparenz@gmail.com</a>
+      Your account is set up, but the email you signed up with doesn't match what we have on file for a clinic.
+      To link your account, please email <a href="mailto:dentalcomparenz@gmail.com" style="color:var(--clr-teal);">dentalcomparenz@gmail.com</a>
+      from this account's email address, letting us know which practice you're claiming — this can take up to 2 business days.
     </p>
     <button id="unauth-signout-btn" class="btn btn--outline" style="font-size:.875rem;">Sign out</button>
   </div>
@@ -113,6 +138,16 @@
         <div class="field-group">
           <label for="f-description">Description</label>
           <textarea id="f-description" name="description" placeholder="Describe your practice, team, and what makes you stand out…"></textarea>
+        </div>
+        <div class="two-col">
+          <div class="field-group">
+            <label for="f-address">Address</label>
+            <input type="text" id="f-address" name="address" placeholder="123 Example Street">
+          </div>
+          <div class="field-group">
+            <label for="f-suburb">Suburb</label>
+            <input type="text" id="f-suburb" name="suburb" placeholder="Merivale">
+          </div>
         </div>
         <div class="two-col">
           <div class="field-group">
@@ -156,6 +191,41 @@
       <button type="button" class="add-row-btn" id="add-price-btn">+ Add row</button>
       <br>
       <button type="button" class="save-btn" id="save-pricing-btn">Save pricing</button>
+    </div>
+
+    <!-- Reviews -->
+    <div class="manage-card">
+      <h2>Reviews</h2>
+      <div id="reviews-list"></div>
+    </div>
+
+    <!-- Clinic Logo -->
+    <div class="manage-card">
+      <h2>Clinic Logo</h2>
+      <div class="logo-row">
+        <div class="logo-preview" id="logo-preview"></div>
+        <div class="logo-row__actions">
+          <input type="file" id="logo-input" accept="image/*" style="display:none">
+          <button type="button" class="add-row-btn" id="add-logo-btn">Upload logo</button>
+          <button type="button" class="add-row-btn" id="remove-logo-btn" style="display:none;">Remove logo</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clinic Photos -->
+    <div class="manage-card">
+      <h2>Clinic Photos</h2>
+      <p style="font-size:.82rem;color:var(--clr-gray-400);margin:-.5rem 0 1rem;">Photos of your practice, waiting room, and facilities — shown in a gallery on your profile.</p>
+      <div class="photo-grid" id="photo-grid"></div>
+      <input type="file" id="photo-input" accept="image/*" style="display:none">
+      <button type="button" class="add-row-btn" id="add-photo-btn">+ Upload photo</button>
+    </div>
+
+    <!-- Practitioner Photos -->
+    <div class="manage-card">
+      <h2>Practitioner Photos</h2>
+      <p style="font-size:.82rem;color:var(--clr-gray-400);margin:-.5rem 0 1rem;">Photos of your dentists and team members, shown on their profile cards.</p>
+      <div id="practitioner-list"></div>
     </div>
 
   </div>
@@ -238,12 +308,21 @@
     if (!ownerRow) { showState('unauth'); return; } // signed in but not yet linked
     clinicId = ownerRow.clinic_id;
 
-    const [{ data: clinic }, { data: pricing }] = await Promise.all([
+    const [{ data: clinic }, { data: pricing }, { data: reviews }, { data: photos }, { data: practitioners }] = await Promise.all([
       db.from('dental_clinics')
-        .select('name, suburb_town, description, phone_national, phone_international, website, opening_hours, services')
+        .select('name, address, suburb_town, description, phone_national, phone_international, website, opening_hours, services, photo_url')
         .eq('id', clinicId).single(),
       db.from('scraped_prices')
         .select('id, treatment, price_label, notes')
+        .eq('clinic_id', clinicId).order('id'),
+      db.from('google_reviews')
+        .select('id, author, rating, date_text, snippet, owner_reply')
+        .eq('clinic_id', clinicId).order('id', { ascending: false }),
+      db.from('clinic_photos')
+        .select('id, url')
+        .eq('clinic_id', clinicId).order('sort_order'),
+      db.from('clinic_practitioners')
+        .select('id, name, photo_url, bio, gender, experience, specialties, languages, qualifications')
         .eq('clinic_id', clinicId).order('id'),
     ]);
 
@@ -251,6 +330,10 @@
 
     dbPricingRows = pricing || [];
     populateAll(clinic, dbPricingRows);
+    renderReviews(reviews || []);
+    renderPhotos(photos || []);
+    renderLogo(clinic.photo_url);
+    renderPractitioners(practitioners || []);
     showState('app');
   }
 
@@ -258,6 +341,8 @@
     document.getElementById('clinic-name').textContent = clinic.name;
     document.getElementById('clinic-suburb').textContent = clinic.suburb_town || '';
     document.getElementById('f-description').value = clinic.description || '';
+    document.getElementById('f-address').value = clinic.address || '';
+    document.getElementById('f-suburb').value = clinic.suburb_town || '';
     document.getElementById('f-phone').value = clinic.phone_national || clinic.phone_international || '';
     document.getElementById('f-website').value = clinic.website || '';
     renderHours(clinic.opening_hours);
@@ -366,13 +451,21 @@
     const btn = e.submitter;
     setBusy(btn, true, 'Save changes');
     const fd = new FormData(e.target);
+    const suburb = fd.get('suburb').trim();
     const { error } = await db.from('dental_clinics').update({
       description:    fd.get('description').trim(),
+      address:        fd.get('address').trim(),
+      suburb_town:    suburb,
       phone_national: fd.get('phone').trim(),
       website:        fd.get('website').trim(),
     }).eq('id', clinicId);
     setBusy(btn, false, 'Save changes');
-    error ? toast('Error: ' + error.message, true) : toast('Saved ✓');
+    if (error) {
+      toast('Error: ' + error.message, true);
+    } else {
+      document.getElementById('clinic-suburb').textContent = suburb;
+      toast('Saved ✓');
+    }
   });
 
   // ---- Pricing ----
@@ -448,6 +541,298 @@
 
     setBusy(btn, false, 'Save pricing');
     err ? toast('Error: ' + err.message, true) : toast('Pricing saved ✓');
+  });
+
+  // ---- Reviews ----
+  function reviewItemHTML(r) {
+    return `<div class="review-item" data-id="${r.id}">
+      <div class="review-item__head">
+        <span class="review-item__author">${esc(r.author)}</span>
+        <span class="review-item__meta">${'★'.repeat(r.rating || 0)}${'☆'.repeat(5 - (r.rating || 0))} · ${esc(r.date_text)}</span>
+      </div>
+      <div class="review-item__text">${esc(r.snippet)}</div>
+      <div class="review-item__reply-row">
+        <textarea class="review-item__reply-input" placeholder="Write a public reply…">${esc(r.owner_reply)}</textarea>
+        <button type="button" class="save-btn review-item__reply-save">Save reply</button>
+      </div>
+    </div>`;
+  }
+
+  function renderReviews(reviews) {
+    const el = document.getElementById('reviews-list');
+    el.innerHTML = reviews.length
+      ? reviews.map(reviewItemHTML).join('')
+      : '<div class="review-empty">No reviews yet.</div>';
+  }
+
+  document.getElementById('reviews-list').addEventListener('click', async e => {
+    if (!e.target.classList.contains('review-item__reply-save')) return;
+    const btn = e.target;
+    const item = btn.closest('.review-item');
+    const reviewId = item.dataset.id;
+    const text = item.querySelector('.review-item__reply-input').value.trim();
+    setBusy(btn, true, 'Save reply');
+    const { error } = await db.from('google_reviews')
+      .update({ owner_reply: text || null, owner_reply_at: new Date().toISOString() })
+      .eq('id', reviewId);
+    setBusy(btn, false, 'Save reply');
+    error ? toast('Error: ' + error.message, true) : toast('Reply saved ✓');
+  });
+
+  // ---- Photos (shared helpers) ----
+  const PHOTO_BUCKET = 'clinic-photos';
+  const PHOTO_PUBLIC_PREFIX = `${SUPABASE_URL}/storage/v1/object/public/${PHOTO_BUCKET}/`;
+
+  function validateImageFile(file) {
+    if (!file.type.startsWith('image/')) return 'Please choose an image file';
+    if (file.size > 5 * 1024 * 1024) return 'Image must be under 5MB';
+    return null;
+  }
+
+  // Uploads a file under the clinic's own folder (required by the storage
+  // policy, which scopes writes to the folder matching the owner's clinic_id)
+  // and returns its public URL.
+  async function uploadClinicFile(subPath, file) {
+    const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+    const path = `${clinicId}/${subPath}/${Date.now()}.${ext}`;
+    const { error } = await db.storage.from(PHOTO_BUCKET).upload(path, file);
+    if (error) return { error };
+    const { data: { publicUrl } } = db.storage.from(PHOTO_BUCKET).getPublicUrl(path);
+    return { publicUrl, path };
+  }
+
+  function storagePathFromUrl(url) {
+    return url && url.startsWith(PHOTO_PUBLIC_PREFIX) ? url.slice(PHOTO_PUBLIC_PREFIX.length) : null;
+  }
+
+  let dbPhotoRows = [];
+
+  function photoTileHTML(p) {
+    return `<div class="photo-tile" data-id="${p.id}">
+      <img src="${p.url}" loading="lazy">
+      <button type="button" class="photo-tile__del" title="Remove photo">×</button>
+    </div>`;
+  }
+
+  function renderPhotos(photos) {
+    dbPhotoRows = photos;
+    document.getElementById('photo-grid').innerHTML = photos.map(photoTileHTML).join('');
+  }
+
+  document.getElementById('photo-grid').addEventListener('click', async e => {
+    if (!e.target.classList.contains('photo-tile__del')) return;
+    const tile = e.target.closest('.photo-tile');
+    const photoId = tile.dataset.id;
+    const row = dbPhotoRows.find(p => String(p.id) === photoId);
+    if (!row || !confirm('Remove this photo?')) return;
+
+    const path = storagePathFromUrl(row.url);
+    if (path) await db.storage.from(PHOTO_BUCKET).remove([path]);
+    const { error } = await db.from('clinic_photos').delete().eq('id', photoId);
+    if (error) { toast('Error: ' + error.message, true); return; }
+
+    renderPhotos(dbPhotoRows.filter(p => String(p.id) !== photoId));
+    toast('Photo removed ✓');
+  });
+
+  document.getElementById('add-photo-btn').addEventListener('click', () => {
+    document.getElementById('photo-input').click();
+  });
+
+  document.getElementById('photo-input').addEventListener('change', async e => {
+    const file = e.target.files[0];
+    e.target.value = '';
+    if (!file) return;
+    const invalid = validateImageFile(file);
+    if (invalid) { toast(invalid, true); return; }
+
+    const btn = document.getElementById('add-photo-btn');
+    setBusy(btn, true, '+ Upload photo');
+
+    const { publicUrl, error: uploadError } = await uploadClinicFile('gallery', file);
+    if (uploadError) {
+      setBusy(btn, false, '+ Upload photo');
+      toast('Error: ' + uploadError.message, true);
+      return;
+    }
+
+    const nextOrder = dbPhotoRows.length
+      ? Math.max(...dbPhotoRows.map(p => p.sort_order || 0)) + 1
+      : 0;
+    const { data: inserted, error: insertError } = await db.from('clinic_photos')
+      .insert({ clinic_id: clinicId, url: publicUrl, sort_order: nextOrder })
+      .select('id, url').single();
+
+    setBusy(btn, false, '+ Upload photo');
+    if (insertError) { toast('Error: ' + insertError.message, true); return; }
+
+    renderPhotos([...dbPhotoRows, inserted]);
+    toast('Photo uploaded ✓');
+  });
+
+  // ---- Clinic logo ----
+  let currentLogoUrl = null;
+
+  function renderLogo(url) {
+    currentLogoUrl = url || null;
+    document.getElementById('logo-preview').innerHTML = url
+      ? `<img src="${url}">`
+      : 'No logo';
+    document.getElementById('remove-logo-btn').style.display = url ? '' : 'none';
+  }
+
+  document.getElementById('add-logo-btn').addEventListener('click', () => {
+    document.getElementById('logo-input').click();
+  });
+
+  document.getElementById('logo-input').addEventListener('change', async e => {
+    const file = e.target.files[0];
+    e.target.value = '';
+    if (!file) return;
+    const invalid = validateImageFile(file);
+    if (invalid) { toast(invalid, true); return; }
+
+    const btn = document.getElementById('add-logo-btn');
+    setBusy(btn, true, 'Upload logo');
+
+    const { publicUrl, error: uploadError } = await uploadClinicFile('logo', file);
+    if (uploadError) {
+      setBusy(btn, false, 'Upload logo');
+      toast('Error: ' + uploadError.message, true);
+      return;
+    }
+
+    const { error } = await db.from('dental_clinics').update({ photo_url: publicUrl }).eq('id', clinicId);
+    setBusy(btn, false, 'Upload logo');
+    if (error) { toast('Error: ' + error.message, true); return; }
+
+    renderLogo(publicUrl);
+    toast('Logo updated ✓');
+  });
+
+  document.getElementById('remove-logo-btn').addEventListener('click', async () => {
+    if (!confirm('Remove your clinic logo?')) return;
+    const path = storagePathFromUrl(currentLogoUrl);
+    if (path) await db.storage.from(PHOTO_BUCKET).remove([path]);
+    const { error } = await db.from('dental_clinics').update({ photo_url: null }).eq('id', clinicId);
+    if (error) { toast('Error: ' + error.message, true); return; }
+    renderLogo(null);
+    toast('Logo removed ✓');
+  });
+
+  // ---- Practitioners ----
+  function toCommaList(val) {
+    if (Array.isArray(val)) return val.join(', ');
+    if (typeof val === 'string' && val.trim().startsWith('[')) {
+      try { const arr = JSON.parse(val); if (Array.isArray(arr)) return arr.join(', '); } catch (e) {}
+    }
+    return val || '';
+  }
+
+  function practitionerRowHTML(p) {
+    return `<div class="practitioner-row" data-id="${p.id}">
+      <div class="practitioner-row__head">
+        <div class="practitioner-row__photo">${p.photo_url ? `<img src="${p.photo_url}">` : ''}</div>
+        <div class="practitioner-row__name">${esc(p.name)}</div>
+        <input type="file" class="practitioner-row__input" accept="image/*" style="display:none">
+        <button type="button" class="add-row-btn practitioner-row__btn">Upload photo</button>
+      </div>
+      <div class="practitioner-row__fields">
+        <div class="field-group">
+          <label>Bio</label>
+          <textarea class="pr-bio">${esc(p.bio)}</textarea>
+        </div>
+        <div class="two-col">
+          <div class="field-group">
+            <label>Gender</label>
+            <select class="pr-gender">
+              <option value=""  ${!p.gender ? 'selected' : ''}>Prefer not to say</option>
+              <option value="F" ${p.gender === 'F' ? 'selected' : ''}>Female</option>
+              <option value="M" ${p.gender === 'M' ? 'selected' : ''}>Male</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Experience</label>
+            <input type="text" class="pr-experience" placeholder="e.g. 12 years" value="${esc(p.experience)}">
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="field-group">
+            <label>Specialties</label>
+            <input type="text" class="pr-specialties" placeholder="e.g. Implants, Orthodontics" value="${esc(toCommaList(p.specialties))}">
+          </div>
+          <div class="field-group">
+            <label>Qualifications</label>
+            <input type="text" class="pr-qualifications" placeholder="e.g. BDS, University of Otago" value="${esc(toCommaList(p.qualifications))}">
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Languages spoken</label>
+          <input type="text" class="pr-languages" placeholder="e.g. English, Mandarin" value="${esc(toCommaList(p.languages))}">
+        </div>
+        <button type="button" class="save-btn practitioner-row__save">Save details</button>
+      </div>
+    </div>`;
+  }
+
+  function renderPractitioners(practitioners) {
+    const el = document.getElementById('practitioner-list');
+    el.innerHTML = practitioners.length
+      ? practitioners.map(practitionerRowHTML).join('')
+      : '<div class="review-empty">No team members listed yet.</div>';
+  }
+
+  document.getElementById('practitioner-list').addEventListener('click', e => {
+    if (!e.target.classList.contains('practitioner-row__btn')) return;
+    e.target.closest('.practitioner-row').querySelector('.practitioner-row__input').click();
+  });
+
+  document.getElementById('practitioner-list').addEventListener('change', async e => {
+    if (!e.target.classList.contains('practitioner-row__input')) return;
+    const file = e.target.files[0];
+    e.target.value = '';
+    if (!file) return;
+    const invalid = validateImageFile(file);
+    if (invalid) { toast(invalid, true); return; }
+
+    const row = e.target.closest('.practitioner-row');
+    const practitionerId = row.dataset.id;
+    const btn = row.querySelector('.practitioner-row__btn');
+    setBusy(btn, true, 'Upload photo');
+
+    const { publicUrl, error: uploadError } = await uploadClinicFile(`practitioners/${practitionerId}`, file);
+    if (uploadError) {
+      setBusy(btn, false, 'Upload photo');
+      toast('Error: ' + uploadError.message, true);
+      return;
+    }
+
+    const { error } = await db.from('clinic_practitioners')
+      .update({ photo_url: publicUrl }).eq('id', practitionerId);
+    setBusy(btn, false, 'Upload photo');
+    if (error) { toast('Error: ' + error.message, true); return; }
+
+    row.querySelector('.practitioner-row__photo').innerHTML = `<img src="${publicUrl}">`;
+    toast('Photo updated ✓');
+  });
+
+  document.getElementById('practitioner-list').addEventListener('click', async e => {
+    if (!e.target.classList.contains('practitioner-row__save')) return;
+    const btn = e.target;
+    const row = btn.closest('.practitioner-row');
+    const practitionerId = row.dataset.id;
+
+    setBusy(btn, true, 'Save details');
+    const { error } = await db.from('clinic_practitioners').update({
+      bio:            row.querySelector('.pr-bio').value.trim() || null,
+      gender:         row.querySelector('.pr-gender').value || null,
+      experience:     row.querySelector('.pr-experience').value.trim() || null,
+      specialties:    row.querySelector('.pr-specialties').value.trim() || null,
+      qualifications: row.querySelector('.pr-qualifications').value.trim() || null,
+      languages:      row.querySelector('.pr-languages').value.trim() || null,
+    }).eq('id', practitionerId);
+    setBusy(btn, false, 'Save details');
+    error ? toast('Error: ' + error.message, true) : toast('Details saved ✓');
   });
 
 })();

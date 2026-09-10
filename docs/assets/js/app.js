@@ -2108,6 +2108,7 @@ function matchTreatment(raw) {
             <div class="team-card__body">
               <div class="team-card__name">${p.name}</div>
               ${p.experience ? `<div class="team-card__experience"><span class="team-card__exp-label">Experience:</span> ${p.experience}</div>` : ''}
+              ${p.qualifications ? `<div class="team-card__qualifications"><span class="team-card__exp-label">Qualifications:</span> ${p.qualifications}</div>` : ''}
               ${specialtyPills ? `<div class="team-card__specialties">${specialtyPills}</div>` : ''}
               ${p.bio ? `<div class="team-card__bio-wrap"><p class="team-card__bio">${p.bio}</p><button class="team-card__read-more" onclick="var w=this.previousElementSibling;var expanded=w.classList.toggle('team-card__bio--expanded');this.textContent=expanded?'Read less ▲':'Read more ▼'">Read more ▼</button></div>` : ''}
               ${languageNote}
@@ -2225,7 +2226,16 @@ function matchTreatment(raw) {
           <div class="profile-desc">${dentist.description}</div>
         </div>` : ''}
 
-        ${dentist.clinicPhotoUrl ? `
+        ${(dentist.galleryPhotos && dentist.galleryPhotos.length) ? `
+        <div class="profile-section profile-section--clinic-gallery">
+          <h2 class="profile-section__title">Photos</h2>
+          <div class="clinic-photo-grid">
+            ${dentist.galleryPhotos.map((url, i) => `
+              <button type="button" class="clinic-photo-grid__item" data-src="${url}" data-name="${dentist.name} photo ${i + 1}">
+                <img src="${url}" alt="${dentist.name} photo ${i + 1}" loading="lazy">
+              </button>`).join('')}
+          </div>
+        </div>` : dentist.clinicPhotoUrl ? `
         <div class="profile-section profile-section--clinic-photo">
           <img src="${dentist.clinicPhotoUrl}" alt="${dentist.name}" class="profile-clinic-photo" loading="lazy" onerror="this.closest('.profile-section--clinic-photo').style.display='none'">
         </div>` : ''}
@@ -2478,6 +2488,12 @@ function matchTreatment(raw) {
         const mentionHTML = mentions.length
           ? `<div class="review-card__mentions">${mentions.map(m => `<a href="#${m.cardId}" class="review-card__mention">👤 ${m.displayName}</a>`).join('')}</div>`
           : '';
+        const replyHTML = r.reply
+          ? `<div class="review-card__reply">
+              <div class="review-card__reply-label">Response from the owner</div>
+              <p class="review-card__reply-text">${esc(r.reply)}</p>
+            </div>`
+          : '';
         return `
           <div class="review-card">
             <div class="review-card__header">
@@ -2490,6 +2506,7 @@ function matchTreatment(raw) {
             </div>
             <p class="review-card__text">${r.text}</p>
             ${mentionHTML}
+            ${replyHTML}
           </div>`;
       }).join('');
       const practPattern = practitionerFilter ? _practPatterns.find(pp => pp.cardId === practitionerFilter) : null;
@@ -2572,16 +2589,36 @@ function matchTreatment(raw) {
     setReviewTab('curated');
 
     // Photo lightbox
-    const teamList = document.querySelector('.team-list');
-    if (teamList) {
-      if (!document.getElementById('photo-lightbox')) {
-        const lb = document.createElement('div');
+    function ensurePhotoLightbox() {
+      let lb = document.getElementById('photo-lightbox');
+      if (!lb) {
+        lb = document.createElement('div');
         lb.id = 'photo-lightbox';
         lb.innerHTML = '<div class="photo-lightbox__backdrop"></div><figure class="photo-lightbox__frame"><img class="photo-lightbox__img" alt=""><figcaption class="photo-lightbox__caption"></figcaption></figure>';
         document.body.appendChild(lb);
         lb.querySelector('.photo-lightbox__backdrop').addEventListener('click', () => lb.classList.remove('photo-lightbox--open'));
         document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('photo-lightbox--open'); });
       }
+      return lb;
+    }
+
+    const clinicPhotoGrid = document.querySelector('.clinic-photo-grid');
+    if (clinicPhotoGrid) {
+      clinicPhotoGrid.addEventListener('click', e => {
+        const btn = e.target.closest('.clinic-photo-grid__item');
+        if (!btn) return;
+        const lb = ensurePhotoLightbox();
+        lb.querySelector('.photo-lightbox__img').src = btn.dataset.src;
+        lb.querySelector('.photo-lightbox__img').alt = btn.dataset.name;
+        lb.querySelector('.photo-lightbox__caption').textContent = btn.dataset.name;
+        lb.classList.add('photo-lightbox--open');
+      });
+    }
+
+    // Photo lightbox
+    const teamList = document.querySelector('.team-list');
+    if (teamList) {
+      ensurePhotoLightbox();
       teamList.addEventListener('click', e => {
         const btn = e.target.closest('.team-card__photo-btn');
         if (!btn) return;

@@ -70,6 +70,7 @@ function transformClinic(clinic) {
     phone: clinic.phone_national || clinic.phone_international || clinic.phone || '',
     email: clinic.email || '',
     website: clinic.website || '',
+    bookingUrl: clinic.booking_url || '',
     rating: clinic.rating || 0,
     reviewCount: clinic.total_ratings || 0,
     services: clinic.services ? clinic.services.split(',').map(s => s.trim()) : ['General Dentistry'],
@@ -370,7 +371,7 @@ async function fetchPractitionersForClinics(clinicIds) {
 // Fetch practitioners for a single clinic
 async function fetchClinicPractitioners(clinicId) {
   try {
-    const url = `${SUPABASE_URL}/rest/v1/clinic_practitioners?clinic_id=eq.${clinicId}&select=name,experience,specialties,bio,languages,photo_url&order=id`;
+    const url = `${SUPABASE_URL}/rest/v1/clinic_practitioners?clinic_id=eq.${clinicId}&select=name,experience,specialties,bio,languages,photo_url,qualifications&order=id`;
     const response = await fetch(url, {
       headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
     });
@@ -416,21 +417,21 @@ async function fetchClinicById(id) {
     if (clinics.length === 0) return null;
     const clinic = transformClinic(clinics[0]);
 
-    // Fetch pricing for this specific clinic
-    const pricing = await fetchSingleClinicPricing(id);
+    // Fetch pricing, reviews, amenities, practitioners, and gallery photos
+    // concurrently - they're independent of each other, so there's no need
+    // to wait for each one before starting the next.
+    const [pricing, reviews, amenities, practitioners, galleryPhotos] = await Promise.all([
+      fetchSingleClinicPricing(id),
+      fetchSingleClinicReviews(id),
+      fetchClinicAmenities(id),
+      fetchClinicPractitioners(id),
+      fetchClinicPhotos(id),
+    ]);
     clinic.pricing = pricing;
-
-    // Fetch reviews for this specific clinic
-    const reviews = await fetchSingleClinicReviews(id);
     clinic.reviews = reviews;
-
-    // Fetch amenities for this specific clinic
-    const amenities = await fetchClinicAmenities(id);
     clinic.amenities = amenities;
-
-    // Fetch practitioners for this specific clinic
-    const practitioners = await fetchClinicPractitioners(id);
     clinic.practitioners = practitioners;
+    clinic.galleryPhotos = galleryPhotos;
 
     return clinic;
   } catch (error) {
@@ -483,11 +484,37 @@ async function fetchSingleClinicReviews(clinicId) {
         text: r.snippet || '',
         daysAgo: parseDateTextToDaysAgo(r.date_text),
         curated: r.is_curated || false,
-        curatedRating: r.is_curated_rating || false
+        curatedRating: r.is_curated_rating || false,
+        reply: r.owner_reply || '',
+        replyAt: r.owner_reply_at || null
       }))
       .sort((a, b) => a.daysAgo - b.daysAgo);
   } catch (error) {
     console.error('Failed to fetch single clinic reviews:', error);
+    return [];
+  }
+}
+
+// Fetch owner-uploaded gallery photos for a single clinic
+async function fetchClinicPhotos(clinicId) {
+  try {
+    const url = `${SUPABASE_URL}/rest/v1/clinic_photos?clinic_id=eq.${clinicId}&select=id,url&order=sort_order.asc`;
+    const response = await fetch(url, {
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+      }
+    });
+
+    if (!response.ok) {
+      console.warn('Failed to fetch clinic photos:', response.status);
+      return [];
+    }
+
+    const data = await response.json();
+    return Array.isArray(data) ? data.map(p => p.url) : [];
+  } catch (error) {
+    console.error('Failed to fetch clinic photos:', error);
     return [];
   }
 }
