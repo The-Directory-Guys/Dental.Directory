@@ -1,8 +1,8 @@
 // Dental Compare — Owner Auth
 // Magic-link (OTP) flow via Supabase Auth REST API
 (function (window) {
-  const URL$  = 'https://ankyjpgcocsvvtyyymys.supabase.co/auth/v1';
-  const KEY   = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFua3lqcGdjb2NzdnZ0eXl5bXlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MTM1MTQsImV4cCI6MjA4OTM4OTUxNH0.SXxTLBdiNVSEDXy95yU0x0ctYFOjIby8hZbJ7B1LPK8';
+  const URL$  = (window.DC_SUPABASE_URL || 'https://ankyjpgcocsvvtyyymys.supabase.co') + '/auth/v1';
+  const KEY   = window.DC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFua3lqcGdjb2NzdnZ0eXl5bXlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MTM1MTQsImV4cCI6MjA4OTM4OTUxNH0.SXxTLBdiNVSEDXy95yU0x0ctYFOjIby8hZbJ7B1LPK8';
   const H     = { 'Content-Type': 'application/json', apikey: KEY };
   const LS    = 'dc_owner_session';
 

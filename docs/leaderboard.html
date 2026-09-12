@@ -11,6 +11,7 @@
     <link rel="canonical" href="https://dentalcompare.co.nz/leaderboard.html">
     <link rel="stylesheet" href="assets/css/styles.css?v=21">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4J758VJQVX"></script>
+    <script src="assets/js/supabase-config.js"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -335,8 +336,8 @@
 
     <script>
         (function () {
-            const SUPABASE_URL = 'https://ankyjpgcocsvvtyyymys.supabase.co';
-            const ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFua3lqcGdjb2NzdnZ0eXl5bXlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MTM1MTQsImV4cCI6MjA4OTM4OTUxNH0.SXxTLBdiNVSEDXy95yU0x0ctYFOjIby8hZbJ7B1LPK8';
+            const SUPABASE_URL = window.DC_SUPABASE_URL;
+            const ANON_KEY = window.DC_SUPABASE_ANON_KEY;
             const USERNAME_KEY = 'dc_username';
             const myHandle = localStorage.getItem(USERNAME_KEY);
 

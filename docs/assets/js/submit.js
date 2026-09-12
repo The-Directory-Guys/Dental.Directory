@@ -4,8 +4,8 @@
   if (!document.getElementById('profile-content')) return;
   if (typeof window.supabase === 'undefined') return;
 
-  const SUPABASE_URL = 'https://ankyjpgcocsvvtyyymys.supabase.co';
-  const ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFua3lqcGdjb2NzdnZ0eXl5bXlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MTM1MTQsImV4cCI6MjA4OTM4OTUxNH0.SXxTLBdiNVSEDXy95yU0x0ctYFOjIby8hZbJ7B1LPK8';
+  const SUPABASE_URL = window.DC_SUPABASE_URL || 'https://ankyjpgcocsvvtyyymys.supabase.co';
+  const ANON_KEY = window.DC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFua3lqcGdjb2NzdnZ0eXl5bXlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MTM1MTQsImV4cCI6MjA4OTM4OTUxNH0.SXxTLBdiNVSEDXy95yU0x0ctYFOjIby8hZbJ7B1LPK8';
   const PENDING_KEY = 'dc_pending_submit';
 
   const db = window.supabase.createClient(SUPABASE_URL, ANON_KEY);

@@ -300,10 +300,11 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="assets/js/supabase-config.js"></script>
   <script src="assets/js/supabase.js"></script>
   <script>
-    const SB_URL = 'https://ankyjpgcocsvvtyyymys.supabase.co';
-    const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFua3lqcGdjb2NzdnZ0eXl5bXlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MTM1MTQsImV4cCI6MjA4OTM4OTUxNH0.SXxTLBdiNVSEDXy95yU0x0ctYFOjIby8hZbJ7B1LPK8';
+    const SB_URL = window.DC_SUPABASE_URL;
+    const SB_KEY = window.DC_SUPABASE_ANON_KEY;
     const H = { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}`, 'Content-Type': 'application/json' };
 
     // If already signed in, there's nothing to claim/sign up for here -
