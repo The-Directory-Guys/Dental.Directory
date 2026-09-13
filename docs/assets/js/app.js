@@ -1875,8 +1875,16 @@ function matchTreatment(raw) {
     const heroMeta = document.getElementById('profile-meta');
     if (heroName) heroName.textContent = dentist.name;
     if (heroMeta) {
+      // The hero badge shows the count of reviews we actually hold on file
+      // (dentist.reviews.length), not dentist.reviewCount (Google's total
+      // review count at last scrape) - that total can only be as fresh as
+      // the last manual refresh, so showing it here risked looking stale or
+      // wrong. dentist.reviewCount is still used for search-page sorting
+      // and the Min Reviews filter, where the true Google total is the more
+      // useful signal.
+      const onFileCount = (dentist.reviews || []).length;
       const ratingHtml = dentist.rating
-        ? `<span class="stars stars--lg">${starsHTML(dentist.rating)}</span> <strong style="color:#fff">${dentist.rating}</strong> <span>(${dentist.reviewCount} review${dentist.reviewCount === 1 ? '' : 's'})</span>`
+        ? `<span class="stars stars--lg">${starsHTML(dentist.rating)}</span> <strong style="color:#fff">${dentist.rating}</strong> <span>(${onFileCount} review${onFileCount === 1 ? '' : 's'})</span>`
         : '<span style="color:var(--clr-gray-300)">No rating yet</span>';
       const foundedHtml = dentist.foundedYear ? `<span class="profile-hero__meta-item">Est. ${dentist.foundedYear}</span>` : '';
       heroMeta.innerHTML = `
@@ -2226,7 +2234,7 @@ function matchTreatment(raw) {
     const allAvg = allReviews.length
       ? (allReviews.reduce((s, r) => s + (r.rating || 0), 0) / allReviews.length).toFixed(1)
       : null;
-    const _initReviewHeading = curatedReviews.length ? `Reviews (${curatedReviews.length})` : (dentist.reviewCount ? `Reviews (${dentist.reviewCount})` : 'Reviews');
+    const _initReviewHeading = curatedReviews.length ? `Reviews (${curatedReviews.length})` : (allReviews.length ? `Reviews (${allReviews.length})` : 'Reviews');
     profileContainer.innerHTML = `
       <div class="profile-main">
         ${dentist.description ? `
