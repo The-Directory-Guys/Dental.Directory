@@ -1,8 +1,8 @@
 // Supabase Configuration & Data Fetching
 // URL/key come from supabase-config.js when it's loaded on the page; the
 // literals below are a fallback default for pages that don't load it.
-const SUPABASE_URL = window.DC_SUPABASE_URL || 'https://ankyjpgcocsvvtyyymys.supabase.co';
-const SUPABASE_ANON_KEY = window.DC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFua3lqcGdjb2NzdnZ0eXl5bXlzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4MTM1MTQsImV4cCI6MjA4OTM4OTUxNH0.SXxTLBdiNVSEDXy95yU0x0ctYFOjIby8hZbJ7B1LPK8';
+const SUPABASE_URL = window.DC_SUPABASE_URL || 'https://ydcminsdkiccbngkbvpg.supabase.co';
+const SUPABASE_ANON_KEY = window.DC_SUPABASE_ANON_KEY || 'sb_publishable_ikGnFs7m_Q8oIJLOddKuSg_6A8Mkoed';
 
 // Parse opening hours from "Monday: 8:00 AM – 5:00 PM; Tuesday: ..." string into object
 function parseOpeningHours(hoursStr) {
