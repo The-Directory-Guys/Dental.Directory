@@ -1,5 +1,63 @@
 // Dental Compare — App Logic
 
+/* ── First-party per-clinic analytics ────────────────────────────────────
+   Fires lightweight, insert-only events into the Supabase `clinic_events`
+   table, read back per practice in the owner portal's Insights tab. No PII
+   is stored: just a clinic id, an event type and a server-set timestamp.
+   Owners see the data for their own listing only, via RLS.
+
+   Events: profile_view, phone_click, website_click, directions_click. CTAs
+   are tagged with data-dc-ev and caught by one delegated listener, so there
+   is nothing to wire up per button beyond the attribute. */
+(function (w, d) {
+  const SB_URL = w.DC_SUPABASE_URL;
+  const SB_KEY = w.DC_SUPABASE_ANON_KEY;
+  let currentClinic = null;
+
+  // Skip automation/scrapers, and skip anyone signed in as an owner, so
+  // practices don't inflate their own numbers while managing their listing.
+  const isBot = (typeof navigator !== 'undefined') && (navigator.webdriver ||
+    /bot|crawl|spider|slurp|headless|lighthouse|preview|monitor/i.test(navigator.userAgent || ''));
+  // A signed-in owner has a Supabase auth token in localStorage (same origin
+  // as the portal). If one is present, this is an owner, so don't count them.
+  const isOwner = () => {
+    try {
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && /^sb-.*-auth-token$/.test(k) && localStorage.getItem(k)) return true;
+      }
+      return false;
+    } catch { return false; }
+  };
+
+  function track(clinicId, type) {
+    if (!SB_URL || !SB_KEY || !clinicId || !type || isBot || isOwner()) return;
+    try {
+      fetch(`${SB_URL}/rest/v1/clinic_events`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: SB_KEY,
+          Authorization: `Bearer ${SB_KEY}`,
+          Prefer: 'return=minimal'
+        },
+        body: JSON.stringify({ clinic_id: Number(clinicId), event_type: type }),
+        keepalive: true
+      }).catch(() => {});
+    } catch {}
+  }
+
+  w.dcTrackEvent = track;
+  w.dcSetClinic = id => { currentClinic = id ? Number(id) : null; };
+
+  // One delegated listener catches every CTA tagged with data-dc-ev.
+  d.addEventListener('click', function (e) {
+    const el = e.target.closest && e.target.closest('[data-dc-ev]');
+    if (!el) return;
+    track(el.getAttribute('data-dc-clinic') || currentClinic, el.getAttribute('data-dc-ev'));
+  }, true);
+})(window, document);
+
 // Treatment synonym map — keys are user search terms, values are { service, priceType }
 // priceType: 'checkup' | 'hygienist' | null (null = no price-boost sort)
 const TREATMENT_MAP = {
@@ -1870,6 +1928,12 @@ function matchTreatment(raw) {
       });
     }
 
+    // First-party profile-view event (read in the owner portal's Insights tab)
+    if (typeof window.dcSetClinic === 'function') {
+      window.dcSetClinic(dentist.id);
+      window.dcTrackEvent(dentist.id, 'profile_view');
+    }
+
     // Update hero
     const heroName = document.getElementById('profile-name');
     const heroMeta = document.getElementById('profile-meta');
@@ -2007,8 +2071,8 @@ function matchTreatment(raw) {
             <div class="pricing-empty__icon">💰</div>
             <h4 class="pricing-empty__title">No prices listed on website</h4>
             <p class="pricing-empty__text">This practice hasn't published prices on their website. Contact them directly for a quote.</p>
-            ${dentist.phone ? `<a href="tel:${dentist.phone.replace(/\s/g, '')}" class="btn btn--outline btn--sm pricing-empty__btn">📞 Call for Pricing</a>` : ''}
-            ${dentist.website ? `<a href="${dentist.website}" target="_blank" class="btn btn--outline btn--sm pricing-empty__btn">🌐 Check Website</a>` : ''}
+            ${dentist.phone ? `<a href="tel:${dentist.phone.replace(/\s/g, '')}" data-dc-ev="phone_click" class="btn btn--outline btn--sm pricing-empty__btn">📞 Call for Pricing</a>` : ''}
+            ${dentist.website ? `<a href="${dentist.website}" target="_blank" data-dc-ev="website_click" class="btn btn--outline btn--sm pricing-empty__btn">🌐 Check Website</a>` : ''}
           </div>
           <div class="submit-nudge">
             <span class="submit-nudge__text">Do you know the price?</span>
@@ -2055,7 +2119,7 @@ function matchTreatment(raw) {
 
     // Google Maps directions link
     const mapLink = dentist.googleMapsUrl
-      ? `<a href="${dentist.googleMapsUrl}" target="_blank" class="btn btn--outline btn--block" style="margin-top:.5rem;">📍 Get Directions</a>`
+      ? `<a href="${dentist.googleMapsUrl}" target="_blank" data-dc-ev="directions_click" class="btn btn--outline btn--block" style="margin-top:.5rem;">📍 Get Directions</a>`
       : '';
 
     // Write a Google Review button
@@ -2065,7 +2129,7 @@ function matchTreatment(raw) {
 
     // Website button
     const websiteBtn = dentist.website
-      ? `<a href="${dentist.website}" target="_blank" class="btn btn--primary btn--block">Visit Website ↗</a>`
+      ? `<a href="${dentist.website}" target="_blank" data-dc-ev="website_click" class="btn btn--primary btn--block">Visit Website ↗</a>`
       : '';
 
     // Facebook button
@@ -2321,7 +2385,7 @@ function matchTreatment(raw) {
           <div class="contact-item">
             <div class="contact-item__icon">📞</div>
             <div class="contact-item__content">
-              <a href="tel:${dentist.phone.replace(/\\s/g, '')}" style="font-weight:600;color:var(--clr-navy);text-decoration:none;">${dentist.phone}</a>
+              <a href="tel:${dentist.phone.replace(/\\s/g, '')}" data-dc-ev="phone_click" style="font-weight:600;color:var(--clr-navy);text-decoration:none;">${dentist.phone}</a>
               <div style="font-size:.75rem;color:var(--clr-gray-400)">Phone</div>
             </div>
           </div>` : ''}
@@ -2361,9 +2425,9 @@ function matchTreatment(raw) {
     const stickyActions = document.getElementById('sticky-actions');
     if (stickyActions) {
       stickyActions.innerHTML = [
-        dentist.phone ? `<a href="tel:${dentist.phone.replace(/\s/g, '')}" class="sticky-actions__btn sticky-actions__btn--call">📞 Call</a>` : '',
-        dentist.website ? `<a href="${dentist.website}" target="_blank" class="sticky-actions__btn sticky-actions__btn--website">🌐 Visit Website</a>` : '',
-        dentist.googleMapsUrl ? `<a href="${dentist.googleMapsUrl}" target="_blank" class="sticky-actions__btn sticky-actions__btn--directions">📍 Directions</a>` : '',
+        dentist.phone ? `<a href="tel:${dentist.phone.replace(/\s/g, '')}" data-dc-ev="phone_click" class="sticky-actions__btn sticky-actions__btn--call">📞 Call</a>` : '',
+        dentist.website ? `<a href="${dentist.website}" target="_blank" data-dc-ev="website_click" class="sticky-actions__btn sticky-actions__btn--website">🌐 Visit Website</a>` : '',
+        dentist.googleMapsUrl ? `<a href="${dentist.googleMapsUrl}" target="_blank" data-dc-ev="directions_click" class="sticky-actions__btn sticky-actions__btn--directions">📍 Directions</a>` : '',
         dentist.id ? `<button id="sticky-save-btn" class="sticky-actions__btn sticky-actions__btn--save${profileIsFav ? ' sticky-actions__btn--save--active' : ''}">${profileIsFav ? '♥ Saved' : '♥ Save'}</button>` : '',
       ].filter(Boolean).join('');
     }

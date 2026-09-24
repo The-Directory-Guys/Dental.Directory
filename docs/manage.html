@@ -76,7 +76,33 @@
       .price-header, .price-row { grid-template-columns:1fr 1fr; }
       .price-header span:nth-child(3), .price-row input.p-notes { grid-column:1/-1; }
       .price-row__del { grid-column:2; justify-self:end; }
+      .ins-metrics { grid-template-columns:1fr 1fr; }
     }
+    /* Portal tabs */
+    .mtabs { display:flex; gap:.25rem; background:var(--clr-gray-50); border-radius:10px; padding:.3rem; margin-bottom:1.75rem; max-width:340px; }
+    .mtab { flex:1; border:none; background:none; padding:.55rem .9rem; font-size:.9rem; font-weight:600; font-family:inherit; color:var(--clr-gray-500); border-radius:7px; cursor:pointer; }
+    .mtab.is-active { background:#fff; color:var(--clr-gray-900); box-shadow:0 1px 2px rgba(0,0,0,.08); }
+    /* Insights */
+    .ins-range { display:inline-flex; gap:.25rem; background:var(--clr-gray-50); border-radius:8px; padding:.25rem; margin-bottom:1.5rem; }
+    .ins-range button { border:none; background:none; padding:.4rem .85rem; font-size:.82rem; font-weight:600; color:var(--clr-gray-500); border-radius:6px; cursor:pointer; font-family:inherit; }
+    .ins-range button.is-active { background:#fff; color:var(--clr-gray-900); box-shadow:0 1px 2px rgba(0,0,0,.08); }
+    .ins-metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:.9rem; margin-bottom:1.5rem; }
+    .ins-card { background:#fff; border:1px solid var(--clr-gray-100); border-radius:12px; padding:1.1rem 1.2rem; }
+    .ins-card__label { font-size:.7rem; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--clr-gray-400); margin-bottom:.4rem; }
+    .ins-card__value { font-size:1.85rem; font-weight:700; color:var(--clr-gray-900); line-height:1; }
+    .ins-card__sub { font-size:.72rem; color:var(--clr-gray-400); margin-top:.35rem; }
+    .chart { display:flex; align-items:flex-end; gap:3px; height:180px; padding-top:.5rem; }
+    .chart__bar { flex:1 1 0; background:var(--clr-teal); border-radius:3px 3px 0 0; min-height:2px; position:relative; }
+    .chart__bar:hover { filter:brightness(.92); }
+    .chart__bar span { position:absolute; bottom:100%; left:50%; transform:translateX(-50%); background:var(--clr-gray-900); color:#fff; font-size:.7rem; padding:.15rem .4rem; border-radius:4px; white-space:nowrap; opacity:0; pointer-events:none; transition:opacity .12s; margin-bottom:4px; }
+    .chart__bar:hover span { opacity:1; }
+    .chart-axis { display:flex; justify-content:space-between; font-size:.68rem; color:var(--clr-gray-400); margin-top:.5rem; }
+    .ins-tbl { width:100%; border-collapse:collapse; font-size:.88rem; }
+    .ins-tbl th { text-align:left; font-size:.7rem; text-transform:uppercase; letter-spacing:.05em; color:var(--clr-gray-400); font-weight:600; padding:.5rem .6rem; border-bottom:2px solid var(--clr-gray-100); }
+    .ins-tbl td { padding:.6rem .6rem; border-bottom:1px solid var(--clr-gray-50); color:var(--clr-gray-700); }
+    .ins-tbl td:last-child, .ins-tbl th:last-child { text-align:right; }
+    .ins-empty { text-align:center; color:var(--clr-gray-400); padding:2.5rem 1rem; font-size:.9rem; }
+    .ins-note { font-size:.75rem; color:var(--clr-gray-400); margin:1rem 0 0; line-height:1.55; }
   </style>
     <!-- Microsoft Clarity -->
     <script type="text/javascript">
@@ -132,6 +158,13 @@
       </div>
       <button id="sign-out-btn" style="background:none; border:none; color:var(--clr-gray-400); font-size:.85rem; cursor:pointer; text-decoration:underline; font-family:inherit;">Sign out</button>
     </div>
+
+    <div class="mtabs" role="tablist">
+      <button class="mtab is-active" data-panel="tab-listing" role="tab">My Listing</button>
+      <button class="mtab" data-panel="tab-insights" role="tab">Insights</button>
+    </div>
+
+    <div id="tab-listing">
 
     <!-- Basic Info -->
     <div class="manage-card">
@@ -307,6 +340,50 @@
         <button type="submit" class="save-btn">Save amenities</button>
       </form>
     </div>
+
+    </div><!-- /tab-listing -->
+
+    <div id="tab-insights" style="display:none;">
+      <div class="ins-range" id="ins-range">
+        <button data-days="7">Last 7 days</button>
+        <button data-days="30" class="is-active">Last 30 days</button>
+        <button data-days="90">Last 90 days</button>
+      </div>
+
+      <div class="ins-metrics">
+        <div class="ins-card"><div class="ins-card__label">Total profile views</div><div class="ins-card__value" id="m-views">—</div><div class="ins-card__sub">total visitors, not unique</div></div>
+        <div class="ins-card"><div class="ins-card__label">Phone clicks</div><div class="ins-card__value" id="m-phone">—</div><div class="ins-card__sub">tapped your number</div></div>
+        <div class="ins-card"><div class="ins-card__label">Website clicks</div><div class="ins-card__value" id="m-website">—</div><div class="ins-card__sub">went to your site</div></div>
+        <div class="ins-card"><div class="ins-card__label">Directions</div><div class="ins-card__value" id="m-directions">—</div><div class="ins-card__sub">asked for the map</div></div>
+      </div>
+
+      <div class="manage-card">
+        <h2>Profile views over time</h2>
+        <div id="chart-wrap">
+          <div class="chart" id="chart"></div>
+          <div class="chart-axis"><span id="axis-start"></span><span id="axis-end"></span></div>
+        </div>
+        <div class="ins-empty" id="chart-empty" style="display:none;">No profile views in this period yet.</div>
+      </div>
+
+      <div class="manage-card">
+        <h2>Action breakdown</h2>
+        <table class="ins-tbl">
+          <thead><tr><th>Action</th><th>Total</th><th>Share of views</th></tr></thead>
+          <tbody id="breakdown"></tbody>
+        </table>
+        <p class="ins-note">
+          All figures are <strong>total counts, not unique visitors</strong>. One person opening your listing three times counts as three views.
+          Share of views is how often visitors who opened your listing went on to take that action.
+          Numbers exclude you when you're signed in, and known bots.
+        </p>
+      </div>
+
+      <div class="ins-empty" id="ins-nodata" style="display:none;">
+        <p><strong>No activity recorded yet.</strong></p>
+        <p>Once visitors start viewing your listing, their views and clicks show up here.</p>
+      </div>
+    </div><!-- /tab-insights -->
 
   </div>
 </section>
@@ -1100,6 +1177,92 @@
     amenitiesRowExists = true;
     toast('Amenities saved ✓');
   });
+
+  // ---- Insights tab ----
+  const INS_LABELS = { profile_view:'Profile views', phone_click:'Phone clicks', website_click:'Website clicks', directions_click:'Directions' };
+  const INS_CLICKS = ['phone_click','website_click','directions_click'];
+  let insEvents = [];
+  let insDays = 30;
+  let insLoaded = false;
+
+  function switchTab(panel) {
+    document.querySelectorAll('.mtab').forEach(b => b.classList.toggle('is-active', b.dataset.panel === panel));
+    document.getElementById('tab-listing').style.display  = panel === 'tab-listing'  ? '' : 'none';
+    document.getElementById('tab-insights').style.display = panel === 'tab-insights' ? '' : 'none';
+    if (panel === 'tab-insights' && !insLoaded) loadInsights();
+  }
+  document.querySelectorAll('.mtab').forEach(btn =>
+    btn.addEventListener('click', () => switchTab(btn.dataset.panel)));
+
+  document.getElementById('ins-range').addEventListener('click', e => {
+    const btn = e.target.closest('button[data-days]'); if (!btn) return;
+    insDays = Number(btn.dataset.days);
+    document.querySelectorAll('#ins-range button').forEach(b => b.classList.toggle('is-active', b === btn));
+    renderInsights();
+  });
+
+  async function loadInsights() {
+    insLoaded = true;
+    const since = new Date(Date.now() - 90 * 864e5).toISOString();
+    const { data, error } = await db.from('clinic_events')
+      .select('event_type, created_at').eq('clinic_id', clinicId)
+      .gte('created_at', since).order('created_at', { ascending: true }).limit(50000);
+    if (error) console.warn('clinic_events read failed:', error.message);
+    insEvents = Array.isArray(data) ? data : [];
+    renderInsights();
+  }
+
+  function renderInsights() {
+    const cutoff = Date.now() - insDays * 864e5;
+    const rows = insEvents.filter(e => new Date(e.created_at).getTime() >= cutoff);
+    const counts = { profile_view:0, phone_click:0, website_click:0, directions_click:0 };
+    rows.forEach(e => { if (e.event_type in counts) counts[e.event_type]++; });
+
+    document.getElementById('m-views').textContent = counts.profile_view.toLocaleString();
+    document.getElementById('m-phone').textContent = counts.phone_click.toLocaleString();
+    document.getElementById('m-website').textContent = counts.website_click.toLocaleString();
+    document.getElementById('m-directions').textContent = counts.directions_click.toLocaleString();
+    document.getElementById('ins-nodata').style.display = rows.length ? 'none' : 'block';
+
+    renderInsChart(rows, cutoff);
+    renderInsBreakdown(counts);
+  }
+
+  function renderInsChart(rows, cutoff) {
+    const chart = document.getElementById('chart');
+    const empty = document.getElementById('chart-empty');
+    const wrap  = document.getElementById('chart-wrap');
+    const views = rows.filter(e => e.event_type === 'profile_view');
+    const days = insDays;
+    const start = new Date(cutoff); start.setHours(0,0,0,0);
+    const buckets = new Array(days).fill(0);
+    views.forEach(e => {
+      const idx = Math.floor((new Date(e.created_at).setHours(0,0,0,0) - start.getTime()) / 864e5);
+      if (idx >= 0 && idx < days) buckets[idx]++;
+    });
+    const total = buckets.reduce((a,b)=>a+b,0);
+    if (!total) { wrap.style.display='none'; empty.style.display='block'; return; }
+    wrap.style.display='block'; empty.style.display='none';
+    const max = Math.max(...buckets, 1);
+    const fmtDay = d => d.toLocaleDateString('en-NZ', { day:'numeric', month:'short' });
+    chart.innerHTML = buckets.map((v,i) => {
+      const day = new Date(start.getTime() + i*864e5);
+      const h = Math.round((v/max)*100);
+      return `<div class="chart__bar" style="height:${Math.max(h, v?4:0)}%"><span>${fmtDay(day)}: ${v} view${v===1?'':'s'}</span></div>`;
+    }).join('');
+    document.getElementById('axis-start').textContent = fmtDay(start);
+    document.getElementById('axis-end').textContent = fmtDay(new Date(start.getTime() + (days-1)*864e5));
+  }
+
+  function renderInsBreakdown(counts) {
+    const views = counts.profile_view || 0;
+    const order = ['profile_view', ...INS_CLICKS];
+    document.getElementById('breakdown').innerHTML = order.map(k => {
+      const c = counts[k];
+      const share = (k === 'profile_view' || !views) ? '—' : Math.round((c/views)*100) + '%';
+      return `<tr><td>${INS_LABELS[k]}</td><td>${c.toLocaleString()}</td><td>${share}</td></tr>`;
+    }).join('');
+  }
 
 })();
 </script>
