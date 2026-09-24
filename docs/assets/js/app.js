@@ -10,8 +10,14 @@
    are tagged with data-dc-ev and caught by one delegated listener, so there
    is nothing to wire up per button beyond the attribute. */
 (function (w, d) {
-  const SB_URL = w.DC_SUPABASE_URL;
-  const SB_KEY = w.DC_SUPABASE_ANON_KEY;
+  // Config comes from supabase-config.js (window.DC_*) on portal pages, or the
+  // top-level SUPABASE_URL / SUPABASE_ANON_KEY consts from supabase.js on public
+  // pages. Resolve at call time so script load order never matters.
+  function sbConf() {
+    const url = w.DC_SUPABASE_URL || (typeof SUPABASE_URL !== 'undefined' ? SUPABASE_URL : null);
+    const key = w.DC_SUPABASE_ANON_KEY || (typeof SUPABASE_ANON_KEY !== 'undefined' ? SUPABASE_ANON_KEY : null);
+    return { url, key };
+  }
   let currentClinic = null;
 
   // Skip automation/scrapers, and skip anyone signed in as an owner, so
@@ -31,6 +37,7 @@
   };
 
   function track(clinicId, type) {
+    const { url: SB_URL, key: SB_KEY } = sbConf();
     if (!SB_URL || !SB_KEY || !clinicId || !type || isBot || isOwner()) return;
     try {
       fetch(`${SB_URL}/rest/v1/clinic_events`, {
