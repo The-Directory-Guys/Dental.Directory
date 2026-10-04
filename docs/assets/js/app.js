@@ -1450,7 +1450,7 @@ function matchTreatment(raw) {
     { key: 'calendar_booking',        label: 'Online calendar booking' },
     { key: 'saturday_hours',          label: 'Open Saturdays' },
     { key: 'sunday_hours',            label: 'Open Sundays' },
-    { key: 'evening_hours',           label: 'Open evenings (after 5 PM)' },
+    { key: 'evening_hours',           label: 'Afterhours availability' },
     { key: 'same_day_emergency',      label: 'Same-day emergencies' },
   ];
 

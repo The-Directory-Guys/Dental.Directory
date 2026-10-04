@@ -80,8 +80,11 @@ function transformClinic(clinic) {
     hasPricingFlag: clinic.price || null,  // 'full_prices', 'some_prices', or null
     pricesLastUpdated: clinic.prices_last_updated || null,
     description: clinic.description || '',
-    hours: parseOpeningHours(clinic.opening_hours),
-    hrs: compactHours(parseOpeningHours(clinic.opening_hours)),
+    hours: clinic.opening_hours ? parseOpeningHours(clinic.opening_hours) : null,
+    // Prerendered city/region pages ship a precomputed `hrs` instead of the
+    // full `opening_hours` string (to keep the prefetch payload small) - use
+    // it directly when present, otherwise parse opening_hours as normal.
+    hrs: clinic.hrs || compactHours(parseOpeningHours(clinic.opening_hours)),
     reviews: [],
     googleMapsUrl: clinic.google_maps_url || '',
     businessStatus: clinic.business_status || 'OPERATIONAL',
