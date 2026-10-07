@@ -3175,7 +3175,7 @@ function matchTreatment(raw) {
         }
         if (total > 0) {
           const countEl = card.querySelector('.location-card__count');
-          if (countEl) countEl.textContent = `${total} dentists`;
+          if (countEl) countEl.textContent = `${total} clinics`;
         }
       });
     });
