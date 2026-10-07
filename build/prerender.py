@@ -43,9 +43,10 @@ load_dotenv()
 
 SUPABASE_URL = os.environ["SUPABASE_URL"]
 SUPABASE_KEY = os.environ["SUPABASE_SERVICE_KEY"]
+# apikey only - combining this with Authorization: Bearer breaks the new
+# sb_secret_... key format (returns "Expected 3 parts in JWT").
 HEADERS = {
     "apikey": SUPABASE_KEY,
-    "Authorization": f"Bearer {SUPABASE_KEY}",
 }
 
 DOCS = "docs"
@@ -239,7 +240,7 @@ def fetch_all_clinics():
             f"&order=region,total_ratings.desc.nullslast"
             f"&limit={limit}&offset={offset}"
         )
-        r = requests.get(url, headers=HEADERS, timeout=30)
+        r = requests.get(url, headers=HEADERS, timeout=30, verify=False)
         r.raise_for_status()
         batch = r.json()
         clinics.extend(batch)
@@ -266,7 +267,7 @@ def fetch_pricing_for_ids(clinic_ids: list[int]) -> dict:
                 f"&order=clinic_id,id"
                 f"&limit={limit}&offset={offset}"
             )
-            r = requests.get(url, headers=HEADERS, timeout=30)
+            r = requests.get(url, headers=HEADERS, timeout=30, verify=False)
             r.raise_for_status()
             rows = r.json()
             for row in rows:
