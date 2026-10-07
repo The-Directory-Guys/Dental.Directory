@@ -312,7 +312,9 @@ function matchTreatment(raw) {
   const AMENITY_CHECKS = {
     saturday_hours:   d => !!(d.hrs && Array.isArray(d.hrs['6'])),
     sunday_hours:     d => !!(d.hrs && Array.isArray(d.hrs['0'])),
-    evening_hours:    d => !!(d.hrs && Object.values(d.hrs).some(v => Array.isArray(v) && v[1] > 1020)),
+    // Weekdays only (Mon-Fri, keys '1'-'5') - deliberately excludes Saturday/
+    // Sunday so this doesn't just overlap with the weekend-hours checkboxes.
+    evening_hours:    d => !!(d.hrs && ['1','2','3','4','5'].some(k => Array.isArray(d.hrs[k]) && d.hrs[k][1] > 1020)),
     calendar_booking: d => !!(d.amenityFlags && d.amenityFlags.online_booking_note),
   };
 
@@ -1515,7 +1517,7 @@ function matchTreatment(raw) {
     { key: 'calendar_booking',        label: 'Online calendar booking' },
     { key: 'saturday_hours',          label: 'Open Saturdays' },
     { key: 'sunday_hours',            label: 'Open Sundays' },
-    { key: 'evening_hours',           label: 'Afterhours availability' },
+    { key: 'evening_hours',           label: 'Open weekdays after 5 pm' },
     { key: 'same_day_emergency',      label: 'Same-day emergencies' },
   ];
 
