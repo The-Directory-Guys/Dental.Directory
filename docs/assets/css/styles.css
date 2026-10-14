@@ -2743,6 +2743,24 @@ details[open] .faq__question::after {
     margin-bottom: var(--sp-8);
 }
 
+.contact-warning {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-left: 4px solid #ea580c;
+    border-radius: var(--radius-lg);
+    padding: var(--sp-6);
+    color: #7c2d12;
+    line-height: 1.7;
+    margin-bottom: var(--sp-6);
+}
+
+.contact-warning a {
+    color: #c2410c;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
 .contact-callout a {
     color: var(--clr-teal);
     font-weight: 600;
