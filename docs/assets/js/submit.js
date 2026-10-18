@@ -256,8 +256,7 @@
     if (!session) { showStep('email'); return; }
 
     const displayName = session.user.user_metadata?.display_name || 'Anonymous';
-    const params = new URLSearchParams(window.location.search);
-    const clinicId = params.get('id') ? parseInt(params.get('id'), 10) : null;
+    const clinicId = typeof window.__CLINIC_ID__ === 'number' ? window.__CLINIC_ID__ : null;
     const clinicName = document.getElementById('profile-name')?.textContent || null;
 
     const btn = document.getElementById('sub-submit-btn');
