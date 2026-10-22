@@ -90,7 +90,7 @@ SUBURB_FILTERS = {
         "Bryndwr","Richmond","Redwood","Riccarton (Upper)","Somerfield","Hoon Hay",
         "Phillipstown","Ferrymead","Casebrook","Northcote","Ilam","Waltham","Addington",
         "North New Brighton","Redcliffs","Fendalton","Yaldhurst",
-        "Kaiapoi","Prebbleton","Rangiora","Rolleston","Lincoln",
+        "Kaiapoi","Prebbleton","Rangiora","Rolleston","Lincoln","Woodend",
     },
     "wider-canterbury": {"Ashburton","Timaru","Darfield","Geraldine","Kaikōura","Oxford"},
     "hamilton-city": {
