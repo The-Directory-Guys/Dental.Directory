@@ -430,7 +430,7 @@ function matchTreatment(raw) {
       'Bryndwr','Richmond','Redwood','Riccarton (Upper)','Somerfield','Hoon Hay',
       'Phillipstown','Ferrymead','Casebrook','Northcote','Ilam','Waltham','Addington',
       'North New Brighton','Redcliffs','Fendalton','Yaldhurst',
-      'Kaiapoi','Prebbleton','Rangiora','Rolleston','Lincoln'
+      'Kaiapoi','Prebbleton','Rangiora','Rolleston','Lincoln','Woodend'
     ]),
     'wider-canterbury': new Set([
       'Ashburton','Timaru','Darfield','Geraldine','Kaikōura','Oxford'
@@ -2826,6 +2826,7 @@ function matchTreatment(raw) {
     'Feilding':         [-40.22628, 175.56444],
     'Rangiora':         [-43.30317, 172.59615],
     'Rolleston':        [-43.59665, 172.38500],
+    'Woodend':          [-43.30740, 172.67059],
     'Kaitaia':          [-35.11400, 173.26600],
     'Kaitāia':          [-35.11400, 173.26600],
     'Paihia':           [-35.28124, 174.09209],
