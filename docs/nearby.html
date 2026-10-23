@@ -289,7 +289,7 @@
         const ORS_API_KEY = 'eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImNjMDc0MmM4MWU5MTRjYzZiMmM5NDEwOGU5ODQ1YmFiIiwiaCI6Im11cm11cjY0In0=';
 
         let userLat, userLng, allClinics = [];
-        let map, clinicMarkers = [], radiusCircle, userMarker;
+        let map, clinicMarkers = [], radiusCircle, userMarker, resizeHandle;
         let activeServices = [], activeSuburbs = [], minRating = 0, maxPrice = Infinity, maxHygienistPrice = Infinity;
         let activeTreatmentPriceType = null;
         let drivingDistances = null; // clinic id → driving km; null = not yet fetched
@@ -304,6 +304,34 @@
           const a = Math.sin(dLat/2)**2 +
                     Math.cos(lat1 * Math.PI/180) * Math.cos(lat2 * Math.PI/180) * Math.sin(dLng/2)**2;
           return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        }
+
+        // Point at `distKm` from [lat, lng] along `bearingDeg` (0 = north, 90 = east)
+        function destPoint(lat, lng, bearingDeg, distKm) {
+          const R = 6371;
+          const brng = bearingDeg * Math.PI / 180;
+          const lat1 = lat * Math.PI / 180, lng1 = lng * Math.PI / 180;
+          const lat2 = Math.asin(Math.sin(lat1) * Math.cos(distKm / R) + Math.cos(lat1) * Math.sin(distKm / R) * Math.cos(brng));
+          const lng2 = lng1 + Math.atan2(
+            Math.sin(brng) * Math.sin(distKm / R) * Math.cos(lat1),
+            Math.cos(distKm / R) - Math.sin(lat1) * Math.sin(lat2)
+          );
+          return [lat2 * 180 / Math.PI, lng2 * 180 / Math.PI];
+        }
+
+        // Reflects a drag-resized radius in the dropdown, adding a one-off
+        // custom option when it doesn't match a preset (5/10/20/50).
+        function setCustomRadiusOption(km) {
+          const existing = radiusSel.querySelector('option[data-custom]');
+          if (existing) existing.remove();
+          if (!radiusSel.querySelector(`option[value="${km}"]`)) {
+            const opt = document.createElement('option');
+            opt.value = km;
+            opt.textContent = `${km} km`;
+            opt.dataset.custom = '1';
+            radiusSel.appendChild(opt);
+          }
+          radiusSel.value = km;
         }
 
         async function fetchDrivingDistances(lat, lng, clinics) {
@@ -482,6 +510,7 @@
           clinicMarkers.forEach(m => map.removeLayer(m));
           clinicMarkers = [];
           if (radiusCircle) map.removeLayer(radiusCircle);
+          if (resizeHandle) map.removeLayer(resizeHandle);
 
           setUserMarker(userLat, userLng);
           radiusCircle = L.circle([userLat, userLng], {
@@ -489,6 +518,24 @@
             color: '#0d9488', fillColor: '#0d9488', fillOpacity: 0.06,
             weight: 1.5, dashArray: '6 4'
           }).addTo(map);
+
+          resizeHandle = L.marker(destPoint(userLat, userLng, 90, radiusKm), {
+            draggable: true,
+            title: 'Drag to resize search radius',
+            icon: L.divIcon({
+              className: '',
+              html: '<div style="width:16px;height:16px;background:#fff;border:3px solid #0d9488;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.3);cursor:grab;"></div>',
+              iconSize: [16, 16], iconAnchor: [8, 8]
+            })
+          }).addTo(map);
+          resizeHandle.on('drag', e => {
+            radiusCircle.setRadius(haversineKm(userLat, userLng, e.target.getLatLng().lat, e.target.getLatLng().lng) * 1000);
+          });
+          resizeHandle.on('dragend', e => {
+            const km = Math.min(100, Math.max(1, Math.round(haversineKm(userLat, userLng, e.target.getLatLng().lat, e.target.getLatLng().lng))));
+            setCustomRadiusOption(km);
+            render();
+          });
 
           const icon = L.divIcon({
             className: '',
@@ -660,7 +707,11 @@
           }
 
           // Wire up all filter controls
-          radiusSel.addEventListener('change', () => render());
+          radiusSel.addEventListener('change', () => {
+            const existing = radiusSel.querySelector('option[data-custom]');
+            if (existing && existing.value !== radiusSel.value) existing.remove();
+            render();
+          });
           sortSelect.addEventListener('change', () => render(false));
           if (searchInput) searchInput.addEventListener('input', () => {
             const raw = searchInput.value;
