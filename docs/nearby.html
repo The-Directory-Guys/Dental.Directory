@@ -504,6 +504,15 @@
             return d;
           };
           hint.addTo(map);
+
+          const resizeHint = L.control({ position: 'bottomright' });
+          resizeHint.onAdd = () => {
+            const d = L.DomUtil.create('div');
+            d.style.cssText = 'background:rgba(255,255,255,.85);padding:4px 8px;border-radius:6px;font-size:.72rem;color:#6b7280;pointer-events:none;';
+            d.textContent = 'Drag circle edge to resize';
+            return d;
+          };
+          resizeHint.addTo(map);
         }
 
         function updateMap(nearby, radiusKm, fitMap = true) {
