@@ -457,7 +457,7 @@ def card_html(clinic: dict, pricing: list, region: str) -> str:
         f'<a href="{profile_link}">{html.escape(name)}</a></h3>\n'
         f'            <div class="dentist-card__meta">\n'
         f'              <span class="dentist-card__meta-item">{rating_display}</span>\n'
-        f'              <span class="dentist-card__meta-item">📍 {html.escape(location)}</span>\n'
+        f'              <span class="dentist-card__meta-item">{html.escape(location)}</span>\n'
         + (f'              <span class="dentist-card__meta-item">{review_text}</span>\n' if review_text else "")
         + f'            </div>\n'
         + (f'            <div class="dentist-card__services">{service_pills}</div>\n' if service_pills else "")

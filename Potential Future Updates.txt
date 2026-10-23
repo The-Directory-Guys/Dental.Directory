@@ -41,3 +41,10 @@ CLINICS WITH HTTP (NOT SECURE) WEBSITES — photos may not load on HTTPS pages
    - Allow users to enter a work address separately from their home address
    - Filter clinics near workplace (useful for lunchtime appointments)
    - Extends the existing nearby/distance search with a second saved location
+
+7. Draggable Search Radius Circle
+   - On the nearby/map search feature, let users click and drag the radius
+     circle itself to adjust the search distance, instead of only a
+     slider/dropdown
+   - Check whether the mapping library in use (nearby.html) supports an
+     editable/draggable circle overlay out of the box

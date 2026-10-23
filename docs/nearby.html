@@ -269,7 +269,7 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="assets/js/supabase.js"></script>
-    <script src="assets/js/app.js?v=40"></script>
+    <script src="assets/js/app.js?v=41"></script>
     <script>
       (function () {
         const grid        = document.getElementById('nearby-grid');
@@ -410,7 +410,7 @@
                 </h3>
                 <div class="dentist-card__meta">
                   <span class="dentist-card__meta-item">${rating}</span>
-                  <span class="dentist-card__meta-item">📍 ${loc}</span>
+                  <span class="dentist-card__meta-item">${loc}</span>
                   ${reviews ? `<span class="dentist-card__meta-item">${reviews}</span>` : ''}
                 </div>
                 ${pills ? `<div class="dentist-card__services">${pills}</div>` : ''}
@@ -500,7 +500,7 @@
             const link = `dentist.html?id=${c.id}&region=${encodeURIComponent(c.region||'')}`;
             const popup = `<div style="min-width:150px;line-height:1.6;">
               <strong style="font-size:.88rem;">${c.name}</strong><br>
-              <span style="font-size:.76rem;color:#6b7280;">📍 ${c.suburb||c.region}</span><br>
+              <span style="font-size:.76rem;color:#6b7280;">${c.suburb||c.region}</span><br>
               ${c.rating ? `<span style="font-size:.76rem;color:#f59e0b;">★ ${c.rating}</span><br>` : ''}
               <span style="font-size:.76rem;color:#0d9488;font-weight:600;">${c.distKm.toFixed(1)} km${c.isDriving ? ' by road' : ''} away</span><br>
               <a href="${link}" style="font-size:.76rem;color:#2563eb;">View Profile →</a>

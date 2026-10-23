@@ -700,7 +700,7 @@ function matchTreatment(raw) {
             ${openBadge}
             <div class="dentist-card__meta">
               <span class="dentist-card__meta-item">${ratingDisplay}</span>
-              <span class="dentist-card__meta-item">📍 ${d.suburb && d.suburb !== d.city ? `${d.suburb}, ${d.city}` : (d.city || d.suburb || 'Unknown')}</span>
+              <span class="dentist-card__meta-item">${d.suburb && d.suburb !== d.city ? `${d.suburb}, ${d.city}` : (d.city || d.suburb || 'Unknown')}</span>
               ${reviewText ? `<span class="dentist-card__meta-item">${reviewText}</span>` : ''}
             </div>
             ${descText ? `<p class="dentist-card__desc">${descText}</p>` : ''}
@@ -1962,7 +1962,7 @@ function matchTreatment(raw) {
       const foundedHtml = dentist.foundedYear ? `<span class="profile-hero__meta-item">Est. ${dentist.foundedYear}</span>` : '';
       heroMeta.innerHTML = `
         <span class="profile-hero__meta-item">${ratingHtml}</span>
-        <span class="profile-hero__meta-item">📍 ${dentist.address}</span>
+        <span class="profile-hero__meta-item">${dentist.address}</span>
         ${foundedHtml}
       `;
     }
@@ -2128,7 +2128,7 @@ function matchTreatment(raw) {
 
     // Google Maps directions link
     const mapLink = dentist.googleMapsUrl
-      ? `<a href="${dentist.googleMapsUrl}" target="_blank" data-dc-ev="directions_click" class="btn btn--outline btn--block" style="margin-top:.5rem;">📍 Get Directions</a>`
+      ? `<a href="${dentist.googleMapsUrl}" target="_blank" data-dc-ev="directions_click" class="btn btn--outline btn--block" style="margin-top:.5rem;">Get Directions</a>`
       : '';
 
     // Write a Google Review button
@@ -2407,7 +2407,6 @@ function matchTreatment(raw) {
             </div>
           </div>` : ''}
           <div class="contact-item">
-            <div class="contact-item__icon">📍</div>
             <div class="contact-item__content">
               <div style="font-weight:600;color:var(--clr-navy)">${dentist.address}</div>
               <div style="font-size:.75rem;color:var(--clr-gray-400)">Address</div>
@@ -2436,7 +2435,7 @@ function matchTreatment(raw) {
       stickyActions.innerHTML = [
         dentist.phone ? `<a href="tel:${dentist.phone.replace(/\s/g, '')}" data-dc-ev="phone_click" class="sticky-actions__btn sticky-actions__btn--call">📞 Call</a>` : '',
         dentist.website ? `<a href="${dentist.website}" target="_blank" data-dc-ev="website_click" class="sticky-actions__btn sticky-actions__btn--website">🌐 Visit Website</a>` : '',
-        dentist.googleMapsUrl ? `<a href="${dentist.googleMapsUrl}" target="_blank" data-dc-ev="directions_click" class="sticky-actions__btn sticky-actions__btn--directions">📍 Directions</a>` : '',
+        dentist.googleMapsUrl ? `<a href="${dentist.googleMapsUrl}" target="_blank" data-dc-ev="directions_click" class="sticky-actions__btn sticky-actions__btn--directions">Directions</a>` : '',
         dentist.id ? `<button id="sticky-save-btn" class="sticky-actions__btn sticky-actions__btn--save${profileIsFav ? ' sticky-actions__btn--save--active' : ''}">${profileIsFav ? '♥ Saved' : '♥ Save'}</button>` : '',
       ].filter(Boolean).join('');
     }
