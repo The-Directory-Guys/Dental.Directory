@@ -91,7 +91,9 @@ function transformClinic(clinic) {
     photoUrl: clinic.photo_url || '',
     clinicPhotoUrl: clinic.clinic_photo_url || '',
     foundedYear: clinic.founded_year || null,
-    facebookUrl: clinic.facebook_url || ''
+    facebookUrl: clinic.facebook_url || '',
+    lat: clinic.lat != null ? clinic.lat : null,
+    lng: clinic.lng != null ? clinic.lng : null
   };
 }
 

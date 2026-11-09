@@ -591,7 +591,7 @@ def inject_page(
         "id","name","suburb_town","town","city",
         "phone_national","phone_international","phone",
         "rating","total_ratings","services","price","description",
-        "photo_url",
+        "photo_url","lat","lng",
     }
     slim_clinics = []
     for c in clinics:

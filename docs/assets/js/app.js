@@ -598,6 +598,8 @@ function matchTreatment(raw) {
 
     // Setup filtering & rendering
     let activeSuburbs = [];
+    let selectedSuburbLoc = null; // { name, lat, lng } — single-suburb radius search
+    let suburbRadiusKm = 10;
     let activeLanguages = [];
     let activeServices = [];
     let minRating = 0;
@@ -745,6 +747,10 @@ function matchTreatment(raw) {
         if (filterFemalePractitioner && !d.practitionerHasFemalePractitioner) return false;
         if (filterMalePractitioner && !d.practitionerHasMalePractitioner) return false;
         if (activeSuburbs.length && !activeSuburbs.includes(d.suburb)) return false;
+        if (selectedSuburbLoc) {
+          if (d.lat == null || d.lng == null) return false;
+          if (haversineKm(selectedSuburbLoc.lat, selectedSuburbLoc.lng, d.lat, d.lng) > suburbRadiusKm) return false;
+        }
         if (activeServices.length && !searchQuery && !activeServices.every(s => {
           if (s === 'Hygienist') return getHygienistPrice(d) !== null;
           return (SERVICE_ALIASES[s] || [s]).some(a => d.services.includes(a));
@@ -825,6 +831,7 @@ function matchTreatment(raw) {
           if (filterHasPhoto) activeLabels.push('Has team photos');
           if (filterHasBio) activeLabels.push('Has team bios');
           activeSuburbs.forEach(s => activeLabels.push(s));
+          if (selectedSuburbLoc) activeLabels.push(`within ${suburbRadiusKm}km of ${selectedSuburbLoc.name}`);
           if (minRating > 0) activeLabels.push(`★ ${minRating.toFixed(1)}+`);
           if (minReviews > 0) activeLabels.push(`${minReviews}+ reviews`);
           if (maxPrice !== Infinity) activeLabels.push(`under $${maxPrice}`);
@@ -910,6 +917,9 @@ function matchTreatment(raw) {
 
     function clearAllFilters() {
       activeSuburbs = [];
+      selectedSuburbLoc = null;
+      suburbRadiusKm = 10;
+      updateSuburbRadiusUI();
       activeLanguages = [];
       activeServices = [];
       filterHasPhoto = false;
@@ -949,6 +959,9 @@ function matchTreatment(raw) {
         if (val) val.textContent = 'Any';
       });
       if (searchInput) searchInput.value = '';
+      document.querySelectorAll('#inline-clinic-search, #mobile-listings-search').forEach(i => { i.value = ''; });
+      const _inlineClear = document.getElementById('inline-search-clear');
+      if (_inlineClear) _inlineClear.hidden = true;
 
       // Reset sliders + labels without triggering extra renders
       const ratingLabel = '★ 0+';
@@ -1094,24 +1107,48 @@ function matchTreatment(raw) {
     if (desktopRatingLabel) desktopRatingLabel.textContent = '★ 0+';
     if (mobileRatingLabel) mobileRatingLabel.textContent = '★ 0+';
 
-    // Search — shared handler used by both desktop and mobile inputs
+    // Search — shared handler used by desktop, mobile and inline inputs
     function handleSearchInput(raw) {
       if (searchMode === 'practitioner') {
         activeTreatmentPriceType = null;
         searchQuery = raw;
+        selectedSuburbLoc = null;
       } else {
-        const treatment = matchTreatment(raw);
-        if (treatment) {
-          document.querySelectorAll(`.filter-service[value="${treatment.service}"]`).forEach(cb => { cb.checked = true; });
-          activeServices = [...new Set(Array.from(document.querySelectorAll('.filter-service:checked')).map(el => el.value))];
-          activeTreatmentPriceType = treatment.priceType;
+        const suburbMatch = resolveSuburbRadiusInput(raw);
+        if (suburbMatch) {
+          selectedSuburbLoc = suburbMatch;
+          activeTreatmentPriceType = null;
           searchQuery = '';
         } else {
-          activeTreatmentPriceType = null;
-          searchQuery = raw;
+          selectedSuburbLoc = null;
+          const treatment = matchTreatment(raw);
+          if (treatment) {
+            document.querySelectorAll(`.filter-service[value="${treatment.service}"]`).forEach(cb => { cb.checked = true; });
+            activeServices = [...new Set(Array.from(document.querySelectorAll('.filter-service:checked')).map(el => el.value))];
+            activeTreatmentPriceType = treatment.priceType;
+            searchQuery = '';
+          } else {
+            activeTreatmentPriceType = null;
+            searchQuery = raw;
+          }
         }
       }
+      updateSuburbRadiusUI();
       renderWithReset();
+    }
+
+    // Shows/hides the "within Xkm of <suburb>" radius chip under the inline
+    // search bar once a typed/selected suburb has resolved to a known location.
+    function updateSuburbRadiusUI() {
+      const chip = document.getElementById('suburb-radius-chip');
+      if (!chip) return;
+      chip.hidden = !selectedSuburbLoc;
+      if (selectedSuburbLoc) {
+        const label = chip.querySelector('.suburb-radius-chip-label');
+        if (label) label.textContent = `Showing clinics near ${selectedSuburbLoc.name}, within`;
+        const sel = chip.querySelector('.suburb-radius-chip-select');
+        if (sel) sel.value = String(suburbRadiusKm);
+      }
     }
 
     function updateSearchModeUI() {
@@ -1228,17 +1265,47 @@ function matchTreatment(raw) {
           // Let the service filter handle recognised treatment keywords
           if (matchTreatment(q)) { acd.hidden = true; return; }
           const lower = q.toLowerCase();
-          const hits = allDentists.filter(d => d.name.toLowerCase().includes(lower)).slice(0, 8);
-          if (!hits.length) { acd.hidden = true; return; }
-          acd.innerHTML = hits.map(d => {
-            const loc = [d.suburb, d.city].filter(Boolean).join(', ');
-            return `<div class="clinic-ac-item" data-id="${d.id}" data-region="${encodeURIComponent(d.region||'')}">
-              <span class="clinic-ac-name">${escAC(d.name)}</span>
-              ${loc ? `<span class="clinic-ac-sub">${escAC(loc)}</span>` : ''}
-            </div>`;
-          }).join('');
+
+          const coords = typeof SUBURB_COORDS !== 'undefined' ? SUBURB_COORDS : {};
+          const pageSuburbs = [...new Set(allDentists.map(d => d.suburb).filter(Boolean))];
+          const locHits = pageSuburbs
+            .filter(s => s.toLowerCase().includes(lower) && Object.keys(coords).some(k => k.toLowerCase() === s.toLowerCase()))
+            .sort((a, b) => a.localeCompare(b))
+            .slice(0, 5);
+
+          const clinicHits = allDentists.filter(d => d.name.toLowerCase().includes(lower)).slice(0, 8);
+          if (!locHits.length && !clinicHits.length) { acd.hidden = true; return; }
+
+          let html = '';
+          if (locHits.length) {
+            html += '<div class="clinic-ac-group-label">Suburb/Town</div>';
+            html += locHits.map(s => `<div class="clinic-ac-item clinic-ac-item--loc" data-suburb="${escAC(s)}">${escAC(s)}</div>`).join('');
+          }
+          if (clinicHits.length) {
+            if (locHits.length) html += '<div class="clinic-ac-group-label">Clinics</div>';
+            html += clinicHits.map(d => {
+              const loc = [d.suburb, d.city].filter(Boolean).join(', ');
+              return `<div class="clinic-ac-item" data-id="${d.id}" data-region="${encodeURIComponent(d.region||'')}">
+                <span class="clinic-ac-name">${escAC(d.name)}</span>
+                ${loc ? `<span class="clinic-ac-sub">${escAC(loc)}</span>` : ''}
+              </div>`;
+            }).join('');
+          }
+          acd.innerHTML = html;
           acd.hidden = false;
-          acd.querySelectorAll('.clinic-ac-item').forEach(el => {
+
+          acd.querySelectorAll('.clinic-ac-item--loc').forEach(el => {
+            el.addEventListener('mousedown', ev => {
+              ev.preventDefault();
+              const suburb = el.dataset.suburb;
+              document.querySelectorAll('#listings-search, #mobile-listings-search, #inline-clinic-search').forEach(i => { i.value = suburb; });
+              const clearBtn = document.getElementById('inline-search-clear');
+              if (clearBtn) clearBtn.hidden = false;
+              handleSearchInput(suburb);
+              acd.hidden = true;
+            });
+          });
+          acd.querySelectorAll('.clinic-ac-item:not(.clinic-ac-item--loc)').forEach(el => {
             el.addEventListener('mousedown', ev => {
               ev.preventDefault();
               window.location.href = `dentist.html?id=${el.dataset.id}&region=${el.dataset.region}`;
@@ -1262,6 +1329,8 @@ function matchTreatment(raw) {
           '.clinic-ac-item:hover{background:var(--clr-gray-50,#f8fafc);}',
           '.clinic-ac-name{font-size:.875rem;font-weight:500;color:var(--clr-gray-800,#1e293b);}',
           '.clinic-ac-sub{font-size:.75rem;color:var(--clr-gray-400,#94a3b8);}',
+          '.clinic-ac-group-label{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em;color:var(--clr-gray-400,#94a3b8);padding:.5rem .9rem .2rem;}',
+          '.clinic-ac-item--loc{font-size:.875rem;color:var(--clr-gray-800,#1e293b);}',
         ].join('');
         document.head.appendChild(s);
       }
@@ -1271,8 +1340,15 @@ function matchTreatment(raw) {
         const barWrap = document.createElement('div');
         barWrap.id = 'inline-clinic-search-wrap';
         barWrap.className = 'inline-clinic-search-wrap listings-search';
-        barWrap.innerHTML = `<svg class="inline-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="inline-clinic-search" placeholder="Search by clinic name..." autocomplete="off"><button class="inline-search-clear" id="inline-search-clear" type="button" aria-label="Clear search" hidden>&times;</button>`;
+        barWrap.innerHTML = `<svg class="inline-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="inline-clinic-search" placeholder="Search by clinic name or suburb/town..." autocomplete="off"><button class="inline-search-clear" id="inline-search-clear" type="button" aria-label="Clear search" hidden>&times;</button>`;
         dentistGrid.parentElement.insertBefore(barWrap, dentistGrid);
+
+        const chip = document.createElement('div');
+        chip.id = 'suburb-radius-chip';
+        chip.className = 'suburb-radius-chip';
+        chip.hidden = true;
+        chip.innerHTML = `<span class="suburb-radius-chip-label"></span><select class="suburb-radius-chip-select" aria-label="Search radius"><option value="5">5 km</option><option value="10" selected>10 km</option><option value="20">20 km</option><option value="50">50 km</option><option value="100">100 km</option></select><button type="button" class="suburb-radius-chip-clear" aria-label="Clear suburb search">&times;</button>`;
+        dentistGrid.parentElement.insertBefore(chip, dentistGrid);
 
         const inlineInput = document.getElementById('inline-clinic-search');
         const inlineClear = document.getElementById('inline-search-clear');
@@ -1296,6 +1372,16 @@ function matchTreatment(raw) {
           inlineInput.focus();
         });
 
+        chip.querySelector('.suburb-radius-chip-select').addEventListener('change', (e) => {
+          suburbRadiusKm = parseFloat(e.target.value);
+          renderWithReset();
+        });
+        chip.querySelector('.suburb-radius-chip-clear').addEventListener('click', () => {
+          document.querySelectorAll('#listings-search, #mobile-listings-search, #inline-clinic-search').forEach(i => { i.value = ''; });
+          inlineClear.hidden = true;
+          handleSearchInput('');
+        });
+
         if (!document.getElementById('inline-search-css')) {
           const s = document.createElement('style');
           s.id = 'inline-search-css';
@@ -1307,6 +1393,10 @@ function matchTreatment(raw) {
             '.inline-clinic-search-wrap input::placeholder{color:var(--clr-gray-400,#94a3b8);}',
             '.inline-search-clear{background:none;border:none;font-size:1.1rem;line-height:1;cursor:pointer;color:var(--clr-gray-400,#94a3b8);padding:.2rem .3rem;border-radius:50%;}',
             '.inline-search-clear:hover{color:var(--clr-gray-700,#334155);background:var(--clr-gray-100,#f1f5f9);}',
+            '.suburb-radius-chip{display:flex;align-items:center;gap:.5rem;margin:-.4rem 0 .75rem;font-size:.82rem;color:var(--clr-gray-500,#6b7280);}',
+            '.suburb-radius-chip-select{padding:2px 6px;border:1px solid var(--clr-gray-200,#e2e8f0);border-radius:6px;font-size:.78rem;background:#fff;color:var(--clr-gray-700,#334155);}',
+            '.suburb-radius-chip-clear{background:none;border:none;cursor:pointer;color:var(--clr-gray-400,#94a3b8);font-size:1rem;line-height:1;padding:0 .2rem;}',
+            '.suburb-radius-chip-clear:hover{color:var(--clr-gray-700,#334155);}',
           ].join('');
           document.head.appendChild(s);
         }
@@ -1735,6 +1825,23 @@ function matchTreatment(raw) {
 
     const mobileSuburbItems = document.querySelector('.filter-drawer [data-filter="suburb"] .filter-group__items');
     if (mobileSuburbItems) mobileSuburbItems.innerHTML = checkboxHtml;
+  }
+
+  function haversineKm(lat1, lng1, lat2, lng2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLng = (lng2 - lng1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) ** 2 +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+
+  function resolveSuburbRadiusInput(val) {
+    const q = (val || '').trim();
+    if (!q) return null;
+    const coords = typeof SUBURB_COORDS !== 'undefined' ? SUBURB_COORDS : {};
+    const key = Object.keys(coords).find(k => k.toLowerCase() === q.toLowerCase());
+    return key ? { name: key, lat: coords[key][0], lng: coords[key][1] } : null;
   }
 
   function buildLanguageFilters(allDentists) {
