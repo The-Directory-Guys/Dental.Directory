@@ -600,6 +600,10 @@ function matchTreatment(raw) {
     let activeSuburbs = [];
     let selectedSuburbLoc = null; // { name, lat, lng } — single-suburb radius search
     let suburbRadiusKm = 10;
+    let suburbMap = null;
+    let suburbMapMarkers = [];
+    let suburbMapCircle = null;
+    let leafletLoadPromise = null;
     let activeLanguages = [];
     let activeServices = [];
     let minRating = 0;
@@ -718,6 +722,89 @@ function matchTreatment(raw) {
           </div>
         </article>
       `;
+    }
+
+    // Lazy-loads Leaflet (only hit when a suburb-radius map is actually opened)
+    function loadLeaflet() {
+      if (typeof L !== 'undefined') return Promise.resolve();
+      if (leafletLoadPromise) return leafletLoadPromise;
+      leafletLoadPromise = new Promise((resolve, reject) => {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+        document.head.appendChild(link);
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+        script.onload = () => resolve();
+        script.onerror = () => reject(new Error('Leaflet failed to load'));
+        document.head.appendChild(script);
+      });
+      return leafletLoadPromise;
+    }
+
+    const suburbMapPinIcon = () => L.divIcon({
+      className: '',
+      html: '<div style="width:22px;height:22px;background:#0d9488;border:3px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;"><svg width="9" height="9" viewBox="0 0 24 24" fill="white"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>',
+      iconSize: [22, 22], iconAnchor: [11, 11], popupAnchor: [0, -14]
+    });
+
+    // Redraws the circle + clinic pins for the current selectedSuburbLoc/suburbRadiusKm.
+    // No-ops until the map has actually been opened once (suburbMap is null until then).
+    function renderSuburbMapMarkers() {
+      if (!suburbMap || !selectedSuburbLoc) return;
+      suburbMapMarkers.forEach(m => suburbMap.removeLayer(m));
+      suburbMapMarkers = [];
+      if (suburbMapCircle) suburbMap.removeLayer(suburbMapCircle);
+
+      suburbMapCircle = L.circle([selectedSuburbLoc.lat, selectedSuburbLoc.lng], {
+        radius: suburbRadiusKm * 1000,
+        color: '#0d9488', fillColor: '#0d9488', fillOpacity: 0.06, weight: 1.5, dashArray: '6 4'
+      }).addTo(suburbMap);
+
+      const icon = suburbMapPinIcon();
+      const inRadius = allDentists.filter(d =>
+        d.lat != null && d.lng != null &&
+        haversineKm(selectedSuburbLoc.lat, selectedSuburbLoc.lng, d.lat, d.lng) <= suburbRadiusKm
+      );
+
+      inRadius.forEach(d => {
+        const marker = L.marker([d.lat, d.lng], { icon }).addTo(suburbMap);
+        marker.bindPopup(`<div style="min-width:140px;line-height:1.5;">
+          <strong style="font-size:.85rem;">${esc(d.name)}</strong><br>
+          <span style="font-size:.75rem;color:#6b7280;">${esc(d.suburb || '')}</span><br>
+          ${d.rating ? `<span style="font-size:.75rem;color:#f59e0b;">★ ${d.rating}</span><br>` : ''}
+          <a href="${clinicUrl(d)}" style="font-size:.75rem;color:#2563eb;">View Profile →</a>
+        </div>`);
+        suburbMapMarkers.push(marker);
+      });
+
+      suburbMap.fitBounds(
+        L.latLngBounds([[selectedSuburbLoc.lat, selectedSuburbLoc.lng], ...inRadius.map(d => [d.lat, d.lng])]),
+        { padding: [30, 30], maxZoom: 15 }
+      );
+    }
+
+    // Opens (and lazily initialises) the suburb-radius map when the "Show map" toggle is checked.
+    async function showSuburbMap() {
+      const mapContainer = document.getElementById('suburb-map');
+      if (!mapContainer || !selectedSuburbLoc) return;
+      mapContainer.hidden = false;
+      try {
+        await loadLeaflet();
+      } catch (e) {
+        mapContainer.innerHTML = '<p style="padding:1rem;color:var(--clr-gray-500,#6b7280);font-size:.85rem;">Map failed to load.</p>';
+        return;
+      }
+      if (!suburbMap) {
+        suburbMap = L.map(mapContainer).setView([selectedSuburbLoc.lat, selectedSuburbLoc.lng], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          maxZoom: 19
+        }).addTo(suburbMap);
+      } else {
+        suburbMap.invalidateSize();
+      }
+      renderSuburbMapMarkers();
     }
 
     // Pagination
@@ -893,6 +980,8 @@ function matchTreatment(raw) {
       document.querySelectorAll('.filter-apply-btn').forEach(btn => {
         btn.textContent = `Show ${n} result${n !== 1 ? 's' : ''} →`;
       });
+
+      renderSuburbMapMarkers();
     }
 
     // Reset pagination when filters change
@@ -1148,6 +1237,11 @@ function matchTreatment(raw) {
         if (label) label.textContent = `Showing clinics near ${selectedSuburbLoc.name}, within`;
         const sel = chip.querySelector('.suburb-radius-chip-select');
         if (sel) sel.value = String(suburbRadiusKm);
+      } else {
+        const toggle = chip.querySelector('.suburb-map-toggle-input');
+        if (toggle) toggle.checked = false;
+        const mapContainer = document.getElementById('suburb-map');
+        if (mapContainer) mapContainer.hidden = true;
       }
     }
 
@@ -1347,8 +1441,14 @@ function matchTreatment(raw) {
         chip.id = 'suburb-radius-chip';
         chip.className = 'suburb-radius-chip';
         chip.hidden = true;
-        chip.innerHTML = `<span class="suburb-radius-chip-label"></span><select class="suburb-radius-chip-select" aria-label="Search radius"><option value="5">5 km</option><option value="10" selected>10 km</option><option value="20">20 km</option><option value="50">50 km</option><option value="100">100 km</option></select><button type="button" class="suburb-radius-chip-clear" aria-label="Clear suburb search">&times;</button>`;
+        chip.innerHTML = `<span class="suburb-radius-chip-label"></span><select class="suburb-radius-chip-select" aria-label="Search radius"><option value="5">5 km</option><option value="10" selected>10 km</option><option value="20">20 km</option><option value="50">50 km</option><option value="100">100 km</option></select><label class="suburb-map-toggle"><input type="checkbox" class="suburb-map-toggle-input"> 🗺️ Map</label><button type="button" class="suburb-radius-chip-clear" aria-label="Clear suburb search">&times;</button>`;
         dentistGrid.parentElement.insertBefore(chip, dentistGrid);
+
+        const suburbMapEl = document.createElement('div');
+        suburbMapEl.id = 'suburb-map';
+        suburbMapEl.className = 'suburb-map';
+        suburbMapEl.hidden = true;
+        dentistGrid.parentElement.insertBefore(suburbMapEl, dentistGrid);
 
         const inlineInput = document.getElementById('inline-clinic-search');
         const inlineClear = document.getElementById('inline-search-clear');
@@ -1381,6 +1481,10 @@ function matchTreatment(raw) {
           inlineClear.hidden = true;
           handleSearchInput('');
         });
+        chip.querySelector('.suburb-map-toggle-input').addEventListener('change', (e) => {
+          if (e.target.checked) showSuburbMap();
+          else suburbMapEl.hidden = true;
+        });
 
         if (!document.getElementById('inline-search-css')) {
           const s = document.createElement('style');
@@ -1397,6 +1501,10 @@ function matchTreatment(raw) {
             '.suburb-radius-chip-select{padding:2px 6px;border:1px solid var(--clr-gray-200,#e2e8f0);border-radius:6px;font-size:.78rem;background:#fff;color:var(--clr-gray-700,#334155);}',
             '.suburb-radius-chip-clear{background:none;border:none;cursor:pointer;color:var(--clr-gray-400,#94a3b8);font-size:1rem;line-height:1;padding:0 .2rem;}',
             '.suburb-radius-chip-clear:hover{color:var(--clr-gray-700,#334155);}',
+            '.suburb-map-toggle{display:inline-flex;align-items:center;gap:.3rem;cursor:pointer;font-size:.82rem;color:var(--clr-gray-600,#475569);margin-left:.25rem;user-select:none;}',
+            '.suburb-map-toggle input{cursor:pointer;width:15px;height:15px;}',
+            '.suburb-map{display:block;width:100%;height:280px;border-radius:var(--radius-lg,10px);margin-bottom:.75rem;z-index:0;}',
+            '@media (max-width:640px){.suburb-map{height:220px;}}',
           ].join('');
           document.head.appendChild(s);
         }
@@ -1827,22 +1935,8 @@ function matchTreatment(raw) {
     if (mobileSuburbItems) mobileSuburbItems.innerHTML = checkboxHtml;
   }
 
-  function haversineKm(lat1, lng1, lat2, lng2) {
-    const R = 6371;
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLng = (lng2 - lng1) * Math.PI / 180;
-    const a = Math.sin(dLat / 2) ** 2 +
-              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLng / 2) ** 2;
-    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  }
-
-  function resolveSuburbRadiusInput(val) {
-    const q = (val || '').trim();
-    if (!q) return null;
-    const coords = typeof SUBURB_COORDS !== 'undefined' ? SUBURB_COORDS : {};
-    const key = Object.keys(coords).find(k => k.toLowerCase() === q.toLowerCase());
-    return key ? { name: key, lat: coords[key][0], lng: coords[key][1] } : null;
-  }
+  // haversineKm and resolveSuburbRadiusInput now live in geo_utils.js (loaded
+  // before this file), shared with nearby.html instead of being duplicated here.
 
   function buildLanguageFilters(allDentists) {
     // Count clinics per language
