@@ -88,7 +88,10 @@
     .search-result:hover, .search-result.active { background: #f0fdfa; }
     .search-result__name { font-size: .875rem; font-weight: 600; color: #1e293b; }
     .search-result__loc  { font-size: .75rem; color: #94a3b8; }
-    .search-result--none { color: #94a3b8; font-size: .85rem; font-style: italic; }
+    .search-result--none { color: #94a3b8; font-size: .85rem; font-style: italic; cursor: default; }
+    .search-result--empty-cta { color: #64748b; font-size: .8rem; cursor: default; }
+    .search-result--empty-cta a { color: var(--clr-teal, #0d9488); font-weight: 600; text-decoration: none; }
+    .search-result--empty-cta a:hover { text-decoration: underline; }
 
     .selected-clinic {
       display: none;
@@ -335,14 +338,20 @@
         const url = `${SB_URL}/rest/v1/dental_clinics?select=id,name,city,suburb_town&name=ilike.*${enc}*&business_status=eq.OPERATIONAL&limit=8`;
         const r = await fetch(url, { headers: H });
         const data = await r.json();
-        showResults(Array.isArray(data) ? data : []);
+        showResults(Array.isArray(data) ? data : [], q);
       }, 250);
     }
 
-    function showResults(items) {
+    function showResults(items, q) {
       const el = document.getElementById('search-results');
       if (!items.length) {
-        el.innerHTML = '<div class="search-result search-result--none">No matching practices found</div>';
+        const subject = encodeURIComponent('Add my clinic to Dental Compare');
+        const body = encodeURIComponent(`Hi,\n\nI couldn't find "${q}" in your directory and would like to get it added.\n\nPractice name:\nAddress:\nPhone:\n\nThanks,`);
+        el.innerHTML = `
+          <div class="search-result search-result--none">No matching practices found</div>
+          <div class="search-result search-result--empty-cta">
+            Not listed yet? <a href="mailto:dentalcomparenz@gmail.com?subject=${subject}&body=${body}">Email us</a> and we'll get it added.
+          </div>`;
       } else {
         el.innerHTML = items.map(c => `
           <div class="search-result" onclick="selectClinic(${c.id}, '${esc(c.name)}', '${esc(c.suburb_town || c.city || '')}')">
