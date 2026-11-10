@@ -1203,7 +1203,7 @@ function matchTreatment(raw) {
         searchQuery = raw;
         selectedSuburbLoc = null;
       } else {
-        const suburbMatch = resolveSuburbRadiusInput(raw);
+        const suburbMatch = resolveSuburbRadiusInput(raw, region);
         if (suburbMatch) {
           selectedSuburbLoc = suburbMatch;
           activeTreatmentPriceType = null;
