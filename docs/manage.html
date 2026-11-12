@@ -232,6 +232,8 @@
     <div class="manage-card">
       <h2>Reviews</h2>
       <div id="reviews-list"></div>
+      <button type="button" class="add-row-btn" id="request-review-refresh-btn" style="margin-top:1rem;">Request review update</button>
+      <div id="review-refresh-note" style="display:none; font-size:.82rem; color:var(--clr-gray-500); margin-top:.5rem;">Request sent — we'll pull your latest Google reviews soon.</div>
     </div>
 
     <!-- Clinic Logo -->
@@ -491,6 +493,7 @@
     dbPricingRows = pricing || [];
     populateAll(clinic, dbPricingRows);
     renderReviews(reviews || []);
+    checkPendingReviewRequest();
     renderPhotos(photos || []);
     renderLogo(clinic.photo_url);
     renderPractitioners(practitioners || []);
@@ -739,6 +742,37 @@
       .eq('id', reviewId);
     setBusy(btn, false, 'Save reply');
     error ? toast('Error: ' + error.message, true) : toast('Reply saved ✓');
+  });
+
+  // ---- Review refresh requests ----
+  // We never call SerpAPI from the browser (the key has to stay server-side,
+  // and matches still get a human check before going live) - this just emails
+  // the team a request, same pattern as clinic claims.
+  function setReviewRequestPending() {
+    const btn = document.getElementById('request-review-refresh-btn');
+    btn.disabled = true;
+    btn.textContent = 'Request pending';
+    document.getElementById('review-refresh-note').style.display = '';
+  }
+
+  async function checkPendingReviewRequest() {
+    const { data } = await db.from('review_refresh_requests')
+      .select('id').eq('clinic_id', clinicId).eq('status', 'pending').limit(1).maybeSingle();
+    if (data) setReviewRequestPending();
+  }
+
+  document.getElementById('request-review-refresh-btn').addEventListener('click', async e => {
+    const btn = e.target;
+    setBusy(btn, true, 'Request review update');
+    const { error } = await db.from('review_refresh_requests').insert({ clinic_id: clinicId });
+    setBusy(btn, false, 'Request review update');
+    if (error) {
+      if (error.code === '23505') { setReviewRequestPending(); return; } // already one pending
+      toast('Error: ' + error.message, true);
+      return;
+    }
+    setReviewRequestPending();
+    toast('Request sent ✓');
   });
 
   // ---- Photos (shared helpers) ----
