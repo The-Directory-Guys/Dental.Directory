@@ -9,10 +9,13 @@
 CREATE TABLE IF NOT EXISTS review_refresh_requests (
   id bigserial primary key,
   clinic_id bigint not null references dental_clinics(id) on delete cascade,
-  requested_by uuid references auth.users(id) on delete set null,
+  requested_by uuid default auth.uid() references auth.users(id) on delete set null,
   status text not null default 'pending',
   requested_at timestamptz default now()
 );
+
+-- In case this file was already run once before requested_by had a default:
+ALTER TABLE review_refresh_requests ALTER COLUMN requested_by SET DEFAULT auth.uid();
 
 -- Only one outstanding request per clinic at a time - a second click (or a
 -- second tab) just hits this instead of queuing a duplicate notification.
@@ -39,6 +42,7 @@ AS $$
 DECLARE
   api_key text;
   clinic_name text;
+  requester_email text;
   email_html text;
 BEGIN
   SELECT decrypted_secret INTO api_key
@@ -51,11 +55,14 @@ BEGIN
   END IF;
 
   SELECT name INTO clinic_name FROM dental_clinics WHERE id = new.clinic_id;
+  SELECT email INTO requester_email FROM auth.users WHERE id = new.requested_by;
 
   email_html := format(
     '<p>A clinic owner requested a Google reviews refresh.</p>' ||
-    '<p><strong>Clinic:</strong> %s (id %s)</p>',
-    coalesce(clinic_name, 'Unknown'), new.clinic_id
+    '<p><strong>Clinic:</strong> %s (id %s)<br>' ||
+    '<strong>Requested by:</strong> %s</p>',
+    coalesce(clinic_name, 'Unknown'), new.clinic_id,
+    coalesce(requester_email, 'Unknown user')
   );
 
   PERFORM net.http_post(
