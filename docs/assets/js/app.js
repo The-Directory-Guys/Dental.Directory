@@ -3101,14 +3101,14 @@ function matchTreatment(raw) {
     const hdrs = { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` };
     const base = `${SUPABASE_URL}/rest/v1/dental_clinics`;
     try {
-      const res = await fetch(`${base}?name=ilike.*${encodeURIComponent(q)}*&select=id,name,city,suburb_town,region&order=total_ratings.desc.nullslast&limit=5`, { headers: hdrs });
+      const res = await fetch(`${base}?name=ilike.*${encodeURIComponent(q)}*&business_status=eq.OPERATIONAL&select=id,name,city,suburb_town,region&order=total_ratings.desc.nullslast&limit=5`, { headers: hdrs });
       const results = res.ok ? await res.json() : [];
       if (results.length > 0) return results;
       const words = q.split(/\s+/).filter(w => w.length >= 4);
       if (!words.length) return [];
       const seen = new Set(), all = [];
       for (const word of words) {
-        const wr = await fetch(`${base}?name=ilike.*${encodeURIComponent(word)}*&select=id,name,city,suburb_town,region&order=total_ratings.desc.nullslast&limit=4`, { headers: hdrs });
+        const wr = await fetch(`${base}?name=ilike.*${encodeURIComponent(word)}*&business_status=eq.OPERATIONAL&select=id,name,city,suburb_town,region&order=total_ratings.desc.nullslast&limit=4`, { headers: hdrs });
         if (wr.ok) for (const c of await wr.json()) if (!seen.has(c.id)) { seen.add(c.id); all.push(c); }
       }
       return all.slice(0, 5);

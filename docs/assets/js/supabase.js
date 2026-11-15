@@ -407,7 +407,7 @@ async function fetchClinicAmenities(clinicId) {
 // Fetch a single clinic by ID (including its pricing)
 async function fetchClinicById(id) {
   try {
-    const url = `${SUPABASE_URL}/rest/v1/dental_clinics?id=eq.${id}`;
+    const url = `${SUPABASE_URL}/rest/v1/dental_clinics?id=eq.${id}&business_status=eq.OPERATIONAL`;
     
     const response = await fetch(url, {
       headers: {
