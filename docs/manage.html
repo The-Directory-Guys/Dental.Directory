@@ -155,6 +155,9 @@
         <h1 id="clinic-name" style="margin:0; font-size:1.5rem; color:var(--clr-gray-900);"></h1>
         <p id="clinic-suburb" style="margin:.3rem 0 0; color:var(--clr-gray-500); font-size:.9rem;"></p>
         <a id="view-listing-link" href="#" target="_blank" style="display:inline-block; margin-top:.5rem; font-size:.85rem; color:var(--clr-teal); text-decoration:none;">View my public listing &#8599;</a>
+        <div>
+          <select id="clinic-switcher" style="display:none; margin-top:.6rem; padding:.4rem .6rem; border:1.5px solid var(--clr-gray-200); border-radius:8px; font-size:.85rem; color:var(--clr-gray-700); font-family:inherit;"></select>
+        </div>
       </div>
       <button id="sign-out-btn" style="background:none; border:none; color:var(--clr-gray-400); font-size:.85rem; cursor:pointer; text-decoration:underline; font-family:inherit;">Sign out</button>
     </div>
@@ -414,6 +417,7 @@
   ];
 
   let clinicId = null;
+  let ownedClinics = []; // [{id, name}] - every clinic this account owns
   let dbPricingRows = [];
 
   // ---- State helpers ----
@@ -461,31 +465,68 @@
   async function loadApp(userId) {
     showState('loading');
 
-    const { data: ownerRow } = await db
-      .from('clinic_owners').select('clinic_id').eq('user_id', userId).single();
+    const { data: ownerRows } = await db
+      .from('clinic_owners').select('clinic_id').eq('user_id', userId);
 
-    if (!ownerRow) { showState('unauth'); return; } // signed in but not yet linked
-    clinicId = ownerRow.clinic_id;
+    if (!ownerRows || !ownerRows.length) { showState('unauth'); return; } // signed in but not yet linked
 
+    const ids = ownerRows.map(r => r.clinic_id);
+    const { data: nameRows } = await db.from('dental_clinics').select('id, name').in('id', ids);
+    ownedClinics = (nameRows || [])
+      .map(r => ({ id: r.id, name: r.name }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    if (!ownedClinics.length) { showState('unauth'); return; }
+
+    renderClinicSwitcher();
+
+    const savedId = Number(localStorage.getItem('dc_manage_clinic_id'));
+    clinicId = ownedClinics.some(c => c.id === savedId) ? savedId : ownedClinics[0].id;
+
+    await loadClinicData(clinicId);
+  }
+
+  function renderClinicSwitcher() {
+    const sel = document.getElementById('clinic-switcher');
+    if (ownedClinics.length <= 1) { sel.style.display = 'none'; return; }
+    sel.innerHTML = ownedClinics.map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join('');
+    sel.value = String(clinicId);
+    sel.style.display = '';
+  }
+
+  document.getElementById('clinic-switcher').addEventListener('change', async e => {
+    clinicId = Number(e.target.value);
+    localStorage.setItem('dc_manage_clinic_id', String(clinicId));
+    // Insights are cached per-clinic in module state - drop the cache so the
+    // next visit (or an immediate reload below, if already on that tab) pulls
+    // fresh data for the newly-selected clinic instead of showing stale data.
+    insLoaded = false;
+    showState('loading');
+    await loadClinicData(clinicId);
+    renderClinicSwitcher();
+    if (document.getElementById('tab-insights').style.display !== 'none') loadInsights();
+  });
+
+  async function loadClinicData(id) {
     const [{ data: clinic }, { data: pricing }, { data: reviews }, { data: photos }, { data: practitioners }, { data: amenities }] = await Promise.all([
       db.from('dental_clinics')
         .select('name, address, suburb_town, description, phone_national, phone_international, website, opening_hours, services, photo_url')
-        .eq('id', clinicId).single(),
+        .eq('id', id).single(),
       db.from('scraped_prices')
         .select('id, treatment, price_label, notes')
-        .eq('clinic_id', clinicId).order('id'),
+        .eq('clinic_id', id).order('id'),
       db.from('google_reviews')
         .select('id, author, rating, date_text, snippet, owner_reply')
-        .eq('clinic_id', clinicId).order('id', { ascending: false }),
+        .eq('clinic_id', id).order('id', { ascending: false }),
       db.from('clinic_photos')
         .select('id, url')
-        .eq('clinic_id', clinicId).order('sort_order'),
+        .eq('clinic_id', id).order('sort_order'),
       db.from('clinic_practitioners')
         .select('id, name, photo_url, bio, gender, experience, specialties, languages, qualifications')
-        .eq('clinic_id', clinicId).order('id'),
+        .eq('clinic_id', id).order('id'),
       db.from('clinic_amenities')
         .select('*')
-        .eq('clinic_id', clinicId).maybeSingle(),
+        .eq('clinic_id', id).maybeSingle(),
     ]);
 
     if (!clinic) { showState('unauth'); return; }
