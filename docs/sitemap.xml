@@ -1945,11 +1945,6 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://dentalcompare.co.nz/clinic/dr-wondersmile-auckland</loc>
-    <priority>0.7</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
     <loc>https://dentalcompare.co.nz/clinic/duchenne-denture-specialists</loc>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
@@ -6146,11 +6141,6 @@
   </url>
   <url>
     <loc>https://dentalcompare.co.nz/clinic/tooth-care-pukekohe</loc>
-    <priority>0.7</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://dentalcompare.co.nz/clinic/tooth-factory-dental</loc>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
