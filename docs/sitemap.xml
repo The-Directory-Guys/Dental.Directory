@@ -2595,11 +2595,6 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://dentalcompare.co.nz/clinic/guardian-dental-care</loc>
-    <priority>0.7</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
     <loc>https://dentalcompare.co.nz/clinic/halswell-dental</loc>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
@@ -4231,11 +4226,6 @@
   </url>
   <url>
     <loc>https://dentalcompare.co.nz/clinic/ocean-view-dental</loc>
-    <priority>0.7</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-  <url>
-    <loc>https://dentalcompare.co.nz/clinic/octagon-dental-suite</loc>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
