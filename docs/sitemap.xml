@@ -920,6 +920,11 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://dentalcompare.co.nz/clinic/capital-dental-silverstream</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://dentalcompare.co.nz/clinic/capital-dental-tawa</loc>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
