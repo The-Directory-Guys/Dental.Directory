@@ -1497,13 +1497,13 @@ function matchTreatment(raw) {
             '.inline-clinic-search-wrap input::placeholder{color:var(--clr-gray-400,#94a3b8);}',
             '.inline-search-clear{background:none;border:none;font-size:1.1rem;line-height:1;cursor:pointer;color:var(--clr-gray-400,#94a3b8);padding:.2rem .3rem;border-radius:50%;}',
             '.inline-search-clear:hover{color:var(--clr-gray-700,#334155);background:var(--clr-gray-100,#f1f5f9);}',
-            '.suburb-radius-chip{display:flex;align-items:center;gap:.5rem;margin:-.4rem 0 .75rem;font-size:.82rem;color:var(--clr-gray-500,#6b7280);}',
+            '.suburb-radius-chip:not([hidden]){display:flex;align-items:center;gap:.5rem;margin:-.4rem 0 .75rem;font-size:.82rem;color:var(--clr-gray-500,#6b7280);}',
             '.suburb-radius-chip-select{padding:2px 6px;border:1px solid var(--clr-gray-200,#e2e8f0);border-radius:6px;font-size:.78rem;background:#fff;color:var(--clr-gray-700,#334155);}',
             '.suburb-radius-chip-clear{background:none;border:none;cursor:pointer;color:var(--clr-gray-400,#94a3b8);font-size:1rem;line-height:1;padding:0 .2rem;}',
             '.suburb-radius-chip-clear:hover{color:var(--clr-gray-700,#334155);}',
             '.suburb-map-toggle{display:inline-flex;align-items:center;gap:.3rem;cursor:pointer;font-size:.82rem;color:var(--clr-gray-600,#475569);margin-left:.25rem;user-select:none;}',
             '.suburb-map-toggle input{cursor:pointer;width:15px;height:15px;}',
-            '.suburb-map{display:block;width:100%;height:280px;border-radius:var(--radius-lg,10px);margin-bottom:.75rem;z-index:0;}',
+            '.suburb-map:not([hidden]){display:block;width:100%;height:280px;border-radius:var(--radius-lg,10px);margin-bottom:.75rem;z-index:0;}',
             '@media (max-width:640px){.suburb-map{height:220px;}}',
           ].join('');
           document.head.appendChild(s);
